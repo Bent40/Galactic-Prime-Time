@@ -1,0 +1,4044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GALACTIC PRIME TIME — Character Sheet</title>
+<style>
+  :root {
+    --bg: #04050d;
+    --panel: #090c1a;
+    --cyan: #00d4ff;
+    --gold: #c8a84b;
+    --danger: #ff2255;
+    --success: #00ff88;
+    --text: #b8c8e0;
+    --muted: #3a4560;
+    --border: #1a2540;
+    --bronze: #cd7f32;
+    --silver: #c0c0c0;
+    --legendary: #a855f7;
+    --mythic: #ec4899;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  /* BROADCAST BAR */
+  .broadcast-bar {
+    background: linear-gradient(90deg, #000510 0%, #0a1a2e 50%, #000510 100%);
+    border-bottom: 1px solid var(--cyan);
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(0,212,255,0.3);
+    overflow: hidden;
+  }
+
+  .broadcast-bar::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,212,255,0.02) 2px,
+      rgba(0,212,255,0.02) 4px
+    );
+    pointer-events: none;
+  }
+
+  .broadcast-live {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--danger);
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .live-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--danger);
+    box-shadow: 0 0 8px var(--danger);
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .broadcast-title {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(0,212,255,0.8);
+  }
+
+  .broadcast-signal {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .signal-bar {
+    width: 4px;
+    background: var(--cyan);
+    border-radius: 1px;
+  }
+
+  /* MAIN LAYOUT */
+  .main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* PANELS */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    position: relative;
+    box-shadow: inset 0 0 30px rgba(0,212,255,0.04);
+  }
+
+  .panel::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 16px; height: 16px;
+    border-top: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+    border-radius: 4px 0 0 0;
+    pointer-events: none;
+  }
+
+  .panel::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 16px; height: 16px;
+    border-bottom: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    border-radius: 0 0 4px 0;
+    pointer-events: none;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 3px solid var(--cyan);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* IDENTITY ROW */
+  .identity-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 80px;
+    gap: 12px;
+    align-items: end;
+  }
+
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .field-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .field-input {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    padding: 6px 10px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+  }
+
+  .field-input:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0,212,255,0.3);
+  }
+
+  .field-input[type="number"] {
+    font-family: 'Courier New', monospace;
+  }
+
+  /* SAVE INDICATOR */
+  .save-indicator {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--success);
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .save-indicator.visible { opacity: 1; }
+
+  /* TWO-COLUMN LAYOUT */
+  .two-col {
+    display: grid;
+    grid-template-columns: 45% 55%;
+    gap: 16px;
+  }
+
+  .two-col-equal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* THREE-COLUMN LAYOUT */
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  /* TRAITS */
+  .traits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .trait-group-row {
+    grid-column: 1 / -1;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    padding: 2px 0 6px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+  }
+
+  .trait-group-row + .trait-group-row {
+    margin-top: 8px;
+  }
+
+  .trait-card {
+    background: rgba(0,212,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .trait-name {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+
+  .trait-sub {
+    font-size: 9px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    opacity: 0.6;
+  }
+
+  .trait-value {
+    font-family: 'Courier New', monospace;
+    font-size: 42px;
+    font-weight: bold;
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(0,212,255,0.6);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .trait-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .btn-trait {
+    width: 32px; height: 32px;
+    border: 1px solid var(--cyan);
+    background: transparent;
+    color: var(--cyan);
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .btn-trait:hover {
+    background: rgba(0,212,255,0.2);
+    box-shadow: 0 0 10px rgba(0,212,255,0.4);
+  }
+
+  .trait-bonus {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 70px;
+  }
+
+  .trait-sp {
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    margin-top: 6px;
+  }
+
+  .trait-adv-pool {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 3px;
+    transition: color 0.2s;
+  }
+
+  .pts-remaining {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .pts-badge {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--muted);
+    color: var(--text);
+  }
+
+  .pts-badge.warn { border-color: var(--gold); color: var(--gold); }
+  .pts-badge.empty { border-color: var(--danger); color: var(--danger); }
+
+  /* BUTTONS */
+  .btn {
+    padding: 6px 14px;
+    border-radius: 3px;
+    border: 1px solid var(--cyan);
+    background: transparent;
+    color: var(--cyan);
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    text-transform: uppercase;
+  }
+
+  .btn:hover {
+    background: rgba(0,212,255,0.15);
+    box-shadow: 0 0 10px rgba(0,212,255,0.3);
+  }
+
+  .btn-danger { border-color: var(--danger); color: var(--danger); }
+  .btn-danger:hover { background: rgba(255,34,85,0.15); box-shadow: 0 0 10px rgba(255,34,85,0.3); }
+  .btn-success { border-color: var(--success); color: var(--success); }
+  .btn-success:hover { background: rgba(0,255,136,0.15); }
+  .btn-gold { border-color: var(--gold); color: var(--gold); }
+  .btn-gold:hover { background: rgba(200,168,75,0.15); }
+  .btn-sm { padding: 4px 10px; font-size: 11px; }
+  .btn-xs { padding: 2px 7px; font-size: 10px; }
+
+  /* BODY PARTS */
+  .body-parts-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .body-part-card {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px;
+    border-left: 4px solid var(--success);
+    transition: border-left-color 0.3s;
+  }
+
+  .body-part-card.dmg-light    { border-left-color: #aaff00; }
+  .body-part-card.dmg-medium   { border-left-color: var(--gold); }
+  .body-part-card.dmg-heavy    { border-left-color: #ff8800; }
+  .body-part-card.dmg-critical { border-left-color: var(--danger); }
+  .body-part-card.dmg-destroyed{ border-left-color: var(--muted); }
+
+  .body-part-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .part-name-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--muted);
+    color: var(--text);
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    width: 120px;
+    padding: 2px 4px;
+    font-family: inherit;
+  }
+
+  .part-name-input:focus { outline: none; border-bottom-color: var(--cyan); }
+
+  .lethal-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--danger);
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  .lethal-toggle input { accent-color: var(--danger); }
+
+  .hp-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .hp-label {
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .hp-max-display {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .hp-max-input {
+    width: 48px;
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--cyan);
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    text-align: center;
+    padding: 2px;
+  }
+
+  .hp-max-input:focus { outline: none; border-color: var(--cyan); }
+
+  .btn-hptiny {
+    width: 22px; height: 22px;
+    border: 1px solid var(--cyan);
+    background: transparent;
+    color: var(--cyan);
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    line-height: 1;
+    transition: all 0.2s;
+  }
+
+  .btn-hptiny:hover { background: rgba(0,212,255,0.2); }
+
+  .hp-boxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .hp-box {
+    width: 28px; height: 28px;
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: rgba(0,255,136,0.1);
+    position: relative;
+  }
+
+  .hp-box.damaged {
+    background: rgba(255,34,85,0.25);
+    border-color: var(--danger);
+    box-shadow: 0 0 6px rgba(255,34,85,0.4);
+  }
+
+  .hp-box.damaged::after {
+    content: '✕';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--danger);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  .hp-box:hover { border-color: var(--cyan); }
+
+  /* CONDITIONS */
+  .conditions-section { margin-top: 8px; }
+
+  .conditions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 6px;
+    min-height: 8px;
+  }
+
+  .condition-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 1px solid;
+  }
+
+  .cond-t1 { border-color: #ffdd00; color: #ffdd00; background: rgba(255,221,0,0.08); }
+  .cond-t2 { border-color: #ff8800; color: #ff8800; background: rgba(255,136,0,0.08); }
+  .cond-t3 { border-color: var(--danger); color: var(--danger); background: rgba(255,34,85,0.08); }
+  .cond-t4 { border-color: #aa0022; color: #ff4466; background: rgba(136,0,34,0.15); }
+
+  .cond-remove {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 0;
+    opacity: 0.6;
+    line-height: 1;
+  }
+
+  .cond-remove:hover { opacity: 1; }
+
+  .add-cond-form {
+    display: none;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    padding: 8px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 3px;
+    border: 1px dashed var(--muted);
+  }
+
+  .add-cond-form.open { display: flex; }
+
+  .mini-select {
+    background: var(--panel);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    padding: 4px 6px;
+    font-size: 11px;
+    font-family: inherit;
+  }
+
+  /* SKILLS */
+  .skills-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .skill-card {
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+  }
+
+  .skill-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .skill-name-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--muted);
+    color: var(--text);
+    font-weight: bold;
+    font-size: 13px;
+    flex: 1;
+    padding: 2px 4px;
+    font-family: inherit;
+  }
+
+  .skill-name-input:focus { outline: none; border-bottom-color: var(--cyan); }
+
+  .skill-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .skill-meta-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .skill-meta-input {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    font-size: 11px;
+    padding: 3px 6px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .skill-meta-input:focus { outline: none; border-color: var(--cyan); }
+
+  .pip-row {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .pip {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 1px solid var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: transparent;
+  }
+
+  .pip.filled {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    box-shadow: 0 0 6px rgba(0,212,255,0.6);
+  }
+
+  .pip:hover { border-color: var(--cyan); }
+
+  .skill-level-display {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: 6px;
+  }
+
+  .skill-desc-toggle {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 11px;
+    padding: 2px 6px;
+  }
+
+  .skill-desc-toggle:hover { color: var(--cyan); }
+
+  .skill-desc { display: none; margin-top: 8px; }
+  .skill-desc.open { display: block; }
+
+  .skill-passive-btn {
+    background: rgba(0,255,136,0.1);
+    border: 1px solid var(--success);
+    border-radius: 3px;
+    color: var(--success);
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    padding: 2px 7px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+  .skill-passive-btn.is-passive {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+  .skill-passive-btn:hover { opacity: 0.8; }
+
+  .skill-stat-toggle {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    padding: 3px 7px;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .skill-stat-toggle.active {
+    background: rgba(0,212,255,0.15);
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 6px rgba(0,212,255,0.3);
+  }
+  .skill-stat-toggle:hover { border-color: var(--cyan); opacity: 0.85; }
+  .skill-stat-total {
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--gold);
+    text-shadow: 0 0 8px rgba(200,168,75,0.5);
+    margin-left: 4px;
+    white-space: nowrap;
+  }
+
+  .skill-extra-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+  }
+  .skill-extra-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .skill-extra-field {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .skill-extra-field.skill-extra-full {
+    flex: 1;
+    min-width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .skill-detail-input {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    font-size: 11px;
+    padding: 3px 6px;
+    font-family: inherit;
+    min-width: 80px;
+  }
+  .skill-detail-input:focus { outline: none; border-color: var(--cyan); }
+  .skill-detail-short { width: 130px; }
+  .skill-detail-full  { width: 100%; box-sizing: border-box; }
+  .skill-detail-textarea {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    font-size: 11px;
+    padding: 4px 8px;
+    font-family: inherit;
+    width: 100%;
+    resize: vertical;
+    min-height: 52px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+  .skill-detail-textarea:focus { outline: none; border-color: var(--cyan); }
+
+  /* INVENTORY drag-and-drop */
+  .item-wrapper { display: flex; flex-direction: column; }
+  .item-drag-handle {
+    color: var(--muted);
+    cursor: grab;
+    font-size: 15px;
+    padding: 0 4px;
+    flex-shrink: 0;
+    user-select: none;
+    opacity: 0.4;
+    transition: opacity 0.15s;
+    line-height: 1;
+  }
+  .item-row:hover .item-drag-handle { opacity: 1; }
+  .item-wrapper.dragging .item-row { opacity: 0.4; border-style: dashed; }
+  .item-wrapper.drag-over .item-row { border-color: var(--cyan); box-shadow: 0 0 8px rgba(0,212,255,0.3); }
+  .item-wrapper.has-extra .item-row { border-radius: 3px 3px 0 0; }
+  .item-extra-row {
+    display: none;
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.15);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .item-extra-row.open { display: flex; }
+  .item-expand-btn { padding: 1px 5px; flex-shrink: 0; }
+
+  .skill-desc textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    font-size: 12px;
+    padding: 6px;
+    resize: vertical;
+    font-family: inherit;
+    min-height: 60px;
+  }
+
+  .skill-desc textarea:focus { outline: none; border-color: var(--cyan); }
+
+  /* ADD FORMS */
+  .add-form {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    padding: 12px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    border: 1px dashed var(--muted);
+    margin-top: 10px;
+  }
+
+  .add-form .field-group { flex: 1; min-width: 80px; }
+
+  /* TAGS */
+  .tags-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 36px;
+    align-items: flex-start;
+  }
+
+  .tag-chip {
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 2px solid var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    user-select: none;
+  }
+
+  .tag-chip.active {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0,212,255,0.3);
+  }
+
+  .tag-chip.reinforced {
+    border-color: var(--gold);
+    background: var(--gold);
+    color: #000;
+    box-shadow: 0 0 10px rgba(200,168,75,0.4);
+  }
+
+  .tag-chip.faded {
+    border-style: dashed;
+    border-color: var(--muted);
+    color: var(--muted);
+  }
+
+  .tag-state-label {
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .tag-add-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    align-items: center;
+  }
+
+  /* EXPOSURE */
+  .exposure-counter {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .counter-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .counter-value {
+    font-family: 'Courier New', monospace;
+    font-size: 52px;
+    font-weight: bold;
+    color: var(--cyan);
+    text-shadow: 0 0 30px rgba(0,212,255,0.7);
+    line-height: 1;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(0,212,255,0.03);
+  }
+
+  .counter-controls {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .btn-counter {
+    width: 48px; height: 48px;
+    border: 2px solid var(--cyan);
+    background: rgba(0,212,255,0.08);
+    color: var(--cyan);
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .btn-counter:hover {
+    background: rgba(0,212,255,0.2);
+    box-shadow: 0 0 15px rgba(0,212,255,0.4);
+  }
+
+  /* PATRONS */
+  .patron-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .patron-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 5px 8px;
+    border-radius: 3px;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid var(--border);
+  }
+
+  .patron-row.rank-1 { border-color: var(--gold);   background: rgba(200,168,75,0.07); }
+  .patron-row.rank-2 { border-color: var(--silver); background: rgba(192,192,192,0.05); }
+  .patron-row.rank-3 { border-color: var(--bronze); background: rgba(205,127,50,0.05); }
+
+  .patron-avatar-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .patron-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid var(--muted);
+    background: rgba(0,212,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .patron-avatar:hover { border-color: var(--cyan); box-shadow: 0 0 10px rgba(0,212,255,0.3); }
+  .patron-avatar img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .patron-avatar.r1 { border-color: var(--gold);   box-shadow: 0 0 10px rgba(200,168,75,0.4); }
+  .patron-avatar.r2 { border-color: var(--silver); box-shadow: 0 0 8px rgba(192,192,192,0.3); }
+  .patron-avatar.r3 { border-color: var(--bronze); box-shadow: 0 0 8px rgba(205,127,50,0.3); }
+  .patron-rank-overlay {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Courier New', monospace;
+    font-size: 9px;
+    font-weight: bold;
+    color: var(--panel);
+    border: 1px solid var(--panel);
+  }
+  .patron-rank-overlay.r1 { background: var(--gold); }
+  .patron-rank-overlay.r2 { background: var(--silver); }
+  .patron-rank-overlay.r3 { background: var(--bronze); }
+
+  .patron-fields { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+
+  .patron-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 2px 3px;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+
+  .patron-input:focus { outline: none; border-bottom-color: var(--cyan); }
+
+  .patron-name   { font-size: 14px; font-weight: bold; }
+  .patron-amount { font-family: 'Courier New', monospace; color: var(--gold); }
+  .patron-notes  { color: var(--muted); font-size: 11px; }
+
+  /* TOKENS */
+  .token-counters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .token-counter-box {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(0,212,255,0.03);
+  }
+
+  .token-counter-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .token-counter-val {
+    font-family: 'Courier New', monospace;
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--gold);
+    text-shadow: 0 0 15px rgba(200,168,75,0.6);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .token-btn-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .boss-tokens-section { margin-top: 12px; }
+
+  .boss-tokens-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 20px;
+  }
+
+  .boss-token {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 3px solid;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .boss-token.used { opacity: 0.28; filter: grayscale(0.7); }
+  .boss-token:hover { transform: scale(1.1); }
+
+  .boss-token-remove {
+    position: absolute;
+    top: -5px; right: -5px;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--danger);
+    border: 1px solid var(--bg);
+    color: white;
+    font-size: 10px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .boss-tokens-grid:hover .boss-token-remove { display: flex; }
+
+  .token-bronze    { border-color: var(--bronze); color: var(--bronze); }
+  .token-silver    { border-color: var(--silver); color: var(--silver); }
+  .token-gold      { border-color: #ffd700; color: #ffd700; }
+  .token-legendary { border-color: var(--legendary); color: var(--legendary); box-shadow: 0 0 10px rgba(168,85,247,0.4); }
+  .token-mythic    { border-color: var(--mythic); color: var(--mythic); box-shadow: 0 0 10px rgba(236,72,153,0.4); }
+  .token-godly     { border-color: #fff; color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+
+  .add-token-form {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* OBJECTIVES */
+  .objectives-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .obj-section-title {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    padding-left: 8px;
+    border-left: 2px solid var(--gold);
+  }
+
+  .objective-card {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--cyan);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+
+  .objective-card.complete { border-left-color: var(--success); }
+  .objective-card.failed   { border-left-color: var(--danger); }
+
+  .obj-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+
+  .status-badge {
+    font-size: 9px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    white-space: nowrap;
+    border: 1px solid;
+    font-family: 'Courier New', monospace;
+    flex-shrink: 0;
+  }
+
+  .status-active   { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.08); }
+  .status-complete { border-color: var(--success); color: var(--success); background: rgba(0,255,136,0.08); }
+  .status-failed   { border-color: var(--danger); color: var(--danger); background: rgba(255,34,85,0.08); }
+
+  .obj-title-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--muted);
+    color: var(--text);
+    font-weight: bold;
+    font-size: 13px;
+    font-family: inherit;
+    padding: 2px 4px;
+    min-width: 60px;
+  }
+
+  .obj-title-input:focus { outline: none; border-bottom-color: var(--cyan); }
+
+  .obj-desc-area {
+    display: none;
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 6px;
+    resize: vertical;
+    min-height: 60px;
+    margin: 6px 0;
+  }
+
+  .obj-desc-area.open { display: block; }
+  .obj-desc-area:focus { outline: none; border-color: var(--cyan); }
+
+  .subtask-list { list-style: none; margin: 4px 0; }
+
+  .subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+  }
+
+  .subtask-cb {
+    width: 16px; height: 16px;
+    border: 2px solid var(--muted);
+    border-radius: 2px;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    background: transparent;
+  }
+
+  .subtask-cb:checked {
+    background: var(--success);
+    border-color: var(--success);
+    box-shadow: 0 0 8px rgba(0,255,136,0.5);
+  }
+
+  .subtask-cb:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -2px; left: 1px;
+    color: #000;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+  }
+
+  .subtask-text {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: var(--text);
+    font-size: 12px;
+    font-family: inherit;
+    padding: 1px 3px;
+  }
+
+  .subtask-text:focus { outline: none; border-bottom-color: var(--muted); }
+
+  .obj-reward {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .reward-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .reward-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--muted);
+    color: var(--gold);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    padding: 2px 4px;
+  }
+
+  .reward-input:focus { outline: none; border-bottom-color: var(--gold); }
+
+  /* INVENTORY */
+  .inventory-category {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 8px;
+    overflow: hidden;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(0,212,255,0.04);
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .category-header:hover { background: rgba(0,212,255,0.09); }
+
+  .category-toggle-icon {
+    color: var(--cyan);
+    font-size: 12px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .category-toggle-icon.closed { transform: rotate(-90deg); }
+
+  .category-name-input {
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    flex: 1;
+    font-family: inherit;
+    cursor: text;
+    min-width: 60px;
+  }
+
+  .category-name-input:focus { outline: none; }
+
+  .item-count-badge {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--panel);
+    background: var(--muted);
+    padding: 2px 7px;
+    border-radius: 10px;
+    min-width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .category-body {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .category-body.collapsed { display: none; }
+
+  .item-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px;
+    border: 1px solid var(--border);
+  }
+
+  .item-name-input {
+    flex: 2;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 2px 4px;
+    min-width: 60px;
+  }
+
+  .item-name-input:focus { outline: none; border-bottom-color: var(--cyan); }
+
+  .item-qty-input {
+    width: 52px;
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--cyan);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    text-align: center;
+    padding: 3px;
+    flex-shrink: 0;
+  }
+
+  .item-qty-input:focus { outline: none; border-color: var(--cyan); }
+
+  .item-notes-input {
+    flex: 3;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 11px;
+    padding: 2px 4px;
+    min-width: 60px;
+  }
+
+  .item-notes-input:focus { outline: none; border-bottom-color: var(--muted); }
+
+  /* ACHIEVEMENTS */
+  .achievement-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 10px;
+    align-items: start;
+    padding: 10px 12px;
+    background: rgba(200,168,75,0.05);
+    border: 1px solid rgba(200,168,75,0.2);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .achievement-num {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--gold);
+    opacity: 0.5;
+    min-width: 24px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .achievement-title {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .achievement-desc { font-size: 11px; color: var(--text); margin-bottom: 4px; }
+  .achievement-reward { font-size: 10px; color: var(--success); letter-spacing: 1px; }
+  .achievement-reward::before { content: '★ '; }
+
+  /* NOTES */
+  .notes-textarea {
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--muted);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    padding: 12px;
+    resize: vertical;
+    min-height: 160px;
+    line-height: 1.6;
+  }
+
+  .notes-textarea:focus {
+    outline: none;
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0,212,255,0.2);
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    margin-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .corp-watermark {
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.5;
+    font-weight: 300;
+  }
+
+  .corp-watermark span { color: var(--gold); opacity: 0.8; }
+
+  /* UTILS */
+  .mt-8  { margin-top: 8px; }
+  .mt-12 { margin-top: 12px; }
+  .flex-row { display: flex; gap: 8px; align-items: center; }
+  .flex-row.wrap { flex-wrap: wrap; }
+
+  .body-part-add-form {
+    padding: 14px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    border: 1px dashed var(--muted);
+    margin-top: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .body-part-add-form.open { display: flex; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+  /* DISABLED BADGE */
+  .disabled-badge { color: #ff2255; font-size: 9px; letter-spacing: 2px; font-family: 'Courier New', monospace; background: rgba(255,34,85,0.1); border: 1px solid #ff2255; border-radius: 3px; padding: 1px 6px; flex-shrink: 0; }
+
+  /* PORTRAIT */
+  .portrait-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .portrait-preview {
+    width: 90px;
+    height: 90px;
+    border: 2px solid var(--muted);
+    border-radius: 4px;
+    background: rgba(0,212,255,0.05);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .portrait-preview:hover { border-color: var(--cyan); box-shadow: 0 0 10px rgba(0,212,255,0.3); }
+  .portrait-upload-label { cursor: pointer; }
+
+  /* TAGS — card design */
+  .tag-card {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--muted);
+    border-radius: 4px;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .tag-card.active      { border-left-color: var(--success); }
+  .tag-card.reinforced  { border-left-color: var(--cyan); }
+  .tag-card.faded       { border-left-color: var(--muted); opacity: 0.7; }
+  .tag-card-header { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .tag-card-name { font-weight: bold; font-size: 13px; flex: 1; letter-spacing: 1px; }
+  .tag-state-btns { display: flex; gap: 4px; flex-shrink: 0; }
+  .tag-state-btn {
+    background: transparent;
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--muted);
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    transition: all 0.15s;
+  }
+  .tag-state-btn.selected-active     { border-color: var(--success); color: var(--success); background: rgba(0,255,136,0.1); }
+  .tag-state-btn.selected-reinforced { border-color: var(--cyan);    color: var(--cyan);    background: rgba(0,212,255,0.1); }
+  .tag-state-btn.selected-faded      { border-color: var(--muted);   color: var(--text);    background: rgba(58,69,96,0.3); }
+  .tag-effect-row { display: flex; align-items: center; gap: 6px; }
+
+  /* OBJECTIVES type select */
+  .obj-type-select { font-size: 9px; padding: 2px 4px; background: rgba(200,168,75,0.1); border: 1px solid var(--gold); border-radius: 3px; color: var(--gold); font-family: 'Courier New', monospace; letter-spacing: 1px; }
+
+  /* ACTIVE EFFECTS */
+  .effect-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    background: rgba(0,212,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    margin-bottom: 5px;
+  }
+  .effect-icon { color: var(--gold); font-size: 13px; flex-shrink: 0; }
+  .effect-text-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 1px 4px;
+  }
+  .effect-text-input:focus { outline: none; border-bottom-color: var(--cyan); }
+
+  /* LEVEL-UP & HP UPGRADE */
+  .lvl-pts-badge { border-color: #c678dd; color: #c678dd; }
+  .lvl-pts-badge.active { border-color: #e5c07b; color: #e5c07b; box-shadow: 0 0 8px rgba(229,192,123,0.4); animation: pulse 1.5s infinite; }
+
+  .btn-lvlup {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6px;
+    width: 100%;
+    background: rgba(229,192,123,0.12);
+    border: 1px solid #e5c07b;
+    border-radius: 3px;
+    color: #e5c07b;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 4px 6px;
+    transition: all 0.2s;
+  }
+  .btn-lvlup:hover { background: rgba(229,192,123,0.25); box-shadow: 0 0 8px rgba(229,192,123,0.4); }
+
+  .btn-hp-upgrade {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+    background: rgba(255,112,67,0.1);
+    border: 1px solid #ff7043;
+    border-radius: 3px;
+    color: #ff7043;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: all 0.2s;
+  }
+  .btn-hp-upgrade:hover { background: rgba(255,112,67,0.22); box-shadow: 0 0 8px rgba(255,112,67,0.4); }
+
+  /* ============================================================
+     MOBILE / RESPONSIVE
+  ============================================================ */
+  @media (max-width: 900px) {
+    .two-col { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    body { font-size: 13px; }
+
+    .broadcast-bar { padding: 6px 12px; gap: 8px; }
+    .broadcast-title { font-size: 13px; letter-spacing: 3px; }
+    .broadcast-signal { display: none; }
+    .broadcast-live { font-size: 10px; }
+
+    .main-container { padding: 8px; gap: 10px; }
+
+    .panel { padding: 12px 10px; }
+    .panel-title { font-size: 10px; letter-spacing: 2px; margin-bottom: 10px; }
+
+    /* Identity */
+    .portrait-section { margin-bottom: 10px; }
+    .identity-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    /* Layouts — stack everything */
+    .two-col, .two-col-equal, .three-col { grid-template-columns: 1fr; }
+
+    /* Traits */
+    .traits-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .trait-card { padding: 8px; }
+    .trait-value { font-size: 32px; }
+    .btn-trait { width: 28px; height: 28px; font-size: 16px; }
+    .trait-bonus { font-size: 10px; min-width: 55px; }
+
+    /* Objectives */
+    .objectives-columns { grid-template-columns: 1fr; gap: 10px; }
+
+    /* Broadcast bar title hide long text */
+    .broadcast-title { letter-spacing: 2px; font-size: 12px; }
+
+    /* Body parts */
+    .hp-boxes { flex-wrap: wrap; }
+
+    /* Buttons — larger touch targets */
+    .btn { padding: 8px 14px; }
+    .btn-sm { padding: 6px 10px; font-size: 11px; }
+    .btn-xs { padding: 4px 8px; font-size: 10px; }
+    .btn-counter { width: 36px !important; height: 36px !important; }
+    .btn-trait { width: 36px; height: 36px; }
+
+    /* Skills meta wrap */
+    .skill-meta { gap: 6px; }
+
+    /* Patron list — stack cards */
+    .patron-list { gap: 12px; }
+    .patron-row { padding: 10px; }
+    .patron-avatar { width: 56px; height: 56px; }
+
+    /* Inventory */
+    .item-row { flex-wrap: wrap; }
+    .item-name-input { min-width: 120px; }
+
+    /* Tags */
+    .tag-card { padding: 8px 10px; }
+
+    /* Footer */
+    .footer { padding: 14px; }
+    .corp-watermark { font-size: 9px; letter-spacing: 3px; }
+
+    /* Skill stat toggle row — wrap */
+    .skill-stat-toggle { padding: 4px 6px; font-size: 9px; }
+
+    /* Pip row wrap */
+    .pip-row { flex-wrap: wrap; }
+
+    /* Modal */
+    #appModal > div { min-width: unset; width: calc(100vw - 32px); padding: 20px; }
+  }
+
+  @media (max-width: 400px) {
+    .traits-grid { grid-template-columns: 1fr; }
+    .identity-row { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr; }
+    .broadcast-title { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BROADCAST BAR -->
+<div class="broadcast-bar">
+  <div class="broadcast-live">
+    <div class="live-dot"></div>
+    &#9679; LIVE BROADCAST
+  </div>
+  <div class="broadcast-title">GALACTIC PRIME TIME</div>
+  <div class="broadcast-signal">
+    <div class="signal-bar" style="height:8px"></div>
+    <div class="signal-bar" style="height:12px"></div>
+    <div class="signal-bar" style="height:16px"></div>
+    <div class="signal-bar" style="height:10px"></div>
+    &nbsp;SIGNAL 94%
+  </div>
+</div>
+
+<div class="main-container">
+
+  <!-- IDENTITY PANEL -->
+  <div class="panel">
+    <div class="panel-title">
+      CONTESTANT IDENTITY
+      <div class="flex-row">
+        <span class="save-indicator" id="saveIndicator">&#9679; SAVED</span>
+        <button class="btn btn-sm" style="background:rgba(0,212,255,0.1);border:1px solid var(--cyan);color:var(--cyan);" onclick="exportCharacter()">&#11015; EXPORT</button>
+        <label class="btn btn-sm" style="background:rgba(0,255,136,0.1);border:1px solid var(--success);color:var(--success);cursor:pointer;">&#11014; IMPORT<input type="file" accept=".json" style="display:none" onchange="importCharacter(this)"></label>
+        <button class="btn btn-danger btn-sm" onclick="resetCharacter()">&#8635; RESET CHARACTER</button>
+      </div>
+    </div>
+    <div class="portrait-section">
+      <label class="portrait-preview portrait-upload-label" id="portraitPreview" title="Click to upload contestant photo">
+        <input type="file" id="portraitUpload" accept="image/*" style="display:none" onchange="handlePortraitUpload(this)">
+        <img id="portraitImg" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:2px">
+        <span id="portraitPlaceholder" style="font-size:9px;color:var(--muted);letter-spacing:1px;text-align:center;line-height:1.6">📷<br>CLICK TO<br>UPLOAD</span>
+      </label>
+    </div>
+    <div class="identity-row">
+      <div class="field-group">
+        <div class="field-label">Character Name</div>
+        <input class="field-input" type="text" id="charName" placeholder="CONTESTANT NAME" oninput="updateIdentity()">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Player Name</div>
+        <input class="field-input" type="text" id="playerName" placeholder="PLAYER" oninput="updateIdentity()">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Race / Species</div>
+        <input class="field-input" type="text" id="charRace" placeholder="Human" oninput="updateIdentity()">
+      </div>
+      <div class="field-group">
+        <div class="field-label">Level</div>
+        <input class="field-input" type="number" id="charLevel" min="1" value="1" oninput="updateIdentity()">
+      </div>
+    </div><!-- end identity-row -->
+    <div style="margin-top:12px">
+      <div class="field-label" style="margin-bottom:4px">BACKGROUND &amp; BACKSTORY</div>
+      <textarea class="notes-textarea" id="charBackground" placeholder="Character background, backstory, motivations, history..." oninput="updateIdentity()" style="min-height:80px;resize:vertical"></textarea>
+    </div>
+  </div>
+
+  <!-- TWO-COLUMN: TRAITS+SKILLS | BODY PARTS -->
+  <div class="two-col">
+
+    <!-- LEFT: TRAITS + SKILLS -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- TRAITS -->
+      <div class="panel">
+        <div class="panel-title">TRAITS</div>
+        <div class="pts-remaining">
+          <span class="pts-badge" id="bodyPtsDisplay">BODY PTS: 4 remaining</span>
+          <span class="pts-badge" id="corePtsDisplay">CORE PTS: 4 remaining</span>
+          <span class="pts-badge lvl-pts-badge" id="levelPtsDisplay" style="display:none"></span>
+        </div>
+        <div class="traits-grid">
+          <div class="trait-group-row">— BODY —</div>
+
+          <div class="trait-card">
+            <div class="trait-name">PHYSIQUE</div>
+            <div class="trait-sub">Body</div>
+            <div class="trait-value" id="tv-physique">1</div>
+            <div class="trait-controls">
+              <button class="btn-trait" onclick="adjustTrait('physique',-1)">&#8722;</button>
+              <span class="trait-bonus" id="tb-physique">BASE 1 +0</span>
+              <button class="btn-trait" onclick="adjustTrait('physique',1)">+</button>
+            </div>
+            <div class="trait-sp" id="tsp-physique">SP: 1</div>
+            <div class="trait-adv-pool" id="advpool-physique">ADV: 0</div>
+            <button class="btn-lvlup" id="lvlbtn-physique" onclick="investLevelPoint('physique')" style="display:none" title="Spend a Level-Up point (+1 PHYSIQUE, +1 HP Upgrade)">&#8679; LEVEL UP</button>
+          </div>
+
+          <div class="trait-card">
+            <div class="trait-name">REFLEXES</div>
+            <div class="trait-sub">Body</div>
+            <div class="trait-value" id="tv-reflexes">1</div>
+            <div class="trait-controls">
+              <button class="btn-trait" onclick="adjustTrait('reflexes',-1)">&#8722;</button>
+              <span class="trait-bonus" id="tb-reflexes">BASE 1 +0</span>
+              <button class="btn-trait" onclick="adjustTrait('reflexes',1)">+</button>
+            </div>
+            <div class="trait-sp" id="tsp-reflexes">SP: 1</div>
+            <div class="trait-adv-pool" id="advpool-reflexes">ADV: 0</div>
+            <button class="btn-lvlup" id="lvlbtn-reflexes" onclick="investLevelPoint('reflexes')" style="display:none" title="Spend a Level-Up point (+1 REFLEXES)">&#8679; LEVEL UP</button>
+          </div>
+
+          <div class="trait-group-row" style="margin-top:6px;">— CORE —</div>
+
+          <div class="trait-card">
+            <div class="trait-name">MIND</div>
+            <div class="trait-sub">Core</div>
+            <div class="trait-value" id="tv-mind">1</div>
+            <div class="trait-controls">
+              <button class="btn-trait" onclick="adjustTrait('mind',-1)">&#8722;</button>
+              <span class="trait-bonus" id="tb-mind">BASE 1 +0</span>
+              <button class="btn-trait" onclick="adjustTrait('mind',1)">+</button>
+            </div>
+            <div class="trait-sp" id="tsp-mind">SP: 1</div>
+            <div class="trait-adv-pool" id="advpool-mind">ADV: 0</div>
+            <button class="btn-lvlup" id="lvlbtn-mind" onclick="investLevelPoint('mind')" style="display:none" title="Spend a Level-Up point (+1 MIND)">&#8679; LEVEL UP</button>
+          </div>
+
+          <div class="trait-card">
+            <div class="trait-name">CHARM</div>
+            <div class="trait-sub">Core</div>
+            <div class="trait-value" id="tv-charm">1</div>
+            <div class="trait-controls">
+              <button class="btn-trait" onclick="adjustTrait('charm',-1)">&#8722;</button>
+              <span class="trait-bonus" id="tb-charm">BASE 1 +0</span>
+              <button class="btn-trait" onclick="adjustTrait('charm',1)">+</button>
+            </div>
+            <div class="trait-sp" id="tsp-charm">SP: 1</div>
+            <div class="trait-adv-pool" id="advpool-charm">ADV: 0</div>
+            <button class="btn-lvlup" id="lvlbtn-charm" onclick="investLevelPoint('charm')" style="display:none" title="Spend a Level-Up point (+1 CHARM)">&#8679; LEVEL UP</button>
+          </div>
+        </div>
+      </div><!-- end traits panel -->
+
+      <!-- ACTIVE EFFECTS -->
+      <div class="panel">
+        <div class="panel-title">ACTIVE EFFECTS</div>
+        <div id="effectsList"></div>
+        <div class="add-form" style="margin-top:8px">
+          <input class="field-input" type="text" id="newEffectText" placeholder="Current Effects..." style="flex:1"
+            onkeydown="if(event.key==='Enter'){event.preventDefault();addEffect();}">
+          <button class="btn btn-sm btn-success" onclick="addEffect()">+ ADD</button>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="panel">
+        <div class="panel-title">SKILLS</div>
+        <div class="skills-list" id="skillsList"></div>
+        <div class="add-form">
+          <div class="field-group">
+            <div class="field-label">Skill Name</div>
+            <input class="field-input" type="text" id="newSkillName" placeholder="Skill name">
+          </div>
+          <div class="field-group" style="max-width:80px">
+            <div class="field-label">Moment Cost</div>
+            <input class="field-input" type="text" id="newSkillCost" placeholder="1">
+          </div>
+          <button class="btn btn-success" onclick="addSkill()" style="align-self:flex-end">+ SKILL</button>
+        </div>
+      </div><!-- end skills panel -->
+
+    </div><!-- end left col -->
+
+    <!-- RIGHT: BODY PARTS -->
+    <div class="panel">
+      <div class="panel-title">BODY PARTS</div>
+      <div class="pts-remaining" style="margin-bottom:10px">
+        <span class="pts-badge" id="hpUpgradeDisplay" style="display:none;border-color:#ff7043;color:#ff7043"></span>
+      </div>
+      <div class="body-parts-list" id="bodyPartsList"></div>
+
+      <!-- FORCED ACTIONS REFERENCE -->
+      <details style="margin-top:14px;background:rgba(0,0,0,0.25);border:1px solid var(--border);border-radius:4px;padding:8px 10px;">
+        <summary style="cursor:pointer;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;user-select:none;">&#9888; FORCED ACTION CONSEQUENCES</summary>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
+          <div>
+            <div style="font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:3px;">BODY</div>
+            <div style="font-size:10px;color:var(--text);line-height:1.6;">
+              <div><span style="color:var(--muted);margin-right:4px;">1.</span><b>Tear Something</b> — Take 1 dmg to relevant part. If at 0 HP, condition escalates.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">2.</span><b>Lock-Up</b> — Body part unusable for next 3 Moments.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">3.</span><b>Condition Surge</b> — Advance one active condition by 1 clock (prioritize cause). If none, apply Shock Tier 1.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">4.</span><b>Drop Item</b> — Drop item held in the limb involved. If no limb, choose one hand.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">5.</span><b>Shock Spike</b> — Increase Shock by 1 tier.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">6.</span><b>Stumble</b> — You become exposed until your next moment.</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;border-bottom:1px solid var(--border);padding-bottom:3px;">TOOL</div>
+            <div style="font-size:10px;color:var(--text);line-height:1.6;">
+              <div><span style="color:var(--muted);margin-right:4px;">1.</span><b>Whiff</b> — Action fails to meaningfully impact its intended target.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">2.</span><b>Overcommit</b> — You become exposed.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">3.</span><b>Collateral</b> — Ally, object, or environment affected.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">4.</span><b>Slip</b> — You are unarmed until your next moment.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">5.</span><b>Strained Grip</b> — +1 Moment cost on your next action with the tool.</div>
+              <div><span style="color:var(--muted);margin-right:4px;">6.</span><b>Overextension</b> — Next scheduled action is delayed by 1 additional Moment.</div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <div class="body-part-add-form" id="bodyPartAddForm">
+        <div style="font-size:11px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;border-left:3px solid var(--cyan);padding-left:8px;">NEW BODY PART</div>
+        <div class="flex-row flex-row wrap">
+          <div class="field-group" style="flex:2">
+            <div class="field-label">Name</div>
+            <input class="field-input" type="text" id="newPartName" placeholder="Part name">
+          </div>
+          <div class="field-group" style="max-width:90px">
+            <div class="field-label">Max HP</div>
+            <input class="field-input" type="number" id="newPartHp" min="1" value="2">
+          </div>
+          <div class="field-group" style="align-self:flex-end;padding-bottom:4px">
+            <label style="display:flex;align-items:center;gap:6px;color:var(--danger);font-size:12px;cursor:pointer;white-space:nowrap">
+              <input type="checkbox" id="newPartLethal" style="accent-color:var(--danger)"> LETHAL
+            </label>
+          </div>
+        </div>
+        <div class="flex-row">
+          <button class="btn btn-success btn-sm" onclick="addBodyPart()">+ ADD PART</button>
+          <button class="btn btn-sm" onclick="document.getElementById('bodyPartAddForm').classList.remove('open')">CANCEL</button>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <button class="btn btn-sm" onclick="document.getElementById('bodyPartAddForm').classList.toggle('open')">+ ADD BODY PART</button>
+      </div>
+    </div><!-- end body parts panel -->
+
+  </div><!-- end two-col -->
+
+  <!-- TAGS — FULL WIDTH -->
+  <div class="panel">
+    <div class="panel-title">TAGS</div>
+    <div class="tags-container" id="tagsContainer"></div>
+    <div class="tag-add-row">
+      <input class="field-input" type="text" id="newTagInput" placeholder="Add tag..." style="max-width:220px"
+        onkeydown="if(event.key==='Enter'){event.preventDefault();addTag();}">
+      <button class="btn btn-sm" onclick="addTag()">+ ADD TAG</button>
+    </div>
+  </div>
+
+  <!-- THREE COLS: EXPOSURE | PATRONS | TOKENS -->
+  <div class="three-col">
+
+    <!-- EXPOSURE -->
+    <div class="panel">
+      <div class="panel-title">EXPOSURE</div>
+
+      <div class="exposure-counter">
+        <div class="counter-label">VIEWERS</div>
+        <input class="field-input" id="viewersDisplay" placeholder="0" style="text-align:center;font-size:22px;font-weight:bold;color:var(--cyan);background:transparent;border:none;border-bottom:1px solid var(--border);width:100%;padding:4px 0;" oninput="updateExposure('viewers',this.value)">
+      </div>
+
+      <div class="exposure-counter" style="margin-bottom:0">
+        <div class="counter-label">FOLLOWERS</div>
+        <input class="field-input" id="followersDisplay" placeholder="0" style="text-align:center;font-size:22px;font-weight:bold;color:var(--cyan);background:transparent;border:none;border-bottom:1px solid var(--border);width:100%;padding:4px 0;" oninput="updateExposure('followers',this.value)">
+      </div>
+    </div>
+
+    <!-- PATRONS -->
+    <div class="panel">
+      <div class="panel-title">TOP PATRONS</div>
+      <div class="patron-list" id="patronList"></div>
+    </div>
+
+    <!-- TOKENS -->
+    <div class="panel">
+      <div class="panel-title">TOKENS</div>
+
+      <div class="token-counters">
+        <div class="token-counter-box">
+          <div class="token-counter-label">NARRATIVE</div>
+          <div class="token-counter-val" id="narrativeDisplay">0</div>
+          <div class="token-btn-row">
+            <button class="btn-counter" style="width:36px;height:36px;font-size:18px" onclick="adjustTokenCounter('narrative',-1)">&#8722;</button>
+            <button class="btn-counter" style="width:36px;height:36px;font-size:18px" onclick="adjustTokenCounter('narrative',1)">+</button>
+          </div>
+        </div>
+        <div class="token-counter-box">
+          <div class="token-counter-label">UPGRADE</div>
+          <div class="token-counter-val" id="upgradeDisplay">0</div>
+          <div class="token-btn-row">
+            <button class="btn-counter" style="width:36px;height:36px;font-size:18px" onclick="adjustTokenCounter('upgrade',-1)">&#8722;</button>
+            <button class="btn-counter" style="width:36px;height:36px;font-size:18px" onclick="adjustTokenCounter('upgrade',1)">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="boss-tokens-section">
+        <div class="panel-title" style="margin-bottom:10px">BOSS TOKENS</div>
+        <div class="boss-tokens-grid" id="bossTokensGrid"></div>
+        <div class="add-token-form">
+          <select class="mini-select" id="newTokenTier">
+            <option value="bronze">Bronze</option>
+            <option value="silver">Silver</option>
+            <option value="gold">Gold</option>
+            <option value="legendary">Legendary</option>
+            <option value="mythic">Mythic</option>
+            <option value="godly">Godly</option>
+          </select>
+          <button class="btn btn-sm" onclick="addBossToken()">+ ADD TOKEN</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end three-col -->
+
+  <!-- OBJECTIVES — FULL WIDTH -->
+  <div class="panel">
+    <div class="panel-title">OBJECTIVES &#8212; QUEST LOG</div>
+    <div class="objectives-columns">
+      <div>
+        <div class="obj-section-title">&#9654; MAIN OBJECTIVES</div>
+        <div id="objMain"></div>
+        <button class="btn btn-sm mt-8" onclick="addObjective('main')">+ ADD OBJECTIVE</button>
+      </div>
+      <div>
+        <div class="obj-section-title">&#9654; DIRECTIVES &#8212; Corporate Quests</div>
+        <div id="objDirectives"></div>
+        <button class="btn btn-sm btn-gold mt-8" onclick="addObjective('directives')">+ ADD DIRECTIVE</button>
+      </div>
+      <div>
+        <div class="obj-section-title">&#9654; GOALS &#8212; Crowd Challenges</div>
+        <div id="objGoals"></div>
+        <button class="btn btn-sm mt-8" onclick="addObjective('goals')">+ ADD GOAL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVENTORY — FULL WIDTH -->
+  <div class="panel">
+    <div class="panel-title">INVENTORY</div>
+    <div id="inventoryList"></div>
+    <div class="mt-8">
+      <button class="btn btn-sm" onclick="addCategory()">+ ADD CATEGORY</button>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="panel">
+    <div class="panel-title">ACHIEVEMENTS</div>
+    <div id="achievementsList"></div>
+    <div style="margin-top:12px;padding:10px;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:4px;">
+      <div style="font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;border-left:3px solid var(--gold);padding-left:8px;">NEW ACHIEVEMENT</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 2fr auto;gap:8px;align-items:end;">
+        <div class="field-group">
+          <div class="field-label">Title</div>
+          <input class="field-input" id="newAchTitle" placeholder="Achievement name">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Reward</div>
+          <input class="field-input" id="newAchReward" placeholder="What was earned">
+        </div>
+        <div class="field-group">
+          <div class="field-label">Description</div>
+          <input class="field-input" id="newAchDesc" placeholder="How it was earned">
+        </div>
+        <button class="btn btn-sm btn-gold" onclick="addAchievement()">+ ADD</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES -->
+  <div class="panel">
+    <div class="panel-title">NOTES</div>
+    <textarea class="notes-textarea" id="generalNotes" placeholder="General notes, story hooks, contacts, session recap..." oninput="updateNotes()"></textarea>
+  </div>
+
+</div><!-- end main-container -->
+
+<!-- CUSTOM CONFIRM MODAL -->
+<div id="appModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:9999;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)">
+  <div style="background:var(--panel);border:1px solid var(--cyan);border-radius:6px;padding:28px 32px;min-width:300px;max-width:440px;box-shadow:0 0 40px rgba(0,212,255,0.35);position:relative">
+    <div style="position:absolute;top:-1px;left:-1px;width:16px;height:16px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan);border-radius:4px 0 0 0;pointer-events:none"></div>
+    <div style="position:absolute;bottom:-1px;right:-1px;width:16px;height:16px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan);border-radius:0 0 4px 0;pointer-events:none"></div>
+    <div id="appModalMsg" style="color:var(--text);font-size:14px;line-height:1.7;margin-bottom:22px"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-sm" id="appModalCancel">CANCEL</button>
+      <button class="btn btn-sm btn-danger" id="appModalOk">CONFIRM</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="corp-watermark">
+    GALACTIC PRIME TIME&#8482; &nbsp;&middot;&nbsp; ALL CONTESTANTS BROADCAST ACROSS THE GALAXY &nbsp;&middot;&nbsp; SEASON &#8734;
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  CONSTANTS
+// ============================================================
+
+const CONDITION_TYPES = ['Bleeding','Crushed','Chilled','Burned','Poisoned','Infected','Suffocation','Exhausted','Exposed'];
+
+const CONDITION_DESCS = {
+  Bleeding:    'Lose 1 HP from this part at the start of each round unless treated.',
+  Crushed:     'Part is structurally compromised. Actions using it suffer a penalty.',
+  Chilled:     'Part is numbed by extreme cold. Reduced responsiveness.',
+  Burned:      'Part is seared. Painful to use; may spread if untreated.',
+  Poisoned:    'Toxin is active in this part. Worsens over time without antidote.',
+  Infected:    'Wound is infected. Will escalate to higher tier if ignored.',
+  Suffocation: 'Airway or circulation to this part is restricted.',
+  Exhausted:   'Part is overtaxed and operating at reduced capacity.',
+  Exposed:     'Armor or protection has been compromised. Easier to hit.'
+};
+
+const TOKEN_TIER_INFO = {
+  bronze:    { cls:'token-bronze',    label:'BR', bg:'rgba(205,127,50,0.12)' },
+  silver:    { cls:'token-silver',    label:'SI', bg:'rgba(192,192,192,0.12)' },
+  gold:      { cls:'token-gold',      label:'GO', bg:'rgba(255,215,0,0.12)' },
+  legendary: { cls:'token-legendary', label:'LE', bg:'rgba(168,85,247,0.12)' },
+  mythic:    { cls:'token-mythic',    label:'MY', bg:'rgba(236,72,153,0.12)' },
+  godly:     { cls:'token-godly',     label:'GD', bg:'rgba(255,255,255,0.08)' }
+};
+
+const TAG_STATES  = ['active','reinforced','faded'];
+const TAG_LABELS  = { active:'ACTIVE', reinforced:'REINFORCED', faded:'FADED' };
+const OBJ_STATUSES = ['active','complete','failed'];
+const OBJ_LABELS   = { active:'ACTIVE', complete:'COMPLETE', failed:'FAILED' };
+
+// ============================================================
+//  DEFAULT STATE
+// ============================================================
+
+const DEFAULT_STATE = {
+  identity: { name:'', player:'', race:'Human', level:1, background:'', portrait:'' },
+  traits:          { physique:1, reflexes:1, mind:1, charm:1 },
+  traitBonus:      { physique:0, reflexes:0, mind:0, charm:0 },
+  traitLevelBonus: { physique:0, reflexes:0, mind:0, charm:0 },
+  bonusPoints: { body:5, core:5 },
+  bodyParts: [
+    { id:1, name:'Head',      maxHp:2, currentHp:2, lethal:true,  conditions:[] },
+    { id:2, name:'Torso',     maxHp:5, currentHp:5, lethal:true,  conditions:[] },
+    { id:3, name:'Left Arm',  maxHp:2, currentHp:2, lethal:false, conditions:[] },
+    { id:4, name:'Right Arm', maxHp:2, currentHp:2, lethal:false, conditions:[] },
+    { id:5, name:'Left Leg',  maxHp:3, currentHp:3, lethal:false, conditions:[] },
+    { id:6, name:'Right Leg', maxHp:3, currentHp:3, lethal:false, conditions:[] }
+  ],
+  skills: [],
+  tags: [],
+  effects: [],
+  levelPoints:          { body: 0, core: 0 },
+  hpUpgradePointsSpent: 0,
+  statAdvPool:          { physique:0, reflexes:0, mind:0, charm:0 },
+  exposure: { viewers:'', followers:'' },
+  patrons: Array.from({length:3}, (_,i) => ({ rank:i+1, name:'', amount:'', notes:'', avatar:'' })),
+  tokens: { narrative:0, upgrade:0, bossTokens:[] },
+  inventory: {
+    categories: [
+      { id:9,  name:'Quick Slots',    collapsed:false, items:[], locked:true, maxItems:3 },
+      { id:15, name:'Worn/Equipped',  collapsed:false, items:[] },
+      { id:10, name:'Equipment',      collapsed:false, items:[] },
+      { id:11, name:'Weapons',        collapsed:false, items:[] },
+      { id:12, name:'Tools',          collapsed:false, items:[] },
+      { id:13, name:'Consumables',    collapsed:false, items:[] },
+      { id:14, name:'Misc',           collapsed:false, items:[] }
+    ]
+  },
+  objectives: { main:[], directives:[], goals:[] },
+  notes: '',
+  conditionLog: '',
+  achievements: []
+};
+
+// ============================================================
+//  STATE & PERSISTENCE
+// ============================================================
+
+let STATE = {};
+let _nextId = 200;
+let _dragSrc = null; // { catIdx, itemIdx }
+function genId() { return ++_nextId; }
+
+function appConfirm(msg, onConfirm) {
+  var overlay   = document.getElementById('appModal');
+  var msgEl     = document.getElementById('appModalMsg');
+  var okBtn     = document.getElementById('appModalOk');
+  var cancelBtn = document.getElementById('appModalCancel');
+  msgEl.textContent  = msg;
+  overlay.style.display = 'flex';
+  function cleanup() { overlay.style.display = 'none'; okBtn.onclick = null; cancelBtn.onclick = null; }
+  okBtn.onclick     = function() { cleanup(); onConfirm(); };
+  cancelBtn.onclick = function() { cleanup(); };
+}
+
+function saveState() {
+  localStorage.setItem('theshow_v1', JSON.stringify(STATE));
+  showSaved();
+}
+
+function loadState() {
+  const saved = localStorage.getItem('theshow_v1');
+  if (saved) {
+    try {
+      STATE = JSON.parse(saved);
+      // Migration guards
+      if (!STATE.traitBonus)   STATE.traitBonus  = { physique:0, reflexes:0, mind:0, charm:0 };
+      // Migrate old skills: string stat → stats array
+      if (STATE.skills) STATE.skills.forEach(function(sk) {
+        if (!sk.stats) sk.stats = (sk.stat && sk.stat.trim()) ? [sk.stat.trim().toLowerCase()] : [];
+      });
+      if (!STATE.bonusPoints)  STATE.bonusPoints  = { body:5, core:5 };
+      // Migrate old saves to 5-point pool
+      STATE.bonusPoints.body = Math.max(STATE.bonusPoints.body, 5 - ((STATE.traitBonus.physique||0) + (STATE.traitBonus.reflexes||0)));
+      STATE.bonusPoints.core = Math.max(STATE.bonusPoints.core, 5 - ((STATE.traitBonus.mind||0) + (STATE.traitBonus.charm||0)));
+      if (!STATE.tokens)       STATE.tokens       = { narrative:0, upgrade:0, bossTokens:[] };
+      if (!STATE.tokens.bossTokens) STATE.tokens.bossTokens = [];
+      if (!STATE.objectives)   STATE.objectives   = { main:[], directives:[], goals:[] };
+      if (!STATE.inventory)    STATE.inventory    = JSON.parse(JSON.stringify(DEFAULT_STATE.inventory));
+      if (!STATE.exposure)     STATE.exposure     = { viewers:0, followers:0 };
+      if (!STATE.patrons)      STATE.patrons      = JSON.parse(JSON.stringify(DEFAULT_STATE.patrons));
+      else if (STATE.patrons.length > 3) STATE.patrons = STATE.patrons.slice(0,3);
+      if (STATE.conditionLog === undefined) STATE.conditionLog = '';
+      if (STATE.notes        === undefined) STATE.notes        = '';
+      if (!STATE.achievements) STATE.achievements = [];
+      // Recompute traits from bonus (fixes old saves that stored base-5 values)
+      if (!STATE.traitBonus)      STATE.traitBonus      = { physique:0, reflexes:0, mind:0, charm:0 };
+      if (!STATE.traitLevelBonus) STATE.traitLevelBonus = { physique:0, reflexes:0, mind:0, charm:0 };
+      var _traits = ['physique','reflexes','mind','charm'];
+      _traits.forEach(function(t) { STATE.traits[t] = 1 + (STATE.traitBonus[t] || 0) + (STATE.traitLevelBonus[t] || 0); });
+      // Portrait migration
+      if (!STATE.identity) STATE.identity = JSON.parse(JSON.stringify(DEFAULT_STATE.identity));
+      if (!STATE.identity.portrait) STATE.identity.portrait = '';
+      // Effects migration
+      if (!STATE.effects)          STATE.effects          = [];
+      if (!STATE.levelPoints)      STATE.levelPoints      = { body: 0, core: 0 };
+      if (!STATE.levelPoints.core) STATE.levelPoints.core = 0;
+      if (!STATE.statAdvPool)      STATE.statAdvPool      = { physique:0, reflexes:0, mind:0, charm:0 };
+      // Migrate old hpUpgradePoints to spent-based system
+      if (STATE.hpUpgradePoints !== undefined) { delete STATE.hpUpgradePoints; }
+      if (STATE.hpUpgradePointsSpent === undefined) STATE.hpUpgradePointsSpent = 0;
+      // Objectives type migration
+      ['main','directives','goals'].forEach(function(sec) {
+        if (STATE.objectives[sec]) STATE.objectives[sec].forEach(function(obj) {
+          if (!obj.type) obj.type = 'Scenario';
+        });
+      });
+      // Tags migration: add effect field if missing
+      if (STATE.tags) STATE.tags.forEach(function(tag) {
+        if (tag.effect === undefined) tag.effect = '';
+      });
+      // Patron avatar migration
+      if (STATE.patrons) STATE.patrons.forEach(function(p) { if (!p.avatar) p.avatar = ''; });
+      // Quick Slots migration
+      if (STATE.inventory && STATE.inventory.categories) {
+        var hasQS = STATE.inventory.categories.some(function(c) { return c.locked && c.maxItems === 3; });
+        if (!hasQS) STATE.inventory.categories.unshift({ id:9, name:'Quick Slots', collapsed:false, items:[], locked:true, maxItems:3 });
+        // Worn/Equipped migration
+        var hasWorn = STATE.inventory.categories.some(function(c) { return c.name === 'Worn/Equipped'; });
+        if (!hasWorn) {
+          var qsIdx = 0;
+          for (var _i=0; _i<STATE.inventory.categories.length; _i++) { if (STATE.inventory.categories[_i].locked) { qsIdx = _i; break; } }
+          STATE.inventory.categories.splice(qsIdx + 1, 0, { id:15, name:'Worn/Equipped', collapsed:false, items:[] });
+        }
+      }
+    } catch(e) {
+      STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    }
+  } else {
+    STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
+  }
+  renderAll();
+}
+
+function showSaved() {
+  const el = document.getElementById('saveIndicator');
+  el.classList.add('visible');
+  clearTimeout(window._saveTimer);
+  window._saveTimer = setTimeout(function() { el.classList.remove('visible'); }, 1500);
+}
+
+function exportCharacter() {
+  var name = (STATE.identity && STATE.identity.name) ? STATE.identity.name.replace(/[^a-z0-9]/gi, '-').toLowerCase() : 'character';
+  var json = JSON.stringify(STATE, null, 2);
+  var blob = new Blob([json], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'galactic-prime-time-' + name + '.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importCharacter(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var parsed = JSON.parse(e.target.result);
+      STATE = parsed;
+      // Run same migrations as loadState
+      var _traits = ['physique','reflexes','mind','charm'];
+      if (!STATE.traits)          STATE.traits          = { physique:1, reflexes:1, mind:1, charm:1 };
+      if (!STATE.traitBonus)      STATE.traitBonus      = { physique:0, reflexes:0, mind:0, charm:0 };
+      if (!STATE.traitLevelBonus) STATE.traitLevelBonus = { physique:0, reflexes:0, mind:0, charm:0 };
+      _traits.forEach(function(t) { STATE.traits[t] = 1 + (STATE.traitBonus[t] || 0) + (STATE.traitLevelBonus[t] || 0); });
+      if (!STATE.levelPoints)      STATE.levelPoints      = { body: 0, core: 0 };
+      if (!STATE.levelPoints.core) STATE.levelPoints.core = 0;
+      if (!STATE.statAdvPool)      STATE.statAdvPool      = { physique:0, reflexes:0, mind:0, charm:0 };
+      if (STATE.hpUpgradePoints !== undefined) delete STATE.hpUpgradePoints;
+      if (STATE.hpUpgradePointsSpent === undefined) STATE.hpUpgradePointsSpent = 0;
+      if (!STATE.identity) STATE.identity = JSON.parse(JSON.stringify(DEFAULT_STATE.identity));
+      if (!STATE.identity.portrait) STATE.identity.portrait = '';
+      if (!STATE.bonusPoints) STATE.bonusPoints = { body:5, core:5 };
+      if (!STATE.bodyParts) STATE.bodyParts = JSON.parse(JSON.stringify(DEFAULT_STATE.bodyParts));
+      if (!STATE.skills) STATE.skills = [];
+      if (!STATE.tags) STATE.tags = [];
+      if (!STATE.effects) STATE.effects = [];
+      if (!STATE.exposure) STATE.exposure = { viewers:0, followers:0 };
+      if (!STATE.patrons) STATE.patrons = JSON.parse(JSON.stringify(DEFAULT_STATE.patrons));
+      STATE.patrons.forEach(function(p) { if (!p.avatar) p.avatar = ''; });
+      if (!STATE.tokens) STATE.tokens = { narrative:0, upgrade:0, bossTokens:[] };
+      if (!STATE.inventory) STATE.inventory = JSON.parse(JSON.stringify(DEFAULT_STATE.inventory));
+      if (!STATE.objectives) STATE.objectives = { main:[], directives:[], goals:[] };
+      if (!STATE.notes) STATE.notes = '';
+      saveState();
+      renderAll();
+      showSaved();
+    } catch(err) {
+      alert('Import failed: invalid JSON file.');
+    }
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+function resetCharacter() {
+  appConfirm('RESET CHARACTER? All data will be permanently lost. This cannot be undone.', function() {
+    localStorage.removeItem('theshow_v1');
+    STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    renderAll();
+    showSaved();
+  });
+}
+
+function renderAll() {
+  renderIdentity();
+  renderPortrait();
+  renderTraits();
+  renderEffects();
+  renderBodyParts();
+  renderSkills();
+  renderTags();
+  renderExposure();
+  renderPatrons();
+  renderTokens();
+  renderObjectives();
+  renderInventory();
+  renderAchievements();
+  renderNotes();
+}
+
+// ============================================================
+//  IDENTITY
+// ============================================================
+
+function renderIdentity() {
+  var id = STATE.identity;
+  document.getElementById('charName').value       = id.name       || '';
+  document.getElementById('playerName').value     = id.player     || '';
+  document.getElementById('charRace').value       = id.race       || 'Human';
+  document.getElementById('charLevel').value      = id.level      || 1;
+  document.getElementById('charBackground').value = id.background || '';
+  renderPortrait();
+}
+
+function updateIdentity() {
+  var oldLevel = STATE.identity.level || 1;
+  STATE.identity.name       = document.getElementById('charName').value;
+  STATE.identity.player     = document.getElementById('playerName').value;
+  STATE.identity.race       = document.getElementById('charRace').value;
+  STATE.identity.background = document.getElementById('charBackground').value;
+  var newLevel = Math.max(1, parseInt(document.getElementById('charLevel').value) || 1);
+  STATE.identity.level = newLevel;
+  if (newLevel > oldLevel) {
+    var gained = newLevel - oldLevel;
+    STATE.levelPoints.body = (STATE.levelPoints.body || 0) + gained;
+    STATE.levelPoints.core = (STATE.levelPoints.core || 0) + gained;
+    renderTraits();
+    renderSkills();
+  } else if (newLevel < oldLevel) {
+    var totalEarned = Math.max(0, newLevel - 1);
+    // Force un-invest excess traitLevelBonus and claw back statAdvPool
+    function _unInvestPool(traitList, poolKey) {
+      var spent = traitList.reduce(function(s,t){ return s+(STATE.traitLevelBonus[t]||0); }, 0);
+      while (spent > totalEarned) {
+        var removed = false;
+        for (var _i = traitList.length - 1; _i >= 0; _i--) {
+          var _t = traitList[_i];
+          if ((STATE.traitLevelBonus[_t] || 0) > 0) {
+            STATE.traitLevelBonus[_t]--;
+            STATE.statAdvPool[_t] = Math.max(0, (STATE.statAdvPool[_t] || 0) - 1);
+            removed = true; break;
+          }
+        }
+        if (!removed) break;
+        spent = traitList.reduce(function(s,t){ return s+(STATE.traitLevelBonus[t]||0); }, 0);
+      }
+      STATE.levelPoints[poolKey] = Math.max(0, totalEarned - spent);
+    }
+    _unInvestPool(['physique','reflexes'], 'body');
+    _unInvestPool(['mind','charm'], 'core');
+    ['physique','reflexes','mind','charm'].forEach(function(t) {
+      STATE.traits[t] = 1 + (STATE.traitBonus[t]||0) + (STATE.traitLevelBonus[t]||0);
+    });
+    renderTraits(); renderBodyParts(); renderSkills();
+  }
+  saveState();
+}
+
+// ============================================================
+//  TRAITS
+// ============================================================
+
+var BODY_TRAITS = ['physique','reflexes'];
+var CORE_TRAITS = ['mind','charm'];
+
+function adjustTrait(trait, delta) {
+  var isBody   = BODY_TRAITS.indexOf(trait) !== -1;
+  var poolKey  = isBody ? 'body' : 'core';
+  var curBonus = STATE.traitBonus[trait] || 0;
+
+  if (delta > 0) {
+    if (STATE.bonusPoints[poolKey] <= 0) return;
+    if (curBonus >= 4) return; // max bonus per trait is 4 (1+4=5)
+    STATE.traitBonus[trait] = curBonus + 1;
+    STATE.bonusPoints[poolKey]--;
+  } else {
+    if (curBonus <= 0) return;
+    STATE.traitBonus[trait] = curBonus - 1;
+    STATE.bonusPoints[poolKey]++;
+  }
+
+  STATE.traits[trait] = 1 + STATE.traitBonus[trait] + (STATE.traitLevelBonus ? (STATE.traitLevelBonus[trait] || 0) : 0);
+  renderTraits();
+  saveState();
+}
+
+function getHpEarned() {
+  var phys = STATE.traits.physique || 1;
+  return phys >= 10 ? Math.floor((phys - 10) / 5) + 1 : 0;
+}
+function getHpAvailable() {
+  return Math.max(0, getHpEarned() - (STATE.hpUpgradePointsSpent || 0));
+}
+
+function investLevelPoint(trait) {
+  var isCore = ['mind','charm'].indexOf(trait) !== -1;
+  var poolKey = isCore ? 'core' : 'body';
+  if ((STATE.levelPoints[poolKey] || 0) <= 0) return;
+  STATE.levelPoints[poolKey]--;
+  if (!STATE.traitLevelBonus) STATE.traitLevelBonus = { physique:0, reflexes:0, mind:0, charm:0 };
+  STATE.traitLevelBonus[trait] = (STATE.traitLevelBonus[trait] || 0) + 1;
+  STATE.traits[trait] = 1 + (STATE.traitBonus[trait] || 0) + STATE.traitLevelBonus[trait];
+  // Award 1 ADV point for this stat so skills using it can be advanced
+  if (!STATE.statAdvPool) STATE.statAdvPool = { physique:0, reflexes:0, mind:0, charm:0 };
+  STATE.statAdvPool[trait] = (STATE.statAdvPool[trait] || 0) + 1;
+  renderTraits();
+  renderBodyParts(); // refresh HP upgrade button
+  saveState();
+}
+
+function renderTraits() {
+  var traits = ['physique','reflexes','mind','charm'];
+  traits.forEach(function(t) {
+    var val      = STATE.traits[t]          !== undefined ? STATE.traits[t] : 1;
+    var bonus    = STATE.traitBonus[t]      || 0;
+    var lvlBonus = STATE.traitLevelBonus ? (STATE.traitLevelBonus[t] || 0) : 0;
+    document.getElementById('tv-'  + t).textContent = val;
+    var bonusStr = 'BASE 1 +' + bonus + (lvlBonus > 0 ? ' LVL+' + lvlBonus : '');
+    document.getElementById('tb-'  + t).textContent = bonusStr;
+    document.getElementById('tsp-' + t).textContent = 'SP: ' + val;
+  });
+
+  var bodyPts = STATE.bonusPoints.body;
+  var corePts = STATE.bonusPoints.core;
+
+  var bodyEl = document.getElementById('bodyPtsDisplay');
+  bodyEl.textContent = 'BODY PTS: ' + bodyPts + ' remaining';
+  bodyEl.className   = 'pts-badge' + (bodyPts === 0 ? ' empty' : bodyPts <= 2 ? ' warn' : '');
+
+  var coreEl = document.getElementById('corePtsDisplay');
+  coreEl.textContent = 'CORE PTS: ' + corePts + ' remaining';
+  coreEl.className   = 'pts-badge' + (corePts === 0 ? ' empty' : corePts <= 2 ? ' warn' : '');
+
+  // Level-up invest buttons (shown when levelPoints > 0)
+  var lvlPts = STATE.levelPoints ? STATE.levelPoints.body || 0 : 0;
+  var lvlEl  = document.getElementById('levelPtsDisplay');
+  if (lvlEl) {
+    var coreLvlPts = STATE.levelPoints ? STATE.levelPoints.core || 0 : 0;
+    var anyPts = lvlPts + coreLvlPts;
+    lvlEl.textContent = '\u2B06 LEVEL-UP PTS — BODY: ' + lvlPts + '  CORE: ' + coreLvlPts;
+    lvlEl.className   = 'pts-badge lvl-pts-badge' + (anyPts > 0 ? ' active' : '');
+    lvlEl.style.display = anyPts > 0 ? '' : 'none';
+  }
+  var corePts = STATE.levelPoints ? STATE.levelPoints.core || 0 : 0;
+  // Show invest buttons for body traits when body pool > 0, core traits when core pool > 0
+  ['physique','reflexes'].forEach(function(t) {
+    var btn = document.getElementById('lvlbtn-' + t);
+    if (btn) btn.style.display = lvlPts > 0 ? 'inline-flex' : 'none';
+  });
+  ['mind','charm'].forEach(function(t) {
+    var btn = document.getElementById('lvlbtn-' + t);
+    if (btn) btn.style.display = corePts > 0 ? 'inline-flex' : 'none';
+  });
+  // HP upgrade points (auto-computed from physique)
+  var hpEl = document.getElementById('hpUpgradeDisplay');
+  if (hpEl) {
+    var hpAvail = getHpAvailable();
+    var hpEarned = getHpEarned();
+    hpEl.textContent = '\u2665 HP UPGRADES: ' + hpAvail + ' available (earned ' + hpEarned + ' at PHYS ' + (STATE.traits.physique||1) + ')';
+    hpEl.style.display = hpEarned > 0 ? '' : 'none';
+  }
+  // Stat advancement pool badges
+  var pool = STATE.statAdvPool || {};
+  ['physique','reflexes','mind','charm'].forEach(function(t) {
+    var el = document.getElementById('advpool-' + t);
+    if (!el) return;
+    var v = pool[t] || 0;
+    el.textContent = 'ADV: ' + v;
+    el.style.color = v > 0 ? 'var(--gold)' : 'var(--muted)';
+  });
+}
+
+// ============================================================
+//  BODY PARTS
+// ============================================================
+
+function getHealthClass(part) {
+  if (part.currentHp <= 0)                          return 'dmg-destroyed';
+  var ratio = part.currentHp / part.maxHp;
+  if (ratio >= 1)    return '';
+  if (ratio > 0.75)  return 'dmg-light';
+  if (ratio > 0.5)   return 'dmg-medium';
+  if (ratio > 0.25)  return 'dmg-heavy';
+  return 'dmg-critical';
+}
+
+function renderBodyParts() {
+  var container = document.getElementById('bodyPartsList');
+  container.innerHTML = '';
+
+  STATE.bodyParts.forEach(function(part, idx) {
+    var card = document.createElement('div');
+    card.className = 'body-part-card ' + getHealthClass(part);
+
+    // --- HEADER ---
+    var header = document.createElement('div');
+    header.className = 'body-part-header';
+
+    var nameInput = document.createElement('input');
+    nameInput.className   = 'part-name-input';
+    nameInput.value       = part.name;
+    nameInput.placeholder = 'PART NAME';
+    (function(i) {
+      nameInput.onchange = function(e) { STATE.bodyParts[i].name = e.target.value; saveState(); };
+    })(idx);
+
+    var lethalLabel = document.createElement('label');
+    lethalLabel.className = 'lethal-toggle';
+    var lethalCb = document.createElement('input');
+    lethalCb.type = 'checkbox';
+    lethalCb.checked = !!part.lethal;
+    (function(i) {
+      lethalCb.onchange = function(e) { STATE.bodyParts[i].lethal = e.target.checked; saveState(); };
+    })(idx);
+    lethalLabel.appendChild(lethalCb);
+    lethalLabel.appendChild(document.createTextNode(' LETHAL'));
+
+    var delBtn = document.createElement('button');
+    delBtn.className   = 'btn btn-danger btn-xs';
+    delBtn.textContent = '\u2715 DEL';
+    (function(i) {
+      delBtn.onclick = function() { deleteBodyPart(i); };
+    })(idx);
+
+    header.appendChild(nameInput);
+    header.appendChild(lethalLabel);
+    if (part.currentHp <= 0) {
+      var disabledBadge = document.createElement('span');
+      disabledBadge.className = 'disabled-badge';
+      disabledBadge.textContent = 'DISABLED';
+      header.appendChild(disabledBadge);
+    }
+    header.appendChild(delBtn);
+
+    // --- HP SECTION ---
+    var hpSec = document.createElement('div');
+    hpSec.className = 'hp-section';
+
+    var hpLabel = document.createElement('span');
+    hpLabel.className   = 'hp-label';
+    hpLabel.textContent = 'HP:';
+
+    // max HP controls
+    var hpMaxDisp = document.createElement('div');
+    hpMaxDisp.className = 'hp-max-display';
+
+    var hpMinus = document.createElement('button');
+    hpMinus.className   = 'btn-hptiny';
+    hpMinus.textContent = '\u2212';
+    (function(i) {
+      hpMinus.onclick = function() {
+        if (STATE.bodyParts[i].maxHp > 1) {
+          STATE.bodyParts[i].maxHp--;
+          if (STATE.bodyParts[i].currentHp > STATE.bodyParts[i].maxHp) {
+            STATE.bodyParts[i].currentHp = STATE.bodyParts[i].maxHp;
+          }
+          renderBodyParts(); saveState();
+        }
+      };
+    })(idx);
+
+    var hpMaxInput = document.createElement('input');
+    hpMaxInput.className = 'hp-max-input';
+    hpMaxInput.type      = 'number';
+    hpMaxInput.min       = '1';
+    hpMaxInput.value     = part.maxHp;
+    (function(i) {
+      hpMaxInput.onchange = function(e) {
+        var v = Math.max(1, parseInt(e.target.value) || 1);
+        STATE.bodyParts[i].maxHp = v;
+        if (STATE.bodyParts[i].currentHp > v) STATE.bodyParts[i].currentHp = v;
+        renderBodyParts(); saveState();
+      };
+    })(idx);
+
+    var hpPlus = document.createElement('button');
+    hpPlus.className   = 'btn-hptiny';
+    hpPlus.textContent = '+';
+    (function(i) {
+      hpPlus.onclick = function() { STATE.bodyParts[i].maxHp++; renderBodyParts(); saveState(); };
+    })(idx);
+
+    hpMaxDisp.appendChild(hpMinus);
+    hpMaxDisp.appendChild(hpMaxInput);
+    hpMaxDisp.appendChild(hpPlus);
+
+    // HP Boxes
+    var hpBoxes = document.createElement('div');
+    hpBoxes.className = 'hp-boxes';
+
+    for (var b = 0; b < part.maxHp; b++) {
+      var box = document.createElement('div');
+      box.className = 'hp-box' + (b >= part.currentHp ? ' damaged' : '');
+      (function(i, boxIdx) {
+        box.onclick = function() {
+          var p = STATE.bodyParts[i];
+          if (boxIdx < p.currentHp) {
+            p.currentHp = boxIdx;       // damage from this box onward
+          } else {
+            p.currentHp = boxIdx + 1;   // heal to this box
+          }
+          renderBodyParts(); saveState();
+        };
+      })(idx, b);
+      hpBoxes.appendChild(box);
+    }
+
+    // HP Upgrade button (computed from physique: +1 per 5 pts from 10 onwards)
+    if (getHpAvailable() > 0) {
+      var hpUpBtn = document.createElement('button');
+      hpUpBtn.className   = 'btn-hp-upgrade';
+      hpUpBtn.textContent = '\u2665 +1 MAX HP  (' + getHpAvailable() + ' left)';
+      hpUpBtn.title       = 'Spend 1 HP Upgrade point (earned from PHYSIQUE \u2265 10) to permanently raise this part\'s max HP';
+      (function(i) {
+        hpUpBtn.onclick = function() {
+          STATE.bodyParts[i].maxHp++;
+          STATE.bodyParts[i].currentHp++;
+          STATE.hpUpgradePointsSpent = (STATE.hpUpgradePointsSpent || 0) + 1;
+          renderBodyParts(); renderTraits(); saveState();
+        };
+      })(idx);
+      hpSec.appendChild(hpUpBtn);
+    }
+
+    hpSec.appendChild(hpLabel);
+    hpSec.appendChild(hpMaxDisp);
+    hpSec.appendChild(hpBoxes);
+
+    // --- CONDITIONS ---
+    var condSec = document.createElement('div');
+    condSec.className = 'conditions-section';
+
+    var condList = document.createElement('div');
+    condList.className = 'conditions-list';
+
+    var conditions = part.conditions || [];
+    conditions.forEach(function(cond, ci) {
+      var badge = document.createElement('div');
+      badge.className = 'condition-badge cond-t' + cond.tier;
+      badge.title = (CONDITION_DESCS[cond.type] || '') + ' [Tier ' + cond.tier + ']';
+
+      var typeSpan = document.createTextNode(cond.type + ' ');
+      var tierSpan = document.createElement('span');
+      tierSpan.style.fontFamily = "'Courier New', monospace";
+      tierSpan.textContent = 'T' + cond.tier;
+
+      var rmBtn = document.createElement('button');
+      rmBtn.className   = 'cond-remove';
+      rmBtn.textContent = '\u2715';
+      (function(i, j) {
+        rmBtn.onclick = function() { STATE.bodyParts[i].conditions.splice(j,1); renderBodyParts(); saveState(); };
+      })(idx, ci);
+
+      badge.appendChild(typeSpan);
+      badge.appendChild(tierSpan);
+      badge.appendChild(rmBtn);
+      condList.appendChild(badge);
+    });
+
+    // + Condition button & inline form
+    var addCondBtn = document.createElement('button');
+    addCondBtn.className   = 'btn btn-xs';
+    addCondBtn.textContent = '+ Condition';
+
+    var addCondForm = document.createElement('div');
+    addCondForm.className = 'add-cond-form';
+
+    addCondBtn.onclick = function() { addCondForm.classList.toggle('open'); };
+
+    var condTypeSelect = document.createElement('select');
+    condTypeSelect.className = 'mini-select';
+    CONDITION_TYPES.forEach(function(ct) {
+      var opt       = document.createElement('option');
+      opt.value     = ct;
+      opt.textContent = ct;
+      condTypeSelect.appendChild(opt);
+    });
+
+    var condTierSelect = document.createElement('select');
+    condTierSelect.className = 'mini-select';
+    [1,2,3,4].forEach(function(t) {
+      var opt       = document.createElement('option');
+      opt.value     = t;
+      opt.textContent = 'Tier ' + t;
+      condTierSelect.appendChild(opt);
+    });
+
+    var addCondConfirm = document.createElement('button');
+    addCondConfirm.className   = 'btn btn-xs btn-success';
+    addCondConfirm.textContent = 'ADD';
+    (function(i, form, typeEl, tierEl) {
+      addCondConfirm.onclick = function() {
+        if (!STATE.bodyParts[i].conditions) STATE.bodyParts[i].conditions = [];
+        STATE.bodyParts[i].conditions.push({ type: typeEl.value, tier: parseInt(tierEl.value) });
+        form.classList.remove('open');
+        renderBodyParts(); saveState();
+      };
+    })(idx, addCondForm, condTypeSelect, condTierSelect);
+
+    addCondForm.appendChild(condTypeSelect);
+    addCondForm.appendChild(condTierSelect);
+    addCondForm.appendChild(addCondConfirm);
+
+    condSec.appendChild(condList);
+    condSec.appendChild(addCondBtn);
+    condSec.appendChild(addCondForm);
+
+    card.appendChild(header);
+    card.appendChild(hpSec);
+    card.appendChild(condSec);
+    container.appendChild(card);
+  });
+}
+
+function deleteBodyPart(idx) {
+  appConfirm('Delete body part "' + STATE.bodyParts[idx].name + '"?', function() {
+    STATE.bodyParts.splice(idx, 1);
+    renderBodyParts();
+    saveState();
+  });
+}
+
+function addBodyPart() {
+  var name    = document.getElementById('newPartName').value.trim();
+  var maxHp   = Math.max(1, parseInt(document.getElementById('newPartHp').value) || 1);
+  var lethal  = document.getElementById('newPartLethal').checked;
+  if (!name) { alert('Enter a part name.'); return; }
+  STATE.bodyParts.push({ id: genId(), name: name, maxHp: maxHp, currentHp: maxHp, lethal: lethal, conditions: [] });
+  document.getElementById('newPartName').value      = '';
+  document.getElementById('newPartHp').value        = '2';
+  document.getElementById('newPartLethal').checked  = false;
+  document.getElementById('bodyPartAddForm').classList.remove('open');
+  renderBodyParts();
+  saveState();
+}
+
+// ============================================================
+//  SKILLS
+// ============================================================
+
+function renderSkills() {
+  var container = document.getElementById('skillsList');
+  container.innerHTML = '';
+
+  STATE.skills.forEach(function(skill, idx) {
+    var card = document.createElement('div');
+    card.className = 'skill-card';
+
+    // --- HEADER ---
+    var header = document.createElement('div');
+    header.className = 'skill-header';
+
+    var nameInput = document.createElement('input');
+    nameInput.className   = 'skill-name-input';
+    nameInput.value       = skill.name || '';
+    nameInput.placeholder = 'Skill Name';
+    (function(i) {
+      nameInput.onchange = function(e) { STATE.skills[i].name = e.target.value; saveState(); };
+    })(idx);
+
+    var passiveBtn = document.createElement('button');
+    passiveBtn.className   = 'skill-passive-btn' + (skill.passive ? ' is-passive' : '');
+    passiveBtn.textContent = skill.passive ? 'PASSIVE' : 'ACTIVE';
+    (function(i) {
+      passiveBtn.onclick = function() {
+        STATE.skills[i].passive = !STATE.skills[i].passive;
+        renderSkills(); saveState();
+      };
+    })(idx);
+
+    var detailToggle = document.createElement('button');
+    detailToggle.className   = 'skill-desc-toggle';
+    detailToggle.textContent = '\u25BC DETAILS';
+
+    var delBtn = document.createElement('button');
+    delBtn.className   = 'btn btn-danger btn-xs';
+    delBtn.textContent = '\u2715';
+    (function(i) {
+      delBtn.onclick = function() {
+        appConfirm('Delete skill "' + (STATE.skills[i].name || 'unnamed') + '"?', function() {
+          STATE.skills.splice(i, 1);
+          renderSkills(); saveState();
+        });
+      };
+    })(idx);
+
+    header.appendChild(nameInput);
+    header.appendChild(passiveBtn);
+    header.appendChild(detailToggle);
+    header.appendChild(delBtn);
+
+    // --- META ROW ---
+    var meta = document.createElement('div');
+    meta.className = 'skill-meta';
+
+    // Stat toggles (multi-select any of the 4 stats, shows combined total)
+    var statsLabel = document.createElement('span');
+    statsLabel.className   = 'skill-meta-label';
+    statsLabel.textContent = 'STATS:';
+    meta.appendChild(statsLabel);
+
+    var STAT_DEFS = [
+      { key:'physique', label:'PHYS' },
+      { key:'reflexes', label:'REFL' },
+      { key:'mind',     label:'MIND' },
+      { key:'charm',    label:'CHRM' }
+    ];
+    var skillStats = skill.stats || [];
+
+    var statTotal = document.createElement('span');
+    statTotal.className = 'skill-stat-total';
+    function refreshTotal() {
+      var sum = 0;
+      (STATE.skills[idx] ? STATE.skills[idx].stats || [] : skillStats).forEach(function(k) {
+        sum += STATE.traits[k] !== undefined ? STATE.traits[k] : 1;
+      });
+      statTotal.textContent = skillStats.length > 0 ? '= ' + sum : '';
+    }
+
+    STAT_DEFS.forEach(function(def) {
+      var btn = document.createElement('button');
+      var isActive = skillStats.indexOf(def.key) !== -1;
+      btn.className   = 'skill-stat-toggle' + (isActive ? ' active' : '');
+      btn.textContent = def.label + '\u00A0' + (STATE.traits[def.key] !== undefined ? STATE.traits[def.key] : 1);
+      btn.title       = def.key.charAt(0).toUpperCase() + def.key.slice(1) + ' = ' + (STATE.traits[def.key] !== undefined ? STATE.traits[def.key] : 1);
+      (function(i, defKey) {
+        btn.onclick = function() {
+          if (!STATE.skills[i].stats) STATE.skills[i].stats = [];
+          var arr = STATE.skills[i].stats;
+          var pos = arr.indexOf(defKey);
+          if (pos !== -1) arr.splice(pos, 1); else arr.push(defKey);
+          renderSkills(); saveState();
+        };
+      })(idx, def.key);
+      meta.appendChild(btn);
+    });
+
+    meta.appendChild(statTotal);
+
+    var costLabel = document.createElement('span');
+    costLabel.className   = 'skill-meta-label';
+    costLabel.textContent = 'MOMENT:';
+    var costInput = document.createElement('input');
+    costInput.className   = 'skill-meta-input';
+    costInput.value       = skill.momentCost || '';
+    costInput.placeholder = '1';
+    costInput.style.width = '48px';
+    (function(i) {
+      costInput.onchange = function(e) { STATE.skills[i].momentCost = e.target.value; saveState(); };
+    })(idx);
+
+    var capLabel = document.createElement('span');
+    capLabel.className   = 'skill-meta-label';
+    capLabel.textContent = 'CAP:';
+    var capInput = document.createElement('input');
+    capInput.className   = 'skill-meta-input';
+    capInput.type        = 'number';
+    capInput.min         = '1';
+    capInput.max         = '10';
+    capInput.value       = skill.capacity || 5;
+    capInput.style.width = '48px';
+    capInput.title       = 'Max level (capacity)';
+    (function(i) {
+      capInput.onchange = function(e) {
+        var cap = Math.max(1, Math.min(10, parseInt(e.target.value) || 5));
+        STATE.skills[i].capacity = cap;
+        if (STATE.skills[i].level > cap) STATE.skills[i].level = cap;
+        renderSkills(); saveState();
+      };
+    })(idx);
+
+    meta.appendChild(costLabel);
+    meta.appendChild(costInput);
+    meta.appendChild(capLabel);
+    meta.appendChild(capInput);
+
+    refreshTotal();
+
+    // --- PIP ROW (capped by capacity) ---
+    var pipRow = document.createElement('div');
+    pipRow.className = 'pip-row';
+    var cap = skill.capacity || 5;
+    for (var p = 1; p <= cap; p++) {
+      var pip = document.createElement('div');
+      pip.className = 'pip' + (p <= (skill.level || 0) ? ' filled' : '');
+      (function(i, pLevel) {
+        pip.onclick = function() {
+          var curLevel = STATE.skills[i].level || 0;
+          var advancing = curLevel < pLevel; // clicking unfilled pip = advance
+          if (advancing) {
+            // Must have 1 ADV point per required stat
+            var required = STATE.skills[i].stats || [];
+            if (required.length === 0) {
+              // No stats selected — warn
+              alert('Select at least one stat for this skill before leveling it up.');
+              return;
+            }
+            var pool = STATE.statAdvPool || {};
+            var missing = required.filter(function(t) { return (pool[t] || 0) < 1; });
+            if (missing.length > 0) {
+              alert('Not enough advancement points.\nMissing: ' + missing.map(function(t){ return t.toUpperCase(); }).join(', ') + '\nLevel up your character to earn stat advancement points.');
+              return;
+            }
+            // Spend 1 from each required stat pool
+            required.forEach(function(t) { STATE.statAdvPool[t]--; });
+            STATE.skills[i].level = pLevel;
+          } else {
+            // Decreasing (click same or lower filled pip) — refund ADV points
+            var required = STATE.skills[i].stats || [];
+            required.forEach(function(t) {
+              if (!STATE.statAdvPool) STATE.statAdvPool = {};
+              STATE.statAdvPool[t] = (STATE.statAdvPool[t] || 0) + 1;
+            });
+            STATE.skills[i].level = (curLevel === pLevel) ? pLevel - 1 : pLevel;
+          }
+          renderSkills(); renderTraits(); saveState();
+        };
+      })(idx, p);
+      pipRow.appendChild(pip);
+    }
+    var levelDisplay = document.createElement('span');
+    levelDisplay.className   = 'skill-level-display';
+    levelDisplay.textContent = 'LV ' + (skill.level || 0) + ' / ' + cap;
+    pipRow.appendChild(levelDisplay);
+
+    // --- DETAILS (collapsible) ---
+    var detailDiv = document.createElement('div');
+    detailDiv.className = 'skill-desc';
+
+    var extraGrid = document.createElement('div');
+    extraGrid.className = 'skill-extra-grid';
+
+    function makeExtraField(labelText, isFullWidth, inputEl) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'skill-extra-field' + (isFullWidth ? ' skill-extra-full' : '');
+      var lbl = document.createElement('span');
+      lbl.className   = 'skill-meta-label';
+      lbl.textContent = labelText;
+      wrapper.appendChild(lbl);
+      wrapper.appendChild(inputEl);
+      return wrapper;
+    }
+
+    // Requirements
+    var reqIn = document.createElement('input');
+    reqIn.className   = 'skill-detail-input skill-detail-full';
+    reqIn.value       = skill.requirements || '';
+    reqIn.placeholder = 'Prereqs or conditions to use this skill...';
+    (function(i) { reqIn.onchange = function(e) { STATE.skills[i].requirements = e.target.value; saveState(); }; })(idx);
+
+    // Range
+    var rangeIn = document.createElement('input');
+    rangeIn.className   = 'skill-detail-input skill-detail-short';
+    rangeIn.value       = skill.range || '';
+    rangeIn.placeholder = 'Self / Near / Far';
+    (function(i) { rangeIn.onchange = function(e) { STATE.skills[i].range = e.target.value; saveState(); }; })(idx);
+
+    // Target
+    var targetIn = document.createElement('input');
+    targetIn.className   = 'skill-detail-input skill-detail-short';
+    targetIn.value       = skill.target || '';
+    targetIn.placeholder = 'Single / Area / Self';
+    (function(i) { targetIn.onchange = function(e) { STATE.skills[i].target = e.target.value; saveState(); }; })(idx);
+
+    // Range/Target inline row
+    var rtRow = document.createElement('div');
+    rtRow.className = 'skill-extra-row';
+    rtRow.appendChild(makeExtraField('RANGE:', false, rangeIn));
+    rtRow.appendChild(makeExtraField('TARGET:', false, targetIn));
+
+    // Effect
+    var effectArea = document.createElement('textarea');
+    effectArea.className   = 'skill-detail-textarea';
+    effectArea.value       = skill.effect || '';
+    effectArea.placeholder = 'What this skill does when activated...';
+    (function(i) { effectArea.onchange = function(e) { STATE.skills[i].effect = e.target.value; saveState(); }; })(idx);
+
+    // Notes / Flavor
+    var notesArea = document.createElement('textarea');
+    notesArea.className   = 'skill-detail-textarea';
+    notesArea.value       = skill.description || '';
+    notesArea.placeholder = 'Flavor text, rules clarifications, personal notes...';
+    (function(i) { notesArea.onchange = function(e) { STATE.skills[i].description = e.target.value; saveState(); }; })(idx);
+
+    extraGrid.appendChild(makeExtraField('REQUIREMENTS:', true, reqIn));
+    extraGrid.appendChild(rtRow);
+    extraGrid.appendChild(makeExtraField('EFFECT:', true, effectArea));
+    extraGrid.appendChild(makeExtraField('NOTES:', true, notesArea));
+    detailDiv.appendChild(extraGrid);
+
+    detailToggle.onclick = function() {
+      detailDiv.classList.toggle('open');
+      detailToggle.textContent = detailDiv.classList.contains('open') ? '\u25B2 DETAILS' : '\u25BC DETAILS';
+    };
+
+    card.appendChild(header);
+    card.appendChild(meta);
+    card.appendChild(pipRow);
+    card.appendChild(detailDiv);
+    container.appendChild(card);
+  });
+}
+
+function addSkill() {
+  var name = document.getElementById('newSkillName').value.trim();
+  var cost = document.getElementById('newSkillCost').value.trim();
+  if (!name) { alert('Enter a skill name.'); return; }
+  STATE.skills.push({
+    id: genId(), name: name, stats: [], momentCost: cost,
+    level: 0, capacity: 5, passive: false,
+    requirements: '', range: '', target: '', effect: '', description: ''
+  });
+  document.getElementById('newSkillName').value = '';
+  document.getElementById('newSkillCost').value = '';
+  renderSkills();
+  saveState();
+}
+
+// ============================================================
+//  TAGS
+// ============================================================
+
+function renderTags() {
+  var container = document.getElementById('tagsContainer');
+  container.innerHTML = '';
+
+  STATE.tags.forEach(function(tag, idx) {
+    var card = document.createElement('div');
+    card.className = 'tag-card ' + (tag.state || 'active');
+
+    var cardHeader = document.createElement('div');
+    cardHeader.className = 'tag-card-header';
+
+    var nameSpan = document.createElement('span');
+    nameSpan.className   = 'tag-card-name';
+    nameSpan.textContent = tag.name;
+
+    var stateBtns = document.createElement('div');
+    stateBtns.className = 'tag-state-btns';
+
+    ['active','reinforced','faded'].forEach(function(st) {
+      var btn = document.createElement('button');
+      btn.className = 'tag-state-btn' + ((tag.state || 'active') === st ? ' selected-' + st : '');
+      btn.textContent = st.toUpperCase();
+      (function(i, s) {
+        btn.onclick = function() {
+          STATE.tags[i].state = s;
+          renderTags(); saveState();
+        };
+      })(idx, st);
+      stateBtns.appendChild(btn);
+    });
+
+    var rmBtn = document.createElement('button');
+    rmBtn.className   = 'btn btn-danger btn-xs';
+    rmBtn.textContent = '\u00D7';
+    (function(i) {
+      rmBtn.onclick = function() {
+        appConfirm('Remove tag "' + STATE.tags[i].name + '"?', function() {
+          STATE.tags.splice(i, 1);
+          renderTags(); saveState();
+        });
+      };
+    })(idx);
+
+    cardHeader.appendChild(nameSpan);
+    cardHeader.appendChild(stateBtns);
+    cardHeader.appendChild(rmBtn);
+
+    var effectRow = document.createElement('div');
+    effectRow.className = 'tag-effect-row';
+
+    var effLabel = document.createElement('span');
+    effLabel.className   = 'skill-meta-label';
+    effLabel.textContent = 'EFFECT:';
+
+    var effInput = document.createElement('input');
+    effInput.className   = 'skill-detail-input';
+    effInput.style.flex  = '1';
+    effInput.value       = tag.effect || '';
+    effInput.placeholder = 'Effect description...';
+    (function(i) {
+      effInput.onchange = function(e) { STATE.tags[i].effect = e.target.value; saveState(); };
+    })(idx);
+
+    effectRow.appendChild(effLabel);
+    effectRow.appendChild(effInput);
+
+    card.appendChild(cardHeader);
+    card.appendChild(effectRow);
+    container.appendChild(card);
+  });
+}
+
+function addTag() {
+  var input = document.getElementById('newTagInput');
+  var name  = input.value.trim();
+  if (!name) return;
+  STATE.tags.push({ id: genId(), name: name, state: 'active', effect: '' });
+  input.value = '';
+  renderTags();
+  saveState();
+}
+
+// ============================================================
+//  EXPOSURE
+// ============================================================
+
+function renderExposure() {
+  document.getElementById('viewersDisplay').value   = STATE.exposure.viewers   || '';
+  document.getElementById('followersDisplay').value = STATE.exposure.followers || '';
+}
+
+function updateExposure(key, val) {
+  STATE.exposure[key] = val;
+  saveState();
+}
+
+// ============================================================
+//  PATRONS
+// ============================================================
+
+function renderPatrons() {
+  var container = document.getElementById('patronList');
+  container.innerHTML = '';
+
+  STATE.patrons.forEach(function(patron, idx) {
+    var row = document.createElement('div');
+    row.className = 'patron-row rank-' + patron.rank;
+
+    // Avatar wrap
+    var avatarWrap = document.createElement('div');
+    avatarWrap.className = 'patron-avatar-wrap';
+
+    var avatarLabel = document.createElement('label');
+    avatarLabel.className = 'patron-avatar r' + patron.rank;
+    avatarLabel.title = 'Click to upload patron photo';
+
+    var avatarFileInput = document.createElement('input');
+    avatarFileInput.type = 'file';
+    avatarFileInput.accept = 'image/*';
+    avatarFileInput.style.display = 'none';
+    (function(i) {
+      avatarFileInput.onchange = function(e) {
+        var file = e.target.files[0];
+        if (!file) return;
+        var reader = new FileReader();
+        reader.onload = function(ev) {
+          STATE.patrons[i].avatar = ev.target.result;
+          renderPatrons(); saveState();
+        };
+        reader.readAsDataURL(file);
+      };
+    })(idx);
+
+    if (patron.avatar) {
+      var avatarImg = document.createElement('img');
+      avatarImg.src = patron.avatar;
+      avatarLabel.appendChild(avatarImg);
+    } else {
+      avatarLabel.innerHTML = '👤<br>UPLOAD';
+    }
+    avatarLabel.appendChild(avatarFileInput);
+
+    var rankOverlay = document.createElement('div');
+    rankOverlay.className = 'patron-rank-overlay r' + patron.rank;
+    rankOverlay.textContent = '#' + patron.rank;
+
+    avatarWrap.appendChild(avatarLabel);
+    avatarWrap.appendChild(rankOverlay);
+
+    // Fields
+    var fields = document.createElement('div');
+    fields.className = 'patron-fields';
+
+    var nameInput = document.createElement('input');
+    nameInput.className   = 'patron-input patron-name';
+    nameInput.placeholder = 'Patron name...';
+    nameInput.value       = patron.name || '';
+    (function(i) {
+      nameInput.onchange = function(e) { STATE.patrons[i].name = e.target.value; saveState(); };
+    })(idx);
+
+    var amtInput = document.createElement('input');
+    amtInput.className   = 'patron-input patron-amount';
+    amtInput.placeholder = 'Contribution...';
+    amtInput.value       = patron.amount || '';
+    (function(i) {
+      amtInput.onchange = function(e) { STATE.patrons[i].amount = e.target.value; saveState(); };
+    })(idx);
+
+    var notesInput = document.createElement('input');
+    notesInput.className   = 'patron-input patron-notes';
+    notesInput.placeholder = 'Notes...';
+    notesInput.value       = patron.notes || '';
+    (function(i) {
+      notesInput.onchange = function(e) { STATE.patrons[i].notes = e.target.value; saveState(); };
+    })(idx);
+
+    fields.appendChild(nameInput);
+    fields.appendChild(amtInput);
+    fields.appendChild(notesInput);
+
+    row.appendChild(avatarWrap);
+    row.appendChild(fields);
+    container.appendChild(row);
+  });
+}
+
+// ============================================================
+//  TOKENS
+// ============================================================
+
+function renderTokens() {
+  document.getElementById('narrativeDisplay').textContent = STATE.tokens.narrative || 0;
+  document.getElementById('upgradeDisplay').textContent   = STATE.tokens.upgrade   || 0;
+
+  var grid = document.getElementById('bossTokensGrid');
+  grid.innerHTML = '';
+
+  (STATE.tokens.bossTokens || []).forEach(function(token, idx) {
+    var info = TOKEN_TIER_INFO[token.tier] || TOKEN_TIER_INFO.bronze;
+
+    var el = document.createElement('div');
+    el.className = 'boss-token ' + info.cls + (token.used ? ' used' : '');
+    el.title     = token.tier.toUpperCase() + ' \u2014 click to toggle';
+    el.style.background = info.bg;
+    el.textContent = info.label;
+
+    var rmBtn = document.createElement('button');
+    rmBtn.className   = 'boss-token-remove';
+    rmBtn.textContent = '\u2715';
+    (function(i) {
+      rmBtn.onclick = function(e) {
+        e.stopPropagation();
+        STATE.tokens.bossTokens.splice(i, 1);
+        renderTokens(); saveState();
+      };
+      el.onclick = function(e) {
+        if (e.target === rmBtn) return;
+        STATE.tokens.bossTokens[i].used = !STATE.tokens.bossTokens[i].used;
+        renderTokens(); saveState();
+      };
+    })(idx);
+
+    el.appendChild(rmBtn);
+    grid.appendChild(el);
+  });
+}
+
+function adjustTokenCounter(key, delta) {
+  STATE.tokens[key] = Math.max(0, (STATE.tokens[key] || 0) + delta);
+  renderTokens();
+  saveState();
+}
+
+function addBossToken() {
+  var tier = document.getElementById('newTokenTier').value;
+  if (!STATE.tokens.bossTokens) STATE.tokens.bossTokens = [];
+  STATE.tokens.bossTokens.push({ id: genId(), tier: tier, used: false });
+  renderTokens();
+  saveState();
+}
+
+// ============================================================
+//  OBJECTIVES
+// ============================================================
+
+function renderObjectives() {
+  renderObjSection('main',       document.getElementById('objMain'));
+  renderObjSection('directives', document.getElementById('objDirectives'));
+  renderObjSection('goals',      document.getElementById('objGoals'));
+}
+
+function renderObjSection(sectionKey, container) {
+  container.innerHTML = '';
+  var objectives = STATE.objectives[sectionKey] || [];
+
+  objectives.forEach(function(obj, idx) {
+    var card = document.createElement('div');
+    card.className = 'objective-card ' + (obj.status || 'active');
+
+    // Header row
+    var hdr = document.createElement('div');
+    hdr.className = 'obj-header';
+
+    var statusBadge = document.createElement('span');
+    statusBadge.className   = 'status-badge status-' + (obj.status || 'active');
+    statusBadge.textContent = '[' + OBJ_LABELS[obj.status || 'active'] + ']';
+    (function(sk, i, badge) {
+      badge.onclick = function() {
+        var cur  = OBJ_STATUSES.indexOf(STATE.objectives[sk][i].status || 'active');
+        var next = OBJ_STATUSES[(cur + 1) % OBJ_STATUSES.length];
+        STATE.objectives[sk][i].status = next;
+        renderObjectives(); saveState();
+      };
+    })(sectionKey, idx, statusBadge);
+
+    var titleInput = document.createElement('input');
+    titleInput.className   = 'obj-title-input';
+    titleInput.value       = obj.title || '';
+    titleInput.placeholder = 'Objective title...';
+    (function(sk, i) {
+      titleInput.onchange = function(e) { STATE.objectives[sk][i].title = e.target.value; saveState(); };
+    })(sectionKey, idx);
+
+    var delBtn = document.createElement('button');
+    delBtn.className   = 'btn btn-danger btn-xs';
+    delBtn.textContent = '\u2715';
+    (function(sk, i) {
+      delBtn.onclick = function() {
+        appConfirm('Delete objective?', function() {
+          STATE.objectives[sk].splice(i, 1);
+          renderObjectives(); saveState();
+        });
+      };
+    })(sectionKey, idx);
+
+    var typeSelect = document.createElement('select');
+    typeSelect.className = 'mini-select obj-type-select';
+    ['Scenario','Chapter','Interlude','Side Quest','Personal','Bounty','Corporate Directive'].forEach(function(t) {
+      var opt = document.createElement('option');
+      opt.value = t; opt.textContent = t;
+      if ((obj.type || 'Scenario') === t) opt.selected = true;
+      typeSelect.appendChild(opt);
+    });
+    (function(sk, i) {
+      typeSelect.onchange = function(e) { STATE.objectives[sk][i].type = e.target.value; saveState(); };
+    })(sectionKey, idx);
+
+    hdr.appendChild(statusBadge);
+    hdr.appendChild(typeSelect);
+    hdr.appendChild(titleInput);
+    hdr.appendChild(delBtn);
+
+    // Description toggle button + area
+    var descBtn = document.createElement('button');
+    descBtn.className   = 'btn btn-xs';
+    descBtn.style.marginTop = '4px';
+    descBtn.textContent = '\u25BC Description';
+
+    var descArea = document.createElement('textarea');
+    descArea.className   = 'obj-desc-area';
+    descArea.placeholder = 'Objective details...';
+    descArea.value       = obj.description || '';
+    (function(sk, i) {
+      descArea.onchange = function(e) { STATE.objectives[sk][i].description = e.target.value; saveState(); };
+    })(sectionKey, idx);
+
+    descBtn.onclick = function() {
+      descArea.classList.toggle('open');
+      descBtn.textContent = descArea.classList.contains('open') ? '\u25B2 Description' : '\u25BC Description';
+    };
+
+    // Subtasks
+    var subtaskList = document.createElement('ul');
+    subtaskList.className = 'subtask-list';
+
+    (obj.subtasks || []).forEach(function(st, si) {
+      var li = document.createElement('li');
+      li.className = 'subtask-item';
+
+      var cb = document.createElement('input');
+      cb.type      = 'checkbox';
+      cb.className = 'subtask-cb';
+      cb.checked   = !!st.done;
+      (function(sk, i, j) {
+        cb.onchange = function(e) { STATE.objectives[sk][i].subtasks[j].done = e.target.checked; saveState(); };
+      })(sectionKey, idx, si);
+
+      var textInput = document.createElement('input');
+      textInput.className   = 'subtask-text';
+      textInput.value       = st.text || '';
+      textInput.placeholder = 'Sub-task...';
+      (function(sk, i, j) {
+        textInput.onchange = function(e) { STATE.objectives[sk][i].subtasks[j].text = e.target.value; saveState(); };
+      })(sectionKey, idx, si);
+
+      var rmSt = document.createElement('button');
+      rmSt.className   = 'btn btn-xs btn-danger';
+      rmSt.textContent = '\u2715';
+      (function(sk, i, j) {
+        rmSt.onclick = function() {
+          STATE.objectives[sk][i].subtasks.splice(j, 1);
+          renderObjectives(); saveState();
+        };
+      })(sectionKey, idx, si);
+
+      li.appendChild(cb);
+      li.appendChild(textInput);
+      li.appendChild(rmSt);
+      subtaskList.appendChild(li);
+    });
+
+    var addStBtn = document.createElement('button');
+    addStBtn.className   = 'btn btn-xs';
+    addStBtn.style.marginBottom = '4px';
+    addStBtn.textContent = '+ Sub-task';
+    (function(sk, i) {
+      addStBtn.onclick = function() {
+        if (!STATE.objectives[sk][i].subtasks) STATE.objectives[sk][i].subtasks = [];
+        STATE.objectives[sk][i].subtasks.push({ id: genId(), text:'', done:false });
+        renderObjectives(); saveState();
+      };
+    })(sectionKey, idx);
+
+    // Reward
+    var rewardRow = document.createElement('div');
+    rewardRow.className = 'obj-reward';
+    var rewardLabel = document.createElement('span');
+    rewardLabel.className   = 'reward-label';
+    rewardLabel.textContent = '\u25BA REWARD:';
+    var rewardInput = document.createElement('input');
+    rewardInput.className   = 'reward-input';
+    rewardInput.placeholder = 'Reward...';
+    rewardInput.value       = obj.reward || '';
+    (function(sk, i) {
+      rewardInput.onchange = function(e) { STATE.objectives[sk][i].reward = e.target.value; saveState(); };
+    })(sectionKey, idx);
+    rewardRow.appendChild(rewardLabel);
+    rewardRow.appendChild(rewardInput);
+
+    card.appendChild(hdr);
+    card.appendChild(descBtn);
+    card.appendChild(descArea);
+    card.appendChild(subtaskList);
+    card.appendChild(addStBtn);
+    card.appendChild(rewardRow);
+    container.appendChild(card);
+  });
+}
+
+function addObjective(section) {
+  if (!STATE.objectives[section]) STATE.objectives[section] = [];
+  STATE.objectives[section].push({
+    id: genId(), status:'active', type:'Scenario', title:'', description:'', subtasks:[], reward:''
+  });
+  renderObjectives();
+  saveState();
+}
+
+// ============================================================
+//  INVENTORY
+// ============================================================
+
+function renderInventory() {
+  var container = document.getElementById('inventoryList');
+  container.innerHTML = '';
+
+  (STATE.inventory.categories || []).forEach(function(cat, catIdx) {
+    var catEl = document.createElement('div');
+    catEl.className = 'inventory-category';
+
+    // --- HEADER ---
+    var catHeader = document.createElement('div');
+    catHeader.className = 'category-header';
+
+    var toggleIcon = document.createElement('span');
+    toggleIcon.className   = 'category-toggle-icon' + (cat.collapsed ? ' closed' : '');
+    toggleIcon.textContent = '\u25BC';
+
+    var itemCount = (cat.items || []).length;
+
+    if (cat.locked) {
+      var nameSpan = document.createElement('span');
+      nameSpan.className   = 'category-name-input';
+      nameSpan.style.cursor = 'default';
+      nameSpan.textContent = cat.name || '';
+      catHeader.appendChild(toggleIcon);
+      catHeader.appendChild(nameSpan);
+    } else {
+      var nameInput = document.createElement('input');
+      nameInput.className = 'category-name-input';
+      nameInput.value     = cat.name || '';
+      nameInput.onclick   = function(e) { e.stopPropagation(); };
+      (function(i) {
+        nameInput.onchange = function(e) { STATE.inventory.categories[i].name = e.target.value; saveState(); };
+      })(catIdx);
+      catHeader.appendChild(toggleIcon);
+      catHeader.appendChild(nameInput);
+    }
+
+    var countBadge = document.createElement('span');
+    countBadge.className   = 'item-count-badge';
+    if (cat.maxItems) {
+      countBadge.textContent = itemCount + '/' + cat.maxItems;
+    } else {
+      countBadge.textContent = itemCount;
+    }
+    catHeader.appendChild(countBadge);
+
+    if (!cat.locked) {
+      var delCatBtn = document.createElement('button');
+      delCatBtn.className   = 'btn btn-danger btn-xs';
+      delCatBtn.textContent = '\u2715 DEL';
+      delCatBtn.onclick = function(e) {
+        e.stopPropagation();
+        var items = STATE.inventory.categories[catIdx].items || [];
+        var catName = STATE.inventory.categories[catIdx].name;
+        var doDelete = function() { STATE.inventory.categories.splice(catIdx, 1); renderInventory(); saveState(); };
+        if (items.length > 0) {
+          appConfirm('Delete category "' + catName + '" with ' + items.length + ' item(s)?', doDelete);
+        } else {
+          doDelete();
+        }
+      };
+      catHeader.appendChild(delCatBtn);
+    }
+    catHeader.onclick = function() {
+      STATE.inventory.categories[catIdx].collapsed = !STATE.inventory.categories[catIdx].collapsed;
+      renderInventory(); saveState();
+    };
+
+    // --- BODY ---
+    var catBody = document.createElement('div');
+    catBody.className = 'category-body' + (cat.collapsed ? ' collapsed' : '');
+
+    // Allow dropping onto empty category body
+    catBody.addEventListener('dragover', function(e) { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; });
+    catBody.addEventListener('drop', function(e) {
+      e.preventDefault();
+      if (!_dragSrc) return;
+      var srcCat = STATE.inventory.categories[_dragSrc.catIdx];
+      var dragged = srcCat.items.splice(_dragSrc.itemIdx, 1)[0];
+      var destCat = STATE.inventory.categories[catIdx];
+      destCat.items.push(dragged);
+      destCat.collapsed = false;
+      _dragSrc = null;
+      renderInventory(); saveState();
+    });
+
+    (cat.items || []).forEach(function(item, itemIdx) {
+      // Outer wrapper (draggable unit)
+      var wrapper = document.createElement('div');
+      wrapper.className = 'item-wrapper';
+      wrapper.draggable = true;
+
+      wrapper.addEventListener('dragstart', (function(ci, ii) {
+        return function(e) {
+          _dragSrc = { catIdx: ci, itemIdx: ii };
+          e.dataTransfer.effectAllowed = 'move';
+          setTimeout(function() { wrapper.classList.add('dragging'); }, 0);
+        };
+      })(catIdx, itemIdx));
+
+      wrapper.addEventListener('dragend', function() {
+        wrapper.classList.remove('dragging');
+        document.querySelectorAll('.item-wrapper.drag-over').forEach(function(el) { el.classList.remove('drag-over'); });
+      });
+
+      wrapper.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.dataTransfer.dropEffect = 'move';
+        wrapper.classList.add('drag-over');
+      });
+
+      wrapper.addEventListener('dragleave', function(e) {
+        if (!wrapper.contains(e.relatedTarget)) wrapper.classList.remove('drag-over');
+      });
+
+      wrapper.addEventListener('drop', (function(ci, ii) {
+        return function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          wrapper.classList.remove('drag-over');
+          if (!_dragSrc) return;
+          if (_dragSrc.catIdx === ci && _dragSrc.itemIdx === ii) { _dragSrc = null; return; }
+          var srcCat  = STATE.inventory.categories[_dragSrc.catIdx];
+          var dragged = srcCat.items.splice(_dragSrc.itemIdx, 1)[0];
+          var destCat = STATE.inventory.categories[ci];
+          var insertAt = ii;
+          // Adjust index if dragging within same category after removed item
+          if (_dragSrc.catIdx === ci && _dragSrc.itemIdx < ii) insertAt = ii - 1;
+          destCat.items.splice(insertAt, 0, dragged);
+          _dragSrc = null;
+          renderInventory(); saveState();
+        };
+      })(catIdx, itemIdx));
+
+      // --- ITEM ROW ---
+      var itemRow = document.createElement('div');
+      itemRow.className = 'item-row';
+
+      var dragHandle = document.createElement('span');
+      dragHandle.className   = 'item-drag-handle';
+      dragHandle.textContent = '\u2807'; // braille dots ⠷ as grip icon
+      dragHandle.title       = 'Drag to reorder';
+
+      var nameIn = document.createElement('input');
+      nameIn.className   = 'item-name-input';
+      nameIn.value       = item.name || '';
+      nameIn.placeholder = 'Item name...';
+      (function(ci, ii) {
+        nameIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].name = e.target.value; saveState(); };
+      })(catIdx, itemIdx);
+
+      var qtyIn = document.createElement('input');
+      qtyIn.className   = 'item-qty-input';
+      qtyIn.type        = 'number';
+      qtyIn.min         = '0';
+      qtyIn.value       = item.qty !== undefined ? item.qty : 1;
+      qtyIn.title       = 'Quantity';
+      (function(ci, ii) {
+        qtyIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].qty = parseInt(e.target.value) || 0; saveState(); };
+      })(catIdx, itemIdx);
+
+      var expandBtn = document.createElement('button');
+      expandBtn.className   = 'skill-desc-toggle item-expand-btn';
+      expandBtn.textContent = '\u25BC';
+      expandBtn.title       = 'Show item details';
+
+      var rmBtn = document.createElement('button');
+      rmBtn.className   = 'btn btn-danger btn-xs';
+      rmBtn.textContent = '\u2715';
+      (function(ci, ii) {
+        rmBtn.onclick = function() {
+          STATE.inventory.categories[ci].items.splice(ii, 1);
+          renderInventory(); saveState();
+        };
+      })(catIdx, itemIdx);
+
+      itemRow.appendChild(dragHandle);
+      itemRow.appendChild(nameIn);
+      itemRow.appendChild(qtyIn);
+      itemRow.appendChild(expandBtn);
+      itemRow.appendChild(rmBtn);
+
+      // --- EXTRA FIELDS ROW ---
+      var extraRow = document.createElement('div');
+      extraRow.className = 'item-extra-row';
+
+      function itemField(labelText, inputEl) {
+        var lbl = document.createElement('span');
+        lbl.className   = 'skill-meta-label';
+        lbl.textContent = labelText;
+        extraRow.appendChild(lbl);
+        extraRow.appendChild(inputEl);
+      }
+
+      var typeIn = document.createElement('input');
+      typeIn.className   = 'skill-detail-input skill-detail-short';
+      typeIn.value       = item.type || '';
+      typeIn.placeholder = 'Weapon / Tool / Worn...';
+      (function(ci, ii) { typeIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].type = e.target.value; saveState(); }; })(catIdx, itemIdx);
+
+      var equipIn = document.createElement('input');
+      equipIn.className   = 'skill-detail-input skill-detail-short';
+      equipIn.value       = item.equippedOn || '';
+      equipIn.placeholder = 'Right Arm, Torso...';
+      (function(ci, ii) { equipIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].equippedOn = e.target.value; saveState(); }; })(catIdx, itemIdx);
+
+      var dmgIn = document.createElement('input');
+      dmgIn.className   = 'skill-detail-input skill-detail-short';
+      dmgIn.value       = item.damage || '';
+      dmgIn.placeholder = '1d6 / 2d4+1...';
+      (function(ci, ii) { dmgIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].damage = e.target.value; saveState(); }; })(catIdx, itemIdx);
+
+      var rangeIn = document.createElement('input');
+      rangeIn.className   = 'skill-detail-input skill-detail-short';
+      rangeIn.value       = item.range || '';
+      rangeIn.placeholder = 'Near / Far / Touch...';
+      (function(ci, ii) { rangeIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].range = e.target.value; saveState(); }; })(catIdx, itemIdx);
+
+      var effectIn = document.createElement('input');
+      effectIn.className   = 'skill-detail-input';
+      effectIn.style.minWidth = '180px';
+      effectIn.value       = item.effect || '';
+      effectIn.placeholder = 'Special effect or property...';
+      (function(ci, ii) { effectIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].effect = e.target.value; saveState(); }; })(catIdx, itemIdx);
+
+      var notesIn = document.createElement('input');
+      notesIn.className   = 'skill-detail-input';
+      notesIn.style.minWidth = '150px';
+      notesIn.value       = item.notes || '';
+      notesIn.placeholder = 'Notes...';
+      (function(ci, ii) { notesIn.onchange = function(e) { STATE.inventory.categories[ci].items[ii].notes = e.target.value; saveState(); }; })(catIdx, itemIdx);
+
+      itemField('TYPE:', typeIn);
+      itemField('EQUIP ON:', equipIn);
+      itemField('DAMAGE:', dmgIn);
+      itemField('RANGE:', rangeIn);
+      itemField('EFFECT:', effectIn);
+      itemField('NOTES:', notesIn);
+
+      expandBtn.onclick = function(e) {
+        e.stopPropagation();
+        var isOpen = extraRow.classList.toggle('open');
+        expandBtn.textContent = isOpen ? '\u25B2' : '\u25BC';
+        wrapper.classList.toggle('has-extra', isOpen);
+      };
+
+      wrapper.appendChild(itemRow);
+      wrapper.appendChild(extraRow);
+      catBody.appendChild(wrapper);
+    });
+
+    var addItemBtn = document.createElement('button');
+    addItemBtn.className   = 'btn btn-xs mt-8';
+    addItemBtn.textContent = '+ ADD ITEM';
+    if (cat.maxItems && itemCount >= cat.maxItems) {
+      addItemBtn.disabled = true;
+      addItemBtn.classList.add('btn-disabled');
+      addItemBtn.style.opacity = '0.4';
+      addItemBtn.style.cursor = 'not-allowed';
+    }
+    (function(ci) {
+      addItemBtn.onclick = function() {
+        var c = STATE.inventory.categories[ci];
+        if (c.maxItems && (c.items || []).length >= c.maxItems) return;
+        if (!c.items) c.items = [];
+        c.items.push({
+          id: genId(), name:'', qty:1,
+          type:'', equippedOn:'', damage:'', range:'', effect:'', notes:''
+        });
+        c.collapsed = false;
+        renderInventory(); saveState();
+      };
+    })(catIdx);
+    catBody.appendChild(addItemBtn);
+
+    catEl.appendChild(catHeader);
+    catEl.appendChild(catBody);
+    container.appendChild(catEl);
+  });
+}
+
+function addCategory() {
+  if (!STATE.inventory.categories) STATE.inventory.categories = [];
+  STATE.inventory.categories.push({ id: genId(), name:'New Category', collapsed:false, items:[] });
+  renderInventory();
+  saveState();
+}
+
+// ============================================================
+//  ACHIEVEMENTS
+// ============================================================
+
+function renderAchievements() {
+  var container = document.getElementById('achievementsList');
+  container.innerHTML = '';
+  var list = STATE.achievements || [];
+  if (list.length === 0) {
+    container.innerHTML = '<div style="font-size:11px;color:var(--muted);text-align:center;padding:12px 0;">No achievements yet.</div>';
+    return;
+  }
+  list.forEach(function(ach, idx) {
+    var card = document.createElement('div');
+    card.className = 'achievement-card';
+
+    var num = document.createElement('div');
+    num.className = 'achievement-num';
+    num.textContent = idx + 1;
+
+    var body = document.createElement('div');
+    var title = document.createElement('div');
+    title.className = 'achievement-title';
+    title.textContent = ach.title || '—';
+    var desc = document.createElement('div');
+    desc.className = 'achievement-desc';
+    desc.textContent = ach.desc || '';
+    var reward = document.createElement('div');
+    reward.className = 'achievement-reward';
+    reward.textContent = ach.reward || '';
+    body.appendChild(title);
+    if (ach.desc) body.appendChild(desc);
+    if (ach.reward) body.appendChild(reward);
+
+    var del = document.createElement('button');
+    del.className = 'btn btn-danger btn-xs';
+    del.textContent = '✕';
+    (function(i) {
+      del.onclick = function() {
+        appConfirm('Delete achievement "' + (STATE.achievements[i].title || 'this achievement') + '"?', function() {
+          STATE.achievements.splice(i, 1);
+          renderAchievements();
+          saveState();
+        });
+      };
+    })(idx);
+
+    card.appendChild(num);
+    card.appendChild(body);
+    card.appendChild(del);
+    container.appendChild(card);
+  });
+}
+
+function addAchievement() {
+  var title = document.getElementById('newAchTitle').value.trim();
+  if (!title) { document.getElementById('newAchTitle').focus(); return; }
+  var desc  = document.getElementById('newAchDesc').value.trim();
+  var reward = document.getElementById('newAchReward').value.trim();
+  if (!STATE.achievements) STATE.achievements = [];
+  STATE.achievements.push({ id: Date.now(), title: title, desc: desc, reward: reward });
+  document.getElementById('newAchTitle').value = '';
+  document.getElementById('newAchDesc').value = '';
+  document.getElementById('newAchReward').value = '';
+  renderAchievements();
+  saveState();
+}
+
+// ============================================================
+//  NOTES
+// ============================================================
+
+function renderNotes() {
+  document.getElementById('generalNotes').value = STATE.notes || '';
+}
+
+function updateNotes() {
+  STATE.notes = document.getElementById('generalNotes').value;
+  saveState();
+}
+
+// ============================================================
+//  PORTRAIT
+// ============================================================
+
+function handlePortraitUpload(input) {
+  var file = input.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    STATE.identity.portrait = e.target.result;
+    renderPortrait();
+    saveState();
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearPortrait() {
+  STATE.identity.portrait = '';
+  renderPortrait();
+  saveState();
+}
+
+function renderPortrait() {
+  var img = document.getElementById('portraitImg');
+  var ph  = document.getElementById('portraitPlaceholder');
+  if (!img || !ph) return;
+  if (STATE.identity && STATE.identity.portrait) {
+    img.src = STATE.identity.portrait;
+    img.style.display = 'block';
+    ph.style.display  = 'none';
+  } else {
+    img.src = '';
+    img.style.display = 'none';
+    ph.style.display  = 'block';
+  }
+}
+
+// ============================================================
+//  ACTIVE EFFECTS
+// ============================================================
+
+function renderEffects() {
+  var container = document.getElementById('effectsList');
+  if (!container) return;
+  container.innerHTML = '';
+  (STATE.effects || []).forEach(function(eff, idx) {
+    var row = document.createElement('div');
+    row.className = 'effect-row';
+    var icon = document.createElement('span');
+    icon.className = 'effect-icon';
+    icon.textContent = '\u25C8';
+    var textIn = document.createElement('input');
+    textIn.className = 'effect-text-input';
+    textIn.value = eff.text || '';
+    textIn.placeholder = 'Effect description...';
+    (function(i) {
+      textIn.onchange = function(e) { STATE.effects[i].text = e.target.value; saveState(); };
+    })(idx);
+    var rmBtn = document.createElement('button');
+    rmBtn.className = 'btn btn-danger btn-xs';
+    rmBtn.textContent = '\u00D7';
+    (function(i) {
+      rmBtn.onclick = function() { STATE.effects.splice(i, 1); renderEffects(); saveState(); };
+    })(idx);
+    row.appendChild(icon);
+    row.appendChild(textIn);
+    row.appendChild(rmBtn);
+    container.appendChild(row);
+  });
+}
+
+function addEffect() {
+  var input = document.getElementById('newEffectText');
+  var text = input.value.trim();
+  if (!text) return;
+  if (!STATE.effects) STATE.effects = [];
+  STATE.effects.push({ id: genId(), text: text });
+  input.value = '';
+  renderEffects();
+  saveState();
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+
+window.addEventListener('DOMContentLoaded', loadState);
+</script>
+</body>
+</html>

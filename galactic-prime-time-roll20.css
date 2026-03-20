@@ -1,0 +1,1432 @@
+/* ============================================================
+   GALACTIC PRIME TIME — Roll20 Character Sheet CSS
+
+   Roll20 CSS Rules:
+     • All class selectors MUST have the "sheet-" prefix.
+       Roll20 auto-prepends "sheet-" to HTML class names,
+       so HTML uses class="panel" → CSS targets .sheet-panel
+     • Avoid !important where possible
+     • Dark mode support via body.sheet-darkmode
+     • Use Flexbox / Grid for layout (no table layouts)
+============================================================ */
+
+/* ── CSS CUSTOM PROPERTIES ─────────────────────────────────── */
+.charsheet {
+  --bg:       #04050d;
+  --panel:    #090c1a;
+  --cyan:     #00d4ff;
+  --gold:     #c8a84b;
+  --danger:   #ff2255;
+  --success:  #00ff88;
+  --text:     #b8c8e0;
+  --muted:    #3a4560;
+  --border:   #1a2540;
+  --bronze:   #cd7f32;
+  --silver:   #c0c0c0;
+  --legendary:#a855f7;
+  --mythic:   #ec4899;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ── RESET ─────────────────────────────────────────────────── */
+.sheet-main-container *,
+.sheet-broadcast-bar *,
+.sheet-panel *,
+.sheet-footer * {
+  box-sizing: border-box;
+}
+
+/* ── BROADCAST BAR ──────────────────────────────────────────── */
+.sheet-broadcast-bar {
+  background: linear-gradient(90deg, #000510 0%, #0a1a2e 50%, #000510 100%);
+  border-bottom: 1px solid var(--cyan);
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 20px rgba(0,212,255,0.3);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 0;
+}
+
+.sheet-broadcast-bar::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,212,255,0.02) 2px,
+    rgba(0,212,255,0.02) 4px
+  );
+  pointer-events: none;
+}
+
+.sheet-broadcast-live {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--danger);
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.sheet-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  box-shadow: 0 0 8px var(--danger);
+  animation: sheet-pulse 1s infinite;
+}
+
+@keyframes sheet-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+.sheet-broadcast-title {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: 0 0 20px rgba(0,212,255,0.8);
+}
+
+.sheet-broadcast-signal {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.sheet-signal-bar {
+  width: 4px;
+  background: var(--cyan);
+  border-radius: 1px;
+}
+
+/* ── MAIN CONTAINER ─────────────────────────────────────────── */
+.sheet-main-container {
+  background: var(--bg);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── PANELS ─────────────────────────────────────────────────── */
+.sheet-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  position: relative;
+  box-shadow: inset 0 0 30px rgba(0,212,255,0.04);
+}
+
+.sheet-panel::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 16px; height: 16px;
+  border-top: 2px solid var(--cyan);
+  border-left: 2px solid var(--cyan);
+  border-radius: 4px 0 0 0;
+  pointer-events: none;
+}
+
+.sheet-panel::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; right: -1px;
+  width: 16px; height: 16px;
+  border-bottom: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
+  border-radius: 0 0 4px 0;
+  pointer-events: none;
+}
+
+.sheet-panel-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 14px;
+  padding-left: 10px;
+  border-left: 3px solid var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── LAYOUT GRIDS ───────────────────────────────────────────── */
+.sheet-two-col {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  gap: 16px;
+  align-items: start;
+}
+
+.sheet-three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── IDENTITY ───────────────────────────────────────────────── */
+.sheet-identity-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 80px;
+  gap: 12px;
+  align-items: end;
+}
+
+.sheet-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheet-field-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sheet-field-input,
+.charsheet input[type="text"],
+.charsheet input[type="number"] {
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 14px;
+  width: 100%;
+}
+
+.sheet-field-input:focus,
+.charsheet input[type="text"]:focus,
+.charsheet input[type="number"]:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(0,212,255,0.3);
+}
+
+.charsheet textarea {
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 13px;
+  width: 100%;
+  resize: vertical;
+}
+
+.charsheet textarea:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(0,212,255,0.2);
+}
+
+/* ── TRAITS ─────────────────────────────────────────────────── */
+.sheet-pts-remaining {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.sheet-pts-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sheet-pts-badge {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  min-width: 24px;
+  text-align: center;
+}
+
+.sheet-traits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.sheet-trait-group-row {
+  grid-column: 1 / -1;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  padding: 2px 0 6px 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+.sheet-trait-card {
+  background: rgba(0,212,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.sheet-trait-name {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.sheet-trait-sub {
+  font-size: 9px;
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.sheet-trait-value-input {
+  font-family: 'Courier New', monospace;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--cyan);
+  text-shadow: 0 0 20px rgba(0,212,255,0.6);
+  line-height: 1;
+  width: 80px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--border);
+  padding: 0;
+}
+
+.sheet-trait-value-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-trait-bonus-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+
+.sheet-trait-bonus-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.sheet-trait-bonus {
+  color: var(--text);
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.sheet-trait-adv-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.sheet-adv-input {
+  width: 44px;
+  text-align: center;
+  background: rgba(200,168,75,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--gold);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 2px;
+}
+
+.sheet-adv-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.sheet-roll-btn {
+  font-size: 10px;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  margin-top: 2px;
+  width: 100%;
+}
+
+.sheet-lvl-pts-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.sheet-pts-input {
+  width: 50px;
+  text-align: center;
+  background: rgba(229,192,123,0.08);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: #e5c07b;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  padding: 3px;
+}
+
+.sheet-pts-input:focus {
+  outline: none;
+  border-color: #e5c07b;
+}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+.sheet-btn {
+  padding: 6px 14px;
+  border-radius: 3px;
+  border: 1px solid var(--cyan);
+  background: transparent;
+  color: var(--cyan);
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.sheet-btn:hover {
+  background: rgba(0,212,255,0.15);
+  box-shadow: 0 0 10px rgba(0,212,255,0.3);
+}
+
+.sheet-btn-sm {
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+.sheet-btn-xs {
+  padding: 2px 7px;
+  font-size: 10px;
+}
+
+.sheet-btn-danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.sheet-btn-danger:hover {
+  background: rgba(255,34,85,0.15);
+  box-shadow: 0 0 10px rgba(255,34,85,0.3);
+}
+
+.sheet-btn-success {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.sheet-btn-success:hover {
+  background: rgba(0,255,136,0.15);
+}
+
+.sheet-btn-gold {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.sheet-btn-gold:hover {
+  background: rgba(200,168,75,0.15);
+}
+
+/* Roll20 button overrides */
+.charsheet button[type="roll"] {
+  padding: 4px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--cyan);
+  background: transparent;
+  color: var(--cyan);
+  font-size: 11px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  font-family: inherit;
+  text-transform: uppercase;
+}
+
+.charsheet button[type="roll"]:hover {
+  background: rgba(0,212,255,0.15);
+  box-shadow: 0 0 8px rgba(0,212,255,0.3);
+}
+
+.charsheet button[type="roll"].sheet-btn-success {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.charsheet button[type="roll"].sheet-btn-success:hover {
+  background: rgba(0,255,136,0.12);
+}
+
+/* ── ACTIVE EFFECTS ─────────────────────────────────────────── */
+.sheet-effect-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 8px;
+  background: rgba(0,212,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+
+.sheet-effect-icon {
+  color: var(--gold);
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.sheet-effect-text-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 1px 4px;
+}
+
+.sheet-effect-text-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+/* ── SKILLS ─────────────────────────────────────────────────── */
+.sheet-skill-card {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.sheet-skill-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.sheet-skill-name-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--muted);
+  color: var(--text);
+  font-weight: bold;
+  font-size: 13px;
+  flex: 1;
+  padding: 2px 4px;
+  font-family: inherit;
+  min-width: 100px;
+}
+
+.sheet-skill-name-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-skill-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.sheet-skill-meta-label {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sheet-skill-meta-input {
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  font-size: 11px;
+  padding: 3px 6px;
+  font-family: 'Courier New', monospace;
+}
+
+.sheet-skill-meta-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-skill-extra-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.sheet-skill-extra-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sheet-skill-extra-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.sheet-skill-extra-full {
+  flex: 1;
+  min-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.sheet-skill-detail-input {
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  font-size: 11px;
+  padding: 3px 6px;
+  font-family: inherit;
+  min-width: 80px;
+}
+
+.sheet-skill-detail-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-skill-detail-short {
+  width: 130px;
+}
+
+.sheet-skill-detail-full {
+  width: 100%;
+}
+
+.sheet-skill-detail-textarea {
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  font-size: 11px;
+  padding: 4px 8px;
+  font-family: inherit;
+  width: 100%;
+  resize: vertical;
+  min-height: 52px;
+  line-height: 1.5;
+}
+
+.sheet-skill-detail-textarea:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: none;
+}
+
+/* ── BODY PARTS ─────────────────────────────────────────────── */
+.sheet-body-part-card {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 12px;
+  border-left: 4px solid var(--success);
+  margin-bottom: 8px;
+}
+
+.sheet-body-part-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.sheet-part-name-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--muted);
+  color: var(--text);
+  font-weight: bold;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: 140px;
+  padding: 2px 4px;
+  font-family: inherit;
+}
+
+.sheet-part-name-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-lethal-toggle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--danger);
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.sheet-hp-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.sheet-hp-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.sheet-hp-sep {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.sheet-hp-max-input {
+  width: 52px;
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--cyan);
+  font-family: 'Courier New', monospace;
+  font-size: 18px;
+  text-align: center;
+  padding: 2px;
+}
+
+.sheet-hp-max-input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-conditions-section {
+  margin-top: 6px;
+}
+
+.sheet-condition-select {
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+.sheet-cond-tier-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* Forced Actions Reference */
+.sheet-forced-ref {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.sheet-forced-ref-title {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+}
+
+.sheet-forced-ref-header {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 3px;
+}
+
+.sheet-forced-ref-list {
+  font-size: 10px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* ── TAGS ───────────────────────────────────────────────────── */
+.sheet-tag-card {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--muted);
+  border-radius: 4px;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.sheet-tag-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sheet-tag-name-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--muted);
+  color: var(--text);
+  font-weight: bold;
+  font-size: 13px;
+  flex: 1;
+  padding: 2px 4px;
+  font-family: inherit;
+  letter-spacing: 1px;
+  min-width: 80px;
+}
+
+.sheet-tag-name-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-tag-effect-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ── MINI SELECT ─────────────────────────────────────────────── */
+.sheet-mini-select {
+  background: var(--panel);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  padding: 4px 6px;
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.sheet-mini-select:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+/* ── EXPOSURE ───────────────────────────────────────────────── */
+.sheet-exposure-counter {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.sheet-counter-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.sheet-exposure-input {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--cyan);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  padding: 4px 0;
+}
+
+.sheet-exposure-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+/* ── PATRONS ─────────────────────────────────────────────────── */
+.sheet-patron-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.sheet-patron-row.sheet-rank-1 {
+  border-color: var(--gold);
+  background: rgba(200,168,75,0.07);
+}
+
+.sheet-patron-row.sheet-rank-2 {
+  border-color: var(--silver);
+  background: rgba(192,192,192,0.05);
+}
+
+.sheet-patron-row.sheet-rank-3 {
+  border-color: var(--bronze);
+  background: rgba(205,127,50,0.05);
+}
+
+.sheet-patron-rank-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--panel);
+  flex-shrink: 0;
+}
+
+.sheet-patron-rank-badge.sheet-r1 {
+  background: var(--gold);
+}
+
+.sheet-patron-rank-badge.sheet-r2 {
+  background: var(--silver);
+}
+
+.sheet-patron-rank-badge.sheet-r3 {
+  background: var(--bronze);
+}
+
+.sheet-patron-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.sheet-patron-input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 2px 3px;
+  width: 100%;
+}
+
+.sheet-patron-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-patron-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.sheet-patron-amount {
+  font-family: 'Courier New', monospace;
+  color: var(--gold);
+}
+
+.sheet-patron-notes {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* ── TOKENS ──────────────────────────────────────────────────── */
+.sheet-token-counters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sheet-token-counter-box {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: rgba(0,212,255,0.03);
+}
+
+.sheet-token-counter-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.sheet-token-counter-input {
+  font-family: 'Courier New', monospace;
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--gold);
+  text-shadow: 0 0 15px rgba(200,168,75,0.6);
+  line-height: 1;
+  text-align: center;
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+.sheet-token-counter-input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--gold);
+  box-shadow: none;
+}
+
+.sheet-boss-tokens-section {
+  margin-top: 12px;
+}
+
+.sheet-boss-token-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.sheet-token-used-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* ── OBJECTIVES ──────────────────────────────────────────────── */
+.sheet-objectives-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.sheet-obj-section-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 10px;
+  padding-left: 8px;
+  border-left: 2px solid var(--cyan);
+}
+
+.sheet-obj-section-gold {
+  color: var(--gold);
+  border-left-color: var(--gold);
+}
+
+.sheet-objective-card {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--cyan);
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.sheet-obj-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.sheet-status-select {
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.sheet-obj-title-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--muted);
+  color: var(--text);
+  font-weight: bold;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 2px 4px;
+  min-width: 60px;
+}
+
+.sheet-obj-title-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-obj-desc-area {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  padding: 6px;
+  resize: vertical;
+  min-height: 52px;
+  margin: 6px 0;
+}
+
+.sheet-obj-desc-area:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-obj-reward {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.sheet-reward-label {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--gold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sheet-reward-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--muted);
+  color: var(--gold);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  padding: 2px 4px;
+}
+
+.sheet-reward-input:focus {
+  outline: none;
+  border-bottom-color: var(--gold);
+  box-shadow: none;
+}
+
+/* ── INVENTORY ───────────────────────────────────────────────── */
+.sheet-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 6px;
+}
+
+.sheet-item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 3px;
+  border: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.sheet-item-cat-input {
+  width: 100px;
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  padding: 3px 5px;
+}
+
+.sheet-item-name-input {
+  flex: 2;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 2px 4px;
+  min-width: 80px;
+}
+
+.sheet-item-name-input:focus {
+  outline: none;
+  border-bottom-color: var(--cyan);
+  box-shadow: none;
+}
+
+.sheet-item-qty-input {
+  width: 52px;
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--cyan);
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  text-align: center;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.sheet-item-weight-input {
+  width: 52px;
+  background: rgba(0,212,255,0.05);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--muted);
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  text-align: center;
+  padding: 3px;
+  flex-shrink: 0;
+}
+
+.sheet-item-notes-input {
+  flex: 3;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  padding: 2px 4px;
+  min-width: 60px;
+}
+
+.sheet-item-notes-input:focus {
+  outline: none;
+  border-bottom-color: var(--muted);
+  box-shadow: none;
+}
+
+.sheet-item-desc-row {
+  padding: 6px 8px;
+  background: rgba(0,0,0,0.1);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 3px 3px;
+}
+
+/* ── ACHIEVEMENTS ────────────────────────────────────────────── */
+.sheet-achievement-card {
+  padding: 10px 12px;
+  background: rgba(200,168,75,0.05);
+  border: 1px solid rgba(200,168,75,0.2);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.sheet-achievement-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sheet-achievement-title-input input {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.sheet-achievement-desc-input input {
+  font-size: 11px;
+  color: var(--text);
+}
+
+.sheet-achievement-reward-input input {
+  font-size: 10px;
+  color: var(--success);
+}
+
+/* ── NOTES TEXTAREA ──────────────────────────────────────────── */
+.sheet-notes-textarea {
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--muted);
+  border-radius: 4px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 12px;
+  resize: vertical;
+  min-height: 160px;
+  line-height: 1.6;
+}
+
+.sheet-notes-textarea:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(0,212,255,0.2);
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────── */
+.sheet-footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.sheet-corp-watermark {
+  font-size: 11px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.5;
+  font-weight: 300;
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────────────── */
+.charsheet ::-webkit-scrollbar { width: 6px; height: 6px; }
+.charsheet ::-webkit-scrollbar-track { background: var(--bg); }
+.charsheet ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+.charsheet ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+/* ── REPEATING SECTION OVERRIDES ─────────────────────────────── */
+/* Minimal styling so Roll20's built-in add/remove buttons look ok */
+.sheet-repcontainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .sheet-two-col { grid-template-columns: 1fr; }
+  .sheet-three-col { grid-template-columns: 1fr 1fr; }
+  .sheet-objectives-columns { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .sheet-broadcast-bar { padding: 6px 12px; }
+  .sheet-broadcast-title { font-size: 14px; letter-spacing: 3px; }
+  .sheet-broadcast-signal { display: none; }
+  .sheet-main-container { padding: 8px; gap: 10px; }
+  .sheet-panel { padding: 12px 10px; }
+  .sheet-identity-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .sheet-traits-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .sheet-two-col,
+  .sheet-three-col,
+  .sheet-objectives-columns { grid-template-columns: 1fr; }
+  .sheet-token-counters { flex-direction: column; }
+}
+
+@media (max-width: 400px) {
+  .sheet-identity-row { grid-template-columns: 1fr; }
+  .sheet-broadcast-title { display: none; }
+}
+
+/* ── DARK MODE SUPPORT ───────────────────────────────────────── */
+/* The sheet already uses a dark theme by default.
+   These ensure readability if Roll20's dark mode class is applied. */
+body.sheet-darkmode .sheet-main-container {
+  background: var(--bg);
+}
+
+body.sheet-darkmode .sheet-panel {
+  background: var(--panel);
+}
