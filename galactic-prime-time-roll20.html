@@ -1,16 +1,3 @@
-<!-- ============================================================
-     GALACTIC PRIME TIME — Roll20 Character Sheet
-     Roll20 Rules Applied:
-       • No <html>, <head>, or <body> tags
-       • No id attributes
-       • All saved inputs use name="attr_X"
-       • CSS classes in HTML have NO sheet- prefix (Roll20 adds it)
-       • Dynamic lists use <fieldset class="repeating_X">
-       • No standard JS — only <script type="text/worker">
-       • Roll buttons use type="roll"
-============================================================ -->
-
-<!-- BROADCAST BAR -->
 <div class="broadcast-bar">
   <div class="broadcast-live">
     <div class="live-dot"></div>
@@ -28,9 +15,7 @@
 
 <div class="main-container">
 
-  <!-- ═══════════════════════════════════════════════════════
-       IDENTITY PANEL
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="panel">
     <div class="panel-title">CONTESTANT IDENTITY</div>
     <div class="identity-row">
@@ -55,23 +40,21 @@
       <label class="field-label">Background &amp; Backstory</label>
       <textarea name="attr_background" class="notes-textarea" placeholder="Character background, backstory, motivations, history..." style="min-height:80px;resize:vertical"></textarea>
     </div>
-  </div><!-- end identity panel -->
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       TWO-COLUMN: LEFT (TRAITS + EFFECTS + SKILLS) | RIGHT (BODY PARTS)
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="two-col">
 
-    <!-- ─── LEFT COLUMN ─────────────────────────────────── -->
+    
     <div style="display:flex;flex-direction:column;gap:16px;">
 
-      <!-- TRAITS PANEL -->
+      
       <div class="panel">
         <div class="panel-title">
           TRAITS
         </div>
 
-        <!-- Points Remaining Display (calculated by sheet workers) -->
+        
         <div class="pts-remaining">
           <div class="pts-badge-group">
             <span class="field-label">BODY PTS REMAINING:</span>
@@ -86,7 +69,7 @@
         <div class="traits-grid">
           <div class="trait-group-row">— BODY —</div>
 
-          <!-- PHYSIQUE -->
+          
           <div class="trait-card">
             <div class="trait-name">PHYSIQUE</div>
             <div class="trait-sub">Body</div>
@@ -99,10 +82,9 @@
               <span class="trait-bonus-label">ADV PTS:</span>
               <input type="number" name="attr_adv_physique" value="0" min="0" class="adv-input">
             </div>
-            <button type="roll" name="roll_physique" value="/roll @{physique}d6 [PHYSIQUE]" class="btn btn-sm roll-btn">&#9880; ROLL PHYSIQUE</button>
           </div>
 
-          <!-- REFLEXES -->
+          
           <div class="trait-card">
             <div class="trait-name">REFLEXES</div>
             <div class="trait-sub">Body</div>
@@ -115,12 +97,11 @@
               <span class="trait-bonus-label">ADV PTS:</span>
               <input type="number" name="attr_adv_reflexes" value="0" min="0" class="adv-input">
             </div>
-            <button type="roll" name="roll_reflexes" value="/roll @{reflexes}d6 [REFLEXES]" class="btn btn-sm roll-btn">&#9880; ROLL REFLEXES</button>
           </div>
 
           <div class="trait-group-row" style="margin-top:6px">— CORE —</div>
 
-          <!-- MIND -->
+          
           <div class="trait-card">
             <div class="trait-name">MIND</div>
             <div class="trait-sub">Core</div>
@@ -133,10 +114,9 @@
               <span class="trait-bonus-label">ADV PTS:</span>
               <input type="number" name="attr_adv_mind" value="0" min="0" class="adv-input">
             </div>
-            <button type="roll" name="roll_mind" value="/roll @{mind}d6 [MIND]" class="btn btn-sm roll-btn">&#9880; ROLL MIND</button>
           </div>
 
-          <!-- CHARM -->
+          
           <div class="trait-card">
             <div class="trait-name">CHARM</div>
             <div class="trait-sub">Core</div>
@@ -149,20 +129,19 @@
               <span class="trait-bonus-label">ADV PTS:</span>
               <input type="number" name="attr_adv_charm" value="0" min="0" class="adv-input">
             </div>
-            <button type="roll" name="roll_charm" value="/roll @{charm}d6 [CHARM]" class="btn btn-sm roll-btn">&#9880; ROLL CHARM</button>
           </div>
-        </div><!-- end traits-grid -->
+        </div>
 
-        <!-- Level Up Points -->
+        
         <div class="lvl-pts-row">
           <span class="field-label">LEVEL-UP PTS — BODY:</span>
           <input type="number" name="attr_level_pts_body" value="0" min="0" class="pts-input">
           <span class="field-label" style="margin-left:8px">CORE:</span>
           <input type="number" name="attr_level_pts_core" value="0" min="0" class="pts-input">
         </div>
-      </div><!-- end traits panel -->
+      </div>
 
-      <!-- ACTIVE EFFECTS -->
+      
       <div class="panel">
         <div class="panel-title">ACTIVE EFFECTS</div>
         <fieldset class="repeating_effects">
@@ -171,15 +150,15 @@
             <input type="text" name="attr_effect_text" class="effect-text-input" placeholder="Current active effect...">
           </div>
         </fieldset>
-      </div><!-- end active effects -->
+      </div>
 
-      <!-- SKILLS -->
+      
       <div class="panel">
         <div class="panel-title">SKILLS</div>
         <fieldset class="repeating_skills">
           <div class="skill-card">
 
-            <!-- Skill Header -->
+            
             <div class="skill-header">
               <input type="text" name="attr_skill_name" class="skill-name-input" placeholder="SKILL NAME">
               <select name="attr_skill_passive" class="mini-select">
@@ -188,7 +167,7 @@
               </select>
             </div>
 
-            <!-- Skill Meta Row -->
+            
             <div class="skill-meta">
               <span class="skill-meta-label">STAT:</span>
               <select name="attr_skill_stat" class="mini-select">
@@ -205,7 +184,7 @@
               <input type="number" name="attr_skill_capacity" value="5" min="1" max="10" class="skill-meta-input" style="width:44px">
             </div>
 
-            <!-- Skill Details (always visible in Roll20 since no toggle JS) -->
+            
             <div class="skill-extra-grid">
               <div class="skill-extra-row">
                 <div class="skill-extra-field">
@@ -231,23 +210,23 @@
               </div>
             </div>
 
-            <!-- Roll Button -->
+            
             <button type="roll" name="roll_skill_check" value="/roll @{skill_level}d6 [@{skill_name} — @{skill_stat}]" class="btn btn-sm btn-success" style="margin-top:8px;width:100%">&#9880; ROLL SKILL</button>
 
           </div>
         </fieldset>
-      </div><!-- end skills panel -->
+      </div>
 
-    </div><!-- end left column -->
+    </div>
 
-    <!-- ─── RIGHT COLUMN: BODY PARTS ───────────────────── -->
+    
     <div class="panel">
       <div class="panel-title">BODY PARTS</div>
 
       <fieldset class="repeating_bodyparts">
         <div class="body-part-card">
 
-          <!-- Part Header -->
+          
           <div class="body-part-header">
             <input type="text" name="attr_part_name" class="part-name-input" value="Body Part" placeholder="PART NAME">
             <label class="lethal-toggle">
@@ -255,7 +234,7 @@
             </label>
           </div>
 
-          <!-- HP Section -->
+          
           <div class="hp-section">
             <span class="hp-label">CURRENT HP:</span>
             <input type="number" name="attr_part_current_hp" value="2" min="0" class="hp-max-input">
@@ -264,7 +243,7 @@
             <input type="number" name="attr_part_max_hp" value="2" min="1" class="hp-max-input">
           </div>
 
-          <!-- Conditions -->
+          
           <div class="conditions-section">
             <div class="field-label" style="margin-bottom:4px">CONDITIONS</div>
             <select name="attr_part_condition_1" class="mini-select condition-select">
@@ -294,7 +273,7 @@
             <input type="text" name="attr_part_condition_extra" class="field-input" placeholder="Other conditions..." style="margin-top:4px">
           </div>
 
-          <!-- Condition Tier -->
+          
           <div class="cond-tier-row">
             <span class="field-label">TIER:</span>
             <select name="attr_part_cond_tier" class="mini-select">
@@ -309,7 +288,7 @@
         </div>
       </fieldset>
 
-      <!-- FORCED ACTION CONSEQUENCES REFERENCE -->
+      
       <div class="forced-ref" style="margin-top:14px">
         <div class="forced-ref-title">&#9888; FORCED ACTION CONSEQUENCES</div>
         <div class="forced-ref-body" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;">
@@ -338,13 +317,11 @@
         </div>
       </div>
 
-    </div><!-- end body parts panel -->
+    </div>
 
-  </div><!-- end two-col -->
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       TAGS — FULL WIDTH
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="panel">
     <div class="panel-title">TAGS</div>
     <fieldset class="repeating_tags">
@@ -363,14 +340,12 @@
         </div>
       </div>
     </fieldset>
-  </div><!-- end tags panel -->
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       THREE-COLUMN: EXPOSURE | PATRONS | TOKENS
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="three-col">
 
-    <!-- EXPOSURE -->
+    
     <div class="panel">
       <div class="panel-title">EXPOSURE</div>
       <div class="exposure-counter">
@@ -381,13 +356,13 @@
         <div class="counter-label">FOLLOWERS</div>
         <input type="text" name="attr_followers" class="exposure-input" placeholder="0">
       </div>
-    </div><!-- end exposure -->
+    </div>
 
-    <!-- PATRONS -->
+    
     <div class="panel">
       <div class="panel-title">TOP PATRONS</div>
 
-      <!-- Patron 1 (Gold) -->
+      
       <div class="patron-row rank-1">
         <div class="patron-rank-badge r1">1</div>
         <div class="patron-fields">
@@ -396,7 +371,7 @@
           <input type="text" name="attr_patron1_notes"  class="patron-input patron-notes"  placeholder="Notes...">
         </div>
       </div>
-      <!-- Patron 2 (Silver) -->
+      
       <div class="patron-row rank-2">
         <div class="patron-rank-badge r2">2</div>
         <div class="patron-fields">
@@ -405,7 +380,7 @@
           <input type="text" name="attr_patron2_notes"  class="patron-input patron-notes"  placeholder="Notes...">
         </div>
       </div>
-      <!-- Patron 3 (Bronze) -->
+      
       <div class="patron-row rank-3">
         <div class="patron-rank-badge r3">3</div>
         <div class="patron-fields">
@@ -414,9 +389,9 @@
           <input type="text" name="attr_patron3_notes"  class="patron-input patron-notes"  placeholder="Notes...">
         </div>
       </div>
-    </div><!-- end patrons -->
+    </div>
 
-    <!-- TOKENS -->
+    
     <div class="panel">
       <div class="panel-title">TOKENS</div>
       <div class="token-counters">
@@ -449,18 +424,16 @@
           </div>
         </fieldset>
       </div>
-    </div><!-- end tokens -->
+    </div>
 
-  </div><!-- end three-col -->
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       OBJECTIVES — FULL WIDTH
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="panel">
     <div class="panel-title">OBJECTIVES &#8212; QUEST LOG</div>
     <div class="objectives-columns">
 
-      <!-- MAIN OBJECTIVES -->
+      
       <div>
         <div class="obj-section-title">&#9654; MAIN OBJECTIVES</div>
         <fieldset class="repeating_objectives_main">
@@ -482,7 +455,7 @@
         </fieldset>
       </div>
 
-      <!-- DIRECTIVES -->
+      
       <div>
         <div class="obj-section-title obj-section-gold">&#9654; DIRECTIVES &#8212; Corporate Quests</div>
         <fieldset class="repeating_objectives_directives">
@@ -504,7 +477,7 @@
         </fieldset>
       </div>
 
-      <!-- GOALS -->
+      
       <div>
         <div class="obj-section-title">&#9654; GOALS &#8212; Crowd Challenges</div>
         <fieldset class="repeating_objectives_goals">
@@ -526,12 +499,10 @@
         </fieldset>
       </div>
 
-    </div><!-- end objectives-columns -->
-  </div><!-- end objectives panel -->
+    </div>
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       INVENTORY — FULL WIDTH
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="panel">
     <div class="panel-title">INVENTORY</div>
     <fieldset class="repeating_inventory">
@@ -548,11 +519,9 @@
         </div>
       </div>
     </fieldset>
-  </div><!-- end inventory panel -->
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       ACHIEVEMENTS
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="panel">
     <div class="panel-title">ACHIEVEMENTS</div>
     <fieldset class="repeating_achievements">
@@ -570,30 +539,22 @@
         </div>
       </div>
     </fieldset>
-  </div><!-- end achievements panel -->
+  </div>
 
-  <!-- ═══════════════════════════════════════════════════════
-       NOTES — FULL WIDTH
-  ═══════════════════════════════════════════════════════ -->
+  
   <div class="panel">
     <div class="panel-title">NOTES</div>
     <textarea name="attr_notes" class="notes-textarea" placeholder="General notes, story hooks, contacts, session recap..."></textarea>
-  </div><!-- end notes panel -->
+  </div>
 
-</div><!-- end main-container -->
+</div>
 
-<!-- FOOTER -->
 <div class="footer">
   <div class="corp-watermark">
     GALACTIC PRIME TIME&#8482; &nbsp;&middot;&nbsp; ALL CONTESTANTS BROADCAST ACROSS THE GALAXY &nbsp;&middot;&nbsp; SEASON &#8734;
   </div>
 </div>
 
-<!-- ============================================================
-     SHEET WORKER SCRIPTS
-     Calculates derived values from attribute changes.
-     Uses Roll20's on() / getAttrs() / setAttrs() API.
-============================================================ -->
 <script type="text/worker">
 
 // ── BODY POINTS REMAINING ───────────────────────────────────

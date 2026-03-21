@@ -1772,9 +1772,204 @@
     .three-col { grid-template-columns: 1fr; }
     .broadcast-title { display: none; }
   }
+
+  /* AUTH STYLES */
+  .auth-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+  }
+  .auth-username {
+    color: var(--cyan);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .auth-btn {
+    background: rgba(0,212,255,0.1);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 3px 8px;
+    font-family: inherit;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .auth-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .auth-btn.sync-btn { border-color: var(--success); color: var(--success); background: rgba(0,255,136,0.08); }
+  .auth-btn.sync-btn:hover { background: rgba(0,255,136,0.18); }
+  .auth-btn.load-btn { border-color: var(--gold); color: var(--gold); background: rgba(200,168,75,0.08); }
+  .auth-btn.load-btn:hover { background: rgba(200,168,75,0.18); }
+  .auth-btn.logout-btn { border-color: var(--danger); color: var(--danger); background: rgba(255,34,85,0.08); }
+  .auth-btn.logout-btn:hover { background: rgba(255,34,85,0.18); }
+
+  /* LOGIN MODAL */
+  .login-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+  }
+  .login-overlay.visible { display: flex; }
+  .login-box {
+    background: var(--panel);
+    border: 1px solid var(--cyan);
+    border-radius: 4px;
+    padding: 32px;
+    width: 340px;
+    max-width: calc(100vw - 32px);
+    position: relative;
+    box-shadow: 0 0 40px rgba(0,212,255,0.2);
+  }
+  .login-box::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 20px; height: 20px;
+    border-top: 2px solid var(--cyan);
+    border-left: 2px solid var(--cyan);
+    border-radius: 4px 0 0 0;
+    pointer-events: none;
+  }
+  .login-box::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 20px; height: 20px;
+    border-bottom: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    border-radius: 0 0 4px 0;
+    pointer-events: none;
+  }
+  .login-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(0,212,255,0.5);
+  }
+  .login-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .login-tab {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 8px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .login-tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
+  .login-field { margin-bottom: 14px; }
+  .login-field label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .login-field input {
+    width: 100%;
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s;
+  }
+  .login-field input:focus { outline: none; border-color: var(--cyan); }
+  .login-submit {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(0,212,255,0.15);
+    border: 1px solid var(--cyan);
+    border-radius: 3px;
+    color: var(--cyan);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .login-submit:hover { background: rgba(0,212,255,0.28); }
+  .login-error {
+    color: var(--danger);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    text-align: center;
+    min-height: 16px;
+  }
+  .login-skip {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .login-skip:hover { color: var(--text); }
+  .sync-status {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
 </style>
 </head>
 <body>
+
+<!-- LOGIN MODAL -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-title">&#128752; GALACTIC PRIME TIME — PLAYER ACCESS</div>
+    <div class="login-tabs">
+      <button class="login-tab active" id="loginTabBtn" onclick="switchLoginTab('login')">LOGIN</button>
+      <button class="login-tab" id="registerTabBtn" onclick="switchLoginTab('register')">REGISTER</button>
+    </div>
+    <div id="loginForm">
+      <div class="login-field"><label>Username</label><input type="text" id="loginUsername" placeholder="your_callsign" autocomplete="username"></div>
+      <div class="login-field"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password"></div>
+      <button class="login-submit" onclick="doLogin()">ENTER THE SHOW</button>
+    </div>
+    <div id="registerForm" style="display:none">
+      <div class="login-field"><label>Username</label><input type="text" id="regUsername" placeholder="your_callsign" autocomplete="username"></div>
+      <div class="login-field"><label>Password</label><input type="password" id="regPassword" placeholder="••••••••" autocomplete="new-password"></div>
+      <div class="login-field"><label>Confirm Password</label><input type="password" id="regPasswordConfirm" placeholder="••••••••" autocomplete="new-password"></div>
+      <button class="login-submit" onclick="doRegister()">JOIN THE BROADCAST</button>
+    </div>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-skip" onclick="skipLogin()">Continue without account</div>
+  </div>
+</div>
 
 <!-- BROADCAST BAR -->
 <div class="broadcast-bar">
@@ -1783,12 +1978,8 @@
     &#9679; LIVE BROADCAST
   </div>
   <div class="broadcast-title">GALACTIC PRIME TIME</div>
-  <div class="broadcast-signal">
-    <div class="signal-bar" style="height:8px"></div>
-    <div class="signal-bar" style="height:12px"></div>
-    <div class="signal-bar" style="height:16px"></div>
-    <div class="signal-bar" style="height:10px"></div>
-    &nbsp;SIGNAL 94%
+  <div class="auth-bar" id="authBar">
+    <!-- populated by JS -->
   </div>
 </div>
 
@@ -1800,8 +1991,7 @@
       CONTESTANT IDENTITY
       <div class="flex-row">
         <span class="save-indicator" id="saveIndicator">&#9679; SAVED</span>
-        <button class="btn btn-sm" style="background:rgba(0,212,255,0.1);border:1px solid var(--cyan);color:var(--cyan);" onclick="exportCharacter()">&#11015; EXPORT</button>
-        <label class="btn btn-sm" style="background:rgba(0,255,136,0.1);border:1px solid var(--success);color:var(--success);cursor:pointer;">&#11014; IMPORT<input type="file" accept=".json" style="display:none" onchange="importCharacter(this)"></label>
+        <label class="btn btn-sm" style="background:rgba(0,212,255,0.1);border:1px solid var(--cyan);color:var(--cyan);cursor:pointer;">&#11014; LOAD FROM FILE<input type="file" accept=".json" style="display:none" onchange="loadFromFile(this)"></label>
         <button class="btn btn-danger btn-sm" onclick="resetCharacter()">&#8635; RESET CHARACTER</button>
       </div>
     </div>
@@ -2268,81 +2458,61 @@ function appConfirm(msg, onConfirm) {
 }
 
 function saveState() {
-  localStorage.setItem('theshow_v1', JSON.stringify(STATE));
   showSaved();
 }
 
-function loadState() {
-  const saved = localStorage.getItem('theshow_v1');
-  if (saved) {
-    try {
-      STATE = JSON.parse(saved);
-      // Migration guards
-      if (!STATE.traitBonus)   STATE.traitBonus  = { physique:0, reflexes:0, mind:0, charm:0 };
-      // Migrate old skills: string stat → stats array
-      if (STATE.skills) STATE.skills.forEach(function(sk) {
-        if (!sk.stats) sk.stats = (sk.stat && sk.stat.trim()) ? [sk.stat.trim().toLowerCase()] : [];
-      });
-      if (!STATE.bonusPoints)  STATE.bonusPoints  = { body:5, core:5 };
-      // Migrate old saves to 5-point pool
-      STATE.bonusPoints.body = Math.max(STATE.bonusPoints.body, 5 - ((STATE.traitBonus.physique||0) + (STATE.traitBonus.reflexes||0)));
-      STATE.bonusPoints.core = Math.max(STATE.bonusPoints.core, 5 - ((STATE.traitBonus.mind||0) + (STATE.traitBonus.charm||0)));
-      if (!STATE.tokens)       STATE.tokens       = { narrative:0, upgrade:0, bossTokens:[] };
-      if (!STATE.tokens.bossTokens) STATE.tokens.bossTokens = [];
-      if (!STATE.objectives)   STATE.objectives   = { main:[], directives:[], goals:[] };
-      if (!STATE.inventory)    STATE.inventory    = JSON.parse(JSON.stringify(DEFAULT_STATE.inventory));
-      if (!STATE.exposure)     STATE.exposure     = { viewers:0, followers:0 };
-      if (!STATE.patrons)      STATE.patrons      = JSON.parse(JSON.stringify(DEFAULT_STATE.patrons));
-      else if (STATE.patrons.length > 3) STATE.patrons = STATE.patrons.slice(0,3);
-      if (STATE.conditionLog === undefined) STATE.conditionLog = '';
-      if (STATE.notes        === undefined) STATE.notes        = '';
-      if (!STATE.achievements) STATE.achievements = [];
-      // Recompute traits from bonus (fixes old saves that stored base-5 values)
-      if (!STATE.traitBonus)      STATE.traitBonus      = { physique:0, reflexes:0, mind:0, charm:0 };
-      if (!STATE.traitLevelBonus) STATE.traitLevelBonus = { physique:0, reflexes:0, mind:0, charm:0 };
-      var _traits = ['physique','reflexes','mind','charm'];
-      _traits.forEach(function(t) { STATE.traits[t] = 1 + (STATE.traitBonus[t] || 0) + (STATE.traitLevelBonus[t] || 0); });
-      // Portrait migration
-      if (!STATE.identity) STATE.identity = JSON.parse(JSON.stringify(DEFAULT_STATE.identity));
-      if (!STATE.identity.portrait) STATE.identity.portrait = '';
-      // Effects migration
-      if (!STATE.effects)          STATE.effects          = [];
-      if (!STATE.levelPoints)      STATE.levelPoints      = { body: 0, core: 0 };
-      if (!STATE.levelPoints.core) STATE.levelPoints.core = 0;
-      if (!STATE.statAdvPool)      STATE.statAdvPool      = { physique:0, reflexes:0, mind:0, charm:0 };
-      // Migrate old hpUpgradePoints to spent-based system
-      if (STATE.hpUpgradePoints !== undefined) { delete STATE.hpUpgradePoints; }
-      if (STATE.hpUpgradePointsSpent === undefined) STATE.hpUpgradePointsSpent = 0;
-      // Objectives type migration
-      ['main','directives','goals'].forEach(function(sec) {
-        if (STATE.objectives[sec]) STATE.objectives[sec].forEach(function(obj) {
-          if (!obj.type) obj.type = 'Scenario';
-        });
-      });
-      // Tags migration: add effect field if missing
-      if (STATE.tags) STATE.tags.forEach(function(tag) {
-        if (tag.effect === undefined) tag.effect = '';
-      });
-      // Patron avatar migration
-      if (STATE.patrons) STATE.patrons.forEach(function(p) { if (!p.avatar) p.avatar = ''; });
-      // Quick Slots migration
-      if (STATE.inventory && STATE.inventory.categories) {
-        var hasQS = STATE.inventory.categories.some(function(c) { return c.locked && c.maxItems === 3; });
-        if (!hasQS) STATE.inventory.categories.unshift({ id:9, name:'Quick Slots', collapsed:false, items:[], locked:true, maxItems:3 });
-        // Worn/Equipped migration
-        var hasWorn = STATE.inventory.categories.some(function(c) { return c.name === 'Worn/Equipped'; });
-        if (!hasWorn) {
-          var qsIdx = 0;
-          for (var _i=0; _i<STATE.inventory.categories.length; _i++) { if (STATE.inventory.categories[_i].locked) { qsIdx = _i; break; } }
-          STATE.inventory.categories.splice(qsIdx + 1, 0, { id:15, name:'Worn/Equipped', collapsed:false, items:[] });
-        }
-      }
-    } catch(e) {
-      STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
+function applyMigrations(s) {
+  if (!s.traitBonus)      s.traitBonus      = { physique:0, reflexes:0, mind:0, charm:0 };
+  if (!s.traitLevelBonus) s.traitLevelBonus = { physique:0, reflexes:0, mind:0, charm:0 };
+  if (s.skills) s.skills.forEach(function(sk) {
+    if (!sk.stats) sk.stats = (sk.stat && sk.stat.trim()) ? [sk.stat.trim().toLowerCase()] : [];
+  });
+  if (!s.bonusPoints) s.bonusPoints = { body:5, core:5 };
+  s.bonusPoints.body = Math.max(s.bonusPoints.body, 5 - ((s.traitBonus.physique||0) + (s.traitBonus.reflexes||0)));
+  s.bonusPoints.core = Math.max(s.bonusPoints.core, 5 - ((s.traitBonus.mind||0) + (s.traitBonus.charm||0)));
+  if (!s.tokens)            s.tokens      = { narrative:0, upgrade:0, bossTokens:[] };
+  if (!s.tokens.bossTokens) s.tokens.bossTokens = [];
+  if (!s.objectives)        s.objectives  = { main:[], directives:[], goals:[] };
+  if (!s.inventory)         s.inventory   = JSON.parse(JSON.stringify(DEFAULT_STATE.inventory));
+  if (!s.exposure)          s.exposure    = { viewers:0, followers:0 };
+  if (!s.patrons)           s.patrons     = JSON.parse(JSON.stringify(DEFAULT_STATE.patrons));
+  else if (s.patrons.length > 3) s.patrons = s.patrons.slice(0,3);
+  if (s.conditionLog === undefined) s.conditionLog = '';
+  if (s.notes        === undefined) s.notes        = '';
+  if (!s.achievements) s.achievements = [];
+  if (!s.traits) s.traits = { physique:1, reflexes:1, mind:1, charm:1 };
+  var _traits = ['physique','reflexes','mind','charm'];
+  _traits.forEach(function(t) { s.traits[t] = 1 + (s.traitBonus[t] || 0) + (s.traitLevelBonus[t] || 0); });
+  if (!s.identity)         s.identity = JSON.parse(JSON.stringify(DEFAULT_STATE.identity));
+  if (!s.identity.portrait) s.identity.portrait = '';
+  if (!s.effects)          s.effects          = [];
+  if (!s.levelPoints)      s.levelPoints      = { body: 0, core: 0 };
+  if (!s.levelPoints.core) s.levelPoints.core = 0;
+  if (!s.statAdvPool)      s.statAdvPool      = { physique:0, reflexes:0, mind:0, charm:0 };
+  if (s.hpUpgradePoints !== undefined) { delete s.hpUpgradePoints; }
+  if (s.hpUpgradePointsSpent === undefined) s.hpUpgradePointsSpent = 0;
+  ['main','directives','goals'].forEach(function(sec) {
+    if (s.objectives[sec]) s.objectives[sec].forEach(function(obj) {
+      if (!obj.type) obj.type = 'Scenario';
+    });
+  });
+  if (s.tags) s.tags.forEach(function(tag) { if (tag.effect === undefined) tag.effect = ''; });
+  if (s.patrons) s.patrons.forEach(function(p) { if (!p.avatar) p.avatar = ''; });
+  if (s.inventory && s.inventory.categories) {
+    var hasQS = s.inventory.categories.some(function(c) { return c.locked && c.maxItems === 3; });
+    if (!hasQS) s.inventory.categories.unshift({ id:9, name:'Quick Slots', collapsed:false, items:[], locked:true, maxItems:3 });
+    var hasWorn = s.inventory.categories.some(function(c) { return c.name === 'Worn/Equipped'; });
+    if (!hasWorn) {
+      var qsIdx = 0;
+      for (var _i=0; _i<s.inventory.categories.length; _i++) { if (s.inventory.categories[_i].locked) { qsIdx = _i; break; } }
+      s.inventory.categories.splice(qsIdx + 1, 0, { id:15, name:'Worn/Equipped', collapsed:false, items:[] });
     }
-  } else {
-    STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
   }
+  return s;
+}
+
+function loadState() {
+  STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
   renderAll();
 }
 
@@ -2353,58 +2523,17 @@ function showSaved() {
   window._saveTimer = setTimeout(function() { el.classList.remove('visible'); }, 1500);
 }
 
-function exportCharacter() {
-  var name = (STATE.identity && STATE.identity.name) ? STATE.identity.name.replace(/[^a-z0-9]/gi, '-').toLowerCase() : 'character';
-  var json = JSON.stringify(STATE, null, 2);
-  var blob = new Blob([json], { type: 'application/json' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url;
-  a.download = 'galactic-prime-time-' + name + '.json';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-function importCharacter(input) {
+function loadFromFile(input) {
   var file = input.files[0];
   if (!file) return;
   var reader = new FileReader();
   reader.onload = function(e) {
     try {
-      var parsed = JSON.parse(e.target.result);
-      STATE = parsed;
-      // Run same migrations as loadState
-      var _traits = ['physique','reflexes','mind','charm'];
-      if (!STATE.traits)          STATE.traits          = { physique:1, reflexes:1, mind:1, charm:1 };
-      if (!STATE.traitBonus)      STATE.traitBonus      = { physique:0, reflexes:0, mind:0, charm:0 };
-      if (!STATE.traitLevelBonus) STATE.traitLevelBonus = { physique:0, reflexes:0, mind:0, charm:0 };
-      _traits.forEach(function(t) { STATE.traits[t] = 1 + (STATE.traitBonus[t] || 0) + (STATE.traitLevelBonus[t] || 0); });
-      if (!STATE.levelPoints)      STATE.levelPoints      = { body: 0, core: 0 };
-      if (!STATE.levelPoints.core) STATE.levelPoints.core = 0;
-      if (!STATE.statAdvPool)      STATE.statAdvPool      = { physique:0, reflexes:0, mind:0, charm:0 };
-      if (STATE.hpUpgradePoints !== undefined) delete STATE.hpUpgradePoints;
-      if (STATE.hpUpgradePointsSpent === undefined) STATE.hpUpgradePointsSpent = 0;
-      if (!STATE.identity) STATE.identity = JSON.parse(JSON.stringify(DEFAULT_STATE.identity));
-      if (!STATE.identity.portrait) STATE.identity.portrait = '';
-      if (!STATE.bonusPoints) STATE.bonusPoints = { body:5, core:5 };
-      if (!STATE.bodyParts) STATE.bodyParts = JSON.parse(JSON.stringify(DEFAULT_STATE.bodyParts));
-      if (!STATE.skills) STATE.skills = [];
-      if (!STATE.tags) STATE.tags = [];
-      if (!STATE.effects) STATE.effects = [];
-      if (!STATE.exposure) STATE.exposure = { viewers:0, followers:0 };
-      if (!STATE.patrons) STATE.patrons = JSON.parse(JSON.stringify(DEFAULT_STATE.patrons));
-      STATE.patrons.forEach(function(p) { if (!p.avatar) p.avatar = ''; });
-      if (!STATE.tokens) STATE.tokens = { narrative:0, upgrade:0, bossTokens:[] };
-      if (!STATE.inventory) STATE.inventory = JSON.parse(JSON.stringify(DEFAULT_STATE.inventory));
-      if (!STATE.objectives) STATE.objectives = { main:[], directives:[], goals:[] };
-      if (!STATE.notes) STATE.notes = '';
-      saveState();
+      STATE = applyMigrations(JSON.parse(e.target.result));
       renderAll();
       showSaved();
     } catch(err) {
-      alert('Import failed: invalid JSON file.');
+      alert('Load failed: invalid JSON file.');
     }
     input.value = '';
   };
@@ -2413,7 +2542,6 @@ function importCharacter(input) {
 
 function resetCharacter() {
   appConfirm('RESET CHARACTER? All data will be permanently lost. This cannot be undone.', function() {
-    localStorage.removeItem('theshow_v1');
     STATE = JSON.parse(JSON.stringify(DEFAULT_STATE));
     renderAll();
     showSaved();
@@ -4038,7 +4166,181 @@ function addEffect() {
 //  INIT
 // ============================================================
 
-window.addEventListener('DOMContentLoaded', loadState);
+window.addEventListener('DOMContentLoaded', initApp);
+
+// ============================================================
+//  SERVER SYNC — AUTH & CHARACTER
+// ============================================================
+
+var SERVER_URL = 'http://localhost:3001';
+var _authToken = null;
+var _authUsername = null;
+
+function initApp() {
+  _authToken = localStorage.getItem('gpt_token');
+  _authUsername = localStorage.getItem('gpt_username');
+  renderAuthBar();
+  loadState();
+  if (_authToken) {
+    loadFromServer();
+  } else {
+    document.getElementById('loginOverlay').classList.add('visible');
+  }
+
+  // Enter key support on login forms
+  document.getElementById('loginPassword').addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('regPasswordConfirm').addEventListener('keydown', function(e) { if (e.key === 'Enter') doRegister(); });
+}
+
+function renderAuthBar() {
+  var bar = document.getElementById('authBar');
+  if (_authToken && _authUsername) {
+    bar.innerHTML =
+      '<span class="auth-username">&#128100; ' + escHtml(_authUsername) + '</span>' +
+      '<button class="auth-btn sync-btn" onclick="syncToServer()" title="Save character to server">&#9651; SYNC</button>' +
+      '<button class="auth-btn load-btn" onclick="loadFromServer()" title="Load character from server">&#9661; LOAD</button>' +
+      '<span class="sync-status" id="syncStatus"></span>' +
+      '<button class="auth-btn logout-btn" onclick="doLogout()">LOGOUT</button>';
+  } else {
+    bar.innerHTML =
+      '<button class="auth-btn" onclick="openLoginModal()">&#128752; LOGIN</button>' +
+      '<span class="sync-status" id="syncStatus">Offline — saves local only</span>';
+  }
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function setSyncStatus(msg, color) {
+  var el = document.getElementById('syncStatus');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = color || '';
+  clearTimeout(window._syncTimer);
+  if (msg) window._syncTimer = setTimeout(function() { if (el) el.textContent = ''; }, 3000);
+}
+
+function openLoginModal() {
+  document.getElementById('loginError').textContent = '';
+  document.getElementById('loginOverlay').classList.add('visible');
+}
+
+function skipLogin() {
+  document.getElementById('loginOverlay').classList.remove('visible');
+}
+
+function switchLoginTab(tab) {
+  document.getElementById('loginForm').style.display = tab === 'login' ? '' : 'none';
+  document.getElementById('registerForm').style.display = tab === 'register' ? '' : 'none';
+  document.getElementById('loginTabBtn').classList.toggle('active', tab === 'login');
+  document.getElementById('registerTabBtn').classList.toggle('active', tab === 'register');
+  document.getElementById('loginError').textContent = '';
+}
+
+function setLoginError(msg) {
+  document.getElementById('loginError').textContent = msg;
+}
+
+async function doLogin() {
+  var username = document.getElementById('loginUsername').value.trim();
+  var password = document.getElementById('loginPassword').value;
+  if (!username || !password) { setLoginError('Enter username and password.'); return; }
+  try {
+    var res = await fetch(SERVER_URL + '/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    var data = await res.json();
+    if (!res.ok) { setLoginError(data.error || 'Login failed.'); return; }
+    _authToken = data.token;
+    _authUsername = data.username;
+    localStorage.setItem('gpt_token', _authToken);
+    localStorage.setItem('gpt_username', _authUsername);
+    document.getElementById('loginOverlay').classList.remove('visible');
+    renderAuthBar();
+    await loadFromServer();
+  } catch (e) {
+    setLoginError('Cannot reach server. Check it is running.');
+  }
+}
+
+async function doRegister() {
+  var username = document.getElementById('regUsername').value.trim();
+  var password = document.getElementById('regPassword').value;
+  var confirm  = document.getElementById('regPasswordConfirm').value;
+  if (!username || !password) { setLoginError('Enter username and password.'); return; }
+  if (password !== confirm) { setLoginError('Passwords do not match.'); return; }
+  if (password.length < 6) { setLoginError('Password must be at least 6 characters.'); return; }
+  try {
+    var res = await fetch(SERVER_URL + '/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    var data = await res.json();
+    if (!res.ok) { setLoginError(data.error || 'Registration failed.'); return; }
+    _authToken = data.token;
+    _authUsername = data.username;
+    localStorage.setItem('gpt_token', _authToken);
+    localStorage.setItem('gpt_username', _authUsername);
+    document.getElementById('loginOverlay').classList.remove('visible');
+    renderAuthBar();
+    await loadFromServer();
+  } catch (e) {
+    setLoginError('Cannot reach server. Check it is running.');
+  }
+}
+
+function doLogout() {
+  _authToken = null;
+  _authUsername = null;
+  localStorage.removeItem('gpt_token');
+  localStorage.removeItem('gpt_username');
+  renderAuthBar();
+  document.getElementById('loginOverlay').classList.add('visible');
+}
+
+async function syncToServer() {
+  if (!_authToken) { openLoginModal(); return; }
+  setSyncStatus('Syncing...', 'var(--gold)');
+  try {
+    var res = await fetch(SERVER_URL + '/api/character', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + _authToken
+      },
+      body: JSON.stringify({ state: STATE })
+    });
+    if (res.status === 401) { doLogout(); return; }
+    if (!res.ok) { setSyncStatus('Sync failed.', 'var(--danger)'); return; }
+    var data = await res.json();
+    setSyncStatus('Synced ' + new Date(data.updatedAt).toLocaleTimeString(), 'var(--success)');
+  } catch (e) {
+    setSyncStatus('Server unreachable.', 'var(--danger)');
+  }
+}
+
+async function loadFromServer() {
+  if (!_authToken) { openLoginModal(); return; }
+  setSyncStatus('Loading...', 'var(--gold)');
+  try {
+    var res = await fetch(SERVER_URL + '/api/character', {
+      headers: { 'Authorization': 'Bearer ' + _authToken }
+    });
+    if (res.status === 401) { doLogout(); return; }
+    if (res.status === 404) { setSyncStatus('No save on server.', 'var(--muted)'); return; }
+    if (!res.ok) { setSyncStatus('Load failed.', 'var(--danger)'); return; }
+    var data = await res.json();
+    STATE = applyMigrations(data.state);
+    renderAll();
+    setSyncStatus('Loaded ' + new Date(data.updatedAt).toLocaleTimeString(), 'var(--success)');
+  } catch (e) {
+    setSyncStatus('Server unreachable.', 'var(--danger)');
+  }
+}
 </script>
 </body>
 </html>

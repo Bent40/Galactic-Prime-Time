@@ -1,16 +1,3 @@
-/* ============================================================
-   GALACTIC PRIME TIME — Roll20 Character Sheet CSS
-
-   Roll20 CSS Rules:
-     • All class selectors MUST have the "sheet-" prefix.
-       Roll20 auto-prepends "sheet-" to HTML class names,
-       so HTML uses class="panel" → CSS targets .sheet-panel
-     • Avoid !important where possible
-     • Dark mode support via body.sheet-darkmode
-     • Use Flexbox / Grid for layout (no table layouts)
-============================================================ */
-
-/* ── CSS CUSTOM PROPERTIES ─────────────────────────────────── */
 .charsheet {
   --bg:       #04050d;
   --panel:    #090c1a;
@@ -27,20 +14,16 @@
   --mythic:   #ec4899;
   font-family: system-ui, -apple-system, sans-serif;
   font-size: 14px;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg) !important;
+  color: var(--text) !important;
 }
 
-/* ── RESET ─────────────────────────────────────────────────── */
-.sheet-main-container *,
-.sheet-broadcast-bar *,
-.sheet-panel *,
-.sheet-footer * {
+.charsheet * {
   box-sizing: border-box;
 }
 
-/* ── BROADCAST BAR ──────────────────────────────────────────── */
-.sheet-broadcast-bar {
+/* ── BROADCAST BAR ─────────────────────────────────────── */
+.charsheet .broadcast-bar {
   background: linear-gradient(90deg, #000510 0%, #0a1a2e 50%, #000510 100%);
   border-bottom: 1px solid var(--cyan);
   padding: 8px 24px;
@@ -53,7 +36,7 @@
   margin-bottom: 0;
 }
 
-.sheet-broadcast-bar::after {
+.charsheet .broadcast-bar::after {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -67,7 +50,7 @@
   pointer-events: none;
 }
 
-.sheet-broadcast-live {
+.charsheet .broadcast-live {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -78,21 +61,22 @@
   text-transform: uppercase;
 }
 
-.sheet-live-dot {
+.charsheet .live-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--danger);
   box-shadow: 0 0 8px var(--danger);
-  animation: sheet-pulse 1s infinite;
+  animation: gpt-pulse 1s infinite;
+  flex-shrink: 0;
 }
 
-@keyframes sheet-pulse {
+@keyframes gpt-pulse {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.3; }
 }
 
-.sheet-broadcast-title {
+.charsheet .broadcast-title {
   font-size: 20px;
   font-weight: 900;
   letter-spacing: 6px;
@@ -101,7 +85,7 @@
   text-shadow: 0 0 20px rgba(0,212,255,0.8);
 }
 
-.sheet-broadcast-signal {
+.charsheet .broadcast-signal {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -110,15 +94,15 @@
   color: var(--muted);
 }
 
-.sheet-signal-bar {
+.charsheet .signal-bar {
   width: 4px;
   background: var(--cyan);
   border-radius: 1px;
 }
 
-/* ── MAIN CONTAINER ─────────────────────────────────────────── */
-.sheet-main-container {
-  background: var(--bg);
+/* ── MAIN LAYOUT ───────────────────────────────────────── */
+.charsheet .main-container {
+  background: var(--bg) !important;
   max-width: 1400px;
   margin: 0 auto;
   padding: 16px;
@@ -127,17 +111,17 @@
   gap: 16px;
 }
 
-/* ── PANELS ─────────────────────────────────────────────────── */
-.sheet-panel {
-  background: var(--panel);
-  border: 1px solid var(--border);
+/* ── PANELS ────────────────────────────────────────────── */
+.charsheet .panel {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px;
   padding: 16px;
   position: relative;
   box-shadow: inset 0 0 30px rgba(0,212,255,0.04);
 }
 
-.sheet-panel::before {
+.charsheet .panel::before {
   content: '';
   position: absolute;
   top: -1px; left: -1px;
@@ -148,7 +132,7 @@
   pointer-events: none;
 }
 
-.sheet-panel::after {
+.charsheet .panel::after {
   content: '';
   position: absolute;
   bottom: -1px; right: -1px;
@@ -159,7 +143,7 @@
   pointer-events: none;
 }
 
-.sheet-panel-title {
+.charsheet .panel-title {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -175,42 +159,43 @@
   flex-wrap: wrap;
 }
 
-/* ── LAYOUT GRIDS ───────────────────────────────────────────── */
-.sheet-two-col {
+/* ── LAYOUTS ───────────────────────────────────────────── */
+.charsheet .two-col {
   display: grid;
   grid-template-columns: 45% 55%;
   gap: 16px;
   align-items: start;
 }
 
-.sheet-three-col {
+.charsheet .three-col {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
 }
 
-/* ── IDENTITY ───────────────────────────────────────────────── */
-.sheet-identity-row {
+/* ── IDENTITY ──────────────────────────────────────────── */
+.charsheet .identity-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 80px;
   gap: 12px;
   align-items: end;
 }
 
-.sheet-field-group {
+.charsheet .field-group {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.sheet-field-label {
+.charsheet .field-label {
   font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-.sheet-field-input,
+/* ── INPUTS ────────────────────────────────────────────── */
+.charsheet .field-input,
 .charsheet input[type="text"],
 .charsheet input[type="number"] {
   background: rgba(0,212,255,0.05);
@@ -223,7 +208,7 @@
   width: 100%;
 }
 
-.sheet-field-input:focus,
+.charsheet .field-input:focus,
 .charsheet input[type="text"]:focus,
 .charsheet input[type="number"]:focus {
   outline: none;
@@ -249,8 +234,8 @@
   box-shadow: 0 0 10px rgba(0,212,255,0.2);
 }
 
-/* ── TRAITS ─────────────────────────────────────────────────── */
-.sheet-pts-remaining {
+/* ── TRAITS ────────────────────────────────────────────── */
+.charsheet .pts-remaining {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -258,13 +243,13 @@
   align-items: center;
 }
 
-.sheet-pts-badge-group {
+.charsheet .pts-badge-group {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.sheet-pts-badge {
+.charsheet .pts-badge {
   font-family: 'Courier New', monospace;
   font-size: 13px;
   font-weight: bold;
@@ -276,14 +261,14 @@
   text-align: center;
 }
 
-.sheet-traits-grid {
+.charsheet .traits-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   margin-bottom: 12px;
 }
 
-.sheet-trait-group-row {
+.charsheet .trait-group-row {
   grid-column: 1 / -1;
   font-size: 9px;
   letter-spacing: 3px;
@@ -295,9 +280,9 @@
   margin-bottom: 6px;
 }
 
-.sheet-trait-card {
-  background: rgba(0,212,255,0.03);
-  border: 1px solid var(--border);
+.charsheet .trait-card {
+  background: rgba(0,212,255,0.03) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px;
   padding: 12px;
   text-align: center;
@@ -307,20 +292,20 @@
   gap: 6px;
 }
 
-.sheet-trait-name {
+.charsheet .trait-name {
   font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--muted);
 }
 
-.sheet-trait-sub {
+.charsheet .trait-sub {
   font-size: 9px;
   color: var(--muted);
   opacity: 0.6;
 }
 
-.sheet-trait-value-input {
+.charsheet .trait-value-input {
   font-family: 'Courier New', monospace;
   font-size: 40px;
   font-weight: bold;
@@ -335,13 +320,13 @@
   padding: 0;
 }
 
-.sheet-trait-value-input:focus {
+.charsheet .trait-value-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-trait-bonus-row {
+.charsheet .trait-bonus-row {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -349,21 +334,21 @@
   font-size: 11px;
 }
 
-.sheet-trait-bonus-label {
+.charsheet .trait-bonus-label {
   color: var(--muted);
   font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.sheet-trait-bonus {
+.charsheet .trait-bonus {
   color: var(--text);
   font-family: 'Courier New', monospace;
   font-size: 13px;
   font-weight: bold;
 }
 
-.sheet-trait-adv-row {
+.charsheet .trait-adv-row {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -371,7 +356,7 @@
   color: var(--muted);
 }
 
-.sheet-adv-input {
+.charsheet .adv-input {
   width: 44px;
   text-align: center;
   background: rgba(200,168,75,0.05);
@@ -383,20 +368,12 @@
   padding: 2px;
 }
 
-.sheet-adv-input:focus {
+.charsheet .adv-input:focus {
   outline: none;
   border-color: var(--gold);
 }
 
-.sheet-roll-btn {
-  font-size: 10px;
-  letter-spacing: 1px;
-  padding: 3px 8px;
-  margin-top: 2px;
-  width: 100%;
-}
-
-.sheet-lvl-pts-row {
+.charsheet .lvl-pts-row {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -407,7 +384,7 @@
   color: var(--muted);
 }
 
-.sheet-pts-input {
+.charsheet .pts-input {
   width: 50px;
   text-align: center;
   background: rgba(229,192,123,0.08);
@@ -419,73 +396,12 @@
   padding: 3px;
 }
 
-.sheet-pts-input:focus {
+.charsheet .pts-input:focus {
   outline: none;
   border-color: #e5c07b;
 }
 
-/* ── BUTTONS ─────────────────────────────────────────────────── */
-.sheet-btn {
-  padding: 6px 14px;
-  border-radius: 3px;
-  border: 1px solid var(--cyan);
-  background: transparent;
-  color: var(--cyan);
-  font-size: 12px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  font-family: inherit;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-}
-
-.sheet-btn:hover {
-  background: rgba(0,212,255,0.15);
-  box-shadow: 0 0 10px rgba(0,212,255,0.3);
-}
-
-.sheet-btn-sm {
-  padding: 4px 10px;
-  font-size: 11px;
-}
-
-.sheet-btn-xs {
-  padding: 2px 7px;
-  font-size: 10px;
-}
-
-.sheet-btn-danger {
-  border-color: var(--danger);
-  color: var(--danger);
-}
-
-.sheet-btn-danger:hover {
-  background: rgba(255,34,85,0.15);
-  box-shadow: 0 0 10px rgba(255,34,85,0.3);
-}
-
-.sheet-btn-success {
-  border-color: var(--success);
-  color: var(--success);
-}
-
-.sheet-btn-success:hover {
-  background: rgba(0,255,136,0.15);
-}
-
-.sheet-btn-gold {
-  border-color: var(--gold);
-  color: var(--gold);
-}
-
-.sheet-btn-gold:hover {
-  background: rgba(200,168,75,0.15);
-}
-
-/* Roll20 button overrides */
+/* ── BUTTONS ───────────────────────────────────────────── */
 .charsheet button[type="roll"] {
   padding: 4px 10px;
   border-radius: 3px;
@@ -504,17 +420,17 @@
   box-shadow: 0 0 8px rgba(0,212,255,0.3);
 }
 
-.charsheet button[type="roll"].sheet-btn-success {
+.charsheet button[type="roll"].btn-success {
   border-color: var(--success);
   color: var(--success);
 }
 
-.charsheet button[type="roll"].sheet-btn-success:hover {
+.charsheet button[type="roll"].btn-success:hover {
   background: rgba(0,255,136,0.12);
 }
 
-/* ── ACTIVE EFFECTS ─────────────────────────────────────────── */
-.sheet-effect-row {
+/* ── ACTIVE EFFECTS ────────────────────────────────────── */
+.charsheet .effect-row {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -525,13 +441,13 @@
   margin-bottom: 5px;
 }
 
-.sheet-effect-icon {
+.charsheet .effect-icon {
   color: var(--gold);
   font-size: 13px;
   flex-shrink: 0;
 }
 
-.sheet-effect-text-input {
+.charsheet .effect-text-input {
   flex: 1;
   background: transparent;
   border: none;
@@ -542,22 +458,22 @@
   padding: 1px 4px;
 }
 
-.sheet-effect-text-input:focus {
+.charsheet .effect-text-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-/* ── SKILLS ─────────────────────────────────────────────────── */
-.sheet-skill-card {
-  background: rgba(0,0,0,0.2);
-  border: 1px solid var(--border);
+/* ── SKILLS ────────────────────────────────────────────── */
+.charsheet .skill-card {
+  background: rgba(0,0,0,0.2) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 8px;
 }
 
-.sheet-skill-header {
+.charsheet .skill-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -565,7 +481,7 @@
   flex-wrap: wrap;
 }
 
-.sheet-skill-name-input {
+.charsheet .skill-name-input {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--muted);
@@ -578,13 +494,13 @@
   min-width: 100px;
 }
 
-.sheet-skill-name-input:focus {
+.charsheet .skill-name-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-skill-meta {
+.charsheet .skill-meta {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -592,7 +508,7 @@
   flex-wrap: wrap;
 }
 
-.sheet-skill-meta-label {
+.charsheet .skill-meta-label {
   font-size: 9px;
   letter-spacing: 1px;
   color: var(--muted);
@@ -600,7 +516,7 @@
   white-space: nowrap;
 }
 
-.sheet-skill-meta-input {
+.charsheet .skill-meta-input {
   background: rgba(0,212,255,0.05);
   border: 1px solid var(--muted);
   border-radius: 3px;
@@ -610,13 +526,13 @@
   font-family: 'Courier New', monospace;
 }
 
-.sheet-skill-meta-input:focus {
+.charsheet .skill-meta-input:focus {
   outline: none;
   border-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-skill-extra-grid {
+.charsheet .skill-extra-grid {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -624,21 +540,21 @@
   border-top: 1px solid var(--border);
 }
 
-.sheet-skill-extra-row {
+.charsheet .skill-extra-row {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.sheet-skill-extra-field {
+.charsheet .skill-extra-field {
   display: flex;
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
 }
 
-.sheet-skill-extra-full {
+.charsheet .skill-extra-full {
   flex: 1;
   min-width: 100%;
   flex-direction: column;
@@ -646,7 +562,7 @@
   gap: 4px;
 }
 
-.sheet-skill-detail-input {
+.charsheet .skill-detail-input {
   background: rgba(0,212,255,0.05);
   border: 1px solid var(--muted);
   border-radius: 3px;
@@ -657,21 +573,16 @@
   min-width: 80px;
 }
 
-.sheet-skill-detail-input:focus {
+.charsheet .skill-detail-input:focus {
   outline: none;
   border-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-skill-detail-short {
-  width: 130px;
-}
+.charsheet .skill-detail-short { width: 130px; }
+.charsheet .skill-detail-full  { width: 100%; }
 
-.sheet-skill-detail-full {
-  width: 100%;
-}
-
-.sheet-skill-detail-textarea {
+.charsheet .skill-detail-textarea {
   background: rgba(0,212,255,0.05);
   border: 1px solid var(--muted);
   border-radius: 3px;
@@ -685,23 +596,23 @@
   line-height: 1.5;
 }
 
-.sheet-skill-detail-textarea:focus {
+.charsheet .skill-detail-textarea:focus {
   outline: none;
   border-color: var(--cyan);
   box-shadow: none;
 }
 
-/* ── BODY PARTS ─────────────────────────────────────────────── */
-.sheet-body-part-card {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
+/* ── BODY PARTS ────────────────────────────────────────── */
+.charsheet .body-part-card {
+  background: rgba(0,0,0,0.3) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px;
   padding: 12px;
-  border-left: 4px solid var(--success);
+  border-left: 4px solid var(--success) !important;
   margin-bottom: 8px;
 }
 
-.sheet-body-part-header {
+.charsheet .body-part-header {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -709,7 +620,7 @@
   flex-wrap: wrap;
 }
 
-.sheet-part-name-input {
+.charsheet .part-name-input {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--muted);
@@ -723,13 +634,13 @@
   font-family: inherit;
 }
 
-.sheet-part-name-input:focus {
+.charsheet .part-name-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-lethal-toggle {
+.charsheet .lethal-toggle {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -740,7 +651,7 @@
   margin-left: auto;
 }
 
-.sheet-hp-section {
+.charsheet .hp-section {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -748,7 +659,7 @@
   flex-wrap: wrap;
 }
 
-.sheet-hp-label {
+.charsheet .hp-label {
   font-size: 10px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -756,13 +667,13 @@
   white-space: nowrap;
 }
 
-.sheet-hp-sep {
+.charsheet .hp-sep {
   color: var(--muted);
   font-size: 16px;
   line-height: 1;
 }
 
-.sheet-hp-max-input {
+.charsheet .hp-max-input {
   width: 52px;
   background: rgba(0,212,255,0.05);
   border: 1px solid var(--muted);
@@ -774,22 +685,23 @@
   padding: 2px;
 }
 
-.sheet-hp-max-input:focus {
+.charsheet .hp-max-input:focus {
   outline: none;
   border-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-conditions-section {
+/* ── CONDITIONS ────────────────────────────────────────── */
+.charsheet .conditions-section {
   margin-top: 6px;
 }
 
-.sheet-condition-select {
+.charsheet .condition-select {
   margin-right: 4px;
   margin-bottom: 4px;
 }
 
-.sheet-cond-tier-row {
+.charsheet .cond-tier-row {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -798,15 +710,31 @@
   color: var(--muted);
 }
 
-/* Forced Actions Reference */
-.sheet-forced-ref {
-  background: rgba(0,0,0,0.25);
-  border: 1px solid var(--border);
+/* ── MINI SELECT ───────────────────────────────────────── */
+.charsheet .mini-select {
+  background: var(--panel);
+  border: 1px solid var(--muted);
+  border-radius: 3px;
+  color: var(--text);
+  padding: 4px 6px;
+  font-size: 11px;
+  font-family: inherit;
+}
+
+.charsheet .mini-select:focus {
+  outline: none;
+  border-color: var(--cyan);
+}
+
+/* ── FORCED ACTION REF ─────────────────────────────────── */
+.charsheet .forced-ref {
+  background: rgba(0,0,0,0.25) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 4px;
   padding: 10px;
 }
 
-.sheet-forced-ref-title {
+.charsheet .forced-ref-title {
   font-size: 10px;
   letter-spacing: 2px;
   color: var(--muted);
@@ -815,7 +743,7 @@
   user-select: none;
 }
 
-.sheet-forced-ref-header {
+.charsheet .forced-ref-header {
   font-size: 9px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -824,33 +752,33 @@
   padding-bottom: 3px;
 }
 
-.sheet-forced-ref-list {
+.charsheet .forced-ref-list {
   font-size: 10px;
   color: var(--text);
   line-height: 1.7;
 }
 
-/* ── TAGS ───────────────────────────────────────────────────── */
-.sheet-tag-card {
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--muted);
+/* ── TAGS ──────────────────────────────────────────────── */
+.charsheet .tag-card {
+  border: 1px solid var(--border) !important;
+  border-left: 3px solid var(--muted) !important;
   border-radius: 4px;
   padding: 8px 12px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.2) !important;
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 8px;
 }
 
-.sheet-tag-card-header {
+.charsheet .tag-card-header {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
 
-.sheet-tag-name-input {
+.charsheet .tag-name-input {
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--muted);
@@ -864,41 +792,25 @@
   min-width: 80px;
 }
 
-.sheet-tag-name-input:focus {
+.charsheet .tag-name-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-tag-effect-row {
+.charsheet .tag-effect-row {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-/* ── MINI SELECT ─────────────────────────────────────────────── */
-.sheet-mini-select {
-  background: var(--panel);
-  border: 1px solid var(--muted);
-  border-radius: 3px;
-  color: var(--text);
-  padding: 4px 6px;
-  font-size: 11px;
-  font-family: inherit;
-}
-
-.sheet-mini-select:focus {
-  outline: none;
-  border-color: var(--cyan);
-}
-
-/* ── EXPOSURE ───────────────────────────────────────────────── */
-.sheet-exposure-counter {
+/* ── EXPOSURE ──────────────────────────────────────────── */
+.charsheet .exposure-counter {
   text-align: center;
   margin-bottom: 16px;
 }
 
-.sheet-counter-label {
+.charsheet .counter-label {
   font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -906,7 +818,7 @@
   margin-bottom: 8px;
 }
 
-.sheet-exposure-input {
+.charsheet .exposure-input {
   text-align: center;
   font-family: 'Courier New', monospace;
   font-size: 28px;
@@ -919,40 +831,40 @@
   padding: 4px 0;
 }
 
-.sheet-exposure-input:focus {
+.charsheet .exposure-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-/* ── PATRONS ─────────────────────────────────────────────────── */
-.sheet-patron-row {
+/* ── PATRONS ───────────────────────────────────────────── */
+.charsheet .patron-row {
   display: flex;
   align-items: flex-start;
   gap: 10px;
   padding: 8px 10px;
   border-radius: 3px;
-  background: rgba(0,0,0,0.2);
-  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.2) !important;
+  border: 1px solid var(--border) !important;
   margin-bottom: 8px;
 }
 
-.sheet-patron-row.sheet-rank-1 {
-  border-color: var(--gold);
-  background: rgba(200,168,75,0.07);
+.charsheet .patron-row.rank-1 {
+  border-color: var(--gold) !important;
+  background: rgba(200,168,75,0.07) !important;
 }
 
-.sheet-patron-row.sheet-rank-2 {
-  border-color: var(--silver);
-  background: rgba(192,192,192,0.05);
+.charsheet .patron-row.rank-2 {
+  border-color: var(--silver) !important;
+  background: rgba(192,192,192,0.05) !important;
 }
 
-.sheet-patron-row.sheet-rank-3 {
-  border-color: var(--bronze);
-  background: rgba(205,127,50,0.05);
+.charsheet .patron-row.rank-3 {
+  border-color: var(--bronze) !important;
+  background: rgba(205,127,50,0.05) !important;
 }
 
-.sheet-patron-rank-badge {
+.charsheet .patron-rank-badge {
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -966,19 +878,11 @@
   flex-shrink: 0;
 }
 
-.sheet-patron-rank-badge.sheet-r1 {
-  background: var(--gold);
-}
+.charsheet .patron-rank-badge.r1 { background: var(--gold); }
+.charsheet .patron-rank-badge.r2 { background: var(--silver); }
+.charsheet .patron-rank-badge.r3 { background: var(--bronze); }
 
-.sheet-patron-rank-badge.sheet-r2 {
-  background: var(--silver);
-}
-
-.sheet-patron-rank-badge.sheet-r3 {
-  background: var(--bronze);
-}
-
-.sheet-patron-fields {
+.charsheet .patron-fields {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -986,7 +890,7 @@
   min-width: 0;
 }
 
-.sheet-patron-input {
+.charsheet .patron-input {
   background: transparent;
   border: none;
   border-bottom: 1px solid transparent;
@@ -997,35 +901,24 @@
   width: 100%;
 }
 
-.sheet-patron-input:focus {
+.charsheet .patron-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-patron-name {
-  font-size: 14px;
-  font-weight: bold;
-}
+.charsheet .patron-name   { font-size: 14px; font-weight: bold; }
+.charsheet .patron-amount { font-family: 'Courier New', monospace; color: var(--gold); }
+.charsheet .patron-notes  { color: var(--muted); font-size: 11px; }
 
-.sheet-patron-amount {
-  font-family: 'Courier New', monospace;
-  color: var(--gold);
-}
-
-.sheet-patron-notes {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-/* ── TOKENS ──────────────────────────────────────────────────── */
-.sheet-token-counters {
+/* ── TOKENS ────────────────────────────────────────────── */
+.charsheet .token-counters {
   display: flex;
   gap: 12px;
   margin-bottom: 16px;
 }
 
-.sheet-token-counter-box {
+.charsheet .token-counter-box {
   flex: 1;
   text-align: center;
   padding: 12px;
@@ -1034,7 +927,7 @@
   background: rgba(0,212,255,0.03);
 }
 
-.sheet-token-counter-label {
+.charsheet .token-counter-label {
   font-size: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -1042,7 +935,7 @@
   margin-bottom: 6px;
 }
 
-.sheet-token-counter-input {
+.charsheet .token-counter-input {
   font-family: 'Courier New', monospace;
   font-size: 36px;
   font-weight: bold;
@@ -1055,29 +948,29 @@
   width: 100%;
 }
 
-.sheet-token-counter-input:focus {
+.charsheet .token-counter-input:focus {
   outline: none;
   border-bottom: 1px solid var(--gold);
   box-shadow: none;
 }
 
-.sheet-boss-tokens-section {
+.charsheet .boss-tokens-section {
   margin-top: 12px;
 }
 
-.sheet-boss-token-row {
+.charsheet .boss-token-row {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 6px 8px;
-  background: rgba(0,0,0,0.2);
-  border: 1px solid var(--border);
+  background: rgba(0,0,0,0.2) !important;
+  border: 1px solid var(--border) !important;
   border-radius: 3px;
   margin-bottom: 6px;
   flex-wrap: wrap;
 }
 
-.sheet-token-used-label {
+.charsheet .token-used-label {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -1089,14 +982,14 @@
   cursor: pointer;
 }
 
-/* ── OBJECTIVES ──────────────────────────────────────────────── */
-.sheet-objectives-columns {
+/* ── OBJECTIVES ────────────────────────────────────────── */
+.charsheet .objectives-columns {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
 }
 
-.sheet-obj-section-title {
+.charsheet .obj-section-title {
   font-size: 11px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -1106,21 +999,21 @@
   border-left: 2px solid var(--cyan);
 }
 
-.sheet-obj-section-gold {
+.charsheet .obj-section-gold {
   color: var(--gold);
   border-left-color: var(--gold);
 }
 
-.sheet-objective-card {
-  background: rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--cyan);
+.charsheet .objective-card {
+  background: rgba(0,0,0,0.3) !important;
+  border: 1px solid var(--border) !important;
+  border-left: 4px solid var(--cyan) !important;
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 8px;
 }
 
-.sheet-obj-header {
+.charsheet .obj-header {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1128,7 +1021,7 @@
   flex-wrap: wrap;
 }
 
-.sheet-status-select {
+.charsheet .status-select {
   font-size: 10px;
   font-family: 'Courier New', monospace;
   letter-spacing: 1px;
@@ -1138,7 +1031,7 @@
   flex-shrink: 0;
 }
 
-.sheet-obj-title-input {
+.charsheet .obj-title-input {
   flex: 1;
   background: transparent;
   border: none;
@@ -1151,13 +1044,13 @@
   min-width: 60px;
 }
 
-.sheet-obj-title-input:focus {
+.charsheet .obj-title-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-obj-desc-area {
+.charsheet .obj-desc-area {
   width: 100%;
   background: rgba(0,0,0,0.3);
   border: 1px solid var(--muted);
@@ -1171,20 +1064,20 @@
   margin: 6px 0;
 }
 
-.sheet-obj-desc-area:focus {
+.charsheet .obj-desc-area:focus {
   outline: none;
   border-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-obj-reward {
+.charsheet .obj-reward {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-top: 6px;
 }
 
-.sheet-reward-label {
+.charsheet .reward-label {
   font-size: 9px;
   letter-spacing: 1px;
   color: var(--gold);
@@ -1192,7 +1085,7 @@
   white-space: nowrap;
 }
 
-.sheet-reward-input {
+.charsheet .reward-input {
   flex: 1;
   background: transparent;
   border: none;
@@ -1203,20 +1096,20 @@
   padding: 2px 4px;
 }
 
-.sheet-reward-input:focus {
+.charsheet .reward-input:focus {
   outline: none;
   border-bottom-color: var(--gold);
   box-shadow: none;
 }
 
-/* ── INVENTORY ───────────────────────────────────────────────── */
-.sheet-item-wrapper {
+/* ── INVENTORY ─────────────────────────────────────────── */
+.charsheet .item-wrapper {
   display: flex;
   flex-direction: column;
   margin-bottom: 6px;
 }
 
-.sheet-item-row {
+.charsheet .item-row {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1227,7 +1120,7 @@
   flex-wrap: wrap;
 }
 
-.sheet-item-cat-input {
+.charsheet .item-cat-input {
   width: 100px;
   background: rgba(0,212,255,0.05);
   border: 1px solid var(--muted);
@@ -1238,7 +1131,7 @@
   padding: 3px 5px;
 }
 
-.sheet-item-name-input {
+.charsheet .item-name-input {
   flex: 2;
   background: transparent;
   border: none;
@@ -1250,13 +1143,13 @@
   min-width: 80px;
 }
 
-.sheet-item-name-input:focus {
+.charsheet .item-name-input:focus {
   outline: none;
   border-bottom-color: var(--cyan);
   box-shadow: none;
 }
 
-.sheet-item-qty-input {
+.charsheet .item-qty-input {
   width: 52px;
   background: rgba(0,212,255,0.05);
   border: 1px solid var(--muted);
@@ -1269,7 +1162,7 @@
   flex-shrink: 0;
 }
 
-.sheet-item-weight-input {
+.charsheet .item-weight-input {
   width: 52px;
   background: rgba(0,212,255,0.05);
   border: 1px solid var(--muted);
@@ -1282,7 +1175,7 @@
   flex-shrink: 0;
 }
 
-.sheet-item-notes-input {
+.charsheet .item-notes-input {
   flex: 3;
   background: transparent;
   border: none;
@@ -1294,13 +1187,13 @@
   min-width: 60px;
 }
 
-.sheet-item-notes-input:focus {
+.charsheet .item-notes-input:focus {
   outline: none;
   border-bottom-color: var(--muted);
   box-shadow: none;
 }
 
-.sheet-item-desc-row {
+.charsheet .item-desc-row {
   padding: 6px 8px;
   background: rgba(0,0,0,0.1);
   border: 1px solid var(--border);
@@ -1308,23 +1201,23 @@
   border-radius: 0 0 3px 3px;
 }
 
-/* ── ACHIEVEMENTS ────────────────────────────────────────────── */
-.sheet-achievement-card {
+/* ── ACHIEVEMENTS ──────────────────────────────────────── */
+.charsheet .achievement-card {
   padding: 10px 12px;
-  background: rgba(200,168,75,0.05);
-  border: 1px solid rgba(200,168,75,0.2);
-  border-left: 3px solid var(--gold);
+  background: rgba(200,168,75,0.05) !important;
+  border: 1px solid rgba(200,168,75,0.2) !important;
+  border-left: 3px solid var(--gold) !important;
   border-radius: 4px;
   margin-bottom: 8px;
 }
 
-.sheet-achievement-inner {
+.charsheet .achievement-inner {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.sheet-achievement-title-input input {
+.charsheet .achievement-title-input input {
   font-size: 13px;
   font-weight: bold;
   color: var(--gold);
@@ -1332,18 +1225,18 @@
   text-transform: uppercase;
 }
 
-.sheet-achievement-desc-input input {
+.charsheet .achievement-desc-input input {
   font-size: 11px;
   color: var(--text);
 }
 
-.sheet-achievement-reward-input input {
+.charsheet .achievement-reward-input input {
   font-size: 10px;
   color: var(--success);
 }
 
-/* ── NOTES TEXTAREA ──────────────────────────────────────────── */
-.sheet-notes-textarea {
+/* ── NOTES ─────────────────────────────────────────────── */
+.charsheet .notes-textarea {
   width: 100%;
   background: rgba(0,0,0,0.3);
   border: 1px solid var(--muted);
@@ -1357,21 +1250,21 @@
   line-height: 1.6;
 }
 
-.sheet-notes-textarea:focus {
+.charsheet .notes-textarea:focus {
   outline: none;
   border-color: var(--cyan);
   box-shadow: 0 0 10px rgba(0,212,255,0.2);
 }
 
-/* ── FOOTER ──────────────────────────────────────────────────── */
-.sheet-footer {
+/* ── FOOTER ────────────────────────────────────────────── */
+.charsheet .footer {
   text-align: center;
   padding: 20px;
   margin-top: 8px;
   border-top: 1px solid var(--border);
 }
 
-.sheet-corp-watermark {
+.charsheet .corp-watermark {
   font-size: 11px;
   letter-spacing: 6px;
   text-transform: uppercase;
@@ -1380,53 +1273,41 @@
   font-weight: 300;
 }
 
-/* ── SCROLLBAR ───────────────────────────────────────────────── */
+/* ── SCROLLBAR ─────────────────────────────────────────── */
 .charsheet ::-webkit-scrollbar { width: 6px; height: 6px; }
 .charsheet ::-webkit-scrollbar-track { background: var(--bg); }
 .charsheet ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
 .charsheet ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
 
-/* ── REPEATING SECTION OVERRIDES ─────────────────────────────── */
-/* Minimal styling so Roll20's built-in add/remove buttons look ok */
-.sheet-repcontainer {
+/* ── REPEATING SECTION CONTAINER ───────────────────────── */
+.charsheet .repcontainer {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-/* ── RESPONSIVE ──────────────────────────────────────────────── */
+/* ── RESPONSIVE ────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .sheet-two-col { grid-template-columns: 1fr; }
-  .sheet-three-col { grid-template-columns: 1fr 1fr; }
-  .sheet-objectives-columns { grid-template-columns: 1fr 1fr; }
+  .charsheet .two-col { grid-template-columns: 1fr; }
+  .charsheet .three-col { grid-template-columns: 1fr 1fr; }
+  .charsheet .objectives-columns { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 640px) {
-  .sheet-broadcast-bar { padding: 6px 12px; }
-  .sheet-broadcast-title { font-size: 14px; letter-spacing: 3px; }
-  .sheet-broadcast-signal { display: none; }
-  .sheet-main-container { padding: 8px; gap: 10px; }
-  .sheet-panel { padding: 12px 10px; }
-  .sheet-identity-row { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .sheet-traits-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .sheet-two-col,
-  .sheet-three-col,
-  .sheet-objectives-columns { grid-template-columns: 1fr; }
-  .sheet-token-counters { flex-direction: column; }
+  .charsheet .broadcast-bar { padding: 6px 12px; }
+  .charsheet .broadcast-title { font-size: 14px; letter-spacing: 3px; }
+  .charsheet .broadcast-signal { display: none; }
+  .charsheet .main-container { padding: 8px; gap: 10px; }
+  .charsheet .panel { padding: 12px 10px; }
+  .charsheet .identity-row { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .charsheet .traits-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .charsheet .two-col,
+  .charsheet .three-col,
+  .charsheet .objectives-columns { grid-template-columns: 1fr; }
+  .charsheet .token-counters { flex-direction: column; }
 }
 
 @media (max-width: 400px) {
-  .sheet-identity-row { grid-template-columns: 1fr; }
-  .sheet-broadcast-title { display: none; }
-}
-
-/* ── DARK MODE SUPPORT ───────────────────────────────────────── */
-/* The sheet already uses a dark theme by default.
-   These ensure readability if Roll20's dark mode class is applied. */
-body.sheet-darkmode .sheet-main-container {
-  background: var(--bg);
-}
-
-body.sheet-darkmode .sheet-panel {
-  background: var(--panel);
+  .charsheet .identity-row { grid-template-columns: 1fr; }
+  .charsheet .broadcast-title { display: none; }
 }
