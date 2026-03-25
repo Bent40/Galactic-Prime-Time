@@ -748,6 +748,43 @@
     letter-spacing: 1px;
     background: rgba(200,168,75,0.08);
   }
+
+  /* ---- COMMS STYLE PICKER ---- */
+  .admin-style-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0 4px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+  .style-swatches { display: flex; align-items: center; gap: 4px; }
+  .style-label { font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-right: 2px; }
+  .swatch {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid transparent; cursor: pointer; padding: 0;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .swatch:hover  { transform: scale(1.25); }
+  .swatch.active { border-color: #fff; transform: scale(1.2); }
+  .style-select {
+    background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 4px;
+    color: var(--text); font-size: 11px; padding: 4px 8px; font-family: inherit; cursor: pointer;
+  }
+  .style-select:focus { outline: none; border-color: var(--purple); }
+
+  /* text effect animations (used in admin chat log rendering) */
+  @keyframes glowPulse  { 0%,100%{text-shadow:0 0 5px currentColor} 50%{text-shadow:0 0 18px currentColor,0 0 32px currentColor} }
+  @keyframes rainbowCycle { 0%{color:#ff4444}14%{color:#ff8c00}28%{color:#ffff00}42%{color:#44ff44}57%{color:#00d4ff}71%{color:#8844ff}85%{color:#ff44cc}100%{color:#ff4444} }
+  @keyframes flickerText  { 0%,100%{opacity:1}7%{opacity:.7}9%{opacity:1}38%{opacity:.85}40%{opacity:1}68%{opacity:.55}70%{opacity:1} }
+  @keyframes shakeText    { 0%,100%{transform:translate(0,0)}10%{transform:translate(-2px,-1px)}30%{transform:translate(2px,1px)}50%{transform:translate(-1px,2px)}70%{transform:translate(1px,-2px)}90%{transform:translate(-2px,0)} }
+  @keyframes jitterChar   { 0%{transform:translate(0,0)rotate(0deg)}20%{transform:translate(1px,-1px)rotate(.6deg)}40%{transform:translate(-1px,1px)rotate(-.6deg)}60%{transform:translate(1px,1px)rotate(.3deg)}80%{transform:translate(-1px,-1px)rotate(-.3deg)}100%{transform:translate(0,0)rotate(0deg)} }
+  .chat-fx-glow    { animation: glowPulse    1.6s ease-in-out infinite; }
+  .chat-fx-rainbow { animation: rainbowCycle 2.2s linear infinite; }
+  .chat-fx-flicker { animation: flickerText  3s step-start infinite; }
+  .chat-fx-shake   { display:inline-block; animation: shakeText 0.35s ease-in-out infinite; }
+  .chat-jitter-char{ display:inline-block; animation: jitterChar 0.12s infinite; }
 </style>
 </head>
 <body>
@@ -787,6 +824,7 @@
   <button class="cnav-tab active" id="cnav-players"      onclick="switchSection('players')">&#128100; Players</button>
   <button class="cnav-tab"        id="cnav-library"      onclick="switchSection('library')">&#128218; Skill Library</button>
   <button class="cnav-tab"        id="cnav-achievements" onclick="switchSection('achievements')">&#9733; All Achievements</button>
+  <button class="cnav-tab"        id="cnav-comms"        onclick="switchSection('comms')">&#128172; Comms</button>
 </div>
 
 <!-- PLAYERS SECTION (app layout with sidebar) -->
@@ -878,6 +916,80 @@
     </div>
     <div class="panel-content">
       <div id="allAchievementsTable"><div class="loading">Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMS SECTION -->
+<div id="section-comms" class="section-page" style="display:none">
+  <div class="panel">
+    <div class="panel-title">&#128172; COMMS — ALL MESSAGES
+      <button class="refresh-btn" onclick="loadAdminMessages()">&#8635; Refresh</button>
+    </div>
+    <div class="panel-content">
+      <div id="adminChatLog" style="height:280px;overflow-y:auto;background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:4px;padding:10px;display:flex;flex-direction:column;gap:5px;margin-bottom:16px;scroll-behavior:smooth;">
+        <div style="font-size:11px;color:var(--muted);text-align:center;padding:20px 0">Loading...</div>
+      </div>
+      <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;border-left:3px solid var(--purple);padding-left:8px;">SEND MESSAGE</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div class="form-group">
+          <div class="form-label">Send As NPC</div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <select class="form-input" id="adminChatNpc" style="flex:1;background:#0d1020;color:var(--text);">
+              <option value="">Select NPC...</option>
+            </select>
+            <button class="btn btn-sm btn-purple" onclick="toggleAdminNpcCreator()" title="Add new NPC">+</button>
+          </div>
+          <div id="adminNpcCreator" style="display:none;margin-top:8px;display:none;">
+            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+              <input class="form-input" id="adminNewNpcName" placeholder="NPC name..." style="flex:1;min-width:100px;">
+              <input type="color" id="adminNewNpcColor" value="#c8a84b" style="width:32px;height:32px;border:1px solid var(--border);border-radius:4px;background:transparent;cursor:pointer;padding:2px;">
+              <button class="btn btn-sm btn-gold" onclick="createAdminNpc()">Create</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Whisper To (leave blank = broadcast)</div>
+          <select class="form-input wide" id="adminChatRecipient" style="background:#0d1020;color:var(--text);">
+            <option value="">&#128225; Broadcast to all</option>
+          </select>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-end;">
+        <textarea class="form-input" id="adminChatText" placeholder="Type message..." maxlength="500" style="flex:1;height:52px;resize:none;"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAdminMessage();}"></textarea>
+        <button class="btn btn-purple" onclick="sendAdminMessage()" style="height:52px;padding:0 20px;">SEND</button>
+      </div>
+      <div class="admin-style-bar">
+        <div class="style-swatches">
+          <span class="style-label">Color</span>
+          <button class="swatch active" style="background:var(--text)"  title="Default" onclick="setAdminColor(this,'')"></button>
+          <button class="swatch" style="background:#00d4ff" title="Cyan"    onclick="setAdminColor(this,'#00d4ff')"></button>
+          <button class="swatch" style="background:#c8a84b" title="Gold"    onclick="setAdminColor(this,'#c8a84b')"></button>
+          <button class="swatch" style="background:#00ff88" title="Green"   onclick="setAdminColor(this,'#00ff88')"></button>
+          <button class="swatch" style="background:#ff2255" title="Red"     onclick="setAdminColor(this,'#ff2255')"></button>
+          <button class="swatch" style="background:#a855f7" title="Purple"  onclick="setAdminColor(this,'#a855f7')"></button>
+          <button class="swatch" style="background:#ec4899" title="Pink"    onclick="setAdminColor(this,'#ec4899')"></button>
+          <button class="swatch" style="background:#ff8c00" title="Orange"  onclick="setAdminColor(this,'#ff8c00')"></button>
+          <button class="swatch" style="background:#ffffff" title="White"   onclick="setAdminColor(this,'#ffffff')"></button>
+          <button class="swatch" style="background:#64ffda" title="Teal"    onclick="setAdminColor(this,'#64ffda')"></button>
+        </div>
+        <select class="style-select" id="adminChatFont" onchange="_adminChatFont=this.value">
+          <option value="default">Default Font</option>
+          <option value="mono">&#128187; Terminal</option>
+          <option value="serif">&#128214; Elegant</option>
+          <option value="bold">&#9889; Impact</option>
+          <option value="alien">&#128125; Alien</option>
+        </select>
+        <select class="style-select" id="adminChatEffect" onchange="_adminChatEffect=this.value">
+          <option value="none">No Effect</option>
+          <option value="jitter">&#128565; Jitter</option>
+          <option value="glow">&#10024; Glow</option>
+          <option value="rainbow">&#127752; Rainbow</option>
+          <option value="flicker">&#9889; Flicker</option>
+          <option value="shake">&#128128; Shake</option>
+        </select>
+      </div>
     </div>
   </div>
 </div>
@@ -1051,15 +1163,17 @@ function onLoggedIn() {
 }
 
 function switchSection(name) {
-  ['players', 'library', 'achievements'].forEach(s => {
+  ['players', 'library', 'achievements', 'comms'].forEach(s => {
     document.getElementById('section-' + s).style.display = 'none';
     document.getElementById('cnav-' + s).classList.remove('active');
   });
   document.getElementById('section-' + name).style.display = name === 'players' ? 'block' : 'flex';
   document.getElementById('cnav-' + name).classList.add('active');
 
+  if (name !== 'comms' && _adminCommsInterval) { clearInterval(_adminCommsInterval); _adminCommsInterval = null; }
   if (name === 'library')      loadSkillLibrary();
   if (name === 'achievements') loadAllAchievements();
+  if (name === 'comms')        loadAdminMessages();
 }
 
 // Try restoring session on page load
@@ -1418,6 +1532,47 @@ function renderPlayerPanel() {
   `;
   achContent.appendChild(achForm);
   panel.appendChild(achPanel);
+
+  // -- Tags
+  const tags = s.tags || [];
+  const tagsPanel = mkPanel(`TAGS <span style="color:var(--muted);font-weight:normal">(${tags.length})</span>`);
+  const tagsContent = tagsPanel.querySelector('.panel-content');
+  tagsContent.id = 'adminTagsContent';
+
+  function renderAdminTags() {
+    const current = currentPlayer?.state?.tags || [];
+    tagsContent.innerHTML = '';
+    if (current.length) {
+      const list = document.createElement('div');
+      list.style.cssText = 'display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;';
+      current.forEach((tag, i) => {
+        const chip = document.createElement('div');
+        chip.style.cssText = 'display:flex;align-items:center;gap:6px;padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:rgba(0,0,0,0.3);font-size:12px;';
+        chip.innerHTML = `<span style="color:var(--text)">${escHtml(tag.name)}</span><span style="font-size:10px;color:var(--muted);text-transform:uppercase">${tag.state || 'active'}</span>`;
+        const rm = document.createElement('button');
+        rm.textContent = '×';
+        rm.style.cssText = 'background:none;border:none;color:var(--danger);cursor:pointer;font-size:14px;padding:0 2px;line-height:1;';
+        rm.onclick = async () => {
+          const updated = (currentPlayer.state.tags || []).filter((_, j) => j !== i);
+          await saveAdminTags(updated);
+        };
+        chip.appendChild(rm);
+        list.appendChild(chip);
+      });
+      tagsContent.appendChild(list);
+    } else {
+      const none = document.createElement('div');
+      none.style.cssText = 'font-size:11px;color:var(--muted);margin-bottom:12px;';
+      none.textContent = 'No tags yet.';
+      tagsContent.appendChild(none);
+    }
+    const addRow = document.createElement('div');
+    addRow.style.cssText = 'display:flex;gap:8px;align-items:center;';
+    addRow.innerHTML = `<input class="form-input" id="adminNewTagInput" placeholder="Tag name..." style="flex:1"><button class="btn btn-cyan btn-sm" onclick="addAdminTag()">+ ADD TAG</button>`;
+    tagsContent.appendChild(addRow);
+  }
+  renderAdminTags();
+  panel.appendChild(tagsPanel);
 
   // -- Identity edit
   const idPanel = mkPanel('EDIT IDENTITY');
@@ -1917,6 +2072,244 @@ async function saveEditedTemplate() {
     showToast('Template updated!');
     closeEditTemplateModal();
     await loadSkillLibrary();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  ACTIONS — TAGS
+// ============================================================
+async function addAdminTag() {
+  const input = document.getElementById('adminNewTagInput');
+  const name = input ? input.value.trim() : '';
+  if (!name) { showToast('Tag name required', true); return; }
+  const current = currentPlayer?.state?.tags || [];
+  current.push({ id: Date.now(), name, state: 'active', effect: '' });
+  await saveAdminTags(current);
+  if (input) input.value = '';
+}
+
+async function saveAdminTags(tags) {
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/tags', {
+      method: 'PATCH',
+      headers: authHeaders(),
+      body: JSON.stringify({ tags })
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Tags saved!');
+    await refreshCurrentPlayer();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  COMMS — ADMIN CHAT
+// ============================================================
+let _adminCommsInterval = null;
+
+// ============================================================
+//  COMMS STYLE PICKER
+// ============================================================
+let _adminChatColor  = null;
+let _adminChatFont   = 'default';
+let _adminChatEffect = 'none';
+
+const ADMIN_FONT_MAP = {
+  default: 'inherit',
+  mono:    "'Courier New','Lucida Console',monospace",
+  serif:   "Georgia,'Times New Roman',serif",
+  bold:    "Impact,'Arial Black',sans-serif",
+  alien:   "'Trebuchet MS','Century Gothic',sans-serif",
+};
+
+function setAdminColor(btn, color) {
+  _adminChatColor = color || null;
+  document.querySelectorAll('.admin-style-bar .swatch').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function buildAdminStyledText(text, style) {
+  const color  = style?.color  || null;
+  const font   = style?.font && style.font !== 'default' ? ADMIN_FONT_MAP[style.font] : null;
+  const effect = style?.effect || 'none';
+
+  let inlineStyle = '';
+  if (color) inlineStyle += `color:${color};`;
+  if (font)  inlineStyle += `font-family:${font};`;
+
+  if (effect === 'jitter') {
+    const chars = Array.from(text).map((ch, i) =>
+      ch === ' ' ? ' ' : `<span class="chat-jitter-char" style="animation-delay:${(i*0.018).toFixed(3)}s">${escHtml(ch)}</span>`
+    ).join('');
+    return `<span style="${inlineStyle}">${chars}</span>`;
+  }
+
+  const fxClass = effect !== 'none' ? ` chat-fx-${effect}` : '';
+  return `<span class="${fxClass}" style="${inlineStyle}">${escHtml(text)}</span>`;
+}
+
+function getAdminUserId() {
+  try {
+    const payload = JSON.parse(atob(adminToken.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+    return payload.userId;
+  } catch (e) { return null; }
+}
+
+let _adminNpcs = [];
+
+async function loadAdminMessages() {
+  const log = document.getElementById('adminChatLog');
+  if (!log) return;
+
+  // Load NPCs for send-as picker
+  await refreshAdminNpcPicker();
+
+  // Populate whisper recipient list (players + NPCs)
+  try {
+    const pr = await fetch(API.replace('/api','') + '/api/players', { headers: authHeaders() });
+    if (pr.ok) {
+      const plist = await pr.json();
+      const sel = document.getElementById('adminChatRecipient');
+      if (sel) {
+        sel.innerHTML = '<option value="">&#128225; Broadcast to all</option>';
+        const humans = plist.filter(p => !p.isNPC);
+        const npcs   = plist.filter(p =>  p.isNPC);
+        if (humans.length) {
+          const g = document.createElement('optgroup');
+          g.label = 'Players';
+          humans.forEach(p => {
+            const o = document.createElement('option');
+            o.value = p.userId; o.textContent = p.displayName || p.username;
+            g.appendChild(o);
+          });
+          sel.appendChild(g);
+        }
+        if (npcs.length) {
+          const g = document.createElement('optgroup');
+          g.label = 'NPC Characters';
+          npcs.forEach(p => {
+            const o = document.createElement('option');
+            o.value = p.userId; o.textContent = p.displayName;
+            g.appendChild(o);
+          });
+          sel.appendChild(g);
+        }
+      }
+    }
+  } catch (e) {}
+
+  await refreshAdminChatLog();
+
+  if (_adminCommsInterval) clearInterval(_adminCommsInterval);
+  _adminCommsInterval = setInterval(refreshAdminChatLog, 2000);
+}
+
+async function refreshAdminNpcPicker() {
+  try {
+    const res = await fetch(API + '/admin/npcs', { headers: authHeaders() });
+    if (!res.ok) return;
+    _adminNpcs = await res.json();
+    const sel = document.getElementById('adminChatNpc');
+    if (!sel) return;
+    sel.innerHTML = '<option value="">Select NPC...</option>';
+    _adminNpcs.forEach(n => {
+      const o = document.createElement('option');
+      o.value = n._id;
+      o.textContent = n.name;
+      o.style.color = n.color || 'inherit';
+      sel.appendChild(o);
+    });
+  } catch (e) {}
+}
+
+function toggleAdminNpcCreator() {
+  const el = document.getElementById('adminNpcCreator');
+  if (el) el.style.display = el.style.display === 'none' ? '' : 'none';
+}
+
+async function createAdminNpc() {
+  const name  = document.getElementById('adminNewNpcName')?.value.trim();
+  const color = document.getElementById('adminNewNpcColor')?.value || '#c8a84b';
+  if (!name) { showToast('NPC name required', true); return; }
+  try {
+    const res = await fetch(API + '/admin/npcs', {
+      method: 'POST', headers: authHeaders(), body: JSON.stringify({ name, color })
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    document.getElementById('adminNewNpcName').value = '';
+    document.getElementById('adminNpcCreator').style.display = 'none';
+    showToast('NPC "' + name + '" created!');
+    await refreshAdminNpcPicker();
+    await loadAdminMessages(); // refresh recipient list too
+  } catch (e) { showToast('Server error', true); }
+}
+
+async function refreshAdminChatLog() {
+  const log = document.getElementById('adminChatLog');
+  if (!log) { clearInterval(_adminCommsInterval); return; }
+  const myUserId = getAdminUserId();
+  try {
+    const res = await fetch(API + '/admin/messages', { headers: authHeaders() });
+    if (!res.ok) return;
+    const messages = await res.json();
+    const atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 50;
+    if (!messages.length) {
+      log.innerHTML = '<div style="font-size:11px;color:var(--muted);text-align:center;padding:20px 0">No messages yet.</div>';
+      return;
+    }
+    log.innerHTML = messages.map(m => {
+      const isWhisper   = !!(m.recipient || m.recipientNPC);
+      const isNpcWhisper = !!m.recipientNPC;
+      const toMe        = myUserId && m.recipient && String(m.recipient) === String(myUserId);
+      const senderColor = (m.style?.color) ? m.style.color : (isWhisper ? 'var(--purple)' : 'var(--cyan)');
+      const border      = toMe ? 'var(--gold)' : (isWhisper ? 'var(--purple)' : 'var(--border)');
+      const bg          = toMe ? 'rgba(200,168,75,0.08)' : (isWhisper ? 'rgba(168,85,247,0.05)' : 'rgba(0,0,0,0.2)');
+      const toMeBadge   = toMe ? ' <span style="font-size:9px;letter-spacing:1px;background:rgba(200,168,75,0.2);color:var(--gold);border-radius:3px;padding:1px 5px;text-transform:uppercase">TO YOU</span>' : '';
+      const whisperTag  = isWhisper ? ` <span style="font-size:10px;color:var(--legendary)">&#128172; ${escHtml(m.recipientName||'?')}</span>` : '';
+      const fontFamily  = m.style?.font && m.style.font !== 'default' ?
+        ({mono:"'Courier New',monospace",serif:"Georgia,serif",bold:"Impact,'Arial Black',sans-serif",alien:"'Trebuchet MS',sans-serif"}[m.style.font]||'inherit') : 'inherit';
+      const textColor   = m.style?.color || 'var(--text)';
+      const time        = new Date(m.createdAt).toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+      return `<div style="padding:5px 8px;border-radius:4px;border-left:3px solid ${border};background:${bg};font-size:12px;line-height:1.5">
+        <span style="float:right;font-size:10px;color:var(--muted)">${time}</span>
+        <span style="font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:${senderColor}">${escHtml(m.senderName)}</span>${whisperTag}${toMeBadge}
+        <span style="color:${textColor};font-family:${fontFamily}"> ${escHtml(m.text)}</span>
+      </div>`;
+    }).join('');
+    if (atBottom) log.scrollTop = log.scrollHeight;
+  } catch (e) {}
+}
+
+async function sendAdminMessage() {
+  const text      = document.getElementById('adminChatText')?.value.trim();
+  const npcId     = document.getElementById('adminChatNpc')?.value || null;
+  const recipientEl = document.getElementById('adminChatRecipient');
+  const rawRecipient = recipientEl?.value || '';
+  const recipientIsNpc = rawRecipient.startsWith('npc:');
+  const recipientId = recipientIsNpc ? rawRecipient.slice(4) : (rawRecipient || null);
+
+  if (!text) { showToast('Message required', true); return; }
+  if (!npcId) { showToast('Select an NPC to send as', true); return; }
+
+  try {
+    const body = {
+      text, npcId,
+      recipientId: recipientId || undefined,
+      recipientIsNpc,
+      style: { color: _adminChatColor, font: _adminChatFont, effect: _adminChatEffect },
+    };
+    const res = await fetch(API + '/admin/messages', {
+      method: 'POST', headers: authHeaders(), body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    document.getElementById('adminChatText').value = '';
+    await refreshAdminChatLog();
   } catch (e) {
     showToast('Server error', true);
   }

@@ -2,6 +2,8 @@ const express = require('express');
 const Character = require('../models/Character');
 const User = require('../models/User');
 const SkillTemplate = require('../models/SkillTemplate');
+const Message = require('../models/Message');
+const NPC = require('../models/NPC');
 const requireAdmin = require('../middleware/adminAuth');
 
 const router = express.Router();
@@ -268,6 +270,23 @@ router.patch('/players/:userId/identity', async (req, res) => {
   }
 });
 
+// PATCH /api/admin/players/:userId/tags — set tags array
+router.patch('/players/:userId/tags', async (req, res) => {
+  try {
+    const { tags } = req.body;
+    const character = await Character.findOne({ userId: req.params.userId });
+    if (!character) return res.status(404).json({ error: 'Character not found' });
+
+    const state = character.state || {};
+    state.tags = Array.isArray(tags) ? tags : [];
+
+    await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // PATCH /api/admin/players/:userId/tokens — adjust tokens
 router.patch('/players/:userId/tokens', async (req, res) => {
   try {
@@ -330,6 +349,103 @@ router.delete('/skill-library/:id', async (req, res) => {
     const template = await SkillTemplate.findByIdAndDelete(req.params.id);
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ============================================================
+//  NPC CHARACTERS
+// ============================================================
+
+// GET /api/admin/npcs
+router.get('/npcs', async (req, res) => {
+  try {
+    const npcs = await NPC.find().sort({ name: 1 }).lean();
+    res.json(npcs);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// POST /api/admin/npcs
+router.post('/npcs', async (req, res) => {
+  try {
+    const { name, color } = req.body;
+    if (!name || !name.trim()) return res.status(400).json({ error: 'NPC name required' });
+    const npc = await NPC.create({ name: name.trim(), color: color || '#c8a84b' });
+    res.status(201).json(npc);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// DELETE /api/admin/npcs/:id
+router.delete('/npcs/:id', async (req, res) => {
+  try {
+    await NPC.findByIdAndDelete(req.params.id);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ============================================================
+//  COMMS — ADMIN MESSAGE ACCESS
+// ============================================================
+
+// GET /api/admin/messages — all messages
+router.get('/messages', async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ createdAt: -1 }).limit(100).lean();
+    res.json(messages.reverse());
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// POST /api/admin/messages — send as an NPC (or plain name fallback)
+router.post('/messages', async (req, res) => {
+  try {
+    const { text, npcId, recipientId, recipientIsNpc, style: reqStyle } = req.body;
+    if (!text || !text.trim()) return res.status(400).json({ error: 'Message text required' });
+    if (text.length > 500) return res.status(400).json({ error: 'Message too long' });
+
+    let senderName = 'Admin';
+    let msgStyle = reqStyle || null;
+
+    if (npcId) {
+      const npc = await NPC.findById(npcId).lean();
+      if (!npc) return res.status(404).json({ error: 'NPC not found' });
+      senderName = npc.name;
+      msgStyle = { color: npc.color, font: reqStyle?.font || 'default', effect: reqStyle?.effect || 'none' };
+    }
+
+    let recipientNPC = null;
+    let recipientName = null;
+
+    if (recipientIsNpc && recipientId) {
+      const rNpc = await NPC.findById(recipientId).lean();
+      if (!rNpc) return res.status(404).json({ error: 'Recipient NPC not found' });
+      recipientNPC = rNpc._id;
+      recipientName = rNpc.name;
+    } else if (recipientId) {
+      const rChar = await Character.findOne({ userId: recipientId }, 'state.identity.name').lean();
+      const rUser = await User.findById(recipientId, 'username').lean();
+      if (!rUser) return res.status(404).json({ error: 'Recipient not found' });
+      recipientName = rChar?.state?.identity?.name?.trim() || rUser.username;
+    }
+
+    const msg = await Message.create({
+      sender: req.userId,
+      senderName,
+      recipient: (!recipientIsNpc && recipientId) ? recipientId : null,
+      recipientNPC,
+      recipientName,
+      style,
+      text: text.trim(),
+    });
+    res.status(201).json(msg);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const characterRoutes = require('./routes/character');
 const adminRoutes = require('./routes/admin');
+const messagesRoutes = require('./routes/messages');
+const playersRoutes = require('./routes/players');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -17,6 +19,8 @@ app.use(express.json({ limit: '10mb' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/character', characterRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/messages', messagesRoutes);
+app.use('/api/players', playersRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

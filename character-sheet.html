@@ -1943,9 +1943,272 @@
     color: var(--muted);
     text-transform: uppercase;
   }
+
+  /* ============================================================
+     CHAT PANEL
+     ============================================================ */
+  .chat-log {
+    height: 200px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    scroll-behavior: smooth;
+  }
+  .chat-msg {
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 5px 8px;
+    border-radius: 4px;
+  }
+  .chat-msg.broadcast {
+    background: rgba(0,212,255,0.05);
+    border-left: 3px solid var(--cyan);
+  }
+  .chat-msg.whisper-in {
+    background: rgba(168,85,247,0.08);
+    border-left: 3px solid var(--legendary);
+  }
+  .chat-msg.whisper-out {
+    background: rgba(0,0,0,0.2);
+    border-left: 3px solid var(--muted);
+  }
+  .chat-msg-sender { font-weight: 700; color: var(--cyan); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+  .chat-msg-whisper-in .chat-msg-sender { color: var(--legendary); }
+  .chat-msg-whisper-label { font-size: 10px; color: var(--legendary); }
+  .chat-msg-text { color: var(--text); }
+  .chat-msg-time { font-size: 10px; color: var(--muted); float: right; margin-left: 8px; }
+  .chat-empty { text-align: center; color: var(--muted); font-size: 11px; padding: 20px 0; }
+
+  /* custom whisper dropdown */
+  .whisper-dropdown { position: relative; }
+  .whisper-trigger {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--legendary);
+    border-radius: 4px;
+    color: var(--text);
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    font-family: inherit;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .whisper-trigger:hover { background: rgba(168,85,247,0.1); }
+  .whisper-trigger .arrow { color: var(--legendary); font-size: 10px; }
+  .whisper-trigger .selected-name { color: var(--text); }
+  .whisper-trigger .placeholder { color: var(--muted); }
+  .whisper-list {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0; right: 0;
+    background: #0d1020;
+    border: 1px solid var(--legendary);
+    border-radius: 4px;
+    z-index: 500;
+    max-height: 180px;
+    overflow-y: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  }
+  .whisper-list.open { display: block; }
+  .whisper-option {
+    padding: 9px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 1px solid rgba(26,37,64,0.5);
+    transition: background 0.15s;
+  }
+  .whisper-option:last-child { border-bottom: none; }
+  .whisper-option:hover { background: rgba(168,85,247,0.15); color: #fff; }
+  .whisper-option.selected { background: rgba(168,85,247,0.2); color: var(--legendary); font-weight: 700; }
+  .chat-mode-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+  .chat-tab {
+    flex: 1;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .chat-tab.active { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.08); }
+  .chat-tab:not(.active):hover { border-color: var(--muted); color: var(--text); }
+  .chat-compose { display: flex; gap: 8px; align-items: flex-end; }
+  .chat-compose textarea {
+    flex: 1;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-size: 13px;
+    padding: 8px;
+    resize: none;
+    height: 52px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .chat-compose textarea:focus { outline: none; border-color: var(--cyan); }
+  .chat-compose textarea::placeholder { color: var(--muted); }
+
+  /* ============================================================
+     CHAT TEXT EFFECTS
+     ============================================================ */
+  @keyframes jitterChar {
+    0%   { transform: translate(0px,  0px) rotate(0deg);    }
+    20%  { transform: translate(1px, -1px) rotate( 0.6deg); }
+    40%  { transform: translate(-1px, 1px) rotate(-0.6deg); }
+    60%  { transform: translate(1px,  1px) rotate( 0.3deg); }
+    80%  { transform: translate(-1px,-1px) rotate(-0.3deg); }
+    100% { transform: translate(0px,  0px) rotate(0deg);    }
+  }
+  @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 5px currentColor; }
+    50%       { text-shadow: 0 0 18px currentColor, 0 0 32px currentColor; }
+  }
+  @keyframes rainbowCycle {
+    0%   { color: #ff4444; } 14%  { color: #ff8c00; }
+    28%  { color: #ffff00; } 42%  { color: #44ff44; }
+    57%  { color: #00d4ff; } 71%  { color: #8844ff; }
+    85%  { color: #ff44cc; } 100% { color: #ff4444; }
+  }
+  @keyframes flickerText {
+    0%,100% { opacity:1; } 7%  { opacity:.7; } 9%  { opacity:1; }
+    38%     { opacity:.85;}40% { opacity:1; } 68% { opacity:.55;}70% { opacity:1; }
+  }
+  @keyframes shakeText {
+    0%,100% { transform: translate(0,0); }
+    10%     { transform: translate(-2px,-1px); }
+    30%     { transform: translate(2px, 1px); }
+    50%     { transform: translate(-1px, 2px); }
+    70%     { transform: translate(1px,-2px); }
+    90%     { transform: translate(-2px, 0px); }
+  }
+  .chat-jitter-char { display: inline-block; animation: jitterChar 0.12s infinite; }
+  .chat-fx-glow     { animation: glowPulse   1.6s ease-in-out infinite; }
+  .chat-fx-rainbow  { animation: rainbowCycle 2.2s linear infinite; }
+  .chat-fx-flicker  { animation: flickerText  3s step-start infinite; }
+  .chat-fx-shake    { display: inline-block; animation: shakeText 0.35s ease-in-out infinite; }
+
+  /* NPC group in whisper dropdown */
+  .whisper-group-label {
+    padding: 5px 10px 3px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    pointer-events: none;
+  }
+  .whisper-option.npc { color: var(--gold); }
+  .whisper-option.npc:hover { background: rgba(200,168,75,0.15); color: #fff; }
+  .whisper-option.npc.selected { background: rgba(200,168,75,0.2); color: var(--gold); }
+
+  /* ============================================================
+     ACHIEVEMENT TOAST + CONFETTI
+     ============================================================ */
+  .achievement-toast {
+    position: fixed;
+    top: -220px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: linear-gradient(135deg, #0a1a2e 0%, #0d0f1e 100%);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 18px 28px;
+    min-width: 300px;
+    max-width: 460px;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(200,168,75,0.5), 0 6px 24px rgba(0,0,0,0.9);
+    transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .achievement-toast.visible {
+    top: 72px;
+  }
+  .achievement-toast-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .achievement-toast-icon {
+    font-size: 32px;
+    margin-bottom: 6px;
+    filter: drop-shadow(0 0 8px var(--gold));
+  }
+  .achievement-toast-title {
+    font-size: 22px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 16px var(--gold);
+    margin-bottom: 6px;
+  }
+  .achievement-toast-desc {
+    font-size: 12px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .achievement-toast-reward {
+    font-size: 11px;
+    color: var(--success);
+    letter-spacing: 1px;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  /* CONFETTI */
+  .confetti-container {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9998;
+    overflow: hidden;
+  }
+  .confetti-piece {
+    position: absolute;
+    top: -14px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg) scaleX(1);  opacity: 1; }
+    70%  { opacity: 1; }
+    100% { transform: translateY(105vh) rotate(800deg) scaleX(-1); opacity: 0; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ACHIEVEMENT TOAST -->
+<div id="achievementToast" class="achievement-toast">
+  <div class="achievement-toast-icon">&#127942;</div>
+  <div class="achievement-toast-eyebrow">Achievement Unlocked</div>
+  <div class="achievement-toast-title" id="toastTitle"></div>
+  <div class="achievement-toast-desc" id="toastDesc"></div>
+  <div class="achievement-toast-reward" id="toastReward"></div>
+</div>
+<div id="confettiContainer" class="confetti-container"></div>
+
 
 <!-- LOGIN MODAL -->
 <div class="login-overlay" id="loginOverlay">
@@ -2019,6 +2282,10 @@
         <div class="field-label">Level</div>
         <input class="field-input" type="number" id="charLevel" min="1" value="1" oninput="updateIdentity()">
       </div>
+      <div class="field-group">
+        <div class="field-label">Contestant #</div>
+        <input class="field-input" type="text" id="contestantNumber" placeholder="#" oninput="updateIdentity()" style="text-align:center;">
+      </div>
     </div><!-- end identity-row -->
     <div style="margin-top:12px">
       <div class="field-label" style="margin-bottom:4px">BACKGROUND &amp; BACKSTORY</div>
@@ -2034,7 +2301,7 @@
 
       <!-- TRAITS -->
       <div class="panel">
-        <div class="panel-title">TRAITS</div>
+        <div class="panel-title">&#128100; TRAITS</div>
         <div class="pts-remaining">
           <span class="pts-badge" id="bodyPtsDisplay">BODY PTS: 4 remaining</span>
           <span class="pts-badge" id="corePtsDisplay">CORE PTS: 4 remaining</span>
@@ -2116,7 +2383,7 @@
 
       <!-- SKILLS -->
       <div class="panel">
-        <div class="panel-title">SKILLS</div>
+        <div class="panel-title">&#127939; SKILLS</div>
         <div class="skills-list" id="skillsList"></div>
         <div class="add-form">
           <div class="field-group">
@@ -2135,7 +2402,7 @@
 
     <!-- RIGHT: BODY PARTS -->
     <div class="panel">
-      <div class="panel-title">BODY PARTS</div>
+      <div class="panel-title">&#128100; BODY PARTS</div>
       <div class="pts-remaining" style="margin-bottom:10px">
         <span class="pts-badge" id="hpUpgradeDisplay" style="display:none;border-color:#ff7043;color:#ff7043"></span>
       </div>
@@ -2216,7 +2483,7 @@
 
     <!-- EXPOSURE -->
     <div class="panel">
-      <div class="panel-title">EXPOSURE</div>
+      <div class="panel-title">&#128065; EXPOSURE</div>
 
       <div class="exposure-counter">
         <div class="counter-label">VIEWERS</div>
@@ -2309,7 +2576,7 @@
 
   <!-- INVENTORY — FULL WIDTH -->
   <div class="panel">
-    <div class="panel-title">INVENTORY</div>
+    <div class="panel-title">&#127890; INVENTORY</div>
     <div id="inventoryList"></div>
     <div class="mt-8">
       <button class="btn btn-sm" onclick="addCategory()">+ ADD CATEGORY</button>
@@ -2318,7 +2585,7 @@
 
   <!-- ACHIEVEMENTS -->
   <div class="panel">
-    <div class="panel-title">ACHIEVEMENTS</div>
+    <div class="panel-title">&#127942; ACHIEVEMENTS</div>
     <div id="achievementsList"></div>
     <div style="margin-top:12px;padding:10px;background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:4px;">
       <div style="font-size:10px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:8px;border-left:3px solid var(--gold);padding-left:8px;">NEW ACHIEVEMENT</div>
@@ -2337,6 +2604,34 @@
         </div>
         <button class="btn btn-sm btn-gold" onclick="addAchievement()">+ ADD</button>
       </div>
+    </div>
+  </div>
+
+  <!-- COMMS CHANNEL (CHAT) -->
+  <div class="panel" id="chatPanel" style="display:none">
+    <div class="panel-title">&#128172; COMMS CHANNEL</div>
+    <div class="chat-mode-tabs">
+      <button class="chat-tab active" id="tabBroadcast" onclick="setChatMode('broadcast')">&#128225; BROADCAST</button>
+      <button class="chat-tab" id="tabWhisper" onclick="setChatMode('whisper')">&#128172; WHISPER</button>
+    </div>
+    <div id="whisperTargetRow" style="display:none;margin-bottom:10px;">
+      <div class="field-label" style="margin-bottom:6px;">TO</div>
+      <input type="hidden" id="whisperTarget" value="">
+      <div class="whisper-dropdown" id="whisperDropdown">
+        <button type="button" class="whisper-trigger" onclick="toggleWhisperDropdown(event)">
+          <span id="whisperTriggerLabel" class="placeholder">Select player...</span>
+          <span class="arrow">&#9660;</span>
+        </button>
+        <div class="whisper-list" id="whisperList"></div>
+      </div>
+    </div>
+    <div class="chat-log" id="chatLog">
+      <div class="chat-empty">No messages yet.</div>
+    </div>
+    <div class="chat-compose">
+      <textarea id="chatInput" placeholder="Type a message... (Enter to send, Shift+Enter for newline)" maxlength="500"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChatMessage();}"></textarea>
+      <button class="btn btn-sm" onclick="sendChatMessage()" style="height:52px;padding:0 18px;white-space:nowrap;">SEND</button>
     </div>
   </div>
 
@@ -2580,20 +2875,22 @@ function renderAll() {
 
 function renderIdentity() {
   var id = STATE.identity;
-  document.getElementById('charName').value       = id.name       || '';
-  document.getElementById('playerName').value     = id.player     || '';
-  document.getElementById('charRace').value       = id.race       || 'Human';
-  document.getElementById('charLevel').value      = id.level      || 1;
-  document.getElementById('charBackground').value = id.background || '';
+  document.getElementById('charName').value         = id.name            || '';
+  document.getElementById('playerName').value       = id.player          || '';
+  document.getElementById('charRace').value         = id.race            || 'Human';
+  document.getElementById('charLevel').value        = id.level           || 1;
+  document.getElementById('contestantNumber').value = id.contestantNumber || '';
+  document.getElementById('charBackground').value   = id.background      || '';
   renderPortrait();
 }
 
 function updateIdentity() {
   var oldLevel = STATE.identity.level || 1;
-  STATE.identity.name       = document.getElementById('charName').value;
-  STATE.identity.player     = document.getElementById('playerName').value;
-  STATE.identity.race       = document.getElementById('charRace').value;
-  STATE.identity.background = document.getElementById('charBackground').value;
+  STATE.identity.name            = document.getElementById('charName').value;
+  STATE.identity.player          = document.getElementById('playerName').value;
+  STATE.identity.race            = document.getElementById('charRace').value;
+  STATE.identity.contestantNumber = document.getElementById('contestantNumber').value;
+  STATE.identity.background      = document.getElementById('charBackground').value;
   var newLevel = Math.max(1, parseInt(document.getElementById('charLevel').value) || 1);
   STATE.identity.level = newLevel;
   if (newLevel > oldLevel) {
@@ -4304,6 +4601,8 @@ async function doRegister() {
 }
 
 function doLogout() {
+  stopPolling();
+  hideChatPanel();
   _authToken = null;
   _authUsername = null;
   localStorage.removeItem('gpt_token');
@@ -4333,6 +4632,304 @@ async function syncToServer() {
   }
 }
 
+// ============================================================
+//  CHAT
+// ============================================================
+
+var _chatMode = 'broadcast';
+
+var FONT_MAP = {
+  'default': 'inherit',
+  'mono':    "'Courier New', 'Lucida Console', monospace",
+  'serif':   "Georgia, 'Times New Roman', serif",
+  'bold':    "Impact, 'Arial Black', sans-serif",
+  'alien':   "'Trebuchet MS', 'Century Gothic', sans-serif",
+};
+
+
+function buildStyledText(text, style) {
+  var color  = (style && style.color)  ? style.color  : null;
+  var font   = (style && style.font && style.font !== 'default') ? FONT_MAP[style.font] || 'inherit' : null;
+  var effect = (style && style.effect) ? style.effect : 'none';
+
+  var inlineStyle = '';
+  if (color) inlineStyle += 'color:' + color + ';';
+  if (font)  inlineStyle += 'font-family:' + font + ';';
+
+  if (effect === 'jitter') {
+    var chars = text.split('').map(function(ch, i) {
+      if (ch === ' ') return ' ';
+      return '<span class="chat-jitter-char" style="animation-delay:' + (i * 0.018).toFixed(3) + 's">' + escHtml(ch) + '</span>';
+    }).join('');
+    return '<span class="chat-msg-text" style="' + inlineStyle + '">' + chars + '</span>';
+  }
+
+  var effectClass = (effect && effect !== 'none') ? ' chat-fx-' + effect : '';
+  return '<span class="chat-msg-text' + effectClass + '" style="' + inlineStyle + '">' + escHtml(text) + '</span>';
+}
+
+function setChatMode(mode) {
+  _chatMode = mode;
+  document.getElementById('tabBroadcast').classList.toggle('active', mode === 'broadcast');
+  document.getElementById('tabWhisper').classList.toggle('active', mode === 'whisper');
+  document.getElementById('whisperTargetRow').style.display = mode === 'whisper' ? '' : 'none';
+  if (mode === 'broadcast') {
+    document.getElementById('whisperTarget').value = '';
+    var lbl = document.getElementById('whisperTriggerLabel');
+    if (lbl) { lbl.textContent = 'Select player...'; lbl.className = 'placeholder'; }
+    var wl = document.getElementById('whisperList');
+    if (wl) wl.classList.remove('open');
+  }
+}
+
+async function loadChatPlayers() {
+  if (!_authToken) return;
+  try {
+    var res = await fetch(SERVER_URL + '/api/players', {
+      headers: { 'Authorization': 'Bearer ' + _authToken }
+    });
+    if (!res.ok) return;
+    var players = await res.json();
+    var list = document.getElementById('whisperList');
+    if (!list) return;
+    list.innerHTML = '';
+
+    var humans = players.filter(function(p) { return !p.isNPC && p.username !== _authUsername; });
+    var npcs   = players.filter(function(p) { return p.isNPC; });
+
+    function addOption(p) {
+      var opt = document.createElement('div');
+      opt.className = 'whisper-option' + (p.isNPC ? ' npc' : '');
+      opt.textContent = p.displayName || p.username;
+      opt.dataset.userId = p.userId; // already prefixed 'npc:...' for NPCs
+      if (p.isNPC && p.color) opt.style.setProperty('--npc-color', p.color);
+      opt.onclick = function() { selectWhisperPlayer(p.userId, p.displayName || p.username); };
+      list.appendChild(opt);
+    }
+
+    if (humans.length) {
+      var pLabel = document.createElement('div');
+      pLabel.className = 'whisper-group-label';
+      pLabel.style.borderTop = 'none';
+      pLabel.textContent = 'Players';
+      list.appendChild(pLabel);
+      humans.forEach(addOption);
+    }
+
+    if (npcs.length) {
+      var nLabel = document.createElement('div');
+      nLabel.className = 'whisper-group-label';
+      nLabel.textContent = 'Characters';
+      list.appendChild(nLabel);
+      npcs.forEach(addOption);
+    }
+
+    if (!humans.length && !npcs.length) {
+      list.innerHTML = '<div class="whisper-option" style="color:var(--muted);cursor:default">No one to whisper to</div>';
+    }
+  } catch (e) {}
+}
+
+function toggleWhisperDropdown(e) {
+  e.stopPropagation();
+  var list = document.getElementById('whisperList');
+  list.classList.toggle('open');
+}
+
+function selectWhisperPlayer(userId, displayName) {
+  document.getElementById('whisperTarget').value = userId;
+  var lbl = document.getElementById('whisperTriggerLabel');
+  lbl.textContent = displayName;
+  lbl.className = 'selected-name';
+  document.getElementById('whisperList').classList.remove('open');
+  // mark selected
+  document.querySelectorAll('#whisperList .whisper-option').forEach(function(el) {
+    el.classList.toggle('selected', el.dataset.userId === userId);
+  });
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+  var dd = document.getElementById('whisperDropdown');
+  if (dd && !dd.contains(e.target)) {
+    var list = document.getElementById('whisperList');
+    if (list) list.classList.remove('open');
+  }
+});
+
+async function loadChatMessages() {
+  if (!_authToken) return;
+  try {
+    var res = await fetch(SERVER_URL + '/api/messages', {
+      headers: { 'Authorization': 'Bearer ' + _authToken }
+    });
+    if (!res.ok) return;
+    var messages = await res.json();
+    renderChatMessages(messages);
+  } catch (e) {}
+}
+
+function renderChatMessages(messages) {
+  var log = document.getElementById('chatLog');
+  if (!log) return;
+  if (!messages || messages.length === 0) {
+    log.innerHTML = '<div class="chat-empty">No messages yet.</div>';
+    return;
+  }
+  var atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 50;
+  log.innerHTML = messages.map(function(m) {
+    var isWhisper  = !!(m.recipient || m.recipientNPC);
+    var isNpcMsg   = !!m.recipientNPC;
+    var cls        = isWhisper ? 'whisper-in' : 'broadcast';
+    var whisperLabel = '';
+    if (isWhisper) {
+      var toLabel = '&#128172; to <strong>' + escHtml(m.recipientName || '?') + '</strong>';
+      whisperLabel = ' <span class="chat-msg-whisper-label">' + toLabel + '</span>';
+    }
+    var senderColor = (m.style && m.style.color) ? m.style.color : 'var(--cyan)';
+    if (isNpcMsg) senderColor = 'var(--gold)';
+    var styledText  = buildStyledText(m.text, m.style);
+    var time = new Date(m.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return '<div class="chat-msg ' + cls + '">' +
+      '<span class="chat-msg-time">' + time + '</span>' +
+      '<span class="chat-msg-sender" style="color:' + senderColor + '">' + escHtml(m.senderName) + '</span>' +
+      whisperLabel + ' ' +
+      styledText +
+      '</div>';
+  }).join('');
+  if (atBottom) log.scrollTop = log.scrollHeight;
+}
+
+async function sendChatMessage() {
+  var text = document.getElementById('chatInput').value.trim();
+  if (!text || !_authToken) return;
+
+  var body = { text: text };
+
+  if (_chatMode === 'whisper') {
+    var rawId = document.getElementById('whisperTarget').value;
+    if (!rawId) { alert('Select a player or character to whisper to.'); return; }
+    if (rawId.startsWith('npc:')) {
+      body.recipientNpcId = rawId.slice(4);
+    } else {
+      body.recipientId = rawId;
+    }
+  }
+
+  try {
+    var res = await fetch(SERVER_URL + '/api/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + _authToken },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) return;
+    document.getElementById('chatInput').value = '';
+    await loadChatMessages();
+  } catch (e) {}
+}
+
+function showChatPanel() {
+  var panel = document.getElementById('chatPanel');
+  if (panel) panel.style.display = '';
+}
+
+function hideChatPanel() {
+  var panel = document.getElementById('chatPanel');
+  if (panel) panel.style.display = 'none';
+}
+
+// ============================================================
+//  REAL-TIME POLLING + ACHIEVEMENT TOAST
+// ============================================================
+
+var _knownAchievementIds = new Set();
+var _pollInterval = null;
+var _toastQueue = [];
+var _toastShowing = false;
+
+function seedKnownAchievements() {
+  _knownAchievementIds = new Set((STATE.achievements || []).map(function(a) { return a.id; }));
+}
+
+function startPolling() {
+  stopPolling();
+  _pollInterval = setInterval(pollFromServer, 1000);
+}
+
+function stopPolling() {
+  if (_pollInterval) { clearInterval(_pollInterval); _pollInterval = null; }
+}
+
+async function pollFromServer() {
+  if (!_authToken) return;
+  try {
+    var res = await fetch(SERVER_URL + '/api/character', {
+      headers: { 'Authorization': 'Bearer ' + _authToken }
+    });
+    if (res.status === 401) { doLogout(); return; }
+    if (!res.ok) return;
+    var data = await res.json();
+    var newState = applyMigrations(data.state);
+    var newAchievements = newState.achievements || [];
+    var newOnes = newAchievements.filter(function(a) { return !_knownAchievementIds.has(a.id); });
+    if (newOnes.length > 0) {
+      STATE = newState;
+      renderAll();
+      seedKnownAchievements();
+      newOnes.forEach(function(a) { _toastQueue.push(a); });
+      processToastQueue();
+    }
+  } catch (e) { /* silent fail — server may be temporarily unreachable */ }
+  loadChatMessages();
+}
+
+function processToastQueue() {
+  if (_toastShowing || _toastQueue.length === 0) return;
+  _toastShowing = true;
+  var achievement = _toastQueue.shift();
+  showAchievementToast(achievement, function() {
+    _toastShowing = false;
+    processToastQueue();
+  });
+}
+
+function showAchievementToast(achievement, onDone) {
+  var toast = document.getElementById('achievementToast');
+  document.getElementById('toastTitle').textContent = achievement.title || '';
+  document.getElementById('toastDesc').textContent = achievement.desc || '';
+  var rewardEl = document.getElementById('toastReward');
+  if (achievement.reward) {
+    rewardEl.textContent = '\u2605 ' + achievement.reward;
+    rewardEl.style.display = '';
+  } else {
+    rewardEl.style.display = 'none';
+  }
+  fireConfetti();
+  toast.classList.add('visible');
+  setTimeout(function() {
+    toast.classList.remove('visible');
+    setTimeout(function() { if (onDone) onDone(); }, 700);
+  }, 4500);
+}
+
+function fireConfetti() {
+  var container = document.getElementById('confettiContainer');
+  container.innerHTML = '';
+  var colors = ['#c8a84b','#00d4ff','#00ff88','#ff2255','#a855f7','#ec4899','#ffffff','#ffd700'];
+  for (var i = 0; i < 90; i++) {
+    var piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    piece.style.left = (Math.random() * 100) + '%';
+    piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+    piece.style.width = (5 + Math.random() * 7) + 'px';
+    piece.style.height = (8 + Math.random() * 10) + 'px';
+    piece.style.animationDuration = (2.2 + Math.random() * 2.3) + 's';
+    piece.style.animationDelay = (Math.random() * 1.0) + 's';
+    container.appendChild(piece);
+  }
+  setTimeout(function() { container.innerHTML = ''; }, 6000);
+}
+
 async function loadFromServer() {
   if (!_authToken) { openLoginModal(); return; }
   setSyncStatus('Loading...', 'var(--gold)');
@@ -4346,6 +4943,11 @@ async function loadFromServer() {
     var data = await res.json();
     STATE = applyMigrations(data.state);
     renderAll();
+    seedKnownAchievements();
+    startPolling();
+    showChatPanel();
+    loadChatPlayers();
+    loadChatMessages();
     setSyncStatus('Loaded ' + new Date(data.updatedAt).toLocaleTimeString(), 'var(--success)');
   } catch (e) {
     setSyncStatus('Server unreachable.', 'var(--danger)');
