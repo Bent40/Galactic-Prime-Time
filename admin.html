@@ -759,15 +759,6 @@
     border-top: 1px solid var(--border);
     margin-top: 8px;
   }
-  .style-swatches { display: flex; align-items: center; gap: 4px; }
-  .style-label { font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-right: 2px; }
-  .swatch {
-    width: 16px; height: 16px; border-radius: 50%;
-    border: 2px solid transparent; cursor: pointer; padding: 0;
-    transition: transform 0.15s, border-color 0.15s;
-  }
-  .swatch:hover  { transform: scale(1.25); }
-  .swatch.active { border-color: #fff; transform: scale(1.2); }
   .style-select {
     background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 4px;
     color: var(--text); font-size: 11px; padding: 4px 8px; font-family: inherit; cursor: pointer;
@@ -961,19 +952,6 @@
         <button class="btn btn-purple" onclick="sendAdminMessage()" style="height:52px;padding:0 20px;">SEND</button>
       </div>
       <div class="admin-style-bar">
-        <div class="style-swatches">
-          <span class="style-label">Color</span>
-          <button class="swatch active" style="background:var(--text)"  title="Default" onclick="setAdminColor(this,'')"></button>
-          <button class="swatch" style="background:#00d4ff" title="Cyan"    onclick="setAdminColor(this,'#00d4ff')"></button>
-          <button class="swatch" style="background:#c8a84b" title="Gold"    onclick="setAdminColor(this,'#c8a84b')"></button>
-          <button class="swatch" style="background:#00ff88" title="Green"   onclick="setAdminColor(this,'#00ff88')"></button>
-          <button class="swatch" style="background:#ff2255" title="Red"     onclick="setAdminColor(this,'#ff2255')"></button>
-          <button class="swatch" style="background:#a855f7" title="Purple"  onclick="setAdminColor(this,'#a855f7')"></button>
-          <button class="swatch" style="background:#ec4899" title="Pink"    onclick="setAdminColor(this,'#ec4899')"></button>
-          <button class="swatch" style="background:#ff8c00" title="Orange"  onclick="setAdminColor(this,'#ff8c00')"></button>
-          <button class="swatch" style="background:#ffffff" title="White"   onclick="setAdminColor(this,'#ffffff')"></button>
-          <button class="swatch" style="background:#64ffda" title="Teal"    onclick="setAdminColor(this,'#64ffda')"></button>
-        </div>
         <select class="style-select" id="adminChatFont" onchange="_adminChatFont=this.value">
           <option value="default">Default Font</option>
           <option value="mono">&#128187; Terminal</option>
@@ -2114,7 +2092,6 @@ let _adminCommsInterval = null;
 // ============================================================
 //  COMMS STYLE PICKER
 // ============================================================
-let _adminChatColor  = null;
 let _adminChatFont   = 'default';
 let _adminChatEffect = 'none';
 
@@ -2125,12 +2102,6 @@ const ADMIN_FONT_MAP = {
   bold:    "Impact,'Arial Black',sans-serif",
   alien:   "'Trebuchet MS','Century Gothic',sans-serif",
 };
-
-function setAdminColor(btn, color) {
-  _adminChatColor = color || null;
-  document.querySelectorAll('.admin-style-bar .swatch').forEach(s => s.classList.remove('active'));
-  btn.classList.add('active');
-}
 
 function buildAdminStyledText(text, style) {
   const color  = style?.color  || null;
@@ -2271,14 +2242,12 @@ async function refreshAdminChatLog() {
       const bg          = toMe ? 'rgba(200,168,75,0.08)' : (isWhisper ? 'rgba(168,85,247,0.05)' : 'rgba(0,0,0,0.2)');
       const toMeBadge   = toMe ? ' <span style="font-size:9px;letter-spacing:1px;background:rgba(200,168,75,0.2);color:var(--gold);border-radius:3px;padding:1px 5px;text-transform:uppercase">TO YOU</span>' : '';
       const whisperTag  = isWhisper ? ` <span style="font-size:10px;color:var(--legendary)">&#128172; ${escHtml(m.recipientName||'?')}</span>` : '';
-      const fontFamily  = m.style?.font && m.style.font !== 'default' ?
-        ({mono:"'Courier New',monospace",serif:"Georgia,serif",bold:"Impact,'Arial Black',sans-serif",alien:"'Trebuchet MS',sans-serif"}[m.style.font]||'inherit') : 'inherit';
-      const textColor   = m.style?.color || 'var(--text)';
       const time        = new Date(m.createdAt).toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+      const styledText  = buildAdminStyledText(m.text, m.style);
       return `<div style="padding:5px 8px;border-radius:4px;border-left:3px solid ${border};background:${bg};font-size:12px;line-height:1.5">
         <span style="float:right;font-size:10px;color:var(--muted)">${time}</span>
         <span style="font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:${senderColor}">${escHtml(m.senderName)}</span>${whisperTag}${toMeBadge}
-        <span style="color:${textColor};font-family:${fontFamily}"> ${escHtml(m.text)}</span>
+        ${styledText}
       </div>`;
     }).join('');
     if (atBottom) log.scrollTop = log.scrollHeight;
@@ -2301,7 +2270,7 @@ async function sendAdminMessage() {
       text, npcId,
       recipientId: recipientId || undefined,
       recipientIsNpc,
-      style: { color: _adminChatColor, font: _adminChatFont, effect: _adminChatEffect },
+      style: { font: _adminChatFont, effect: _adminChatEffect },
     };
     const res = await fetch(API + '/admin/messages', {
       method: 'POST', headers: authHeaders(), body: JSON.stringify(body)

@@ -12,4 +12,64 @@
     "$date": "2026-03-24T11:44:50.806Z"
   },
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "username": "Iris",
+  "password": "$2a$10$HTz.JbsvfTu4P5k0oxvqJeMYY3PmRiFl8604pvCKu11ZA2DeAg1/y",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2026-03-25T16:45:36.816Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-25T16:45:36.816Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "username": "Naomi",
+  "password": "$2a$10$o8.xvQrLV1KQ0fow/9sBzuA9ajMOlhTXJxkjHnkBmMlHl0zwgMI9a",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2026-03-25T16:51:19.371Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-25T16:51:19.371Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c4147065a501bec8ef86b4"
+  },
+  "username": "Lior",
+  "password": "$2a$10$rJN/QkRqVjqJ0APmYVpjdO/KFP/Mzi30CkvVSdaC/oENYxDvch0fO",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2026-03-25T16:59:28.301Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-25T16:59:28.301Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "username": "Meital",
+  "password": "$2a$10$prJB/xrTpurXEMVsnrMkgOgUva.NZhs33J7J9D/sZoIajLvNmdHIa",
+  "isAdmin": false,
+  "createdAt": {
+    "$date": "2026-03-25T17:05:11.600Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-25T17:05:11.600Z"
+  },
+  "__v": 0
 }]

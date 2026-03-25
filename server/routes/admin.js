@@ -442,7 +442,7 @@ router.post('/messages', async (req, res) => {
       recipient: (!recipientIsNpc && recipientId) ? recipientId : null,
       recipientNPC,
       recipientName,
-      style,
+      style: msgStyle,
       text: text.trim(),
     });
     res.status(201).json(msg);
