@@ -1,0 +1,150 @@
+[{
+  "_id": {
+    "$oid": "69c27bc54555ed01e58c628f"
+  },
+  "name": "Controlled Sweep",
+  "momentCost": "1",
+  "stats": [
+    "physique"
+  ],
+  "passive": false,
+  "capacity": 5,
+  "requirements": "Physique higher than target",
+  "range": "Adjacent",
+  "target": "Area (all adjacent Mobs)",
+  "effect": "Attack all adjacent Mobs as if you performed a single target attack on each of them.",
+  "description": "One swing. Everyone feels it.",
+  "createdAt": {
+    "$date": "2026-03-24T11:55:49.369Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-24T12:12:36.110Z"
+  },
+  "__v": 0,
+  "achievementUnlock": "Controlled Sweep"
+},
+{
+  "_id": {
+    "$oid": "69c27c414555ed01e58c6292"
+  },
+  "name": "Quick Step",
+  "momentCost": "0",
+  "stats": [
+    "reflexes"
+  ],
+  "passive": false,
+  "capacity": 5,
+  "requirements": "Have movement",
+  "range": "0",
+  "target": "Self",
+  "effect": "Ignore difficult terrain for the duration of the moment cost of your next action.",
+  "description": "You've learned where to put your feet.",
+  "createdAt": {
+    "$date": "2026-03-24T11:57:53.056Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-24T12:11:43.670Z"
+  },
+  "__v": 0,
+  "achievementUnlock": "Quick Step"
+},
+{
+  "_id": {
+    "$oid": "69c27d3e4555ed01e58c6295"
+  },
+  "name": "Seal The Wound",
+  "momentCost": "1",
+  "stats": [
+    "mind"
+  ],
+  "passive": false,
+  "capacity": 5,
+  "requirements": "Bleed OR Infection is active",
+  "range": "0",
+  "target": "Self",
+  "effect": "Delay Bleeding OR Infection for 1 Clock. Cannot resolve the condition fully.",
+  "description": "This wont fix it, but it'll buy you some time.",
+  "createdAt": {
+    "$date": "2026-03-24T12:02:06.450Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-24T12:11:13.333Z"
+  },
+  "__v": 0,
+  "achievementUnlock": "Seal The Wound"
+},
+{
+  "_id": {
+    "$oid": "69c27de1614affbaff0459ea"
+  },
+  "name": "Strong Strike",
+  "momentCost": "2",
+  "stats": [
+    "physique"
+  ],
+  "passive": false,
+  "capacity": 5,
+  "requirements": "Melee Attack",
+  "range": "Weapon, Melee",
+  "target": "Single",
+  "effect": "Wind up a strike of overwhelming force. On hit: 1.5 damage of weapon type.",
+  "description": "Slow and heavy, yet packs quite the punch.",
+  "achievementUnlock": "Strong Strike",
+  "createdAt": {
+    "$date": "2026-03-24T12:04:49.855Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-24T12:10:33.118Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c27e9e614affbaff0459ed"
+  },
+  "name": "Counter-Surge",
+  "momentCost": "1",
+  "stats": [
+    "physique, mind"
+  ],
+  "passive": false,
+  "capacity": 5,
+  "requirements": "Adjacent enemy executes a 2+ Moment cost action.",
+  "range": "Adjacent",
+  "target": "Single",
+  "effect": "Strike immediately, and reduce their action's remaining cost by 1. If the action collapses, they roll Forced Action — Body.",
+  "description": "They shouldn't have gone flashy in front of you.",
+  "achievementUnlock": "Counter-Surge",
+  "createdAt": {
+    "$date": "2026-03-24T12:07:58.597Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-24T12:12:21.798Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c27f10614affbaff0459f0"
+  },
+  "name": "Read The Pattern",
+  "momentCost": "1",
+  "stats": [
+    "mind"
+  ],
+  "passive": false,
+  "capacity": 5,
+  "requirements": "None",
+  "range": "3 Spaces",
+  "target": "Single",
+  "effect": "Choose one enemy. You may get 1 part of their stat sheet presented to you.",
+  "description": "Read like an open book",
+  "achievementUnlock": "Read The Pattern",
+  "createdAt": {
+    "$date": "2026-03-24T12:09:52.038Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-24T12:11:34.735Z"
+  },
+  "__v": 0
+}]

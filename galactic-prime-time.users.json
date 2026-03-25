@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "username": "Ben",
+  "password": "$2a$10$MJE0BQJCBLomkeN3PSz8TejwqBgSJlTay9lqo26FMgVf0/Nctgime",
+  "isAdmin": true,
+  "createdAt": {
+    "$date": "2026-03-24T11:40:54.446Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-24T11:44:50.806Z"
+  },
+  "__v": 0
+}]

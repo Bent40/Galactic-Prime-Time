@@ -2256,6 +2256,14 @@
             <button class="btn-counter" style="width:36px;height:36px;font-size:18px" onclick="adjustTokenCounter('upgrade',1)">+</button>
           </div>
         </div>
+        <div class="token-counter-box">
+          <div class="token-counter-label">PATRON</div>
+          <div class="token-counter-val" id="patronTokensDisplay">0</div>
+          <div class="token-btn-row">
+            <button class="btn-counter" style="width:36px;height:36px;font-size:18px" onclick="adjustTokenCounter('patronTokens',-1)">&#8722;</button>
+            <button class="btn-counter" style="width:36px;height:36px;font-size:18px" onclick="adjustTokenCounter('patronTokens',1)">+</button>
+          </div>
+        </div>
       </div>
 
       <div class="boss-tokens-section">
@@ -2418,7 +2426,7 @@ const DEFAULT_STATE = {
   statAdvPool:          { physique:0, reflexes:0, mind:0, charm:0 },
   exposure: { viewers:'', followers:'' },
   patrons: Array.from({length:3}, (_,i) => ({ rank:i+1, name:'', amount:'', notes:'', avatar:'' })),
-  tokens: { narrative:0, upgrade:0, bossTokens:[] },
+  tokens: { narrative:0, upgrade:0, patronTokens:0, bossTokens:[] },
   inventory: {
     categories: [
       { id:9,  name:'Quick Slots',    collapsed:false, items:[], locked:true, maxItems:3 },
@@ -2470,8 +2478,9 @@ function applyMigrations(s) {
   if (!s.bonusPoints) s.bonusPoints = { body:5, core:5 };
   s.bonusPoints.body = Math.max(s.bonusPoints.body, 5 - ((s.traitBonus.physique||0) + (s.traitBonus.reflexes||0)));
   s.bonusPoints.core = Math.max(s.bonusPoints.core, 5 - ((s.traitBonus.mind||0) + (s.traitBonus.charm||0)));
-  if (!s.tokens)            s.tokens      = { narrative:0, upgrade:0, bossTokens:[] };
-  if (!s.tokens.bossTokens) s.tokens.bossTokens = [];
+  if (!s.tokens)                        s.tokens            = { narrative:0, upgrade:0, patronTokens:0, bossTokens:[] };
+  if (s.tokens.patronTokens === undefined) s.tokens.patronTokens = 0;
+  if (!s.tokens.bossTokens)             s.tokens.bossTokens = [];
   if (!s.objectives)        s.objectives  = { main:[], directives:[], goals:[] };
   if (!s.inventory)         s.inventory   = JSON.parse(JSON.stringify(DEFAULT_STATE.inventory));
   if (!s.exposure)          s.exposure    = { viewers:0, followers:0 };
@@ -3479,8 +3488,9 @@ function renderPatrons() {
 // ============================================================
 
 function renderTokens() {
-  document.getElementById('narrativeDisplay').textContent = STATE.tokens.narrative || 0;
-  document.getElementById('upgradeDisplay').textContent   = STATE.tokens.upgrade   || 0;
+  document.getElementById('narrativeDisplay').textContent    = STATE.tokens.narrative    || 0;
+  document.getElementById('upgradeDisplay').textContent      = STATE.tokens.upgrade      || 0;
+  document.getElementById('patronTokensDisplay').textContent = STATE.tokens.patronTokens || 0;
 
   var grid = document.getElementById('bossTokensGrid');
   grid.innerHTML = '';

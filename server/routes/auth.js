@@ -4,9 +4,9 @@ const User = require('../models/User');
 
 const router = express.Router();
 
-function signToken(userId) {
+function signToken(userId, isAdmin = false) {
   return jwt.sign(
-    { userId },
+    { userId, isAdmin },
     process.env.JWT_SECRET || 'dev_secret',
     { expiresIn: '30d' }
   );
@@ -23,8 +23,8 @@ router.post('/register', async (req, res) => {
     if (existing) return res.status(409).json({ error: 'Username already taken' });
 
     const user = await User.create({ username, password });
-    const token = signToken(user._id);
-    res.status(201).json({ token, username: user.username });
+    const token = signToken(user._id, user.isAdmin);
+    res.status(201).json({ token, username: user.username, isAdmin: user.isAdmin });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -42,8 +42,24 @@ router.post('/login', async (req, res) => {
     const match = await user.comparePassword(password);
     if (!match) return res.status(401).json({ error: 'Invalid credentials' });
 
-    const token = signToken(user._id);
-    res.json({ token, username: user.username });
+    const token = signToken(user._id, user.isAdmin);
+    res.json({ token, username: user.username, isAdmin: user.isAdmin });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// POST /api/auth/make-admin  — promote a user to admin using ADMIN_SECRET
+router.post('/make-admin', async (req, res) => {
+  try {
+    const { username, adminSecret } = req.body;
+    const secret = process.env.ADMIN_SECRET;
+    if (!secret || adminSecret !== secret) {
+      return res.status(403).json({ error: 'Invalid admin secret' });
+    }
+    const user = await User.findOneAndUpdate({ username }, { isAdmin: true }, { new: true });
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    res.json({ ok: true, username: user.username });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

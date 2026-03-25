@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GALACTIC PRIME TIME — Admin Panel</title>
+<style>
+  :root {
+    --bg: #04050d;
+    --panel: #090c1a;
+    --cyan: #00d4ff;
+    --gold: #c8a84b;
+    --danger: #ff2255;
+    --success: #00ff88;
+    --text: #b8c8e0;
+    --muted: #3a4560;
+    --border: #1a2540;
+    --purple: #a855f7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* ---- TOP BAR ---- */
+  .topbar {
+    background: linear-gradient(90deg, #000510 0%, #0a1a2e 50%, #000510 100%);
+    border-bottom: 1px solid var(--purple);
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(168,85,247,0.25);
+  }
+
+  .topbar-title {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--purple);
+    text-shadow: 0 0 18px rgba(168,85,247,0.7);
+  }
+
+  .topbar-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+  }
+
+  .admin-badge {
+    background: rgba(168,85,247,0.15);
+    border: 1px solid var(--purple);
+    border-radius: 3px;
+    color: var(--purple);
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+  }
+
+  /* ---- LOGIN OVERLAY ---- */
+  .login-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    backdrop-filter: blur(6px);
+  }
+
+  .login-box {
+    background: var(--panel);
+    border: 1px solid var(--purple);
+    border-radius: 6px;
+    padding: 32px;
+    width: 360px;
+    box-shadow: 0 0 40px rgba(168,85,247,0.3);
+  }
+
+  .login-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 24px;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(168,85,247,0.5);
+  }
+
+  .login-field { margin-bottom: 14px; }
+  .login-field label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 5px;
+  }
+  .login-field input {
+    width: 100%;
+    background: rgba(168,85,247,0.05);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    color: var(--text);
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color 0.2s;
+  }
+  .login-field input:focus { outline: none; border-color: var(--purple); }
+
+  .login-submit {
+    width: 100%;
+    margin-top: 16px;
+    padding: 10px;
+    background: rgba(168,85,247,0.15);
+    border: 1px solid var(--purple);
+    border-radius: 3px;
+    color: var(--purple);
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .login-submit:hover { background: rgba(168,85,247,0.28); }
+
+  .login-error {
+    color: var(--danger);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+    text-align: center;
+    min-height: 16px;
+  }
+
+  /* ---- LAYOUT ---- */
+  .app-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: calc(100vh - 53px);
+  }
+
+  /* ---- SIDEBAR ---- */
+  .sidebar {
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    background: #06081a;
+  }
+
+  .sidebar-header {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .refresh-btn {
+    background: transparent;
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--muted);
+    font-size: 11px;
+    cursor: pointer;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .refresh-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  .player-item {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .player-item:hover { background: rgba(0,212,255,0.04); }
+  .player-item.active { background: rgba(168,85,247,0.08); border-left: 3px solid var(--purple); }
+
+  .player-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--muted);
+    background: rgba(0,212,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--cyan);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .player-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+  .player-info { flex: 1; min-width: 0; }
+  .player-username { font-size: 12px; font-weight: bold; letter-spacing: 1px; color: var(--text); text-transform: uppercase; }
+  .player-charname { font-size: 11px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .player-level-badge {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    background: rgba(200,168,75,0.1);
+    border: 1px solid rgba(200,168,75,0.3);
+    border-radius: 3px;
+    padding: 1px 5px;
+    flex-shrink: 0;
+  }
+
+  .no-players {
+    padding: 24px 16px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  /* ---- MAIN CONTENT ---- */
+  .main-content {
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 12px;
+    color: var(--muted);
+  }
+  .empty-state-icon { font-size: 48px; opacity: 0.3; }
+  .empty-state-text { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; }
+
+  /* ---- PANELS ---- */
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    position: relative;
+  }
+  .panel::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 14px; height: 14px;
+    border-top: 2px solid var(--purple);
+    border-left: 2px solid var(--purple);
+    border-radius: 4px 0 0 0;
+    pointer-events: none;
+  }
+  .panel::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 14px; height: 14px;
+    border-bottom: 2px solid var(--purple);
+    border-right: 2px solid var(--purple);
+    border-radius: 0 0 4px 0;
+    pointer-events: none;
+  }
+
+  .panel-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 3px solid var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* ---- PLAYER HEADER ---- */
+  .player-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .player-portrait {
+    width: 72px; height: 72px;
+    border-radius: 4px;
+    border: 2px solid var(--purple);
+    background: rgba(168,85,247,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--purple);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .player-portrait img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
+  .player-meta { flex: 1; }
+  .player-meta-name { font-size: 22px; font-weight: 900; letter-spacing: 2px; color: var(--text); text-transform: uppercase; }
+  .player-meta-sub { font-size: 11px; color: var(--muted); margin-top: 4px; letter-spacing: 1px; }
+  .player-meta-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+
+  .meta-tag {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+  }
+  .meta-tag.lvl { border-color: var(--gold); color: var(--gold); background: rgba(200,168,75,0.08); }
+  .meta-tag.race { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.06); }
+  .meta-tag.admin-flag { border-color: var(--purple); color: var(--purple); background: rgba(168,85,247,0.08); }
+
+  /* ---- STATS GRID ---- */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .stat-box {
+    text-align: center;
+    padding: 10px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(0,212,255,0.03);
+  }
+  .stat-name { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .stat-val { font-family: 'Courier New', monospace; font-size: 30px; font-weight: bold; color: var(--cyan); line-height: 1; }
+
+  /* ---- FORMS ---- */
+  .form-row {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .form-label {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .form-input {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid var(--muted);
+    border-radius: 3px;
+    color: var(--text);
+    padding: 6px 10px;
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 8px rgba(168,85,247,0.25); }
+
+  .form-input.wide { min-width: 200px; }
+  .form-input.short { width: 80px; }
+
+  textarea.form-input { resize: vertical; min-height: 60px; }
+
+  .btn {
+    padding: 7px 14px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .btn-purple {
+    background: rgba(168,85,247,0.15);
+    border-color: var(--purple);
+    color: var(--purple);
+  }
+  .btn-purple:hover { background: rgba(168,85,247,0.28); box-shadow: 0 0 10px rgba(168,85,247,0.3); }
+
+  .btn-gold {
+    background: rgba(200,168,75,0.12);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .btn-gold:hover { background: rgba(200,168,75,0.25); box-shadow: 0 0 10px rgba(200,168,75,0.3); }
+
+  .btn-danger {
+    background: rgba(255,34,85,0.1);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+  .btn-danger:hover { background: rgba(255,34,85,0.22); }
+
+  .btn-cyan {
+    background: rgba(0,212,255,0.1);
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+  .btn-cyan:hover { background: rgba(0,212,255,0.22); }
+
+  .btn-sm { padding: 4px 10px; font-size: 9px; }
+
+  /* ---- SKILL ROWS ---- */
+  .skill-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .skill-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(0,212,255,0.02);
+  }
+
+  .skill-row-name {
+    flex: 1;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--text);
+    letter-spacing: 0.5px;
+  }
+
+  .skill-row-meta {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .skill-badge {
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--muted);
+    color: var(--muted);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+  }
+  .skill-badge.passive { border-color: var(--gold); color: var(--gold); }
+
+  /* ---- ACHIEVEMENT ROWS ---- */
+  .achievement-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .achievement-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid rgba(200,168,75,0.2);
+    border-left: 3px solid var(--gold);
+    border-radius: 4px;
+    background: rgba(200,168,75,0.04);
+  }
+
+  .achievement-icon { font-size: 20px; color: var(--gold); flex-shrink: 0; line-height: 1.2; }
+  .achievement-body { flex: 1; }
+  .achievement-title-text { font-size: 12px; font-weight: bold; letter-spacing: 1px; color: var(--gold); text-transform: uppercase; margin-bottom: 2px; }
+  .achievement-desc-text { font-size: 11px; color: var(--text); }
+  .achievement-reward-text { font-size: 10px; color: var(--success); margin-top: 3px; letter-spacing: 1px; }
+  .achievement-reward-text::before { content: '★ '; }
+
+  /* ---- TOKENS ---- */
+  .tokens-grid {
+    display: flex;
+    gap: 12px;
+  }
+
+  .token-box {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: rgba(0,0,0,0.2);
+  }
+  .token-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .token-val { font-family: 'Courier New', monospace; font-size: 28px; font-weight: bold; color: var(--gold); }
+
+  /* ---- TOAST ---- */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #0a1a2e;
+    border: 1px solid var(--success);
+    border-radius: 4px;
+    color: var(--success);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    z-index: 300;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+  }
+  .toast.error { border-color: var(--danger); color: var(--danger); }
+  .toast.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---- DIVIDER ---- */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 14px 0;
+  }
+
+  /* ---- SECTION LABEL ---- */
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* ---- TWO COL ---- */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ---- SCROLLBAR ---- */
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--purple); }
+
+  /* ---- LOADING ---- */
+  .loading { color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; padding: 12px 0; }
+
+  /* ---- IDENTITY EDIT ---- */
+  .identity-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 80px; gap: 10px; }
+
+  select.form-input {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%233a4560'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 24px;
+  }
+
+  /* ---- CONTENT NAV ---- */
+  .content-nav {
+    display: flex;
+    background: #06081a;
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    gap: 0;
+  }
+  .cnav-tab {
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 11px 16px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .cnav-tab:hover { color: var(--text); }
+  .cnav-tab.active { color: var(--purple); border-bottom-color: var(--purple); }
+
+  /* ---- FULL-WIDTH SECTION PAGES ---- */
+  .section-page {
+    padding: 20px;
+    overflow-y: auto;
+    height: calc(100vh - 53px - 38px);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ---- SKILL TEMPLATE CARDS ---- */
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+
+  .template-card {
+    background: rgba(0,212,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+  }
+  .template-card:hover { border-color: var(--muted); }
+
+  .template-name { font-size: 14px; font-weight: bold; color: var(--text); letter-spacing: 0.5px; }
+  .template-meta { display: flex; flex-wrap: wrap; gap: 5px; }
+  .template-effect { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .template-actions { display: flex; gap: 6px; margin-top: 4px; }
+
+  /* ---- LIB PICKER (in player panel) ---- */
+  .lib-picker { display: flex; flex-direction: column; gap: 6px; max-height: 280px; overflow-y: auto; padding-right: 4px; }
+  .lib-pick-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: rgba(0,0,0,0.2);
+  }
+  .lib-pick-row:hover { border-color: var(--muted); }
+  .lib-pick-name { flex: 1; font-size: 12px; font-weight: bold; color: var(--text); }
+  .lib-pick-meta { font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+
+  /* ---- ACHIEVEMENTS TABLE ---- */
+  .ach-table { width: 100%; border-collapse: collapse; }
+  .ach-table th {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .ach-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(26,37,64,0.5);
+    font-size: 12px;
+    vertical-align: top;
+  }
+  .ach-table tr:hover td { background: rgba(168,85,247,0.04); }
+  .ach-player { color: var(--cyan); font-weight: bold; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+  .ach-charname { color: var(--muted); font-size: 10px; }
+  .ach-title { color: var(--gold); font-weight: bold; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+  .ach-reward { color: var(--success); font-size: 10px; }
+  .ach-reward::before { content: '★ '; }
+  .ach-date { color: var(--muted); font-size: 10px; font-family: 'Courier New', monospace; }
+
+  /* ---- EDIT MODAL ---- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 250;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.hidden { display: none; }
+
+  .modal-box {
+    background: var(--panel);
+    border: 1px solid var(--purple);
+    border-radius: 6px;
+    padding: 24px;
+    width: 560px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 40px rgba(168,85,247,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .modal-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple);
+    margin-bottom: 4px;
+    padding-left: 10px;
+    border-left: 3px solid var(--purple);
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  /* ---- ACHIEVEMENT LOCK BADGE ---- */
+  .ach-lock-badge {
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+    background: rgba(200,168,75,0.08);
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-title">&#128737; ADMIN CONTROL PANEL</div>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="loginUsername" placeholder="admin_callsign" autocomplete="username">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="login-submit" onclick="doLogin()">ACCESS PANEL</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div>
+    <div class="topbar-title">&#128737; Admin Control Panel</div>
+    <div class="topbar-sub">Galactic Prime Time — Game Master Interface</div>
+  </div>
+  <div class="topbar-user" id="topbarUser" style="display:none">
+    <span class="admin-badge">ADMIN</span>
+    <span id="topbarUsername" style="color:var(--text);font-size:12px;letter-spacing:1px;text-transform:uppercase;font-weight:bold;"></span>
+    <button class="btn btn-sm" style="border-color:var(--muted);color:var(--muted);background:transparent;border:1px solid var(--muted);border-radius:3px;font-size:9px;letter-spacing:1px;padding:3px 8px;cursor:pointer;text-transform:uppercase;" onclick="doLogout()">LOGOUT</button>
+  </div>
+</div>
+
+<!-- CONTENT NAV -->
+<div class="content-nav" id="contentNav" style="display:none">
+  <button class="cnav-tab active" id="cnav-players"      onclick="switchSection('players')">&#128100; Players</button>
+  <button class="cnav-tab"        id="cnav-library"      onclick="switchSection('library')">&#128218; Skill Library</button>
+  <button class="cnav-tab"        id="cnav-achievements" onclick="switchSection('achievements')">&#9733; All Achievements</button>
+</div>
+
+<!-- PLAYERS SECTION (app layout with sidebar) -->
+<div id="section-players" style="display:none">
+  <div class="app-layout" id="appLayout">
+    <!-- SIDEBAR: Player List -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-label">Players</span>
+        <button class="refresh-btn" onclick="loadPlayers()">&#8635; Refresh</button>
+      </div>
+      <div id="playerList"><div class="loading" style="padding:16px">Loading...</div></div>
+    </div>
+    <!-- MAIN CONTENT -->
+    <div class="main-content" id="mainContent">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-state-icon">&#128737;</div>
+        <div class="empty-state-text">Select a player to manage their character</div>
+      </div>
+      <div id="playerPanel" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILL LIBRARY SECTION -->
+<div id="section-library" class="section-page" style="display:none">
+  <div class="panel">
+    <div class="panel-title">SKILL LIBRARY</div>
+    <div class="panel-content">
+      <div class="section-label">Add New Template</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="form-row">
+          <div class="form-group" style="flex:2">
+            <div class="form-label">Skill Name *</div>
+            <input class="form-input" id="libSkillName" placeholder="e.g. Plasma Surge">
+          </div>
+          <div class="form-group">
+            <div class="form-label">Moment Cost</div>
+            <input class="form-input short" id="libSkillCost" placeholder="e.g. 2">
+          </div>
+          <div class="form-group">
+            <div class="form-label">Stat</div>
+            <input class="form-input" id="libSkillStat" placeholder="physique" style="width:110px">
+          </div>
+          <div class="form-group" style="justify-content:flex-end">
+            <label style="display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1px;color:var(--muted);cursor:pointer">
+              <input type="checkbox" id="libSkillPassive"> PASSIVE
+            </label>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex:1"><div class="form-label">Range</div><input class="form-input" id="libSkillRange" placeholder="e.g. 30ft"></div>
+          <div class="form-group" style="flex:1"><div class="form-label">Target</div><input class="form-input" id="libSkillTarget" placeholder="e.g. Single"></div>
+          <div class="form-group" style="flex:1"><div class="form-label">Requirements</div><input class="form-input" id="libSkillReqs" placeholder="e.g. Physique 3"></div>
+          <div class="form-group" style="flex:1">
+            <div class="form-label">Capacity</div>
+            <input class="form-input short" id="libSkillCapacity" type="number" min="1" max="10" placeholder="5">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Effect</div>
+          <input class="form-input" id="libSkillEffect" placeholder="Mechanical effect...">
+        </div>
+        <div class="form-group">
+          <div class="form-label">Description / Flavour</div>
+          <textarea class="form-input" id="libSkillDesc" style="min-height:60px" placeholder="Flavour text..."></textarea>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Achievement Unlock <span style="color:var(--muted);font-weight:normal;font-size:8px;letter-spacing:1px">(auto-grant this skill when achievement is given)</span></div>
+          <input class="form-input" id="libSkillAchievementUnlock" placeholder="e.g. First Blood">
+        </div>
+        <div><button class="btn btn-purple" onclick="saveSkillTemplate()">+ Add to Library</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-title">TEMPLATES <span id="libCountBadge" style="color:var(--muted);font-weight:normal"></span></div>
+    <div class="panel-content">
+      <div id="templateGrid" class="template-grid"><div class="loading">Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ALL ACHIEVEMENTS SECTION -->
+<div id="section-achievements" class="section-page" style="display:none">
+  <div class="panel">
+    <div class="panel-title">ALL ACHIEVEMENTS <span id="achCountBadge" style="color:var(--muted);font-weight:normal"></span>
+      <button class="refresh-btn" onclick="loadAllAchievements()">&#8635; Refresh</button>
+    </div>
+    <div class="panel-content">
+      <div id="allAchievementsTable"><div class="loading">Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT SKILL MODAL (player panel) -->
+<div class="modal-overlay hidden" id="editSkillModal">
+  <div class="modal-box">
+    <div class="modal-title">Edit Skill</div>
+    <input type="hidden" id="editSkillId">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="form-row">
+        <div class="form-group" style="flex:2">
+          <div class="form-label">Skill Name *</div>
+          <input class="form-input" id="editSkillName" placeholder="e.g. Plasma Surge">
+        </div>
+        <div class="form-group">
+          <div class="form-label">Moment Cost</div>
+          <input class="form-input short" id="editSkillCost" placeholder="e.g. 2">
+        </div>
+        <div class="form-group">
+          <div class="form-label">Stat</div>
+          <input class="form-input" id="editSkillStat" placeholder="physique" style="width:110px">
+        </div>
+        <div class="form-group" style="justify-content:flex-end">
+          <label style="display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1px;color:var(--muted);cursor:pointer">
+            <input type="checkbox" id="editSkillPassive"> PASSIVE
+          </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="flex:1"><div class="form-label">Range</div><input class="form-input" id="editSkillRange" placeholder="e.g. 30ft"></div>
+        <div class="form-group" style="flex:1"><div class="form-label">Target</div><input class="form-input" id="editSkillTarget" placeholder="e.g. Single"></div>
+        <div class="form-group" style="flex:1"><div class="form-label">Requirements</div><input class="form-input" id="editSkillReqs" placeholder="e.g. Physique 3"></div>
+        <div class="form-group" style="flex:1">
+          <div class="form-label">Capacity</div>
+          <input class="form-input short" id="editSkillCapacity" type="number" min="1" max="10" placeholder="5">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Effect</div>
+        <input class="form-input" id="editSkillEffect" placeholder="Mechanical effect...">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Description / Flavour</div>
+        <textarea class="form-input" id="editSkillDesc" style="min-height:60px" placeholder="Flavour text..."></textarea>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-purple" onclick="saveEditedSkill()">Save Changes</button>
+      <button class="btn" style="border-color:var(--muted);color:var(--muted);background:transparent" onclick="closeEditSkillModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT SKILL TEMPLATE MODAL (library) -->
+<div class="modal-overlay hidden" id="editTemplateModal">
+  <div class="modal-box">
+    <div class="modal-title">Edit Skill Template</div>
+    <input type="hidden" id="editTemplateId">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="form-row">
+        <div class="form-group" style="flex:2">
+          <div class="form-label">Skill Name *</div>
+          <input class="form-input" id="editTplName" placeholder="e.g. Plasma Surge">
+        </div>
+        <div class="form-group">
+          <div class="form-label">Moment Cost</div>
+          <input class="form-input short" id="editTplCost" placeholder="e.g. 2">
+        </div>
+        <div class="form-group">
+          <div class="form-label">Stat</div>
+          <input class="form-input" id="editTplStat" placeholder="physique" style="width:110px">
+        </div>
+        <div class="form-group" style="justify-content:flex-end">
+          <label style="display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1px;color:var(--muted);cursor:pointer">
+            <input type="checkbox" id="editTplPassive"> PASSIVE
+          </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group" style="flex:1"><div class="form-label">Range</div><input class="form-input" id="editTplRange" placeholder="e.g. 30ft"></div>
+        <div class="form-group" style="flex:1"><div class="form-label">Target</div><input class="form-input" id="editTplTarget" placeholder="e.g. Single"></div>
+        <div class="form-group" style="flex:1"><div class="form-label">Requirements</div><input class="form-input" id="editTplReqs" placeholder="e.g. Physique 3"></div>
+        <div class="form-group" style="flex:1">
+          <div class="form-label">Capacity</div>
+          <input class="form-input short" id="editTplCapacity" type="number" min="1" max="10" placeholder="5">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Effect</div>
+        <input class="form-input" id="editTplEffect" placeholder="Mechanical effect...">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Description / Flavour</div>
+        <textarea class="form-input" id="editTplDesc" style="min-height:60px" placeholder="Flavour text..."></textarea>
+      </div>
+      <div class="form-group">
+        <div class="form-label">Achievement Unlock (auto-grant when achievement is given)</div>
+        <input class="form-input" id="editTplAchievementUnlock" placeholder="e.g. First Blood">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-purple" onclick="saveEditedTemplate()">Save Changes</button>
+      <button class="btn" style="border-color:var(--muted);color:var(--muted);background:transparent" onclick="closeEditTemplateModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+//  CONFIG
+// ============================================================
+const API = 'http://localhost:3001/api';
+
+// ============================================================
+//  AUTH
+// ============================================================
+let adminToken = localStorage.getItem('adminToken') || '';
+let adminUsername = localStorage.getItem('adminUsername') || '';
+
+function authHeaders() {
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + adminToken };
+}
+
+async function doLogin() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errEl = document.getElementById('loginError');
+  errEl.textContent = '';
+
+  if (!username || !password) { errEl.textContent = 'Enter username and password.'; return; }
+
+  try {
+    const res = await fetch(API + '/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+    const data = await res.json();
+    if (!res.ok) { errEl.textContent = data.error || 'Login failed.'; return; }
+    if (!data.isAdmin) { errEl.textContent = 'This account does not have admin access.'; return; }
+
+    adminToken = data.token;
+    adminUsername = data.username;
+    localStorage.setItem('adminToken', adminToken);
+    localStorage.setItem('adminUsername', adminUsername);
+    onLoggedIn();
+  } catch (e) {
+    errEl.textContent = 'Could not reach server.';
+  }
+}
+
+function doLogout() {
+  adminToken = '';
+  adminUsername = '';
+  localStorage.removeItem('adminToken');
+  localStorage.removeItem('adminUsername');
+  location.reload();
+}
+
+function onLoggedIn() {
+  document.getElementById('loginOverlay').style.display = 'none';
+  document.getElementById('topbarUser').style.display = 'flex';
+  document.getElementById('topbarUsername').textContent = adminUsername;
+  document.getElementById('contentNav').style.display = 'flex';
+  switchSection('players');
+  loadPlayers();
+}
+
+function switchSection(name) {
+  ['players', 'library', 'achievements'].forEach(s => {
+    document.getElementById('section-' + s).style.display = 'none';
+    document.getElementById('cnav-' + s).classList.remove('active');
+  });
+  document.getElementById('section-' + name).style.display = name === 'players' ? 'block' : 'flex';
+  document.getElementById('cnav-' + name).classList.add('active');
+
+  if (name === 'library')      loadSkillLibrary();
+  if (name === 'achievements') loadAllAchievements();
+}
+
+// Try restoring session on page load
+window.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('loginPassword').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  if (adminToken) {
+    fetch(API + '/admin/players', { headers: authHeaders() }).then(r => {
+      if (r.ok) { onLoggedIn(); }
+      else { adminToken = ''; localStorage.removeItem('adminToken'); }
+    }).catch(() => {});
+  }
+});
+
+// ============================================================
+//  TOAST
+// ============================================================
+let _toastTimer = null;
+function showToast(msg, isError = false) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast' + (isError ? ' error' : '');
+  void el.offsetWidth;
+  el.classList.add('visible');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => el.classList.remove('visible'), 2800);
+}
+
+// ============================================================
+//  PLAYER LIST
+// ============================================================
+let players = [];
+let selectedUserId = null;
+
+async function loadPlayers() {
+  document.getElementById('playerList').innerHTML = '<div class="loading" style="padding:16px">Loading...</div>';
+  try {
+    const res = await fetch(API + '/admin/players', { headers: authHeaders() });
+    if (!res.ok) throw new Error('Failed');
+    players = await res.json();
+    renderPlayerList();
+  } catch (e) {
+    document.getElementById('playerList').innerHTML = '<div class="no-players">Could not load players.</div>';
+  }
+}
+
+function renderPlayerList() {
+  const container = document.getElementById('playerList');
+  if (!players.length) {
+    container.innerHTML = '<div class="no-players">No players registered yet.</div>';
+    return;
+  }
+  container.innerHTML = '';
+  players.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'player-item' + (p.userId == selectedUserId ? ' active' : '');
+    div.onclick = () => selectPlayer(p.userId);
+
+    const initial = (p.characterName || p.username || '?')[0].toUpperCase();
+    div.innerHTML = `
+      <div class="player-avatar">${initial}</div>
+      <div class="player-info">
+        <div class="player-username">${escHtml(p.username)}${p.isAdmin ? ' <span style="color:var(--purple);font-size:9px">★</span>' : ''}</div>
+        <div class="player-charname">${p.characterName ? escHtml(p.characterName) : '<em style="opacity:0.5">no character</em>'}</div>
+      </div>
+      <div class="player-level-badge">LV${p.level || 1}</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// ============================================================
+//  SELECT PLAYER
+// ============================================================
+let currentPlayer = null;
+
+async function selectPlayer(userId) {
+  selectedUserId = userId;
+  renderPlayerList();
+
+  document.getElementById('emptyState').style.display = 'none';
+  const panel = document.getElementById('playerPanel');
+  panel.style.display = 'block';
+  panel.innerHTML = '<div class="loading">Loading character data...</div>';
+
+  try {
+    const res = await fetch(API + '/admin/players/' + userId, { headers: authHeaders() });
+    if (!res.ok) throw new Error('Failed');
+    currentPlayer = await res.json();
+    renderPlayerPanel();
+  } catch (e) {
+    panel.innerHTML = '<div class="loading" style="color:var(--danger)">Failed to load character.</div>';
+  }
+}
+
+async function refreshCurrentPlayer() {
+  if (!selectedUserId) return;
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId, { headers: authHeaders() });
+    if (!res.ok) throw new Error('Failed');
+    currentPlayer = await res.json();
+    renderPlayerPanel();
+  } catch (e) {
+    showToast('Refresh failed', true);
+  }
+}
+
+// ============================================================
+//  RENDER PLAYER PANEL
+// ============================================================
+function renderPlayerPanel() {
+  const { user, state } = currentPlayer;
+  const s = state || {};
+  const identity = s.identity || {};
+  const traits = s.traits || {};
+  const achievements = s.achievements || [];
+  const skills = s.skills || [];
+  const tokens = s.tokens || {};
+
+  const panel = document.getElementById('playerPanel');
+  panel.innerHTML = '';
+
+  // -- Header
+  const headerPanel = mkPanel('CONTESTANT FILE');
+  const portraitHtml = identity.portrait
+    ? `<img src="${escHtml(identity.portrait)}" alt="portrait">`
+    : identity.name ? identity.name[0].toUpperCase() : user.username[0].toUpperCase();
+
+  headerPanel.querySelector('.panel-content').innerHTML = `
+    <div class="player-header">
+      <div class="player-portrait">${identity.portrait ? '<img src="' + escHtml(identity.portrait) + '" alt="portrait">' : (identity.name || user.username || '?')[0].toUpperCase()}</div>
+      <div class="player-meta">
+        <div class="player-meta-name">${escHtml(identity.name || '(No character name)')}</div>
+        <div class="player-meta-sub">Player: <strong>${escHtml(user.username)}</strong></div>
+        <div class="player-meta-tags">
+          <span class="meta-tag lvl">Level ${identity.level || 1}</span>
+          ${identity.race ? `<span class="meta-tag race">${escHtml(identity.race)}</span>` : ''}
+          ${user.isAdmin ? `<span class="meta-tag admin-flag">Admin</span>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+  panel.appendChild(headerPanel);
+
+  // -- Stats
+  const statsPanel = mkPanel('TRAITS');
+  const traitNames = ['physique', 'reflexes', 'mind', 'charm'];
+  statsPanel.querySelector('.panel-content').innerHTML = `
+    <div class="stats-grid">
+      ${traitNames.map(t => `
+        <div class="stat-box">
+          <div class="stat-name">${t}</div>
+          <div class="stat-val">${traits[t] || 1}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="section-label">Tokens</div>
+    <div class="tokens-grid">
+      <div class="token-box"><div class="token-label">Narrative</div><div class="token-val">${tokens.narrative || 0}</div></div>
+      <div class="token-box"><div class="token-label">Upgrade</div><div class="token-val">${tokens.upgrade || 0}</div></div>
+      <div class="token-box"><div class="token-label">Patron</div><div class="token-val">${tokens.patronTokens || 0}</div></div>
+    </div>
+    <hr class="divider">
+    <div class="section-label">Adjust Tokens</div>
+    <div class="form-row">
+      <div class="form-group">
+        <div class="form-label">Narrative Tokens</div>
+        <input class="form-input short" type="number" id="tokenNarrative" value="${tokens.narrative || 0}" min="0">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Upgrade Tokens</div>
+        <input class="form-input short" type="number" id="tokenUpgrade" value="${tokens.upgrade || 0}" min="0">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Patron Tokens</div>
+        <input class="form-input short" type="number" id="tokenPatron" value="${tokens.patronTokens || 0}" min="0">
+      </div>
+      <button class="btn btn-cyan" onclick="saveTokens()">Save Tokens</button>
+    </div>
+  `;
+  panel.appendChild(statsPanel);
+
+  // -- Skills
+  const skillsPanel = mkPanel(`SKILLS <span style="color:var(--muted);font-weight:normal">(${skills.length})</span>`);
+  const skillsContent = skillsPanel.querySelector('.panel-content');
+
+  if (skills.length) {
+    const list = document.createElement('div');
+    list.className = 'skill-list';
+    list.id = 'skillListEl';
+    skills.forEach(sk => {
+      const row = document.createElement('div');
+      row.className = 'skill-row';
+      row.innerHTML = `
+        <div class="skill-row-name">${escHtml(sk.name)}</div>
+        ${sk.passive ? '<span class="skill-badge passive">Passive</span>' : ''}
+        ${sk.momentCost ? `<span class="skill-badge">${escHtml(sk.momentCost)} Moment</span>` : ''}
+        ${sk.stats && sk.stats.length ? `<span class="skill-badge">${sk.stats.join(', ')}</span>` : ''}
+        ${sk.unlockedByAchievement ? `<span class="ach-lock-badge" title="Unlocked by achievement">&#128274; ${escHtml(sk.unlockedByAchievement)}</span>` : ''}
+        <span class="skill-row-meta">LV ${sk.level || 0}/${sk.capacity || 5}</span>
+        <button class="btn btn-cyan btn-sm" onclick="openEditSkillModal(${sk.id})">&#9998;</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSkill(${sk.id})">&#10005;</button>
+      `;
+      list.appendChild(row);
+    });
+    skillsContent.appendChild(list);
+    const divider = document.createElement('hr');
+    divider.className = 'divider';
+    skillsContent.appendChild(divider);
+  }
+
+  // Add skill form
+  const addSkillLabel = document.createElement('div');
+  addSkillLabel.className = 'section-label';
+  addSkillLabel.textContent = 'Add New Skill';
+  skillsContent.appendChild(addSkillLabel);
+
+  const skillForm = document.createElement('div');
+  skillForm.style.display = 'flex';
+  skillForm.style.flexDirection = 'column';
+  skillForm.style.gap = '10px';
+  skillForm.innerHTML = `
+    <div class="form-row">
+      <div class="form-group" style="flex:2">
+        <div class="form-label">Skill Name *</div>
+        <input class="form-input" id="newSkillName" placeholder="e.g. Plasma Surge">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Moment Cost</div>
+        <input class="form-input short" id="newSkillCost" placeholder="e.g. 2">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Stat (physique etc.)</div>
+        <input class="form-input" id="newSkillStat" placeholder="physique" style="width:110px">
+      </div>
+      <div class="form-group" style="justify-content:flex-end">
+        <label style="display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:1px;color:var(--muted);cursor:pointer">
+          <input type="checkbox" id="newSkillPassive"> PASSIVE
+        </label>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group" style="flex:1">
+        <div class="form-label">Range</div>
+        <input class="form-input" id="newSkillRange" placeholder="e.g. 30ft">
+      </div>
+      <div class="form-group" style="flex:1">
+        <div class="form-label">Target</div>
+        <input class="form-input" id="newSkillTarget" placeholder="e.g. Single">
+      </div>
+      <div class="form-group" style="flex:1">
+        <div class="form-label">Requirements</div>
+        <input class="form-input" id="newSkillReqs" placeholder="e.g. Physique 3">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-label">Effect</div>
+      <input class="form-input wide" id="newSkillEffect" placeholder="What it does mechanically...">
+    </div>
+    <div class="form-group">
+      <div class="form-label">Description / Flavour</div>
+      <textarea class="form-input" id="newSkillDesc" placeholder="Flavour text, lore notes..."></textarea>
+    </div>
+    <div>
+      <button class="btn btn-purple" onclick="addSkill()">+ Add Skill to Character</button>
+    </div>
+  `;
+  skillsContent.appendChild(skillForm);
+
+  // From Library picker
+  const libDivider = document.createElement('hr');
+  libDivider.className = 'divider';
+  skillsContent.appendChild(libDivider);
+
+  const libLabel = document.createElement('div');
+  libLabel.className = 'section-label';
+  libLabel.innerHTML = 'Add from Skill Library &nbsp;<span style="color:var(--muted);font-size:9px;font-weight:normal">— manage templates in the Skill Library tab</span>';
+  skillsContent.appendChild(libLabel);
+
+  const libSearchRow = document.createElement('div');
+  libSearchRow.innerHTML = `<input class="form-input" id="libPickerSearch" placeholder="Search library..." oninput="filterLibPicker()" style="margin-bottom:10px;width:100%">`;
+  skillsContent.appendChild(libSearchRow);
+
+  const libPickerDiv = document.createElement('div');
+  libPickerDiv.className = 'lib-picker';
+  libPickerDiv.id = 'libPickerList';
+  libPickerDiv.innerHTML = '<div class="loading">Loading...</div>';
+  skillsContent.appendChild(libPickerDiv);
+
+  // Populate picker async
+  fetchSkillLibrary().then(templates => {
+    renderLibPicker(templates);
+  });
+
+  panel.appendChild(skillsPanel);
+
+  // -- Achievements
+  const achPanel = mkPanel(`ACHIEVEMENTS <span style="color:var(--muted);font-weight:normal">(${achievements.length})</span>`);
+  const achContent = achPanel.querySelector('.panel-content');
+
+  if (achievements.length) {
+    const achList = document.createElement('div');
+    achList.className = 'achievement-list';
+    achievements.forEach(a => {
+      const row = document.createElement('div');
+      row.className = 'achievement-row';
+      row.innerHTML = `
+        <div class="achievement-icon">&#9733;</div>
+        <div class="achievement-body">
+          <div class="achievement-title-text">${escHtml(a.title)}</div>
+          ${a.desc ? `<div class="achievement-desc-text">${escHtml(a.desc)}</div>` : ''}
+          ${a.reward ? `<div class="achievement-reward-text">${escHtml(a.reward)}</div>` : ''}
+        </div>
+        <button class="btn btn-danger btn-sm" style="flex-shrink:0" onclick="deleteAchievement(${a.id})">&#10005;</button>
+      `;
+      achList.appendChild(row);
+    });
+    achContent.appendChild(achList);
+    const divider = document.createElement('hr');
+    divider.className = 'divider';
+    achContent.appendChild(divider);
+  } else {
+    const none = document.createElement('div');
+    none.style.cssText = 'font-size:11px;color:var(--muted);text-align:center;padding:8px 0;margin-bottom:12px;';
+    none.textContent = 'No achievements yet.';
+    achContent.appendChild(none);
+  }
+
+  const achLabel = document.createElement('div');
+  achLabel.className = 'section-label';
+  achLabel.textContent = 'Grant Achievement';
+  achContent.appendChild(achLabel);
+
+  const achForm = document.createElement('div');
+  achForm.style.display = 'flex';
+  achForm.style.flexDirection = 'column';
+  achForm.style.gap = '10px';
+  achForm.innerHTML = `
+    <div class="form-group">
+      <div class="form-label">Achievement Title *</div>
+      <input class="form-input wide" id="newAchTitle" placeholder="e.g. First Blood">
+    </div>
+    <div class="form-group">
+      <div class="form-label">Description</div>
+      <input class="form-input wide" id="newAchDesc" placeholder="How they earned it...">
+    </div>
+    <div class="form-group">
+      <div class="form-label">Reward (optional)</div>
+      <input class="form-input wide" id="newAchReward" placeholder="e.g. +1 Upgrade Token">
+    </div>
+    <div>
+      <button class="btn btn-gold" onclick="addAchievement()">&#9733; Grant Achievement</button>
+    </div>
+  `;
+  achContent.appendChild(achForm);
+  panel.appendChild(achPanel);
+
+  // -- Identity edit
+  const idPanel = mkPanel('EDIT IDENTITY');
+  idPanel.querySelector('.panel-content').innerHTML = `
+    <div class="identity-grid">
+      <div class="form-group">
+        <div class="form-label">Character Name</div>
+        <input class="form-input" id="editCharName" value="${escAttr(identity.name || '')}">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Race / Species</div>
+        <input class="form-input" id="editCharRace" value="${escAttr(identity.race || '')}">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Player Name</div>
+        <input class="form-input" id="editPlayerName" value="${escAttr(identity.player || '')}">
+      </div>
+      <div class="form-group">
+        <div class="form-label">Level</div>
+        <input class="form-input short" id="editCharLevel" type="number" min="1" value="${identity.level || 1}">
+      </div>
+    </div>
+    <div style="margin-top:10px">
+      <button class="btn btn-cyan" onclick="saveIdentity()">Save Identity</button>
+    </div>
+  `;
+  panel.appendChild(idPanel);
+}
+
+// ============================================================
+//  HELPERS
+// ============================================================
+function mkPanel(titleHtml) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'panel';
+  wrapper.innerHTML = `<div class="panel-title">${titleHtml}</div><div class="panel-content"></div>`;
+  return wrapper;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function escAttr(s) {
+  return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ============================================================
+//  ACTIONS — SKILLS
+// ============================================================
+async function addSkill() {
+  const name = document.getElementById('newSkillName').value.trim();
+  if (!name) { showToast('Skill name required', true); return; }
+
+  const statVal = document.getElementById('newSkillStat').value.trim().toLowerCase();
+  const body = {
+    name,
+    momentCost: document.getElementById('newSkillCost').value.trim(),
+    stats: statVal ? [statVal] : [],
+    passive: document.getElementById('newSkillPassive').checked,
+    range: document.getElementById('newSkillRange').value.trim(),
+    target: document.getElementById('newSkillTarget').value.trim(),
+    requirements: document.getElementById('newSkillReqs').value.trim(),
+    effect: document.getElementById('newSkillEffect').value.trim(),
+    description: document.getElementById('newSkillDesc').value.trim(),
+  };
+
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/skills', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Skill added!');
+    await refreshCurrentPlayer();
+    loadPlayers();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+
+async function deleteSkill(skillId) {
+  if (!confirm('Remove this skill from the character?')) return;
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/skills/' + skillId, {
+      method: 'DELETE',
+      headers: authHeaders()
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Skill removed.');
+    await refreshCurrentPlayer();
+    loadPlayers();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  ACTIONS — ACHIEVEMENTS
+// ============================================================
+async function addAchievement() {
+  const title = document.getElementById('newAchTitle').value.trim();
+  if (!title) { showToast('Achievement title required', true); return; }
+
+  const body = {
+    title,
+    desc: document.getElementById('newAchDesc').value.trim(),
+    reward: document.getElementById('newAchReward').value.trim(),
+  };
+
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/achievements', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    const autoCount = data.autoGrantedSkills ? data.autoGrantedSkills.length : 0;
+    showToast(autoCount > 0 ? `Achievement granted! +${autoCount} skill(s) auto-unlocked.` : 'Achievement granted!');
+    await refreshCurrentPlayer();
+    loadPlayers();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+async function deleteAchievement(achId) {
+  if (!confirm('Revoke this achievement?')) return;
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/achievements/' + achId, {
+      method: 'DELETE',
+      headers: authHeaders()
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Achievement revoked.');
+    await refreshCurrentPlayer();
+    loadPlayers();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  ACTIONS — TOKENS
+// ============================================================
+async function saveTokens() {
+  const narrative     = parseInt(document.getElementById('tokenNarrative').value) || 0;
+  const upgrade       = parseInt(document.getElementById('tokenUpgrade').value)   || 0;
+  const patronTokens  = parseInt(document.getElementById('tokenPatron').value)    || 0;
+
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/tokens', {
+      method: 'PATCH',
+      headers: authHeaders(),
+      body: JSON.stringify({ narrative, upgrade, patronTokens })
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Tokens saved!');
+    await refreshCurrentPlayer();
+    loadPlayers();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  ACTIONS — IDENTITY
+// ============================================================
+async function saveIdentity() {
+  const body = {
+    name:   document.getElementById('editCharName').value.trim(),
+    race:   document.getElementById('editCharRace').value.trim(),
+    player: document.getElementById('editPlayerName').value.trim(),
+    level:  parseInt(document.getElementById('editCharLevel').value) || 1,
+  };
+
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/identity', {
+      method: 'PATCH',
+      headers: authHeaders(),
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Identity saved!');
+    await refreshCurrentPlayer();
+    loadPlayers();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  SKILL LIBRARY
+// ============================================================
+let _libraryCache = null;
+
+async function fetchSkillLibrary(forceRefresh = false) {
+  if (_libraryCache && !forceRefresh) return _libraryCache;
+  try {
+    const res = await fetch(API + '/admin/skill-library', { headers: authHeaders() });
+    if (!res.ok) return [];
+    _libraryCache = await res.json();
+    return _libraryCache;
+  } catch (e) {
+    return [];
+  }
+}
+
+async function loadSkillLibrary() {
+  _libraryCache = null;
+  const grid = document.getElementById('templateGrid');
+  grid.innerHTML = '<div class="loading">Loading...</div>';
+  const templates = await fetchSkillLibrary(true);
+  renderTemplateGrid(templates);
+}
+
+function renderTemplateGrid(templates) {
+  const grid = document.getElementById('templateGrid');
+  const badge = document.getElementById('libCountBadge');
+  if (badge) badge.textContent = `(${templates.length})`;
+
+  if (!templates.length) {
+    grid.innerHTML = '<div style="font-size:11px;color:var(--muted);padding:8px">No templates yet. Add one above.</div>';
+    return;
+  }
+
+  grid.innerHTML = '';
+  templates.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'template-card';
+    card.dataset.id = t._id;
+    card.innerHTML = `
+      <div class="template-name">${escHtml(t.name)}</div>
+      <div class="template-meta">
+        ${t.passive ? `<span class="skill-badge passive">Passive</span>` : ''}
+        ${t.momentCost ? `<span class="skill-badge">${escHtml(t.momentCost)} Moment</span>` : ''}
+        ${t.stats && t.stats.length ? `<span class="skill-badge">${t.stats.map(escHtml).join(', ')}</span>` : ''}
+        ${t.range ? `<span class="skill-badge">${escHtml(t.range)}</span>` : ''}
+        <span class="skill-badge" style="color:var(--muted)">Cap ${t.capacity || 5}</span>
+        ${t.achievementUnlock ? `<span class="ach-lock-badge">&#128274; ${escHtml(t.achievementUnlock)}</span>` : ''}
+      </div>
+      ${t.effect ? `<div class="template-effect">${escHtml(t.effect)}</div>` : ''}
+      ${t.description ? `<div class="template-effect" style="opacity:0.6;font-style:italic">${escHtml(t.description)}</div>` : ''}
+      <div class="template-actions">
+        <button class="btn btn-cyan btn-sm" onclick="openEditTemplateModal('${t._id}')">&#9998; Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSkillTemplate('${t._id}')">&#10005; Delete</button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+async function saveSkillTemplate() {
+  const name = document.getElementById('libSkillName').value.trim();
+  if (!name) { showToast('Skill name required', true); return; }
+
+  const statVal = document.getElementById('libSkillStat').value.trim().toLowerCase();
+  const body = {
+    name,
+    momentCost:        document.getElementById('libSkillCost').value.trim(),
+    stats:             statVal ? [statVal] : [],
+    passive:           document.getElementById('libSkillPassive').checked,
+    capacity:          parseInt(document.getElementById('libSkillCapacity').value) || 5,
+    range:             document.getElementById('libSkillRange').value.trim(),
+    target:            document.getElementById('libSkillTarget').value.trim(),
+    requirements:      document.getElementById('libSkillReqs').value.trim(),
+    effect:            document.getElementById('libSkillEffect').value.trim(),
+    description:       document.getElementById('libSkillDesc').value.trim(),
+    achievementUnlock: document.getElementById('libSkillAchievementUnlock').value.trim(),
+  };
+
+  try {
+    const res = await fetch(API + '/admin/skill-library', {
+      method: 'POST', headers: authHeaders(), body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Template added!');
+    // Clear form
+    ['libSkillName','libSkillCost','libSkillStat','libSkillRange','libSkillTarget','libSkillReqs','libSkillEffect','libSkillDesc','libSkillCapacity','libSkillAchievementUnlock'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    document.getElementById('libSkillPassive').checked = false;
+    await loadSkillLibrary();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+async function deleteSkillTemplate(id) {
+  if (!confirm('Delete this skill template?')) return;
+  try {
+    const res = await fetch(API + '/admin/skill-library/' + id, { method: 'DELETE', headers: authHeaders() });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Template deleted.');
+    await loadSkillLibrary();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ---- Library picker (inside player panel) ----
+let _libPickerTemplates = [];
+
+function renderLibPicker(templates) {
+  _libPickerTemplates = templates;
+  const list = document.getElementById('libPickerList');
+  if (!list) return;
+  if (!templates.length) {
+    list.innerHTML = '<div style="font-size:11px;color:var(--muted);text-align:center;padding:10px">Skill library is empty. Add templates in the Skill Library tab.</div>';
+    return;
+  }
+  _renderFilteredPicker(templates);
+}
+
+function _renderFilteredPicker(templates) {
+  const list = document.getElementById('libPickerList');
+  if (!list) return;
+  list.innerHTML = '';
+  if (!templates.length) {
+    list.innerHTML = '<div style="font-size:11px;color:var(--muted);padding:6px 0">No matching skills.</div>';
+    return;
+  }
+  templates.forEach(t => {
+    const row = document.createElement('div');
+    row.className = 'lib-pick-row';
+    row.innerHTML = `
+      <div class="lib-pick-name">${escHtml(t.name)}</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap">
+        ${t.passive ? `<span class="skill-badge passive">Passive</span>` : ''}
+        ${t.momentCost ? `<span class="skill-badge">${escHtml(t.momentCost)}M</span>` : ''}
+        ${t.stats && t.stats.length ? `<span class="skill-badge">${t.stats.map(escHtml).join(', ')}</span>` : ''}
+      </div>
+      <button class="btn btn-purple btn-sm" onclick="addSkillFromLibrary('${t._id}')">+ Add</button>
+    `;
+    list.appendChild(row);
+  });
+}
+
+function filterLibPicker() {
+  const q = (document.getElementById('libPickerSearch')?.value || '').toLowerCase();
+  const filtered = q ? _libPickerTemplates.filter(t => t.name.toLowerCase().includes(q)) : _libPickerTemplates;
+  _renderFilteredPicker(filtered);
+}
+
+async function addSkillFromLibrary(templateId) {
+  const template = _libPickerTemplates.find(t => t._id === templateId);
+  if (!template) { showToast('Template not found', true); return; }
+
+  const body = {
+    name:         template.name,
+    momentCost:   template.momentCost || '',
+    stats:        template.stats || [],
+    passive:      !!template.passive,
+    capacity:     template.capacity || 5,
+    requirements: template.requirements || '',
+    range:        template.range || '',
+    target:       template.target || '',
+    effect:       template.effect || '',
+    description:  template.description || '',
+  };
+
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/skills', {
+      method: 'POST', headers: authHeaders(), body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast(`"${template.name}" added!`);
+    await refreshCurrentPlayer();
+    loadPlayers();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  EDIT SKILL (player panel)
+// ============================================================
+function openEditSkillModal(skillId) {
+  const skills = currentPlayer?.state?.skills || [];
+  const sk = skills.find(s => s.id === skillId);
+  if (!sk) { showToast('Skill not found', true); return; }
+
+  document.getElementById('editSkillId').value = sk.id;
+  document.getElementById('editSkillName').value = sk.name || '';
+  document.getElementById('editSkillCost').value = sk.momentCost || '';
+  document.getElementById('editSkillStat').value = (sk.stats && sk.stats.length) ? sk.stats[0] : '';
+  document.getElementById('editSkillPassive').checked = !!sk.passive;
+  document.getElementById('editSkillRange').value = sk.range || '';
+  document.getElementById('editSkillTarget').value = sk.target || '';
+  document.getElementById('editSkillReqs').value = sk.requirements || '';
+  document.getElementById('editSkillCapacity').value = sk.capacity || 5;
+  document.getElementById('editSkillEffect').value = sk.effect || '';
+  document.getElementById('editSkillDesc').value = sk.description || '';
+  document.getElementById('editSkillModal').classList.remove('hidden');
+}
+
+function closeEditSkillModal() {
+  document.getElementById('editSkillModal').classList.add('hidden');
+}
+
+async function saveEditedSkill() {
+  const id = Number(document.getElementById('editSkillId').value);
+  const name = document.getElementById('editSkillName').value.trim();
+  if (!name) { showToast('Skill name required', true); return; }
+
+  const statVal = document.getElementById('editSkillStat').value.trim().toLowerCase();
+  const body = {
+    name,
+    momentCost:   document.getElementById('editSkillCost').value.trim(),
+    stats:        statVal ? [statVal] : [],
+    passive:      document.getElementById('editSkillPassive').checked,
+    capacity:     parseInt(document.getElementById('editSkillCapacity').value) || 5,
+    range:        document.getElementById('editSkillRange').value.trim(),
+    target:       document.getElementById('editSkillTarget').value.trim(),
+    requirements: document.getElementById('editSkillReqs').value.trim(),
+    effect:       document.getElementById('editSkillEffect').value.trim(),
+    description:  document.getElementById('editSkillDesc').value.trim(),
+  };
+
+  try {
+    const res = await fetch(API + '/admin/players/' + selectedUserId + '/skills/' + id, {
+      method: 'PUT', headers: authHeaders(), body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Skill updated!');
+    closeEditSkillModal();
+    await refreshCurrentPlayer();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  EDIT SKILL TEMPLATE (library)
+// ============================================================
+function openEditTemplateModal(templateId) {
+  const t = _libraryCache && _libraryCache.find(t => t._id === templateId);
+  if (!t) { showToast('Template not found', true); return; }
+
+  document.getElementById('editTemplateId').value = t._id;
+  document.getElementById('editTplName').value = t.name || '';
+  document.getElementById('editTplCost').value = t.momentCost || '';
+  document.getElementById('editTplStat').value = (t.stats && t.stats.length) ? t.stats[0] : '';
+  document.getElementById('editTplPassive').checked = !!t.passive;
+  document.getElementById('editTplRange').value = t.range || '';
+  document.getElementById('editTplTarget').value = t.target || '';
+  document.getElementById('editTplReqs').value = t.requirements || '';
+  document.getElementById('editTplCapacity').value = t.capacity || 5;
+  document.getElementById('editTplEffect').value = t.effect || '';
+  document.getElementById('editTplDesc').value = t.description || '';
+  document.getElementById('editTplAchievementUnlock').value = t.achievementUnlock || '';
+  document.getElementById('editTemplateModal').classList.remove('hidden');
+}
+
+function closeEditTemplateModal() {
+  document.getElementById('editTemplateModal').classList.add('hidden');
+}
+
+async function saveEditedTemplate() {
+  const id = document.getElementById('editTemplateId').value;
+  const name = document.getElementById('editTplName').value.trim();
+  if (!name) { showToast('Skill name required', true); return; }
+
+  const statVal = document.getElementById('editTplStat').value.trim().toLowerCase();
+  const body = {
+    name,
+    momentCost:        document.getElementById('editTplCost').value.trim(),
+    stats:             statVal ? [statVal] : [],
+    passive:           document.getElementById('editTplPassive').checked,
+    capacity:          parseInt(document.getElementById('editTplCapacity').value) || 5,
+    range:             document.getElementById('editTplRange').value.trim(),
+    target:            document.getElementById('editTplTarget').value.trim(),
+    requirements:      document.getElementById('editTplReqs').value.trim(),
+    effect:            document.getElementById('editTplEffect').value.trim(),
+    description:       document.getElementById('editTplDesc').value.trim(),
+    achievementUnlock: document.getElementById('editTplAchievementUnlock').value.trim(),
+  };
+
+  try {
+    const res = await fetch(API + '/admin/skill-library/' + id, {
+      method: 'PUT', headers: authHeaders(), body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Failed', true); return; }
+    showToast('Template updated!');
+    closeEditTemplateModal();
+    await loadSkillLibrary();
+  } catch (e) {
+    showToast('Server error', true);
+  }
+}
+
+// ============================================================
+//  ALL ACHIEVEMENTS
+// ============================================================
+async function loadAllAchievements() {
+  const container = document.getElementById('allAchievementsTable');
+  container.innerHTML = '<div class="loading">Loading...</div>';
+
+  try {
+    const res = await fetch(API + '/admin/achievements', { headers: authHeaders() });
+    if (!res.ok) throw new Error();
+    const rows = await res.json();
+    renderAllAchievements(rows);
+  } catch (e) {
+    document.getElementById('allAchievementsTable').innerHTML =
+      '<div style="color:var(--danger);font-size:11px">Failed to load achievements.</div>';
+  }
+}
+
+function renderAllAchievements(rows) {
+  const container = document.getElementById('allAchievementsTable');
+  const badge = document.getElementById('achCountBadge');
+  if (badge) badge.textContent = `(${rows.length} total)`;
+
+  if (!rows.length) {
+    container.innerHTML = '<div style="font-size:11px;color:var(--muted);text-align:center;padding:16px">No achievements have been granted yet.</div>';
+    return;
+  }
+
+  container.innerHTML = '';
+  const table = document.createElement('table');
+  table.className = 'ach-table';
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Achievement</th>
+        <th>Description</th>
+        <th>Reward</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+  `;
+  const tbody = document.createElement('tbody');
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    const date = r.id ? new Date(r.id).toLocaleDateString() : '—';
+    tr.innerHTML = `
+      <td>
+        <div class="ach-player">${escHtml(r.username)}</div>
+        ${r.charName ? `<div class="ach-charname">${escHtml(r.charName)}</div>` : ''}
+      </td>
+      <td><span class="ach-title">${escHtml(r.title)}</span></td>
+      <td style="color:var(--text);max-width:240px">${escHtml(r.desc || '')}</td>
+      <td>${r.reward ? `<span class="ach-reward">${escHtml(r.reward)}</span>` : '<span style="color:var(--muted)">—</span>'}</td>
+      <td><span class="ach-date">${date}</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  container.appendChild(table);
+}
+</script>
+</body>
+</html>
