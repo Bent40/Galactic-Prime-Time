@@ -737,6 +737,20 @@
     margin-top: 4px;
   }
 
+  /* ---- BULK IMPORT ---- */
+  .bulk-preview-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 11px; }
+  .bulk-preview-table th {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); text-align: left; padding: 5px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .bulk-preview-table td { padding: 5px 8px; border-bottom: 1px solid rgba(26,37,64,0.4); vertical-align: top; }
+  .bulk-preview-table tr.row-ok td:first-child { color: var(--success); }
+  .bulk-preview-table tr.row-err td { color: var(--danger); opacity: 0.8; }
+  .bulk-result-bar { display: flex; gap: 16px; margin-top: 10px; font-size: 11px; letter-spacing: 1px; }
+  .bulk-result-ok   { color: var(--success); font-weight: bold; }
+  .bulk-result-skip { color: var(--danger); font-weight: bold; }
+
   /* ---- ACHIEVEMENT LOCK BADGE ---- */
   .ach-lock-badge {
     font-size: 9px;
@@ -887,10 +901,56 @@
           <div class="form-label">Achievement Unlock <span style="color:var(--muted);font-weight:normal;font-size:8px;letter-spacing:1px">(auto-grant this skill when achievement is given)</span></div>
           <input class="form-input" id="libSkillAchievementUnlock" placeholder="e.g. First Blood">
         </div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
+        <div class="section-label" style="margin-bottom:6px">Advanced Level Effects <span style="color:var(--muted);font-weight:normal;font-size:8px;letter-spacing:1px">(revealed when capacity reaches that level)</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 6 Effect</div><textarea class="form-input" id="libLvl6" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 6..."></textarea></div>
+          <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 7 Effect</div><textarea class="form-input" id="libLvl7" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 7..."></textarea></div>
+          <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 8 Effect</div><textarea class="form-input" id="libLvl8" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 8..."></textarea></div>
+          <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 9 Effect</div><textarea class="form-input" id="libLvl9" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 9..."></textarea></div>
+          <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 10 Effect</div><textarea class="form-input" id="libLvl10" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 10..."></textarea></div>
+        </div>
         <div><button class="btn btn-purple" onclick="saveSkillTemplate()">+ Add to Library</button></div>
       </div>
     </div>
   </div>
+  <!-- BULK IMPORT PANEL -->
+  <div class="panel">
+    <div class="panel-title" style="cursor:pointer;user-select:none" onclick="toggleBulkPanel()">
+      BULK IMPORT
+      <span id="bulkPanelToggle" style="font-size:11px;font-weight:normal;color:var(--muted)">&#9654; Expand</span>
+    </div>
+    <div id="bulkImportPanel" style="display:none">
+      <div class="panel-content" style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:11px;color:var(--muted);line-height:1.6">
+          Paste a JSON array of skill objects. Each entry supports:
+          <code style="color:var(--cyan);font-size:10px">name</code>,
+          <code style="color:var(--cyan);font-size:10px">momentCost</code>,
+          <code style="color:var(--cyan);font-size:10px">stats</code> (array),
+          <code style="color:var(--cyan);font-size:10px">passive</code>,
+          <code style="color:var(--cyan);font-size:10px">capacity</code>,
+          <code style="color:var(--cyan);font-size:10px">range</code>,
+          <code style="color:var(--cyan);font-size:10px">target</code>,
+          <code style="color:var(--cyan);font-size:10px">requirements</code>,
+          <code style="color:var(--cyan);font-size:10px">effect</code>,
+          <code style="color:var(--cyan);font-size:10px">description</code>,
+          <code style="color:var(--cyan);font-size:10px">achievementUnlock</code>.
+          Only <code style="color:var(--cyan);font-size:10px">name</code> is required.
+        </div>
+        <div class="form-group">
+          <div class="form-label">JSON Payload</div>
+          <textarea class="form-input" id="bulkJsonInput" style="min-height:140px;font-family:'Courier New',monospace;font-size:11px" placeholder='[&#10;  { "name": "Plasma Surge", "momentCost": "2", "stats": ["physique"], "passive": false, "effect": "Deal 2d6 damage" },&#10;  { "name": "Mind Veil",    "passive": true,  "description": "Concealment aura" }&#10;]'></textarea>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn btn-cyan" onclick="previewBulkImport()">&#9654; Preview</button>
+          <button class="btn btn-purple" id="bulkImportBtn" style="display:none" onclick="executeBulkImport()">&#8593; Import All</button>
+          <button class="btn btn-sm" style="border-color:var(--muted);color:var(--muted);background:transparent" onclick="clearBulkImport()">Clear</button>
+        </div>
+        <div id="bulkPreviewArea"></div>
+      </div>
+    </div>
+  </div>
+
   <div class="panel">
     <div class="panel-title">TEMPLATES <span id="libCountBadge" style="color:var(--muted);font-weight:normal"></span></div>
     <div class="panel-content">
@@ -1014,6 +1074,15 @@
         <div class="form-label">Description / Flavour</div>
         <textarea class="form-input" id="editSkillDesc" style="min-height:60px" placeholder="Flavour text..."></textarea>
       </div>
+      <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
+      <div class="section-label" style="margin-bottom:6px">Advanced Level Effects <span style="color:var(--muted);font-weight:normal;font-size:8px;letter-spacing:1px">(revealed when capacity reaches that level)</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 6 Effect</div><textarea class="form-input" id="editSkillLvl6" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 6..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 7 Effect</div><textarea class="form-input" id="editSkillLvl7" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 7..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 8 Effect</div><textarea class="form-input" id="editSkillLvl8" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 8..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 9 Effect</div><textarea class="form-input" id="editSkillLvl9" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 9..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 10 Effect</div><textarea class="form-input" id="editSkillLvl10" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 10..."></textarea></div>
+      </div>
     </div>
     <div class="modal-actions">
       <button class="btn btn-purple" onclick="saveEditedSkill()">Save Changes</button>
@@ -1067,6 +1136,15 @@
       <div class="form-group">
         <div class="form-label">Achievement Unlock (auto-grant when achievement is given)</div>
         <input class="form-input" id="editTplAchievementUnlock" placeholder="e.g. First Blood">
+      </div>
+      <hr style="border:none;border-top:1px solid var(--border);margin:4px 0">
+      <div class="section-label" style="margin-bottom:6px">Advanced Level Effects <span style="color:var(--muted);font-weight:normal;font-size:8px;letter-spacing:1px">(revealed when capacity reaches that level)</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 6 Effect</div><textarea class="form-input" id="editTplLvl6" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 6..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 7 Effect</div><textarea class="form-input" id="editTplLvl7" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 7..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 8 Effect</div><textarea class="form-input" id="editTplLvl8" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 8..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 9 Effect</div><textarea class="form-input" id="editTplLvl9" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 9..."></textarea></div>
+        <div class="form-group"><div class="form-label" style="color:var(--gold)">Level 10 Effect</div><textarea class="form-input" id="editTplLvl10" style="min-height:52px;border-color:rgba(200,168,75,0.3)" placeholder="Bonus unlocked at level 10..."></textarea></div>
       </div>
     </div>
     <div class="modal-actions">
@@ -1827,6 +1905,13 @@ async function saveSkillTemplate() {
     effect:            document.getElementById('libSkillEffect').value.trim(),
     description:       document.getElementById('libSkillDesc').value.trim(),
     achievementUnlock: document.getElementById('libSkillAchievementUnlock').value.trim(),
+    levelEffects: {
+      6:  document.getElementById('libLvl6').value.trim(),
+      7:  document.getElementById('libLvl7').value.trim(),
+      8:  document.getElementById('libLvl8').value.trim(),
+      9:  document.getElementById('libLvl9').value.trim(),
+      10: document.getElementById('libLvl10').value.trim(),
+    },
   };
 
   try {
@@ -1837,7 +1922,7 @@ async function saveSkillTemplate() {
     if (!res.ok) { showToast(data.error || 'Failed', true); return; }
     showToast('Template added!');
     // Clear form
-    ['libSkillName','libSkillCost','libSkillStat','libSkillRange','libSkillTarget','libSkillReqs','libSkillEffect','libSkillDesc','libSkillCapacity','libSkillAchievementUnlock'].forEach(id => {
+    ['libSkillName','libSkillCost','libSkillStat','libSkillRange','libSkillTarget','libSkillReqs','libSkillEffect','libSkillDesc','libSkillCapacity','libSkillAchievementUnlock','libLvl6','libLvl7','libLvl8','libLvl9','libLvl10'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = '';
     });
@@ -1920,6 +2005,7 @@ async function addSkillFromLibrary(templateId) {
     target:       template.target || '',
     effect:       template.effect || '',
     description:  template.description || '',
+    levelEffects: template.levelEffects || {},
   };
 
   try {
@@ -1955,6 +2041,10 @@ function openEditSkillModal(skillId) {
   document.getElementById('editSkillCapacity').value = sk.capacity || 5;
   document.getElementById('editSkillEffect').value = sk.effect || '';
   document.getElementById('editSkillDesc').value = sk.description || '';
+  const skLvlFx = sk.levelEffects || {};
+  [6,7,8,9,10].forEach(l => {
+    document.getElementById('editSkillLvl' + l).value = skLvlFx[l] || '';
+  });
   document.getElementById('editSkillModal').classList.remove('hidden');
 }
 
@@ -1979,6 +2069,7 @@ async function saveEditedSkill() {
     requirements: document.getElementById('editSkillReqs').value.trim(),
     effect:       document.getElementById('editSkillEffect').value.trim(),
     description:  document.getElementById('editSkillDesc').value.trim(),
+    levelEffects: Object.fromEntries([6,7,8,9,10].map(l => [l, document.getElementById('editSkillLvl' + l).value.trim()])),
   };
 
   try {
@@ -2014,6 +2105,10 @@ function openEditTemplateModal(templateId) {
   document.getElementById('editTplEffect').value = t.effect || '';
   document.getElementById('editTplDesc').value = t.description || '';
   document.getElementById('editTplAchievementUnlock').value = t.achievementUnlock || '';
+  const tplLvlFx = t.levelEffects || {};
+  [6,7,8,9,10].forEach(l => {
+    document.getElementById('editTplLvl' + l).value = tplLvlFx[l] || '';
+  });
   document.getElementById('editTemplateModal').classList.remove('hidden');
 }
 
@@ -2039,6 +2134,7 @@ async function saveEditedTemplate() {
     effect:            document.getElementById('editTplEffect').value.trim(),
     description:       document.getElementById('editTplDesc').value.trim(),
     achievementUnlock: document.getElementById('editTplAchievementUnlock').value.trim(),
+    levelEffects: Object.fromEntries([6,7,8,9,10].map(l => [l, document.getElementById('editTplLvl' + l).value.trim()])),
   };
 
   try {
@@ -2344,6 +2440,150 @@ function renderAllAchievements(rows) {
   });
   table.appendChild(tbody);
   container.appendChild(table);
+}
+
+// ============================================================
+//  BULK SKILL IMPORT
+// ============================================================
+let _bulkParsed = [];
+
+function toggleBulkPanel() {
+  const panel = document.getElementById('bulkImportPanel');
+  const toggle = document.getElementById('bulkPanelToggle');
+  const open = panel.style.display === 'none';
+  panel.style.display = open ? 'block' : 'none';
+  toggle.innerHTML = open ? '&#9660; Collapse' : '&#9654; Expand';
+}
+
+function previewBulkImport() {
+  const raw = document.getElementById('bulkJsonInput').value.trim();
+  const area = document.getElementById('bulkPreviewArea');
+  const importBtn = document.getElementById('bulkImportBtn');
+  _bulkParsed = [];
+  area.innerHTML = '';
+  importBtn.style.display = 'none';
+
+  if (!raw) { area.innerHTML = '<div style="color:var(--danger);font-size:11px">Paste JSON first.</div>'; return; }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch (e) {
+    area.innerHTML = `<div style="color:var(--danger);font-size:11px">Invalid JSON: ${escHtml(e.message)}</div>`;
+    return;
+  }
+
+  if (!Array.isArray(parsed)) {
+    area.innerHTML = '<div style="color:var(--danger);font-size:11px">Expected a JSON array [ ... ]</div>';
+    return;
+  }
+  if (!parsed.length) {
+    area.innerHTML = '<div style="color:var(--muted);font-size:11px">Array is empty.</div>';
+    return;
+  }
+
+  // Validate each entry
+  const rows = parsed.map(s => {
+    if (!s.name || !String(s.name).trim()) return { ok: false, name: '(unnamed)', reason: 'Missing name' };
+    return { ok: true, s };
+  });
+
+  const okCount  = rows.filter(r => r.ok).length;
+  const errCount = rows.filter(r => !r.ok).length;
+
+  const table = document.createElement('table');
+  table.className = 'bulk-preview-table';
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>#</th><th>Name</th><th>Cost</th><th>Stats</th>
+        <th>Passive</th><th>Range</th><th>Achievement Lock</th><th>Status</th>
+      </tr>
+    </thead>
+  `;
+  const tbody = document.createElement('tbody');
+  rows.forEach((r, i) => {
+    const tr = document.createElement('tr');
+    tr.className = r.ok ? 'row-ok' : 'row-err';
+    if (r.ok) {
+      const { s } = r;
+      tr.innerHTML = `
+        <td>${i + 1}</td>
+        <td>${escHtml(s.name)}</td>
+        <td>${escHtml(s.momentCost || '')}</td>
+        <td>${escHtml(Array.isArray(s.stats) ? s.stats.join(', ') : (s.stats || ''))}</td>
+        <td>${s.passive ? 'Yes' : ''}</td>
+        <td>${escHtml(s.range || '')}</td>
+        <td>${escHtml(s.achievementUnlock || '')}</td>
+        <td style="color:var(--success)">&#10003; OK</td>
+      `;
+    } else {
+      tr.innerHTML = `
+        <td>${i + 1}</td>
+        <td>${escHtml(r.name)}</td>
+        <td colspan="5"></td>
+        <td>&#10005; ${escHtml(r.reason)}</td>
+      `;
+    }
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+
+  const resultBar = document.createElement('div');
+  resultBar.className = 'bulk-result-bar';
+  resultBar.innerHTML = `
+    <span class="bulk-result-ok">&#10003; ${okCount} ready to import</span>
+    ${errCount ? `<span class="bulk-result-skip">&#10005; ${errCount} will be skipped</span>` : ''}
+  `;
+
+  area.appendChild(resultBar);
+  area.appendChild(table);
+
+  if (okCount > 0) {
+    _bulkParsed = rows.filter(r => r.ok).map(r => r.s);
+    importBtn.style.display = '';
+  }
+}
+
+async function executeBulkImport() {
+  if (!_bulkParsed.length) return;
+  const btn = document.getElementById('bulkImportBtn');
+  btn.disabled = true;
+  btn.textContent = 'Importing...';
+
+  try {
+    const res = await fetch(API + '/admin/skill-library/bulk', {
+      method: 'POST',
+      headers: authHeaders(),
+      body: JSON.stringify({ skills: _bulkParsed })
+    });
+    const data = await res.json();
+    if (!res.ok) { showToast(data.error || 'Bulk import failed', true); btn.disabled = false; btn.innerHTML = '&#8593; Import All'; return; }
+
+    const msg = `Imported ${data.added} skill${data.added !== 1 ? 's' : ''}` +
+                (data.skipped ? `, ${data.skipped} skipped` : '') + '.';
+    showToast(msg);
+
+    const area = document.getElementById('bulkPreviewArea');
+    area.innerHTML = `<div class="bulk-result-bar"><span class="bulk-result-ok">&#10003; ${msg}</span></div>`;
+    document.getElementById('bulkJsonInput').value = '';
+    _bulkParsed = [];
+    btn.style.display = 'none';
+    btn.disabled = false;
+    btn.innerHTML = '&#8593; Import All';
+    await loadSkillLibrary();
+  } catch (e) {
+    showToast('Server error', true);
+    btn.disabled = false;
+    btn.innerHTML = '&#8593; Import All';
+  }
+}
+
+function clearBulkImport() {
+  document.getElementById('bulkJsonInput').value = '';
+  document.getElementById('bulkPreviewArea').innerHTML = '';
+  document.getElementById('bulkImportBtn').style.display = 'none';
+  _bulkParsed = [];
 }
 </script>
 </body>

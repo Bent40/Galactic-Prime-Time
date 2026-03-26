@@ -708,6 +708,28 @@
   .skill-desc { display: none; margin-top: 8px; }
   .skill-desc.open { display: block; }
 
+  .skill-level-effects { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .skill-level-effect-row { display: flex; flex-direction: column; gap: 3px; }
+  .skill-level-effect-label {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); font-weight: bold;
+  }
+  .skill-level-effect-textarea {
+    background: rgba(200,168,75,0.05);
+    border: 1px solid rgba(200,168,75,0.3);
+    border-radius: 3px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    padding: 6px 8px;
+    resize: vertical;
+    min-height: 44px;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+  .skill-level-effect-textarea:focus { outline: none; border-color: var(--gold); }
+  .skill-level-effect-textarea:read-only { cursor: default; color: var(--text); }
+
   .skill-passive-btn {
     background: rgba(0,255,136,0.1);
     border: 1px solid var(--success);
@@ -2801,6 +2823,7 @@ function applyMigrations(s) {
     });
   });
   if (s.tags) s.tags.forEach(function(tag) { if (tag.effect === undefined) tag.effect = ''; });
+  if (s.skills) s.skills.forEach(function(sk) { if (!sk.levelEffects) sk.levelEffects = {}; });
   if (s.patrons) s.patrons.forEach(function(p) { if (!p.avatar) p.avatar = ''; });
   if (s.inventory && s.inventory.categories) {
     var hasQS = s.inventory.categories.some(function(c) { return c.locked && c.maxItems === 3; });
@@ -3561,6 +3584,44 @@ function renderSkills() {
     extraGrid.appendChild(makeExtraField('NOTES:', true, notesArea));
     detailDiv.appendChild(extraGrid);
 
+    // --- LEVEL EFFECTS (6-10, shown only when capacity >= level) ---
+    var currentCap = skill.capacity || 5;
+    var levelNums = [6, 7, 8, 9, 10];
+    var visibleLevels = levelNums.filter(function(l) { return currentCap >= l; });
+    if (visibleLevels.length > 0) {
+      var lvlFxSection = document.createElement('div');
+      lvlFxSection.className = 'skill-level-effects';
+
+      var lvlFxDivider = document.createElement('hr');
+      lvlFxDivider.style.cssText = 'border:none;border-top:1px solid rgba(200,168,75,0.2);margin:2px 0 4px';
+      lvlFxSection.appendChild(lvlFxDivider);
+
+      var lvlFxHeader = document.createElement('div');
+      lvlFxHeader.style.cssText = 'font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(200,168,75,0.6);margin-bottom:2px';
+      lvlFxHeader.textContent = 'Advanced Level Effects';
+      lvlFxSection.appendChild(lvlFxHeader);
+
+      visibleLevels.forEach(function(lvl) {
+        var row = document.createElement('div');
+        row.className = 'skill-level-effect-row';
+
+        var lbl = document.createElement('div');
+        lbl.className = 'skill-level-effect-label';
+        lbl.textContent = 'Level ' + lvl + ' Effect';
+        row.appendChild(lbl);
+
+        var ta = document.createElement('textarea');
+        ta.className = 'skill-level-effect-textarea';
+        ta.value = (skill.levelEffects && skill.levelEffects[lvl]) ? skill.levelEffects[lvl] : '';
+        ta.placeholder = 'Bonus unlocked at level ' + lvl + '...';
+        ta.readOnly = true; // set by admin, read-only for players
+        row.appendChild(ta);
+
+        lvlFxSection.appendChild(row);
+      });
+      detailDiv.appendChild(lvlFxSection);
+    }
+
     detailToggle.onclick = function() {
       detailDiv.classList.toggle('open');
       detailToggle.textContent = detailDiv.classList.contains('open') ? '\u25B2 DETAILS' : '\u25BC DETAILS';
@@ -3581,7 +3642,7 @@ function addSkill() {
   STATE.skills.push({
     id: genId(), name: name, stats: [], momentCost: cost,
     level: 0, capacity: 5, passive: false,
-    requirements: '', range: '', target: '', effect: '', description: ''
+    requirements: '', range: '', target: '', effect: '', description: '', levelEffects: {}
   });
   document.getElementById('newSkillName').value = '';
   document.getElementById('newSkillCost').value = '';

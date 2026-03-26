@@ -72,7 +72,7 @@ router.put('/players/:userId/state', async (req, res) => {
 // POST /api/admin/players/:userId/skills — add a skill to a player's character
 router.post('/players/:userId/skills', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
 
     const character = await Character.findOne({ userId: req.params.userId });
@@ -93,7 +93,8 @@ router.post('/players/:userId/skills', async (req, res) => {
       range: range || '',
       target: target || '',
       effect: effect || '',
-      description: description || ''
+      description: description || '',
+      levelEffects: levelEffects || {},
     };
     state.skills.push(skill);
 
@@ -107,7 +108,7 @@ router.post('/players/:userId/skills', async (req, res) => {
 // PUT /api/admin/players/:userId/skills/:skillId — edit a skill
 router.put('/players/:userId/skills/:skillId', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
 
     const character = await Character.findOne({ userId: req.params.userId });
@@ -132,6 +133,7 @@ router.put('/players/:userId/skills/:skillId', async (req, res) => {
       target: target || '',
       effect: effect || '',
       description: description || '',
+      levelEffects: levelEffects || {},
     };
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
@@ -200,6 +202,7 @@ router.post('/players/:userId/achievements', async (req, res) => {
           target: t.target || '',
           effect: t.effect || '',
           description: t.description || '',
+          levelEffects: t.levelEffects || {},
           unlockedByAchievement: title,
         };
         state.skills.push(skill);
@@ -321,9 +324,9 @@ router.get('/skill-library', async (req, res) => {
 // POST /api/admin/skill-library
 router.post('/skill-library', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock });
+    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects: levelEffects || {} });
     res.status(201).json(template);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -333,9 +336,9 @@ router.post('/skill-library', async (req, res) => {
 // PUT /api/admin/skill-library/:id
 router.put('/skill-library/:id', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock }, { new: true });
+    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects: levelEffects || {} }, { new: true });
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json(template);
   } catch (err) {
@@ -349,6 +352,50 @@ router.delete('/skill-library/:id', async (req, res) => {
     const template = await SkillTemplate.findByIdAndDelete(req.params.id);
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// POST /api/admin/skill-library/bulk — import multiple templates at once
+router.post('/skill-library/bulk', async (req, res) => {
+  try {
+    const { skills } = req.body;
+    if (!Array.isArray(skills) || !skills.length) {
+      return res.status(400).json({ error: 'skills array required' });
+    }
+
+    const results = { added: 0, skipped: 0, errors: [] };
+
+    for (const s of skills) {
+      if (!s.name || typeof s.name !== 'string' || !s.name.trim()) {
+        results.errors.push({ name: s.name || '(unnamed)', reason: 'Missing name' });
+        results.skipped++;
+        continue;
+      }
+      try {
+        await SkillTemplate.create({
+          name:             s.name.trim(),
+          momentCost:       s.momentCost   || '',
+          stats:            Array.isArray(s.stats) ? s.stats : (s.stats ? [s.stats] : []),
+          passive:          !!s.passive,
+          capacity:         Number(s.capacity) || 5,
+          requirements:     s.requirements  || '',
+          range:            s.range         || '',
+          target:           s.target        || '',
+          effect:           s.effect        || '',
+          description:       s.description        || '',
+          achievementUnlock: s.achievementUnlock  || '',
+          levelEffects:      (s.levelEffects && typeof s.levelEffects === 'object') ? s.levelEffects : {},
+        });
+        results.added++;
+      } catch (e) {
+        results.errors.push({ name: s.name, reason: e.message });
+        results.skipped++;
+      }
+    }
+
+    res.json({ ok: true, ...results });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

@@ -10,8 +10,9 @@ const skillTemplateSchema = new mongoose.Schema({
   range:        { type: String, default: '' },
   target:       { type: String, default: '' },
   effect:       { type: String, default: '' },
-  description:     { type: String, default: '' },
+  description:       { type: String, default: '' },
   achievementUnlock: { type: String, default: '' },
+  levelEffects:      { type: Object, default: {} },
 }, { timestamps: true });
 
 module.exports = mongoose.model('SkillTemplate', skillTemplateSchema);
