@@ -9,11 +9,18 @@ const adminRoutes = require('./routes/admin');
 const messagesRoutes = require('./routes/messages');
 const playersRoutes = require('./routes/players');
 
+const path = require('path');
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
+
+// Serve HTML pages
+const rootDir = path.join(__dirname, '..');
+app.get('/character-sheet', (req, res) => res.sendFile(path.join(rootDir, 'character-sheet.html')));
+app.get('/admin', (req, res) => res.sendFile(path.join(rootDir, 'admin.html')));
 
 // Routes
 app.use('/api/auth', authRoutes);
