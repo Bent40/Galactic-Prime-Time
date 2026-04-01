@@ -8,6 +8,8 @@ const characterRoutes = require('./routes/character');
 const adminRoutes = require('./routes/admin');
 const messagesRoutes = require('./routes/messages');
 const playersRoutes = require('./routes/players');
+const trackerRoutes = require('./routes/momentTracker');
+const itemsRoutes = require('./routes/items');
 
 const path = require('path');
 
@@ -28,6 +30,8 @@ app.use('/api/character', characterRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/messages', messagesRoutes);
 app.use('/api/players', playersRoutes);
+app.use('/api/tracker', trackerRoutes);
+app.use('/api/items', itemsRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

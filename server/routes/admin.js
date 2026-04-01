@@ -69,6 +69,90 @@ router.put('/players/:userId/state', async (req, res) => {
   }
 });
 
+// POST /api/admin/players/bulk/achievements — grant the same achievement to multiple players
+// NOTE: must come before /:userId routes to avoid param collision
+router.post('/players/bulk/achievements', async (req, res) => {
+  try {
+    const { userIds, title, desc, reward } = req.body;
+    if (!title) return res.status(400).json({ error: 'Achievement title required' });
+    if (!Array.isArray(userIds) || userIds.length === 0)
+      return res.status(400).json({ error: 'userIds array required' });
+
+    const unlockedTemplates = await SkillTemplate.find({
+      achievementUnlock: { $regex: new RegExp('^' + title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$', 'i') }
+    }).lean();
+
+    const results = [];
+    for (const userId of userIds) {
+      try {
+        const character = await Character.findOne({ userId });
+        if (!character) { results.push({ userId, ok: false, error: 'Character not found' }); continue; }
+        const state = character.state || {};
+        if (!state.achievements) state.achievements = [];
+        const achievement = { id: Date.now() + Math.floor(Math.random() * 10000), title, desc: desc || '', reward: reward || '' };
+        state.achievements.push(achievement);
+        if (!state.skills) state.skills = [];
+        const autoGranted = [];
+        for (const t of unlockedTemplates) {
+          if (!state.skills.some(s => s.name === t.name)) {
+            state.skills.push({
+              id: Date.now() + Math.floor(Math.random() * 10000),
+              name: t.name, momentCost: t.momentCost || '', stats: t.stats || [],
+              passive: !!t.passive, capacity: t.capacity || 5, level: 0,
+              requirements: t.requirements || '', range: t.range || '',
+              target: t.target || '', effect: t.effect || '',
+              description: t.description || '', levelEffects: t.levelEffects || {},
+              unlockedByAchievement: title,
+            });
+            autoGranted.push(t.name);
+          }
+        }
+        await Character.findOneAndUpdate({ userId }, { state });
+        results.push({ userId, ok: true, autoGrantedSkills: autoGranted });
+      } catch (e) {
+        results.push({ userId, ok: false, error: e.message });
+      }
+    }
+    res.json({ results });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// POST /api/admin/players/bulk/objectives — send an objective to multiple players
+// NOTE: must come before /:userId routes to avoid param collision
+router.post('/players/bulk/objectives', async (req, res) => {
+  try {
+    const { userIds, section, title, type, description, status } = req.body;
+    if (!Array.isArray(userIds) || userIds.length === 0)
+      return res.status(400).json({ error: 'userIds array required' });
+    if (!title) return res.status(400).json({ error: 'title required' });
+    const sec = ['main', 'directives', 'goals'].includes(section) ? section : 'main';
+    const results = [];
+    for (const userId of userIds) {
+      try {
+        const character = await Character.findOne({ userId });
+        if (!character) { results.push({ userId, ok: false, error: 'Character not found' }); continue; }
+        const state = character.state || {};
+        if (!state.objectives) state.objectives = { main: [], directives: [], goals: [] };
+        if (!state.objectives[sec]) state.objectives[sec] = [];
+        state.objectives[sec].push({
+          id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+          title, type: type || '', description: description || '',
+          status: status || 'active', subtasks: [],
+        });
+        await Character.findOneAndUpdate({ userId }, { state });
+        results.push({ userId, ok: true });
+      } catch (e) {
+        results.push({ userId, ok: false, error: e.message });
+      }
+    }
+    res.json({ results });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // POST /api/admin/players/:userId/skills — add a skill to a player's character
 router.post('/players/:userId/skills', async (req, res) => {
   try {

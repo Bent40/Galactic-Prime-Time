@@ -1020,6 +1020,85 @@
         margin-top: 4px;
       }
 
+      /* ---- MOMENT TRACKER ---- */
+      .tracker-page {
+        padding: 20px;
+        overflow-y: auto;
+        height: calc(100vh - 53px - 38px);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .tracker-header-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+      .clock-display {
+        display: flex; flex-direction: column; align-items: center;
+        background: rgba(168,85,247,0.08); border: 1px solid var(--purple);
+        border-radius: 6px; padding: 8px 20px; min-width: 90px;
+      }
+      .clock-display-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--purple); }
+      .clock-display-val   { font-family: 'Courier New', monospace; font-size: 36px; font-weight: bold; color: var(--purple); line-height: 1; }
+      .moment-display {
+        display: flex; flex-direction: column; align-items: center;
+        background: rgba(0,212,255,0.06); border: 1px solid var(--cyan);
+        border-radius: 6px; padding: 8px 20px; min-width: 90px;
+      }
+      .moment-display-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); }
+      .moment-display-val   { font-family: 'Courier New', monospace; font-size: 36px; font-weight: bold; color: var(--cyan); line-height: 1; }
+      .tracker-controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+      .track-rail-wrap { overflow-x: auto; padding-bottom: 6px; }
+      .track-rail {
+        display: flex; gap: 0; min-width: max-content;
+        border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+      }
+      .track-slot {
+        width: 110px; min-width: 110px; border-right: 1px solid var(--border);
+        display: flex; flex-direction: column; transition: background 0.15s;
+      }
+      .track-slot:last-child { border-right: none; }
+      .track-slot.current-moment {
+        background: rgba(0,212,255,0.06); box-shadow: inset 0 0 0 2px rgba(0,212,255,0.4);
+      }
+      .track-slot.drag-over {
+        background: rgba(168,85,247,0.14); box-shadow: inset 0 0 0 2px var(--purple);
+      }
+      .track-slot-header {
+        padding: 6px 8px; text-align: center;
+        font-family: 'Courier New', monospace; font-size: 18px; font-weight: bold;
+        border-bottom: 1px solid var(--border); color: var(--muted);
+        background: rgba(0,0,0,0.15); flex-shrink: 0;
+      }
+      .track-slot.current-moment .track-slot-header {
+        color: var(--cyan); background: rgba(0,212,255,0.08); border-bottom-color: rgba(0,212,255,0.3);
+      }
+      .track-slot-body {
+        flex: 1; min-height: 130px; padding: 6px;
+        display: flex; flex-direction: column; gap: 5px;
+      }
+      .tracker-entry {
+        border-radius: 4px; padding: 5px 7px; font-size: 11px; font-weight: bold;
+        letter-spacing: 0.5px; display: flex; align-items: center; gap: 5px;
+        cursor: grab; user-select: none; border: 1px solid; position: relative;
+        transition: opacity 0.15s, transform 0.1s; white-space: nowrap;
+      }
+      .tracker-entry:active { cursor: grabbing; opacity: 0.7; transform: scale(0.96); }
+      .tracker-entry.dragging { opacity: 0.3; }
+      .tracker-entry-icon { font-size: 12px; flex-shrink: 0; }
+      .tracker-entry-name { flex: 1; overflow: hidden; text-overflow: ellipsis; max-width: 72px; }
+      .tracker-entry-del {
+        background: none; border: none; cursor: pointer; color: inherit;
+        opacity: 0.45; font-size: 11px; padding: 0 1px; flex-shrink: 0; line-height: 1;
+      }
+      .tracker-entry-del:hover { opacity: 1; }
+      .tracker-add-row { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; }
+      .mob-color-swatches { display: flex; gap: 4px; align-items: center; }
+      .swatch {
+        width: 20px; height: 20px; border-radius: 50%;
+        border: 2px solid transparent; cursor: pointer;
+        transition: border-color 0.15s, transform 0.1s;
+      }
+      .swatch:hover { transform: scale(1.15); }
+      .swatch.selected { border-color: #fff; box-shadow: 0 0 6px rgba(255,255,255,0.4); }
+
       /* ---- BULK IMPORT ---- */
       .bulk-preview-table {
         width: 100%;
@@ -1318,6 +1397,12 @@
       <button class="cnav-tab" id="cnav-comms" onclick="switchSection('comms')">
         &#128172; Comms
       </button>
+      <button class="cnav-tab" id="cnav-tracker" onclick="switchSection('tracker')">
+        &#9201; Moment Tracker
+      </button>
+      <button class="cnav-tab" id="cnav-items" onclick="switchSection('items')">
+        &#127890; Item Library
+      </button>
     </div>
 
     <!-- PLAYERS SECTION (app layout with sidebar) -->
@@ -1327,9 +1412,11 @@
         <div class="sidebar">
           <div class="sidebar-header">
             <span class="sidebar-label">Players</span>
-            <button class="refresh-btn" onclick="loadPlayers()">
-              &#8635; Refresh
-            </button>
+            <div style="display:flex;gap:4px;align-items:center">
+              <button class="action-btn" style="font-size:9px;padding:3px 8px" title="Send objective to multiple players" onclick="openBulkObjModal()">&#127919; Objective</button>
+              <button class="action-btn" style="font-size:9px;padding:3px 8px" title="Grant achievement to multiple players" onclick="openBulkAchievModal()">&#127942; Achievement</button>
+              <button class="refresh-btn" onclick="loadPlayers()">&#8635;</button>
+            </div>
           </div>
           <div id="playerList">
             <div class="loading" style="padding: 16px">Loading...</div>
@@ -1746,6 +1833,160 @@
           <div id="allAchievementsTable">
             <div class="loading">Loading...</div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MOMENT TRACKER SECTION -->
+    <div id="section-tracker" class="tracker-page" style="display:none">
+
+      <!-- Header: clock + moment + controls -->
+      <div class="panel">
+        <div class="panel-title">&#9201; MOMENT TRACKER</div>
+        <div class="panel-content">
+          <div class="tracker-header-bar">
+            <div class="clock-display">
+              <div class="clock-display-label">Clock</div>
+              <div class="clock-display-val" id="trkClock">0</div>
+            </div>
+            <div class="moment-display">
+              <div class="moment-display-label">Moment</div>
+              <div class="moment-display-val" id="trkMoment">0</div>
+            </div>
+            <div class="tracker-controls">
+              <button class="btn btn-sm" style="border-color:var(--muted);color:var(--muted);background:transparent;font-size:16px;padding:6px 14px" onclick="trackerRetreat()" title="Go back one moment">&#8592;</button>
+              <button class="btn btn-cyan" style="padding:8px 20px;font-size:12px" onclick="trackerAdvance()">Advance &#8594;</button>
+              <button class="btn btn-sm" style="border-color:var(--muted);color:var(--muted);background:transparent" onclick="trackerReset()">&#8635; Reset Clock</button>
+              <button class="btn btn-sm" style="border-color:var(--danger);color:var(--danger);background:transparent" onclick="trackerClearEntries()">&#10005; Clear All</button>
+              <button class="refresh-btn" onclick="loadTrackerAdmin()" style="margin-left:8px">&#8635; Refresh</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Track rail -->
+      <div class="panel">
+        <div class="panel-title">TRACK <span style="color:var(--muted);font-weight:normal;font-size:9px">— drag entries between moments</span></div>
+        <div class="panel-content">
+          <div class="track-rail-wrap">
+            <div class="track-rail" id="trkRail"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add entries -->
+      <div class="panel">
+        <div class="panel-title">ADD ENTRIES</div>
+        <div class="panel-content" style="display:flex;flex-direction:column;gap:14px">
+
+          <!-- Add Player -->
+          <div>
+            <div class="section-label" style="margin-bottom:8px">Add Player</div>
+            <div class="tracker-add-row">
+              <div class="form-group">
+                <div class="form-label">Player</div>
+                <select class="form-input" id="trkPlayerSelect" style="min-width:180px">
+                  <option value="">— select player —</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="form-label">Starting Moment</div>
+                <select class="form-input short" id="trkPlayerMoment">
+                  <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                  <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                  <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                  <option value="9">9</option><option value="10">10</option>
+                </select>
+              </div>
+              <button class="btn btn-cyan" onclick="trackerAddPlayer()">+ Add Player</button>
+            </div>
+          </div>
+
+          <!-- Add Mob -->
+          <div>
+            <div class="section-label" style="margin-bottom:8px">Add Mob / NPC</div>
+            <div class="tracker-add-row">
+              <div class="form-group" style="flex:2">
+                <div class="form-label">Name</div>
+                <input class="form-input" id="trkMobName" placeholder="e.g. Space Rat" style="min-width:160px">
+              </div>
+              <div class="form-group">
+                <div class="form-label">Starting Moment</div>
+                <select class="form-input short" id="trkMobMoment">
+                  <option value="0">0</option><option value="1">1</option><option value="2">2</option>
+                  <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+                  <option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                  <option value="9">9</option><option value="10">10</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="form-label">Colour</div>
+                <div class="mob-color-swatches" id="trkMobSwatches"></div>
+              </div>
+              <button class="btn btn-danger" onclick="trackerAddMob()">+ Add Mob</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEM LIBRARY SECTION -->
+    <div id="section-items" class="section-page" style="display:none">
+      <div class="panel">
+        <div class="panel-title">&#127890; ITEM LIBRARY</div>
+        <div class="panel-content">
+
+          <!-- Category tabs -->
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px" id="itemCatTabs">
+            <button class="action-btn item-cat-tab active" data-cat="Equipment" onclick="switchItemCat('Equipment')">Equipment</button>
+            <button class="action-btn item-cat-tab" data-cat="Weapons" onclick="switchItemCat('Weapons')">Weapons</button>
+            <button class="action-btn item-cat-tab" data-cat="Tools" onclick="switchItemCat('Tools')">Tools</button>
+            <button class="action-btn item-cat-tab" data-cat="Consumables" onclick="switchItemCat('Consumables')">Consumables</button>
+            <button class="action-btn item-cat-tab" data-cat="Misc" onclick="switchItemCat('Misc')">Misc</button>
+          </div>
+
+          <!-- Add form -->
+          <div class="section-label" id="itemCatLabel">Equipment</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+            <div class="form-row">
+              <div class="form-group" style="flex:2">
+                <div class="form-label">Name *</div>
+                <input class="form-input" id="newItemName" placeholder="e.g. Plasma Rifle" />
+              </div>
+              <div class="form-group">
+                <div class="form-label">Qty</div>
+                <input class="form-input short" id="newItemQty" type="number" value="1" min="1" style="width:60px" />
+              </div>
+              <div class="form-group">
+                <div class="form-label">Type</div>
+                <input class="form-input" id="newItemType" placeholder="e.g. Ranged" style="width:110px" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <div class="form-label">Damage</div>
+                <input class="form-input" id="newItemDamage" placeholder="e.g. 2d6" style="width:90px" />
+              </div>
+              <div class="form-group">
+                <div class="form-label">Range</div>
+                <input class="form-input" id="newItemRange" placeholder="e.g. 30m" style="width:90px" />
+              </div>
+              <div class="form-group" style="flex:2">
+                <div class="form-label">Effect</div>
+                <input class="form-input" id="newItemEffect" placeholder="e.g. On hit: apply Burn" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label">Notes</div>
+              <input class="form-input" id="newItemNotes" placeholder="Additional notes" />
+            </div>
+            <div>
+              <button class="action-btn" onclick="addItem()">+ Add Item</button>
+            </div>
+          </div>
+
+          <!-- Item list for current category -->
+          <div id="itemLibList"></div>
         </div>
       </div>
     </div>
@@ -2449,6 +2690,164 @@
       </div>
     </div>
 
+    <!-- EDIT ITEM MODAL -->
+    <div class="modal-overlay hidden" id="editItemModal">
+      <div class="modal-box">
+        <div class="modal-title">Edit Item</div>
+        <input type="hidden" id="editItemId" />
+        <div class="form-row">
+          <div class="form-group" style="flex:2">
+            <div class="form-label">Name *</div>
+            <input class="form-input" id="editItemName" />
+          </div>
+          <div class="form-group">
+            <div class="form-label">Category</div>
+            <select class="form-input" id="editItemCategory">
+              <option>Equipment</option>
+              <option>Weapons</option>
+              <option>Tools</option>
+              <option>Consumables</option>
+              <option>Misc</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="form-label">Qty</div>
+            <input class="form-input short" id="editItemQty" type="number" min="1" style="width:60px" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <div class="form-label">Type</div>
+            <input class="form-input" id="editItemType" style="width:110px" />
+          </div>
+          <div class="form-group">
+            <div class="form-label">Damage</div>
+            <input class="form-input" id="editItemDamage" style="width:90px" />
+          </div>
+          <div class="form-group">
+            <div class="form-label">Range</div>
+            <input class="form-input" id="editItemRange" style="width:90px" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Effect</div>
+          <input class="form-input" id="editItemEffect" />
+        </div>
+        <div class="form-group">
+          <div class="form-label">Notes</div>
+          <input class="form-input" id="editItemNotes" />
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button class="action-btn" onclick="saveEditedItem()">Save Changes</button>
+          <button class="action-btn" style="background:transparent;border-color:var(--muted);color:var(--muted)" onclick="closeEditItemModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GIVE ITEM MODAL -->
+    <div class="modal-overlay hidden" id="giveItemModal">
+      <div class="modal-box">
+        <div class="modal-title">Give Item to Players</div>
+        <input type="hidden" id="giveItemId" />
+        <div id="giveItemName" style="font-size:13px;color:#fff;margin-bottom:4px"></div>
+        <div class="form-row" style="align-items:flex-end">
+          <div class="form-group">
+            <div class="form-label">Qty Override</div>
+            <input class="form-input short" id="giveItemQty" type="number" min="1" style="width:70px" placeholder="default" />
+          </div>
+        </div>
+        <div class="form-label" style="margin-bottom:4px">Select Players</div>
+        <div id="giveItemPlayerList" style="max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:4px;padding:8px;display:flex;flex-direction:column;gap:6px"></div>
+        <div style="display:flex;gap:6px;margin-top:6px">
+          <button class="action-btn" style="font-size:10px;padding:4px 10px" onclick="giveItemSelectAll(true)">All</button>
+          <button class="action-btn" style="font-size:10px;padding:4px 10px" onclick="giveItemSelectAll(false)">None</button>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button class="action-btn" onclick="submitGiveItem()">Give to Selected</button>
+          <button class="action-btn" style="background:transparent;border-color:var(--muted);color:var(--muted)" onclick="closeGiveItemModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BULK ACHIEVEMENT MODAL -->
+    <div class="modal-overlay hidden" id="bulkAchievModal">
+      <div class="modal-box" style="width:600px">
+        <div class="modal-title">Bulk Grant Achievement</div>
+        <div class="form-label" style="margin-bottom:4px">Select Players</div>
+        <div id="bulkAchievPlayerList" style="max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:4px;padding:8px;display:flex;flex-direction:column;gap:6px"></div>
+        <div style="display:flex;gap:6px;margin-top:2px">
+          <button class="action-btn" style="font-size:10px;padding:4px 10px" onclick="bulkAchievSelectAll(true)">All</button>
+          <button class="action-btn" style="font-size:10px;padding:4px 10px" onclick="bulkAchievSelectAll(false)">None</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex:2">
+            <div class="form-label">Achievement Title *</div>
+            <input class="form-input" id="bulkAchievTitle" placeholder="e.g. First Blood" />
+          </div>
+          <div class="form-group" style="flex:1">
+            <div class="form-label">Reward</div>
+            <input class="form-input" id="bulkAchievReward" placeholder="e.g. +1 Token" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Description</div>
+          <input class="form-input" id="bulkAchievDesc" placeholder="Short description" />
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button class="action-btn" onclick="submitBulkAchievements()">Grant to Selected</button>
+          <button class="action-btn" style="background:transparent;border-color:var(--muted);color:var(--muted)" onclick="closeBulkAchievModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BULK OBJECTIVE MODAL -->
+    <div class="modal-overlay hidden" id="bulkObjModal">
+      <div class="modal-box" style="width:620px">
+        <div class="modal-title">Send Objective to Players</div>
+        <div class="form-label" style="margin-bottom:4px">Select Players</div>
+        <div id="bulkObjPlayerList" style="max-height:180px;overflow-y:auto;border:1px solid var(--border);border-radius:4px;padding:8px;display:flex;flex-direction:column;gap:6px"></div>
+        <div style="display:flex;gap:6px;margin-top:2px">
+          <button class="action-btn" style="font-size:10px;padding:4px 10px" onclick="bulkObjSelectAll(true)">All</button>
+          <button class="action-btn" style="font-size:10px;padding:4px 10px" onclick="bulkObjSelectAll(false)">None</button>
+        </div>
+        <div class="form-row">
+          <div class="form-group" style="flex:2">
+            <div class="form-label">Title *</div>
+            <input class="form-input" id="bulkObjTitle" placeholder="Objective title" />
+          </div>
+          <div class="form-group">
+            <div class="form-label">Section</div>
+            <select class="form-input" id="bulkObjSection">
+              <option value="main">Main</option>
+              <option value="directives">Directives</option>
+              <option value="goals">Goals</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <div class="form-label">Type</div>
+            <select class="form-input" id="bulkObjType">
+              <option value="">— none —</option>
+              <option>Scenario</option>
+              <option>Chapter</option>
+              <option>Interlude</option>
+              <option>Side Quest</option>
+              <option>Personal</option>
+              <option>Bounty</option>
+              <option>Corporate Directive</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="form-label">Description</div>
+          <textarea class="form-input" id="bulkObjDesc" rows="3" placeholder="Objective description..." style="resize:vertical"></textarea>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <button class="action-btn" onclick="submitBulkObjectives()">Send to Selected</button>
+          <button class="action-btn" style="background:transparent;border-color:var(--muted);color:var(--muted)" onclick="closeBulkObjModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
     <!-- TOAST -->
     <div class="toast" id="toast"></div>
 
@@ -2456,7 +2855,7 @@
       // ============================================================
       //  CONFIG
       // ============================================================
-      const API = "http://192.168.7.28:3001/api";
+      const API = "http://192.168.7.62:3001/api";
 
       // ============================================================
       //  AUTH
@@ -2526,7 +2925,7 @@
       }
 
       function switchSection(name) {
-        ["players", "library", "achievements", "comms"].forEach((s) => {
+        ["players", "library", "achievements", "comms", "tracker", "items"].forEach((s) => {
           document.getElementById("section-" + s).style.display = "none";
           document.getElementById("cnav-" + s).classList.remove("active");
         });
@@ -2538,9 +2937,11 @@
           clearInterval(_adminCommsInterval);
           _adminCommsInterval = null;
         }
-        if (name === "library") loadSkillLibrary();
+        if (name === "library")      loadSkillLibrary();
         if (name === "achievements") loadAllAchievements();
-        if (name === "comms") loadAdminMessages();
+        if (name === "comms")        loadAdminMessages();
+        if (name === "tracker")      loadTrackerAdmin();
+        if (name === "items")        loadItems();
       }
 
       // Try restoring session on page load
@@ -4209,6 +4610,567 @@
         document.getElementById("bulkPreviewArea").innerHTML = "";
         document.getElementById("bulkImportBtn").style.display = "none";
         _bulkParsed = [];
+      }
+
+      // ============================================================
+      //  MOMENT TRACKER — ADMIN
+      // ============================================================
+      const TRACKER_API = API + '/tracker';
+      const MOB_COLORS = ['#ff2255','#ff8c00','#a855f7','#00ff88','#ec4899','#facc15','#38bdf8','#f87171'];
+      let _trkMobColor = MOB_COLORS[0];
+      let _dragEntryId = null;
+      let _trackerState = null;
+
+      function trackerAuthHeaders() { return authHeaders(); }
+
+      // Populate colour swatches on init
+      function initTrackerSwatches() {
+        const wrap = document.getElementById('trkMobSwatches');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+        MOB_COLORS.forEach(c => {
+          const s = document.createElement('div');
+          s.className = 'swatch' + (c === _trkMobColor ? ' selected' : '');
+          s.style.background = c;
+          s.title = c;
+          s.onclick = () => {
+            _trkMobColor = c;
+            wrap.querySelectorAll('.swatch').forEach(el => el.classList.remove('selected'));
+            s.classList.add('selected');
+          };
+          wrap.appendChild(s);
+        });
+      }
+
+      // Populate player dropdown from already-loaded players list
+      function populateTrkPlayerSelect() {
+        const sel = document.getElementById('trkPlayerSelect');
+        if (!sel) return;
+        sel.innerHTML = '<option value="">— select player —</option>';
+        players.forEach(p => {
+          const opt = document.createElement('option');
+          opt.value = JSON.stringify({ name: p.characterName || p.username, userId: p.userId });
+          opt.textContent = (p.characterName ? p.characterName + ' (' + p.username + ')' : p.username);
+          sel.appendChild(opt);
+        });
+      }
+
+      async function loadTrackerAdmin() {
+        try {
+          const res = await fetch(TRACKER_API, { headers: trackerAuthHeaders() });
+          if (!res.ok) throw new Error();
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+          populateTrkPlayerSelect();
+          initTrackerSwatches();
+        } catch (e) {
+          showToast('Could not load tracker', true);
+        }
+      }
+
+      function renderTrackerAdmin() {
+        if (!_trackerState) return;
+        const { currentMoment, clock, entries } = _trackerState;
+
+        document.getElementById('trkClock').textContent  = clock;
+        document.getElementById('trkMoment').textContent = currentMoment;
+
+        const rail = document.getElementById('trkRail');
+        rail.innerHTML = '';
+
+        for (let m = 0; m <= 10; m++) {
+          const slot = document.createElement('div');
+          slot.className = 'track-slot' + (m === currentMoment ? ' current-moment' : '');
+          slot.dataset.moment = m;
+
+          // Header
+          const hdr = document.createElement('div');
+          hdr.className = 'track-slot-header';
+          hdr.textContent = m;
+          slot.appendChild(hdr);
+
+          // Body (drop zone)
+          const body = document.createElement('div');
+          body.className = 'track-slot-body';
+          body.dataset.moment = m;
+
+          body.addEventListener('dragover', e => {
+            e.preventDefault();
+            slot.classList.add('drag-over');
+          });
+          body.addEventListener('dragleave', () => slot.classList.remove('drag-over'));
+          body.addEventListener('drop', async e => {
+            e.preventDefault();
+            slot.classList.remove('drag-over');
+            const entryId = e.dataTransfer.getData('text/plain');
+            if (!entryId) return;
+            await trackerMoveEntry(entryId, m);
+          });
+
+          // Entries in this slot
+          const slotEntries = entries.filter(en => en.moment === m);
+          slotEntries.forEach(en => {
+            const chip = buildTrackerChip(en, true);
+            body.appendChild(chip);
+          });
+
+          slot.appendChild(body);
+          rail.appendChild(slot);
+        }
+      }
+
+      function buildTrackerChip(entry, editable) {
+        const chip = document.createElement('div');
+        chip.className = 'tracker-entry';
+        chip.dataset.entryId = entry.entryId;
+
+        const isPlayer = entry.type === 'player';
+        const col = entry.color || (isPlayer ? '#00d4ff' : '#ff2255');
+        chip.style.borderColor = col;
+        chip.style.background  = col + '18';
+        chip.style.color       = col;
+
+        if (editable) {
+          chip.draggable = true;
+          chip.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('text/plain', entry.entryId);
+            setTimeout(() => chip.classList.add('dragging'), 0);
+          });
+          chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+        }
+
+        const icon = document.createElement('span');
+        icon.className = 'tracker-entry-icon';
+        icon.textContent = isPlayer ? '👤' : '⚔';
+        chip.appendChild(icon);
+
+        const name = document.createElement('span');
+        name.className = 'tracker-entry-name';
+        name.textContent = entry.name;
+        chip.appendChild(name);
+
+        if (editable) {
+          const del = document.createElement('button');
+          del.className = 'tracker-entry-del';
+          del.textContent = '×';
+          del.title = 'Remove';
+          del.onclick = async e => { e.stopPropagation(); await trackerDeleteEntry(entry.entryId); };
+          chip.appendChild(del);
+        }
+
+        return chip;
+      }
+
+      async function trackerAdvance() {
+        try {
+          const res = await fetch(TRACKER_API + '/advance', { method: 'PATCH', headers: trackerAuthHeaders() });
+          if (!res.ok) { showToast('Failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function trackerRetreat() {
+        try {
+          const res = await fetch(TRACKER_API + '/retreat', { method: 'PATCH', headers: trackerAuthHeaders() });
+          if (!res.ok) { showToast('Failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function trackerReset() {
+        if (!confirm('Reset clock and moment to 0? Entries will be kept.')) return;
+        try {
+          const res = await fetch(TRACKER_API + '/reset', { method: 'POST', headers: trackerAuthHeaders() });
+          if (!res.ok) { showToast('Failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+          showToast('Tracker reset.');
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function trackerClearEntries() {
+        if (!confirm('Remove all entries from the tracker?')) return;
+        try {
+          const res = await fetch(TRACKER_API + '/entries', { method: 'DELETE', headers: trackerAuthHeaders() });
+          if (!res.ok) { showToast('Failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+          showToast('All entries cleared.');
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function trackerAddPlayer() {
+        const raw = document.getElementById('trkPlayerSelect').value;
+        if (!raw) { showToast('Select a player first', true); return; }
+        const { name, userId } = JSON.parse(raw);
+        const moment = parseInt(document.getElementById('trkPlayerMoment').value) || 0;
+        try {
+          const res = await fetch(TRACKER_API + '/entries', {
+            method: 'POST', headers: { ...trackerAuthHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, type: 'player', moment, color: '#00d4ff', userId })
+          });
+          if (!res.ok) { showToast('Failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+          showToast(name + ' added to moment ' + moment + '.');
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function trackerAddMob() {
+        const name = document.getElementById('trkMobName').value.trim();
+        if (!name) { showToast('Enter a mob name', true); return; }
+        const moment = parseInt(document.getElementById('trkMobMoment').value) || 0;
+        try {
+          const res = await fetch(TRACKER_API + '/entries', {
+            method: 'POST', headers: { ...trackerAuthHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, type: 'mob', moment, color: _trkMobColor })
+          });
+          if (!res.ok) { showToast('Failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+          document.getElementById('trkMobName').value = '';
+          showToast(name + ' added to moment ' + moment + '.');
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function trackerMoveEntry(entryId, newMoment) {
+        try {
+          const res = await fetch(TRACKER_API + '/entries/' + entryId, {
+            method: 'PATCH', headers: { ...trackerAuthHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify({ moment: newMoment })
+          });
+          if (!res.ok) { showToast('Move failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function trackerDeleteEntry(entryId) {
+        try {
+          const res = await fetch(TRACKER_API + '/entries/' + entryId, {
+            method: 'DELETE', headers: trackerAuthHeaders()
+          });
+          if (!res.ok) { showToast('Failed', true); return; }
+          _trackerState = await res.json();
+          renderTrackerAdmin();
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      // ============================================================
+      //  BULK ACHIEVEMENT MODAL
+      // ============================================================
+      function openBulkAchievModal() {
+        const list = document.getElementById('bulkAchievPlayerList');
+        list.innerHTML = '';
+        players.forEach(p => {
+          const label = document.createElement('label');
+          label.style.cssText = 'display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px';
+          label.innerHTML = `<input type="checkbox" class="bulk-achiev-cb" value="${p.userId}" checked>
+            <span>${escHtml(p.username)}${p.characterName ? ' — ' + escHtml(p.characterName) : ''}</span>`;
+          list.appendChild(label);
+        });
+        document.getElementById('bulkAchievTitle').value = '';
+        document.getElementById('bulkAchievReward').value = '';
+        document.getElementById('bulkAchievDesc').value = '';
+        document.getElementById('bulkAchievModal').classList.remove('hidden');
+      }
+
+      function closeBulkAchievModal() {
+        document.getElementById('bulkAchievModal').classList.add('hidden');
+      }
+
+      function bulkAchievSelectAll(checked) {
+        document.querySelectorAll('.bulk-achiev-cb').forEach(cb => cb.checked = checked);
+      }
+
+      async function submitBulkAchievements() {
+        const title = document.getElementById('bulkAchievTitle').value.trim();
+        if (!title) { showToast('Achievement title required', true); return; }
+        const userIds = [...document.querySelectorAll('.bulk-achiev-cb:checked')].map(cb => cb.value);
+        if (!userIds.length) { showToast('Select at least one player', true); return; }
+        try {
+          const res = await fetch(API + '/admin/players/bulk/achievements', {
+            method: 'POST',
+            headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              userIds,
+              title,
+              desc: document.getElementById('bulkAchievDesc').value.trim(),
+              reward: document.getElementById('bulkAchievReward').value.trim(),
+            }),
+          });
+          if (!res.ok) { showToast('Server error', true); return; }
+          const data = await res.json();
+          const ok = data.results.filter(r => r.ok).length;
+          showToast(`Achievement granted to ${ok}/${userIds.length} players`);
+          closeBulkAchievModal();
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      // ============================================================
+      //  BULK OBJECTIVE MODAL
+      // ============================================================
+      function openBulkObjModal() {
+        const list = document.getElementById('bulkObjPlayerList');
+        list.innerHTML = '';
+        players.forEach(p => {
+          const label = document.createElement('label');
+          label.style.cssText = 'display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px';
+          label.innerHTML = `<input type="checkbox" class="bulk-obj-cb" value="${p.userId}" checked>
+            <span>${escHtml(p.username)}${p.characterName ? ' — ' + escHtml(p.characterName) : ''}</span>`;
+          list.appendChild(label);
+        });
+        document.getElementById('bulkObjTitle').value = '';
+        document.getElementById('bulkObjDesc').value = '';
+        document.getElementById('bulkObjSection').value = 'main';
+        document.getElementById('bulkObjType').value = '';
+        document.getElementById('bulkObjModal').classList.remove('hidden');
+      }
+
+      function closeBulkObjModal() {
+        document.getElementById('bulkObjModal').classList.add('hidden');
+      }
+
+      function bulkObjSelectAll(checked) {
+        document.querySelectorAll('.bulk-obj-cb').forEach(cb => cb.checked = checked);
+      }
+
+      async function submitBulkObjectives() {
+        const title = document.getElementById('bulkObjTitle').value.trim();
+        if (!title) { showToast('Objective title required', true); return; }
+        const userIds = [...document.querySelectorAll('.bulk-obj-cb:checked')].map(cb => cb.value);
+        if (!userIds.length) { showToast('Select at least one player', true); return; }
+        try {
+          const res = await fetch(API + '/admin/players/bulk/objectives', {
+            method: 'POST',
+            headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              userIds,
+              title,
+              section: document.getElementById('bulkObjSection').value,
+              type: document.getElementById('bulkObjType').value,
+              description: document.getElementById('bulkObjDesc').value.trim(),
+              status: 'active',
+            }),
+          });
+          if (!res.ok) { showToast('Server error', true); return; }
+          const data = await res.json();
+          const ok = data.results.filter(r => r.ok).length;
+          showToast(`Objective sent to ${ok}/${userIds.length} players`);
+          closeBulkObjModal();
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      // ============================================================
+      //  ITEM LIBRARY
+      // ============================================================
+      let _items = [];
+      let _currentItemCat = 'Equipment';
+
+      function switchItemCat(cat) {
+        _currentItemCat = cat;
+        document.getElementById('itemCatLabel').textContent = cat;
+        document.querySelectorAll('.item-cat-tab').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.cat === cat);
+        });
+        renderItems();
+      }
+
+      async function loadItems() {
+        try {
+          const res = await fetch(API + '/items', { headers: authHeaders() });
+          if (!res.ok) throw new Error('Failed');
+          _items = await res.json();
+          renderItems();
+        } catch (e) {
+          document.getElementById('itemLibList').innerHTML =
+            '<div style="color:var(--danger);font-size:12px">Could not load items.</div>';
+        }
+      }
+
+      function renderItems() {
+        const container = document.getElementById('itemLibList');
+        const catItems = _items.filter(i => i.category === _currentItemCat);
+        if (!catItems.length) {
+          container.innerHTML = '<div style="color:var(--muted);font-size:12px;padding:12px 0">No items in this category yet.</div>';
+          return;
+        }
+        container.innerHTML = '';
+        catItems.forEach(item => {
+          const row = document.createElement('div');
+          row.style.cssText = 'display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)';
+          const info = document.createElement('div');
+          info.style.cssText = 'flex:1;display:flex;flex-direction:column;gap:2px';
+          const nameLine = `<span style="font-weight:700;color:#fff;font-size:13px">${escHtml(item.name)}</span>` +
+            (item.type ? ` <span style="font-size:10px;color:var(--muted)">[${escHtml(item.type)}]</span>` : '') +
+            ` <span style="font-size:10px;color:var(--gold)">×${item.qty}</span>`;
+          const details = [
+            item.damage  ? `<span style="color:var(--danger)">DMG: ${escHtml(item.damage)}</span>` : '',
+            item.range   ? `<span style="color:var(--accent)">RNG: ${escHtml(item.range)}</span>` : '',
+            item.effect  ? `<span style="color:var(--success)">${escHtml(item.effect)}</span>` : '',
+            item.notes   ? `<span style="color:var(--muted);font-style:italic">${escHtml(item.notes)}</span>` : '',
+          ].filter(Boolean).join(' &nbsp;·&nbsp; ');
+          info.innerHTML = `<div>${nameLine}</div>${details ? `<div style="font-size:11px">${details}</div>` : ''}`;
+          const btns = document.createElement('div');
+          btns.style.cssText = 'display:flex;gap:6px;flex-shrink:0';
+          const giveBtn = document.createElement('button');
+          giveBtn.className = 'action-btn';
+          giveBtn.style.cssText = 'font-size:10px;padding:3px 10px';
+          giveBtn.textContent = 'Give';
+          giveBtn.onclick = () => openGiveItemModal(item);
+          const editBtn = document.createElement('button');
+          editBtn.className = 'action-btn';
+          editBtn.style.cssText = 'font-size:10px;padding:3px 10px';
+          editBtn.textContent = 'Edit';
+          editBtn.onclick = () => openEditItemModal(item);
+          const delBtn = document.createElement('button');
+          delBtn.className = 'action-btn';
+          delBtn.style.cssText = 'font-size:10px;padding:3px 10px;background:transparent;border-color:var(--danger);color:var(--danger)';
+          delBtn.textContent = 'Delete';
+          delBtn.onclick = () => deleteItem(item._id, item.name);
+          btns.appendChild(giveBtn);
+          btns.appendChild(editBtn);
+          btns.appendChild(delBtn);
+          row.appendChild(info);
+          row.appendChild(btns);
+          container.appendChild(row);
+        });
+      }
+
+      async function addItem() {
+        const name = document.getElementById('newItemName').value.trim();
+        if (!name) { showToast('Name required', true); return; }
+        const body = {
+          name,
+          category: _currentItemCat,
+          qty:    parseInt(document.getElementById('newItemQty').value) || 1,
+          type:   document.getElementById('newItemType').value.trim(),
+          damage: document.getElementById('newItemDamage').value.trim(),
+          range:  document.getElementById('newItemRange').value.trim(),
+          effect: document.getElementById('newItemEffect').value.trim(),
+          notes:  document.getElementById('newItemNotes').value.trim(),
+        };
+        try {
+          const res = await fetch(API + '/items', {
+            method: 'POST',
+            headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+          if (!res.ok) { showToast('Failed to add item', true); return; }
+          ['newItemName','newItemQty','newItemType','newItemDamage','newItemRange','newItemEffect','newItemNotes']
+            .forEach(id => { const el = document.getElementById(id); el.value = id === 'newItemQty' ? '1' : ''; });
+          await loadItems();
+          showToast('Item added');
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function deleteItem(id, name) {
+        if (!confirm(`Delete "${name}"?`)) return;
+        try {
+          const res = await fetch(API + '/items/' + id, { method: 'DELETE', headers: authHeaders() });
+          if (!res.ok) { showToast('Failed', true); return; }
+          await loadItems();
+          showToast('Item deleted');
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      function openEditItemModal(item) {
+        document.getElementById('editItemId').value = item._id;
+        document.getElementById('editItemName').value = item.name;
+        document.getElementById('editItemCategory').value = item.category;
+        document.getElementById('editItemQty').value = item.qty;
+        document.getElementById('editItemType').value = item.type || '';
+        document.getElementById('editItemDamage').value = item.damage || '';
+        document.getElementById('editItemRange').value = item.range || '';
+        document.getElementById('editItemEffect').value = item.effect || '';
+        document.getElementById('editItemNotes').value = item.notes || '';
+        document.getElementById('editItemModal').classList.remove('hidden');
+      }
+
+      function closeEditItemModal() {
+        document.getElementById('editItemModal').classList.add('hidden');
+      }
+
+      async function saveEditedItem() {
+        const id = document.getElementById('editItemId').value;
+        const name = document.getElementById('editItemName').value.trim();
+        if (!name) { showToast('Name required', true); return; }
+        const body = {
+          name,
+          category: document.getElementById('editItemCategory').value,
+          qty:    parseInt(document.getElementById('editItemQty').value) || 1,
+          type:   document.getElementById('editItemType').value.trim(),
+          damage: document.getElementById('editItemDamage').value.trim(),
+          range:  document.getElementById('editItemRange').value.trim(),
+          effect: document.getElementById('editItemEffect').value.trim(),
+          notes:  document.getElementById('editItemNotes').value.trim(),
+        };
+        try {
+          const res = await fetch(API + '/items/' + id, {
+            method: 'PUT',
+            headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+          if (!res.ok) { showToast('Failed', true); return; }
+          closeEditItemModal();
+          // If category changed, switch to new category
+          _currentItemCat = body.category;
+          document.querySelectorAll('.item-cat-tab').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.cat === _currentItemCat);
+          });
+          document.getElementById('itemCatLabel').textContent = _currentItemCat;
+          await loadItems();
+          showToast('Item updated');
+        } catch (e) { showToast('Server error', true); }
+      }
+
+      async function openGiveItemModal(item) {
+        if (!players.length) await loadPlayers();
+        document.getElementById('giveItemId').value = item._id;
+        document.getElementById('giveItemName').textContent = item.name + ' (' + item.category + ')';
+        document.getElementById('giveItemQty').value = '';
+        const list = document.getElementById('giveItemPlayerList');
+        list.innerHTML = '';
+        players.forEach(p => {
+          const label = document.createElement('label');
+          label.style.cssText = 'display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px';
+          label.innerHTML = `<input type="checkbox" class="give-item-cb" value="${p.userId}" checked>
+            <span>${escHtml(p.username)}${p.characterName ? ' — ' + escHtml(p.characterName) : ''}</span>`;
+          list.appendChild(label);
+        });
+        document.getElementById('giveItemModal').classList.remove('hidden');
+      }
+
+      function closeGiveItemModal() {
+        document.getElementById('giveItemModal').classList.add('hidden');
+      }
+
+      function giveItemSelectAll(checked) {
+        document.querySelectorAll('.give-item-cb').forEach(cb => cb.checked = checked);
+      }
+
+      async function submitGiveItem() {
+        const itemId = document.getElementById('giveItemId').value;
+        const qtyVal = document.getElementById('giveItemQty').value.trim();
+        const qty = qtyVal ? parseInt(qtyVal) : null;
+        const userIds = [...document.querySelectorAll('.give-item-cb:checked')].map(cb => cb.value);
+        if (!userIds.length) { showToast('Select at least one player', true); return; }
+        try {
+          const body = { userIds, itemId };
+          if (qty != null && qty > 0) body.qty = qty;
+          const res = await fetch(API + '/items/give', {
+            method: 'POST',
+            headers: { ...authHeaders(), 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+          if (!res.ok) { showToast('Server error', true); return; }
+          const data = await res.json();
+          const ok = data.results.filter(r => r.ok).length;
+          showToast(`Item given to ${ok}/${userIds.length} players`);
+          closeGiveItemModal();
+        } catch (e) { showToast('Server error', true); }
       }
     </script>
   </body>

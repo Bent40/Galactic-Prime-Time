@@ -1338,6 +1338,50 @@
         font-size: 11px;
       }
 
+      /* MOMENT TRACKER (read-only bar) */
+      .trk-bar {
+        background: #06081a; border-bottom: 1px solid var(--border);
+        padding: 8px 16px; display: flex; align-items: center; gap: 12px;
+        flex-wrap: nowrap; overflow: hidden;
+      }
+      .trk-clock-pill {
+        display: flex; flex-direction: column; align-items: center;
+        background: rgba(168,85,247,0.08); border: 1px solid rgba(168,85,247,0.5);
+        border-radius: 5px; padding: 3px 10px; flex-shrink: 0;
+      }
+      .trk-clock-label { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(168,85,247,0.7); }
+      .trk-clock-val   { font-family: 'Courier New', monospace; font-size: 20px; font-weight: bold; color: #a855f7; line-height: 1; }
+      .trk-moment-pill {
+        display: flex; flex-direction: column; align-items: center;
+        background: rgba(0,212,255,0.07); border: 1px solid rgba(0,212,255,0.5);
+        border-radius: 5px; padding: 3px 10px; flex-shrink: 0;
+      }
+      .trk-moment-label { font-size: 7px; letter-spacing: 2px; text-transform: uppercase; color: rgba(0,212,255,0.7); }
+      .trk-moment-val   { font-family: 'Courier New', monospace; font-size: 20px; font-weight: bold; color: var(--cyan); line-height: 1; }
+      .trk-vdivider { width: 1px; height: 40px; background: var(--border); flex-shrink: 0; }
+      .trk-rail-wrap { flex: 1; overflow-x: auto; scrollbar-width: thin; }
+      .trk-rail { display: flex; gap: 3px; min-width: max-content; padding: 2px 0; align-items: flex-start; }
+      .trk-slot {
+        display: flex; flex-direction: column; align-items: center; gap: 3px;
+        min-width: 50px; padding: 3px 3px 4px; border-radius: 4px;
+        border: 1px solid transparent;
+      }
+      .trk-slot.trk-current {
+        background: rgba(0,212,255,0.07); border-color: rgba(0,212,255,0.4);
+        box-shadow: 0 0 8px rgba(0,212,255,0.12);
+      }
+      .trk-slot-num {
+        font-family: 'Courier New', monospace; font-size: 10px; font-weight: bold;
+        color: var(--muted); line-height: 1;
+      }
+      .trk-slot.trk-current .trk-slot-num { color: var(--cyan); }
+      .trk-chip {
+        border-radius: 3px; padding: 2px 4px; font-size: 9px; font-weight: bold;
+        border: 1px solid; white-space: nowrap; max-width: 72px;
+        overflow: hidden; text-overflow: ellipsis;
+      }
+      .trk-empty-msg { font-size: 10px; color: var(--muted); letter-spacing: 1px; padding: 2px 0; }
+
       /* TOKENS */
       .token-counters {
         display: flex;
@@ -2963,6 +3007,49 @@
         font-weight: 700;
         margin-top: 4px;
       }
+      .objective-toast {
+        position: fixed;
+        top: -220px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        background: linear-gradient(135deg, #0a1a2e 0%, #0d0f1e 100%);
+        border: 2px solid var(--accent);
+        border-radius: 10px;
+        padding: 18px 28px;
+        min-width: 300px;
+        max-width: 460px;
+        text-align: center;
+        box-shadow:
+          0 0 50px rgba(0, 212, 255, 0.4),
+          0 6px 24px rgba(0, 0, 0, 0.9);
+        transition: top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .objective-toast.visible { top: 72px; }
+      .objective-toast-icon { font-size: 32px; margin-bottom: 6px; }
+      .objective-toast-eyebrow {
+        font-size: 10px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+      .objective-toast-title {
+        font-size: 20px;
+        font-weight: 900;
+        color: #fff;
+        letter-spacing: 1px;
+        text-shadow: 0 0 16px var(--accent);
+        margin-bottom: 6px;
+      }
+      .objective-toast-type {
+        font-size: 11px;
+        color: var(--accent);
+        letter-spacing: 1px;
+        font-weight: 700;
+        margin-top: 4px;
+      }
 
       /* CONFETTI */
       .confetti-container {
@@ -3007,6 +3094,14 @@
       <div class="achievement-toast-reward" id="toastReward"></div>
     </div>
     <div id="confettiContainer" class="confetti-container"></div>
+
+    <!-- OBJECTIVE TOAST -->
+    <div id="objectiveToast" class="objective-toast">
+      <div class="objective-toast-icon">&#127919;</div>
+      <div class="objective-toast-eyebrow">New Objective</div>
+      <div class="objective-toast-title" id="objToastTitle"></div>
+      <div class="objective-toast-type" id="objToastType"></div>
+    </div>
 
     <!-- LOGIN MODAL -->
     <div class="login-overlay" id="loginOverlay">
@@ -3101,6 +3196,22 @@
       <div class="broadcast-title">GALACTIC PRIME TIME</div>
       <div class="auth-bar" id="authBar">
         <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- MOMENT TRACKER BAR (read-only, auto-polled) -->
+    <div class="trk-bar" id="trkBar" style="display:none">
+      <div class="trk-clock-pill">
+        <div class="trk-clock-label">Clock</div>
+        <div class="trk-clock-val" id="csTrackerClock">0</div>
+      </div>
+      <div class="trk-moment-pill">
+        <div class="trk-moment-label">Moment</div>
+        <div class="trk-moment-val" id="csTrackerMoment">0</div>
+      </div>
+      <div class="trk-vdivider"></div>
+      <div class="trk-rail-wrap">
+        <div class="trk-rail" id="csTrackerRail"></div>
       </div>
     </div>
 
@@ -6561,7 +6672,7 @@
       //  SERVER SYNC — AUTH & CHARACTER
       // ============================================================
 
-      var SERVER_URL = "http://192.168.7.28:3001";
+      var SERVER_URL = "http://192.168.7.62:3001";
       var _authToken = null;
       var _authUsername = null;
 
@@ -6725,6 +6836,7 @@
 
       function doLogout() {
         stopPolling();
+        document.getElementById('trkBar').style.display = 'none';
         hideChatPanel();
         _authToken = null;
         _authUsername = null;
@@ -7049,6 +7161,7 @@
       // ============================================================
 
       var _knownAchievementIds = new Set();
+      var _knownObjectiveIds = new Set();
       var _pollInterval = null;
       var _toastQueue = [];
       var _toastShowing = false;
@@ -7059,6 +7172,14 @@
             return a.id;
           }),
         );
+      }
+
+      function seedKnownObjectives() {
+        _knownObjectiveIds = new Set();
+        var objs = STATE.objectives || {};
+        ['main', 'directives', 'goals'].forEach(function(sec) {
+          (objs[sec] || []).forEach(function(o) { _knownObjectiveIds.add(o.id); });
+        });
       }
 
       function startPolling() {
@@ -7090,29 +7211,54 @@
           var newOnes = newAchievements.filter(function (a) {
             return !_knownAchievementIds.has(a.id);
           });
-          if (newOnes.length > 0) {
+          var allNewObjectives = [];
+          ['main', 'directives', 'goals'].forEach(function(sec) {
+            var objs = (newState.objectives && newState.objectives[sec]) || [];
+            objs.forEach(function(obj) {
+              if (!_knownObjectiveIds.has(obj.id)) allNewObjectives.push(obj);
+            });
+          });
+          if (newOnes.length > 0 || allNewObjectives.length > 0) {
             STATE = newState;
             renderAll();
             seedKnownAchievements();
+            seedKnownObjectives();
             newOnes.forEach(function (a) {
-              _toastQueue.push(a);
+              _toastQueue.push(Object.assign({ _kind: 'achievement' }, a));
+            });
+            allNewObjectives.forEach(function(o) {
+              _toastQueue.push(Object.assign({ _kind: 'objective' }, o));
             });
             processToastQueue();
           }
         } catch (e) {
           /* silent fail — server may be temporarily unreachable */
         }
+        csLoadTracker();
         loadChatMessages();
       }
 
       function processToastQueue() {
         if (_toastShowing || _toastQueue.length === 0) return;
         _toastShowing = true;
-        var achievement = _toastQueue.shift();
-        showAchievementToast(achievement, function () {
-          _toastShowing = false;
-          processToastQueue();
-        });
+        var item = _toastQueue.shift();
+        var onDone = function() { _toastShowing = false; processToastQueue(); };
+        if (item._kind === 'objective') {
+          showObjectiveToast(item, onDone);
+        } else {
+          showAchievementToast(item, onDone);
+        }
+      }
+
+      function showObjectiveToast(obj, onDone) {
+        var toast = document.getElementById('objectiveToast');
+        document.getElementById('objToastTitle').textContent = obj.title || '';
+        document.getElementById('objToastType').textContent = obj.type ? ('Type: ' + obj.type) : '';
+        toast.classList.add('visible');
+        setTimeout(function() {
+          toast.classList.remove('visible');
+          setTimeout(function() { if (onDone) onDone(); }, 700);
+        }, 4000);
       }
 
       function showAchievementToast(achievement, onDone) {
@@ -7194,6 +7340,7 @@
           STATE = applyMigrations(data.state);
           renderAll();
           seedKnownAchievements();
+          seedKnownObjectives();
           startPolling();
           showChatPanel();
           loadChatPlayers();
@@ -7207,6 +7354,69 @@
           setSyncStatus("Server unreachable.", "var(--danger)");
         }
       }
+
+      // ============================================================
+      //  MOMENT TRACKER — READ ONLY (polled every 1s via pollFromServer)
+      // ============================================================
+
+      async function csLoadTracker() {
+        if (!_authToken) return;
+        try {
+          var res = await fetch(SERVER_URL + '/api/tracker', {
+            headers: { 'Authorization': 'Bearer ' + _authToken }
+          });
+          if (!res.ok) return;
+          var data = await res.json();
+          csRenderTracker(data);
+          document.getElementById('trkBar').style.display = 'flex';
+        } catch (e) { /* silently ignore */ }
+      }
+
+      function csRenderTracker(data) {
+        document.getElementById('csTrackerClock').textContent  = data.clock  || 0;
+        document.getElementById('csTrackerMoment').textContent = data.currentMoment || 0;
+
+        var rail = document.getElementById('csTrackerRail');
+        rail.innerHTML = '';
+
+        var byMoment = {};
+        (data.entries || []).forEach(function(e) {
+          if (!byMoment[e.moment]) byMoment[e.moment] = [];
+          byMoment[e.moment].push(e);
+        });
+
+        for (var m = 0; m <= 10; m++) {
+          var slot = document.createElement('div');
+          slot.className = 'trk-slot' + (m === data.currentMoment ? ' trk-current' : '');
+
+          var num = document.createElement('div');
+          num.className = 'trk-slot-num';
+          num.textContent = m;
+          slot.appendChild(num);
+
+          var slotEntries = byMoment[m] || [];
+          if (slotEntries.length === 0) {
+            var empty = document.createElement('div');
+            empty.style.height = '4px';
+            slot.appendChild(empty);
+          } else {
+            slotEntries.forEach(function(en) {
+              var chip = document.createElement('div');
+              chip.className = 'trk-chip';
+              var col = en.color || (en.type === 'player' ? '#00d4ff' : '#ff2255');
+              chip.style.borderColor = col;
+              chip.style.background  = col + '18';
+              chip.style.color       = col;
+              chip.title = en.name + ' (' + en.type + ')';
+              chip.textContent = (en.type === 'player' ? '👤 ' : '⚔ ') + en.name;
+              slot.appendChild(chip);
+            });
+          }
+
+          rail.appendChild(slot);
+        }
+      }
+
     </script>
   </body>
 </html>
