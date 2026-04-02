@@ -1,0 +1,248 @@
+import { useState, useRef } from 'react';
+import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES } from '../../constants.js';
+import { uid, dmgClass } from '../../constants.js';
+
+function CondAddForm({ onAdd, onCancel }) {
+  const [text, setText] = useState('');
+  const [tier, setTier] = useState('1');
+  return (
+    <div className="cond-add-form">
+      <input className="fi" style={{ flex: 1, fontSize: 11, padding: '3px 6px' }} placeholder="Condition name" value={text} onChange={e => setText(e.target.value)} autoFocus />
+      <select className="mini-select" value={tier} onChange={e => setTier(e.target.value)}>
+        <option value="1">T1</option><option value="2">T2</option><option value="3">T3</option>
+      </select>
+      <button className="btn btn-success btn-xs" onClick={() => onAdd(text, tier)}>Add</button>
+      <button className="btn btn-muted btn-xs" onClick={onCancel}>✕</button>
+    </div>
+  );
+}
+
+export default function BodyTab({ state, update }) {
+  const portraitRef = useRef();
+  const [condForms, setCondForms] = useState({});
+  const id = state.identity;
+
+  function patchId(k, v) { update(s => ({ ...s, identity: { ...s.identity, [k]: v } })); }
+  function patchBP(bpId, k, v) {
+    update(s => ({ ...s, bodyParts: s.bodyParts.map(b => b.id === bpId ? { ...b, [k]: v } : b) }));
+  }
+  function addCondition(bpId, text, tier) {
+    if (!text.trim()) return;
+    update(s => ({ ...s, bodyParts: s.bodyParts.map(b =>
+      b.id === bpId ? { ...b, conditions: [...(b.conditions || []), { id: uid(), text, tier: +tier }] } : b
+    ) }));
+  }
+  function rmCondition(bpId, cId) {
+    update(s => ({ ...s, bodyParts: s.bodyParts.map(b =>
+      b.id === bpId ? { ...b, conditions: b.conditions.filter(c => c.id !== cId) } : b
+    ) }));
+  }
+  function addBodyPart() {
+    update(s => ({ ...s, bodyParts: [...s.bodyParts, { id: uid(), name: 'New Part', maxHp: 3, currentHp: 3, lethal: false, conditions: [] }] }));
+  }
+  function rmBodyPart(bpId) { update(s => ({ ...s, bodyParts: s.bodyParts.filter(b => b.id !== bpId) })); }
+
+  function traitTotal(t) { return (state.traits[t] || 0) + (state.traitBonus[t] || 0) + (state.traitLevelBonus[t] || 0); }
+  function isBodyTrait(t) { return BODY_TRAITS.includes(t); }
+  function traitPool(t) { return isBodyTrait(t) ? 'body' : 'core'; }
+
+  function adjustBonus(t, delta) {
+    const pool = traitPool(t);
+    const available = state.bonusPoints[pool] || 0;
+    const current = state.traitBonus[t] || 0;
+    if (delta > 0 && available <= 0) return;
+    if (delta < 0 && current <= 0) return;
+    update(s => ({
+      ...s,
+      traitBonus: { ...s.traitBonus, [t]: (s.traitBonus[t] || 0) + delta },
+      bonusPoints: { ...s.bonusPoints, [pool]: (s.bonusPoints[pool] || 0) - delta },
+    }));
+  }
+  function investLevel(t) {
+    const pool = traitPool(t);
+    if ((state.levelPoints[pool] || 0) <= 0) return;
+    update(s => ({
+      ...s,
+      traitLevelBonus: { ...s.traitLevelBonus, [t]: (s.traitLevelBonus[t] || 0) + 1 },
+      levelPoints: { ...s.levelPoints, [pool]: (s.levelPoints[pool] || 0) - 1 },
+    }));
+  }
+
+  function addEffect() {
+    const text = prompt('New effect:');
+    if (!text) return;
+    update(s => ({ ...s, effects: [...(s.effects || []), { id: uid(), text }] }));
+  }
+  function rmEffect(eId) { update(s => ({ ...s, effects: s.effects.filter(e => e.id !== eId) })); }
+
+  function toggleCondForm(bpId) { setCondForms(f => ({ ...f, [bpId]: !f[bpId] })); }
+
+  const bodyPts = state.bonusPoints?.body ?? 0;
+  const corePts = state.bonusPoints?.core ?? 0;
+  const lvlBody = state.levelPoints?.body ?? 0;
+  const lvlCore = state.levelPoints?.core ?? 0;
+
+  return (
+    <>
+      {/* Identity */}
+      <div className="panel">
+        <div className="panel-title">Contestant Identity</div>
+        <div className="identity-row">
+          <div>
+            <div className="portrait-box" onClick={() => portraitRef.current.click()}>
+              {id.portrait ? <img src={id.portrait} alt="portrait" /> : '👤'}
+            </div>
+            <input ref={portraitRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={e => {
+              const f = e.target.files[0]; if (!f) return;
+              const rd = new FileReader();
+              rd.onload = ev => patchId('portrait', ev.target.result);
+              rd.readAsDataURL(f);
+            }} />
+          </div>
+          <div className="identity-fields">
+            <div className="field-group">
+              <label className="field-label">Character Name</label>
+              <input className="fi" value={id.name} onChange={e => patchId('name', e.target.value)} />
+            </div>
+            <div className="field-group">
+              <label className="field-label">Player Name</label>
+              <input className="fi" value={id.player} onChange={e => patchId('player', e.target.value)} />
+            </div>
+            <div className="field-group">
+              <label className="field-label">Race</label>
+              <select className="fi" value={id.race} onChange={e => patchId('race', e.target.value)}>
+                {RACES.map(r => <option key={r}>{r}</option>)}
+              </select>
+            </div>
+            <div className="field-group">
+              <label className="field-label">Level</label>
+              <input className="fi" type="number" min="1" value={id.level} onChange={e => patchId('level', +e.target.value)} />
+            </div>
+            <div className="field-group" style={{ gridColumn: '1 / -1' }}>
+              <label className="field-label">Background</label>
+              <input className="fi" value={id.background} onChange={e => patchId('background', e.target.value)} />
+            </div>
+            <div className="field-group">
+              <label className="field-label">Contestant #</label>
+              <input className="fi" value={id.contestantNumber} onChange={e => patchId('contestantNumber', e.target.value)} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Traits */}
+      <div className="panel">
+        <div className="panel-title">
+          Traits
+          <div className="row gap-sm" style={{ fontWeight: 'normal' }}>
+            <span className={`pts-badge${bodyPts === 0 ? ' empty' : bodyPts <= 2 ? ' warn' : ''}`}>BODY {bodyPts} pts</span>
+            <span className={`pts-badge${corePts === 0 ? ' empty' : corePts <= 2 ? ' warn' : ''}`}>CORE {corePts} pts</span>
+            {lvlBody > 0 && <span className="pts-badge warn">LVL-BODY {lvlBody}</span>}
+            {lvlCore > 0 && <span className="pts-badge warn">LVL-CORE {lvlCore}</span>}
+          </div>
+        </div>
+        <div className="traits-grid">
+          {ALL_TRAITS.map(t => {
+            const total = traitTotal(t);
+            const bonus = state.traitBonus[t] || 0;
+            const lbonus = state.traitLevelBonus[t] || 0;
+            const pool = traitPool(t);
+            const poolAv = state.bonusPoints[pool] || 0;
+            const lvlAv = state.levelPoints[pool] || 0;
+            return (
+              <div key={t} className="trait-card">
+                <div className="trait-name">{TRAIT_LABELS[t]}</div>
+                <div className="trait-sub">{isBodyTrait(t) ? 'Body' : 'Core'}</div>
+                <div className="trait-val">{total}</div>
+                <div className="trait-controls">
+                  <button className="btn btn-danger btn-icon btn-sm" onClick={() => adjustBonus(t, -1)} disabled={bonus <= 0}>−</button>
+                  <span className="trait-bonus-display">Base {state.traits[t] || 0}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}</span>
+                  <button className="btn btn-cyan btn-icon btn-sm" onClick={() => adjustBonus(t, 1)} disabled={poolAv <= 0}>+</button>
+                </div>
+                {lvlAv > 0 && (
+                  <div className="trait-sp">
+                    <button className="btn btn-gold btn-xs" onClick={() => investLevel(t)}>Invest LVL Pt</button>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Body Parts */}
+      <div className="panel">
+        <div className="panel-title">
+          Body Parts
+          <button className="btn btn-cyan btn-sm" onClick={addBodyPart}>+ Part</button>
+        </div>
+        <div className="body-parts-grid">
+          {state.bodyParts.map(bp => {
+            const cls = dmgClass(bp.currentHp, bp.maxHp);
+            const boxes = Array.from({ length: bp.maxHp }, (_, i) => i >= bp.currentHp);
+            return (
+              <div key={bp.id} className={`bp-card${cls ? ' ' + cls : ''}`}>
+                <div className="bp-header">
+                  <input className="bp-name-input" value={bp.name} onChange={e => patchBP(bp.id, 'name', e.target.value)} />
+                  <label className="lethal-toggle">
+                    <input type="checkbox" checked={!!bp.lethal} onChange={e => patchBP(bp.id, 'lethal', e.target.checked)} />
+                    LETHAL
+                  </label>
+                  <button className="btn btn-danger btn-xs" onClick={() => rmBodyPart(bp.id)}>✕</button>
+                </div>
+                <div className="hp-row">
+                  <span className="hp-label">HP</span>
+                  <input className="hp-max-input" type="number" min="0" value={bp.maxHp}
+                    onChange={e => patchBP(bp.id, 'maxHp', Math.max(0, +e.target.value))} />
+                  <div className="hp-boxes">
+                    {boxes.map((isDmg, i) => (
+                      <div key={i} className={`hp-box${isDmg ? ' dmg' : ''}`}
+                        onClick={() => {
+                          const newBoxes = [...boxes]; newBoxes[i] = !newBoxes[i];
+                          const currentHp = bp.maxHp - newBoxes.filter(Boolean).length;
+                          patchBP(bp.id, 'currentHp', currentHp);
+                        }} />
+                    ))}
+                  </div>
+                </div>
+                <div className="cond-list">
+                  {(bp.conditions || []).map(c => (
+                    <span key={c.id} className={`cond-badge cond-t${c.tier}`}>
+                      {c.text}
+                      <button className="cond-remove" onClick={() => rmCondition(bp.id, c.id)}>✕</button>
+                    </span>
+                  ))}
+                </div>
+                {condForms[bp.id] ? (
+                  <CondAddForm
+                    onAdd={(txt, tier) => { addCondition(bp.id, txt, tier); toggleCondForm(bp.id); }}
+                    onCancel={() => toggleCondForm(bp.id)}
+                  />
+                ) : (
+                  <button className="btn btn-muted btn-xs" onClick={() => toggleCondForm(bp.id)}>+ Condition</button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Active Effects */}
+      <div className="panel">
+        <div className="panel-title">
+          Active Effects
+          <button className="btn btn-cyan btn-sm" onClick={addEffect}>+</button>
+        </div>
+        <div className="row" style={{ flexWrap: 'wrap', gap: 6 }}>
+          {(state.effects || []).map(e => (
+            <span key={e.id} className="effect-chip">
+              {e.text}
+              <button className="chip-rm" onClick={() => rmEffect(e.id)}>✕</button>
+            </span>
+          ))}
+          {(!state.effects || state.effects.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No active effects</span>}
+        </div>
+      </div>
+    </>
+  );
+}

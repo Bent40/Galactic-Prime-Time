@@ -21,11 +21,22 @@ router.get('/', async (req, res) => {
 // POST /api/items — create a new item template
 router.post('/', async (req, res) => {
   try {
-    const { name, category, qty, type, damage, range, effect, notes } = req.body;
+    const { name, icon, category, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (!CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
-    const item = await ItemTemplate.create({ name, category, qty: qty || 1, type, damage, range, effect, notes });
+    const item = await ItemTemplate.create({
+      name, icon: icon || '', category,
+      attackTypes: attackTypes || [],
+      range: range || '', damage: damage || '',
+      damageType: damageType || [],
+      specialEffects: specialEffects || '',
+      resistance: resistance || '',
+      requirements: requirements || '',
+      description: description || '',
+      qty: qty || 1,
+      type: type || '', effect: effect || '', notes: notes || '',
+    });
     res.json(item);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -35,13 +46,24 @@ router.post('/', async (req, res) => {
 // PUT /api/items/:id — update an item template
 router.put('/:id', async (req, res) => {
   try {
-    const { name, category, qty, type, damage, range, effect, notes } = req.body;
+    const { name, icon, category, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (category && !CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
     const item = await ItemTemplate.findByIdAndUpdate(
       req.params.id,
-      { name, category, qty: qty || 1, type, damage, range, effect, notes },
+      {
+        name, icon: icon || '', category,
+        attackTypes: attackTypes || [],
+        range: range || '', damage: damage || '',
+        damageType: damageType || [],
+        specialEffects: specialEffects || '',
+        resistance: resistance || '',
+        requirements: requirements || '',
+        description: description || '',
+        qty: qty || 1,
+        type: type || '', effect: effect || '', notes: notes || '',
+      },
       { new: true }
     );
     if (!item) return res.status(404).json({ error: 'Item not found' });
@@ -74,7 +96,6 @@ router.post('/give', async (req, res) => {
     const template = await ItemTemplate.findById(itemId).lean();
     if (!template) return res.status(404).json({ error: 'Item not found' });
 
-    // Map category name → inventory category id used by character sheet
     const CAT_ID_MAP = {
       'Equipment':   10,
       'Weapons':     11,
@@ -94,24 +115,31 @@ router.post('/give', async (req, res) => {
         if (!state.inventory) state.inventory = { categories: [] };
         if (!state.inventory.categories) state.inventory.categories = [];
 
-        // Find the matching category, or create it
         let cat = state.inventory.categories.find(c => c.id === catId);
         if (!cat) {
-          cat = { id: catId, name: template.category, collapsed: false, items: [] };
+          cat = { id: catId, name: template.category, locked: false, items: [] };
           state.inventory.categories.push(cat);
         }
         if (!cat.items) cat.items = [];
 
         cat.items.push({
           id: Date.now() + Math.floor(Math.random() * 10000),
-          name:       template.name,
-          qty:        qty != null ? qty : template.qty,
-          type:       template.type || '',
-          equippedOn: '',
-          damage:     template.damage || '',
-          range:      template.range || '',
-          effect:     template.effect || '',
-          notes:      template.notes || '',
+          name:           template.name,
+          icon:           template.icon || '',
+          qty:            qty != null ? qty : template.qty,
+          attackTypes:    template.attackTypes || [],
+          range:          template.range || '',
+          damage:         template.damage || '',
+          damageType:     template.damageType || [],
+          specialEffects: template.specialEffects || '',
+          resistance:     template.resistance || '',
+          requirements:   template.requirements || '',
+          description:    template.description || '',
+          // legacy
+          type:           template.type || '',
+          equippedOn:     '',
+          effect:         template.effect || '',
+          notes:          template.notes || '',
         });
 
         await Character.findOneAndUpdate({ userId }, { state });
