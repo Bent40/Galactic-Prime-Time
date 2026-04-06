@@ -1,9 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../../api.js';
 
-export default function MomentTrackerSection({ token, players, showToast }) {
+const TIER_COLOR = { mob: '#3a4560', elite: '#00d4ff', boss: '#c8a84b', legendary: '#a855f7' };
+
+export default function MomentTrackerSection({ token, players, enemies, showToast }) {
   const [tracker, setTracker] = useState(null);
-  const [entryForm, setEntryForm] = useState({ name: '', type: 'player', moment: 1, color: '#00d4ff', userId: '' });
+  const [targetSlot, setTargetSlot] = useState(1);
   const dragEntry = useRef(null);
 
   useEffect(() => {
@@ -16,14 +18,37 @@ export default function MomentTrackerSection({ token, players, showToast }) {
   async function advance() { const d = await apiFetch('/api/tracker/advance', { method: 'PATCH' }, token); if (!d.error) setTracker(d); }
   async function retreat() { const d = await apiFetch('/api/tracker/retreat', { method: 'PATCH' }, token); if (!d.error) setTracker(d); }
   async function reset() { if (!confirm('Reset tracker?')) return; const d = await apiFetch('/api/tracker/reset', { method: 'POST' }, token); if (!d.error) setTracker(d); }
-  async function addEntry() {
-    if (!entryForm.name) return;
-    const d = await apiFetch('/api/tracker/entries', { method: 'POST', body: JSON.stringify(entryForm) }, token);
-    if (!d.error) { setTracker(d); setEntryForm(f => ({ ...f, name: '' })); } else showToast(d.error, 'err');
-  }
   async function rmEntry(id) { const d = await apiFetch(`/api/tracker/entries/${id}`, { method: 'DELETE' }, token); if (!d.error) setTracker(d); }
   async function clearAll() { if (!confirm('Clear all entries?')) return; const d = await apiFetch('/api/tracker/entries', { method: 'DELETE' }, token); if (!d.error) setTracker(d); }
   async function moveEntry(entryId, slot) { const d = await apiFetch(`/api/tracker/entries/${entryId}`, { method: 'PATCH', body: JSON.stringify({ moment: slot }) }, token); if (!d.error) setTracker(d); }
+
+  async function addPlayer(p) {
+    const name = p.characterName || p.username;
+    const d = await apiFetch('/api/tracker/entries', {
+      method: 'POST',
+      body: JSON.stringify({ name, type: 'player', moment: targetSlot, color: '#00d4ff', userId: p.userId }),
+    }, token);
+    if (!d.error) setTracker(d);
+    else showToast(d.error, 'err');
+  }
+
+  async function addEnemy(enemy) {
+    const existing = (tracker?.entries || []).filter(e => e.name.replace(/ \d+$/, '') === enemy.name);
+    let name = enemy.name;
+    if (existing.length === 1 && !existing[0].name.match(/ \d+$/)) {
+      // Rename the existing un-numbered one to "name 1" isn't possible via UI easily,
+      // just number the new one as 2
+      name = `${enemy.name} 2`;
+    } else if (existing.length > 0) {
+      name = `${enemy.name} ${existing.length + 1}`;
+    }
+    const d = await apiFetch('/api/tracker/entries', {
+      method: 'POST',
+      body: JSON.stringify({ name, type: 'mob', moment: targetSlot, color: enemy.color }),
+    }, token);
+    if (!d.error) setTracker(d);
+    else showToast(d.error, 'err');
+  }
 
   if (!tracker) return <div style={{ padding: 20, color: 'var(--muted)', fontSize: 11 }}>Loading tracker...</div>;
 
@@ -32,8 +57,12 @@ export default function MomentTrackerSection({ token, players, showToast }) {
   const entriesBySlot = {};
   (tracker.entries || []).forEach(e => { if (!entriesBySlot[e.moment]) entriesBySlot[e.moment] = []; entriesBySlot[e.moment].push(e); });
 
+  // Which players are already in the tracker this slot
+  const slotPlayerIds = (entriesBySlot[targetSlot] || []).map(e => e.userId).filter(Boolean);
+
   return (
     <>
+      {/* Tracker rail */}
       <div className="panel">
         <div className="panel-title admin">
           Moment Tracker
@@ -84,38 +113,93 @@ export default function MomentTrackerSection({ token, players, showToast }) {
           })}
         </div>
       </div>
+
+      {/* Add to tracker panel */}
       <div className="panel">
-        <div className="panel-title admin">Add Entry</div>
-        <div className="form-row">
-          <div className="field-group" style={{ flex: 2 }}>
-            <label className="field-label">Name</label>
-            <input className="fi" value={entryForm.name} onChange={e => setEntryForm(f => ({ ...f, name: e.target.value }))} />
+        <div className="panel-title admin">Add to Tracker</div>
+
+        {/* Slot picker */}
+        <div style={{ marginBottom: 14 }}>
+          <div className="field-label" style={{ marginBottom: 6 }}>Target Slot</div>
+          <div className="trk-slot-picker">
+            {slotNums.map(n => (
+              <button
+                key={n}
+                className={`trk-slot-pick-btn${targetSlot === n ? ' active' : ''}${n === tracker.currentMoment ? ' cur' : ''}`}
+                onClick={() => setTargetSlot(n)}
+              >
+                {n}
+                {(entriesBySlot[n] || []).length > 0 && (
+                  <span className="trk-slot-pick-count">{(entriesBySlot[n] || []).length}</span>
+                )}
+              </button>
+            ))}
           </div>
-          <div className="field-group">
-            <label className="field-label">Type</label>
-            <select className="fi" value={entryForm.type} onChange={e => setEntryForm(f => ({ ...f, type: e.target.value }))}>
-              <option value="player">Player</option><option value="mob">Mob</option>
-            </select>
+        </div>
+
+        {/* Two card lists */}
+        <div className="trk-add-grid">
+          {/* Characters */}
+          <div>
+            <div className="field-label" style={{ marginBottom: 6 }}>Characters</div>
+            {players.length === 0 && <div style={{ color: 'var(--muted)', fontSize: 10 }}>No players.</div>}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {players.map(p => {
+                const alreadyIn = slotPlayerIds.includes(p.userId);
+                return (
+                  <button
+                    key={p.userId}
+                    className={`trk-add-card player${alreadyIn ? ' in-slot' : ''}`}
+                    onClick={() => addPlayer(p)}
+                    title={alreadyIn ? `${p.characterName || p.username} already in slot ${targetSlot}` : `Add to slot ${targetSlot}`}
+                  >
+                    <span className="trk-add-avatar">{(p.characterName || p.username)[0].toUpperCase()}</span>
+                    <span className="trk-add-info">
+                      <span className="trk-add-name">{p.characterName || p.username}</span>
+                      {p.characterName && <span className="trk-add-sub">{p.username}</span>}
+                    </span>
+                    <span className="trk-add-level">Lv{p.level || 1}</span>
+                    {alreadyIn && <span className="trk-add-badge">in</span>}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <div className="field-group">
-            <label className="field-label">Slot</label>
-            <input className="fi" type="number" min="0" max={totalSlots} style={{ width: 70 }} value={entryForm.moment} onChange={e => setEntryForm(f => ({ ...f, moment: +e.target.value }))} />
+
+          {/* Enemies */}
+          <div>
+            <div className="field-label" style={{ marginBottom: 6 }}>Enemies</div>
+            {(enemies || []).length === 0 && (
+              <div style={{ color: 'var(--muted)', fontSize: 10 }}>No enemies in library. Add them in the Enemies tab.</div>
+            )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {(enemies || []).map(e => {
+                const countInTracker = (tracker.entries || []).filter(ent => ent.name.replace(/ \d+$/, '') === e.name).length;
+                const tierColor = TIER_COLOR[e.tier] || '#3a4560';
+                return (
+                  <button
+                    key={e._id}
+                    className="trk-add-card enemy"
+                    onClick={() => addEnemy(e)}
+                    style={{ '--enemy-color': e.color }}
+                    title={`Add to slot ${targetSlot}`}
+                  >
+                    <span className="trk-add-dot" style={{ background: e.color }} />
+                    <span className="trk-add-info">
+                      <span className="trk-add-name" style={{ color: e.color }}>{e.name}</span>
+                      <span className="trk-add-sub" style={{ color: tierColor }}>{e.tier}</span>
+                    </span>
+                    {countInTracker > 0 && (
+                      <span className="trk-add-badge" style={{ borderColor: e.color, color: e.color }}>×{countInTracker}</span>
+                    )}
+                    {(e.bodyParts || []).length > 0 && (
+                      <span className="trk-add-bp">{(e.bodyParts || []).length} parts</span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
-          <div className="field-group">
-            <label className="field-label">Player (opt)</label>
-            <select className="fi" value={entryForm.userId} onChange={e => {
-              const p = players.find(p => p.userId === e.target.value);
-              setEntryForm(f => ({ ...f, userId: e.target.value, name: p ? p.characterName || p.username : f.name, color: f.type === 'player' ? '#00d4ff' : f.color }));
-            }}>
-              <option value="">— none —</option>
-              {players.map(p => <option key={p.userId} value={p.userId}>{p.username}</option>)}
-            </select>
-          </div>
-          <div className="field-group">
-            <label className="field-label">Color</label>
-            <input type="color" value={entryForm.color} onChange={e => setEntryForm(f => ({ ...f, color: e.target.value }))} style={{ width: 38, height: 32, border: '1px solid var(--muted)', borderRadius: 3, background: 'transparent', cursor: 'pointer', padding: 2 }} />
-          </div>
-          <button className="btn btn-purple btn-sm" onClick={addEntry} style={{ alignSelf: 'flex-end' }}>+ Add</button>
         </div>
       </div>
     </>

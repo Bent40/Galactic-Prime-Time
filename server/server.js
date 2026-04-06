@@ -10,6 +10,7 @@ const messagesRoutes = require('./routes/messages');
 const playersRoutes = require('./routes/players');
 const trackerRoutes = require('./routes/momentTracker');
 const itemsRoutes = require('./routes/items');
+const enemiesRoutes = require('./routes/enemies');
 
 const path = require('path');
 
@@ -27,6 +28,7 @@ app.use('/api/messages', messagesRoutes);
 app.use('/api/players', playersRoutes);
 app.use('/api/tracker', trackerRoutes);
 app.use('/api/items', itemsRoutes);
+app.use('/api/enemies', enemiesRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

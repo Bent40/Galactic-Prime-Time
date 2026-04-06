@@ -7,6 +7,7 @@ export const TABS = [
   { id: 'objectives', label: 'Objectives' },
   { id: 'combat', label: 'Combat Mode' },
   { id: 'notes', label: 'Notes' },
+  { id: 'comms', label: 'Comms' },
 ];
 
 export const BODY_TRAITS = ['physique', 'reflexes'];

@@ -62,9 +62,13 @@ export default function ExposureTab({ state, update }) {
         <div className="panel-title">Tags</div>
         <div className="tags-wrap">
           {(state.tags || []).map(tag => (
-            <div key={tag.id} className={`tag-chip ${tag.state || 'active'}`} onClick={() => cycleTag(tag.id)}>
-              {tag.name}
-              <span className="tag-state-lbl">{tag.state || 'active'}</span>
+            <div key={tag.id} className={`tag-chip ${tag.state || 'active'}`}>
+              <div className="tag-chip-top" onClick={() => cycleTag(tag.id)}>
+                <span className="tag-chip-name">{tag.name}</span>
+                <span className="tag-state-lbl">{tag.state || 'active'}</span>
+                <button className="tag-chip-rm" onClick={e => { e.stopPropagation(); rmTag(tag.id); }}>✕</button>
+              </div>
+              {tag.effect && <div className="tag-chip-effect">{tag.effect}</div>}
             </div>
           ))}
           {(!state.tags || state.tags.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No tags.</span>}

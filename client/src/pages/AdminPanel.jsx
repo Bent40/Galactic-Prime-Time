@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../api.js';
-import { uid } from '../constants.js';
 import LoginOverlay from '../components/shared/LoginOverlay.jsx';
 import Toast, { useToast } from '../components/shared/Toast.jsx';
 import PlayerPanel from '../components/admin/PlayerPanel.jsx';
@@ -9,9 +8,10 @@ import AllAchievementsSection from '../components/admin/AllAchievementsSection.j
 import CommsSection from '../components/admin/CommsSection.jsx';
 import MomentTrackerSection from '../components/admin/MomentTrackerSection.jsx';
 import ItemLibrarySection from '../components/admin/ItemLibrarySection.jsx';
+import EnemiesSection from '../components/admin/EnemiesSection.jsx';
 
-const SECTIONS = ['players', 'library', 'achievements', 'comms', 'tracker', 'items'];
-const SECTION_LABELS = { players: 'Players', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library' };
+const SECTIONS = ['players', 'library', 'achievements', 'comms', 'tracker', 'items', 'enemies'];
+const SECTION_LABELS = { players: 'Players', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library', enemies: 'Enemies' };
 
 export default function AdminPanel() {
   const [auth, setAuth] = useState(() => {
@@ -20,6 +20,7 @@ export default function AdminPanel() {
     return token ? { token, username } : null;
   });
   const [players, setPlayers] = useState([]);
+  const [enemies, setEnemies] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [activeSection, setActiveSection] = useState('players');
   const [toast, showToast] = useToast();
@@ -89,7 +90,9 @@ export default function AdminPanel() {
               <div style={{ fontSize: 9, color: 'var(--purple)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 6 }}>Bulk — {bulkSel.length} selected</div>
               <div style={{ marginBottom: 8 }}>
                 <div style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Grant Achievement</div>
-                <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Achievement title" value={bulkAchForm.title} onChange={e => setBulkAchForm(f => ({ ...f, title: e.target.value }))} />
+                <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Title" value={bulkAchForm.title} onChange={e => setBulkAchForm(f => ({ ...f, title: e.target.value }))} />
+                <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Description" value={bulkAchForm.desc} onChange={e => setBulkAchForm(f => ({ ...f, desc: e.target.value }))} />
+                <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Reward" value={bulkAchForm.reward} onChange={e => setBulkAchForm(f => ({ ...f, reward: e.target.value }))} />
                 <button className="btn btn-gold btn-xs" onClick={bulkGrantAch} style={{ width: '100%' }}>Grant to Selected</button>
               </div>
               <div>
@@ -98,6 +101,10 @@ export default function AdminPanel() {
                   <option value="main">Main</option><option value="directives">Directives</option><option value="goals">Goals</option>
                 </select>
                 <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Objective title" value={bulkObjForm.title} onChange={e => setBulkObjForm(f => ({ ...f, title: e.target.value }))} />
+                <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Description" value={bulkObjForm.description} onChange={e => setBulkObjForm(f => ({ ...f, description: e.target.value }))} />
+                <select className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} value={bulkObjForm.status} onChange={e => setBulkObjForm(f => ({ ...f, status: e.target.value }))}>
+                  <option value="active">Active</option><option value="complete">Complete</option><option value="failed">Failed</option>
+                </select>
                 <button className="btn btn-cyan btn-xs" onClick={bulkSendObj} style={{ width: '100%' }}>Send to Selected</button>
               </div>
             </div>
@@ -145,8 +152,9 @@ export default function AdminPanel() {
             {activeSection === 'library' && <SkillLibrarySection token={auth.token} showToast={showToast} />}
             {activeSection === 'achievements' && <AllAchievementsSection token={auth.token} />}
             {activeSection === 'comms' && <CommsSection token={auth.token} players={players} showToast={showToast} />}
-            {activeSection === 'tracker' && <MomentTrackerSection token={auth.token} players={players} showToast={showToast} />}
+            {activeSection === 'tracker' && <MomentTrackerSection token={auth.token} players={players} enemies={enemies} showToast={showToast} />}
             {activeSection === 'items' && <ItemLibrarySection token={auth.token} players={players} showToast={showToast} />}
+            {activeSection === 'enemies' && <EnemiesSection token={auth.token} showToast={showToast} onEnemiesChange={setEnemies} />}
           </div>
         </div>
       </div>

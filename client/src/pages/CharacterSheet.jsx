@@ -12,6 +12,7 @@ import ExposureTab from '../components/character/ExposureTab.jsx';
 import ObjectivesTab from '../components/character/ObjectivesTab.jsx';
 import CombatModeTab from '../components/character/CombatModeTab.jsx';
 import NotesTab from '../components/character/NotesTab.jsx';
+import CommsTab from '../components/character/CommsTab.jsx';
 
 export default function CharacterSheet() {
   const [auth, setAuth] = useState(() => {
@@ -96,7 +97,7 @@ export default function CharacterSheet() {
       </div>
 
       {/* Tracker Bar */}
-      {activeTab !== 'combat' && <TrackerBar tracker={tracker} />}
+      {activeTab !== 'combat' && activeTab !== 'comms' && <TrackerBar tracker={tracker} />}
 
       {/* Tab Nav */}
       <div className="tab-nav">
@@ -110,13 +111,14 @@ export default function CharacterSheet() {
       {/* Tab Content */}
       <div className="tab-content">
         {activeTab === 'body' && <BodyTab state={charState} update={update} showToast={showToast} />}
-        {activeTab === 'skills' && <SkillsTab state={charState} update={update} token={auth.token} />}
+        {activeTab === 'skills' && <SkillsTab state={charState} token={auth.token} />}
         {activeTab === 'achievements' && <AchievementsTab state={charState} update={update} />}
         {activeTab === 'inventory' && <InventoryTab state={charState} update={update} />}
         {activeTab === 'exposure' && <ExposureTab state={charState} update={update} />}
         {activeTab === 'objectives' && <ObjectivesTab state={charState} update={update} />}
         {activeTab === 'combat' && <CombatModeTab state={charState} update={update} tracker={tracker} />}
         {activeTab === 'notes' && <NotesTab state={charState} update={update} />}
+        {activeTab === 'comms' && <CommsTab auth={auth} />}
       </div>
 
       <Toast toast={toast} />
