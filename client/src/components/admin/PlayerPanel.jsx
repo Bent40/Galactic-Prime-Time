@@ -29,6 +29,17 @@ export default function PlayerPanel({ player, token, showToast }) {
   const id = state.identity || {};
   function traitTotal(t) { return (state.traits?.[t] || 0) + (state.traitBonus?.[t] || 0) + (state.traitLevelBonus?.[t] || 0); }
 
+  async function adjustTrait(trait, field, delta) {
+    const current = (state[field]?.[trait] || 0) + delta;
+    const newField = { ...(state[field] || {}), [trait]: Math.max(0, current) };
+    const d = await apiFetch(`/api/admin/players/${player.userId}/traits`, {
+      method: 'PATCH', body: JSON.stringify({ [field]: newField }),
+    }, token);
+    if (d.ok) {
+      setCharData(cd => ({ ...cd, state: { ...cd.state, [field]: newField } }));
+      showToast('Saved');
+    } else showToast(d.error || 'Save failed', 'err');
+  }
   async function saveTokens() {
     const d = await apiFetch(`/api/admin/players/${player.userId}/tokens`, { method: 'PATCH', body: JSON.stringify(tokenForm) }, token);
     if (d.ok) showToast('Tokens updated'); else showToast(d.error, 'err');
@@ -47,6 +58,16 @@ export default function PlayerPanel({ player, token, showToast }) {
       showToast('Skill added');
       setCharData(cd => ({ ...cd, state: { ...cd.state, skills: [...(cd.state?.skills || []), d.skill] } }));
       setSkillForm({ name: '', momentCost: '', stats: '', effect: '', description: '' });
+    } else showToast(d.error, 'err');
+  }
+  async function updateSkillLevel(sk, delta) {
+    const newLevel = Math.max(0, (sk.level || 0) + delta);
+    const d = await apiFetch(`/api/admin/players/${player.userId}/skills/${sk.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ ...sk, level: newLevel }),
+    }, token);
+    if (d.ok) {
+      setCharData(cd => ({ ...cd, state: { ...cd.state, skills: (cd.state?.skills || []).map(s => s.id === sk.id ? { ...s, level: newLevel } : s) } }));
     } else showToast(d.error, 'err');
   }
   async function rmSkill(skillId) {
@@ -109,12 +130,26 @@ export default function PlayerPanel({ player, token, showToast }) {
           </div>
         </div>
         <div className="stats-grid">
-          {['physique', 'reflexes', 'mind', 'charm'].map(t => (
-            <div key={t} className="stat-box">
-              <div className="stat-name">{TRAIT_LABELS[t]}</div>
-              <div className="stat-val">{traitTotal(t)}</div>
-            </div>
-          ))}
+          {['physique', 'reflexes', 'mind', 'charm'].map(t => {
+            const base = state.traits?.[t] || 0;
+            const bonus = state.traitBonus?.[t] || 0;
+            const lvBonus = state.traitLevelBonus?.[t] || 0;
+            return (
+              <div key={t} className="stat-box">
+                <div className="stat-name">{TRAIT_LABELS[t]}</div>
+                <div className="stat-val">{traitTotal(t)}</div>
+                <div style={{ fontSize: 9, color: 'var(--muted)', marginBottom: 4 }}>
+                  Base {base}{bonus ? ` +${bonus}` : ''}{lvBonus ? ` +${lvBonus}Lv` : ''}
+                </div>
+                <div style={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'traitBonus', -1)} disabled={bonus <= 0} title="Remove bonus pt">−B</button>
+                  <button className="btn btn-cyan btn-xs" onClick={() => adjustTrait(t, 'traitBonus', 1)} title="Add bonus pt">+B</button>
+                  <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'traitLevelBonus', -1)} disabled={lvBonus <= 0} title="Remove level pt">−L</button>
+                  <button className="btn btn-gold btn-xs" onClick={() => adjustTrait(t, 'traitLevelBonus', 1)} title="Add level pt">+L</button>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -149,6 +184,11 @@ export default function PlayerPanel({ player, token, showToast }) {
               <span className="skill-row-name">{sk.name}</span>
               <span className="skill-row-meta">{sk.momentCost || '—'}</span>
               {sk.passive && <span className="skill-badge passive">Passive</span>}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginLeft: 'auto' }}>
+                <button className="btn btn-muted btn-xs" onClick={() => updateSkillLevel(sk, -1)}>−</button>
+                <span style={{ fontSize: 10, minWidth: 32, textAlign: 'center', color: 'var(--cyan)', fontFamily: 'monospace' }}>Lv {sk.level || 0}</span>
+                <button className="btn btn-cyan btn-xs" onClick={() => updateSkillLevel(sk, 1)}>+</button>
+              </div>
               <button className="btn btn-danger btn-xs" onClick={() => rmSkill(sk.id)}>✕</button>
             </div>
           ))}

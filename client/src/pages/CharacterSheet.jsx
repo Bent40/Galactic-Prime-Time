@@ -96,9 +96,6 @@ export default function CharacterSheet() {
         </div>
       </div>
 
-      {/* Tracker Bar */}
-      {activeTab !== 'combat' && activeTab !== 'comms' && <TrackerBar tracker={tracker} />}
-
       {/* Tab Nav */}
       <div className="tab-nav">
         {TABS.map(t => (
@@ -112,7 +109,7 @@ export default function CharacterSheet() {
       <div className="tab-content">
         {activeTab === 'body' && <BodyTab state={charState} update={update} showToast={showToast} />}
         {activeTab === 'skills' && <SkillsTab state={charState} token={auth.token} />}
-        {activeTab === 'achievements' && <AchievementsTab state={charState} update={update} />}
+        {activeTab === 'achievements' && <AchievementsTab state={charState} />}
         {activeTab === 'inventory' && <InventoryTab state={charState} update={update} />}
         {activeTab === 'exposure' && <ExposureTab state={charState} update={update} />}
         {activeTab === 'objectives' && <ObjectivesTab state={charState} update={update} />}

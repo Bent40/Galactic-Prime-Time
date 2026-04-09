@@ -192,7 +192,7 @@ router.post('/players/:userId/skills', async (req, res) => {
 // PUT /api/admin/players/:userId/skills/:skillId — edit a skill
 router.put('/players/:userId/skills/:skillId', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects, level } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
 
     const character = await Character.findOne({ userId: req.params.userId });
@@ -218,6 +218,7 @@ router.put('/players/:userId/skills/:skillId', async (req, res) => {
       effect: effect || '',
       description: description || '',
       levelEffects: levelEffects || {},
+      level: level !== undefined ? Math.max(0, Number(level)) : (state.skills[idx].level || 0),
     };
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
@@ -322,18 +323,41 @@ router.delete('/players/:userId/achievements/:achievementId', async (req, res) =
   }
 });
 
-// PATCH /api/admin/players/:userId/traits — set trait values
-router.patch('/players/:userId/traits', async (req, res) => {
+// POST /api/admin/players/:userId/levelup — grant one level-up point to body OR core
+router.post('/players/:userId/levelup', async (req, res) => {
   try {
-    const { traitBonus, traits } = req.body;
+    const { pool } = req.body;
+    if (pool !== 'body' && pool !== 'core') return res.status(400).json({ error: 'pool must be body or core' });
+
     const character = await Character.findOne({ userId: req.params.userId });
     if (!character) return res.status(404).json({ error: 'Character not found' });
 
     const state = character.state || {};
-    if (traitBonus) state.traitBonus = { ...state.traitBonus, ...traitBonus };
-    if (traits) state.traits = { ...state.traits, ...traits };
+    if (!state.levelPoints) state.levelPoints = { body: 0, core: 0 };
+    state.levelPoints[pool] = (state.levelPoints[pool] || 0) + 1;
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
+    res.json({ ok: true, levelPoints: state.levelPoints });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// PATCH /api/admin/players/:userId/traits — set trait values
+router.patch('/players/:userId/traits', async (req, res) => {
+  try {
+    const { traitBonus, traits, traitLevelBonus } = req.body;
+    const character = await Character.findOne({ userId: req.params.userId });
+    if (!character) return res.status(404).json({ error: 'Character not found' });
+
+    const state = character.state ? { ...character.state } : {};
+    if (traitBonus) state.traitBonus = { ...(state.traitBonus || {}), ...traitBonus };
+    if (traits) state.traits = { ...(state.traits || {}), ...traits };
+    if (traitLevelBonus) state.traitLevelBonus = { ...(state.traitLevelBonus || {}), ...traitLevelBonus };
+
+    character.state = state;
+    character.markModified('state');
+    await character.save();
     res.json({ ok: true });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

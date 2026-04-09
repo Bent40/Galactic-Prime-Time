@@ -116,33 +116,48 @@ function ItemPopup({ item, catId, cats, onClose, onUpdate, onDelete, onMove }) {
   );
 }
 
-function InvBlock({ item, catId, onDragStart, onClick }) {
+function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDragEnd, onClick }) {
   const icon = item.icon || catIcon(item.category || 'default');
   const dmgLbl = itemDmgLabel(item);
   const showQty = (item.qty || 1) > 1;
+  const isOver = dragOverId === item.id;
   return (
-    <div className="item-block" draggable onDragStart={e => onDragStart(e, catId, item.id)} onClick={() => onClick(item, catId)}>
-      <div className="item-block-name">{item.name}</div>
-      <div className="item-block-icon">{icon}</div>
-      <div className="item-block-footer">
-        {dmgLbl && <div className="item-block-dmg">⚔{dmgLbl}</div>}
-        {showQty && <div className="item-block-qty">{item.qty}</div>}
-      </div>
+    <div
+      className={`inv-row${isOver ? ' drag-over' : ''}`}
+      draggable
+      onDragStart={e => onDragStart(e, catId, item.id)}
+      onDragOver={e => { e.preventDefault(); e.stopPropagation(); onDragOver(catId, item.id); }}
+      onDrop={e => { e.preventDefault(); e.stopPropagation(); onDrop(catId, item.id); }}
+      onDragEnd={onDragEnd}
+      onClick={() => onClick(item, catId)}
+    >
+      <span className="inv-row-drag">⠿</span>
+      <span className="inv-row-icon">{icon}</span>
+      <span className="inv-row-name">{item.name}</span>
+      <span className="inv-row-meta">
+        {dmgLbl && <span className="inv-row-dmg">⚔ {dmgLbl}</span>}
+        {item.range && <span className="inv-row-range">{item.range}</span>}
+        {item.attackTypes?.length > 0 && (
+          <span className="inv-row-atk">{item.attackTypes.join(' · ')}</span>
+        )}
+      </span>
+      {showQty && <span className="inv-row-qty">×{item.qty}</span>}
     </div>
   );
 }
 
-function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReorder, canUp, canDown, showReorder, onItemDragStart, onItemDrop, onItemClick }) {
+function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReorder, canUp, canDown, showReorder,
+  onItemDragStart, onItemDragOver, onItemDrop, onItemDragEnd, onItemClick, dragOverItem, onContainerDrop }) {
   const [collapsed, setCollapsed] = useState(false);
   return (
-    <div className="inv-container" style={{ width: fixed ? '100%' : 'calc(50% - 5px)', minWidth: 200, flex: fixed ? 'none' : '1 1 200px' }}>
+    <div className="inv-container">
       <div
         className="inv-container-header"
-        onDragOver={e => e.preventDefault()}
-        onDrop={e => onItemDrop(e, cat.id)}
         onClick={() => setCollapsed(c => !c)}
+        onDragOver={e => e.preventDefault()}
+        onDrop={e => { e.preventDefault(); onContainerDrop(cat.id); }}
       >
-        <span style={{ color: 'var(--cyan)', fontSize: 11 }}>{collapsed ? '▶' : '▼'}</span>
+        <span style={{ color: 'var(--cyan)', fontSize: 11, flexShrink: 0 }}>{collapsed ? '▶' : '▼'}</span>
         <input
           className="inv-cat-name-in"
           value={cat.name}
@@ -161,14 +176,26 @@ function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReo
       </div>
       {!collapsed && (
         <div
-          className="inv-cat-body"
+          className="inv-cat-body-col"
           onDragOver={e => e.preventDefault()}
-          onDrop={e => onItemDrop(e, cat.id)}
+          onDrop={e => { e.preventDefault(); onContainerDrop(cat.id); }}
         >
           {(cat.items || []).map(item => (
-            <InvBlock key={item.id} item={item} catId={cat.id} onDragStart={onItemDragStart} onClick={onItemClick} />
+            <InvRow
+              key={item.id}
+              item={item}
+              catId={cat.id}
+              dragOverId={dragOverItem?.catId === cat.id ? dragOverItem.itemId : null}
+              onDragStart={onItemDragStart}
+              onDragOver={onItemDragOver}
+              onDrop={onItemDrop}
+              onDragEnd={onItemDragEnd}
+              onClick={onItemClick}
+            />
           ))}
-          {(cat.items || []).length === 0 && <span style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: 1 }}>Empty</span>}
+          {(cat.items || []).length === 0 && (
+            <span style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: 1, padding: '4px 2px' }}>Empty</span>
+          )}
         </div>
       )}
     </div>
@@ -178,6 +205,7 @@ function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReo
 export default function InventoryTab({ state, update }) {
   const [popup, setPopup] = useState(null);
   const dragItem = useRef(null);
+  const [dragOverItem, setDragOverItem] = useState(null);
 
   const cats = state.inventory?.categories || [];
   const equipped = cats.find(c => c.id === 1) || { id: 1, name: 'Equipped', items: [] };
@@ -213,6 +241,18 @@ export default function InventoryTab({ state, update }) {
       });
     });
   }
+  function reorderItem(catId, fromItemId, toItemId) {
+    mutateCats(cs => cs.map(c => {
+      if (c.id !== catId) return c;
+      const items = [...(c.items || [])];
+      const fromIdx = items.findIndex(i => i.id === fromItemId);
+      const toIdx = items.findIndex(i => i.id === toItemId);
+      if (fromIdx === -1 || toIdx === -1) return c;
+      const [moved] = items.splice(fromIdx, 1);
+      items.splice(toIdx, 0, moved);
+      return { ...c, items };
+    }));
+  }
   function addCategory() {
     const maxOrder = Math.max(0, ...cats.map(c => c.order || 0));
     mutateCats(cs => [...cs, { id: uid(), name: 'New Container', locked: false, items: [], order: maxOrder + 1 }]);
@@ -227,39 +267,65 @@ export default function InventoryTab({ state, update }) {
       if (dir === 1 && idx === freeOnly.length - 1) return cs;
       const swapIdx = idx + dir;
       const a = freeOnly[idx], b = freeOnly[swapIdx];
-      const aOrd = a.order, bOrd = b.order;
-      return cs.map(c => c.id === a.id ? { ...c, order: bOrd } : c.id === b.id ? { ...c, order: aOrd } : c);
+      return cs.map(c => c.id === a.id ? { ...c, order: b.order } : c.id === b.id ? { ...c, order: a.order } : c);
     });
   }
 
-  function handleItemDragStart(e, catId, itemId) { dragItem.current = { catId, itemId }; e.dataTransfer.effectAllowed = 'move'; }
-  function handleItemDrop(e, toCatId) {
-    e.preventDefault();
-    if (!dragItem.current || dragItem.current.catId === toCatId) return;
-    moveItem(dragItem.current.catId, toCatId, dragItem.current.itemId);
-    dragItem.current = null;
+  function handleItemDragStart(e, catId, itemId) {
+    dragItem.current = { catId, itemId };
+    e.dataTransfer.effectAllowed = 'move';
   }
-  function handleItemClick(item, catId) { setPopup({ item, catId }); }
+  function handleItemDragOver(catId, itemId) {
+    if (!dragItem.current) return;
+    setDragOverItem({ catId, itemId });
+  }
+  function handleItemDrop(toCatId, toItemId) {
+    const from = dragItem.current;
+    if (!from) return;
+    if (from.catId === toCatId) {
+      if (from.itemId !== toItemId) reorderItem(toCatId, from.itemId, toItemId);
+    } else {
+      moveItem(from.catId, toCatId, from.itemId);
+    }
+    dragItem.current = null;
+    setDragOverItem(null);
+  }
+  function handleContainerDrop(toCatId) {
+    const from = dragItem.current;
+    if (!from || from.catId === toCatId) return;
+    moveItem(from.catId, toCatId, from.itemId);
+    dragItem.current = null;
+    setDragOverItem(null);
+  }
+  function handleItemDragEnd() {
+    dragItem.current = null;
+    setDragOverItem(null);
+  }
 
-  const sharedProps = { cats, onPatchName: patchCatName, onAddItem: addItem, onRemoveCat: removeCat, onReorder: reorderCat, onItemDragStart: handleItemDragStart, onItemDrop: handleItemDrop, onItemClick: handleItemClick };
+  const sharedProps = {
+    cats, onPatchName: patchCatName, onAddItem: addItem, onRemoveCat: removeCat, onReorder: reorderCat,
+    onItemDragStart: handleItemDragStart,
+    onItemDragOver: handleItemDragOver,
+    onItemDrop: handleItemDrop,
+    onItemDragEnd: handleItemDragEnd,
+    onItemClick: (item, catId) => setPopup({ item, catId }),
+    onContainerDrop: handleContainerDrop,
+    dragOverItem,
+  };
 
   return (
     <>
-      <div className="inv-layout">
-        <div className="inv-fixed">
-          <CatPanel cat={equipped} fixed {...sharedProps} showReorder={false} />
-          <CatPanel cat={hotbar} fixed {...sharedProps} showReorder={false} />
-        </div>
-        <div className="inv-free">
-          {freeCats.map((cat, idx) => (
-            <CatPanel key={cat.id} cat={cat} {...sharedProps}
-              showReorder={true}
-              canUp={idx > 0} canDown={idx < freeCats.length - 1}
-            />
-          ))}
-          <div style={{ display: 'flex', alignItems: 'center', alignSelf: 'flex-start', marginTop: 4 }}>
-            <button className="btn btn-muted btn-sm" onClick={addCategory}>+ Container</button>
-          </div>
+      <div className="inv-stack">
+        <CatPanel cat={equipped} fixed {...sharedProps} showReorder={false} />
+        <CatPanel cat={hotbar} fixed {...sharedProps} showReorder={false} />
+        {freeCats.map((cat, idx) => (
+          <CatPanel key={cat.id} cat={cat} {...sharedProps}
+            showReorder={true}
+            canUp={idx > 0} canDown={idx < freeCats.length - 1}
+          />
+        ))}
+        <div style={{ paddingTop: 4 }}>
+          <button className="btn btn-muted btn-sm" onClick={addCategory}>+ Container</button>
         </div>
       </div>
       {popup && (

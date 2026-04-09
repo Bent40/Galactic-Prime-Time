@@ -23,6 +23,24 @@ export default function BodyTab({ state, update }) {
   const id = state.identity;
 
   function patchId(k, v) { update(s => ({ ...s, identity: { ...s.identity, [k]: v } })); }
+
+  function changeLevel(newLevel) {
+    const oldLevel = id.level || 1;
+    const delta = newLevel - oldLevel;
+    if (delta === 0) return;
+    update(s => {
+      const currentPool = s.levelPoints?.pool || 0;
+      const newPool = delta > 0
+        ? currentPool + delta
+        : Math.max(0, currentPool + delta); // clamp to 0, don't go negative
+      return {
+        ...s,
+        identity: { ...s.identity, level: newLevel },
+        levelPoints: { ...s.levelPoints, pool: newPool },
+      };
+    });
+  }
+
   function patchBP(bpId, k, v) {
     update(s => ({ ...s, bodyParts: s.bodyParts.map(b => b.id === bpId ? { ...b, [k]: v } : b) }));
   }
@@ -59,12 +77,11 @@ export default function BodyTab({ state, update }) {
     }));
   }
   function investLevel(t) {
-    const pool = traitPool(t);
-    if ((state.levelPoints[pool] || 0) <= 0) return;
+    if ((state.levelPoints?.pool || 0) <= 0) return;
     update(s => ({
       ...s,
       traitLevelBonus: { ...s.traitLevelBonus, [t]: (s.traitLevelBonus[t] || 0) + 1 },
-      levelPoints: { ...s.levelPoints, [pool]: (s.levelPoints[pool] || 0) - 1 },
+      levelPoints: { ...s.levelPoints, pool: (s.levelPoints?.pool || 0) - 1 },
     }));
   }
 
@@ -79,8 +96,8 @@ export default function BodyTab({ state, update }) {
 
   const bodyPts = state.bonusPoints?.body ?? 0;
   const corePts = state.bonusPoints?.core ?? 0;
-  const lvlBody = state.levelPoints?.body ?? 0;
-  const lvlCore = state.levelPoints?.core ?? 0;
+  const lvlPool = state.levelPoints?.pool ?? 0;
+  const isLevelOne = (id.level || 1) <= 1;
 
   return (
     <>
@@ -116,7 +133,7 @@ export default function BodyTab({ state, update }) {
             </div>
             <div className="field-group">
               <label className="field-label">Level</label>
-              <input className="fi" type="number" min="1" value={id.level} onChange={e => patchId('level', +e.target.value)} />
+              <input className="fi" type="number" min="1" value={id.level} onChange={e => changeLevel(+e.target.value)} />
             </div>
             <div className="field-group" style={{ gridColumn: '1 / -1' }}>
               <label className="field-label">Background</label>
@@ -135,10 +152,9 @@ export default function BodyTab({ state, update }) {
         <div className="panel-title">
           Traits
           <div className="row gap-sm" style={{ fontWeight: 'normal' }}>
-            <span className={`pts-badge${bodyPts === 0 ? ' empty' : bodyPts <= 2 ? ' warn' : ''}`}>BODY {bodyPts} pts</span>
-            <span className={`pts-badge${corePts === 0 ? ' empty' : corePts <= 2 ? ' warn' : ''}`}>CORE {corePts} pts</span>
-            {lvlBody > 0 && <span className="pts-badge warn">LVL-BODY {lvlBody}</span>}
-            {lvlCore > 0 && <span className="pts-badge warn">LVL-CORE {lvlCore}</span>}
+            {isLevelOne && <span className={`pts-badge${bodyPts === 0 ? ' empty' : bodyPts <= 2 ? ' warn' : ''}`}>BODY {bodyPts} pts</span>}
+            {isLevelOne && <span className={`pts-badge${corePts === 0 ? ' empty' : corePts <= 2 ? ' warn' : ''}`}>CORE {corePts} pts</span>}
+            {lvlPool > 0 && <span className="pts-badge warn">▲ {lvlPool} pts to spend</span>}
           </div>
         </div>
         <div className="traits-grid">
@@ -148,20 +164,27 @@ export default function BodyTab({ state, update }) {
             const lbonus = state.traitLevelBonus[t] || 0;
             const pool = traitPool(t);
             const poolAv = state.bonusPoints[pool] || 0;
-            const lvlAv = state.levelPoints[pool] || 0;
+            const lvlAv = state.levelPoints?.pool || 0;
             return (
               <div key={t} className="trait-card">
                 <div className="trait-name">{TRAIT_LABELS[t]}</div>
                 <div className="trait-sub">{isBodyTrait(t) ? 'Body' : 'Core'}</div>
                 <div className="trait-val">{total}</div>
-                <div className="trait-controls">
-                  <button className="btn btn-danger btn-icon btn-sm" onClick={() => adjustBonus(t, -1)} disabled={bonus <= 0}>−</button>
-                  <span className="trait-bonus-display">Base {state.traits[t] || 0}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}</span>
-                  <button className="btn btn-cyan btn-icon btn-sm" onClick={() => adjustBonus(t, 1)} disabled={poolAv <= 0}>+</button>
-                </div>
+                {isLevelOne && (
+                  <div className="trait-controls">
+                    <button className="btn btn-danger btn-icon btn-sm" onClick={() => adjustBonus(t, -1)} disabled={bonus <= 0}>−</button>
+                    <span className="trait-bonus-display">Base {state.traits[t] || 0}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}</span>
+                    <button className="btn btn-cyan btn-icon btn-sm" onClick={() => adjustBonus(t, 1)} disabled={poolAv <= 0}>+</button>
+                  </div>
+                )}
+                {!isLevelOne && (bonus > 0 || lbonus > 0) && (
+                  <div className="trait-bonus-display" style={{ textAlign: 'center', fontSize: 9, color: 'var(--muted)' }}>
+                    Base {state.traits[t] || 0}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}
+                  </div>
+                )}
                 {lvlAv > 0 && (
                   <div className="trait-sp">
-                    <button className="btn btn-gold btn-xs" onClick={() => investLevel(t)}>Invest LVL Pt</button>
+                    <button className="btn btn-gold btn-xs" onClick={() => investLevel(t)}>+ Spend</button>
                   </div>
                 )}
               </div>
@@ -243,6 +266,7 @@ export default function BodyTab({ state, update }) {
           {(!state.effects || state.effects.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No active effects</span>}
         </div>
       </div>
+
     </>
   );
 }
