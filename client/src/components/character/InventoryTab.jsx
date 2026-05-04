@@ -1,7 +1,77 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { uid, catIcon, itemDmgLabel, ATK_TYPES, DMG_TYPES } from '../../constants.js';
+import { apiFetch } from '../../api.js';
 
-function ItemPopup({ item, catId, cats, onClose, onUpdate, onDelete, onMove }) {
+const AFFIX_TIER_COLOR = {
+  Lesser: 'var(--muted)', Normal: 'var(--text)', Higher: 'var(--cyan)',
+  Legendary: 'var(--gold)', Mythic: 'var(--purple)', Godly: '#ff6b6b',
+};
+const ITEM_TIER_COLOR = {
+  Crude: 'var(--muted)', Basic: '#8899aa', Quality: 'var(--cyan)',
+  Superior: 'var(--gold)', Exceptional: 'var(--purple)',
+};
+
+function AffixPicker({ type, affixes, current, onPick, onClear }) {
+  const [open, setOpen] = useState(false);
+  const TIERS = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
+  const list  = affixes.filter(a => a.type === type);
+
+  return (
+    <div style={{ marginBottom: 6 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ fontSize: 10, color: 'var(--muted)', width: 44, textTransform: 'uppercase', letterSpacing: 1 }}>{type}</span>
+        {current ? (
+          <>
+            <span style={{ fontSize: 11, fontWeight: 700, color: AFFIX_TIER_COLOR[current.tier], flex: 1 }}>
+              {type === 'prefix' ? current.name + ' …' : '… ' + current.name}
+              <span style={{ fontSize: 9, color: 'var(--muted)', marginLeft: 6 }}>[{current.tier}]</span>
+            </span>
+            <button className="btn btn-muted btn-xs" onClick={() => { setOpen(v => !v); }}>Change</button>
+            <button className="btn btn-danger btn-xs" onClick={onClear}>✕</button>
+          </>
+        ) : (
+          <button className="btn btn-muted btn-xs" onClick={() => setOpen(v => !v)}>
+            {open ? 'Cancel' : `+ Add ${type}`}
+          </button>
+        )}
+      </div>
+      {open && (
+        <div style={{ marginTop: 6, maxHeight: 200, overflowY: 'auto', border: '1px solid var(--border)', borderRadius: 4, background: 'rgba(0,0,0,.4)' }}>
+          {list.length === 0 && (
+            <div style={{ padding: '8px 12px', color: 'var(--muted)', fontSize: 10 }}>No {type}es defined by admin yet.</div>
+          )}
+          {TIERS.map(tier => {
+            const items = list.filter(a => a.tier === tier);
+            if (items.length === 0) return null;
+            return (
+              <div key={tier}>
+                <div style={{ padding: '4px 10px 2px', fontSize: 8, letterSpacing: 2, textTransform: 'uppercase',
+                  color: AFFIX_TIER_COLOR[tier], borderTop: '1px solid var(--border)' }}>{tier}</div>
+                {items.map(a => (
+                  <div key={a._id}
+                    onClick={() => { onPick(a); setOpen(false); }}
+                    style={{ padding: '5px 12px', cursor: 'pointer', fontSize: 11,
+                      background: current?.affixId === a._id ? 'rgba(168,85,247,.12)' : 'transparent',
+                      borderLeft: `2px solid ${AFFIX_TIER_COLOR[a.tier]}` }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,.05)'}
+                    onMouseLeave={e => e.currentTarget.style.background = current?.affixId === a._id ? 'rgba(168,85,247,.12)' : 'transparent'}
+                  >
+                    <span style={{ color: AFFIX_TIER_COLOR[a.tier], fontWeight: 700 }}>
+                      {type === 'prefix' ? a.name + ' …' : '… ' + a.name}
+                    </span>
+                    {a.effects && <span style={{ color: 'var(--gold)', fontSize: 10, marginLeft: 8 }}>{a.effects}</span>}
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, onMove }) {
   const [local, setLocal] = useState({ ...item });
   function patch(k, v) { setLocal(l => ({ ...l, [k]: v })); }
   function toggleAtkType(t) {
@@ -9,6 +79,9 @@ function ItemPopup({ item, catId, cats, onClose, onUpdate, onDelete, onMove }) {
   }
   function toggleDmgType(t) {
     setLocal(l => { const arr = l.damageType || []; return { ...l, damageType: arr.includes(t) ? arr.filter(x => x !== t) : [...arr, t] }; });
+  }
+  function pickAffix(type, a) {
+    patch(type, { affixId: a._id, name: a.name, tier: a.tier, effects: a.effects, description: a.description });
   }
   function save() { onUpdate(catId, local); onClose(); }
 
@@ -45,6 +118,36 @@ function ItemPopup({ item, catId, cats, onClose, onUpdate, onDelete, onMove }) {
               <button className="btn btn-success btn-icon btn-sm" onClick={() => patch('qty', (local.qty || 1) + 1)}>+</button>
             </div>
           </div>
+        </div>
+
+        {/* Tier */}
+        <div className="field-group" style={{ marginBottom: 10 }}>
+          <label className="field-label">Item Tier</label>
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+            <button className={`badge-toggle${!local.tier ? ' on' : ''}`} onClick={() => patch('tier', '')}>None</button>
+            {['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional'].map(t => (
+              <button key={t} className={`badge-toggle${local.tier === t ? ' on' : ''}`}
+                style={local.tier === t ? { borderColor: ITEM_TIER_COLOR[t], color: ITEM_TIER_COLOR[t], background: `${ITEM_TIER_COLOR[t]}18` } : {}}
+                onClick={() => patch('tier', t)}>{t}</button>
+            ))}
+          </div>
+        </div>
+
+        {/* Affixes */}
+        <div style={{ marginBottom: 10, padding: '8px 10px', border: '1px solid var(--border)', borderRadius: 4 }}>
+          <div className="field-label" style={{ marginBottom: 8 }}>Affixes</div>
+          {local.tier ? (
+            <>
+              <AffixPicker type="prefix" affixes={affixes} current={local.prefix || null}
+                onPick={a => pickAffix('prefix', a)} onClear={() => patch('prefix', null)} />
+              <AffixPicker type="suffix" affixes={affixes} current={local.suffix || null}
+                onPick={a => pickAffix('suffix', a)} onClear={() => patch('suffix', null)} />
+            </>
+          ) : (
+            <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic' }}>
+              Set an item tier to unlock affixes.
+            </div>
+          )}
         </div>
 
         <div className="modal-section">
@@ -117,10 +220,16 @@ function ItemPopup({ item, catId, cats, onClose, onUpdate, onDelete, onMove }) {
 }
 
 function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDragEnd, onClick }) {
-  const icon = item.icon || catIcon(item.category || 'default');
-  const dmgLbl = itemDmgLabel(item);
+  const icon    = item.icon || catIcon(item.category || 'default');
+  const dmgLbl  = itemDmgLabel(item);
   const showQty = (item.qty || 1) > 1;
-  const isOver = dragOverId === item.id;
+  const isOver  = dragOverId === item.id;
+
+  // Composed display name: [prefix] name [suffix]
+  const prefix  = item.prefix?.name  ? item.prefix.name + ' '  : '';
+  const suffix  = item.suffix?.name  ? ' ' + item.suffix.name  : '';
+  const tierCol = item.tier ? (ITEM_TIER_COLOR[item.tier] || 'var(--text)') : null;
+
   return (
     <div
       className={`inv-row${isOver ? ' drag-over' : ''}`}
@@ -133,7 +242,12 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
     >
       <span className="inv-row-drag">⠿</span>
       <span className="inv-row-icon">{icon}</span>
-      <span className="inv-row-name">{item.name}</span>
+      <span className="inv-row-name">
+        {item.prefix && <span style={{ color: AFFIX_TIER_COLOR[item.prefix.tier] || 'var(--muted)', fontSize: 10 }}>{prefix}</span>}
+        <span style={tierCol ? { color: tierCol } : {}}>{item.name}</span>
+        {item.suffix && <span style={{ color: AFFIX_TIER_COLOR[item.suffix.tier] || 'var(--muted)', fontSize: 10 }}>{suffix}</span>}
+        {item.tier && <span style={{ fontSize: 8, color: tierCol, marginLeft: 5, opacity: 0.7 }}>[{item.tier}]</span>}
+      </span>
       <span className="inv-row-meta">
         {dmgLbl && <span className="inv-row-dmg">⚔ {dmgLbl}</span>}
         {item.range && <span className="inv-row-range">{item.range}</span>}
@@ -142,6 +256,7 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
         )}
       </span>
       {showQty && <span className="inv-row-qty">×{item.qty}</span>}
+      <span className="inv-row-edit">✎ EDIT</span>
     </div>
   );
 }
@@ -202,15 +317,24 @@ function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReo
   );
 }
 
-export default function InventoryTab({ state, update }) {
+export default function InventoryTab({ state, update, token }) {
   const [popup, setPopup] = useState(null);
+  const [affixes, setAffixes] = useState([]);
   const dragItem = useRef(null);
   const [dragOverItem, setDragOverItem] = useState(null);
 
+  useEffect(() => {
+    if (token) {
+      apiFetch('/api/affixes', {}, token).then(d => { if (Array.isArray(d)) setAffixes(d); });
+    }
+  }, [token]);
+
   const cats = state.inventory?.categories || [];
-  const equipped = cats.find(c => c.id === 1) || { id: 1, name: 'Equipped', items: [] };
-  const hotbar = cats.find(c => c.id === 2) || { id: 2, name: 'Hotbar', items: [] };
-  const freeCats = cats.filter(c => c.id !== 1 && c.id !== 2).sort((a, b) => (a.order || 0) - (b.order || 0));
+  // Support both current IDs (1/2) and legacy IDs (15=Worn/Equipped, 9=Quick Slots)
+  const equipped = cats.find(c => c.id === 1 || c.id === 15) || { id: 1, name: 'Equipped', items: [] };
+  const hotbar   = cats.find(c => c.id === 2 || c.id === 9)  || { id: 2, name: 'Hotbar',   items: [] };
+  const FIXED_IDS = new Set([1, 2, 9, 15]);
+  const freeCats = cats.filter(c => !FIXED_IDS.has(c.id)).sort((a, b) => (a.order || 0) - (b.order || 0));
 
   function mutateCats(fn) {
     update(s => ({ ...s, inventory: { ...s.inventory, categories: fn(s.inventory?.categories || []) } }));
@@ -261,7 +385,7 @@ export default function InventoryTab({ state, update }) {
   function reorderCat(catId, dir) {
     mutateCats(cs => {
       const sorted = [...cs].sort((a, b) => (a.order || 0) - (b.order || 0));
-      const freeOnly = sorted.filter(c => c.id !== 1 && c.id !== 2);
+      const freeOnly = sorted.filter(c => !new Set([1, 2, 9, 15]).has(c.id));
       const idx = freeOnly.findIndex(c => c.id === catId);
       if (dir === -1 && idx === 0) return cs;
       if (dir === 1 && idx === freeOnly.length - 1) return cs;
@@ -331,6 +455,7 @@ export default function InventoryTab({ state, update }) {
       {popup && (
         <ItemPopup
           item={popup.item} catId={popup.catId} cats={cats}
+          affixes={affixes}
           onClose={() => setPopup(null)}
           onUpdate={updateItem} onDelete={deleteItem} onMove={moveItem}
         />

@@ -9,9 +9,10 @@ import CommsSection from '../components/admin/CommsSection.jsx';
 import MomentTrackerSection from '../components/admin/MomentTrackerSection.jsx';
 import ItemLibrarySection from '../components/admin/ItemLibrarySection.jsx';
 import EnemiesSection from '../components/admin/EnemiesSection.jsx';
+import AffixLibrarySection from '../components/admin/AffixLibrarySection.jsx';
 
-const SECTIONS = ['players', 'library', 'achievements', 'comms', 'tracker', 'items', 'enemies'];
-const SECTION_LABELS = { players: 'Players', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library', enemies: 'Enemies' };
+const SECTIONS = ['players', 'library', 'achievements', 'comms', 'tracker', 'items', 'affixes', 'enemies'];
+const SECTION_LABELS = { players: 'Players', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library', affixes: 'Affixes', enemies: 'Enemies' };
 
 export default function AdminPanel() {
   const [auth, setAuth] = useState(() => {
@@ -28,6 +29,7 @@ export default function AdminPanel() {
   const [bulkSel, setBulkSel] = useState([]);
   const [bulkAchForm, setBulkAchForm] = useState({ title: '', desc: '', reward: '' });
   const [bulkObjForm, setBulkObjForm] = useState({ section: 'main', title: '', description: '', status: 'active' });
+  const [bulkFollowers, setBulkFollowers] = useState('');
 
   useEffect(() => { if (auth) loadPlayers(); }, [auth]);
 
@@ -54,6 +56,14 @@ export default function AdminPanel() {
     const ok = d.results?.filter(r => r.ok).length || 0;
     showToast(`Sent to ${ok}/${bulkSel.length} players`);
     setBulkObjForm({ section: 'main', title: '', description: '', status: 'active' });
+    setBulkSel([]);
+  }
+  async function bulkSetFollowers() {
+    if (!bulkFollowers.trim() || bulkSel.length === 0) return;
+    const d = await apiFetch('/api/admin/players/bulk/followers', { method: 'PATCH', body: JSON.stringify({ userIds: bulkSel, followers: bulkFollowers.trim() }) }, auth.token);
+    const ok = d.results?.filter(r => r.ok).length || 0;
+    showToast(`Followers set for ${ok}/${bulkSel.length} players`);
+    setBulkFollowers('');
     setBulkSel([]);
   }
 
@@ -107,6 +117,11 @@ export default function AdminPanel() {
                 </select>
                 <button className="btn btn-cyan btn-xs" onClick={bulkSendObj} style={{ width: '100%' }}>Send to Selected</button>
               </div>
+              <div style={{ marginTop: 8 }}>
+                <div style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Set Followers</div>
+                <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="e.g. 1.5B, 200.6T" value={bulkFollowers} onChange={e => setBulkFollowers(e.target.value)} />
+                <button className="btn btn-purple btn-xs" onClick={bulkSetFollowers} style={{ width: '100%' }}>Set for Selected</button>
+              </div>
             </div>
           )}
 
@@ -154,6 +169,7 @@ export default function AdminPanel() {
             {activeSection === 'comms' && <CommsSection token={auth.token} players={players} showToast={showToast} />}
             {activeSection === 'tracker' && <MomentTrackerSection token={auth.token} players={players} enemies={enemies} showToast={showToast} />}
             {activeSection === 'items' && <ItemLibrarySection token={auth.token} players={players} showToast={showToast} />}
+            {activeSection === 'affixes' && <AffixLibrarySection token={auth.token} showToast={showToast} />}
             {activeSection === 'enemies' && <EnemiesSection token={auth.token} showToast={showToast} onEnemiesChange={setEnemies} />}
           </div>
         </div>

@@ -1,13 +1,13 @@
 import { useState, useRef } from 'react';
 import { uid, BOSS_TIERS } from '../../constants.js';
 
+
 export default function ExposureTab({ state, update }) {
   const portraitRefs = useRef([null, null, null]);
   const [newTag, setNewTag] = useState({ name: '', effect: '' });
   const [tokenForm, setTokenForm] = useState({ tier: 'bronze' });
 
   function patchExposure(k, v) { update(s => ({ ...s, exposure: { ...s.exposure, [k]: v } })); }
-  function adjustExposure(k, delta) { update(s => ({ ...s, exposure: { ...s.exposure, [k]: Math.max(0, (s.exposure[k] || 0) + delta) } })); }
 
   function cycleTag(id) {
     const cycle = ['active', 'reinforced', 'faded'];
@@ -47,11 +47,16 @@ export default function ExposureTab({ state, update }) {
           {['viewers', 'followers'].map(k => (
             <div key={k} className="exp-counter">
               <div className="exp-counter-label">{k === 'viewers' ? 'Viewers' : 'Followers'}</div>
-              <div className="exp-counter-val">{state.exposure?.[k] || 0}</div>
-              <div className="exp-counter-btns">
-                <button className="btn-counter" onClick={() => adjustExposure(k, -1)}>−</button>
-                <button className="btn-counter" onClick={() => adjustExposure(k, 1)}>+</button>
-              </div>
+              <div className="exp-counter-val" style={{ fontSize: 18 }}>{state.exposure?.[k] || '0'}</div>
+              <input
+                className="fi"
+                style={{ marginTop: 6, textAlign: 'center', fontSize: 13, letterSpacing: 1 }}
+                placeholder="e.g. 1.5B, 200.6T"
+                defaultValue={state.exposure?.[k] || ''}
+                key={state.exposure?.[k]}
+                onBlur={e => { const val = e.target.value.trim(); if (val) patchExposure(k, val); }}
+                onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
+              />
             </div>
           ))}
         </div>

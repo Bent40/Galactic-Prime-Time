@@ -18,12 +18,16 @@ export const TRAIT_LABELS = { physique: 'Physique', reflexes: 'Reflexes', mind: 
 export const RACES = ['Human', 'Cyborg', 'Android', 'Mutant', 'Alien', 'Clone', 'Hybrid', 'Synthetic'];
 export const ATK_TYPES = ['Single Target', 'Line', 'Arc', 'Cone', 'Burst', 'Self', 'Thrown', 'All'];
 export const DMG_TYPES = ['Crush', 'Bleed', 'Burn', 'Shock', 'Toxic', 'Psy'];
-export const BOSS_TIERS = ['bronze', 'silver', 'gold', 'legendary', 'mythic', 'godly'];
-export const ITEM_CATS = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc'];
+export const BOSS_TIERS   = ['bronze', 'silver', 'gold', 'legendary', 'mythic', 'godly'];
+export const ITEM_TIERS   = ['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional'];
+export const AFFIX_TIERS  = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
+export const ITEM_CATS    = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'];
 
 export const CAT_ICONS = {
   Weapons: '⚔️', Equipment: '🛡️', Tools: '🔧',
-  Consumables: '💊', Misc: '📦', Hotbar: '⚡', Equipped: '🏃', default: '📦',
+  Consumables: '💊', Misc: '📦', Hotbar: '⚡', Equipped: '🏃',
+  'Quick Slots': '⚡', 'Worn/Equipped': '🏃',
+  'System Items': '💾', 'Key Items': '🔑', default: '📦',
 };
 
 export const DEFAULT_STATE = {
@@ -43,6 +47,7 @@ export const DEFAULT_STATE = {
     { id: 6, name: 'Right Leg', maxHp: 4, currentHp: 4, lethal: false, conditions: [] },
   ],
   skills: [],
+  skillPointsSpent: { physique: 0, reflexes: 0, mind: 0, charm: 0 },
   tags: [],
   effects: [],
   exposure: { viewers: 0, followers: 0 },
@@ -61,6 +66,8 @@ export const DEFAULT_STATE = {
       { id: 12, name: 'Tools', locked: false, items: [], order: 4 },
       { id: 13, name: 'Consumables', locked: false, items: [], order: 5 },
       { id: 14, name: 'Misc', locked: false, items: [], order: 6 },
+      { id: 17, name: 'System Items', locked: true, items: [], order: 7 },
+      { id: 18, name: 'Key Items', locked: true, items: [], order: 8 },
     ],
   },
   objectives: { main: [], directives: [], goals: [] },

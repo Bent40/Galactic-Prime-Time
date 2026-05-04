@@ -250,6 +250,49 @@ export default function BodyTab({ state, update }) {
         </div>
       </div>
 
+      {/* Forced Action Consequences */}
+      <div className="panel">
+        <div className="panel-title">Forced Action Consequences</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div>
+            <div className="section-label" style={{ marginBottom: 8 }}>Body</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {[
+                ['Tear Something', 'You take 1 damage to the relevant body part. If at 0 HP, the condition escalates.'],
+                ['Lock-Up', 'The body part is unusable for the next 3 Moments.'],
+                ['Condition Surge', 'Advance one active condition by 1 clock. Prioritizes conditions responsible for the forced action. If no active condition exists, apply Shock Tier 1 instead.'],
+                ['Drop', 'Drop the item held in the limb involved in the action. If no specific limb is responsible, choose one hand to drop its item.'],
+                ['Shock Spike', 'Increase Shock by 1 tier.'],
+                ['Stumble', 'You become exposed until your next moment.'],
+              ].map(([name, desc]) => (
+                <div key={name} style={{ padding: '6px 8px', background: 'rgba(0,0,0,.2)', borderLeft: '2px solid var(--danger)', borderRadius: 3 }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--danger)', letterSpacing: 1, marginBottom: 2 }}>{name}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.4 }}>{desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div>
+            <div className="section-label" style={{ marginBottom: 8 }}>Tool</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {[
+                ['Whiff', 'The action fails to meaningfully impact its intended target.'],
+                ['Overcommit', 'You become exposed.'],
+                ['Collateral', 'Ally, object or environment affected.'],
+                ['Slip', 'You are unarmed until your next moment.'],
+                ['Strained Grip', '+1 Moment cost on your next action with the tool.'],
+                ['Overextension', 'Your next scheduled action is delayed by 1 additional Moment.'],
+              ].map(([name, desc]) => (
+                <div key={name} style={{ padding: '6px 8px', background: 'rgba(0,0,0,.2)', borderLeft: '2px solid var(--gold)', borderRadius: 3 }}>
+                  <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold)', letterSpacing: 1, marginBottom: 2 }}>{name}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.4 }}>{desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Active Effects */}
       <div className="panel">
         <div className="panel-title">

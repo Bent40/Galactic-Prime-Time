@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
-import { ATK_TYPES, DMG_TYPES, ITEM_CATS } from '../../constants.js';
+import { ATK_TYPES, DMG_TYPES, ITEM_CATS, ITEM_TIERS } from '../../constants.js';
 
 function toggleArr(arr, val) { return arr.includes(val) ? arr.filter(x => x !== val) : [...arr, val]; }
 
@@ -13,6 +13,12 @@ function ItemForm({ value, onChange }) {
         <div className="field-group"><label className="field-label">Category</label>
           <select className="fi" value={value.category} onChange={e => onChange({ ...value, category: e.target.value })}>
             {ITEM_CATS.map(c => <option key={c}>{c}</option>)}
+          </select>
+        </div>
+        <div className="field-group"><label className="field-label">Tier</label>
+          <select className="fi" value={value.tier || ''} onChange={e => onChange({ ...value, tier: e.target.value })}>
+            <option value="">— None —</option>
+            {ITEM_TIERS.map(t => <option key={t}>{t}</option>)}
           </select>
         </div>
       </div>
@@ -43,7 +49,9 @@ function ItemForm({ value, onChange }) {
   );
 }
 
-const BLANK_FORM = { name: '', icon: '', category: 'Misc', attackTypes: [], range: '', damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1 };
+const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1 };
+
+const ITEM_TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 
 export default function ItemLibrarySection({ token, players, showToast }) {
   const [items, setItems] = useState([]);
@@ -98,6 +106,7 @@ export default function ItemLibrarySection({ token, players, showToast }) {
                   </div>
                   <div className="item-card-meta">
                     <span className="badge badge-muted">{it.category}</span>
+                    {it.tier && <span className="badge" style={{ borderColor: ITEM_TIER_COLOR[it.tier], color: ITEM_TIER_COLOR[it.tier] }}>{it.tier}</span>}
                     {it.damage && <span className="badge badge-danger">⚔ {it.damage}</span>}
                     {(it.attackTypes || []).map(t => <span key={t} className="badge badge-cyan">{t}</span>)}
                     {(it.damageType || []).map(t => <span key={t} className="badge badge-gold">{t}</span>)}

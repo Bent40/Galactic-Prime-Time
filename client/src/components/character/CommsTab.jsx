@@ -4,6 +4,7 @@ import { apiFetch } from '../../api.js';
 export default function CommsTab({ auth }) {
   const [messages, setMessages] = useState([]);
   const feedRef = useRef();
+  const initialLoad = useRef(true);
 
   useEffect(() => {
     load();
@@ -15,7 +16,10 @@ export default function CommsTab({ auth }) {
     apiFetch('/api/messages', {}, auth.token).then(d => {
       if (Array.isArray(d)) {
         setMessages(d);
-        setTimeout(() => feedRef.current?.scrollTo(0, feedRef.current.scrollHeight), 50);
+        if (initialLoad.current) {
+          initialLoad.current = false;
+          setTimeout(() => feedRef.current?.scrollTo(0, feedRef.current.scrollHeight), 50);
+        }
       }
     });
   }

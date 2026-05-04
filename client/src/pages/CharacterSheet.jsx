@@ -43,6 +43,7 @@ export default function CharacterSheet() {
           levelPoints: { ...DEFAULT_STATE.levelPoints, ...(d.state.levelPoints || {}) },
           tokens: { ...DEFAULT_STATE.tokens, ...(d.state.tokens || {}) },
           exposure: { ...DEFAULT_STATE.exposure, ...(d.state.exposure || {}) },
+          skillPointsSpent: { ...DEFAULT_STATE.skillPointsSpent, ...(d.state.skillPointsSpent || {}) },
         };
         setCharState(merged);
       }
@@ -108,9 +109,9 @@ export default function CharacterSheet() {
       {/* Tab Content */}
       <div className="tab-content">
         {activeTab === 'body' && <BodyTab state={charState} update={update} showToast={showToast} />}
-        {activeTab === 'skills' && <SkillsTab state={charState} token={auth.token} />}
+        {activeTab === 'skills' && <SkillsTab state={charState} update={update} token={auth.token} />}
         {activeTab === 'achievements' && <AchievementsTab state={charState} />}
-        {activeTab === 'inventory' && <InventoryTab state={charState} update={update} />}
+        {activeTab === 'inventory' && <InventoryTab state={charState} update={update} token={auth?.token} />}
         {activeTab === 'exposure' && <ExposureTab state={charState} update={update} />}
         {activeTab === 'objectives' && <ObjectivesTab state={charState} update={update} />}
         {activeTab === 'combat' && <CombatModeTab state={charState} update={update} tracker={tracker} />}

@@ -1,42 +1,76 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
 
+const TIER_LEVELS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+const BLANK_FORM = {
+  name: '', momentCost: '', stats: '', passive: false, capacity: 5,
+  requirements: '', range: '', target: '', effect: '', description: '',
+  achievementUnlock: '', levelEffects: {},
+};
+
+function LevelEffectsEditor({ value, onChange }) {
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <div className="field-label" style={{ marginBottom: 6 }}>Tier Effects (2–10)</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+        {TIER_LEVELS.map(lvl => (
+          <div key={lvl} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: 'var(--cyan)', width: 24, textAlign: 'right', flexShrink: 0 }}>T{lvl}</span>
+            <input
+              className="fi"
+              style={{ flex: 1, fontSize: 11, padding: '3px 7px' }}
+              placeholder={`Effect at tier ${lvl}…`}
+              value={value?.[lvl] || ''}
+              onChange={e => onChange({ ...value, [lvl]: e.target.value })}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function SkillLibrarySection({ token, showToast }) {
   const [templates, setTemplates] = useState([]);
   const [editModal, setEditModal] = useState(null);
-  const [form, setForm] = useState({ name: '', momentCost: '', stats: '', passive: false, capacity: 5, requirements: '', range: '', target: '', effect: '', description: '', achievementUnlock: '' });
+  const [form, setForm] = useState({ ...BLANK_FORM });
   const [bulkText, setBulkText] = useState('');
   const [showBulk, setShowBulk] = useState(false);
 
   useEffect(() => { load(); }, []);
   function load() { apiFetch('/api/admin/skill-library', {}, token).then(d => { if (Array.isArray(d)) setTemplates(d); }); }
 
+  function prepareBody(data) {
+    return {
+      ...data,
+      stats: typeof data.stats === 'string'
+        ? data.stats.split(',').map(s => s.trim()).filter(Boolean)
+        : data.stats || [],
+      levelEffects: data.levelEffects || {},
+    };
+  }
+
   async function create() {
     if (!form.name) return;
-    const d = await apiFetch('/api/admin/skill-library', {
-      method: 'POST',
-      body: JSON.stringify({ ...form, stats: form.stats ? form.stats.split(',').map(s => s.trim()).filter(Boolean) : [] }),
-    }, token);
-    if (d._id) {
-      showToast('Skill created');
-      setForm({ name: '', momentCost: '', stats: '', passive: false, capacity: 5, requirements: '', range: '', target: '', effect: '', description: '', achievementUnlock: '' });
-      load();
-    } else showToast(d.error, 'err');
+    const d = await apiFetch('/api/admin/skill-library', { method: 'POST', body: JSON.stringify(prepareBody(form)) }, token);
+    if (d._id) { showToast('Skill created'); setForm({ ...BLANK_FORM }); load(); }
+    else showToast(d.error, 'err');
   }
+
   async function save() {
     if (!editModal.name) return;
-    const d = await apiFetch(`/api/admin/skill-library/${editModal._id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ ...editModal, stats: typeof editModal.stats === 'string' ? editModal.stats.split(',').map(s => s.trim()).filter(Boolean) : editModal.stats || [] }),
-    }, token);
+    const d = await apiFetch(`/api/admin/skill-library/${editModal._id}`, { method: 'PUT', body: JSON.stringify(prepareBody(editModal)) }, token);
     if (d._id) { showToast('Saved'); setEditModal(null); load(); }
     else showToast(d.error, 'err');
   }
+
   async function del(id) {
     if (!confirm('Delete this skill template?')) return;
     const d = await apiFetch(`/api/admin/skill-library/${id}`, { method: 'DELETE' }, token);
     if (d.ok) { showToast('Deleted'); load(); } else showToast(d.error, 'err');
   }
+
   async function bulkImport() {
     try {
       const skills = JSON.parse(bulkText);
@@ -69,10 +103,15 @@ export default function SkillLibrarySection({ token, showToast }) {
                 {t.momentCost && <span className="badge badge-cyan">{t.momentCost}</span>}
                 {(t.stats || []).map(s => <span key={s} className="badge badge-muted">{s}</span>)}
                 {t.achievementUnlock && <span className="badge badge-gold">🔒 {t.achievementUnlock}</span>}
+                {t.levelEffects && Object.keys(t.levelEffects).filter(k => t.levelEffects[k]).length > 0 && (
+                  <span className="badge badge-muted">
+                    {Object.keys(t.levelEffects).filter(k => t.levelEffects[k]).length} tier effects
+                  </span>
+                )}
               </div>
               {t.effect && <div className="template-effect">{t.effect}</div>}
               <div className="template-actions">
-                <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...t, stats: (t.stats || []).join(', ') })}>Edit</button>
+                <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...t, stats: (t.stats || []).join(', '), levelEffects: { ...(t.levelEffects || {}) } })}>Edit</button>
                 <button className="btn btn-danger btn-xs" onClick={() => del(t._id)}>Delete</button>
               </div>
             </div>
@@ -101,7 +140,8 @@ export default function SkillLibrarySection({ token, showToast }) {
               <div className="field-group"><label className="field-label">Achievement Unlock</label><input className="fi" value={editModal.achievementUnlock || ''} onChange={e => setEditModal(m => ({ ...m, achievementUnlock: e.target.value }))} /></div>
             </div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Requirements</label><input className="fi" value={editModal.requirements || ''} onChange={e => setEditModal(m => ({ ...m, requirements: e.target.value }))} /></div>
-            <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Effect</label><textarea className="fi" value={editModal.effect || ''} onChange={e => setEditModal(m => ({ ...m, effect: e.target.value }))} /></div>
+            <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Base Effect (Tier 1)</label><textarea className="fi" value={editModal.effect || ''} onChange={e => setEditModal(m => ({ ...m, effect: e.target.value }))} /></div>
+            <LevelEffectsEditor value={editModal.levelEffects || {}} onChange={v => setEditModal(m => ({ ...m, levelEffects: v }))} />
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Description</label><textarea className="fi" value={editModal.description || ''} onChange={e => setEditModal(m => ({ ...m, description: e.target.value }))} /></div>
             <div className="modal-footer">
               <button className="btn btn-muted btn-sm" onClick={() => setEditModal(null)}>Cancel</button>

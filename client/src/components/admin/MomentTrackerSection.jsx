@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../../api.js';
 
 const TIER_COLOR = { mob: '#3a4560', elite: '#00d4ff', boss: '#c8a84b', legendary: '#a855f7' };
+const TIER_ICON  = { player: '◉', mob: '●', elite: '◆', boss: '☠', legendary: '★' };
 
 export default function MomentTrackerSection({ token, players, enemies, showToast }) {
   const [tracker, setTracker] = useState(null);
@@ -21,6 +22,7 @@ export default function MomentTrackerSection({ token, players, enemies, showToas
   async function rmEntry(id) { const d = await apiFetch(`/api/tracker/entries/${id}`, { method: 'DELETE' }, token); if (!d.error) setTracker(d); }
   async function clearAll() { if (!confirm('Clear all entries?')) return; const d = await apiFetch('/api/tracker/entries', { method: 'DELETE' }, token); if (!d.error) setTracker(d); }
   async function moveEntry(entryId, slot) { const d = await apiFetch(`/api/tracker/entries/${entryId}`, { method: 'PATCH', body: JSON.stringify({ moment: slot }) }, token); if (!d.error) setTracker(d); }
+  async function setPhase(entryId, phase) { const d = await apiFetch(`/api/tracker/entries/${entryId}`, { method: 'PATCH', body: JSON.stringify({ currentPhase: phase }) }, token); if (!d.error) setTracker(d); }
 
   async function addPlayer(p) {
     const name = p.characterName || p.username;
@@ -44,7 +46,7 @@ export default function MomentTrackerSection({ token, players, enemies, showToas
     }
     const d = await apiFetch('/api/tracker/entries', {
       method: 'POST',
-      body: JSON.stringify({ name, type: 'mob', moment: targetSlot, color: enemy.color }),
+      body: JSON.stringify({ name, type: 'mob', tier: enemy.tier || 'mob', moment: targetSlot, color: enemy.color, phases: enemy.phases || [] }),
     }, token);
     if (!d.error) setTracker(d);
     else showToast(d.error, 'err');
@@ -97,16 +99,41 @@ export default function MomentTrackerSection({ token, players, enemies, showToas
                   {isCur && <span style={{ fontSize: 8, color: 'var(--cyan)' }}>▶</span>}
                 </div>
                 <div className="trk-slot-body">
-                  {(entriesBySlot[n] || []).map(e => (
-                    <div key={e.entryId} className="trk-entry"
-                      draggable
-                      onDragStart={() => dragEntry.current = e.entryId}
-                      onDragEnd={() => dragEntry.current = null}
-                      style={{ borderColor: e.color, color: e.color, background: `${e.color}18` }}>
-                      <span className="trk-entry-name">{e.name}</span>
-                      <button className="trk-entry-rm" onClick={() => rmEntry(e.entryId)} style={{ color: e.color }}>✕</button>
-                    </div>
-                  ))}
+                  {(entriesBySlot[n] || []).map(e => {
+                    const icon = TIER_ICON[e.tier] || TIER_ICON[e.type] || '●';
+                    const hasPhases = (e.phases || []).length > 0;
+                    const phase = hasPhases ? (e.phases[e.currentPhase] || e.phases[0]) : null;
+                    return (
+                      <div key={e.entryId} className="trk-entry"
+                        draggable
+                        onDragStart={() => dragEntry.current = e.entryId}
+                        onDragEnd={() => dragEntry.current = null}
+                        style={{ borderColor: e.color, color: e.color, background: `${e.color}18`, flexDirection: 'column', alignItems: 'stretch', gap: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                          <span style={{ fontSize: 9, opacity: 0.75 }} title={e.tier || e.type}>{icon}</span>
+                          <span className="trk-entry-name" style={{ flex: 1 }}>{e.name}</span>
+                          <button className="trk-entry-rm" onClick={() => rmEntry(e.entryId)} style={{ color: e.color }}>✕</button>
+                        </div>
+                        {hasPhases && (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 3, paddingTop: 3, borderTop: `1px solid ${e.color}40` }}>
+                            <button
+                              style={{ background: 'none', border: 'none', cursor: 'pointer', color: e.color, fontSize: 9, padding: '0 2px', opacity: e.currentPhase > 0 ? 1 : 0.3 }}
+                              onClick={() => e.currentPhase > 0 && setPhase(e.entryId, e.currentPhase - 1)}
+                              title="Previous phase"
+                            >◀</button>
+                            <span style={{ flex: 1, fontSize: 9, textAlign: 'center', color: e.color, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {e.currentPhase + 1}/{e.phases.length}: {phase?.name || 'Phase'}
+                            </span>
+                            <button
+                              style={{ background: 'none', border: 'none', cursor: 'pointer', color: e.color, fontSize: 9, padding: '0 2px', opacity: e.currentPhase < e.phases.length - 1 ? 1 : 0.3 }}
+                              onClick={() => e.currentPhase < e.phases.length - 1 && setPhase(e.entryId, e.currentPhase + 1)}
+                              title="Next phase"
+                            >▶</button>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             );
@@ -184,10 +211,10 @@ export default function MomentTrackerSection({ token, players, enemies, showToas
                     style={{ '--enemy-color': e.color }}
                     title={`Add to slot ${targetSlot}`}
                   >
-                    <span className="trk-add-dot" style={{ background: e.color }} />
+                    <span style={{ fontSize: 12, minWidth: 16, textAlign: 'center', color: tierColor }} title={e.tier}>{TIER_ICON[e.tier] || '●'}</span>
                     <span className="trk-add-info">
                       <span className="trk-add-name" style={{ color: e.color }}>{e.name}</span>
-                      <span className="trk-add-sub" style={{ color: tierColor }}>{e.tier}</span>
+                      <span className="trk-add-sub" style={{ color: tierColor }}>{e.tier}{(e.phases || []).length > 0 ? ` · ${e.phases.length} phases` : ''}</span>
                     </span>
                     {countInTracker > 0 && (
                       <span className="trk-add-badge" style={{ borderColor: e.color, color: e.color }}>×{countInTracker}</span>

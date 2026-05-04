@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 const itemTemplateSchema = new mongoose.Schema({
   name:           { type: String, required: true },
   icon:           { type: String, default: '' },
-  category:       { type: String, enum: ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc'], default: 'Misc' },
+  category:       { type: String, enum: ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'], default: 'Misc' },
+  tier:           { type: String, enum: ['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional', ''], default: '' },
   attackTypes:    [{ type: String }],
   range:          { type: String, default: '' },
   damage:         { type: String, default: '' },

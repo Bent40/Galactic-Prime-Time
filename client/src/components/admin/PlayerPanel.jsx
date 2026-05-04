@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
-import { uid, TRAIT_LABELS } from '../../constants.js';
+import { uid, TRAIT_LABELS, ATK_TYPES, DMG_TYPES } from '../../constants.js';
 
 export default function PlayerPanel({ player, token, showToast }) {
   const [charData, setCharData] = useState(null);
@@ -11,15 +11,25 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [tagForm, setTagForm] = useState('');
   const [skillLib, setSkillLib] = useState([]);
   const [libSearch, setLibSearch] = useState('');
+  const [itemLib, setItemLib] = useState([]);
+  const [itemSearch, setItemSearch] = useState('');
+  const [giveQty, setGiveQty] = useState(1);
+  const [followersInput, setFollowersInput] = useState('');
+  const [viewersInput, setViewersInput] = useState('');
+  const [invCats, setInvCats] = useState(null); // local inventory state for editing
+  const [invItemModal, setInvItemModal] = useState(null); // { item, catId }
+  const [invSaving, setInvSaving] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     apiFetch(`/api/admin/players/${player.userId}`, {}, token).then(d => {
       setCharData(d);
       if (d.state?.tokens) setTokenForm({ narrative: d.state.tokens.narrative || 0, upgrade: d.state.tokens.upgrade || 0, patronTokens: d.state.tokens.patronTokens || 0 });
+      setInvCats(d.state?.inventory?.categories ? JSON.parse(JSON.stringify(d.state.inventory.categories)) : []);
       setLoading(false);
     });
     apiFetch('/api/admin/skill-library', {}, token).then(d => { if (Array.isArray(d)) setSkillLib(d); });
+    apiFetch('/api/items', {}, token).then(d => { if (Array.isArray(d)) setItemLib(d); });
   }, [player.userId]);
 
   if (loading) return <div style={{ padding: 20, color: 'var(--muted)', fontSize: 11, letterSpacing: 2 }}>LOADING...</div>;
@@ -107,6 +117,77 @@ export default function PlayerPanel({ player, token, showToast }) {
     const d = await apiFetch(`/api/admin/players/${player.userId}/tags`, { method: 'PATCH', body: JSON.stringify({ tags: newTags }) }, token);
     if (d.ok) { showToast('Tag removed'); setCharData(cd => ({ ...cd, state: { ...cd.state, tags: newTags } })); }
     else showToast(d.error, 'err');
+  }
+
+  async function giveItem(item) {
+    const d = await apiFetch('/api/items/give', {
+      method: 'POST',
+      body: JSON.stringify({ itemId: item._id, userIds: [player.userId], qty: giveQty }),
+    }, token);
+    const ok = d.results?.filter(r => r.ok).length || 0;
+    if (ok) showToast(`Gave ${giveQty}× ${item.name}`);
+    else showToast(d.results?.[0]?.error || 'Failed to give item', 'err');
+  }
+  async function saveFollowers() {
+    if (!followersInput.trim()) return;
+    const d = await apiFetch(`/api/admin/players/${player.userId}/exposure`, {
+      method: 'PATCH', body: JSON.stringify({ followers: followersInput.trim() }),
+    }, token);
+    if (d.ok) { showToast('Followers updated'); setFollowersInput(''); }
+    else showToast(d.error || 'Failed', 'err');
+  }
+  async function saveViewers() {
+    if (!viewersInput.trim()) return;
+    const d = await apiFetch(`/api/admin/players/${player.userId}/exposure`, {
+      method: 'PATCH', body: JSON.stringify({ viewers: viewersInput.trim() }),
+    }, token);
+    if (d.ok) { showToast('Viewers updated'); setViewersInput(''); }
+    else showToast(d.error || 'Failed', 'err');
+  }
+
+  // ---- Inventory helpers ----
+  function mutateCats(fn) { setInvCats(prev => fn(JSON.parse(JSON.stringify(prev)))); }
+  function invAddItem(catId) {
+    mutateCats(cs => cs.map(c => c.id === catId ? {
+      ...c, items: [...(c.items || []), {
+        id: uid(), name: 'New Item', icon: '', qty: 1, category: 'Misc',
+        attackTypes: [], range: '', damage: '', damageType: [],
+        specialEffects: '', resistance: '', requirements: '', description: '', tier: '',
+      }],
+    } : c));
+  }
+  function invUpdateItem(catId, updated) {
+    mutateCats(cs => cs.map(c => c.id === catId
+      ? { ...c, items: (c.items || []).map(i => i.id === updated.id ? updated : i) }
+      : c));
+  }
+  function invDeleteItem(catId, itemId) {
+    mutateCats(cs => cs.map(c => c.id === catId
+      ? { ...c, items: (c.items || []).filter(i => i.id !== itemId) }
+      : c));
+  }
+  function invMoveItem(fromCatId, toCatId, itemId) {
+    mutateCats(cs => {
+      const item = cs.find(c => c.id === fromCatId)?.items?.find(i => i.id === itemId);
+      if (!item) return cs;
+      return cs.map(c => {
+        if (c.id === fromCatId) return { ...c, items: (c.items || []).filter(i => i.id !== itemId) };
+        if (c.id === toCatId) return { ...c, items: [...(c.items || []), item] };
+        return c;
+      });
+    });
+  }
+  async function saveInventory() {
+    setInvSaving(true);
+    const newState = { ...charData.state, inventory: { ...charData.state?.inventory, categories: invCats } };
+    const d = await apiFetch(`/api/admin/players/${player.userId}/state`, {
+      method: 'PUT', body: JSON.stringify({ state: newState }),
+    }, token);
+    if (d.ok) {
+      showToast('Inventory saved');
+      setCharData(cd => ({ ...cd, state: newState }));
+    } else showToast(d.error || 'Failed', 'err');
+    setInvSaving(false);
   }
 
   const filteredLib = skillLib.filter(s => s.name.toLowerCase().includes(libSearch.toLowerCase()));
@@ -255,6 +336,127 @@ export default function PlayerPanel({ player, token, showToast }) {
           <button className="btn btn-cyan btn-sm" onClick={addTag}>+ Tag</button>
         </div>
       </div>
+
+      {/* Exposure */}
+      <div className="panel">
+        <div className="panel-title admin">Exposure</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          {[
+            { key: 'followers', label: 'Followers', val: followersInput, set: setFollowersInput, save: saveFollowers },
+            { key: 'viewers', label: 'Viewers', val: viewersInput, set: setViewersInput, save: saveViewers },
+          ].map(({ key, label, val, set, save }) => (
+            <div key={key}>
+              <div className="field-label" style={{ marginBottom: 4 }}>{label} — current: <span style={{ color: 'var(--cyan)' }}>{state.exposure?.[key] || '0'}</span></div>
+              <div className="row">
+                <input className="fi" style={{ flex: 1 }} placeholder="e.g. 1.5B, 200.6T"
+                  value={val} onChange={e => set(e.target.value)} onKeyDown={e => e.key === 'Enter' && save()} />
+                <button className="btn btn-purple btn-sm" onClick={save}>Set</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Give Items from Library */}
+      <div className="panel">
+        <div className="panel-title admin">Give Items from Library</div>
+        <div className="field-group" style={{ marginBottom: 8 }}>
+          <label className="field-label">Quantity</label>
+          <input className="fi" type="number" min="1" style={{ width: 80 }} value={giveQty} onChange={e => setGiveQty(+e.target.value)} />
+        </div>
+        <input className="fi" placeholder="Search items..." value={itemSearch} onChange={e => setItemSearch(e.target.value)} style={{ marginBottom: 6 }} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 200, overflowY: 'auto' }}>
+          {itemLib.filter(it => it.name.toLowerCase().includes(itemSearch.toLowerCase())).map(it => (
+            <div key={it._id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 8px', border: '1px solid var(--border)', borderRadius: 3, background: 'rgba(0,0,0,.2)' }}>
+              <span style={{ fontSize: 16 }}>{it.icon || '📦'}</span>
+              <span style={{ flex: 1, fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{it.name}</span>
+              <span style={{ fontSize: 9, color: 'var(--muted)' }}>{it.category}</span>
+              <button className="btn btn-cyan btn-xs" onClick={() => giveItem(it)}>Give</button>
+            </div>
+          ))}
+          {itemLib.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No items in library.</span>}
+        </div>
+      </div>
+
+      {/* Inventory Editor */}
+      {invCats !== null && (
+        <div className="panel">
+          <div className="panel-title admin">
+            Inventory Editor
+            <button className="btn btn-purple btn-sm" onClick={saveInventory} disabled={invSaving}>
+              {invSaving ? 'Saving…' : 'Save Inventory'}
+            </button>
+          </div>
+          {invCats.map(cat => (
+            <div key={cat.id} style={{ marginBottom: 12, border: '1px solid var(--border)', borderRadius: 4 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', background: 'rgba(0,212,255,.04)', borderBottom: '1px solid var(--border)' }}>
+                <span style={{ flex: 1, fontSize: 11, fontWeight: 700, color: 'var(--cyan)', letterSpacing: 1, textTransform: 'uppercase' }}>{cat.name}</span>
+                <span style={{ fontSize: 10, color: 'var(--muted)' }}>{(cat.items || []).length} items</span>
+                <button className="btn btn-cyan btn-xs" onClick={() => invAddItem(cat.id)}>+ Add</button>
+              </div>
+              <div style={{ padding: '6px 10px', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                {(cat.items || []).map(item => (
+                  <div key={item.id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 6px', border: '1px solid var(--border)', borderRadius: 3, background: 'rgba(0,0,0,.15)' }}>
+                    <span style={{ fontSize: 16 }}>{item.icon || '📦'}</span>
+                    <span style={{ flex: 1, fontSize: 12, fontWeight: 700 }}>{item.name}</span>
+                    {item.tier && <span style={{ fontSize: 9, color: 'var(--gold)' }}>{item.tier}</span>}
+                    {item.qty > 1 && <span style={{ fontSize: 10, color: 'var(--gold)' }}>×{item.qty}</span>}
+                    <select
+                      className="fi"
+                      style={{ fontSize: 9, padding: '2px 4px', width: 100 }}
+                      value={String(cat.id)}
+                      onChange={e => {
+                        const toId = invCats.find(c => String(c.id) === e.target.value)?.id;
+                        if (toId !== undefined && toId !== cat.id) invMoveItem(cat.id, toId, item.id);
+                      }}
+                    >
+                      {invCats.map(c => <option key={c.id} value={String(c.id)}>{c.name}</option>)}
+                    </select>
+                    <button className="btn btn-purple btn-xs" onClick={() => setInvItemModal({ item: JSON.parse(JSON.stringify(item)), catId: cat.id })}>Edit</button>
+                    <button className="btn btn-danger btn-xs" onClick={() => invDeleteItem(cat.id, item.id)}>✕</button>
+                  </div>
+                ))}
+                {(cat.items || []).length === 0 && <span style={{ color: 'var(--muted)', fontSize: 10, padding: '2px 0' }}>Empty</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Item Edit Modal */}
+      {invItemModal && (
+        <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) setInvItemModal(null); }}>
+          <div className="modal-box admin">
+            <div className="modal-title admin">
+              Edit Item
+              <button className="modal-close" onClick={() => setInvItemModal(null)}>✕</button>
+            </div>
+            {[
+              ['name', 'Name', 'text'], ['icon', 'Icon (emoji)', 'text'],
+              ['qty', 'Quantity', 'number'], ['tier', 'Tier', 'text'],
+              ['range', 'Range', 'text'], ['damage', 'Damage', 'text'],
+              ['requirements', 'Requirements', 'text'],
+            ].map(([k, lbl, type]) => (
+              <div key={k} className="field-group" style={{ marginBottom: 6 }}>
+                <label className="field-label">{lbl}</label>
+                <input className="fi" type={type} value={invItemModal.item[k] || ''} onChange={e => setInvItemModal(m => ({ ...m, item: { ...m.item, [k]: type === 'number' ? +e.target.value : e.target.value } }))} />
+              </div>
+            ))}
+            <div className="field-group" style={{ marginBottom: 6 }}>
+              <label className="field-label">Special Effects</label>
+              <textarea className="fi" value={invItemModal.item.specialEffects || ''} onChange={e => setInvItemModal(m => ({ ...m, item: { ...m.item, specialEffects: e.target.value } }))} />
+            </div>
+            <div className="field-group" style={{ marginBottom: 8 }}>
+              <label className="field-label">Description</label>
+              <textarea className="fi" value={invItemModal.item.description || ''} onChange={e => setInvItemModal(m => ({ ...m, item: { ...m.item, description: e.target.value } }))} />
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-muted btn-sm" onClick={() => setInvItemModal(null)}>Cancel</button>
+              <button className="btn btn-purple btn-sm" onClick={() => { invUpdateItem(invItemModal.catId, invItemModal.item); setInvItemModal(null); }}>Apply</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

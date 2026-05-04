@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
 
-const BLANK_BP = { name: '', maxHp: 3 };
-const BLANK = { name: '', tier: 'mob', color: '#ff2255', description: '', notes: '', bodyParts: [] };
+const BLANK_BP    = { name: '', maxHp: 3 };
+const BLANK_PHASE = { name: 'Phase', description: '', hpThreshold: '' };
+const BLANK = { name: '', tier: 'mob', color: '#ff2255', description: '', notes: '', bodyParts: [], phases: [] };
 const TIERS = ['mob', 'elite', 'boss', 'legendary'];
 const TIER_COLOR = { mob: 'var(--muted)', elite: 'var(--cyan)', boss: 'var(--gold)', legendary: 'var(--purple)' };
 
@@ -68,6 +69,59 @@ function BodyPartsEditor({ parts, onChange }) {
   );
 }
 
+function PhasesEditor({ phases, onChange }) {
+  function patch(idx, k, v) {
+    onChange(phases.map((p, i) => i === idx ? { ...p, [k]: v } : p));
+  }
+  function add()        { onChange([...phases, { ...BLANK_PHASE }]); }
+  function remove(idx)  { onChange(phases.filter((_, i) => i !== idx)); }
+
+  return (
+    <div style={{ marginTop: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
+        <label className="field-label" style={{ color: 'var(--gold)' }}>Phases</label>
+        <button className="btn btn-gold btn-xs" onClick={add}>+ Phase</button>
+      </div>
+      {phases.length === 0 && (
+        <div style={{ color: 'var(--muted)', fontSize: 10, padding: '6px 0' }}>
+          No phases defined. Add phases to track boss transitions.
+        </div>
+      )}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {phases.map((ph, idx) => (
+          <div key={idx} style={{ background: 'rgba(200,168,75,.06)', border: '1px solid rgba(200,168,75,.25)', borderRadius: 4, padding: '8px 10px' }}>
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 6 }}>
+              <span style={{ fontSize: 10, color: 'var(--gold)', fontWeight: 700, minWidth: 18 }}>{idx + 1}</span>
+              <input
+                className="fi"
+                style={{ flex: 1 }}
+                placeholder="Phase name (e.g. Enraged)"
+                value={ph.name}
+                onChange={e => patch(idx, 'name', e.target.value)}
+              />
+              <input
+                className="fi"
+                style={{ width: 140 }}
+                placeholder="Trigger (e.g. 50% HP)"
+                value={ph.hpThreshold}
+                onChange={e => patch(idx, 'hpThreshold', e.target.value)}
+              />
+              <button className="btn btn-danger btn-xs" onClick={() => remove(idx)}>✕</button>
+            </div>
+            <textarea
+              className="fi"
+              placeholder="Phase description / abilities..."
+              value={ph.description}
+              onChange={e => patch(idx, 'description', e.target.value)}
+              style={{ width: '100%', minHeight: 42, fontSize: 11, resize: 'vertical', boxSizing: 'border-box' }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function EnemyForm({ value, onChange }) {
   return (
     <>
@@ -105,6 +159,12 @@ function EnemyForm({ value, onChange }) {
         parts={value.bodyParts || []}
         onChange={bps => onChange({ ...value, bodyParts: bps })}
       />
+      {(value.tier === 'boss' || value.tier === 'legendary') && (
+        <PhasesEditor
+          phases={value.phases || []}
+          onChange={phs => onChange({ ...value, phases: phs })}
+        />
+      )}
     </>
   );
 }
@@ -125,7 +185,7 @@ export default function EnemiesSection({ token, showToast, onEnemiesChange }) {
   async function create() {
     if (!form.name) return;
     const d = await apiFetch('/api/enemies', { method: 'POST', body: JSON.stringify(form) }, token);
-    if (d._id) { showToast('Enemy created'); setForm({ ...BLANK, bodyParts: [] }); load(); }
+    if (d._id) { showToast('Enemy created'); setForm({ ...BLANK, bodyParts: [], phases: [] }); load(); }
     else showToast(d.error || 'Error', 'err');
   }
 
@@ -178,9 +238,19 @@ export default function EnemiesSection({ token, showToast, onEnemiesChange }) {
                     </div>
                   )}
 
+                  {(e.phases || []).length > 0 && (
+                    <div className="enemy-bp-list" style={{ borderTop: '1px solid rgba(200,168,75,.2)', marginTop: 4, paddingTop: 4 }}>
+                      {e.phases.map((ph, i) => (
+                        <div key={i} className="enemy-bp-row">
+                          <span className="enemy-bp-name" style={{ color: 'var(--gold)' }}>Phase {i + 1}: {ph.name}</span>
+                          {ph.hpThreshold && <span className="enemy-bp-hp" style={{ color: 'var(--muted)' }}>{ph.hpThreshold}</span>}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   {e.notes && <div className="enemy-card-notes">{e.notes}</div>}
                   <div className="item-card-actions">
-                    <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...e, bodyParts: e.bodyParts ? [...e.bodyParts] : [] })}>Edit</button>
+                    <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...e, bodyParts: e.bodyParts ? [...e.bodyParts] : [], phases: e.phases ? [...e.phases] : [] })}>Edit</button>
                     <button className="btn btn-danger btn-xs" onClick={() => del(e._id)}>Delete</button>
                   </div>
                 </div>

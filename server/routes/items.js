@@ -2,11 +2,12 @@ const express = require('express');
 const ItemTemplate = require('../models/ItemTemplate');
 const Character = require('../models/Character');
 const requireAdmin = require('../middleware/adminAuth');
+const logger = require('../logger');
 
 const router = express.Router();
 router.use(requireAdmin);
 
-const CATEGORIES = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc'];
+const CATEGORIES = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'];
 
 // GET /api/items — list all item templates grouped by category
 router.get('/', async (req, res) => {
@@ -14,6 +15,7 @@ router.get('/', async (req, res) => {
     const items = await ItemTemplate.find().sort({ category: 1, name: 1 }).lean();
     res.json(items);
   } catch (err) {
+    logger.error('GET /api/items failed', { message: err.message, stack: err.stack });
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -21,12 +23,12 @@ router.get('/', async (req, res) => {
 // POST /api/items — create a new item template
 router.post('/', async (req, res) => {
   try {
-    const { name, icon, category, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (!CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
     const item = await ItemTemplate.create({
-      name, icon: icon || '', category,
+      name, icon: icon || '', category, tier: tier || '',
       attackTypes: attackTypes || [],
       range: range || '', damage: damage || '',
       damageType: damageType || [],
@@ -39,21 +41,22 @@ router.post('/', async (req, res) => {
     });
     res.json(item);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    logger.error('POST /api/items failed', { message: err.message, stack: err.stack });
+    res.status(500).json({ error: err.name === 'ValidationError' ? err.message : 'Server error' });
   }
 });
 
 // PUT /api/items/:id — update an item template
 router.put('/:id', async (req, res) => {
   try {
-    const { name, icon, category, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (category && !CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
     const item = await ItemTemplate.findByIdAndUpdate(
       req.params.id,
       {
-        name, icon: icon || '', category,
+        name, icon: icon || '', category, tier: tier || '',
         attackTypes: attackTypes || [],
         range: range || '', damage: damage || '',
         damageType: damageType || [],
@@ -64,12 +67,13 @@ router.put('/:id', async (req, res) => {
         qty: qty || 1,
         type: type || '', effect: effect || '', notes: notes || '',
       },
-      { new: true }
+      { new: true, runValidators: true }
     );
     if (!item) return res.status(404).json({ error: 'Item not found' });
     res.json(item);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    logger.error('PUT /api/items/:id failed', { id: req.params.id, message: err.message, stack: err.stack });
+    res.status(500).json({ error: err.name === 'ValidationError' ? err.message : 'Server error' });
   }
 });
 
@@ -80,6 +84,7 @@ router.delete('/:id', async (req, res) => {
     if (!item) return res.status(404).json({ error: 'Item not found' });
     res.json({ ok: true });
   } catch (err) {
+    logger.error('DELETE /api/items/:id failed', { id: req.params.id, message: err.message, stack: err.stack });
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -97,11 +102,13 @@ router.post('/give', async (req, res) => {
     if (!template) return res.status(404).json({ error: 'Item not found' });
 
     const CAT_ID_MAP = {
-      'Equipment':   10,
-      'Weapons':     11,
-      'Tools':       12,
-      'Consumables': 13,
-      'Misc':        14,
+      'Equipment':    10,
+      'Weapons':      11,
+      'Tools':        12,
+      'Consumables':  13,
+      'Misc':         14,
+      'System Items': 17,
+      'Key Items':    18,
     };
     const catId = CAT_ID_MAP[template.category] || 14;
 
@@ -126,6 +133,7 @@ router.post('/give', async (req, res) => {
           id: Date.now() + Math.floor(Math.random() * 10000),
           name:           template.name,
           icon:           template.icon || '',
+          tier:           template.tier || '',
           qty:            qty != null ? qty : template.qty,
           attackTypes:    template.attackTypes || [],
           range:          template.range || '',
@@ -148,8 +156,11 @@ router.post('/give', async (req, res) => {
         results.push({ userId, ok: false, error: e.message });
       }
     }
+    const okCount = results.filter(r => r.ok).length;
+    logger.info(`ITEM GIVE  "${template.name}"  ×${qty ?? template.qty}  → ${okCount}/${userIds.length} players`);
     res.json({ results });
   } catch (err) {
+    logger.error('POST /api/items/give failed', { message: err.message, stack: err.stack });
     res.status(500).json({ error: 'Server error' });
   }
 });

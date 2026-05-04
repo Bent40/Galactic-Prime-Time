@@ -14,13 +14,14 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, tier, color, description, notes, bodyParts } = req.body;
+    const { name, tier, color, description, notes, bodyParts, phases } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     const enemy = await Enemy.create({
       name, tier: tier || 'mob',
       color: color || '#ff2255',
       description: description || '', notes: notes || '',
       bodyParts: Array.isArray(bodyParts) ? bodyParts : [],
+      phases:    Array.isArray(phases)    ? phases    : [],
     });
     res.json(enemy);
   } catch { res.status(500).json({ error: 'Server error' }); }
@@ -28,11 +29,15 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const { name, tier, color, description, notes, bodyParts } = req.body;
+    const { name, tier, color, description, notes, bodyParts, phases } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     const enemy = await Enemy.findByIdAndUpdate(
       req.params.id,
-      { name, tier, color, description, notes, bodyParts: Array.isArray(bodyParts) ? bodyParts : [] },
+      {
+        name, tier, color, description, notes,
+        bodyParts: Array.isArray(bodyParts) ? bodyParts : [],
+        phases:    Array.isArray(phases)    ? phases    : [],
+      },
       { new: true }
     );
     if (!enemy) return res.status(404).json({ error: 'Not found' });

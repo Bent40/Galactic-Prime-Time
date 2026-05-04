@@ -5,6 +5,7 @@ const SkillTemplate = require('../models/SkillTemplate');
 const Message = require('../models/Message');
 const NPC = require('../models/NPC');
 const requireAdmin = require('../middleware/adminAuth');
+const logger = require('../logger');
 
 const router = express.Router();
 
@@ -69,6 +70,51 @@ router.put('/players/:userId/state', async (req, res) => {
   }
 });
 
+// PATCH /api/admin/players/bulk/followers — set followers for multiple players
+// NOTE: must come before /:userId routes to avoid param collision
+router.patch('/players/bulk/followers', async (req, res) => {
+  try {
+    const { userIds, followers } = req.body;
+    if (!Array.isArray(userIds) || userIds.length === 0)
+      return res.status(400).json({ error: 'userIds array required' });
+    if (followers === undefined) return res.status(400).json({ error: 'followers required' });
+    const results = [];
+    for (const userId of userIds) {
+      try {
+        const character = await Character.findOne({ userId });
+        if (!character) { results.push({ userId, ok: false, error: 'Not found' }); continue; }
+        const state = character.state || {};
+        if (!state.exposure) state.exposure = {};
+        state.exposure.followers = followers;
+        await Character.findOneAndUpdate({ userId }, { state });
+        results.push({ userId, ok: true });
+      } catch (e) { results.push({ userId, ok: false, error: e.message }); }
+    }
+    const ok = results.filter(r => r.ok).length;
+    logger.info(`BULK FOLLOWERS  "${followers}"  → ${ok}/${userIds.length} players`);
+    res.json({ results });
+  } catch (err) {
+    logger.error('PATCH /players/bulk/followers failed', { message: err.message, stack: err.stack });
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// PATCH /api/admin/players/:userId/exposure — set exposure fields (followers, viewers)
+router.patch('/players/:userId/exposure', async (req, res) => {
+  try {
+    const character = await Character.findOne({ userId: req.params.userId });
+    if (!character) return res.status(404).json({ error: 'Character not found' });
+    const state = character.state || {};
+    if (!state.exposure) state.exposure = {};
+    Object.assign(state.exposure, req.body);
+    await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
+    res.json({ ok: true });
+  } catch (err) {
+    logger.error('PATCH /players/:userId/exposure failed', { message: err.message, stack: err.stack });
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // POST /api/admin/players/bulk/achievements — grant the same achievement to multiple players
 // NOTE: must come before /:userId routes to avoid param collision
 router.post('/players/bulk/achievements', async (req, res) => {
@@ -113,6 +159,8 @@ router.post('/players/bulk/achievements', async (req, res) => {
         results.push({ userId, ok: false, error: e.message });
       }
     }
+    const okCount = results.filter(r => r.ok).length;
+    logger.info(`BULK ACHIEVEMENT  "${title}"  → ${okCount}/${userIds.length} players`);
     res.json({ results });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -147,6 +195,8 @@ router.post('/players/bulk/objectives', async (req, res) => {
         results.push({ userId, ok: false, error: e.message });
       }
     }
+    const okCount = results.filter(r => r.ok).length;
+    logger.info(`BULK OBJECTIVE  "${title}"  [${sec}]  → ${okCount}/${userIds.length} players`);
     res.json({ results });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -296,6 +346,7 @@ router.post('/players/:userId/achievements', async (req, res) => {
     }
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
+    logger.info(`ACHIEVEMENT GRANT  "${title}"  → player ${req.params.userId}${autoGranted.length ? `  (auto-skills: ${autoGranted.map(s => s.name).join(', ')})` : ''}`);
     res.json({ ok: true, achievement, autoGrantedSkills: autoGranted });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

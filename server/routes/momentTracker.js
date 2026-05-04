@@ -74,19 +74,22 @@ router.patch('/set-moment', requireAdmin, async (req, res) => {
 // Add a player or mob entry
 router.post('/entries', requireAdmin, async (req, res) => {
   try {
-    const { name, type, moment, color, userId } = req.body;
+    const { name, type, tier, moment, color, userId, phases } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     const m = parseInt(moment) || 0;
     if (m < 0 || m > 10) return res.status(400).json({ error: 'moment must be 0–10' });
 
     const tracker = await getTracker();
     const entry = {
-      entryId: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+      entryId:      Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       name,
-      type:   type === 'player' ? 'player' : 'mob',
-      moment: m,
-      color:  color || (type === 'player' ? '#00d4ff' : '#ff2255'),
-      userId: userId || '',
+      type:         type === 'player' ? 'player' : 'mob',
+      tier:         tier || (type === 'player' ? 'player' : 'mob'),
+      moment:       m,
+      color:        color || (type === 'player' ? '#00d4ff' : '#ff2255'),
+      userId:       userId || '',
+      phases:       Array.isArray(phases) ? phases : [],
+      currentPhase: 0,
     };
     tracker.entries.push(entry);
     await tracker.save();
@@ -97,18 +100,26 @@ router.post('/entries', requireAdmin, async (req, res) => {
 });
 
 // ── PATCH /api/tracker/entries/:entryId ──────────────────────
-// Move an entry to a different moment (drag-and-drop save)
+// Update moment (drag-and-drop) and/or currentPhase
 router.patch('/entries/:entryId', requireAdmin, async (req, res) => {
   try {
-    const { moment } = req.body;
-    const m = parseInt(moment);
-    if (isNaN(m) || m < 0 || m > 10) return res.status(400).json({ error: 'moment must be 0–10' });
-
     const tracker = await getTracker();
     const entry = tracker.entries.find(e => e.entryId === req.params.entryId);
     if (!entry) return res.status(404).json({ error: 'Entry not found' });
 
-    entry.moment = m;
+    const { moment, currentPhase } = req.body;
+
+    if (moment !== undefined) {
+      const m = parseInt(moment);
+      if (isNaN(m) || m < 0 || m > 10) return res.status(400).json({ error: 'moment must be 0–10' });
+      entry.moment = m;
+    }
+
+    if (currentPhase !== undefined) {
+      const cp = parseInt(currentPhase);
+      if (!isNaN(cp) && cp >= 0) entry.currentPhase = cp;
+    }
+
     tracker.markModified('entries');
     await tracker.save();
     res.json(tracker);

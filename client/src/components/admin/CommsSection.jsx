@@ -9,6 +9,7 @@ export default function CommsSection({ token, players, showToast }) {
   const [recipient, setRecipient] = useState('');
   const [newNpc, setNewNpc] = useState({ name: '', color: '#c8a84b' });
   const feedRef = useRef();
+  const initialLoad = useRef(true);
 
   useEffect(() => {
     loadMessages();
@@ -21,7 +22,10 @@ export default function CommsSection({ token, players, showToast }) {
     apiFetch('/api/admin/messages', {}, token).then(d => {
       if (Array.isArray(d)) {
         setMessages(d);
-        setTimeout(() => feedRef.current?.scrollTo(0, feedRef.current.scrollHeight), 50);
+        if (initialLoad.current) {
+          initialLoad.current = false;
+          setTimeout(() => feedRef.current?.scrollTo(0, feedRef.current.scrollHeight), 50);
+        }
       }
     });
   }
