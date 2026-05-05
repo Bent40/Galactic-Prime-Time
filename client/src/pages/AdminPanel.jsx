@@ -31,10 +31,13 @@ export default function AdminPanel() {
   const [bulkObjForm, setBulkObjForm] = useState({ section: 'main', title: '', description: '', status: 'active' });
   const [bulkFollowers, setBulkFollowers] = useState('');
 
-  useEffect(() => { if (auth) loadPlayers(); }, [auth]);
+  useEffect(() => { if (auth) { loadPlayers(); loadEnemies(); } }, [auth]);
 
   function loadPlayers() {
     apiFetch('/api/admin/players', {}, auth.token).then(d => { if (Array.isArray(d)) setPlayers(d); });
+  }
+  function loadEnemies() {
+    apiFetch('/api/enemies', {}, auth.token).then(d => { if (Array.isArray(d)) setEnemies(d); });
   }
   function logout() {
     localStorage.removeItem('adminToken');
