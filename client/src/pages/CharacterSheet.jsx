@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../api.js';
-import { DEFAULT_STATE, TABS } from '../constants.js';
+import { DEFAULT_STATE, TABS, ALL_TRAITS } from '../constants.js';
 import LoginOverlay from '../components/shared/LoginOverlay.jsx';
 import Toast, { useToast } from '../components/shared/Toast.jsx';
 import TrackerBar from '../components/shared/TrackerBar.jsx';
@@ -33,12 +33,14 @@ export default function CharacterSheet() {
     if (!auth) return;
     apiFetch('/api/character', {}, auth.token).then(d => {
       if (d.state) {
+        const loadedTraits = d.state.traits || {};
+        const mergedTraits = ALL_TRAITS.reduce((acc, t) => ({
+          ...acc, [t]: { ...DEFAULT_STATE.traits[t], ...(loadedTraits[t] || {}) },
+        }), {});
         const merged = {
           ...DEFAULT_STATE, ...d.state,
           identity: { ...DEFAULT_STATE.identity, ...(d.state.identity || {}) },
-          traits: { ...DEFAULT_STATE.traits, ...(d.state.traits || {}) },
-          traitBonus: { ...DEFAULT_STATE.traitBonus, ...(d.state.traitBonus || {}) },
-          traitLevelBonus: { ...DEFAULT_STATE.traitLevelBonus, ...(d.state.traitLevelBonus || {}) },
+          traits: mergedTraits,
           bonusPoints: { ...DEFAULT_STATE.bonusPoints, ...(d.state.bonusPoints || {}) },
           levelPoints: { ...DEFAULT_STATE.levelPoints, ...(d.state.levelPoints || {}) },
           tokens: { ...DEFAULT_STATE.tokens, ...(d.state.tokens || {}) },

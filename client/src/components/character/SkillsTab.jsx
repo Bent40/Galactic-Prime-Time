@@ -10,31 +10,18 @@ export default function SkillsTab({ state, update, token }) {
   }, [token]);
 
   function traitTotal(t) {
-    return (state.traits[t] || 0) + (state.traitBonus[t] || 0) + (state.traitLevelBonus[t] || 0);
+    const tr = state.traits?.[t] || {};
+    return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
   }
 
-  const traitLevelBonus = state.traitLevelBonus || {};
   const skillPointsSpent = state.skillPointsSpent || {};
 
   function availableFor(t) {
-    return Math.max(0, (traitLevelBonus[t] || 0) - (skillPointsSpent[t] || 0));
-  }
-
-  // Returns the best trait to spend for this skill, or null if none available
-  function findSpendTrait(sk) {
-    const stats = (sk.stats || []).map(s => s.toLowerCase()).filter(s => ALL_TRAITS.includes(s));
-    let best = null, bestAmt = -1;
-    for (const t of stats) {
-      const amt = availableFor(t);
-      if (amt > bestAmt) { bestAmt = amt; best = t; }
-    }
-    return bestAmt > 0 ? best : null;
+    return Math.max(0, (state.traits?.[t]?.levelBonus || 0) - (skillPointsSpent[t] || 0));
   }
 
   function applyUpdate(newState) {
     update(newState);
-    // Also save immediately — don't rely solely on the debounce
-    apiFetch('/api/character', { method: 'POST', body: JSON.stringify({ state: newState }) }, token);
   }
 
   function raiseCap(sk) {
@@ -63,19 +50,18 @@ export default function SkillsTab({ state, update, token }) {
         skills: state.skills.map(x => x.id === sk.id ? { ...x, level: (x.level || 0) + 1 } : x),
       };
     } else {
-      const spendTrait = findSpendTrait(sk);
-      if (!spendTrait) return;
+      // Every listed stat must have at least 1 available level point
+      if (!stats.every(t => availableFor(t) > 0)) return;
+      const newSpent = { ...(state.skillPointsSpent || {}) };
+      for (const t of stats) newSpent[t] = (newSpent[t] || 0) + 1;
       newState = {
         ...state,
         skills: state.skills.map(x => x.id === sk.id ? {
           ...x,
           level: (x.level || 0) + 1,
-          traitCosts: [...(x.traitCosts || []), spendTrait],
+          traitCosts: [...(x.traitCosts || []), ...stats],
         } : x),
-        skillPointsSpent: {
-          ...(state.skillPointsSpent || {}),
-          [spendTrait]: ((state.skillPointsSpent || {})[spendTrait] || 0) + 1,
-        },
+        skillPointsSpent: newSpent,
       };
     }
     applyUpdate(newState);
@@ -91,17 +77,19 @@ export default function SkillsTab({ state, update, token }) {
       <div className="panel-title">
         Skills ({state.skills.length})
         {/* Available trait points summary */}
-        <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
+        <div style={{ display: 'flex', gap: 6, marginLeft: 'auto', alignItems: 'center' }}>
           {ALL_TRAITS.map(t => {
             const avail = availableFor(t);
+            if (avail === 0) return null;
             return (
               <span key={t} style={{
-                fontSize: 9, fontWeight: 700, letterSpacing: 1, padding: '2px 6px',
-                borderRadius: 3,
-                border: `1px solid ${avail > 0 ? 'var(--cyan)' : 'var(--border)'}`,
-                color: avail > 0 ? 'var(--cyan)' : 'var(--muted)',
+                fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: '3px 8px',
+                borderRadius: 4,
+                border: '1px solid var(--cyan)',
+                background: 'rgba(0,212,255,0.12)',
+                color: 'var(--cyan)',
               }}>
-                {TRAIT_LABELS[t][0]} {avail}
+                {TRAIT_LABELS[t].slice(0, 3)} {avail}
               </span>
             );
           })}
@@ -122,8 +110,7 @@ export default function SkillsTab({ state, update, token }) {
           const stats = (sk.stats || []).map(s => s.toLowerCase()).filter(s => ALL_TRAITS.includes(s));
           const skillTotal = stats.reduce((sum, t) => sum + (traitTotal(t) || 0), 0);
           const atMax = level >= cap;
-          const spendTrait = !atMax ? findSpendTrait(sk) : null;
-          const canLevelUp = !atMax && (stats.length === 0 || spendTrait !== null);
+          const canLevelUp = !atMax && (stats.length === 0 || stats.every(t => availableFor(t) > 0));
           const patronTokens = state.tokens?.patronTokens || 0;
           const canRaiseCap = cap < 10 && patronTokens > 0;
 
@@ -142,9 +129,9 @@ export default function SkillsTab({ state, update, token }) {
                         className={`pip${isLit ? ' on' : ''}`}
                         style={{ cursor: isNext && canLevelUp ? 'pointer' : 'default' }}
                         title={isNext && canLevelUp
-                          ? `Level up (costs 1 ${spendTrait ? TRAIT_LABELS[spendTrait] : 'free'} point)`
+                          ? `Level up${stats.length > 0 ? ` (costs: ${stats.map(t => `1 ${TRAIT_LABELS[t]}`).join(' + ')})` : ' (free)'}`
                           : isNext && !canLevelUp && !atMax
-                            ? `Need a level point in: ${stats.map(t => TRAIT_LABELS[t]).join(' or ')}`
+                            ? `Need 1 point in each: ${stats.map(t => TRAIT_LABELS[t]).join(', ')}`
                             : undefined}
                         onClick={() => isNext && canLevelUp && levelUp(sk)}
                       />
@@ -159,8 +146,8 @@ export default function SkillsTab({ state, update, token }) {
                 <div style={{ fontSize: 9, marginBottom: 4, letterSpacing: 1,
                   color: canLevelUp ? 'var(--cyan)' : 'var(--muted)' }}>
                   {canLevelUp
-                    ? `▲ Next level costs 1 ${TRAIT_LABELS[spendTrait]} level point`
-                    : `✕ Need a level point in ${stats.map(t => TRAIT_LABELS[t]).join(' or ')}`}
+                    ? `▲ Next level costs: ${stats.map(t => `1 ${TRAIT_LABELS[t]}`).join(' + ')}`
+                    : `✕ Need 1 point in each: ${stats.map(t => TRAIT_LABELS[t]).join(', ')}`}
                 </div>
               )}
               {atMax && (

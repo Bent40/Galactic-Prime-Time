@@ -6,6 +6,7 @@ const Message = require('../models/Message');
 const NPC = require('../models/NPC');
 const requireAdmin = require('../middleware/adminAuth');
 const logger = require('../logger');
+const { enrichSkills } = require('../utils/skillUtils');
 
 const router = express.Router();
 
@@ -47,7 +48,11 @@ router.get('/players/:userId', async (req, res) => {
     if (!user) return res.status(404).json({ error: 'User not found' });
 
     const character = await Character.findOne({ userId: req.params.userId }).lean();
-    res.json({ user, state: character ? character.state : null, updatedAt: character ? character.updatedAt : null });
+    let state = character ? character.state : null;
+    if (state && state.skills) {
+      state = { ...state, skills: await enrichSkills(state.skills) };
+    }
+    res.json({ user, state, updatedAt: character ? character.updatedAt : null });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -140,15 +145,18 @@ router.post('/players/bulk/achievements', async (req, res) => {
         if (!state.skills) state.skills = [];
         const autoGranted = [];
         for (const t of unlockedTemplates) {
-          if (!state.skills.some(s => s.name === t.name)) {
+          const alreadyHas = state.skills.some(s =>
+            (s.templateId && String(s.templateId) === String(t._id)) ||
+            (!s.templateId && s.name === t.name)
+          );
+          if (!alreadyHas) {
             state.skills.push({
               id: Date.now() + Math.floor(Math.random() * 10000),
-              name: t.name, momentCost: t.momentCost || '', stats: t.stats || [],
-              passive: !!t.passive, capacity: t.capacity || 5, level: 0,
-              requirements: t.requirements || '', range: t.range || '',
-              target: t.target || '', effect: t.effect || '',
-              description: t.description || '', levelEffects: t.levelEffects || {},
-              unlockedByAchievement: title,
+              templateId: String(t._id),
+              level: 0,
+              capacity: t.capacity || 5,
+              cooldownRemaining: 0,
+              traitCosts: [],
             });
             autoGranted.push(t.name);
           }
@@ -206,8 +214,7 @@ router.post('/players/bulk/objectives', async (req, res) => {
 // POST /api/admin/players/:userId/skills — add a skill to a player's character
 router.post('/players/:userId/skills', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects } = req.body;
-    if (!name) return res.status(400).json({ error: 'Skill name required' });
+    const { templateId, name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects } = req.body;
 
     const character = await Character.findOne({ userId: req.params.userId });
     if (!character) return res.status(404).json({ error: 'Character not found' });
@@ -215,35 +222,54 @@ router.post('/players/:userId/skills', async (req, res) => {
     const state = character.state || {};
     if (!state.skills) state.skills = [];
 
-    const skill = {
-      id: Date.now(),
-      name,
-      momentCost: momentCost || '',
-      stats: stats || [],
-      passive: !!passive,
-      capacity: capacity || 5,
-      level: 0,
-      requirements: requirements || '',
-      range: range || '',
-      target: target || '',
-      effect: effect || '',
-      description: description || '',
-      levelEffects: levelEffects || {},
-    };
-    state.skills.push(skill);
+    let skill;
+    if (templateId) {
+      const tpl = await SkillTemplate.findById(templateId).lean();
+      if (!tpl) return res.status(404).json({ error: 'Skill template not found' });
+      skill = {
+        id: Date.now(),
+        templateId: String(tpl._id),
+        level: 0,
+        capacity: tpl.capacity || 5,
+        cooldownRemaining: 0,
+        traitCosts: [],
+      };
+    } else {
+      if (!name) return res.status(400).json({ error: 'Skill name or templateId required' });
+      // Legacy manual skill without a template reference
+      skill = {
+        id: Date.now(),
+        name,
+        momentCost: momentCost || '',
+        stats: stats || [],
+        passive: !!passive,
+        capacity: capacity || 5,
+        level: 0,
+        requirements: requirements || '',
+        range: range || '',
+        target: target || '',
+        effect: effect || '',
+        description: description || '',
+        levelEffects: levelEffects || {},
+        traitCosts: [],
+      };
+    }
 
+    state.skills.push(skill);
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
-    res.json({ ok: true, skill });
+
+    // Return enriched skill so client can display it immediately
+    const [enrichedSkill] = await enrichSkills([skill]);
+    res.json({ ok: true, skill: enrichedSkill });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
 });
 
-// PUT /api/admin/players/:userId/skills/:skillId — edit a skill
+// PUT /api/admin/players/:userId/skills/:skillId — update instance fields only
 router.put('/players/:userId/skills/:skillId', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects, level } = req.body;
-    if (!name) return res.status(400).json({ error: 'Skill name required' });
+    const { level, capacity } = req.body;
 
     const character = await Character.findOne({ userId: req.params.userId });
     if (!character) return res.status(404).json({ error: 'Character not found' });
@@ -255,24 +281,12 @@ router.put('/players/:userId/skills/:skillId', async (req, res) => {
     const idx = state.skills.findIndex(s => s.id === id);
     if (idx === -1) return res.status(404).json({ error: 'Skill not found' });
 
-    state.skills[idx] = {
-      ...state.skills[idx],
-      name,
-      momentCost: momentCost || '',
-      stats: stats || [],
-      passive: !!passive,
-      capacity: capacity || 5,
-      requirements: requirements || '',
-      range: range || '',
-      target: target || '',
-      effect: effect || '',
-      description: description || '',
-      levelEffects: levelEffects || {},
-      level: level !== undefined ? Math.max(0, Number(level)) : (state.skills[idx].level || 0),
-    };
+    if (level !== undefined) state.skills[idx].level = Math.max(0, Number(level));
+    if (capacity !== undefined) state.skills[idx].capacity = Number(capacity);
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
-    res.json({ ok: true, skill: state.skills[idx] });
+    const [enrichedSkill] = await enrichSkills([state.skills[idx]]);
+    res.json({ ok: true, skill: enrichedSkill });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -322,31 +336,25 @@ router.post('/players/:userId/achievements', async (req, res) => {
     const autoGranted = [];
     if (!state.skills) state.skills = [];
     for (const t of unlockedTemplates) {
-      const alreadyHas = state.skills.some(s => s.name === t.name);
+      const alreadyHas = state.skills.some(s =>
+        (s.templateId && String(s.templateId) === String(t._id)) ||
+        (!s.templateId && s.name === t.name)
+      );
       if (!alreadyHas) {
-        const skill = {
+        state.skills.push({
           id: Date.now() + Math.floor(Math.random() * 10000),
-          name: t.name,
-          momentCost: t.momentCost || '',
-          stats: t.stats || [],
-          passive: !!t.passive,
-          capacity: t.capacity || 5,
+          templateId: String(t._id),
           level: 0,
-          requirements: t.requirements || '',
-          range: t.range || '',
-          target: t.target || '',
-          effect: t.effect || '',
-          description: t.description || '',
-          levelEffects: t.levelEffects || {},
-          unlockedByAchievement: title,
-        };
-        state.skills.push(skill);
-        autoGranted.push(skill);
+          capacity: t.capacity || 5,
+          cooldownRemaining: 0,
+          traitCosts: [],
+        });
+        autoGranted.push(t.name);
       }
     }
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
-    logger.info(`ACHIEVEMENT GRANT  "${title}"  → player ${req.params.userId}${autoGranted.length ? `  (auto-skills: ${autoGranted.map(s => s.name).join(', ')})` : ''}`);
+    logger.info(`ACHIEVEMENT GRANT  "${title}"  → player ${req.params.userId}${autoGranted.length ? `  (auto-skills: ${autoGranted.join(', ')})` : ''}`);
     res.json({ ok: true, achievement, autoGrantedSkills: autoGranted });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -374,18 +382,15 @@ router.delete('/players/:userId/achievements/:achievementId', async (req, res) =
   }
 });
 
-// POST /api/admin/players/:userId/levelup — grant one level-up point to body OR core
+// POST /api/admin/players/:userId/levelup — grant one level-up point to the shared pool
 router.post('/players/:userId/levelup', async (req, res) => {
   try {
-    const { pool } = req.body;
-    if (pool !== 'body' && pool !== 'core') return res.status(400).json({ error: 'pool must be body or core' });
-
     const character = await Character.findOne({ userId: req.params.userId });
     if (!character) return res.status(404).json({ error: 'Character not found' });
 
     const state = character.state || {};
-    if (!state.levelPoints) state.levelPoints = { body: 0, core: 0 };
-    state.levelPoints[pool] = (state.levelPoints[pool] || 0) + 1;
+    if (!state.levelPoints) state.levelPoints = { pool: 0 };
+    state.levelPoints.pool = (state.levelPoints.pool || 0) + 1;
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
     res.json({ ok: true, levelPoints: state.levelPoints });
@@ -394,17 +399,24 @@ router.post('/players/:userId/levelup', async (req, res) => {
   }
 });
 
-// PATCH /api/admin/players/:userId/traits — set trait values
+// PATCH /api/admin/players/:userId/traits — set trait values (consolidated format)
 router.patch('/players/:userId/traits', async (req, res) => {
   try {
-    const { traitBonus, traits, traitLevelBonus } = req.body;
+    const { traits } = req.body;
     const character = await Character.findOne({ userId: req.params.userId });
     if (!character) return res.status(404).json({ error: 'Character not found' });
 
     const state = character.state ? { ...character.state } : {};
-    if (traitBonus) state.traitBonus = { ...(state.traitBonus || {}), ...traitBonus };
-    if (traits) state.traits = { ...(state.traits || {}), ...traits };
-    if (traitLevelBonus) state.traitLevelBonus = { ...(state.traitLevelBonus || {}), ...traitLevelBonus };
+    if (traits) {
+      const currentTraits = state.traits || {};
+      for (const [t, updates] of Object.entries(traits)) {
+        currentTraits[t] = { ...(currentTraits[t] || {}), ...updates };
+      }
+      state.traits = currentTraits;
+    }
+    // Remove legacy flat fields if present
+    delete state.traitBonus;
+    delete state.traitLevelBonus;
 
     character.state = state;
     character.markModified('state');

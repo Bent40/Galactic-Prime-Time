@@ -1,0 +1,1303 @@
+[{
+  "_id": {
+    "$oid": "69c7c80bb36295a54ae08ee1"
+  },
+  "sender": {
+    "$oid": "69c4147065a501bec8ef86b4"
+  },
+  "senderName": "XQUEZ/T",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "first",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:22:35.015Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:22:35.015Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c845b36295a54ae090f0"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "meeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:23:33.278Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:23:33.278Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c848b36295a54ae09116"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "suck my cockkkkkk",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:23:36.583Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:23:36.583Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c84bb36295a54ae09136"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "iiiiiiiiiiiiiiiiii",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:23:39.639Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:23:39.639Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c85db36295a54ae091d7"
+  },
+  "sender": {
+    "$oid": "69c4147065a501bec8ef86b4"
+  },
+  "senderName": "XQUEZ/T",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "עברית צ'ק",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:23:57.353Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:23:57.353Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c874b36295a54ae092b4"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "recipientNPC": null,
+  "recipientName": "Mario Marcus",
+  "text": "i will hunt your dreams and roam free in your nightmaressssss",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:24:20.933Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:24:20.933Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c879b36295a54ae092e3"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "aaaaaaaaaaaaaaaaaaaaaaa",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:24:25.438Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:24:25.438Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c87cb36295a54ae092ff"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:24:28.035Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:24:28.035Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c88db36295a54ae0939f"
+  },
+  "sender": {
+    "$oid": "69c4147065a501bec8ef86b4"
+  },
+  "senderName": "XQUEZ/T",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "gay",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:24:45.194Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:24:45.194Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7c893b36295a54ae093e5"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "recipientNPC": null,
+  "recipientName": "sasha",
+  "text": "help",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:24:51.948Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:24:51.948Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7cb91b36295a54ae0a699"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "hellooo",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:37:37.058Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:37:37.058Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7ce46b36295a54ae0b57c"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "holy shit dude it actually works",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:49:10.741Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:49:10.741Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7ce48b36295a54ae0b58d"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "brooo",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T12:49:12.706Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T12:49:12.706Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7d2e5b36295a54ae0db68"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "whats u doin",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T13:08:53.336Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T13:08:53.336Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7d9c7b36295a54ae0fc29"
+  },
+  "sender": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "senderName": "System",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "The sign reads Mycelius Chrom Production Co",
+  "style": {
+    "color": "#472941",
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T13:38:15.452Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T13:38:15.452Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c7ef95b36295a54ae1b0cb"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": null,
+  "recipientNPC": null,
+  "recipientName": null,
+  "text": "dogroach - back of head is tough, rest of body squishy, back exposed",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T15:11:17.679Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T15:11:17.679Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c811f5b36295a54ae302a7"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "test",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:37:57.942Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:37:57.942Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c8126fb36295a54ae306f7"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "i want an achievement and follower update on the cool shit i did :> and i want to develop a skill for my charm bc i have 6 sp on charm without a useful skill",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:39:59.581Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:39:59.581Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c812adb36295a54ae3092d"
+  },
+  "sender": {
+    "$oid": "69c415c74e2a3085f7ad37f3"
+  },
+  "senderName": "Mario Marcus",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "and i want to know what is up with my patrons",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:41:01.238Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:41:01.238Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c8136db36295a54ae310cf"
+  },
+  "sender": {
+    "$oid": "69c4147065a501bec8ef86b4"
+  },
+  "senderName": "XQUEZ/T",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "things i did: friendly with the elites, lost my leg? / things to improve: add quick navigation to the character sheet, ability to inspect enemies in roll20 map",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:44:13.643Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:44:13.643Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c813c7b36295a54ae3150e"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "1. הסקילס שלי לא אמורים להיות לפי ריפלקסק? כי הגיוני שאני יודעת לפגוע יותר נכון מאשר אני פשוט פיזית חזקה יותר\n2.אם הפיזיקס עולה אני מעלה את ההפ של חלקים מסוימים? \n3.אני רוצה סקין של סלף היל, משהו של פררינג ואז זה יהיה מיינד? או צ׳ארי? כאילו אם אשב על מישהו זה ירפא אותו\n4. לא ברור לי מה קורה לסקילס שלי כשהם עולים לבל? הדמג׳ עולה? המרחק של דברים? \n5. אם כזה כמעט מתים זה ספייק אולי? או פולוורס?\n6. נורא מצחיק אם יהיה ילי אצ׳יבמנט שקשור לסרטוני חתולים? כי זה וויראלי?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:45:43.891Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:45:43.891Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c81446b36295a54ae31af5"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "7. יותר אופציות לפורד אקשן (אני רוצה לגלגל די20 בבקשה)",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:47:50.820Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:47:50.820Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c8146db36295a54ae31ccd"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement? team work with Mario, it was a cool moment. i feel like it could bring us closer? maybe teamwork could be a feature.\ni do wish i could heal more, felt hopeless, but then again we didnt ask about healing, so maybe something in the future so i wont feel so repeatable (i used frost ball 3 times esentially), i could heal.\nthe brothers were not really giving anything about the conflict it felt aimless to talk to them so we could only really fight, which went well eventually so idk.",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:48:29.446Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:48:29.446Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c814deb36295a54ae32228"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "i did like that the fight felt FAIR\ni was (really) scared but also knew we could do it!!!!\ni liked that everyone got the same amount of attention",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:50:22.816Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:50:22.816Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c8153bb36295a54ae32689"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "i would like that when we get an objective, of any kind, we could MARK IT AS DONE\\FAILED, so we could keep track",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:51:55.237Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:51:55.237Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c815f1b36295a54ae32fb1"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "did we get extra followers\\viewers for beating 2 eliets?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:54:57.791Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:54:57.791Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c81603b36295a54ae330cf"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "YOU DE BESTTTT <3 <3 <3",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:55:15.755Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:55:15.755Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c816f2b36295a54ae33ded"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "8. אני רוצה לפתח סקיל של התחמקות, להתחמק כחלק מאקרובטיקה?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T17:59:14.366Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T17:59:14.366Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c81796b36295a54ae344e3"
+  },
+  "sender": {
+    "$oid": "69c4128765a501bec8ef86af"
+  },
+  "senderName": "Filipe",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "should we get an achievement for succedding the poll? it was hardddd",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T18:01:58.354Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T18:01:58.354Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c8191fb36295a54ae34de1"
+  },
+  "sender": {
+    "$oid": "69c4147065a501bec8ef86b4"
+  },
+  "senderName": "XQUEZ/T",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "crossbow - big brother's spare part (write desc)",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T18:08:31.020Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T18:08:31.020Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e1b36295a54ae3d4f8"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:45.924Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:45.924Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e1b36295a54ae3d4fe"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:45.948Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:45.948Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d50c"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.030Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.030Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d517"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.120Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.120Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d51f"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.190Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.190Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d527"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.278Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.278Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d52c"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.302Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.302Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d52f"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.331Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.331Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d535"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.338Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.338Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d53c"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.369Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.369Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d557"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.827Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.827Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d565"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.842Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.842Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d567"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.844Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.844Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d57d"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.925Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.925Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d588"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.933Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.933Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d58a"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.934Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.934Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d58c"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.934Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.934Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e2b36295a54ae3d590"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:46.939Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:46.939Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69c837e3b36295a54ae3d5ca"
+  },
+  "sender": {
+    "$oid": "69c4113065a501bec8ef86a8"
+  },
+  "senderName": "sasha",
+  "recipient": {
+    "$oid": "69c278469a621053ef0bc2c5"
+  },
+  "recipientNPC": null,
+  "recipientName": "Ben",
+  "text": "achievement for getting to skill lvl 6?",
+  "style": {
+    "color": null,
+    "font": "default",
+    "effect": "none"
+  },
+  "createdAt": {
+    "$date": "2026-03-28T20:19:47.382Z"
+  },
+  "updatedAt": {
+    "$date": "2026-03-28T20:19:47.382Z"
+  },
+  "__v": 0
+}]

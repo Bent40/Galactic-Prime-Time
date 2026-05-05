@@ -29,10 +29,8 @@ export default function BodyTab({ state, update }) {
     const delta = newLevel - oldLevel;
     if (delta === 0) return;
     update(s => {
-      const currentPool = s.levelPoints?.pool || 0;
-      const newPool = delta > 0
-        ? currentPool + delta
-        : Math.max(0, currentPool + delta); // clamp to 0, don't go negative
+      const curPool = s.levelPoints?.pool || 0;
+      const newPool = delta > 0 ? curPool + delta : Math.max(0, curPool + delta);
       return {
         ...s,
         identity: { ...s.identity, level: newLevel },
@@ -60,29 +58,37 @@ export default function BodyTab({ state, update }) {
   }
   function rmBodyPart(bpId) { update(s => ({ ...s, bodyParts: s.bodyParts.filter(b => b.id !== bpId) })); }
 
-  function traitTotal(t) { return (state.traits[t] || 0) + (state.traitBonus[t] || 0) + (state.traitLevelBonus[t] || 0); }
+  function traitTotal(t) {
+    const tr = state.traits?.[t] || {};
+    return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
+  }
   function isBodyTrait(t) { return BODY_TRAITS.includes(t); }
   function traitPool(t) { return isBodyTrait(t) ? 'body' : 'core'; }
 
   function adjustBonus(t, delta) {
     const pool = traitPool(t);
     const available = state.bonusPoints[pool] || 0;
-    const current = state.traitBonus[t] || 0;
+    const current = state.traits?.[t]?.bonus || 0;
     if (delta > 0 && available <= 0) return;
     if (delta < 0 && current <= 0) return;
     update(s => ({
       ...s,
-      traitBonus: { ...s.traitBonus, [t]: (s.traitBonus[t] || 0) + delta },
-      bonusPoints: { ...s.bonusPoints, [pool]: (s.bonusPoints[pool] || 0) - delta },
+      traits: { ...s.traits, [t]: { ...(s.traits[t] || {}), bonus: (s.traits[t]?.bonus || 0) + delta } },
+      bonusPoints: { ...s.bonusPoints, [pool]: Math.min(5, (s.bonusPoints[pool] || 0) - delta) },
     }));
   }
   function investLevel(t) {
     if ((state.levelPoints?.pool || 0) <= 0) return;
     update(s => ({
       ...s,
-      traitLevelBonus: { ...s.traitLevelBonus, [t]: (s.traitLevelBonus[t] || 0) + 1 },
-      levelPoints: { ...s.levelPoints, pool: (s.levelPoints?.pool || 0) - 1 },
+      traits: { ...s.traits, [t]: { ...(s.traits[t] || {}), levelBonus: (s.traits[t]?.levelBonus || 0) + 1 } },
+      levelPoints: { ...s.levelPoints, pool: Math.max(0, (s.levelPoints?.pool || 0) - 1) },
     }));
+  }
+
+  function setShockTier(tier) {
+    const current = state.shock?.tier ?? 0;
+    update(s => ({ ...s, shock: { ...s.shock, tier: current === tier ? 0 : tier } }));
   }
 
   function addEffect() {
@@ -154,14 +160,15 @@ export default function BodyTab({ state, update }) {
           <div className="row gap-sm" style={{ fontWeight: 'normal' }}>
             {isLevelOne && <span className={`pts-badge${bodyPts === 0 ? ' empty' : bodyPts <= 2 ? ' warn' : ''}`}>BODY {bodyPts} pts</span>}
             {isLevelOne && <span className={`pts-badge${corePts === 0 ? ' empty' : corePts <= 2 ? ' warn' : ''}`}>CORE {corePts} pts</span>}
-            {lvlPool > 0 && <span className="pts-badge warn">▲ {lvlPool} pts to spend</span>}
+            {lvlPool > 0 && <span className="pts-badge warn">▲ {lvlPool} Lv pts to spend</span>}
           </div>
         </div>
         <div className="traits-grid">
           {ALL_TRAITS.map(t => {
             const total = traitTotal(t);
-            const bonus = state.traitBonus[t] || 0;
-            const lbonus = state.traitLevelBonus[t] || 0;
+            const base = state.traits?.[t]?.base || 0;
+            const bonus = state.traits?.[t]?.bonus || 0;
+            const lbonus = state.traits?.[t]?.levelBonus || 0;
             const pool = traitPool(t);
             const poolAv = state.bonusPoints[pool] || 0;
             const lvlAv = state.levelPoints?.pool || 0;
@@ -173,13 +180,13 @@ export default function BodyTab({ state, update }) {
                 {isLevelOne && (
                   <div className="trait-controls">
                     <button className="btn btn-danger btn-icon btn-sm" onClick={() => adjustBonus(t, -1)} disabled={bonus <= 0}>−</button>
-                    <span className="trait-bonus-display">Base {state.traits[t] || 0}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}</span>
+                    <span className="trait-bonus-display">Base {base}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}</span>
                     <button className="btn btn-cyan btn-icon btn-sm" onClick={() => adjustBonus(t, 1)} disabled={poolAv <= 0}>+</button>
                   </div>
                 )}
                 {!isLevelOne && (bonus > 0 || lbonus > 0) && (
                   <div className="trait-bonus-display" style={{ textAlign: 'center', fontSize: 9, color: 'var(--muted)' }}>
-                    Base {state.traits[t] || 0}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}
+                    Base {base}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}
                   </div>
                 )}
                 {lvlAv > 0 && (
@@ -247,6 +254,104 @@ export default function BodyTab({ state, update }) {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Shock Tier Tracker */}
+      <div className="panel">
+        <div className="panel-title">Shock</div>
+        <div className="shock-tracker">
+          {[
+            { tier: 1, label: 'Shout',    color: '#ffdd00', shadow: 'rgba(255,221,0,.35)' },
+            { tier: 2, label: 'Stutter',  color: '#ff8800', shadow: 'rgba(255,136,0,.35)' },
+            { tier: 3, label: 'Faint',    color: 'var(--danger)', shadow: 'rgba(255,34,85,.35)' },
+            { tier: 4, label: 'Helpless', color: 'var(--danger)', shadow: 'rgba(255,34,85,.6)' },
+          ].map(({ tier, label, color, shadow }) => {
+            const active = (state.shock?.tier ?? 0) >= tier;
+            const current = (state.shock?.tier ?? 0) === tier;
+            return (
+              <button
+                key={tier}
+                className={`shock-tier-btn${active ? ' active' : ''}${current ? ' current' : ''}`}
+                style={active ? { '--shock-color': color, '--shock-shadow': shadow } : {}}
+                onClick={() => setShockTier(tier)}
+              >
+                <span className="shock-tier-num">T{tier}</span>
+                <span className="shock-tier-label">{label}</span>
+              </button>
+            );
+          })}
+          <div className="shock-clear-col">
+            <button
+              className="btn btn-muted btn-xs"
+              style={{ opacity: (state.shock?.tier ?? 0) === 0 ? 0.35 : 1 }}
+              onClick={() => update(s => ({ ...s, shock: { ...s.shock, tier: 0 } }))}
+            >
+              Clear
+            </button>
+            {(state.shock?.tier ?? 0) === 0 && (
+              <span className="shock-none-label">No Shock</span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Resistance Display */}
+      <div className="panel">
+        <div className="panel-title">Resistances</div>
+        <div className="resist-grid">
+          <div className="resist-group">
+            <div className="resist-group-label">Physical</div>
+            {[
+              { key: 'bleed', label: 'Bleed' },
+              { key: 'crush', label: 'Crush' },
+              { key: 'burn',  label: 'Burn'  },
+            ].map(({ key, label }) => {
+              const val = state.statCapBonuses?.[key] ?? 0;
+              return (
+                <div key={key} className="resist-row">
+                  <span className="resist-label">{label}</span>
+                  <span className={`resist-val flat${val > 0 ? ' has-val' : ''}`}>
+                    {val > 0 ? `−${val}` : '—'}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          <div className="resist-group">
+            <div className="resist-group-label">Affliction</div>
+            {[
+              { key: 'chill',     label: 'Chill'     },
+              { key: 'poison',    label: 'Poison'    },
+              { key: 'infection', label: 'Infection' },
+            ].map(({ key, label }) => {
+              const val = state.statCapBonuses?.[key] ?? 0;
+              return (
+                <div key={key} className="resist-row">
+                  <span className="resist-label">{label}</span>
+                  <span className={`resist-val tier${val > 0 ? ' has-val' : ''}`}>
+                    {val > 0 ? `T${val} Immune` : '—'}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          <div className="resist-group">
+            <div className="resist-group-label">Psychic</div>
+            {[
+              { key: 'dissolution', label: 'Dissolution' },
+            ].map(({ key, label }) => {
+              const val = state.statCapBonuses?.[key] ?? 0;
+              return (
+                <div key={key} className="resist-row">
+                  <span className="resist-label">{label}</span>
+                  <span className={`resist-val tier${val > 0 ? ' has-val' : ''}`}>
+                    {val > 0 ? `T${val} Immune` : '—'}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 

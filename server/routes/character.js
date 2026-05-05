@@ -2,6 +2,7 @@ const express = require('express');
 const Character = require('../models/Character');
 const SkillTemplate = require('../models/SkillTemplate');
 const requireAuth = require('../middleware/auth');
+const { enrichSkills, normalizeSkills, normalizeTraits } = require('../utils/skillUtils');
 
 const router = express.Router();
 
@@ -10,7 +11,10 @@ router.get('/', requireAuth, async (req, res) => {
   try {
     const character = await Character.findOne({ userId: req.userId });
     if (!character) return res.status(404).json({ error: 'No character found' });
-    res.json({ state: character.state, updatedAt: character.updatedAt });
+
+    const state = character.state || {};
+    const enrichedSkills = await enrichSkills(state.skills || []);
+    res.json({ state: { ...state, skills: enrichedSkills }, updatedAt: character.updatedAt });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -22,9 +26,17 @@ router.post('/', requireAuth, async (req, res) => {
     const { state } = req.body;
     if (!state) return res.status(400).json({ error: 'No state provided' });
 
+    const normalizedState = {
+      ...state,
+      skills: normalizeSkills(state.skills || []),
+      traits: normalizeTraits(state.traits, state.traitBonus, state.traitLevelBonus),
+    };
+    delete normalizedState.traitBonus;
+    delete normalizedState.traitLevelBonus;
+
     const character = await Character.findOneAndUpdate(
       { userId: req.userId },
-      { state },
+      { state: normalizedState },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
     res.json({ ok: true, updatedAt: character.updatedAt });

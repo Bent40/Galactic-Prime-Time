@@ -37,16 +37,21 @@ export default function PlayerPanel({ player, token, showToast }) {
 
   const state = charData.state || {};
   const id = state.identity || {};
-  function traitTotal(t) { return (state.traits?.[t] || 0) + (state.traitBonus?.[t] || 0) + (state.traitLevelBonus?.[t] || 0); }
+  function traitTotal(t) {
+    const tr = state.traits?.[t] || {};
+    return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
+  }
 
-  async function adjustTrait(trait, field, delta) {
-    const current = (state[field]?.[trait] || 0) + delta;
-    const newField = { ...(state[field] || {}), [trait]: Math.max(0, current) };
+  // subField: 'bonus' or 'levelBonus'
+  async function adjustTrait(trait, subField, delta) {
+    const currentVal = (state.traits?.[trait]?.[subField] || 0) + delta;
+    const newTraitVal = { ...(state.traits?.[trait] || {}), [subField]: Math.max(0, currentVal) };
+    const newTraits = { ...(state.traits || {}), [trait]: newTraitVal };
     const d = await apiFetch(`/api/admin/players/${player.userId}/traits`, {
-      method: 'PATCH', body: JSON.stringify({ [field]: newField }),
+      method: 'PATCH', body: JSON.stringify({ traits: newTraits }),
     }, token);
     if (d.ok) {
-      setCharData(cd => ({ ...cd, state: { ...cd.state, [field]: newField } }));
+      setCharData(cd => ({ ...cd, state: { ...cd.state, traits: newTraits } }));
       showToast('Saved');
     } else showToast(d.error || 'Save failed', 'err');
   }
@@ -55,14 +60,15 @@ export default function PlayerPanel({ player, token, showToast }) {
     if (d.ok) showToast('Tokens updated'); else showToast(d.error, 'err');
   }
   async function addSkill(fromLib) {
-    const sk = fromLib || skillForm;
+    const body = fromLib
+      ? { templateId: fromLib._id }
+      : {
+          name: skillForm.name, momentCost: skillForm.momentCost,
+          stats: skillForm.stats.split(',').map(s => s.trim()).filter(Boolean),
+          effect: skillForm.effect, description: skillForm.description,
+        };
     const d = await apiFetch(`/api/admin/players/${player.userId}/skills`, {
-      method: 'POST',
-      body: JSON.stringify({
-        name: sk.name, momentCost: sk.momentCost,
-        stats: typeof sk.stats === 'string' ? sk.stats.split(',').map(s => s.trim()).filter(Boolean) : sk.stats,
-        effect: sk.effect, description: sk.description,
-      }),
+      method: 'POST', body: JSON.stringify(body),
     }, token);
     if (d.ok) {
       showToast('Skill added');
@@ -212,9 +218,9 @@ export default function PlayerPanel({ player, token, showToast }) {
         </div>
         <div className="stats-grid">
           {['physique', 'reflexes', 'mind', 'charm'].map(t => {
-            const base = state.traits?.[t] || 0;
-            const bonus = state.traitBonus?.[t] || 0;
-            const lvBonus = state.traitLevelBonus?.[t] || 0;
+            const base = state.traits?.[t]?.base || 0;
+            const bonus = state.traits?.[t]?.bonus || 0;
+            const lvBonus = state.traits?.[t]?.levelBonus || 0;
             return (
               <div key={t} className="stat-box">
                 <div className="stat-name">{TRAIT_LABELS[t]}</div>
@@ -223,10 +229,10 @@ export default function PlayerPanel({ player, token, showToast }) {
                   Base {base}{bonus ? ` +${bonus}` : ''}{lvBonus ? ` +${lvBonus}Lv` : ''}
                 </div>
                 <div style={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
-                  <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'traitBonus', -1)} disabled={bonus <= 0} title="Remove bonus pt">−B</button>
-                  <button className="btn btn-cyan btn-xs" onClick={() => adjustTrait(t, 'traitBonus', 1)} title="Add bonus pt">+B</button>
-                  <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'traitLevelBonus', -1)} disabled={lvBonus <= 0} title="Remove level pt">−L</button>
-                  <button className="btn btn-gold btn-xs" onClick={() => adjustTrait(t, 'traitLevelBonus', 1)} title="Add level pt">+L</button>
+                  <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'bonus', -1)} disabled={bonus <= 0} title="Remove bonus pt">−B</button>
+                  <button className="btn btn-cyan btn-xs" onClick={() => adjustTrait(t, 'bonus', 1)} title="Add bonus pt">+B</button>
+                  <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'levelBonus', -1)} disabled={lvBonus <= 0} title="Remove level pt">−L</button>
+                  <button className="btn btn-gold btn-xs" onClick={() => adjustTrait(t, 'levelBonus', 1)} title="Add level pt">+L</button>
                 </div>
               </div>
             );

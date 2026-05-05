@@ -1,0 +1,805 @@
+[{
+  "_id": {
+    "$oid": "69c7d33cb36295a54ae0e004"
+  },
+  "name": "Bandage",
+  "category": "Consumables",
+  "qty": 1,
+  "type": "Healing",
+  "damage": "",
+  "range": "",
+  "effect": "Delay bleeding for 1 clock",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-03-28T13:10:20.496Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:13:22.442Z"
+  },
+  "__v": 0,
+  "attackTypes": [
+    "Single Target"
+  ],
+  "damageType": [],
+  "description": "Classic, normal, every day, (almost) new bandage.",
+  "icon": "🩹",
+  "requirements": "Have Bleed or Crush.",
+  "resistance": "",
+  "specialEffects": "Delays Bleeding, Prevents infection and poison, and can stabilize Crush.",
+  "tier": "Crude"
+},
+{
+  "_id": {
+    "$oid": "69df614b76d7a63bcbeefe3c"
+  },
+  "name": "Stun Net",
+  "icon": "🏻",
+  "category": "Consumables",
+  "attackTypes": [
+    "Thrown"
+  ],
+  "range": "Physique",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "On hit, disable target Leg for 1 Moment. Large targets are Slowed instead.",
+  "resistance": "",
+  "requirements": "2 Moment Cost",
+  "description": "",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T09:58:35.244Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:13:39.501Z"
+  },
+  "__v": 0,
+  "tier": "Crude"
+},
+{
+  "_id": {
+    "$oid": "69df61f9d3730fcc3f52fc87"
+  },
+  "name": "Pointed Clown Hat",
+  "icon": "🎩",
+  "category": "Equipment",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "A small, colorful hat meant to entertain the mindless mass",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T10:01:29.491Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:14:07.317Z"
+  },
+  "__v": 0,
+  "tier": "Crude"
+},
+{
+  "_id": {
+    "$oid": "69df622dd3730fcc3f52fc91"
+  },
+  "name": "Ruffled Clown Collar",
+  "icon": "🎀",
+  "category": "Equipment",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "A wide, colorful collar meant to entertain the mindless mass\n",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T10:02:21.997Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:14:14.213Z"
+  },
+  "__v": 0,
+  "tier": "Crude"
+},
+{
+  "_id": {
+    "$oid": "69df628dd3730fcc3f52fc9f"
+  },
+  "name": "Fedora Hat",
+  "icon": "🎩",
+  "category": "Equipment",
+  "attackTypes": [],
+  "range": "0",
+  "damage": "",
+  "damageType": [
+    "Psy"
+  ],
+  "specialEffects": "",
+  "resistance": "Crush 1",
+  "requirements": "",
+  "description": "Obtained from killing Big Brother Roach. The hat, black as the night, was immaculately clean, compared to the owner's species.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T10:03:57.329Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T17:49:46.272Z"
+  },
+  "__v": 0,
+  "tier": "Basic"
+},
+{
+  "_id": {
+    "$oid": "69df62d2d3730fcc3f52fcab"
+  },
+  "name": "Scalpel (Used)",
+  "icon": "🔪",
+  "category": "Weapons",
+  "attackTypes": [],
+  "range": "",
+  "damage": "2",
+  "damageType": [
+    "Bleed"
+  ],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "1 Physique, 1 Reflexes",
+  "description": "A small knife, dirty and used. ",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T10:05:06.386Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:14:57.203Z"
+  },
+  "__v": 0,
+  "tier": "Crude"
+},
+{
+  "_id": {
+    "$oid": "69df6333d3730fcc3f52fcbb"
+  },
+  "name": "Generic Outfit Coupon",
+  "icon": "🎟️",
+  "category": "System Items",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "Allows the user to gain an outfit of their choice. Cosmetic in effect, though might help with the crowd.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T10:06:43.203Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T07:30:03.052Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69df636bd3730fcc3f52fcc3"
+  },
+  "name": "Silver Modifier Coupon",
+  "icon": "🎟️",
+  "category": "System Items",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "Allows Choosing 1 Lesser Modifier to place on an existing item",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T10:07:39.189Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T07:30:12.470Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69df63e9d3730fcc3f52fcd0"
+  },
+  "name": "Beachy - The Beach Ball",
+  "icon": "🏐",
+  "category": "Misc",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "Filipe's closest companion, the representation of his soul, the testament to who Filipe truly is.\nGreat for party games!",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-15T10:09:45.182Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-15T10:09:45.182Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e08fba8c6d95c2746d8824"
+  },
+  "name": "Middle Brother's Doll",
+  "icon": "🧸",
+  "category": "Key Items",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "The doll Middle Brother Roach hid away in his chest. A little worn down from play, but otherwise well kept. Seems to have been hand sewn by someone.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T07:28:58.874Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T07:30:16.958Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e091fe1690e6dc727bc045"
+  },
+  "name": "Superhero Outfit",
+  "icon": "🦸‍♂",
+  "category": "Equipment",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "Humanoid body",
+  "description": "A mask made of Foam, An outfit sown together from polyester. Truly the mark of a great hero",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T07:38:38.256Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:14:17.347Z"
+  },
+  "__v": 0,
+  "tier": "Crude"
+},
+{
+  "_id": {
+    "$oid": "69e092d11690e6dc727bc053"
+  },
+  "name": "Metal Gauntlets",
+  "icon": "🥊",
+  "category": "Weapons",
+  "attackTypes": [
+    "Single Target"
+  ],
+  "range": "Adjacent",
+  "damage": "2",
+  "damageType": [
+    "Crush"
+  ],
+  "specialEffects": "Damage is added to unarmed attacks",
+  "resistance": "",
+  "requirements": "2 Hands. Physique 3.",
+  "description": "Normal gauntlets made of rigid metal, with a little bit of cushioning inside. Perfect for showing someone how to make a knuckle sandwich.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T07:42:09.227Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:15:10.432Z"
+  },
+  "__v": 0,
+  "tier": "Basic"
+},
+{
+  "_id": {
+    "$oid": "69e093741690e6dc727bc061"
+  },
+  "name": "Big Brother Roach's Suit",
+  "icon": "👔",
+  "category": "Equipment",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "Bleed 1",
+  "requirements": "",
+  "description": "A black suit with 4 sleeves, made of a strong fiber.\nfit for a tall individual.\nThere seems to be a few stains on it.\nPerfect for that \"Didnt try too hard, but definitely tried too hard\" look",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T07:44:52.224Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:13:44.379Z"
+  },
+  "__v": 0,
+  "tier": "Basic"
+},
+{
+  "_id": {
+    "$oid": "69e095611690e6dc727bc075"
+  },
+  "name": "Arrow",
+  "icon": "➶",
+  "category": "Consumables",
+  "attackTypes": [],
+  "range": "",
+  "damage": "2",
+  "damageType": [
+    "Bleed"
+  ],
+  "specialEffects": "Deals 1 Bleed on melee.",
+  "resistance": "",
+  "requirements": "Shooting mechanism. ",
+  "description": "Plain arrows to be used with either a crossbow or a bow.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T07:53:05.399Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:13:32.508Z"
+  },
+  "__v": 0,
+  "tier": "Crude"
+},
+{
+  "_id": {
+    "$oid": "69e0961692c1e4c620dc1e3b"
+  },
+  "name": "Bag Of Trail Mix",
+  "icon": "🫘",
+  "category": "Consumables",
+  "tier": "",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "A small bag full of \"Trail Mix\"™.\nA choking hazard for 5 years old and below.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T07:56:06.891Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T07:56:06.891Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e096d192c1e4c620dc1e52"
+  },
+  "name": "Tome Of Submission",
+  "icon": "📓",
+  "category": "System Items",
+  "tier": "",
+  "attackTypes": [
+    "Self"
+  ],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "On use, gives the skill - Submission.",
+  "resistance": "",
+  "requirements": "Animal Planet, have a pet.",
+  "description": "A skill tome, allows unlocking a skill related to animals.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T07:59:13.269Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T07:59:13.269Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0976c92c1e4c620dc1e60"
+  },
+  "name": "Medical Suture Kit",
+  "icon": "🪡",
+  "category": "Tools",
+  "tier": "Basic",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "For every moment used, Remove 1 Bleed effect from target.",
+  "resistance": "",
+  "requirements": "Reflexes 4, Mind 4, 2 Hands.",
+  "description": "A suturing kit found in the dumpster.\nProbably not the best, sterility-wise, but hey, beggars cant be choosers.\nRight, beggars?",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T08:01:48.522Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:48:10.696Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0980c92c1e4c620dc1e69"
+  },
+  "name": "Sewing Kit",
+  "icon": "🧵",
+  "category": "Tools",
+  "tier": "Quality",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "Contains:\n500 meters of cotton fiber.\nSewing needles.\n",
+  "resistance": "",
+  "requirements": "Reflexes 4",
+  "description": "Want to fix your clothes, sew your initials, or maybe even create something new? This kit has it all.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T08:04:28.529Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:14:48.833Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e098b292c1e4c620dc1e7d"
+  },
+  "name": "Garden Gloves",
+  "icon": "🧤",
+  "category": "Equipment",
+  "tier": "Crude",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "Humanoid hands",
+  "description": "Worn out garden gloves, decorated with foam decorations to fit the superhero theme.\nA masterpiece of our time.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T08:07:14.750Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:13:54.266Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0990892c1e4c620dc1e89"
+  },
+  "name": "Wood scraps",
+  "icon": "🪵",
+  "category": "Misc",
+  "tier": "",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "Wood scraps. Can be used for crafting.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T08:08:40.730Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:08:40.730Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0997692c1e4c620dc1e91"
+  },
+  "name": "Fabric Scraps",
+  "icon": "🧶",
+  "category": "Misc",
+  "tier": "",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "Fiber Scarps. Can be used for crafting.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T08:10:30.072Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T08:10:30.072Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e0a7d792c1e4c620dc1fdf"
+  },
+  "name": "Metal Claw Coverings",
+  "icon": "💅🏻",
+  "category": "Weapons",
+  "tier": "Basic",
+  "attackTypes": [],
+  "range": "Adjacent",
+  "damage": "2 Bleed",
+  "damageType": [],
+  "specialEffects": "Adds +1 damage to claw attacks",
+  "resistance": "",
+  "requirements": "Have claws. Physique 3",
+  "description": "Place it on your claws and swipe away! Nothing fancy, but definitely Better than before.",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T09:11:51.640Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T09:11:51.640Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e10261187523c045ade8da"
+  },
+  "name": "Kunai",
+  "icon": "🗡️",
+  "category": "Weapons",
+  "tier": "Quality",
+  "attackTypes": [
+    "Single Target",
+    "Thrown"
+  ],
+  "range": "Adj / 2 * Physique",
+  "damage": "2 ",
+  "damageType": [
+    "Bleed"
+  ],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "Small Knife Blade. Idk ben edit it\nI swear its not a weeb thing its just a really small dagger thats easy to throw and has a round grip",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T15:38:09.722Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T15:44:16.795Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e1039e187523c045ade91c"
+  },
+  "name": "Short Sword",
+  "icon": "⚔️",
+  "category": "Weapons",
+  "tier": "Basic",
+  "attackTypes": [
+    "Single Target"
+  ],
+  "range": "Adjacent",
+  "damage": "2",
+  "damageType": [
+    "Bleed"
+  ],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "\"While you were playing around and wasting time, I've been studying the blade.\"",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T15:43:26.121Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T15:43:26.121Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e12304187523c045adf2f5"
+  },
+  "name": "Musketeer Hat",
+  "icon": "🧢",
+  "category": "Equipment",
+  "tier": "",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T17:57:24.309Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T17:57:24.309Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e12347187523c045adf313"
+  },
+  "name": "Soft Boots",
+  "icon": "🥾",
+  "category": "Equipment",
+  "tier": "",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T17:58:31.086Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T17:58:31.086Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e124fb187523c045adf3d9"
+  },
+  "name": "Blue Cape",
+  "icon": "🦸‍♂",
+  "category": "Equipment",
+  "tier": "",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T18:05:47.888Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T18:06:13.619Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69e12592187523c045adf42b"
+  },
+  "name": "Basic Weapon Coupon",
+  "icon": "🎟️",
+  "category": "System Items",
+  "tier": "",
+  "attackTypes": [],
+  "range": "",
+  "damage": "",
+  "damageType": [],
+  "specialEffects": "",
+  "resistance": "",
+  "requirements": "",
+  "description": "Allow creation of weapons up to Basic quality",
+  "qty": 1,
+  "type": "",
+  "effect": "",
+  "notes": "",
+  "createdAt": {
+    "$date": "2026-04-16T18:08:18.449Z"
+  },
+  "updatedAt": {
+    "$date": "2026-04-16T18:08:18.449Z"
+  },
+  "__v": 0
+}]

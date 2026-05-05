@@ -32,11 +32,14 @@ export const CAT_ICONS = {
 
 export const DEFAULT_STATE = {
   identity: { name: '', player: '', race: 'Human', level: 1, background: '', portrait: '', contestantNumber: '' },
-  traits: { physique: 1, reflexes: 1, mind: 1, charm: 1 },
-  traitBonus: { physique: 0, reflexes: 0, mind: 0, charm: 0 },
-  traitLevelBonus: { physique: 0, reflexes: 0, mind: 0, charm: 0 },
+  traits: {
+    physique: { base: 1, bonus: 0, levelBonus: 0 },
+    reflexes: { base: 1, bonus: 0, levelBonus: 0 },
+    mind:     { base: 1, bonus: 0, levelBonus: 0 },
+    charm:    { base: 1, bonus: 0, levelBonus: 0 },
+  },
   bonusPoints: { body: 5, core: 5 },
-  levelPoints: { body: 0, core: 0 },
+  levelPoints: { pool: 0 },
   hpUpgradePointsSpent: 0,
   bodyParts: [
     { id: 1, name: 'Head', maxHp: 3, currentHp: 3, lethal: false, conditions: [] },
@@ -46,6 +49,16 @@ export const DEFAULT_STATE = {
     { id: 5, name: 'Left Leg', maxHp: 4, currentHp: 4, lethal: false, conditions: [] },
     { id: 6, name: 'Right Leg', maxHp: 4, currentHp: 4, lethal: false, conditions: [] },
   ],
+  shock: { tier: 0 },
+  statCapBonuses: {
+    bleed: 0,
+    crush: 0,
+    burn: 0,
+    chill: 0,
+    poison: 0,
+    infection: 0,
+    dissolution: 0,
+  },
   skills: [],
   skillPointsSpent: { physique: 0, reflexes: 0, mind: 0, charm: 0 },
   tags: [],
