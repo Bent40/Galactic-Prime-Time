@@ -7,6 +7,7 @@ const itemTemplateSchema = new mongoose.Schema({
   tier:           { type: String, enum: ['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional', ''], default: '' },
   attackTypes:    [{ type: String }],
   range:          { type: String, default: '' },
+  rpm:            { type: Number, default: null },
   damage:         { type: String, default: '' },
   damageType:     [{ type: String }],
   specialEffects: { type: String, default: '' },

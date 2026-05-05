@@ -28,7 +28,7 @@ export default function AdminPanel() {
   const [bulkSelecting, setBulkSelecting] = useState(false);
   const [bulkSel, setBulkSel] = useState([]);
   const [bulkAchForm, setBulkAchForm] = useState({ title: '', desc: '', reward: '' });
-  const [bulkObjForm, setBulkObjForm] = useState({ section: 'main', title: '', description: '', status: 'active' });
+  const [bulkObjForm, setBulkObjForm] = useState({ section: 'main', title: '', description: '', status: 'active', subtasks: '' });
   const [bulkFollowers, setBulkFollowers] = useState('');
 
   useEffect(() => { if (auth) { loadPlayers(); loadEnemies(); } }, [auth]);
@@ -55,10 +55,12 @@ export default function AdminPanel() {
   }
   async function bulkSendObj() {
     if (!bulkObjForm.title || bulkSel.length === 0) return;
-    const d = await apiFetch('/api/admin/players/bulk/objectives', { method: 'POST', body: JSON.stringify({ userIds: bulkSel, ...bulkObjForm }) }, auth.token);
+    const subtasks = (bulkObjForm.subtasks || '').split('\n').map(s => s.trim()).filter(Boolean);
+    const { subtasks: _ignored, ...rest } = bulkObjForm;
+    const d = await apiFetch('/api/admin/players/bulk/objectives', { method: 'POST', body: JSON.stringify({ userIds: bulkSel, ...rest, subtasks }) }, auth.token);
     const ok = d.results?.filter(r => r.ok).length || 0;
     showToast(`Sent to ${ok}/${bulkSel.length} players`);
-    setBulkObjForm({ section: 'main', title: '', description: '', status: 'active' });
+    setBulkObjForm({ section: 'main', title: '', description: '', status: 'active', subtasks: '' });
     setBulkSel([]);
   }
   async function bulkSetFollowers() {
@@ -118,6 +120,13 @@ export default function AdminPanel() {
                 <select className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} value={bulkObjForm.status} onChange={e => setBulkObjForm(f => ({ ...f, status: e.target.value }))}>
                   <option value="active">Active</option><option value="complete">Complete</option><option value="failed">Failed</option>
                 </select>
+                <textarea
+                  className="fi"
+                  style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4, minHeight: 50, fontFamily: 'inherit' }}
+                  placeholder="Subtasks (one per line, optional)"
+                  value={bulkObjForm.subtasks}
+                  onChange={e => setBulkObjForm(f => ({ ...f, subtasks: e.target.value }))}
+                />
                 <button className="btn btn-cyan btn-xs" onClick={bulkSendObj} style={{ width: '100%' }}>Send to Selected</button>
               </div>
               <div style={{ marginTop: 8 }}>

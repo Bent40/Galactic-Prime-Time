@@ -190,10 +190,16 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
           </div>
         </div>
 
-        <div className="modal-grid2" style={{ marginBottom: 10 }}>
+        <div className="modal-grid3" style={{ marginBottom: 10 }}>
           <div className="field-group">
             <label className="field-label">Range</label>
             <input className="fi" value={local.range || ''} onChange={e => patch('range', e.target.value)} />
+          </div>
+          <div className="field-group">
+            <label className="field-label">RPM <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(ranged)</span></label>
+            <input className="fi" type="number" min="1"
+              value={local.rpm ?? ''}
+              onChange={e => patch('rpm', e.target.value === '' ? null : Math.max(1, +e.target.value))} />
           </div>
           <div className="field-group">
             <label className="field-label">Damage</label>
@@ -288,6 +294,7 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
       <span className="inv-row-meta">
         {dmgLbl && <span className="inv-row-dmg">⚔ {dmgLbl}</span>}
         {item.range && <span className="inv-row-range">{item.range}</span>}
+        {item.rpm != null && <span className="inv-row-range">{item.rpm} RPM</span>}
         {item.attackTypes?.length > 0 && (
           <span className="inv-row-atk">{item.attackTypes.join(' · ')}</span>
         )}

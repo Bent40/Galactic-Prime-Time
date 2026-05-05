@@ -23,6 +23,32 @@ export const ITEM_TIERS   = ['Crude', 'Basic', 'Quality', 'Superior', 'Exception
 export const AFFIX_TIERS  = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
 export const ITEM_CATS    = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'];
 
+// Master tag catalog — used by the player-side tag picker. Admins can still
+// add freetext tags from the player panel; this list is for the structured
+// pick experience players use on their own sheet.
+export const MASTER_TAGS = [
+  { name: 'Bleeding',         effect: 'Lose 1 HP at the start of each Moment.' },
+  { name: 'Burning',          effect: 'Burn damage on tick; spreads to adjacent body parts.' },
+  { name: 'Bruised',          effect: '−1 to Physique checks until end of scene.' },
+  { name: 'Stunned',          effect: 'Skip your next Moment action.' },
+  { name: 'Dazed',            effect: '−1 to Reflexes-based actions.' },
+  { name: 'Disarmed',         effect: 'Cannot use equipped weapon until recovered.' },
+  { name: 'Exhausted',        effect: '−1 to all trait checks; recover after rest.' },
+  { name: 'Poisoned',         effect: 'Lose 1 HP per Moment until cleansed.' },
+  { name: 'Infected',         effect: 'Wounds heal at half rate; spreads if untreated.' },
+  { name: 'Prone',            effect: '−1 to attack; +1 cover from ranged.' },
+  { name: 'Pinned',           effect: 'Cannot move; melee attackers get advantage.' },
+  { name: 'Inspired',         effect: '+1 to your next trait check.' },
+  { name: 'Spotlighted',      effect: 'Camera Call cost reduced by 1 stack.' },
+  { name: 'Trending',         effect: '+10% follower gain this scene.' },
+  { name: 'Sponsor Favorite', effect: 'Gain 1 Patron token at scene end.' },
+  { name: 'Underdog',         effect: '+1 Narrative token if you complete a Goal.' },
+  { name: 'Ridiculed',        effect: '−10% viewer gain this scene.' },
+  { name: 'Forgotten',        effect: 'No exposure gained this Moment.' },
+  { name: 'Drunk',            effect: '−1 Mind, +1 Charm.' },
+  { name: 'Confident',        effect: '+1 Charm on your next social roll.' },
+];
+
 export const CAT_ICONS = {
   Weapons: '⚔️', Equipment: '🛡️', Tools: '🔧',
   Consumables: '💊', Misc: '📦', Hotbar: '⚡', Equipped: '🏃',

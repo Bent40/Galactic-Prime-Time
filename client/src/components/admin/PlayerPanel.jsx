@@ -19,6 +19,9 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [invCats, setInvCats] = useState(null); // local inventory state for editing
   const [invItemModal, setInvItemModal] = useState(null); // { item, catId }
   const [invSaving, setInvSaving] = useState(false);
+  const [objectives, setObjectives] = useState(null); // local objectives state for editing
+  const [objSaving, setObjSaving] = useState(false);
+  const [newSubtaskText, setNewSubtaskText] = useState({}); // { [objId]: text } per-objective input buffer
 
   useEffect(() => {
     setLoading(true);
@@ -26,6 +29,7 @@ export default function PlayerPanel({ player, token, showToast }) {
       setCharData(d);
       if (d.state?.tokens) setTokenForm({ narrative: d.state.tokens.narrative || 0, upgrade: d.state.tokens.upgrade || 0, patronTokens: d.state.tokens.patronTokens || 0 });
       setInvCats(d.state?.inventory?.categories ? JSON.parse(JSON.stringify(d.state.inventory.categories)) : []);
+      setObjectives(d.state?.objectives ? JSON.parse(JSON.stringify(d.state.objectives)) : { main: [], directives: [], goals: [] });
       setLoading(false);
     });
     apiFetch('/api/admin/skill-library', {}, token).then(d => { if (Array.isArray(d)) setSkillLib(d); });
@@ -183,6 +187,43 @@ export default function PlayerPanel({ player, token, showToast }) {
       });
     });
   }
+  // ---- Objectives helpers ----
+  function mutateObjs(fn) { setObjectives(prev => fn(JSON.parse(JSON.stringify(prev)))); }
+  function objAddSubtask(section, objId) {
+    const text = (newSubtaskText[objId] || '').trim();
+    if (!text) return;
+    mutateObjs(o => ({ ...o, [section]: (o[section] || []).map(obj =>
+      obj.id !== objId ? obj : { ...obj, subtasks: [...(obj.subtasks || []), { id: uid(), text, done: false }] }
+    ) }));
+    setNewSubtaskText(s => ({ ...s, [objId]: '' }));
+  }
+  function objUpdateSubtask(section, objId, subId, patch) {
+    mutateObjs(o => ({ ...o, [section]: (o[section] || []).map(obj =>
+      obj.id !== objId ? obj : { ...obj, subtasks: (obj.subtasks || []).map(st => st.id !== subId ? st : { ...st, ...patch }) }
+    ) }));
+  }
+  function objRemoveSubtask(section, objId, subId) {
+    mutateObjs(o => ({ ...o, [section]: (o[section] || []).map(obj =>
+      obj.id !== objId ? obj : { ...obj, subtasks: (obj.subtasks || []).filter(st => st.id !== subId) }
+    ) }));
+  }
+  function objRemove(section, objId) {
+    if (!confirm('Remove this objective?')) return;
+    mutateObjs(o => ({ ...o, [section]: (o[section] || []).filter(obj => obj.id !== objId) }));
+  }
+  async function saveObjectives() {
+    setObjSaving(true);
+    const newState = { ...charData.state, objectives };
+    const d = await apiFetch(`/api/admin/players/${player.userId}/state`, {
+      method: 'PUT', body: JSON.stringify({ state: newState }),
+    }, token);
+    if (d.ok) {
+      showToast('Objectives saved');
+      setCharData(cd => ({ ...cd, state: newState }));
+    } else showToast(d.error || 'Failed', 'err');
+    setObjSaving(false);
+  }
+
   async function saveInventory() {
     setInvSaving(true);
     const newState = { ...charData.state, inventory: { ...charData.state?.inventory, categories: invCats } };
@@ -383,6 +424,65 @@ export default function PlayerPanel({ player, token, showToast }) {
           {itemLib.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No items in library.</span>}
         </div>
       </div>
+
+      {/* Objectives Editor */}
+      {objectives !== null && (
+        <div className="panel">
+          <div className="panel-title admin">
+            Objectives Editor
+            <button className="btn btn-purple btn-sm" onClick={saveObjectives} disabled={objSaving}>
+              {objSaving ? 'Saving…' : 'Save Objectives'}
+            </button>
+          </div>
+          {['main', 'directives', 'goals'].map(sec => {
+            const list = objectives[sec] || [];
+            return (
+              <div key={sec} style={{ marginBottom: 12 }}>
+                <div className="section-label">{sec === 'main' ? 'Main' : sec.charAt(0).toUpperCase() + sec.slice(1)}</div>
+                {list.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 10, fontStyle: 'italic' }}>No objectives in this section.</span>}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {list.map(obj => (
+                    <div key={obj.id} style={{ border: '1px solid var(--border)', borderRadius: 4, padding: 8, background: 'rgba(0,0,0,.15)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                        <span style={{ flex: 1, fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{obj.title}</span>
+                        <span style={{ fontSize: 9, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: 1 }}>{obj.status || 'active'}</span>
+                        <button className="btn btn-danger btn-xs" onClick={() => objRemove(sec, obj.id)}>✕</button>
+                      </div>
+                      {obj.description && <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 6 }}>{obj.description}</div>}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 3, marginBottom: 6 }}>
+                        {(obj.subtasks || []).map(st => (
+                          <div key={st.id} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <input type="checkbox" checked={!!st.done} onChange={e => objUpdateSubtask(sec, obj.id, st.id, { done: e.target.checked })} />
+                            <input
+                              className="fi"
+                              style={{ flex: 1, fontSize: 11, padding: '2px 6px' }}
+                              value={st.text}
+                              onChange={e => objUpdateSubtask(sec, obj.id, st.id, { text: e.target.value })}
+                            />
+                            <button className="btn btn-danger btn-xs" onClick={() => objRemoveSubtask(sec, obj.id, st.id)}>✕</button>
+                          </div>
+                        ))}
+                        {(obj.subtasks || []).length === 0 && <span style={{ color: 'var(--muted)', fontSize: 10, fontStyle: 'italic' }}>No subtasks.</span>}
+                      </div>
+                      <div className="row" style={{ gap: 4 }}>
+                        <input
+                          className="fi"
+                          style={{ flex: 1, fontSize: 11 }}
+                          placeholder="New subtask..."
+                          value={newSubtaskText[obj.id] || ''}
+                          onChange={e => setNewSubtaskText(s => ({ ...s, [obj.id]: e.target.value }))}
+                          onKeyDown={e => { if (e.key === 'Enter') objAddSubtask(sec, obj.id); }}
+                        />
+                        <button className="btn btn-cyan btn-xs" onClick={() => objAddSubtask(sec, obj.id)}>+ Subtask</button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Inventory Editor */}
       {invCats !== null && (

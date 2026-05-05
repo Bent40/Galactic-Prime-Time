@@ -179,11 +179,24 @@ router.post('/players/bulk/achievements', async (req, res) => {
 // NOTE: must come before /:userId routes to avoid param collision
 router.post('/players/bulk/objectives', async (req, res) => {
   try {
-    const { userIds, section, title, type, description, status } = req.body;
+    const { userIds, section, title, type, description, status, subtasks } = req.body;
     if (!Array.isArray(userIds) || userIds.length === 0)
       return res.status(400).json({ error: 'userIds array required' });
     if (!title) return res.status(400).json({ error: 'title required' });
     const sec = ['main', 'directives', 'goals'].includes(section) ? section : 'main';
+
+    // Accept subtasks as either an array of strings or an array of { text } objects.
+    const subList = Array.isArray(subtasks)
+      ? subtasks
+          .map(st => typeof st === 'string' ? st : (st && st.text))
+          .map(t => (t || '').trim())
+          .filter(Boolean)
+          .map(text => ({
+            id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+            text, done: false,
+          }))
+      : [];
+
     const results = [];
     for (const userId of userIds) {
       try {
@@ -195,7 +208,8 @@ router.post('/players/bulk/objectives', async (req, res) => {
         state.objectives[sec].push({
           id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
           title, type: type || '', description: description || '',
-          status: status || 'active', subtasks: [],
+          status: status || 'active',
+          subtasks: subList.map(st => ({ ...st, id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6) })),
         });
         await Character.findOneAndUpdate({ userId }, { state });
         results.push({ userId, ok: true });

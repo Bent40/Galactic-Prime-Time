@@ -1,10 +1,11 @@
-import { useState, useRef } from 'react';
-import { uid, BOSS_TIERS } from '../../constants.js';
+import { useState, useRef, useMemo } from 'react';
+import { uid, BOSS_TIERS, MASTER_TAGS } from '../../constants.js';
 
 
 export default function ExposureTab({ state, update }) {
   const portraitRefs = useRef([null, null, null]);
-  const [newTag, setNewTag] = useState({ name: '', effect: '' });
+  const [tagSearch, setTagSearch] = useState('');
+  const [tagPickerOpen, setTagPickerOpen] = useState(false);
   const [tokenForm, setTokenForm] = useState({ tier: 'bronze' });
 
   function patchExposure(k, v) { update(s => ({ ...s, exposure: { ...s.exposure, [k]: v } })); }
@@ -14,11 +15,19 @@ export default function ExposureTab({ state, update }) {
     update(s => ({ ...s, tags: s.tags.map(t => t.id === id ? { ...t, state: cycle[(cycle.indexOf(t.state) + 1) % cycle.length] } : t) }));
   }
   function rmTag(id) { update(s => ({ ...s, tags: s.tags.filter(t => t.id !== id) })); }
-  function addTag() {
-    if (!newTag.name) return;
-    update(s => ({ ...s, tags: [...s.tags, { id: uid(), name: newTag.name, state: 'active', effect: newTag.effect }] }));
-    setNewTag({ name: '', effect: '' });
+  function addTagFromMaster(master) {
+    update(s => ({ ...s, tags: [...(s.tags || []), { id: uid(), name: master.name, state: 'active', effect: master.effect || '' }] }));
+    setTagSearch('');
+    setTagPickerOpen(false);
   }
+
+  const filteredMaster = useMemo(() => {
+    const q = tagSearch.trim().toLowerCase();
+    const owned = new Set((state.tags || []).map(t => t.name.toLowerCase()));
+    return MASTER_TAGS
+      .filter(t => !owned.has(t.name.toLowerCase()))
+      .filter(t => !q || t.name.toLowerCase().includes(q) || (t.effect || '').toLowerCase().includes(q));
+  }, [tagSearch, state.tags]);
 
   function patchPatron(rank, k, v) {
     update(s => ({ ...s, patrons: s.patrons.map(p => p.rank === rank ? { ...p, [k]: v } : p) }));
@@ -126,16 +135,43 @@ export default function ExposureTab({ state, update }) {
           ))}
           {(!state.tags || state.tags.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No tags.</span>}
         </div>
-        <div className="add-form" style={{ marginTop: 8 }}>
-          <div className="field-group" style={{ flex: 2 }}>
-            <label className="field-label">Tag Name</label>
-            <input className="fi" value={newTag.name} onChange={e => setNewTag(f => ({ ...f, name: e.target.value }))} />
-          </div>
-          <div className="field-group" style={{ flex: 3 }}>
-            <label className="field-label">Effect</label>
-            <input className="fi" value={newTag.effect} onChange={e => setNewTag(f => ({ ...f, effect: e.target.value }))} />
-          </div>
-          <button className="btn btn-cyan btn-sm" onClick={addTag} style={{ alignSelf: 'flex-end' }}>+ Tag</button>
+        <div style={{ marginTop: 8 }}>
+          {!tagPickerOpen ? (
+            <button className="btn btn-cyan btn-sm" onClick={() => setTagPickerOpen(true)}>+ Add Tag</button>
+          ) : (
+            <div style={{ border: '1px solid var(--border)', borderRadius: 4, background: 'rgba(0,0,0,.25)', padding: 8 }}>
+              <div className="row" style={{ gap: 6, marginBottom: 6 }}>
+                <input
+                  className="fi"
+                  style={{ flex: 1 }}
+                  placeholder="Search tags..."
+                  value={tagSearch}
+                  onChange={e => setTagSearch(e.target.value)}
+                  autoFocus
+                />
+                <button className="btn btn-muted btn-sm" onClick={() => { setTagPickerOpen(false); setTagSearch(''); }}>Cancel</button>
+              </div>
+              <div style={{ maxHeight: 220, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 3 }}>
+                {filteredMaster.map(t => (
+                  <div
+                    key={t.name}
+                    onClick={() => addTagFromMaster(t)}
+                    style={{ padding: '6px 10px', cursor: 'pointer', borderRadius: 3, border: '1px solid var(--border)', background: 'rgba(0,0,0,.2)' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,212,255,.07)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,.2)'}
+                  >
+                    <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--cyan)', letterSpacing: 1 }}>{t.name}</div>
+                    {t.effect && <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>{t.effect}</div>}
+                  </div>
+                ))}
+                {filteredMaster.length === 0 && (
+                  <span style={{ color: 'var(--muted)', fontSize: 11, padding: '6px 4px', fontStyle: 'italic' }}>
+                    {tagSearch ? 'No matching tags.' : 'All master tags are already on your sheet.'}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

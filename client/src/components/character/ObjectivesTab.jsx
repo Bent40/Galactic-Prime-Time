@@ -11,6 +11,13 @@ export default function ObjectivesTab({ state, update }) {
     }) } }));
   }
 
+  function toggleSubtask(section, objId, subId) {
+    update(s => ({ ...s, objectives: { ...s.objectives, [section]: (s.objectives?.[section] || []).map(o => {
+      if (o.id !== objId) return o;
+      return { ...o, subtasks: (o.subtasks || []).map(st => st.id === subId ? { ...st, done: !st.done } : st) };
+    }) } }));
+  }
+
   return (
     <div className="obj-cols">
       {SECTIONS.map(sec => (
@@ -31,8 +38,13 @@ export default function ObjectivesTab({ state, update }) {
                   <ul className="subtask-list">
                     {obj.subtasks.map(st => (
                       <li key={st.id} className="subtask-item">
-                        <input type="checkbox" className="subtask-cb" checked={!!st.done} readOnly />
-                        <span className="subtask-text-ro">{st.text}</span>
+                        <input
+                          type="checkbox"
+                          className="subtask-cb"
+                          checked={!!st.done}
+                          onChange={() => toggleSubtask(sec, obj.id, st.id)}
+                        />
+                        <span className="subtask-text-ro" style={st.done ? { textDecoration: 'line-through', opacity: 0.6 } : undefined}>{st.text}</span>
                       </li>
                     ))}
                   </ul>
