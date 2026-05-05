@@ -407,6 +407,7 @@ export default function PlayerPanel({ player, token, showToast }) {
                     <span style={{ flex: 1, fontSize: 12, fontWeight: 700 }}>{item.name}</span>
                     {item.tier && <span style={{ fontSize: 9, color: 'var(--gold)' }}>{item.tier}</span>}
                     {item.qty > 1 && <span style={{ fontSize: 10, color: 'var(--gold)' }}>×{item.qty}</span>}
+                    {item.uses?.max != null && <span style={{ fontSize: 10, color: 'var(--cyan)' }}>{item.uses.current ?? 0}/{item.uses.max}</span>}
                     <select
                       className="fi"
                       style={{ fontSize: 9, padding: '2px 4px', width: 100 }}
@@ -448,6 +449,31 @@ export default function PlayerPanel({ player, token, showToast }) {
                 <input className="fi" type={type} value={invItemModal.item[k] || ''} onChange={e => setInvItemModal(m => ({ ...m, item: { ...m.item, [k]: type === 'number' ? +e.target.value : e.target.value } }))} />
               </div>
             ))}
+            <div className="modal-grid2" style={{ marginBottom: 6 }}>
+              <div className="field-group">
+                <label className="field-label">Max Uses <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(empty = unlimited)</span></label>
+                <input className="fi" type="number" min="1"
+                  value={invItemModal.item.uses?.max ?? ''}
+                  onChange={e => {
+                    const raw = e.target.value;
+                    const max = raw === '' ? null : Math.max(1, +raw);
+                    const curr = max == null ? null : Math.min(invItemModal.item.uses?.current ?? max, max);
+                    setInvItemModal(m => ({ ...m, item: { ...m.item, uses: { max, current: curr } } }));
+                  }} />
+              </div>
+              <div className="field-group">
+                <label className="field-label">Current Uses</label>
+                <input className="fi" type="number" min="0"
+                  value={invItemModal.item.uses?.current ?? ''}
+                  disabled={invItemModal.item.uses?.max == null}
+                  onChange={e => {
+                    const raw = e.target.value;
+                    const max = invItemModal.item.uses?.max ?? null;
+                    const curr = raw === '' ? null : Math.max(0, Math.min(max ?? +raw, +raw));
+                    setInvItemModal(m => ({ ...m, item: { ...m.item, uses: { max, current: curr } } }));
+                  }} />
+              </div>
+            </div>
             <div className="field-group" style={{ marginBottom: 6 }}>
               <label className="field-label">Special Effects</label>
               <textarea className="fi" value={invItemModal.item.specialEffects || ''} onChange={e => setInvItemModal(m => ({ ...m, item: { ...m.item, specialEffects: e.target.value } }))} />

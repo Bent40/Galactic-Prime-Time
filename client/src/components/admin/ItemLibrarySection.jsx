@@ -44,12 +44,24 @@ function ItemForm({ value, onChange }) {
       </div>
       <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Requirements</label><input className="fi" value={value.requirements} onChange={e => onChange({ ...value, requirements: e.target.value })} /></div>
       <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Description</label><textarea className="fi" value={value.description} onChange={e => onChange({ ...value, description: e.target.value })} /></div>
-      <div className="field-group"><label className="field-label">Default Qty</label><input className="fi" type="number" min="1" style={{ width: 80 }} value={value.qty} onChange={e => onChange({ ...value, qty: +e.target.value })} /></div>
+      <div className="modal-grid2">
+        <div className="field-group"><label className="field-label">Default Qty</label><input className="fi" type="number" min="1" style={{ width: 80 }} value={value.qty} onChange={e => onChange({ ...value, qty: +e.target.value })} /></div>
+        <div className="field-group">
+          <label className="field-label">Max Uses <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(empty = unlimited)</span></label>
+          <input className="fi" type="number" min="1" style={{ width: 80 }}
+            value={value.uses?.max ?? ''}
+            onChange={e => {
+              const raw = e.target.value;
+              const max = raw === '' ? null : Math.max(1, +raw);
+              onChange({ ...value, uses: { max, current: max } });
+            }} />
+        </div>
+      </div>
     </>
   );
 }
 
-const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1 };
+const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null } };
 
 const ITEM_TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 
@@ -111,6 +123,7 @@ export default function ItemLibrarySection({ token, players, showToast }) {
                     {(it.attackTypes || []).map(t => <span key={t} className="badge badge-cyan">{t}</span>)}
                     {(it.damageType || []).map(t => <span key={t} className="badge badge-gold">{t}</span>)}
                     {it.qty > 1 && <span className="badge badge-muted">×{it.qty}</span>}
+                    {it.uses?.max != null && <span className="badge badge-cyan">{it.uses.max} uses</span>}
                   </div>
                   {it.description && <div className="item-card-effect">{it.description}</div>}
                   <div className="item-card-actions">

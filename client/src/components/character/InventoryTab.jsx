@@ -120,6 +120,37 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
           </div>
         </div>
 
+        {/* Uses / Charges */}
+        <div className="modal-grid2" style={{ marginBottom: 10 }}>
+          <div className="field-group">
+            <label className="field-label">Max Uses <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(empty = unlimited)</span></label>
+            <input className="fi" type="number" min="1"
+              value={local.uses?.max ?? ''}
+              onChange={e => {
+                const raw = e.target.value;
+                const max = raw === '' ? null : Math.max(1, +raw);
+                const curr = max == null ? null : Math.min(local.uses?.current ?? max, max);
+                patch('uses', { max, current: curr });
+              }} />
+          </div>
+          <div className="field-group">
+            <label className="field-label">Current Uses</label>
+            {local.uses?.max != null ? (
+              <div className="modal-qty-row">
+                <button className="btn btn-danger btn-icon btn-sm"
+                  disabled={(local.uses?.current ?? 0) <= 0}
+                  onClick={() => patch('uses', { ...local.uses, current: Math.max(0, (local.uses?.current ?? 0) - 1) })}>−</button>
+                <span className="qty-val">{local.uses?.current ?? 0}/{local.uses.max}</span>
+                <button className="btn btn-success btn-icon btn-sm"
+                  disabled={(local.uses?.current ?? 0) >= local.uses.max}
+                  onClick={() => patch('uses', { ...local.uses, current: Math.min(local.uses.max, (local.uses?.current ?? 0) + 1) })}>+</button>
+              </div>
+            ) : (
+              <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', padding: '6px 0' }}>Unlimited</div>
+            )}
+          </div>
+        </div>
+
         {/* Tier */}
         <div className="field-group" style={{ marginBottom: 10 }}>
           <label className="field-label">Item Tier</label>
@@ -219,7 +250,7 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
   );
 }
 
-function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDragEnd, onClick }) {
+function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDragEnd, onClick, onUseChange }) {
   const icon    = item.icon || catIcon(item.category || 'default');
   const dmgLbl  = itemDmgLabel(item);
   const showQty = (item.qty || 1) > 1;
@@ -230,6 +261,10 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
   const suffix  = item.suffix?.name  ? ' ' + item.suffix.name  : '';
   const tierCol = item.tier ? (ITEM_TIER_COLOR[item.tier] || 'var(--text)') : null;
 
+  const hasUses  = item.uses?.max != null;
+  const curUses  = item.uses?.current ?? 0;
+  const depleted = hasUses && curUses <= 0;
+
   return (
     <div
       className={`inv-row${isOver ? ' drag-over' : ''}`}
@@ -239,14 +274,16 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
       onDrop={e => { e.preventDefault(); e.stopPropagation(); onDrop(catId, item.id); }}
       onDragEnd={onDragEnd}
       onClick={() => onClick(item, catId)}
+      style={depleted ? { opacity: 0.45, filter: 'grayscale(0.7)' } : undefined}
     >
       <span className="inv-row-drag">⠿</span>
       <span className="inv-row-icon">{icon}</span>
       <span className="inv-row-name">
         {item.prefix && <span style={{ color: AFFIX_TIER_COLOR[item.prefix.tier] || 'var(--muted)', fontSize: 10 }}>{prefix}</span>}
-        <span style={tierCol ? { color: tierCol } : {}}>{item.name}</span>
+        <span style={{ ...(tierCol ? { color: tierCol } : {}), ...(depleted ? { textDecoration: 'line-through' } : {}) }}>{item.name}</span>
         {item.suffix && <span style={{ color: AFFIX_TIER_COLOR[item.suffix.tier] || 'var(--muted)', fontSize: 10 }}>{suffix}</span>}
         {item.tier && <span style={{ fontSize: 8, color: tierCol, marginLeft: 5, opacity: 0.7 }}>[{item.tier}]</span>}
+        {depleted && <span style={{ fontSize: 8, color: '#ff6b6b', marginLeft: 6, letterSpacing: 1 }}>DEPLETED</span>}
       </span>
       <span className="inv-row-meta">
         {dmgLbl && <span className="inv-row-dmg">⚔ {dmgLbl}</span>}
@@ -255,6 +292,26 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
           <span className="inv-row-atk">{item.attackTypes.join(' · ')}</span>
         )}
       </span>
+      {hasUses && (
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }} onClick={e => e.stopPropagation()}>
+          <button
+            className="btn btn-danger btn-icon btn-xs"
+            disabled={curUses <= 0}
+            title="Spend a use"
+            onClick={e => { e.stopPropagation(); onUseChange(catId, item.id, -1); }}
+          >−</button>
+          <span style={{
+            fontSize: 10, fontFamily: 'monospace', minWidth: 36, textAlign: 'center',
+            color: depleted ? '#ff6b6b' : 'var(--cyan)', fontWeight: 700,
+          }}>{curUses}/{item.uses.max}</span>
+          <button
+            className="btn btn-success btn-icon btn-xs"
+            disabled={curUses >= item.uses.max}
+            title="Restore a use"
+            onClick={e => { e.stopPropagation(); onUseChange(catId, item.id, 1); }}
+          >+</button>
+        </span>
+      )}
       {showQty && <span className="inv-row-qty">×{item.qty}</span>}
       <span className="inv-row-edit">✎ EDIT</span>
     </div>
@@ -262,7 +319,7 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
 }
 
 function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReorder, canUp, canDown, showReorder,
-  onItemDragStart, onItemDragOver, onItemDrop, onItemDragEnd, onItemClick, dragOverItem, onContainerDrop }) {
+  onItemDragStart, onItemDragOver, onItemDrop, onItemDragEnd, onItemClick, onUseChange, dragOverItem, onContainerDrop }) {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <div className="inv-container">
@@ -306,6 +363,7 @@ function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReo
               onDrop={onItemDrop}
               onDragEnd={onItemDragEnd}
               onClick={onItemClick}
+              onUseChange={onUseChange}
             />
           ))}
           {(cat.items || []).length === 0 && (
@@ -364,6 +422,17 @@ export default function InventoryTab({ state, update, token }) {
         return c;
       });
     });
+  }
+  function changeUses(catId, itemId, delta) {
+    mutateCats(cs => cs.map(c => c.id !== catId ? c : {
+      ...c,
+      items: (c.items || []).map(i => {
+        if (i.id !== itemId || i.uses?.max == null) return i;
+        const max = i.uses.max;
+        const next = Math.max(0, Math.min(max, (i.uses.current ?? max) + delta));
+        return { ...i, uses: { max, current: next } };
+      }),
+    }));
   }
   function reorderItem(catId, fromItemId, toItemId) {
     mutateCats(cs => cs.map(c => {
@@ -433,6 +502,7 @@ export default function InventoryTab({ state, update, token }) {
     onItemDrop: handleItemDrop,
     onItemDragEnd: handleItemDragEnd,
     onItemClick: (item, catId) => setPopup({ item, catId }),
+    onUseChange: changeUses,
     onContainerDrop: handleContainerDrop,
     dragOverItem,
   };

@@ -14,6 +14,10 @@ const itemTemplateSchema = new mongoose.Schema({
   requirements:   { type: String, default: '' },
   description:    { type: String, default: '' },
   qty:            { type: Number, default: 1 },
+  uses:           {
+    max:     { type: Number, default: null },
+    current: { type: Number, default: null },
+  },
   // legacy fields kept for compatibility
   type:           { type: String, default: '' },
   effect:         { type: String, default: '' },

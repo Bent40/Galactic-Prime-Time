@@ -9,6 +9,13 @@ router.use(requireAdmin);
 
 const CATEGORIES = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'];
 
+// Normalize a uses field from request body. Empty/missing → null.
+function normalizeUses(uses) {
+  const max = uses && uses.max != null && uses.max !== '' ? Number(uses.max) : null;
+  const current = uses && uses.current != null && uses.current !== '' ? Number(uses.current) : null;
+  return { max: Number.isFinite(max) ? max : null, current: Number.isFinite(current) ? current : null };
+}
+
 // GET /api/items — list all item templates grouped by category
 router.get('/', async (req, res) => {
   try {
@@ -23,7 +30,7 @@ router.get('/', async (req, res) => {
 // POST /api/items — create a new item template
 router.post('/', async (req, res) => {
   try {
-    const { name, icon, category, tier, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (!CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
@@ -37,6 +44,7 @@ router.post('/', async (req, res) => {
       requirements: requirements || '',
       description: description || '',
       qty: qty || 1,
+      uses: normalizeUses(uses),
       type: type || '', effect: effect || '', notes: notes || '',
     });
     res.json(item);
@@ -49,7 +57,7 @@ router.post('/', async (req, res) => {
 // PUT /api/items/:id — update an item template
 router.put('/:id', async (req, res) => {
   try {
-    const { name, icon, category, tier, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (category && !CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
@@ -65,6 +73,7 @@ router.put('/:id', async (req, res) => {
         requirements: requirements || '',
         description: description || '',
         qty: qty || 1,
+        uses: normalizeUses(uses),
         type: type || '', effect: effect || '', notes: notes || '',
       },
       { new: true, runValidators: true }
@@ -129,6 +138,7 @@ router.post('/give', async (req, res) => {
         }
         if (!cat.items) cat.items = [];
 
+        const tplMax = template.uses?.max != null ? Number(template.uses.max) : null;
         cat.items.push({
           id: Date.now() + Math.floor(Math.random() * 10000),
           name:           template.name,
@@ -143,6 +153,7 @@ router.post('/give', async (req, res) => {
           resistance:     template.resistance || '',
           requirements:   template.requirements || '',
           description:    template.description || '',
+          uses:           { max: tplMax, current: tplMax },
           // legacy
           type:           template.type || '',
           equippedOn:     '',
