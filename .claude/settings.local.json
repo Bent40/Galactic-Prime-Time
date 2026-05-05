@@ -5,7 +5,11 @@
       "Bash(npm run:*)",
       "Bash(xargs grep:*)",
       "Bash(git add *)",
-      "Bash(git commit -m 'Fix enemy list not populating in Moment Tracker *)"
+      "Bash(git commit -m 'Fix enemy list not populating in Moment Tracker *)",
+      "Bash(node -e \"require\\('./models/ItemTemplate'\\); require\\('./routes/items'\\); console.log\\('OK'\\);\")",
+      "Bash(git commit -m ' *)",
+      "Bash(node -e \"require\\('./models/ItemTemplate'\\); require\\('./routes/items'\\); require\\('./routes/admin'\\); console.log\\('OK'\\);\")",
+      "Bash(node -e \"require\\('./routes/admin'\\); console.log\\('OK'\\);\")"
     ]
   }
 }
