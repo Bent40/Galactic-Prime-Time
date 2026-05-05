@@ -475,6 +475,25 @@ router.patch('/players/:userId/tags', async (req, res) => {
   }
 });
 
+// PATCH /api/admin/players/:userId/bonus-points — set body/core bonus point pools
+router.patch('/players/:userId/bonus-points', async (req, res) => {
+  try {
+    const { body, core } = req.body;
+    const character = await Character.findOne({ userId: req.params.userId });
+    if (!character) return res.status(404).json({ error: 'Character not found' });
+
+    const state = character.state || {};
+    if (!state.bonusPoints) state.bonusPoints = { body: 0, core: 0 };
+    if (body !== undefined) state.bonusPoints.body = Math.max(0, parseInt(body, 10) || 0);
+    if (core !== undefined) state.bonusPoints.core = Math.max(0, parseInt(core, 10) || 0);
+
+    await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
+    res.json({ ok: true, bonusPoints: state.bonusPoints });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // PATCH /api/admin/players/:userId/tokens — adjust tokens
 router.patch('/players/:userId/tokens', async (req, res) => {
   try {

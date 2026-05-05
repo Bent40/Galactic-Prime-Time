@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
-import { uid, TRAIT_LABELS, ATK_TYPES, DMG_TYPES } from '../../constants.js';
+import { uid, TRAIT_LABELS, ATK_TYPES, DMG_TYPES, BOSS_TIERS } from '../../constants.js';
 
 export default function PlayerPanel({ player, token, showToast }) {
   const [charData, setCharData] = useState(null);
@@ -22,6 +22,7 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [objectives, setObjectives] = useState(null); // local objectives state for editing
   const [objSaving, setObjSaving] = useState(false);
   const [newSubtaskText, setNewSubtaskText] = useState({}); // { [objId]: text } per-objective input buffer
+  const [bossTokenTier, setBossTokenTier] = useState('bronze');
 
   useEffect(() => {
     setLoading(true);
@@ -58,6 +59,30 @@ export default function PlayerPanel({ player, token, showToast }) {
       setCharData(cd => ({ ...cd, state: { ...cd.state, traits: newTraits } }));
       showToast('Saved');
     } else showToast(d.error || 'Save failed', 'err');
+  }
+  async function setBonusPoints(pool, value) {
+    const v = Math.max(0, parseInt(value, 10) || 0);
+    const current = state.bonusPoints?.[pool] || 0;
+    if (v === current) return;
+    const d = await apiFetch(`/api/admin/players/${player.userId}/bonus-points`, {
+      method: 'PATCH', body: JSON.stringify({ [pool]: v }),
+    }, token);
+    if (d.ok) {
+      setCharData(cd => ({ ...cd, state: { ...cd.state, bonusPoints: { ...(cd.state.bonusPoints || { body: 0, core: 0 }), [pool]: v } } }));
+    } else showToast(d.error || 'Failed', 'err');
+  }
+  function adjustBonusPoints(pool, delta) {
+    setBonusPoints(pool, (state.bonusPoints?.[pool] || 0) + delta);
+  }
+  async function grantBossToken() {
+    const next = [...(state.tokens?.bossTokens || []), { id: uid(), tier: bossTokenTier, used: false }];
+    const d = await apiFetch(`/api/admin/players/${player.userId}/tokens`, {
+      method: 'PATCH', body: JSON.stringify({ bossTokens: next }),
+    }, token);
+    if (d.ok) {
+      setCharData(cd => ({ ...cd, state: { ...cd.state, tokens: { ...(cd.state.tokens || {}), bossTokens: next } } }));
+      showToast(`Granted ${bossTokenTier} boss token`);
+    } else showToast(d.error || 'Failed', 'err');
   }
   async function saveTokens() {
     const d = await apiFetch(`/api/admin/players/${player.userId}/tokens`, { method: 'PATCH', body: JSON.stringify(tokenForm) }, token);
@@ -279,6 +304,33 @@ export default function PlayerPanel({ player, token, showToast }) {
             );
           })}
         </div>
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--border)' }}>
+          <div className="section-label" style={{ marginBottom: 6 }}>Bonus Points</div>
+          <div className="form-row">
+            {[['body', 'Body'], ['core', 'Core']].map(([pool, lbl]) => {
+              const val = state.bonusPoints?.[pool] || 0;
+              return (
+                <div key={pool} className="field-group" style={{ flex: 1 }}>
+                  <label className="field-label">{lbl}</label>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <button className="btn btn-muted btn-xs" disabled={val <= 0} onClick={() => adjustBonusPoints(pool, -1)}>−</button>
+                    <input
+                      className="fi"
+                      type="number"
+                      min="0"
+                      style={{ width: 70, textAlign: 'center' }}
+                      defaultValue={val}
+                      key={`${pool}-${val}`}
+                      onBlur={e => setBonusPoints(pool, e.target.value)}
+                      onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
+                    />
+                    <button className="btn btn-cyan btn-xs" onClick={() => adjustBonusPoints(pool, 1)}>+</button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {/* Tokens */}
@@ -300,6 +352,15 @@ export default function PlayerPanel({ player, token, showToast }) {
             </div>
           ))}
           <button className="btn btn-purple btn-sm" onClick={saveTokens} style={{ alignSelf: 'flex-end' }}>Save Tokens</button>
+        </div>
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--border)' }}>
+          <div className="section-label" style={{ marginBottom: 6 }}>Boss Tokens ({(state.tokens?.bossTokens || []).length})</div>
+          <div className="row" style={{ gap: 6 }}>
+            <select className="fi" style={{ flex: '0 0 140px' }} value={bossTokenTier} onChange={e => setBossTokenTier(e.target.value)}>
+              {BOSS_TIERS.map(t => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
+            </select>
+            <button className="btn btn-gold btn-sm" onClick={grantBossToken}>+ Grant Boss Token</button>
+          </div>
         </div>
       </div>
 
