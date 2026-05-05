@@ -24,21 +24,6 @@ export default function BodyTab({ state, update }) {
 
   function patchId(k, v) { update(s => ({ ...s, identity: { ...s.identity, [k]: v } })); }
 
-  function changeLevel(newLevel) {
-    const oldLevel = id.level || 1;
-    const delta = newLevel - oldLevel;
-    if (delta === 0) return;
-    update(s => {
-      const curPool = s.levelPoints?.pool || 0;
-      const newPool = delta > 0 ? curPool + delta : Math.max(0, curPool + delta);
-      return {
-        ...s,
-        identity: { ...s.identity, level: newLevel },
-        levelPoints: { ...s.levelPoints, pool: newPool },
-      };
-    });
-  }
-
   function patchBP(bpId, k, v) {
     update(s => ({ ...s, bodyParts: s.bodyParts.map(b => b.id === bpId ? { ...b, [k]: v } : b) }));
   }
@@ -57,6 +42,16 @@ export default function BodyTab({ state, update }) {
     update(s => ({ ...s, bodyParts: [...s.bodyParts, { id: uid(), name: 'New Part', maxHp: 3, currentHp: 3, lethal: false, conditions: [] }] }));
   }
   function rmBodyPart(bpId) { update(s => ({ ...s, bodyParts: s.bodyParts.filter(b => b.id !== bpId) })); }
+
+  function adjustPhysRes(key, delta) {
+    const scb = state.statCapBonuses || {};
+    const pEarned = Math.floor(Math.max(0, traitTotal('reflexes') - 10) / 12);
+    const pSpent = (scb.bleed || 0) + (scb.crush || 0) + (scb.burn || 0);
+    const current = scb[key] || 0;
+    if (delta > 0 && pSpent >= pEarned) return;
+    if (delta < 0 && current <= 0) return;
+    update(s => ({ ...s, statCapBonuses: { ...s.statCapBonuses, [key]: Math.max(0, current + delta) } }));
+  }
 
   function traitTotal(t) {
     const tr = state.traits?.[t] || {};
@@ -105,6 +100,13 @@ export default function BodyTab({ state, update }) {
   const lvlPool = state.levelPoints?.pool ?? 0;
   const isLevelOne = (id.level || 1) <= 1;
 
+  const hpBonus       = Math.floor(Math.max(0, traitTotal('physique')  - 10) / 5);
+  const physResEarned = Math.floor(Math.max(0, traitTotal('reflexes')  - 10) / 12);
+  const dissolution   = Math.floor(Math.max(0, traitTotal('mind')      - 10) / 15);
+  const scb = state.statCapBonuses || {};
+  const physResSpent  = (scb.bleed || 0) + (scb.crush || 0) + (scb.burn || 0);
+  const physResRemain = Math.max(0, physResEarned - physResSpent);
+
   return (
     <>
       {/* Identity */}
@@ -139,7 +141,7 @@ export default function BodyTab({ state, update }) {
             </div>
             <div className="field-group">
               <label className="field-label">Level</label>
-              <input className="fi" type="number" min="1" value={id.level} onChange={e => changeLevel(+e.target.value)} />
+              <input className="fi" type="number" value={id.level} readOnly disabled />
             </div>
             <div className="field-group" style={{ gridColumn: '1 / -1' }}>
               <label className="field-label">Background</label>
@@ -208,8 +210,10 @@ export default function BodyTab({ state, update }) {
         </div>
         <div className="body-parts-grid">
           {state.bodyParts.map(bp => {
-            const cls = dmgClass(bp.currentHp, bp.maxHp);
-            const boxes = Array.from({ length: bp.maxHp }, (_, i) => i >= bp.currentHp);
+            const baseHp = bp.baseHp ?? bp.maxHp;
+            const effectiveMax = baseHp + hpBonus;
+            const cls = dmgClass(bp.currentHp, effectiveMax);
+            const boxes = Array.from({ length: effectiveMax }, (_, i) => i >= bp.currentHp);
             return (
               <div key={bp.id} className={`bp-card${cls ? ' ' + cls : ''}`}>
                 <div className="bp-header">
@@ -222,14 +226,16 @@ export default function BodyTab({ state, update }) {
                 </div>
                 <div className="hp-row">
                   <span className="hp-label">HP</span>
-                  <input className="hp-max-input" type="number" min="0" value={bp.maxHp}
-                    onChange={e => patchBP(bp.id, 'maxHp', Math.max(0, +e.target.value))} />
+                  <input className="hp-max-input" type="number" min="0" value={baseHp}
+                    title={hpBonus > 0 ? `Base ${baseHp} + ${hpBonus} Physique = ${effectiveMax}` : undefined}
+                    onChange={e => patchBP(bp.id, 'baseHp', Math.max(0, +e.target.value))} />
+                  {hpBonus > 0 && <span style={{ fontSize: 9, color: 'var(--cyan)', marginLeft: 2 }}>+{hpBonus}</span>}
                   <div className="hp-boxes">
                     {boxes.map((isDmg, i) => (
                       <div key={i} className={`hp-box${isDmg ? ' dmg' : ''}`}
                         onClick={() => {
                           const newBoxes = [...boxes]; newBoxes[i] = !newBoxes[i];
-                          const currentHp = bp.maxHp - newBoxes.filter(Boolean).length;
+                          const currentHp = effectiveMax - newBoxes.filter(Boolean).length;
                           patchBP(bp.id, 'currentHp', currentHp);
                         }} />
                     ))}
@@ -300,57 +306,54 @@ export default function BodyTab({ state, update }) {
       <div className="panel">
         <div className="panel-title">Resistances</div>
         <div className="resist-grid">
+          {/* Physical — player allocates earned points from Reflexes */}
           <div className="resist-group">
-            <div className="resist-group-label">Physical</div>
-            {[
-              { key: 'bleed', label: 'Bleed' },
-              { key: 'crush', label: 'Crush' },
-              { key: 'burn',  label: 'Burn'  },
-            ].map(({ key, label }) => {
-              const val = state.statCapBonuses?.[key] ?? 0;
+            <div className="resist-group-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              Physical
+              {physResEarned > 0 && (
+                <span style={{ fontSize: 9, color: physResRemain > 0 ? 'var(--cyan)' : 'var(--muted)', fontWeight: 700 }}>
+                  {physResRemain}/{physResEarned} pts
+                </span>
+              )}
+            </div>
+            {[{ key: 'bleed', label: 'Bleed' }, { key: 'crush', label: 'Crush' }, { key: 'burn', label: 'Burn' }].map(({ key, label }) => {
+              const val = scb[key] || 0;
               return (
                 <div key={key} className="resist-row">
                   <span className="resist-label">{label}</span>
-                  <span className={`resist-val flat${val > 0 ? ' has-val' : ''}`}>
-                    {val > 0 ? `−${val}` : '—'}
-                  </span>
+                  {physResEarned > 0 ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                      <button className="btn btn-danger btn-icon btn-xs" onClick={() => adjustPhysRes(key, -1)} disabled={val <= 0}>−</button>
+                      <span className={`resist-val flat${val > 0 ? ' has-val' : ''}`}>{val > 0 ? `−${val}` : '—'}</span>
+                      <button className="btn btn-cyan btn-icon btn-xs" onClick={() => adjustPhysRes(key, 1)} disabled={physResRemain <= 0}>+</button>
+                    </div>
+                  ) : (
+                    <span className={`resist-val flat${val > 0 ? ' has-val' : ''}`}>{val > 0 ? `−${val}` : '—'}</span>
+                  )}
                 </div>
               );
             })}
           </div>
+          {/* Affliction — admin-controlled */}
           <div className="resist-group">
             <div className="resist-group-label">Affliction</div>
-            {[
-              { key: 'chill',     label: 'Chill'     },
-              { key: 'poison',    label: 'Poison'    },
-              { key: 'infection', label: 'Infection' },
-            ].map(({ key, label }) => {
-              const val = state.statCapBonuses?.[key] ?? 0;
+            {[{ key: 'chill', label: 'Chill' }, { key: 'poison', label: 'Poison' }, { key: 'infection', label: 'Infection' }].map(({ key, label }) => {
+              const val = scb[key] ?? 0;
               return (
                 <div key={key} className="resist-row">
                   <span className="resist-label">{label}</span>
-                  <span className={`resist-val tier${val > 0 ? ' has-val' : ''}`}>
-                    {val > 0 ? `T${val} Immune` : '—'}
-                  </span>
+                  <span className={`resist-val tier${val > 0 ? ' has-val' : ''}`}>{val > 0 ? `T${val} Immune` : '—'}</span>
                 </div>
               );
             })}
           </div>
+          {/* Psychic — auto-computed from Mind */}
           <div className="resist-group">
             <div className="resist-group-label">Psychic</div>
-            {[
-              { key: 'dissolution', label: 'Dissolution' },
-            ].map(({ key, label }) => {
-              const val = state.statCapBonuses?.[key] ?? 0;
-              return (
-                <div key={key} className="resist-row">
-                  <span className="resist-label">{label}</span>
-                  <span className={`resist-val tier${val > 0 ? ' has-val' : ''}`}>
-                    {val > 0 ? `T${val} Immune` : '—'}
-                  </span>
-                </div>
-              );
-            })}
+            <div className="resist-row">
+              <span className="resist-label">Dissolution</span>
+              <span className={`resist-val tier${dissolution > 0 ? ' has-val' : ''}`}>{dissolution > 0 ? `T${dissolution} Immune` : '—'}</span>
+            </div>
           </div>
         </div>
       </div>

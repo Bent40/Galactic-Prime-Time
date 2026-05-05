@@ -46,6 +46,7 @@ export default function CharacterSheet() {
           tokens: { ...DEFAULT_STATE.tokens, ...(d.state.tokens || {}) },
           exposure: { ...DEFAULT_STATE.exposure, ...(d.state.exposure || {}) },
           skillPointsSpent: { ...DEFAULT_STATE.skillPointsSpent, ...(d.state.skillPointsSpent || {}) },
+          cameraCallUsed: d.state.cameraCallUsed ?? 0,
         };
         setCharState(merged);
       }

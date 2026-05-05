@@ -42,12 +42,12 @@ export const DEFAULT_STATE = {
   levelPoints: { pool: 0 },
   hpUpgradePointsSpent: 0,
   bodyParts: [
-    { id: 1, name: 'Head', maxHp: 3, currentHp: 3, lethal: false, conditions: [] },
-    { id: 2, name: 'Torso', maxHp: 5, currentHp: 5, lethal: false, conditions: [] },
-    { id: 3, name: 'Left Arm', maxHp: 3, currentHp: 3, lethal: false, conditions: [] },
-    { id: 4, name: 'Right Arm', maxHp: 3, currentHp: 3, lethal: false, conditions: [] },
-    { id: 5, name: 'Left Leg', maxHp: 4, currentHp: 4, lethal: false, conditions: [] },
-    { id: 6, name: 'Right Leg', maxHp: 4, currentHp: 4, lethal: false, conditions: [] },
+    { id: 1, name: 'Head',      baseHp: 2, maxHp: 2, currentHp: 2, lethal: false, conditions: [] },
+    { id: 2, name: 'Torso',     baseHp: 5, maxHp: 5, currentHp: 5, lethal: false, conditions: [] },
+    { id: 3, name: 'Left Arm',  baseHp: 2, maxHp: 2, currentHp: 2, lethal: false, conditions: [] },
+    { id: 4, name: 'Right Arm', baseHp: 2, maxHp: 2, currentHp: 2, lethal: false, conditions: [] },
+    { id: 5, name: 'Left Leg',  baseHp: 3, maxHp: 3, currentHp: 3, lethal: false, conditions: [] },
+    { id: 6, name: 'Right Leg', baseHp: 3, maxHp: 3, currentHp: 3, lethal: false, conditions: [] },
   ],
   shock: { tier: 0 },
   statCapBonuses: {
@@ -87,6 +87,7 @@ export const DEFAULT_STATE = {
   achievements: [],
   notes: '',
   conditionLog: '',
+  cameraCallUsed: 0,
 };
 
 export function uid() {

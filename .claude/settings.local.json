@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm install:*)",
       "Bash(npm run:*)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Fix enemy list not populating in Moment Tracker *)"
     ]
   }
 }

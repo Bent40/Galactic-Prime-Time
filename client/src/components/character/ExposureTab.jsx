@@ -38,8 +38,56 @@ export default function ExposureTab({ state, update }) {
   const rankLabel = ['', '🥇 Top Patron', '🥈 2nd Patron', '🥉 3rd Patron'];
   const rankClass = ['', 'r1', 'r2', 'r3'];
 
+  const charmTr = state.traits?.charm || {};
+  const charmTotal = (charmTr.base || 0) + (charmTr.bonus || 0) + (charmTr.levelBonus || 0);
+  const cameraCallEarned = Math.floor(Math.max(0, charmTotal - 10) / 20);
+  const cameraCallUsed = state.cameraCallUsed || 0;
+  const cameraCallAvail = Math.max(0, cameraCallEarned - cameraCallUsed);
+
   return (
     <>
+      {/* Camera Call */}
+      {cameraCallEarned > 0 && (
+        <div className="panel">
+          <div className="panel-title">Camera Call</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 6 }}>
+              {Array.from({ length: cameraCallEarned }, (_, i) => {
+                const used = i >= cameraCallAvail;
+                return (
+                  <div key={i} style={{
+                    width: 28, height: 28, borderRadius: 4, border: `2px solid ${used ? 'var(--border)' : 'var(--gold)'}`,
+                    background: used ? 'transparent' : 'rgba(200,168,75,0.18)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 13, color: used ? 'var(--muted)' : 'var(--gold)',
+                  }}>
+                    {used ? '✕' : '★'}
+                  </div>
+                );
+              })}
+            </div>
+            <span style={{ fontSize: 11, color: 'var(--muted)', letterSpacing: 1 }}>
+              {cameraCallAvail}/{cameraCallEarned} available
+            </span>
+            <button
+              className="btn btn-gold btn-sm"
+              disabled={cameraCallAvail <= 0}
+              onClick={() => update(s => ({ ...s, cameraCallUsed: (s.cameraCallUsed || 0) + 1 }))}
+            >
+              Use Stack
+            </button>
+            {cameraCallUsed > 0 && (
+              <button
+                className="btn btn-muted btn-sm"
+                onClick={() => update(s => ({ ...s, cameraCallUsed: 0 }))}
+              >
+                Reset (New Session)
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Exposure Counters */}
       <div className="panel">
         <div className="panel-title">Exposure Metrics</div>

@@ -17,7 +17,7 @@ export default function SkillsTab({ state, update, token }) {
   const skillPointsSpent = state.skillPointsSpent || {};
 
   function availableFor(t) {
-    return Math.max(0, (state.traits?.[t]?.levelBonus || 0) - (skillPointsSpent[t] || 0));
+    return Math.max(0, traitTotal(t) - 1 - (skillPointsSpent[t] || 0));
   }
 
   function applyUpdate(newState) {
@@ -65,6 +65,23 @@ export default function SkillsTab({ state, update, token }) {
       };
     }
     applyUpdate(newState);
+  }
+
+  function levelDown(sk) {
+    const level = sk.level || 0;
+    if (level <= 0) return;
+    const stats = (sk.stats || []).map(s => s.toLowerCase()).filter(s => ALL_TRAITS.includes(s));
+    const n = stats.length;
+    const traitCosts = sk.traitCosts || [];
+    const refunded = n > 0 ? traitCosts.slice(-n) : [];
+    const newTraitCosts = n > 0 ? traitCosts.slice(0, traitCosts.length - n) : traitCosts;
+    const newSpent = { ...(state.skillPointsSpent || {}) };
+    for (const t of refunded) newSpent[t] = Math.max(0, (newSpent[t] || 0) - 1);
+    applyUpdate({
+      ...state,
+      skills: state.skills.map(x => x.id === sk.id ? { ...x, level: level - 1, traitCosts: newTraitCosts } : x),
+      skillPointsSpent: newSpent,
+    });
   }
 
   const enriched = state.skills.map(sk => {
@@ -122,18 +139,25 @@ export default function SkillsTab({ state, update, token }) {
                 <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
                   {Array.from({ length: cap }, (_, i) => i + 1).map(n => {
                     const isLit = level >= n;
-                    const isNext = n === level + 1; // only the very next pip is clickable
+                    const isNext = n === level + 1;
+                    const isTop = n === level && level > 0;
+                    const downLabel = stats.length > 0
+                      ? `Level down (refunds: ${stats.map(t => `1 ${TRAIT_LABELS[t]}`).join(' + ')})`
+                      : 'Level down (free)';
                     return (
                       <div
                         key={n}
                         className={`pip${isLit ? ' on' : ''}`}
-                        style={{ cursor: isNext && canLevelUp ? 'pointer' : 'default' }}
+                        style={{ cursor: (isNext && canLevelUp) || isTop ? 'pointer' : 'default' }}
                         title={isNext && canLevelUp
                           ? `Level up${stats.length > 0 ? ` (costs: ${stats.map(t => `1 ${TRAIT_LABELS[t]}`).join(' + ')})` : ' (free)'}`
                           : isNext && !canLevelUp && !atMax
                             ? `Need 1 point in each: ${stats.map(t => TRAIT_LABELS[t]).join(', ')}`
-                            : undefined}
-                        onClick={() => isNext && canLevelUp && levelUp(sk)}
+                            : isTop ? downLabel : undefined}
+                        onClick={() => {
+                          if (isNext && canLevelUp) levelUp(sk);
+                          else if (isTop) levelDown(sk);
+                        }}
                       />
                     );
                   })}
