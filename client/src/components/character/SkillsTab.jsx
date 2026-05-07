@@ -86,7 +86,20 @@ export default function SkillsTab({ state, update, token }) {
 
   const enriched = state.skills.map(sk => {
     const tpl = sk.templateId ? lib.find(t => String(t._id) === String(sk.templateId)) : null;
-    return { ...sk, _tpl: tpl };
+    if (!tpl) return sk;
+    return {
+      ...sk,
+      name: tpl.name,
+      stats: tpl.stats,
+      effect: tpl.effect,
+      description: tpl.description,
+      requirements: tpl.requirements,
+      range: tpl.range,
+      target: tpl.target,
+      momentCost: tpl.momentCost,
+      passive: tpl.passive,
+      levelEffects: tpl.levelEffects,
+    };
   });
 
   return (
