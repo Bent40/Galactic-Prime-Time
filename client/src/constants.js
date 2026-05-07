@@ -64,7 +64,7 @@ export const DEFAULT_STATE = {
     mind:     { base: 1, bonus: 0, levelBonus: 0 },
     charm:    { base: 1, bonus: 0, levelBonus: 0 },
   },
-  bonusPoints: { body: 5, core: 5 },
+  bonusPoints: { body: 5, core: 5, bodyMax: 5, coreMax: 5 },
   levelPoints: { pool: 0 },
   hpUpgradePointsSpent: 0,
   bodyParts: [

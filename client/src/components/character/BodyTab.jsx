@@ -66,10 +66,12 @@ export default function BodyTab({ state, update }) {
     const current = state.traits?.[t]?.bonus || 0;
     if (delta > 0 && available <= 0) return;
     if (delta < 0 && current <= 0) return;
+    const maxKey = pool === 'body' ? 'bodyMax' : 'coreMax';
+    const ceiling = state.bonusPoints?.[maxKey] ?? 5;
     update(s => ({
       ...s,
       traits: { ...s.traits, [t]: { ...(s.traits[t] || {}), bonus: (s.traits[t]?.bonus || 0) + delta } },
-      bonusPoints: { ...s.bonusPoints, [pool]: Math.min(5, (s.bonusPoints[pool] || 0) - delta) },
+      bonusPoints: { ...s.bonusPoints, [pool]: Math.min(ceiling, (s.bonusPoints[pool] || 0) - delta) },
     }));
   }
   function investLevel(t) {
