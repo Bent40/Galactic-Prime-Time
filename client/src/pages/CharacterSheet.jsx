@@ -115,7 +115,7 @@ export default function CharacterSheet() {
         {activeTab === 'skills' && <SkillsTab state={charState} update={update} token={auth.token} />}
         {activeTab === 'achievements' && <AchievementsTab state={charState} />}
         {activeTab === 'inventory' && <InventoryTab state={charState} update={update} token={auth?.token} />}
-        {activeTab === 'exposure' && <ExposureTab state={charState} update={update} />}
+        {activeTab === 'exposure' && <ExposureTab state={charState} update={update} token={auth?.token} />}
         {activeTab === 'objectives' && <ObjectivesTab state={charState} update={update} />}
         {activeTab === 'combat' && <CombatModeTab state={charState} update={update} tracker={tracker} />}
         {activeTab === 'notes' && <NotesTab state={charState} update={update} />}

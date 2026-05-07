@@ -10,9 +10,10 @@ import MomentTrackerSection from '../components/admin/MomentTrackerSection.jsx';
 import ItemLibrarySection from '../components/admin/ItemLibrarySection.jsx';
 import EnemiesSection from '../components/admin/EnemiesSection.jsx';
 import AffixLibrarySection from '../components/admin/AffixLibrarySection.jsx';
+import TagLibrarySection from '../components/admin/TagLibrarySection.jsx';
 
-const SECTIONS = ['players', 'library', 'achievements', 'comms', 'tracker', 'items', 'affixes', 'enemies'];
-const SECTION_LABELS = { players: 'Players', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library', affixes: 'Affixes', enemies: 'Enemies' };
+const SECTIONS = ['players', 'library', 'achievements', 'comms', 'tracker', 'items', 'affixes', 'tags', 'enemies'];
+const SECTION_LABELS = { players: 'Players', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library', affixes: 'Affixes', tags: 'Tags', enemies: 'Enemies' };
 
 export default function AdminPanel() {
   const [auth, setAuth] = useState(() => {
@@ -182,6 +183,7 @@ export default function AdminPanel() {
             {activeSection === 'tracker' && <MomentTrackerSection token={auth.token} players={players} enemies={enemies} showToast={showToast} />}
             {activeSection === 'items' && <ItemLibrarySection token={auth.token} players={players} showToast={showToast} />}
             {activeSection === 'affixes' && <AffixLibrarySection token={auth.token} showToast={showToast} />}
+            {activeSection === 'tags' && <TagLibrarySection token={auth.token} showToast={showToast} />}
             {activeSection === 'enemies' && <EnemiesSection token={auth.token} showToast={showToast} onEnemiesChange={setEnemies} />}
           </div>
         </div>

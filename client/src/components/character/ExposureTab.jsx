@@ -1,12 +1,18 @@
-import { useState, useRef, useMemo } from 'react';
-import { uid, BOSS_TIERS, MASTER_TAGS } from '../../constants.js';
+import { useState, useRef, useMemo, useEffect } from 'react';
+import { uid, BOSS_TIERS } from '../../constants.js';
+import { apiFetch } from '../../api.js';
 
 
-export default function ExposureTab({ state, update }) {
+export default function ExposureTab({ state, update, token }) {
   const portraitRefs = useRef([null, null, null]);
   const [tagSearch, setTagSearch] = useState('');
   const [tagPickerOpen, setTagPickerOpen] = useState(false);
   const [tokenForm, setTokenForm] = useState({ tier: 'bronze' });
+  const [masterTags, setMasterTags] = useState([]);
+
+  useEffect(() => {
+    apiFetch('/api/tags', {}, token).then(d => { if (Array.isArray(d)) setMasterTags(d); });
+  }, [token]);
 
   function patchExposure(k, v) { update(s => ({ ...s, exposure: { ...s.exposure, [k]: v } })); }
 
@@ -24,10 +30,10 @@ export default function ExposureTab({ state, update }) {
   const filteredMaster = useMemo(() => {
     const q = tagSearch.trim().toLowerCase();
     const owned = new Set((state.tags || []).map(t => t.name.toLowerCase()));
-    return MASTER_TAGS
+    return masterTags
       .filter(t => !owned.has(t.name.toLowerCase()))
       .filter(t => !q || t.name.toLowerCase().includes(q) || (t.effect || '').toLowerCase().includes(q));
-  }, [tagSearch, state.tags]);
+  }, [tagSearch, state.tags, masterTags]);
 
   function patchPatron(rank, k, v) {
     update(s => ({ ...s, patrons: s.patrons.map(p => p.rank === rank ? { ...p, [k]: v } : p) }));
