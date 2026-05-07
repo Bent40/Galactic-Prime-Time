@@ -6,7 +6,6 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [charData, setCharData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [tokenForm, setTokenForm] = useState({ narrative: 0, upgrade: 0, patronTokens: 0 });
-  const [skillForm, setSkillForm] = useState({ name: '', momentCost: '', stats: '', effect: '', description: '' });
   const [achForm, setAchForm] = useState({ title: '', desc: '', reward: '' });
   const [tagForm, setTagForm] = useState('');
   const [skillLib, setSkillLib] = useState([]);
@@ -88,21 +87,13 @@ export default function PlayerPanel({ player, token, showToast }) {
     const d = await apiFetch(`/api/admin/players/${player.userId}/tokens`, { method: 'PATCH', body: JSON.stringify(tokenForm) }, token);
     if (d.ok) showToast('Tokens updated'); else showToast(d.error, 'err');
   }
-  async function addSkill(fromLib) {
-    const body = fromLib
-      ? { templateId: fromLib._id }
-      : {
-          name: skillForm.name, momentCost: skillForm.momentCost,
-          stats: skillForm.stats.split(',').map(s => s.trim()).filter(Boolean),
-          effect: skillForm.effect, description: skillForm.description,
-        };
+  async function addSkill(template) {
     const d = await apiFetch(`/api/admin/players/${player.userId}/skills`, {
-      method: 'POST', body: JSON.stringify(body),
+      method: 'POST', body: JSON.stringify({ templateId: template._id }),
     }, token);
     if (d.ok) {
       showToast('Skill added');
       setCharData(cd => ({ ...cd, state: { ...cd.state, skills: [...(cd.state?.skills || []), d.skill] } }));
-      setSkillForm({ name: '', momentCost: '', stats: '', effect: '', description: '' });
     } else showToast(d.error, 'err');
   }
   async function updateSkillLevel(sk, delta) {
@@ -385,7 +376,7 @@ export default function PlayerPanel({ player, token, showToast }) {
         </div>
         <div className="section-label">Add from Library</div>
         <input className="fi" placeholder="Search library..." value={libSearch} onChange={e => setLibSearch(e.target.value)} style={{ marginBottom: 6 }} />
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 180, overflowY: 'auto', marginBottom: 10 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, maxHeight: 180, overflowY: 'auto' }}>
           {filteredLib.map(t => (
             <div key={t._id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 8px', border: '1px solid var(--border)', borderRadius: 3, background: 'rgba(0,0,0,.2)', cursor: 'pointer' }}
               onClick={() => addSkill(t)}>
@@ -393,12 +384,7 @@ export default function PlayerPanel({ player, token, showToast }) {
               <span style={{ fontSize: 9, color: 'var(--muted)' }}>{t.capacity || 'Active'} · {t.momentCost || '—'}</span>
             </div>
           ))}
-        </div>
-        <div className="add-form">
-          <div className="field-group" style={{ flex: 2 }}><label className="field-label">Skill Name</label><input className="fi" value={skillForm.name} onChange={e => setSkillForm(f => ({ ...f, name: e.target.value }))} /></div>
-          <div className="field-group"><label className="field-label">Cost</label><input className="fi" style={{ width: 60 }} value={skillForm.momentCost} onChange={e => setSkillForm(f => ({ ...f, momentCost: e.target.value }))} /></div>
-          <div className="field-group" style={{ flex: 2 }}><label className="field-label">Stats (comma-sep)</label><input className="fi" value={skillForm.stats} onChange={e => setSkillForm(f => ({ ...f, stats: e.target.value }))} /></div>
-          <button className="btn btn-purple btn-sm" onClick={() => addSkill(null)} style={{ alignSelf: 'flex-end' }}>+ Add</button>
+          {filteredLib.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No matching templates.</span>}
         </div>
       </div>
 
