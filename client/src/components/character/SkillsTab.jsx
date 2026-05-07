@@ -85,7 +85,7 @@ export default function SkillsTab({ state, update, token }) {
   }
 
   const enriched = state.skills.map(sk => {
-    const tpl = lib.find(t => t.name === sk.name);
+    const tpl = sk.templateId ? lib.find(t => t._id === sk.templateId) : null;
     return { ...sk, _tpl: tpl };
   });
 
