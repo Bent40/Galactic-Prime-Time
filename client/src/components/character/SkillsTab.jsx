@@ -97,15 +97,16 @@ export default function SkillsTab({ state, update, token }) {
         <div style={{ display: 'flex', gap: 6, marginLeft: 'auto', alignItems: 'center' }}>
           {ALL_TRAITS.map(t => {
             const avail = availableFor(t);
-            if (avail === 0) return null;
+            const spent = avail === 0;
             return (
               <span key={t} style={{
                 fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: '3px 8px',
                 borderRadius: 4,
-                border: '1px solid var(--cyan)',
-                background: 'rgba(0,212,255,0.12)',
-                color: 'var(--cyan)',
-              }}>
+                border: `1px solid ${spent ? 'var(--border)' : 'var(--cyan)'}`,
+                background: spent ? 'transparent' : 'rgba(0,212,255,0.12)',
+                color: spent ? 'var(--muted)' : 'var(--cyan)',
+                opacity: spent ? 0.6 : 1,
+              }} title={spent ? `${TRAIT_LABELS[t]} skill points fully spent` : `${avail} ${TRAIT_LABELS[t]} skill point${avail === 1 ? '' : 's'} available`}>
                 {TRAIT_LABELS[t].slice(0, 3)} {avail}
               </span>
             );
