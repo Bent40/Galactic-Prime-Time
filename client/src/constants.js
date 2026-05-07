@@ -84,6 +84,7 @@ export const DEFAULT_STATE = {
     poison: 0,
     infection: 0,
     dissolution: 0,
+    cameraCall: 0,
   },
   skills: [],
   skillPointsSpent: { physique: 0, reflexes: 0, mind: 0, charm: 0 },
