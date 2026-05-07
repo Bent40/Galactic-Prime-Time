@@ -85,7 +85,7 @@ export default function SkillsTab({ state, update, token }) {
   }
 
   const enriched = state.skills.map(sk => {
-    const tpl = sk.templateId ? lib.find(t => t._id === sk.templateId) : null;
+    const tpl = sk.templateId ? lib.find(t => String(t._id) === String(sk.templateId)) : null;
     return { ...sk, _tpl: tpl };
   });
 
@@ -168,8 +168,10 @@ export default function SkillsTab({ state, update, token }) {
 
               {/* Upgrade hint */}
               {stats.length > 0 && !atMax && (
-                <div style={{ fontSize: 9, marginBottom: 4, letterSpacing: 1,
-                  color: canLevelUp ? 'var(--cyan)' : 'var(--muted)' }}>
+                <div style={{
+                  fontSize: 9, marginBottom: 4, letterSpacing: 1,
+                  color: canLevelUp ? 'var(--cyan)' : 'var(--muted)'
+                }}>
                   {canLevelUp
                     ? `▲ Next level costs: ${stats.map(t => `1 ${TRAIT_LABELS[t]}`).join(' + ')}`
                     : `✕ Need 1 point in each: ${stats.map(t => TRAIT_LABELS[t]).join(', ')}`}
