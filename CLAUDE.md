@@ -117,7 +117,7 @@ Skills are granted to players by templateId. The player sheet joins template dat
 5. RPM field on ranged weapons
 
 ## Workflow
-- After completing any task, always commit the changes with a descriptive commit message summarizing what was done.
+- After completing any task, always commit the changes with a descriptive commit message summarizing what was done. Don't add your signature to it.
 - Client: `cd client && npm run dev`
 - Server: `cd server && node server.js` (or nodemon)
 - Both run concurrently in dev. Vite proxies `/api` to `localhost:3001`.

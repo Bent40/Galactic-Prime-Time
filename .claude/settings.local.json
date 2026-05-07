@@ -9,7 +9,9 @@
       "Bash(node -e \"require\\('./models/ItemTemplate'\\); require\\('./routes/items'\\); console.log\\('OK'\\);\")",
       "Bash(git commit -m ' *)",
       "Bash(node -e \"require\\('./models/ItemTemplate'\\); require\\('./routes/items'\\); require\\('./routes/admin'\\); console.log\\('OK'\\);\")",
-      "Bash(node -e \"require\\('./routes/admin'\\); console.log\\('OK'\\);\")"
+      "Bash(node -e \"require\\('./routes/admin'\\); console.log\\('OK'\\);\")",
+      "Bash(git commit *)",
+      "Bash(node server/seedTags.js)"
     ]
   }
 }
