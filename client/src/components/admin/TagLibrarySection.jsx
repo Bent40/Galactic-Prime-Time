@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
 
-const BLANK = { name: '', effect: '', conditions: '' };
+const BLANK = { name: '', description: '', effect: '', conditions: '' };
 
 function TagForm({ value, onChange }) {
   return (
@@ -10,6 +10,11 @@ function TagForm({ value, onChange }) {
         <label className="field-label">Name</label>
         <input className="fi" value={value.name} onChange={e => onChange({ ...value, name: e.target.value })}
           placeholder="e.g. Bleeding" />
+      </div>
+      <div className="field-group" style={{ marginBottom: 8 }}>
+        <label className="field-label">Description</label>
+        <input className="fi" value={value.description || ''} onChange={e => onChange({ ...value, description: e.target.value })}
+          placeholder="Short system explanation of the tag" />
       </div>
       <div className="field-group" style={{ marginBottom: 8 }}>
         <label className="field-label">Effect</label>
@@ -61,6 +66,7 @@ export default function TagLibrarySection({ token, showToast }) {
   const visible = tags.filter(t =>
     !q ||
     t.name.toLowerCase().includes(q) ||
+    (t.description || '').toLowerCase().includes(q) ||
     (t.effect || '').toLowerCase().includes(q) ||
     (t.conditions || '').toLowerCase().includes(q)
   );
@@ -89,6 +95,9 @@ export default function TagLibrarySection({ token, showToast }) {
               <div style={{ fontWeight: 700, fontSize: 12, color: 'var(--cyan)', letterSpacing: 1, marginBottom: 3 }}>
                 {t.name}
               </div>
+              {t.description && (
+                <div style={{ fontSize: 10, color: 'var(--text)', marginBottom: 2 }}>{t.description}</div>
+              )}
               {t.effect && (
                 <div style={{ fontSize: 10, color: 'var(--gold)', marginBottom: 2 }}>{t.effect}</div>
               )}

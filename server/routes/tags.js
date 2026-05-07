@@ -21,11 +21,12 @@ router.get('/', requireAuth, async (req, res) => {
 // ── POST /api/tags ───────────────────────────────────────────────────────────
 router.post('/', requireAdmin, async (req, res) => {
   try {
-    const { name, effect, conditions } = req.body;
+    const { name, description, effect, conditions } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
 
     const tag = await Tag.create({
       name,
+      description: description || '',
       effect: effect || '',
       conditions: conditions || '',
     });
@@ -40,14 +41,15 @@ router.post('/', requireAdmin, async (req, res) => {
 // ── PATCH /api/tags/:id ──────────────────────────────────────────────────────
 router.patch('/:id', requireAdmin, async (req, res) => {
   try {
-    const { name, effect, conditions } = req.body;
+    const { name, description, effect, conditions } = req.body;
     const update = {};
     if (name !== undefined) {
       if (!name) return res.status(400).json({ error: 'name required' });
       update.name = name;
     }
-    if (effect !== undefined)     update.effect = effect;
-    if (conditions !== undefined) update.conditions = conditions;
+    if (description !== undefined) update.description = description;
+    if (effect !== undefined)      update.effect = effect;
+    if (conditions !== undefined)  update.conditions = conditions;
 
     const tag = await Tag.findByIdAndUpdate(req.params.id, update, { new: true, runValidators: true });
     if (!tag) return res.status(404).json({ error: 'Tag not found' });
