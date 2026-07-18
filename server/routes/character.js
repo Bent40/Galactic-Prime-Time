@@ -50,7 +50,7 @@ router.get('/skills', requireAuth, async (req, res) => {
   try {
     const templates = await SkillTemplate.find(
       {},
-      'name momentCost stats capacity requirements range target effect description levelEffects'
+      'name momentCost stats passive capacity requirements range target effect description levelEffects'
     ).sort({ name: 1 }).lean();
     res.json(templates);
   } catch (err) {
