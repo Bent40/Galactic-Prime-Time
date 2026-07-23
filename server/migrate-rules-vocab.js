@@ -14,6 +14,7 @@
  *       plus defensive mappings for the old sci-fi list; an existing species
  *       value is never overwritten. Unknown races are warned, never guessed.
  */
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 const mongoose = require('mongoose');
 const ItemTemplate = require('./models/ItemTemplate');
 const Character = require('./models/Character');
@@ -55,8 +56,13 @@ async function run() {
   await mongoose.connect(uri);
   console.log(`${apply ? '=== APPLY MODE ===' : '=== DRY RUN (pass --apply to write) ==='}  ${uri}\n`);
   let changes = 0;
+  const seen = {};
+  const tally = arr => { for (const v of arr || []) seen[v] = (seen[v] || 0) + 1; };
+  let tplCount = 0, invCount = 0, charCount = 0;
 
   for (const tpl of await ItemTemplate.find()) {
+    tplCount++;
+    tally(tpl.damageType);
     const { changed, next } = mapDamage(tpl.damageType || []);
     if (changed) {
       changes++;
@@ -66,12 +72,15 @@ async function run() {
   }
 
   for (const ch of await Character.find()) {
+    charCount++;
     const st = ch.state || {};
     const who = st.identity?.name || ch.userId;
     let dirty = false;
 
     for (const cat of st.inventory?.categories || []) {
       for (const it of cat.items || []) {
+        invCount++;
+        tally(it.damageType);
         const { changed, next } = mapDamage(it.damageType || []);
         if (changed) {
           changes++; dirty = true;
@@ -102,7 +111,9 @@ async function run() {
     }
   }
 
-  console.log(`\n${changes} change(s) ${apply ? 'APPLIED' : 'found — dry run, nothing written'}`);
+  console.log(`\nScanned ${tplCount} template(s), ${charCount} character(s), ${invCount} inventory item(s).`);
+  console.log(`Damage-type values in this database: ${Object.keys(seen).length ? JSON.stringify(seen) : '(none)'}`);
+  console.log(`${changes} change(s) ${apply ? 'APPLIED' : 'found — dry run, nothing written'}`);
   await mongoose.disconnect();
 }
 

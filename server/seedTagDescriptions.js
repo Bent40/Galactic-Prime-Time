@@ -11,6 +11,7 @@
  */
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const mongoose = require('mongoose');
 const Tag = require('./models/Tag');
 
@@ -19,7 +20,8 @@ function parseCompendium() {
   const idx = book.indexOf('## Appendix C');
   if (idx === -1) throw new Error('Appendix C not found in the rulebook');
   const entries = new Map();
-  for (const line of book.slice(idx).split('\n')) {
+  // split tolerates CRLF checkouts (Windows autocrlf) — a trailing \r broke the match
+  for (const line of book.slice(idx).split(/\r?\n/)) {
     const m = line.match(/^- \*\*(.+?)\*\* — (.+)$/);
     if (m) entries.set(m[1].trim().toLowerCase(), { name: m[1].trim(), description: m[2].trim() });
   }
@@ -31,12 +33,17 @@ async function run() {
   const force = process.argv.includes('--force');
   const entries = parseCompendium();
   console.log(`Parsed ${entries.size} tag descriptions from the rulebook`);
+  if (entries.size === 0) throw new Error('Parsed 0 entries — refusing to run. Is rulebook/gpt-system-v0.92.md intact?');
 
   const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/galactic-prime-time';
   await mongoose.connect(uri);
   console.log(`${apply ? '=== APPLY MODE ===' : '=== DRY RUN (pass --apply to write) ==='}  ${uri}\n`);
 
   const tags = await Tag.find();
+  console.log(`Found ${tags.length} tag row(s) in the database`);
+  if (tags.length === 0) {
+    console.log('→ The tags collection is EMPTY. Run `node seedTags.js` first to create the 100 tag rows, then rerun this.');
+  }
   const matchedNames = new Set();
   let updated = 0, skipped = 0, unmatched = 0;
 
