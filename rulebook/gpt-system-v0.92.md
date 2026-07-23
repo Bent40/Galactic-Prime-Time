@@ -148,9 +148,8 @@ character-sheet app exactly.)
 **There is no free respec or refund, ever.** Unlearning and rebuilding is possible
 only through specific items or Lounge upgrades, and always at a cost.
 
-🎙️ **GM CALL:** achievement rewards that grant "+1 to a stat" — decide per award
-whether it is a trait point (permanent, counts toward caps) or temporary. The
-book's default: permanent, identical to a level-point spend.
+Achievement rewards that grant "+1 to a stat" are **permanent** trait points —
+identical to a level-point spend, counting toward stat caps.
 
 ---
 
@@ -173,19 +172,21 @@ Skills run **0–10**:
 
 ### 4.2 Caps, thresholds, upgrades and mutations
 
-- Every skill starts **capped at 5**. **Patron Tokens** raise the cap (+1 max
-  level per token) to a ceiling of **10**. Cap 5 = useful; cap 6 = build-defining;
-  level 10 = game changer.
+- Every skill can go to **10**. **Levels 1–5 are naturally available** — the
+  starting cap of 5 needs no unlocking. **Levels 6–10 unlock one by one:** each
+  step past 5 costs a **Patron Token** (+1 max level per token), to the ceiling
+  of 10. Cap 5 = useful; cap 6 = build-defining; level 10 = game changer.
 - **Thresholds:** every level from 5 up is a threshold. Reaching one **Upgrades**
-  (adds effects) or **Mutates** (changes purpose completely) the skill.
-  🎙️ **GM CALL:** whether the player chooses upgrade-vs-mutate or picks from
-  GM-authored options is per-skill; the owner's skill passover will settle the
-  default.
+  (adds effects) or **Mutates** (changes purpose completely) the skill. **The GM
+  offers the available upgrade or mutation. The work itself happens only in the
+  Lounge, at the Skill Gemstone, and only through compatible skills (§4.5).**
 
 ### 4.3 Multi-stat skills
 
 - A skill attributed to more than one stat levels only with points from **every**
   listed stat (§3.3).
+- **No stat binds the skill's maximum:** as long as you can pay the points from
+  each listed stat, the skill levels freely — a low trait does not cap it.
 - Three-stat skills exist (e.g. Camouflage). They are legal, just expensive.
 
 ### 4.4 Acquisition
@@ -199,9 +200,14 @@ Skills run **0–10**:
 
 ### 4.5 Consuming skills
 
-Skills can combine/consume other skills to upgrade or mutate (the Skill Gemstone,
-§20). Consumed skills permanently alter the result and are unrecoverable unless
-stated. Never automatic — requires conditions AND player consent.
+Skills can combine/consume other **compatible** skills to upgrade or mutate. The
+**Skill Gemstone** (§20) is the Lounge station where all merging and upgrading
+happens. Consumed skills permanently alter the result and are unrecoverable
+unless stated. Never automatic — requires conditions AND player consent.
+
+⚖️ **Design TODO:** a standard marking for skill compatibility (families /
+keywords), so what-merges-with-what is readable at a glance. Until it lands, the
+GM rules compatibility case by case.
 
 ### 4.6 Priming — there are no cooldowns *(v0.92: cooldowns are removed from the system entirely)*
 
@@ -225,7 +231,8 @@ requirement cannot fire until its prime is satisfied. The five prime types:
 
 ### 4.7 Passive and reactive skills
 
-- **Passive skills** are always on unless their text says otherwise.
+- **Passive skills** are always on and need no upkeep unless their text
+  explicitly says otherwise.
 - **Reactive skills** declare a **trigger** and fire out of turn — see §5.6 for
   what a reaction costs you.
 
@@ -390,6 +397,8 @@ Health is localized. Standard body:
   logic; every body needs a head-equivalent and torso-equivalent (lethal parts).
 - Every combatant has a **size**: Small / Medium / Large / Huge. Humans are
   Medium. Effects referencing size read this field.
+- A part's max HP can be raised by **race, class, achievements, skills, and
+  stats** (Physique is the systematic source — §3.2).
 
 ### 7.2 Targeting
 
@@ -415,6 +424,9 @@ parts and *which* conditions.
   is extremely dangerous.
 - Further damage to a disabled part doesn't reduce HP — it escalates conditions or
   causes permanent loss/detachment (detachment applies Bleeding).
+- **Recovering severed/destroyed parts:** the Surgeon's Table, prosthetics (the
+  Augmentation Hub), regeneration skills, high-end healing skills, and truly
+  exceptional potions.
 
 ### 7.5 Death and bleed-out *(v0.92 — rewritten; the old list contradicted its own conditions)*
 
@@ -497,6 +509,9 @@ of combat. **Cannot kill.**
 | T2 | All other active conditions advance **one extra tier** at Clock reset |
 | T3 | **2-Clock death timer** |
 
+Cures: **time** (depending on the infection), potions, and cleansing skills —
+plus Burn T2's field cautery (above).
+
 **Poison** — no immediate HP damage. Entry conditions: open wound, orifice,
 injection/bite, or a helpless target. Activation delay usually 2 Clocks. Always
 targets specific parts.
@@ -507,8 +522,17 @@ targets specific parts.
 | T3 | Catastrophic (lethal clock — must be delayed or cured) |
 
 - **Types are compatibility classes** *(v0.92 — "incompatible" finally defined)*:
-  Neurotoxin, Hemotoxin, Myotoxin, Pneumotoxin, Cytotoxin. **Same type stacks
-  tiers; different types are incompatible → Poison Soup.**
+  **same type stacks tiers; different types are incompatible → Poison Soup.**
+  Each type also carries a signature effect on top of the tier framework
+  *(ruled 2026-07-23)*:
+
+| Type | Signature effect |
+|---|---|
+| **Neurotoxin** | Gradually makes parts unusable, until the victim is Helpless |
+| **Hemotoxin** | From T2 the target cannot heal, and Bleeding advances at twice the speed and damage |
+| **Myotoxin** | Lowers Body traits dramatically, scaling by tier |
+| **Pneumotoxin** | Starts the Suffocation timer once it reaches the torso; severity scales by tier |
+| **Cytotoxin** | Damage over time |
 - **Poison Soup:** all poison effects on the part end; direct HP damage equal to
   the combined tiers — **capped at the part's max HP − 1 on head/torso** ⚖️
   (brutal, never a guaranteed instant kill — in either direction).
@@ -652,11 +676,16 @@ Balanced, Sure-grip). ⚖️
 destroy the modifier (odds improved by Lounge upgrades/skills). Higher+ —
 extraction drops the weapon one tier. Legendary+ — extraction destroys the weapon.
 
-### 12.4 Hands and slots
+### 12.4 Equipment slots *(ruled 2026-07-23)*
 
-🎙️ **GM CALL** (pending a proper slot list): worn equipment uses the slots seen in
-play — Hands, Legs, Face, Torso, Mouth, Utility; the GM rules stacking and
-two-weapon questions until the equipment pass.
+- **One item per slot — no stacking.** Slots follow the body's actual anatomy: a
+  standard human has 1 head, 1 torso, 2 hands, 2 legs, plus accessory slots —
+  necklaces, capes, belts, and the like.
+- **Ring-class items** fit fingers and toes: up to **20** on a standard human
+  (10 fingers, 10 toes).
+- Non-standard bodies derive their slots from their parts (a sea lion has
+  flippers, not hands). When in doubt, **think logically about the anatomy —
+  that IS the rule.**
 
 ---
 
@@ -741,17 +770,25 @@ Applies in and out of combat.
 
 ## 17. The Audience
 
-### 17.1 Exposure
+### 17.1 Exposure *(economy model ruled 2026-07-23)*
 
-- **Viewers** — active watchers. Correlate with reward potential and session
-  chaos; the conversion pool for Followers.
-- **Followers** — clicked "Follow." Notified when you're active; affect TV rating
-  and Directive volume; potential allies and enemies.
-- **Patrons** — **paying audience members**. Can set paid Goals (direct story
-  intervention + rewards).
+**Entire galaxies are watching.**
 
-🎙️ **GM CALL:** concrete Viewer/Follower/Patron numbers, decay, and conversion
-rates remain GM-driven (Appendix B). The structure above is the contract.
+- **Viewers** — active watchers. **Counts run in the billions, easily.**
+  Correlate with reward potential and session chaos; the conversion pool for
+  Followers. Viewer counts decay when you're boring.
+- **Followers** — **paying watchers**, at phone-vote money: they pay a little to
+  follow you. A useful GM instrument: follower counts track the percentage of
+  watchers who'd actually pay to vote. Notified when you're active; affect TV
+  rating and Directive volume; potential allies and enemies. **Followers decay** —
+  they can stop paying for you.
+- **Patrons** — **one-time large donors** (the streamer-gets-$5,000 tier of the
+  galaxy). Can set paid Goals (direct story intervention + rewards). Because the
+  donation already happened, **the Patron roster is permanent — once on your
+  list, always on your list.**
+
+🎙️ Session-to-session numbers stay in the GM's hands; the structure above is the
+contract.
 
 ### 17.2 Patron Tokens
 
@@ -766,11 +803,10 @@ rates remain GM-driven (Appendix B). The structure above is the contract.
 - **Effect:** the camera focuses a target: **Viewership, Follower, and Patron
   gains AND losses from that target are doubled** until the end of that target's
   current or next action.
-- ⚖️ **PROVISIONAL (owner ruling pending — D-3):** calling the camera **on
-  yourself is legal** (that's the Charm build's play); **one spotlight at a
-  time**; the doubling covers audience gains and losses attributed to the spotlit
-  contestant, and ends with their current-or-next action. Losses double too — the
-  camera is a gamble, not a buff.
+- **Self-calls are legal** *(ruled 2026-07-23)* — spotlighting yourself is the
+  Charm build's play. **One spotlight at a time.** The doubling covers audience
+  gains and losses attributed to the spotlit contestant and ends with their
+  current-or-next action. Losses double too — the camera is a gamble, not a buff.
 
 ### 17.4 Goals (crowd challenges)
 
@@ -840,7 +876,7 @@ rates remain GM-driven (Appendix B). The structure above is the contract.
   Unlock Lounge modules.
 - **Patron Tokens** — the skill-cap currency (§17.2).
 
-### 19.2 Boss-Token → Patron-Token exchange *(v0.92 — now tier-aware; the flat 3:1 ignored tiers entirely)* ⚖️
+### 19.2 Boss-Token → Patron-Token exchange *(v0.92 — now tier-aware; the flat 3:1 ignored tiers entirely)*
 
 One-way, same-tier tokens only:
 
@@ -853,8 +889,8 @@ One-way, same-tier tokens only:
 | Mythic | 1 → 1 |
 | Godly | 1 → **2** |
 
-*(Proposed rates — PROVISIONAL until the owner tunes them. The audience loop
-should stay the better Patron-Token income; the exchange is the overflow valve.)*
+*(Approved 2026-07-23. The audience loop remains the better Patron-Token income;
+the exchange is the overflow valve.)*
 
 ---
 
@@ -929,6 +965,32 @@ Lounge design pass.
   catastrophic player effects with phase changes, acceleration, repositioning,
   sacrifice.
 
+**Super Bosses** *(ruled 2026-07-23)* are large, **multi-stage, multi-area**
+encounters that demand understanding and preparation across multiple ways of
+fighting. The shape: a giant flower feeds on five different zones, each zone
+powering different abilities and damage types — the party builds immunities and
+plans the disabling of each zone, and only then faces the flower itself, which
+demands several damage types, complex attacks, and specific conditions to
+finish. A Super Boss is a campaign arc in one creature.
+
+### 21.4 Terrain (authoring framework) *(ruled 2026-07-23)*
+
+Stat any terrain by answering three questions:
+
+1. **Is it hard to walk in — and why?** (movement costs, Slowed, forced paths)
+2. **Is it a hazard — and how?** (damage, conditions, timers)
+3. **What effects does it have that aren't a direct danger?** (vision, noise,
+   cover, flammability, smell)
+
+Known table examples: Sludge, Flammable ground, water, difficult terrain, smoke.
+
+### 21.5 Falling ⚖️
+
+Falls longer than **3 hexes** deal damage, scaling with height: roughly
+**1d4–5d4 across 3–8 m**, **2d6–6d6 across 9–14 m**, continuing the pattern
+upward. (A sketch — falling has barely come up in play; tune it when it
+matters.)
+
 ---
 
 ## Appendix A — Changelog v0.91 → v0.92
@@ -974,6 +1036,7 @@ ruling source (digital addendum R-ids / owner decisions D-ids):
 | Threshold-die upgrades = Lounge module | — | **D-5** |
 | Full original tag list retained (Appendix C) | — | **D-6** |
 | Stat-valued ranges convention; item variance rule; Surgeon's Table circular unlock fixed; Moments/Clocks vocabulary purge | F2, F4, B14, F9 | errata |
+| **2026-07-23 rulings batch:** poison-type signature effects; infection cures; audience economy model (billions of Viewers, paying Followers, permanent Patron roster); Camera Call finalized (self-call legal); tier-aware exchange approved; equipment slots + 20 ring slots; terrain framework; fall-damage sketch; part-recovery paths; part-max-HP sources; permanent achievement stat awards; thresholds executed at the Gemstone via compatible skills; no multi-stat level bind; passives need no upkeep | Q4, Q8/Q9, Q11, Q15, Q31, Q32, Q34–Q37, Q48, Q51, Q57, Q59, Q63, Q64 | owner, in chat |
 
 **Deliberately NOT in this book** (video-game-only): force-vs-robustness damage,
 run types/respawn, Earth-life-only races, the pruned tag list, noise/absorption
@@ -982,30 +1045,22 @@ layer.
 
 ## Appendix B — Open rules questions (the honest list)
 
-The GM adjudicates these today; each has a questionnaire line waiting on an owner
-ruling:
+*Sixteen of the original nineteen were ruled on 2026-07-23 and folded into the
+chapters above. What remains:*
 
-1. Achievement "+1 stat" — permanent trait point or temporary? (default: permanent)
-2. Intended endgame trait totals (are 15/20 caps aspirational?)
-3. Upgrade-vs-Mutate at thresholds — who chooses, from what options?
-4. Skill Gemstone consuming — worked examples.
-5. Passive-skill upkeep exceptions.
-6. Multi-stat skills: does the lowest contributing trait bind the max level?
-7. What mechanically distinguishes the five poison types beyond compatibility.
-8. Infected cures besides Burn T2.
-9. Audience economy numbers (Viewer/Follower/Patron movement, decay, conversion).
-10. Tag mechanical effects (per-tag design pass).
-11. Super Boss mechanical identity beyond bigger numbers.
-12. Currency & store pricing; loot-box generation tables per tier.
-13. Equipment slot list; same-slot stacking; hands accounting edge cases.
-14. Terrain effects list (Sludge, Flammable, water, difficult, smoke were used in
-    play — F1). Until ruled: GM adjudicates by fiction.
-15. Fall/environmental damage numbers.
-16. Severed-part recovery paths (Surgeon's Table, prosthetics, permanence).
-17. What raises a part's max HP besides Physique (armor? race? achievements?).
-18. Lounge module mechanical effects (Kitchen/Farm/Forge specifics); Upgrade-Token
-    sinks; downtime structure.
-19. Camera Call D-3 confirmation (self-call + doubling scope — drafted in §17.3).
+1. **Intended endgame trait totals** — are the over-10 cap tiers (Reflexes 12 /
+   Mind 15 / Charm 20) meant to be reachable by design, or aspirational? *(The
+   2026-07-23 batch clarified SKILL caps — 1–5 natural, 6–10 one by one — which
+   is in §4.2; this TRAIT question is still open.)*
+2. **Tag mechanical effects** — per-tag design pass. **Scheduled: a dedicated
+   sitting with the owner.**
+3. **Currency, store pricing, loot-box generation tables** — large pass,
+   deferred.
+4. **Lounge module effects, Upgrade-Token sinks, downtime structure** — large
+   sitting, deferred.
+5. **Skill compatibility marking** — a standard way to tag which skills are
+   compatible for Gemstone merges/upgrades (new TODO from the 2026-07-23
+   threshold ruling; §4.5).
 
 ## Appendix C — Tag Compendium
 
