@@ -3,4 +3,4 @@ server/node_modules/
 server/logs/
 client/node_modules/
 client/build/
-client/.env
+client/.envwiki-check.png
