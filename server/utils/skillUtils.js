@@ -36,6 +36,7 @@ async function enrichSkills(skills) {
       target: tpl.target || '',
       effect: tpl.effect || '',
       description: tpl.description || '',
+      keywords: tpl.keywords || [],
       levelEffects: tpl.levelEffects || {},
     };
   });

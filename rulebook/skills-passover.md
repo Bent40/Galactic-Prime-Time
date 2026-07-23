@@ -10,16 +10,26 @@
   hit anyway. No charges, no stance, no cooldown. Acrobatic Save gets the same
   movement-forfeit cost in place of its cooldown.
 - **G2 APPROVED** — one growth schema; ladders authored for the zero-growth skills.
-- **G3 REJECTED as proposed** — broad families are wrong (not all BLADES merge; ranged ≠
-  melee; ELEMENTS is a subclass of magic; RACE never merges). Follow-up model being
-  picked (hierarchical keywords vs explicit lists vs GM-only).
+- **G3 RULED — model A: the keyword tree** (round 2, same day). Taxonomy + rule live in
+  the book §4.5; per-skill assignments in `server/apply-skill-passover.js` (KEYWORDS
+  map). Share a NARROW keyword = compatible; broad-only overlap = GM call.
+- **G1 REFINED (round 2):** AREA attacks (blasts/bursts) MISS a rolling target entirely
+  unless the destination hex is the area's CENTER; single/multi-target attacks (arcs,
+  lines, cones) hit if the new hex is still within their range/pattern.
 - **G4 RULED — stats are FROZEN for this campaign run.** No stat/scaling changes to any
   existing skill (Voicebox stays Charm; Telepathy keeps Charm secondary). Revisit for
   the next campaign.
 - **G5 APPROVED** — XQUEZ/T skill definitions concretized.
-- **G6 — new skills reviewed ONE BY ONE** (in progress in chat).
-- **G7 RULED — NO exclusive skills.** Full Potential / Heroic Punch are gated by weird
-  ACQUISITION requirements, not locks. No `exclusiveTo` field. (Anyone could earn them.)
+- **G6 RULED (round 2):** **Intercept** approved with the zig-zag ladder (range/physical
+  resistance alternating L2–5, guard-two at L6) · **Iron Stance NOT seeded** — proposed
+  instead as the first authored Gemstone MUTATION (Intercept + Brace merge → Iron
+  Stance), pending owner nod · **Death Grip Jaws** approved WITHOUT a prime (any
+  bite-capable body may grapple freely) · **Field Triage** approved · **Play to the
+  Camera** approved. Remaining ~20 candidates stay parked.
+- **G7 RULED — NO exclusive skills.** Acquisition requirements instead (ruled round 2):
+  Full Potential = "be savvy with your hands and have real repair experience";
+  Heroic Punch = "aspire wholeheartedly to be a hero while being extremely weak at the
+  same time." No `exclusiveTo` field. (Anyone could earn them.)
 - **G8 APPROVED** — the repair batch.
 
 **Applied by:** `server/apply-skill-passover.js` (dry-run default; 25 template patches).

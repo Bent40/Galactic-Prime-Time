@@ -208,9 +208,25 @@ Skills can combine/consume other **compatible** skills to upgrade or mutate. The
 happens. Consumed skills permanently alter the result and are unrecoverable
 unless stated. Never automatic — requires conditions AND player consent.
 
-⚖️ **Design TODO:** a standard marking for skill compatibility (families /
-keywords), so what-merges-with-what is readable at a glance. Until it lands, the
-GM rules compatibility case by case.
+**Compatibility — the keyword system** *(ruled 2026-07-23)*: every skill carries
+2–4 keywords from a small hierarchy of **broad** groups and **narrow** members:
+
+| Broad | Narrow |
+|---|---|
+| magic | fire · cold · toxin · psychic · force |
+| strikes | blade · blunt · unarmed · flurry · precision · power |
+| movement | leaping · tumbling · rushing |
+| performance | deception · presence · sound · projection |
+| survival | treatment · bracing · aquatic |
+| control | grapple · throw |
+| perception | empathy · patterning · awareness |
+| infiltration | stealth · locks · squeezing |
+| craft | repair · improvisation |
+
+**Skills sharing a NARROW keyword are compatible** at the Gemstone. Sharing only
+a **broad** group (two magic skills of different elements, say) is the "ask the
+GM with a fiction reason" case. No overlap = incompatible. New skills pick from
+this list; the GM may grow the taxonomy deliberately, never casually.
 
 ### 4.6 Priming — there are no cooldowns *(v0.92: cooldowns are removed from the system entirely)*
 

@@ -549,9 +549,9 @@ router.get('/skill-library', async (req, res) => {
 // POST /api/admin/skill-library
 router.post('/skill-library', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects: levelEffects || {} });
+    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {} });
     res.status(201).json(template);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -561,9 +561,9 @@ router.post('/skill-library', async (req, res) => {
 // PUT /api/admin/skill-library/:id
 router.put('/skill-library/:id', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, levelEffects: levelEffects || {} }, { new: true });
+    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {} }, { new: true });
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json(template);
   } catch (err) {

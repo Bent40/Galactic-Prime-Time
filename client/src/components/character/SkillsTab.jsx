@@ -109,6 +109,7 @@ export default function SkillsTab({ state, update, token }) {
       target: tpl.target,
       momentCost: tpl.momentCost,
       passive: tpl.passive,
+      keywords: tpl.keywords,
       levelEffects: tpl.levelEffects,
     };
   });
@@ -229,6 +230,9 @@ export default function SkillsTab({ state, update, token }) {
                 </span>
                 {(sk.stats || []).map(t => (
                   <span key={t} className="skill-badge stat on">{TRAIT_LABELS[t.toLowerCase()] || t}</span>
+                ))}
+                {(sk.keywords || []).map(k => (
+                  <span key={k} className="skill-badge" style={{ color: 'var(--purple)', borderColor: 'var(--purple)' }} title="Gemstone compatibility: skills sharing a narrow keyword can merge">◈ {k}</span>
                 ))}
                 {stats.length > 0 && <span className="skill-total">{skillTotal}</span>}
                 {sk.momentCost && <span className="skill-badge">{sk.momentCost}</span>}

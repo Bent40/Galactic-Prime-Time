@@ -6,7 +6,7 @@ const TIER_LEVELS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 const BLANK_FORM = {
   name: '', momentCost: '', stats: '', passive: false, capacity: 5,
   requirements: '', range: '', target: '', effect: '', description: '',
-  achievementUnlock: '', levelEffects: {},
+  achievementUnlock: '', keywords: '', levelEffects: {},
 };
 
 function LevelEffectsEditor({ value, onChange }) {
@@ -47,6 +47,9 @@ export default function SkillLibrarySection({ token, showToast }) {
       stats: typeof data.stats === 'string'
         ? data.stats.split(',').map(s => s.trim()).filter(Boolean)
         : data.stats || [],
+      keywords: typeof data.keywords === 'string'
+        ? data.keywords.split(',').map(s => s.trim().toLowerCase()).filter(Boolean)
+        : data.keywords || [],
       levelEffects: data.levelEffects || {},
     };
   }
@@ -102,6 +105,7 @@ export default function SkillLibrarySection({ token, showToast }) {
                 {t.passive && <span className="badge badge-gold">Passive</span>}
                 {t.momentCost && <span className="badge badge-cyan">{t.momentCost}</span>}
                 {(t.stats || []).map(s => <span key={s} className="badge badge-muted">{s}</span>)}
+                {(t.keywords || []).map(k => <span key={k} className="badge badge-purple" title="Gemstone compatibility keyword">◈ {k}</span>)}
                 {t.achievementUnlock && <span className="badge badge-gold">🔒 {t.achievementUnlock}</span>}
                 {t.levelEffects && Object.keys(t.levelEffects).filter(k => t.levelEffects[k]).length > 0 && (
                   <span className="badge badge-muted">
@@ -111,7 +115,7 @@ export default function SkillLibrarySection({ token, showToast }) {
               </div>
               {t.effect && <div className="template-effect">{t.effect}</div>}
               <div className="template-actions">
-                <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...t, stats: (t.stats || []).join(', '), levelEffects: { ...(t.levelEffects || {}) } })}>Edit</button>
+                <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...t, stats: (t.stats || []).join(', '), keywords: (t.keywords || []).join(', '), levelEffects: { ...(t.levelEffects || {}) } })}>Edit</button>
                 <button className="btn btn-danger btn-xs" onClick={() => del(t._id)}>Delete</button>
               </div>
             </div>
@@ -138,6 +142,7 @@ export default function SkillLibrarySection({ token, showToast }) {
               <div className="field-group"><label className="field-label">Range</label><input className="fi" value={editModal.range || ''} onChange={e => setEditModal(m => ({ ...m, range: e.target.value }))} /></div>
               <div className="field-group"><label className="field-label">Target</label><input className="fi" value={editModal.target || ''} onChange={e => setEditModal(m => ({ ...m, target: e.target.value }))} /></div>
               <div className="field-group"><label className="field-label">Achievement Unlock</label><input className="fi" value={editModal.achievementUnlock || ''} onChange={e => setEditModal(m => ({ ...m, achievementUnlock: e.target.value }))} /></div>
+              <div className="field-group"><label className="field-label">Keywords (comma-sep, Gemstone compat)</label><input className="fi" value={editModal.keywords || ''} onChange={e => setEditModal(m => ({ ...m, keywords: e.target.value }))} placeholder="magic, fire" /></div>
             </div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Requirements</label><input className="fi" value={editModal.requirements || ''} onChange={e => setEditModal(m => ({ ...m, requirements: e.target.value }))} /></div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Base Effect (Tier 1)</label><textarea className="fi" value={editModal.effect || ''} onChange={e => setEditModal(m => ({ ...m, effect: e.target.value }))} /></div>

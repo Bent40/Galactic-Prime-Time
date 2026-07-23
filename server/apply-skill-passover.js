@@ -28,13 +28,13 @@ const PATCHES = [
     name: 'Tactical Roll',
     set: {
       requirements: 'Must not be Prone, Helpless, or have both legs disabled. Costs your movement: you cannot have moved this Moment, and you forfeit all movement for the rest of it.',
-      effect: 'When an attack targets you, declare a hex within 1 space and immediately roll to it. The attack still resolves: if your new hex is inside its range or area, it hits you as normal — declare badly and you dodge into the hit. If your hex escapes it, the attack misses.',
+      effect: 'When an attack targets you, declare a hex within 1 space and immediately roll to it. Single-target and multi-target attacks (arcs, lines, cones) still resolve: if your new hex is within the attack\'s range or pattern, it hits you as normal — declare badly and you dodge into the hit. AREA attacks (blasts, bursts) miss you entirely as long as your destination hex is not the area\'s CENTER.',
     },
     levels: {
       2: '+1 Space',
       3: '+2 Space',
       4: '+2 Space. You may roll through occupied hexes.',
-      5: '+3 Space. Rolling clear of an area attack escapes it fully — no partial effects.',
+      5: '+3 Space',
       6: '+3 Space. Once per Clock, the roll does not cost your movement.',
     },
   },
@@ -238,6 +238,156 @@ const PATCHES = [
       achievementUnlock: 'Have an enemy not spot you.',
     },
   },
+  // G7 rulings: exclusivity replaced by hard acquisition requirements
+  {
+    name: 'Full Potential',
+    set: {
+      achievementUnlock: 'Be savvy with your hands and have real repair experience — proven by repeatedly repairing, jury-rigging, or improvising items in play.',
+    },
+  },
+  {
+    name: 'Heroic Punch',
+    set: {
+      achievementUnlock: 'Aspire wholeheartedly to be a hero while being extremely weak at the same time.',
+    },
+  },
+];
+
+// ── G3-A: Gemstone compatibility keywords ─────────────────────────────────────
+// Taxonomy (broad → narrow): magic → fire/cold/toxin/psychic/force ·
+// strikes → blade/blunt/unarmed/flurry/precision/power · movement →
+// leaping/tumbling/rushing · performance → deception/presence/sound/projection ·
+// survival → treatment/bracing/aquatic · control → grapple/throw ·
+// perception → empathy/patterning/awareness · infiltration →
+// stealth/locks/squeezing · craft → repair/improvisation.
+// Rule: share a NARROW keyword = compatible; share only a BROAD one = GM call.
+const KEYWORDS = {
+  'Controlled Sweep': ['strikes', 'blade'],
+  'Quick Step': ['movement', 'rushing'],
+  'Seal The Wound': ['survival', 'treatment'],
+  'Strong Strike': ['strikes', 'power'],
+  'Counter-Surge': ['strikes', 'precision', 'patterning'],
+  'Read The Pattern': ['perception', 'patterning'],
+  'Pressure Hold': ['control', 'grapple'],
+  'Brace': ['survival', 'bracing'],
+  'Tactical Roll': ['movement', 'tumbling'],
+  'Poison Ball': ['magic', 'toxin'],
+  'Poison Wall': ['magic', 'toxin'],
+  'Frost Ball': ['magic', 'cold'],
+  'Frost Wall': ['magic', 'cold'],
+  'Fire Ball': ['magic', 'fire'],
+  'Fire Wall': ['magic', 'fire'],
+  'Elemental Confluence': ['magic', 'fire', 'cold', 'toxin'],
+  'Telekinesis': ['magic', 'force', 'control'],
+  'Telepathy': ['magic', 'psychic'],
+  'Mind Burst': ['magic', 'psychic'],
+  'Pounce': ['strikes', 'blade', 'leaping'],
+  'Slip Through': ['movement', 'tumbling'],
+  'Decapitate': ['strikes', 'blade', 'precision'],
+  'Overhead Slam': ['strikes', 'blunt', 'power'],
+  'Shockwave': ['strikes', 'blunt'],
+  'Execution': ['strikes', 'blunt', 'power'],
+  'Feint': ['performance', 'deception'],
+  'Pressure Strike': ['strikes', 'precision'],
+  'Thousand Cuts': ['strikes', 'blade', 'flurry'],
+  'Aura Reading': ['perception', 'empathy'],
+  'Swim': ['survival', 'aquatic'],
+  'Vibe Control': ['performance', 'presence'],
+  'Juggling': ['performance', 'throw'],
+  'Dance': ['performance', 'presence', 'movement'],
+  'Voicebox': ['performance', 'sound'],
+  'Generate Visual Media': ['performance', 'projection'],
+  'Ignore All Previous Commands': ['perception', 'sound'],
+  'Acrobatic Save': ['movement', 'tumbling'],
+  'Full Potential': ['craft', 'repair', 'improvisation'],
+  'Heroic Punch': ['strikes', 'unarmed', 'power'],
+  'Nightlurking': ['infiltration', 'awareness', 'squeezing'],
+  'Lockpicking': ['infiltration', 'locks'],
+  'Acrobatics': ['movement', 'leaping', 'tumbling'],
+  'Slice n\' Dice': ['strikes', 'blade', 'flurry'],
+  'Camouflage': ['infiltration', 'stealth'],
+};
+
+// ── G6: new skills approved 2026-07-23 (created if absent, matched by name).
+// Iron Stance deliberately NOT seeded — proposed as the first authored Gemstone
+// MUTATION (Intercept + Brace), pending owner nod.
+const NEW_SKILLS = [
+  {
+    name: 'Intercept',
+    momentCost: '0 (Reaction)',
+    stats: ['Physique'],
+    passive: false,
+    capacity: 5,
+    requirements: 'Physique 4. Prime: at the start of a Clock, declare a guard on one adjacent ally.',
+    range: '1',
+    target: 'Ally',
+    effect: 'When your guarded ally would be hit while within your guard range (base: adjacent), you take the hit instead — your resistances apply and any conditions land on you.',
+    keywords: ['survival', 'bracing'],
+    levelEffects: {
+      2: '+1 guard range',
+      3: '−1 physical damage taken when intercepting',
+      4: '+2 guard range',
+      5: '−2 physical damage taken when intercepting',
+      6: 'Guard two allies.',
+    },
+  },
+  {
+    name: 'Death Grip Jaws',
+    momentCost: '1',
+    stats: ['Physique'],
+    passive: false,
+    capacity: 5,
+    requirements: 'Physique 3. A bite-capable head. No hands needed.',
+    range: '1',
+    target: 'Single Target',
+    effect: 'Bite-grapple: grapple with your jaws using the standard grapple rules (automatic if your Physique ≥ theirs, otherwise Forced Action — Body). This is how a body without hands grapples.',
+    keywords: ['control', 'grapple'],
+    levelEffects: {
+      2: 'The initial bite deals 1 Bleed',
+      3: 'May drag the hold 1 space per Moment',
+      4: 'The initial bite deals 2 Bleed',
+      5: 'May drag the hold 2 spaces per Moment',
+      6: 'While held, the bitten part takes 1 Bleed at each Clock reset.',
+    },
+  },
+  {
+    name: 'Field Triage',
+    momentCost: '1',
+    stats: ['Mind'],
+    passive: false,
+    capacity: 5,
+    requirements: 'Mind 3. Consumes a bandage or kit charge. Adjacent ally.',
+    range: '1',
+    target: 'Ally',
+    effect: 'Treat an adjacent ally\'s condition: delay one advancement.',
+    keywords: ['survival', 'treatment'],
+    levelEffects: {
+      2: '+1 Clock of delay',
+      3: 'Treat at 1 space of range',
+      4: '+2 Clocks of delay',
+      5: 'Treat at 2 spaces of range',
+      6: 'Once per combat, fully resolve the condition instead of delaying.',
+    },
+  },
+  {
+    name: 'Play to the Camera',
+    momentCost: '1',
+    stats: ['Charm'],
+    passive: false,
+    capacity: 5,
+    requirements: 'Charm 3. Prime: spend a Camera Call stack.',
+    range: '',
+    target: 'All allies',
+    effect: 'Turn your spotlight on the whole team: every party member\'s audience gains count double until your next Moment (the camera pans across the team).',
+    keywords: ['performance', 'presence', 'projection'],
+    levelEffects: {
+      2: '+1 Moment of surge duration',
+      3: '+2 Moments of surge duration',
+      4: '+3 Moments of surge duration',
+      5: '+3 Moments; the surge persists even if you are hit',
+      6: 'Losses no longer double during your surge — the editors cut the embarrassing parts.',
+    },
+  },
 ];
 
 function preview(v) {
@@ -291,7 +441,31 @@ async function run() {
     }
   }
 
-  console.log(`\n${changed} template(s) ${apply ? 'UPDATED' : 'would be updated'} · ${missing} not found in this DB`);
+  // ── keywords pass (G3-A) ──
+  let keyworded = 0;
+  for (const [name, kws] of Object.entries(KEYWORDS)) {
+    const tpl = templates.find(t => (t.name || '').trim() === name);
+    if (!tpl) continue;
+    const current = (tpl.keywords || []).join(',');
+    if (current !== kws.join(',')) {
+      console.log(`${name} · keywords: [${current}] → [${kws.join(', ')}]`);
+      tpl.keywords = kws;
+      keyworded++;
+      if (apply) await tpl.save();
+    }
+  }
+
+  // ── new skills pass (G6) ──
+  let created = 0;
+  for (const skill of NEW_SKILLS) {
+    const exists = templates.find(t => (t.name || '').trim() === skill.name);
+    if (exists) continue;
+    created++;
+    console.log(`NEW SKILL: "${skill.name}" (${skill.stats.join('+')}, cost ${skill.momentCost})`);
+    if (apply) await SkillTemplate.create(skill);
+  }
+
+  console.log(`\n${changed} template(s) ${apply ? 'UPDATED' : 'would be updated'} · ${keyworded} keyword set(s) · ${created} new skill(s) ${apply ? 'created' : 'to create'} · ${missing} not found in this DB`);
   if (missing > 0) console.log('→ "not found" is expected if this DB\'s skill library is the small local one; run against the campaign DB.');
   await mongoose.disconnect();
 }
