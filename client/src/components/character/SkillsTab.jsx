@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../../api.js';
-import { ALL_TRAITS, TRAIT_LABELS } from '../../constants.js';
+import { ALL_TRAITS, TRAIT_LABELS, traitTotal as traitTotalOf } from '../../constants.js';
 
 export default function SkillsTab({ state, update, token }) {
   const [lib, setLib] = useState([]);
@@ -9,10 +9,7 @@ export default function SkillsTab({ state, update, token }) {
     apiFetch('/api/character/skills', {}, token).then(d => { if (Array.isArray(d)) setLib(d); });
   }, [token]);
 
-  function traitTotal(t) {
-    const tr = state.traits?.[t] || {};
-    return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
-  }
+  function traitTotal(t) { return traitTotalOf(state, t); }
 
   const skillPointsSpent = state.skillPointsSpent || {};
 
@@ -59,7 +56,9 @@ export default function SkillsTab({ state, update, token }) {
         skills: state.skills.map(x => x.id === sk.id ? {
           ...x,
           level: (x.level || 0) + 1,
-          traitCosts: [...(x.traitCosts || []), ...stats],
+          // one spend RECORD per level-up (an array), so a later refund returns
+          // exactly what this level cost even if the template's stats change
+          traitCosts: [...(x.traitCosts || []), stats],
         } : x),
         skillPointsSpent: newSpent,
       };
@@ -71,15 +70,27 @@ export default function SkillsTab({ state, update, token }) {
     const level = sk.level || 0;
     if (level <= 0) return;
     const stats = (sk.stats || []).map(s => s.toLowerCase()).filter(s => ALL_TRAITS.includes(s));
-    const n = stats.length;
-    const traitCosts = sk.traitCosts || [];
-    const refunded = n > 0 ? traitCosts.slice(-n) : [];
-    const newTraitCosts = n > 0 ? traitCosts.slice(0, traitCosts.length - n) : traitCosts;
+    const traitCosts = [...(sk.traitCosts || [])];
+    const refunded = [];
+    const last = traitCosts[traitCosts.length - 1];
+    if (Array.isArray(last)) {
+      // Spend record: refund exactly what this level cost when it was bought
+      traitCosts.pop();
+      refunded.push(...last);
+    } else if (typeof last === 'string' && stats.length > 0) {
+      // Legacy flat entries (pre-record data): best effort — one per listed stat
+      while (refunded.length < stats.length && typeof traitCosts[traitCosts.length - 1] === 'string') {
+        refunded.push(traitCosts.pop());
+      }
+    }
+    // A level with no spend history (admin-set, free skill) refunds nothing.
     const newSpent = { ...(state.skillPointsSpent || {}) };
-    for (const t of refunded) newSpent[t] = Math.max(0, (newSpent[t] || 0) - 1);
+    for (const t of refunded) {
+      if (ALL_TRAITS.includes(t)) newSpent[t] = Math.max(0, (newSpent[t] || 0) - 1);
+    }
     applyUpdate({
       ...state,
-      skills: state.skills.map(x => x.id === sk.id ? { ...x, level: level - 1, traitCosts: newTraitCosts } : x),
+      skills: state.skills.map(x => x.id === sk.id ? { ...x, level: level - 1, traitCosts } : x),
       skillPointsSpent: newSpent,
     });
   }

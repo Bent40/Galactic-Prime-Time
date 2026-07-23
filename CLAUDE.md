@@ -48,9 +48,12 @@ traits: {
 ### Skills (reference model)
 Skills on the character are references, not snapshots. Instance stores only:
 ```js
-{ id, templateId, level, capacity, cooldownRemaining, traitCosts }
+{ id, templateId, level, capacity, traitCosts }
 ```
 Display fields (name, effect, stats, etc.) are joined from `SkillTemplate` at runtime via `enrichSkills()` in `skillUtils.js`. Use `normalizeSkills()` before saving to DB to strip template fields.
+`traitCosts` is a list of per-level spend RECORDS (arrays of trait names, one per level-up);
+legacy data may contain flat strings — level-down refunds handle both. `cooldownRemaining`
+was removed 2026-07-23 (no cooldowns in the system — priming).
 
 ### Level Points
 Single unified pool — any trait can be leveled from it regardless of Body/Core pillar:
@@ -118,15 +121,17 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - The full reconciliation plan (rules updates + app fixes, decisions D-1..D-8) lives in the
   game repo: `Galactic-Prime-Time-Game/docs/ttrpg-update-plan.md`.
 
-## Known Backlog (updated 2026-07-23 — old items 1–5 are DONE)
-1. Bug fixes from the reconciliation plan §B-1: CombatModeTab ignores Physique HP bonus /
-   stale maxHp; skill refund counts from current template stats instead of traitCosts;
-   affliction resistances unwritable; InventoryTab duplicated constants (missing System/Key
-   Items categories); new body parts lack baseHp.
-2. Rules alignment §B-2: DMG_TYPES → book taxonomy (Bleed/Crush/Burn/Chill/Poison/
-   Infection) with data migration; races → Human/Animal/Robot-AI + species; remove dead
-   `cooldownRemaining` (no cooldowns — priming); condition tiers to T4; Shock combat-end
-   reset affordance; optional magazine field.
+## Known Backlog (updated 2026-07-23 — §B-1 bug pass DONE)
+1. ~~Bug fixes §B-1~~ **DONE 2026-07-23**: shared rules helpers in `constants.js`
+   (`traitTotal`/`capBonus`/`effectiveMaxHp` — import these, never re-derive); Combat Mode
+   uses effective max HP; refunds follow `traitCosts` spend records; affliction
+   resistances admin-settable (`PATCH /players/:userId/resistances` + PlayerPanel);
+   InventoryTab imports shared constants; new parts get `baseHp`; `cooldownRemaining`
+   removed; condition tiers to T4.
+2. Rules alignment §B-2 (remaining): DMG_TYPES → book taxonomy (Bleed/Crush/Burn/Chill/
+   Poison/Infection) with data migration; races → Human/Animal/Robot-AI + species;
+   canonical condition-name picker; optional magazine field; prime display after the
+   owner's skill passover.
 3. Polish §B-4: CommsTab recipient/whisper selector; admin tag picker; tag description/
    effect backfill from the rulebook tag compendium.
 

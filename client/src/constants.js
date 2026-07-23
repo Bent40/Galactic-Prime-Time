@@ -95,6 +95,26 @@ export function uid() {
   return Date.now() + Math.floor(Math.random() * 100000);
 }
 
+// ── Shared rules math — single source of truth; every tab imports these ──
+export function traitTotal(state, t) {
+  const tr = state?.traits?.[t] || {};
+  return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
+}
+
+// Traits are uncapped; every N points past 10 pays out one milestone bonus
+// (Physique /5 → +1 part HP · Reflexes /12 → +1 phys res · Mind /15 → +1 psychic
+// tier · Charm /20 → +1 Camera Call stack).
+export const CAP_DIVISORS = { physique: 5, reflexes: 12, mind: 15, charm: 20 };
+export function capBonus(state, t) {
+  return Math.floor(Math.max(0, traitTotal(state, t) - 10) / CAP_DIVISORS[t]);
+}
+
+// A part's live max = its base HP (baseHp; legacy parts fall back to maxHp)
+// plus the Physique milestone bonus.
+export function effectiveMaxHp(bp, state) {
+  return (bp.baseHp ?? bp.maxHp ?? 0) + capBonus(state, 'physique');
+}
+
 export function dmgClass(current, max) {
   if (max <= 0) return '';
   const pct = current / max;

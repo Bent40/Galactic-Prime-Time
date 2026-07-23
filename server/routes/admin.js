@@ -155,7 +155,6 @@ router.post('/players/bulk/achievements', async (req, res) => {
               templateId: String(t._id),
               level: 0,
               capacity: t.capacity || 5,
-              cooldownRemaining: 0,
               traitCosts: [],
             });
             autoGranted.push(t.name);
@@ -245,7 +244,6 @@ router.post('/players/:userId/skills', async (req, res) => {
         templateId: String(tpl._id),
         level: 0,
         capacity: tpl.capacity || 5,
-        cooldownRemaining: 0,
         traitCosts: [],
       };
     } else {
@@ -360,7 +358,6 @@ router.post('/players/:userId/achievements', async (req, res) => {
           templateId: String(t._id),
           level: 0,
           capacity: t.capacity || 5,
-          cooldownRemaining: 0,
           traitCosts: [],
         });
         autoGranted.push(t.name);
@@ -489,6 +486,30 @@ router.patch('/players/:userId/bonus-points', async (req, res) => {
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
     res.json({ ok: true, bonusPoints: state.bonusPoints });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// PATCH /api/admin/players/:userId/resistances — set affliction resistance tiers
+// (chill/poison/infection are GM-awarded; nothing else in the app writes them)
+router.patch('/players/:userId/resistances', async (req, res) => {
+  try {
+    const character = await Character.findOne({ userId: req.params.userId });
+    if (!character) return res.status(404).json({ error: 'Character not found' });
+
+    const state = character.state ? { ...character.state } : {};
+    if (!state.statCapBonuses) state.statCapBonuses = {};
+    for (const key of ['chill', 'poison', 'infection']) {
+      if (req.body[key] !== undefined) {
+        state.statCapBonuses[key] = Math.max(0, parseInt(req.body[key], 10) || 0);
+      }
+    }
+
+    character.state = state;
+    character.markModified('state');
+    await character.save();
+    res.json({ ok: true, statCapBonuses: state.statCapBonuses });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

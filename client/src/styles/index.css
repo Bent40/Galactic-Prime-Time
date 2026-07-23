@@ -207,6 +207,7 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .cond-t1 { border-color: #ffdd00; color: #ffdd00; background: rgba(255,221,0,.08); }
 .cond-t2 { border-color: #ff8800; color: #ff8800; background: rgba(255,136,0,.08); }
 .cond-t3 { border-color: var(--danger); color: var(--danger); background: rgba(255,34,85,.08); }
+.cond-t4 { border-color: #ff2255; color: #fff; background: rgba(255,34,85,.35); font-weight: 700; }
 .cond-remove { background: none; border: none; color: inherit; cursor: pointer; font-size: 10px; padding: 0; opacity: .6; line-height: 1; }
 .cond-remove:hover { opacity: 1; }
 .cond-add-form { display: flex; gap: 6px; align-items: center; margin-top: 5px; }

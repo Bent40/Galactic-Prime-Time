@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
-import { uid, BOSS_TIERS } from '../../constants.js';
+import { uid, BOSS_TIERS, capBonus } from '../../constants.js';
 import { apiFetch } from '../../api.js';
 
 
@@ -53,9 +53,7 @@ export default function ExposureTab({ state, update, token }) {
   const rankLabel = ['', '🥇 Top Patron', '🥈 2nd Patron', '🥉 3rd Patron'];
   const rankClass = ['', 'r1', 'r2', 'r3'];
 
-  const charmTr = state.traits?.charm || {};
-  const charmTotal = (charmTr.base || 0) + (charmTr.bonus || 0) + (charmTr.levelBonus || 0);
-  const cameraCallEarned = Math.floor(Math.max(0, charmTotal - 10) / 20);
+  const cameraCallEarned = capBonus(state, 'charm');
   const cameraCallUsed = state.cameraCallUsed || 0;
   const cameraCallAvail = Math.max(0, cameraCallEarned - cameraCallUsed);
 

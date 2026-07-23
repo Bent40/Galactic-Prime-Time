@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { uid, catIcon, itemDmgLabel, ATK_TYPES, DMG_TYPES } from '../../constants.js';
+import { uid, catIcon, itemDmgLabel, ATK_TYPES, DMG_TYPES, AFFIX_TIERS, ITEM_TIERS, ITEM_CATS } from '../../constants.js';
 import { apiFetch } from '../../api.js';
 
 const AFFIX_TIER_COLOR = {
@@ -13,7 +13,7 @@ const ITEM_TIER_COLOR = {
 
 function AffixPicker({ type, affixes, current, onPick, onClear }) {
   const [open, setOpen] = useState(false);
-  const TIERS = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
+  const TIERS = AFFIX_TIERS;
   const list  = affixes.filter(a => a.type === type);
 
   return (
@@ -107,7 +107,7 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
             <label className="field-label">Category</label>
             <select className="fi" value={local.category || ''} onChange={e => patch('category', e.target.value)}>
               <option value="">—</option>
-              {['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc'].map(c => <option key={c}>{c}</option>)}
+              {ITEM_CATS.map(c => <option key={c}>{c}</option>)}
             </select>
           </div>
           <div className="field-group">
@@ -156,7 +156,7 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
           <label className="field-label">Item Tier</label>
           <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
             <button className={`badge-toggle${!local.tier ? ' on' : ''}`} onClick={() => patch('tier', '')}>None</button>
-            {['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional'].map(t => (
+            {ITEM_TIERS.map(t => (
               <button key={t} className={`badge-toggle${local.tier === t ? ' on' : ''}`}
                 style={local.tier === t ? { borderColor: ITEM_TIER_COLOR[t], color: ITEM_TIER_COLOR[t], background: `${ITEM_TIER_COLOR[t]}18` } : {}}
                 onClick={() => patch('tier', t)}>{t}</button>

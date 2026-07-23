@@ -25,7 +25,6 @@ async function enrichSkills(skills) {
       templateId: sk.templateId,
       level: sk.level || 0,
       capacity: sk.capacity ?? (tpl.capacity || 5),
-      cooldownRemaining: sk.cooldownRemaining || 0,
       traitCosts: sk.traitCosts || [],
       // Template-derived display fields
       name: tpl.name,
@@ -56,7 +55,6 @@ function normalizeSkills(skills) {
         templateId: sk.templateId,
         level: sk.level || 0,
         capacity: sk.capacity ?? 5,
-        cooldownRemaining: sk.cooldownRemaining || 0,
         traitCosts: sk.traitCosts || [],
       };
     }

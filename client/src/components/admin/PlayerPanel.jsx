@@ -73,6 +73,16 @@ export default function PlayerPanel({ player, token, showToast }) {
   function adjustBonusPoints(pool, delta) {
     setBonusPoints(pool, (state.bonusPoints?.[pool] || 0) + delta);
   }
+  async function setAfflictionRes(key, value) {
+    const v = Math.max(0, value);
+    const d = await apiFetch(`/api/admin/players/${player.userId}/resistances`, {
+      method: 'PATCH', body: JSON.stringify({ [key]: v }),
+    }, token);
+    if (d.ok) {
+      setCharData(cd => ({ ...cd, state: { ...cd.state, statCapBonuses: { ...(cd.state.statCapBonuses || {}), [key]: v } } }));
+      showToast('Saved');
+    } else showToast(d.error || 'Failed', 'err');
+  }
   async function grantBossToken() {
     const next = [...(state.tokens?.bossTokens || []), { id: uid(), tier: bossTokenTier, used: false }];
     const d = await apiFetch(`/api/admin/players/${player.userId}/tokens`, {
@@ -316,6 +326,26 @@ export default function PlayerPanel({ player, token, showToast }) {
                       onKeyDown={e => { if (e.key === 'Enter') e.target.blur(); }}
                     />
                     <button className="btn btn-cyan btn-xs" onClick={() => adjustBonusPoints(pool, 1)}>+</button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--border)' }}>
+          <div className="section-label" style={{ marginBottom: 6 }}>Affliction Resistance (GM-awarded)</div>
+          <div className="form-row">
+            {[['chill', 'Chill'], ['poison', 'Poison'], ['infection', 'Infection']].map(([key, lbl]) => {
+              const val = state.statCapBonuses?.[key] || 0;
+              return (
+                <div key={key} className="field-group" style={{ flex: 1 }}>
+                  <label className="field-label">{lbl}</label>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <button className="btn btn-muted btn-xs" disabled={val <= 0} onClick={() => setAfflictionRes(key, val - 1)}>−</button>
+                    <span style={{ minWidth: 64, textAlign: 'center', fontSize: 11, fontWeight: 700, color: val > 0 ? 'var(--cyan)' : 'var(--muted)' }}>
+                      {val > 0 ? `T${val} Immune` : '—'}
+                    </span>
+                    <button className="btn btn-cyan btn-xs" onClick={() => setAfflictionRes(key, val + 1)}>+</button>
                   </div>
                 </div>
               );

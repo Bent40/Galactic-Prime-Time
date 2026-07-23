@@ -120,9 +120,12 @@ Common mappings:
 - Levels grant nothing else by default (no automatic HP). More HP comes from
   Physique (§3.2) or explicit rewards.
 
-### 3.2 Trait growth past 10 — stat caps
+### 3.2 Trait growth past 10 — milestone bonuses *(clarified 2026-07-23)*
 
-Traits keep rising in play. From **10 upward**, every trait pays out automatically:
+**Traits have no cap. They grow infinitely.** The old "stat cap" language named
+these thresholds, but they are not ceilings — they are **repeating milestone
+payouts**: from 10 upward, every trait automatically pays out an extra effect
+point at each step, forever:
 
 | Trait | Every … points past 10 | Grants |
 |---|---|---|
@@ -1037,6 +1040,7 @@ ruling source (digital addendum R-ids / owner decisions D-ids):
 | Full original tag list retained (Appendix C) | — | **D-6** |
 | Stat-valued ranges convention; item variance rule; Surgeon's Table circular unlock fixed; Moments/Clocks vocabulary purge | F2, F4, B14, F9 | errata |
 | **2026-07-23 rulings batch:** poison-type signature effects; infection cures; audience economy model (billions of Viewers, paying Followers, permanent Patron roster); Camera Call finalized (self-call legal); tier-aware exchange approved; equipment slots + 20 ring slots; terrain framework; fall-damage sketch; part-recovery paths; part-max-HP sources; permanent achievement stat awards; thresholds executed at the Gemstone via compatible skills; no multi-stat level bind; passives need no upkeep | Q4, Q8/Q9, Q11, Q15, Q31, Q32, Q34–Q37, Q48, Q51, Q57, Q59, Q63, Q64 | owner, in chat |
+| **Traits explicitly uncapped** — infinite growth; the over-10 "stat caps" are repeating milestone bonuses, not ceilings | Q5 | owner, 2026-07-23 |
 
 **Deliberately NOT in this book** (video-game-only): force-vs-robustness damage,
 run types/respawn, Earth-life-only races, the pruned tag list, noise/absorption
@@ -1046,19 +1050,16 @@ layer.
 ## Appendix B — Open rules questions (the honest list)
 
 *Sixteen of the original nineteen were ruled on 2026-07-23 and folded into the
-chapters above. What remains:*
+chapters above — including the last trait question: traits are uncapped, the
+over-10 thresholds are repeating milestone bonuses (§3.2). What remains:*
 
-1. **Intended endgame trait totals** — are the over-10 cap tiers (Reflexes 12 /
-   Mind 15 / Charm 20) meant to be reachable by design, or aspirational? *(The
-   2026-07-23 batch clarified SKILL caps — 1–5 natural, 6–10 one by one — which
-   is in §4.2; this TRAIT question is still open.)*
-2. **Tag mechanical effects** — per-tag design pass. **Scheduled: a dedicated
+1. **Tag mechanical effects** — per-tag design pass. **Scheduled: a dedicated
    sitting with the owner.**
-3. **Currency, store pricing, loot-box generation tables** — large pass,
+2. **Currency, store pricing, loot-box generation tables** — large pass,
    deferred.
-4. **Lounge module effects, Upgrade-Token sinks, downtime structure** — large
+3. **Lounge module effects, Upgrade-Token sinks, downtime structure** — large
    sitting, deferred.
-5. **Skill compatibility marking** — a standard way to tag which skills are
+4. **Skill compatibility marking** — a standard way to tag which skills are
    compatible for Gemstone merges/upgrades (new TODO from the 2026-07-23
    threshold ruling; §4.5).
 
