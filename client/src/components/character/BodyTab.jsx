@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES } from '../../constants.js';
+import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES, CANON_CONDITIONS } from '../../constants.js';
 import { uid, dmgClass, traitTotal as traitTotalOf, capBonus, effectiveMaxHp } from '../../constants.js';
 
 function CondAddForm({ onAdd, onCancel }) {
@@ -7,7 +7,10 @@ function CondAddForm({ onAdd, onCancel }) {
   const [tier, setTier] = useState('1');
   return (
     <div className="cond-add-form">
-      <input className="fi" style={{ flex: 1, fontSize: 11, padding: '3px 6px' }} placeholder="Condition name" value={text} onChange={e => setText(e.target.value)} autoFocus />
+      <input className="fi" style={{ flex: 1, fontSize: 11, padding: '3px 6px' }} placeholder="Condition name" value={text} onChange={e => setText(e.target.value)} autoFocus list="canon-conditions" />
+      <datalist id="canon-conditions">
+        {CANON_CONDITIONS.map(c => <option key={c} value={c} />)}
+      </datalist>
       <select className="mini-select" value={tier} onChange={e => setTier(e.target.value)}>
         <option value="1">T1</option><option value="2">T2</option><option value="3">T3</option><option value="4">T4</option>
       </select>
@@ -140,8 +143,13 @@ export default function BodyTab({ state, update }) {
             <div className="field-group">
               <label className="field-label">Race</label>
               <select className="fi" value={id.race} onChange={e => patchId('race', e.target.value)}>
+                {id.race && !RACES.includes(id.race) && <option value={id.race}>{id.race} (legacy)</option>}
                 {RACES.map(r => <option key={r}>{r}</option>)}
               </select>
+            </div>
+            <div className="field-group">
+              <label className="field-label">Species / Model</label>
+              <input className="fi" value={id.species || ''} onChange={e => patchId('species', e.target.value)} placeholder="e.g. Sea Lion" />
             </div>
             <div className="field-group">
               <label className="field-label">Level</label>
@@ -296,8 +304,9 @@ export default function BodyTab({ state, update }) {
               className="btn btn-muted btn-xs"
               style={{ opacity: (state.shock?.tier ?? 0) === 0 ? 0.35 : 1 }}
               onClick={() => update(s => ({ ...s, shock: { ...s.shock, tier: 0 } }))}
+              title="Shock never decays in combat — it fully resets when the combat ends (R13)"
             >
-              Clear
+              Reset (combat end)
             </button>
             {(state.shock?.tier ?? 0) === 0 && (
               <span className="shock-none-label">No Shock</span>

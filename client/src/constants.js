@@ -15,9 +15,14 @@ export const CORE_TRAITS = ['mind', 'charm'];
 export const ALL_TRAITS = ['physique', 'reflexes', 'mind', 'charm'];
 export const TRAIT_LABELS = { physique: 'Physique', reflexes: 'Reflexes', mind: 'Mind', charm: 'Charm' };
 
-export const RACES = ['Human', 'Cyborg', 'Android', 'Mutant', 'Alien', 'Clone', 'Hybrid', 'Synthetic'];
+// Rulebook v0.92 taxonomy (2026-07-23). Races: book canon + freetext species on
+// identity. Damage types = the resistance keys, 1:1 (Dissolution = the psychic
+// class; an item is a legal "explicit source"). Legacy values (Psy/Toxic/Shock,
+// sci-fi races) are migrated by server/migrate-rules-vocab.js.
+export const RACES = ['Human', 'Animal', 'Robot / AI'];
 export const ATK_TYPES = ['Single Target', 'Line', 'Arc', 'Cone', 'Burst', 'Self', 'Thrown', 'All'];
-export const DMG_TYPES = ['Crush', 'Bleed', 'Burn', 'Shock', 'Toxic', 'Psy'];
+export const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
+export const CANON_CONDITIONS = ['Bleeding', 'Crushed', 'Burn', 'Chilled', 'Poison', 'Infected', 'Suffocation', 'Dissolution', 'Exhausted'];
 export const BOSS_TIERS   = ['bronze', 'silver', 'gold', 'legendary', 'mythic', 'godly'];
 export const ITEM_TIERS   = ['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional'];
 export const AFFIX_TIERS  = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
@@ -31,7 +36,7 @@ export const CAT_ICONS = {
 };
 
 export const DEFAULT_STATE = {
-  identity: { name: '', player: '', race: 'Human', level: 1, background: '', portrait: '', contestantNumber: '' },
+  identity: { name: '', player: '', race: 'Human', species: '', level: 1, background: '', portrait: '', contestantNumber: '' },
   traits: {
     physique: { base: 1, bonus: 0, levelBonus: 0 },
     reflexes: { base: 1, bonus: 0, levelBonus: 0 },

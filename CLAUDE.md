@@ -128,9 +128,17 @@ Skills are granted to players by templateId. The player sheet joins template dat
    resistances admin-settable (`PATCH /players/:userId/resistances` + PlayerPanel);
    InventoryTab imports shared constants; new parts get `baseHp`; `cooldownRemaining`
    removed; condition tiers to T4.
-2. Rules alignment §B-2 (remaining): DMG_TYPES → book taxonomy (Bleed/Crush/Burn/Chill/
-   Poison/Infection) with data migration; races → Human/Animal/Robot-AI + species;
-   canonical condition-name picker; optional magazine field; prime display after the
+2. ~~Rules alignment §B-2~~ **CODE DONE 2026-07-23 — DATA MIGRATION PENDING (owner runs
+   it after mongodump)**: `DMG_TYPES` = the 7 resistance keys (Bleed/Crush/Burn/Chill/
+   Poison/Infection/Dissolution — damage types and resistances now match 1:1); `RACES` =
+   Human/Animal/Robot / AI + `identity.species` freetext (legacy race values still render
+   until migrated); canonical condition-name datalist (freetext still allowed); `magazine`
+   on items (model+routes+both UIs); skill Lv0 shows "Untrained"; Shock clear button
+   relabeled "Reset (combat end)".
+   **Runbook:** `node server/migrate-rules-vocab.js` (dry run, prints every change) →
+   `--apply` (Psy→Dissolution, Toxic→Poison, Shock→Burn; Sea Lion→Animal+species,
+   AI→Robot / AI+species). Then `node server/seedTagDescriptions.js` → `--apply` (fills
+   empty tag descriptions from rulebook Appendix C). Prime display still rides the
    owner's skill passover.
 3. Polish §B-4: CommsTab recipient/whisper selector; admin tag picker; tag description/
    effect backfill from the rulebook tag compendium.

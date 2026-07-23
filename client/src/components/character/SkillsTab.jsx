@@ -187,7 +187,9 @@ export default function SkillsTab({ state, update, token }) {
                     );
                   })}
                 </div>
-                <span className="skill-level-label">Lv {level}/{cap}</span>
+                <span className="skill-level-label" title={level === 0 ? 'Revealed but untrained — the skill does nothing until level 1' : undefined}>
+                  Lv {level}/{cap}{level === 0 ? ' · Untrained' : ''}
+                </span>
               </div>
 
               {/* Upgrade hint */}

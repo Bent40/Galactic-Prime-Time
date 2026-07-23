@@ -35,6 +35,11 @@ function ItemForm({ value, onChange }) {
           <input className="fi" type="number" min="1" value={value.rpm ?? ''}
             onChange={e => onChange({ ...value, rpm: e.target.value === '' ? null : Math.max(1, +e.target.value) })} />
         </div>
+        <div className="field-group">
+          <label className="field-label">Magazine <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(rounds before reload; reload = 2 Moments, both hands)</span></label>
+          <input className="fi" type="number" min="1" value={value.magazine ?? ''}
+            onChange={e => onChange({ ...value, magazine: e.target.value === '' ? null : Math.max(1, +e.target.value) })} />
+        </div>
         <div className="field-group"><label className="field-label">Damage</label><input className="fi" value={value.damage} onChange={e => onChange({ ...value, damage: e.target.value })} /></div>
       </div>
       <div style={{ marginBottom: 10 }}>
@@ -66,7 +71,7 @@ function ItemForm({ value, onChange }) {
   );
 }
 
-const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', rpm: null, damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null } };
+const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', rpm: null, magazine: null, damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null } };
 
 const ITEM_TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 
@@ -126,6 +131,7 @@ export default function ItemLibrarySection({ token, players, showToast }) {
                     {it.tier && <span className="badge" style={{ borderColor: ITEM_TIER_COLOR[it.tier], color: ITEM_TIER_COLOR[it.tier] }}>{it.tier}</span>}
                     {it.damage && <span className="badge badge-danger">⚔ {it.damage}</span>}
                     {it.rpm != null && <span className="badge badge-cyan">{it.rpm} RPM</span>}
+                    {it.magazine != null && <span className="badge badge-cyan">{it.magazine} mag</span>}
                     {(it.attackTypes || []).map(t => <span key={t} className="badge badge-cyan">{t}</span>)}
                     {(it.damageType || []).map(t => <span key={t} className="badge badge-gold">{t}</span>)}
                     {it.qty > 1 && <span className="badge badge-muted">×{it.qty}</span>}
