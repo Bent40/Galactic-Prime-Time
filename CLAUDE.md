@@ -142,8 +142,12 @@ Skills are granted to players by templateId. The player sheet joins template dat
    Shock→Burn; Sea Lion→Animal+species, AI→Robot / AI+species) →
    `node seedTagDescriptions.js` → `--apply` (fills empty tag descriptions from
    rulebook Appendix C). Prime display still rides the owner's skill passover.
-3. Polish §B-4: CommsTab recipient/whisper selector; admin tag picker; tag description/
-   effect backfill from the rulebook tag compendium.
+3. ~~Polish §B-4~~ **DONE 2026-07-23**: CommsTab whisper selector (📢 broadcast /
+   🤫 players / 🎭 NPCs via `/api/players`); admin tag input backed by the tag-catalog
+   datalist (freetext preserved, effect auto-copied on match); player tag picker and
+   owned-tag chips show the seeded rulebook descriptions (search includes them).
+   Deliberately NOT done: auto-decrement item uses (manual fits table play);
+   Moment-tracker 10→1 countdown display (cosmetic).
 
 ## Workflow
 - After completing any task, always commit the changes with a descriptive commit message summarizing what was done. Don't add your signature to it.

@@ -8,6 +8,7 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [tokenForm, setTokenForm] = useState({ narrative: 0, upgrade: 0, patronTokens: 0 });
   const [achForm, setAchForm] = useState({ title: '', desc: '', reward: '' });
   const [tagForm, setTagForm] = useState('');
+  const [tagLib, setTagLib] = useState([]);
   const [skillLib, setSkillLib] = useState([]);
   const [libSearch, setLibSearch] = useState('');
   const [itemLib, setItemLib] = useState([]);
@@ -34,6 +35,7 @@ export default function PlayerPanel({ player, token, showToast }) {
     });
     apiFetch('/api/admin/skill-library', {}, token).then(d => { if (Array.isArray(d)) setSkillLib(d); });
     apiFetch('/api/items', {}, token).then(d => { if (Array.isArray(d)) setItemLib(d); });
+    apiFetch('/api/tags', {}, token).then(d => { if (Array.isArray(d)) setTagLib(d); });
   }, [player.userId]);
 
   if (loading) return <div style={{ padding: 20, color: 'var(--muted)', fontSize: 11, letterSpacing: 2 }}>LOADING...</div>;
@@ -143,7 +145,8 @@ export default function PlayerPanel({ player, token, showToast }) {
   }
   async function addTag() {
     if (!tagForm.trim()) return;
-    const newTags = [...(state.tags || []), { id: uid(), name: tagForm.trim(), state: 'active', effect: '' }];
+    const master = tagLib.find(t => t.name.toLowerCase() === tagForm.trim().toLowerCase());
+    const newTags = [...(state.tags || []), { id: uid(), name: master?.name || tagForm.trim(), state: 'active', effect: master?.effect || '' }];
     const d = await apiFetch(`/api/admin/players/${player.userId}/tags`, { method: 'PATCH', body: JSON.stringify({ tags: newTags }) }, token);
     if (d.ok) { showToast('Tag added'); setCharData(cd => ({ ...cd, state: { ...cd.state, tags: newTags } })); setTagForm(''); }
     else showToast(d.error, 'err');
@@ -456,7 +459,12 @@ export default function PlayerPanel({ player, token, showToast }) {
           {(!state.tags || state.tags.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No tags.</span>}
         </div>
         <div className="row">
-          <input className="fi" style={{ flex: 1 }} placeholder="Tag name..." value={tagForm} onChange={e => setTagForm(e.target.value)} onKeyDown={e => e.key === 'Enter' && addTag()} />
+          <input className="fi" style={{ flex: 1 }} placeholder="Tag name (pick from catalog or freetext)..." value={tagForm} onChange={e => setTagForm(e.target.value)} onKeyDown={e => e.key === 'Enter' && addTag()} list="admin-tag-master" />
+          <datalist id="admin-tag-master">
+            {tagLib
+              .filter(t => !(state.tags || []).some(x => x.name.toLowerCase() === t.name.toLowerCase()))
+              .map(t => <option key={t._id} value={t.name} />)}
+          </datalist>
           <button className="btn btn-cyan btn-sm" onClick={addTag}>+ Tag</button>
         </div>
       </div>
