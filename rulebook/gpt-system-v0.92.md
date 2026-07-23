@@ -228,6 +228,12 @@ a **broad** group (two magic skills of different elements, say) is the "ask the
 GM with a fiction reason" case. No overlap = incompatible. New skills pick from
 this list; the GM may grow the taxonomy deliberately, never casually.
 
+**The canonical worked example** *(ruled 2026-07-23)*: **Intercept Lv 5 +
+Brace Lv 3** — compatible through *bracing* — merge at the Gemstone into
+**Iron Stance**: the mobile bodyguard consumes the self-brace and becomes the
+rooted bulwark (while you hold your ground, attacks on adjacent allies retarget
+to you). Both parents are consumed; the mutation arrives at level 1.
+
 ### 4.6 Priming — there are no cooldowns *(v0.92: cooldowns are removed from the system entirely)*
 
 Powerful skills are gated by **preparation, not waiting**. A skill with a prime

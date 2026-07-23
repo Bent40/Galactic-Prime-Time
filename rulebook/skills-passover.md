@@ -21,11 +21,12 @@
   the next campaign.
 - **G5 APPROVED** — XQUEZ/T skill definitions concretized.
 - **G6 RULED (round 2):** **Intercept** approved with the zig-zag ladder (range/physical
-  resistance alternating L2–5, guard-two at L6) · **Iron Stance NOT seeded** — proposed
-  instead as the first authored Gemstone MUTATION (Intercept + Brace merge → Iron
-  Stance), pending owner nod · **Death Grip Jaws** approved WITHOUT a prime (any
-  bite-capable body may grapple freely) · **Field Triage** approved · **Play to the
-  Camera** approved. Remaining ~20 candidates stay parked.
+  resistance alternating L2–5, guard-two at L6) · **Iron Stance APPROVED as the first
+  authored Gemstone MUTATION (round 3): Intercept Lv5 + Brace Lv3 → Iron Stance**, both
+  parents consumed; template seeded with the recipe as its acquisition line, and the
+  merge recorded in book §4.5 as the canonical example · **Death Grip Jaws** approved
+  WITHOUT a prime (any bite-capable body may grapple freely) · **Field Triage**
+  approved · **Play to the Camera** approved. Remaining ~20 candidates stay parked.
 - **G7 RULED — NO exclusive skills.** Acquisition requirements instead (ruled round 2):
   Full Potential = "be savvy with your hands and have real repair experience";
   Heroic Punch = "aspire wholeheartedly to be a hero while being extremely weak at the

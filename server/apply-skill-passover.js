@@ -370,6 +370,30 @@ const NEW_SKILLS = [
     },
   },
   {
+    // APPROVED as a MUTATION (owner 2026-07-23): not learnable directly — created
+    // at the Skill Gemstone by merging Intercept Lv5 + Brace Lv3 (compatible via
+    // the 'bracing' keyword; both parents consumed). Seeded so the admin can
+    // grant it when a player performs the merge.
+    name: 'Iron Stance',
+    momentCost: '0 (Stance)',
+    stats: ['Physique'],
+    passive: false,
+    capacity: 5,
+    requirements: 'Physique 5. Declare at the start of a Moment; the stance ends the instant you move or fall Prone.',
+    range: '1',
+    target: 'Self',
+    effect: 'Hold your ground: any attack targeting an ally adjacent to you retargets to you instead, and your bracing persists — reduce Crush or Burn damage taken in the stance by 1.',
+    achievementUnlock: 'Mutation: merge Intercept Lv 5 + Brace Lv 3 at the Skill Gemstone (both are consumed).',
+    keywords: ['survival', 'bracing'],
+    levelEffects: {
+      2: 'Stance damage reduction −2 (Crush/Burn)',
+      3: '+1 protected radius',
+      4: 'The reduction extends to Bleed and Chill',
+      5: 'Stance damage reduction −3',
+      6: 'Enemies must spend +1 Moment on any action that tries to move past you.',
+    },
+  },
+  {
     name: 'Play to the Camera',
     momentCost: '1',
     stats: ['Charm'],
