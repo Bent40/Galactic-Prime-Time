@@ -1,6 +1,28 @@
 # Skill Passover — the sitting worksheet
 
-**Date:** 2026-07-23 · **Status:** AWAITING OWNER ANSWERS
+**Date:** 2026-07-23 · **Status:** PART 1 RULED (see block below); G3 + G6 in progress
+
+## RULINGS (owner, 2026-07-23, in chat)
+
+- **G1 RULED — owner's own model (supersedes both proposals): Tactical Roll is a
+  declared-hex dodge.** You give up your movement for the Moment and declare the hex
+  you roll to; the attack still resolves — if your hex is inside its range/area you get
+  hit anyway. No charges, no stance, no cooldown. Acrobatic Save gets the same
+  movement-forfeit cost in place of its cooldown.
+- **G2 APPROVED** — one growth schema; ladders authored for the zero-growth skills.
+- **G3 REJECTED as proposed** — broad families are wrong (not all BLADES merge; ranged ≠
+  melee; ELEMENTS is a subclass of magic; RACE never merges). Follow-up model being
+  picked (hierarchical keywords vs explicit lists vs GM-only).
+- **G4 RULED — stats are FROZEN for this campaign run.** No stat/scaling changes to any
+  existing skill (Voicebox stays Charm; Telepathy keeps Charm secondary). Revisit for
+  the next campaign.
+- **G5 APPROVED** — XQUEZ/T skill definitions concretized.
+- **G6 — new skills reviewed ONE BY ONE** (in progress in chat).
+- **G7 RULED — NO exclusive skills.** Full Potential / Heroic Punch are gated by weird
+  ACQUISITION requirements, not locks. No `exclusiveTo` field. (Anyone could earn them.)
+- **G8 APPROVED** — the repair batch.
+
+**Applied by:** `server/apply-skill-passover.js` (dry-run default; 25 template patches).
 **Scope:** all 44 skill templates (the TABLE canon — the live campaign's skill library).
 Answer by number in chat ("G1: B, G4: approved, #9: change to…") or edit this file.
 Everything here builds on the full per-skill audit (game repo,
