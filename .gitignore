@@ -1,6 +1,8 @@
 server/.env
 server/node_modules/
 server/logs/
+server/backups/
 client/node_modules/
 client/build/
-client/.envwiki-check.png
+client/.env
+wiki-check.png

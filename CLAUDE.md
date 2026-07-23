@@ -135,11 +135,13 @@ Skills are granted to players by templateId. The player sheet joins template dat
    until migrated); canonical condition-name datalist (freetext still allowed); `magazine`
    on items (model+routes+both UIs); skill Lv0 shows "Untrained"; Shock clear button
    relabeled "Reset (combat end)".
-   **Runbook:** `node server/migrate-rules-vocab.js` (dry run, prints every change) →
-   `--apply` (Psy→Dissolution, Toxic→Poison, Shock→Burn; Sea Lion→Animal+species,
-   AI→Robot / AI+species). Then `node server/seedTagDescriptions.js` → `--apply` (fills
-   empty tag descriptions from rulebook Appendix C). Prime display still rides the
-   owner's skill passover.
+   **Runbook (from `server/`, no mongodump needed):** `node backup-db.js` (EJSON dump of
+   every collection to `server/backups/backup-<ts>/`; restore via
+   `node restore-db.js backups/backup-<ts> --apply`) → `node migrate-rules-vocab.js`
+   (dry run, prints every change) → `--apply` (Psy→Dissolution, Toxic→Poison,
+   Shock→Burn; Sea Lion→Animal+species, AI→Robot / AI+species) →
+   `node seedTagDescriptions.js` → `--apply` (fills empty tag descriptions from
+   rulebook Appendix C). Prime display still rides the owner's skill passover.
 3. Polish §B-4: CommsTab recipient/whisper selector; admin tag picker; tag description/
    effect backfill from the rulebook tag compendium.
 
