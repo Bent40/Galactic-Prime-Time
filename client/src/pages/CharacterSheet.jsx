@@ -96,6 +96,7 @@ export default function CharacterSheet() {
         <div className="topbar-right">
           <span className={`save-pill ${saveStatus}`}>{saveStatus === 'saving' ? 'SAVING…' : 'SAVED'}</span>
           <span style={{ letterSpacing: 1 }}>{auth.username?.toUpperCase()}</span>
+          <button className="btn btn-sm" onClick={() => window.open('/wiki', '_blank')} title="Open the rulebook">📖 Wiki</button>
           <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>
         </div>
       </div>

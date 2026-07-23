@@ -109,12 +109,26 @@ Do not add additional direct `apiFetch` saves on top of this — use `update()` 
 Admin manages skill templates via SkillLibrarySection. Templates stored in `skilltemplates` collection.
 Skills are granted to players by templateId. The player sheet joins template data at runtime.
 
-## Known Backlog (in priority order)
-1. Item uses/charges field (schema + UI)
-2. Player chat input — CommsTab is currently read-only. Players need to send messages. Check messages route and admin CommsSection for schema.
-3. Tag picker from master tag list instead of freetext
-4. Player-editable subtask checkboxes on objectives
-5. RPM field on ranged weapons
+## Rulebook & Wiki (added 2026-07-23)
+- **`rulebook/gpt-system-v0.92.md` is the canonical TTRPG rules master** (owner decision
+  D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
+- The player-facing **Wiki** (`/wiki` route, `client/src/pages/Wiki.jsx`) renders it via a
+  `?raw` import + `marked` — one committed copy, no drift. The 📖 Wiki button in the sheet
+  topbar opens it. `vite.config.js` has `server.fs.allow: ['..']` so dev mode can read it.
+- The full reconciliation plan (rules updates + app fixes, decisions D-1..D-8) lives in the
+  game repo: `Galactic-Prime-Time-Game/docs/ttrpg-update-plan.md`.
+
+## Known Backlog (updated 2026-07-23 — old items 1–5 are DONE)
+1. Bug fixes from the reconciliation plan §B-1: CombatModeTab ignores Physique HP bonus /
+   stale maxHp; skill refund counts from current template stats instead of traitCosts;
+   affliction resistances unwritable; InventoryTab duplicated constants (missing System/Key
+   Items categories); new body parts lack baseHp.
+2. Rules alignment §B-2: DMG_TYPES → book taxonomy (Bleed/Crush/Burn/Chill/Poison/
+   Infection) with data migration; races → Human/Animal/Robot-AI + species; remove dead
+   `cooldownRemaining` (no cooldowns — priming); condition tiers to T4; Shock combat-end
+   reset affordance; optional magazine field.
+3. Polish §B-4: CommsTab recipient/whisper selector; admin tag picker; tag description/
+   effect backfill from the rulebook tag compendium.
 
 ## Workflow
 - After completing any task, always commit the changes with a descriptive commit message summarizing what was done. Don't add your signature to it.
