@@ -5,6 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
+    fs: {
+      // allow importing the rulebook markdown from the repo root (../rulebook)
+      allow: ['..'],
+    },
     proxy: {
       '/api': {
         target: 'http://localhost:3001',

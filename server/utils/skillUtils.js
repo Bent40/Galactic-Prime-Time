@@ -25,7 +25,6 @@ async function enrichSkills(skills) {
       templateId: sk.templateId,
       level: sk.level || 0,
       capacity: sk.capacity ?? (tpl.capacity || 5),
-      cooldownRemaining: sk.cooldownRemaining || 0,
       traitCosts: sk.traitCosts || [],
       // Template-derived display fields
       name: tpl.name,
@@ -37,6 +36,7 @@ async function enrichSkills(skills) {
       target: tpl.target || '',
       effect: tpl.effect || '',
       description: tpl.description || '',
+      keywords: tpl.keywords || [],
       levelEffects: tpl.levelEffects || {},
     };
   });
@@ -56,7 +56,6 @@ function normalizeSkills(skills) {
         templateId: sk.templateId,
         level: sk.level || 0,
         capacity: sk.capacity ?? 5,
-        cooldownRemaining: sk.cooldownRemaining || 0,
         traitCosts: sk.traitCosts || [],
       };
     }

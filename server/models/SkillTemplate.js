@@ -12,6 +12,10 @@ const skillTemplateSchema = new mongoose.Schema({
   effect:       { type: String, default: '' },
   description:       { type: String, default: '' },
   achievementUnlock: { type: String, default: '' },
+  // Gemstone compatibility keywords (owner ruling 2026-07-23, G3-A): skills
+  // sharing a NARROW keyword are merge-compatible; sharing only a BROAD one
+  // needs GM approval. Taxonomy: rulebook/skills-passover.md.
+  keywords:          { type: [String], default: [] },
   levelEffects:      { type: Object, default: {} },
 }, { timestamps: true });
 

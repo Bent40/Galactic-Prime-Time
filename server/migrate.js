@@ -3,7 +3,7 @@
  *
  * Changes made:
  *  1. Skills: replace full snapshot objects with reference instances
- *             { id, templateId, level, capacity, cooldownRemaining, traitCosts }
+ *             { id, templateId, level, capacity, traitCosts }
  *             Skills with no matching template are kept as legacy inline records.
  *
  *  2. Traits: consolidate three flat objects (traits, traitBonus, traitLevelBonus)
@@ -54,7 +54,6 @@ async function migrate() {
             templateId: String(tpl._id),
             level: sk.level || 0,
             capacity: sk.capacity ?? (tpl.capacity || 5),
-            cooldownRemaining: sk.cooldownRemaining || 0,
             traitCosts: sk.traitCosts || [],
           };
         }

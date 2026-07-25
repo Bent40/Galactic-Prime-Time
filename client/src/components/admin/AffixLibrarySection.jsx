@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
+import { AFFIX_TIERS } from '../../constants.js';
 
 const TYPES = ['prefix', 'suffix'];
-const TIERS = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
+const TIERS = AFFIX_TIERS;
 
 const TIER_COLOR = {
   Lesser:    'var(--muted)',

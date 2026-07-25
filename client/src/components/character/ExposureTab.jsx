@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
-import { uid, BOSS_TIERS } from '../../constants.js';
+import { uid, BOSS_TIERS, capBonus } from '../../constants.js';
 import { apiFetch } from '../../api.js';
 
 
@@ -32,8 +32,14 @@ export default function ExposureTab({ state, update, token }) {
     const owned = new Set((state.tags || []).map(t => t.name.toLowerCase()));
     return masterTags
       .filter(t => !owned.has(t.name.toLowerCase()))
-      .filter(t => !q || t.name.toLowerCase().includes(q) || (t.effect || '').toLowerCase().includes(q));
+      .filter(t => !q || t.name.toLowerCase().includes(q) || (t.effect || '').toLowerCase().includes(q) || (t.description || '').toLowerCase().includes(q));
   }, [tagSearch, state.tags, masterTags]);
+
+  const masterDesc = useMemo(() => {
+    const m = {};
+    masterTags.forEach(t => { if (t.description) m[t.name.toLowerCase()] = t.description; });
+    return m;
+  }, [masterTags]);
 
   function patchPatron(rank, k, v) {
     update(s => ({ ...s, patrons: s.patrons.map(p => p.rank === rank ? { ...p, [k]: v } : p) }));
@@ -53,9 +59,7 @@ export default function ExposureTab({ state, update, token }) {
   const rankLabel = ['', '🥇 Top Patron', '🥈 2nd Patron', '🥉 3rd Patron'];
   const rankClass = ['', 'r1', 'r2', 'r3'];
 
-  const charmTr = state.traits?.charm || {};
-  const charmTotal = (charmTr.base || 0) + (charmTr.bonus || 0) + (charmTr.levelBonus || 0);
-  const cameraCallEarned = Math.floor(Math.max(0, charmTotal - 10) / 20);
+  const cameraCallEarned = capBonus(state, 'charm');
   const cameraCallUsed = state.cameraCallUsed || 0;
   const cameraCallAvail = Math.max(0, cameraCallEarned - cameraCallUsed);
 
@@ -130,7 +134,7 @@ export default function ExposureTab({ state, update, token }) {
         <div className="panel-title">Tags</div>
         <div className="tags-wrap">
           {(state.tags || []).map(tag => (
-            <div key={tag.id} className={`tag-chip ${tag.state || 'active'}`}>
+            <div key={tag.id} className={`tag-chip ${tag.state || 'active'}`} title={masterDesc[tag.name.toLowerCase()] || undefined}>
               <div className="tag-chip-top" onClick={() => cycleTag(tag.id)}>
                 <span className="tag-chip-name">{tag.name}</span>
                 <span className="tag-state-lbl">{tag.state || 'active'}</span>
@@ -167,7 +171,8 @@ export default function ExposureTab({ state, update, token }) {
                     onMouseLeave={e => e.currentTarget.style.background = 'rgba(0,0,0,.2)'}
                   >
                     <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--cyan)', letterSpacing: 1 }}>{t.name}</div>
-                    {t.effect && <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>{t.effect}</div>}
+                    {t.description && <div style={{ fontSize: 10, color: 'var(--text)', opacity: 0.8, marginTop: 2, lineHeight: 1.35 }}>{t.description}</div>}
+                    {t.effect && <div style={{ fontSize: 10, color: 'var(--gold)', marginTop: 2 }}>{t.effect}</div>}
                   </div>
                 ))}
                 {filteredMaster.length === 0 && (

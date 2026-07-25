@@ -8,6 +8,7 @@ const itemTemplateSchema = new mongoose.Schema({
   attackTypes:    [{ type: String }],
   range:          { type: String, default: '' },
   rpm:            { type: Number, default: null },
+  magazine:       { type: Number, default: null },
   damage:         { type: String, default: '' },
   damageType:     [{ type: String }],
   specialEffects: { type: String, default: '' },

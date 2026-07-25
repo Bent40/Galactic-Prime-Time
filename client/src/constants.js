@@ -15,9 +15,14 @@ export const CORE_TRAITS = ['mind', 'charm'];
 export const ALL_TRAITS = ['physique', 'reflexes', 'mind', 'charm'];
 export const TRAIT_LABELS = { physique: 'Physique', reflexes: 'Reflexes', mind: 'Mind', charm: 'Charm' };
 
-export const RACES = ['Human', 'Cyborg', 'Android', 'Mutant', 'Alien', 'Clone', 'Hybrid', 'Synthetic'];
+// Rulebook v0.92 taxonomy (2026-07-23). Races: book canon + freetext species on
+// identity. Damage types = the resistance keys, 1:1 (Dissolution = the psychic
+// class; an item is a legal "explicit source"). Legacy values (Psy/Toxic/Shock,
+// sci-fi races) are migrated by server/migrate-rules-vocab.js.
+export const RACES = ['Human', 'Animal', 'Robot / AI'];
 export const ATK_TYPES = ['Single Target', 'Line', 'Arc', 'Cone', 'Burst', 'Self', 'Thrown', 'All'];
-export const DMG_TYPES = ['Crush', 'Bleed', 'Burn', 'Shock', 'Toxic', 'Psy'];
+export const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
+export const CANON_CONDITIONS = ['Bleeding', 'Crushed', 'Burn', 'Chilled', 'Poison', 'Infected', 'Suffocation', 'Dissolution', 'Exhausted'];
 export const BOSS_TIERS   = ['bronze', 'silver', 'gold', 'legendary', 'mythic', 'godly'];
 export const ITEM_TIERS   = ['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional'];
 export const AFFIX_TIERS  = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
@@ -31,7 +36,7 @@ export const CAT_ICONS = {
 };
 
 export const DEFAULT_STATE = {
-  identity: { name: '', player: '', race: 'Human', level: 1, background: '', portrait: '', contestantNumber: '' },
+  identity: { name: '', player: '', race: 'Human', species: '', level: 1, background: '', portrait: '', contestantNumber: '' },
   traits: {
     physique: { base: 1, bonus: 0, levelBonus: 0 },
     reflexes: { base: 1, bonus: 0, levelBonus: 0 },
@@ -93,6 +98,26 @@ export const DEFAULT_STATE = {
 
 export function uid() {
   return Date.now() + Math.floor(Math.random() * 100000);
+}
+
+// ── Shared rules math — single source of truth; every tab imports these ──
+export function traitTotal(state, t) {
+  const tr = state?.traits?.[t] || {};
+  return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
+}
+
+// Traits are uncapped; every N points past 10 pays out one milestone bonus
+// (Physique /5 → +1 part HP · Reflexes /12 → +1 phys res · Mind /15 → +1 psychic
+// tier · Charm /20 → +1 Camera Call stack).
+export const CAP_DIVISORS = { physique: 5, reflexes: 12, mind: 15, charm: 20 };
+export function capBonus(state, t) {
+  return Math.floor(Math.max(0, traitTotal(state, t) - 10) / CAP_DIVISORS[t]);
+}
+
+// A part's live max = its base HP (baseHp; legacy parts fall back to maxHp)
+// plus the Physique milestone bonus.
+export function effectiveMaxHp(bp, state) {
+  return (bp.baseHp ?? bp.maxHp ?? 0) + capBonus(state, 'physique');
 }
 
 export function dmgClass(current, max) {

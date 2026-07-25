@@ -1,15 +1,18 @@
 import { useState, useRef } from 'react';
-import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES } from '../../constants.js';
-import { uid, dmgClass } from '../../constants.js';
+import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES, CANON_CONDITIONS } from '../../constants.js';
+import { uid, dmgClass, traitTotal as traitTotalOf, capBonus, effectiveMaxHp } from '../../constants.js';
 
 function CondAddForm({ onAdd, onCancel }) {
   const [text, setText] = useState('');
   const [tier, setTier] = useState('1');
   return (
     <div className="cond-add-form">
-      <input className="fi" style={{ flex: 1, fontSize: 11, padding: '3px 6px' }} placeholder="Condition name" value={text} onChange={e => setText(e.target.value)} autoFocus />
+      <input className="fi" style={{ flex: 1, fontSize: 11, padding: '3px 6px' }} placeholder="Condition name" value={text} onChange={e => setText(e.target.value)} autoFocus list="canon-conditions" />
+      <datalist id="canon-conditions">
+        {CANON_CONDITIONS.map(c => <option key={c} value={c} />)}
+      </datalist>
       <select className="mini-select" value={tier} onChange={e => setTier(e.target.value)}>
-        <option value="1">T1</option><option value="2">T2</option><option value="3">T3</option>
+        <option value="1">T1</option><option value="2">T2</option><option value="3">T3</option><option value="4">T4</option>
       </select>
       <button className="btn btn-success btn-xs" onClick={() => onAdd(text, tier)}>Add</button>
       <button className="btn btn-muted btn-xs" onClick={onCancel}>✕</button>
@@ -39,13 +42,18 @@ export default function BodyTab({ state, update }) {
     ) }));
   }
   function addBodyPart() {
-    update(s => ({ ...s, bodyParts: [...s.bodyParts, { id: uid(), name: 'New Part', maxHp: 3, currentHp: 3, lethal: false, conditions: [] }] }));
+    update(s => ({ ...s, bodyParts: [...s.bodyParts, { id: uid(), name: 'New Part', baseHp: 3, maxHp: 3, currentHp: 3, lethal: false, conditions: [] }] }));
+  }
+  function setBaseHp(bpId, v) {
+    const val = Math.max(0, v);
+    // baseHp is canonical; maxHp kept in sync so no consumer ever reads a stale value
+    update(s => ({ ...s, bodyParts: s.bodyParts.map(b => b.id === bpId ? { ...b, baseHp: val, maxHp: val } : b) }));
   }
   function rmBodyPart(bpId) { update(s => ({ ...s, bodyParts: s.bodyParts.filter(b => b.id !== bpId) })); }
 
   function adjustPhysRes(key, delta) {
     const scb = state.statCapBonuses || {};
-    const pEarned = Math.floor(Math.max(0, traitTotal('reflexes') - 10) / 12);
+    const pEarned = capBonus(state, 'reflexes');
     const pSpent = (scb.bleed || 0) + (scb.crush || 0) + (scb.burn || 0);
     const current = scb[key] || 0;
     if (delta > 0 && pSpent >= pEarned) return;
@@ -53,10 +61,7 @@ export default function BodyTab({ state, update }) {
     update(s => ({ ...s, statCapBonuses: { ...s.statCapBonuses, [key]: Math.max(0, current + delta) } }));
   }
 
-  function traitTotal(t) {
-    const tr = state.traits?.[t] || {};
-    return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
-  }
+  function traitTotal(t) { return traitTotalOf(state, t); }
   function isBodyTrait(t) { return BODY_TRAITS.includes(t); }
   function traitPool(t) { return isBodyTrait(t) ? 'body' : 'core'; }
 
@@ -102,9 +107,9 @@ export default function BodyTab({ state, update }) {
   const lvlPool = state.levelPoints?.pool ?? 0;
   const isLevelOne = (id.level || 1) <= 1;
 
-  const hpBonus       = Math.floor(Math.max(0, traitTotal('physique')  - 10) / 5);
-  const physResEarned = Math.floor(Math.max(0, traitTotal('reflexes')  - 10) / 12);
-  const dissolution   = Math.floor(Math.max(0, traitTotal('mind')      - 10) / 15);
+  const hpBonus       = capBonus(state, 'physique');
+  const physResEarned = capBonus(state, 'reflexes');
+  const dissolution   = capBonus(state, 'mind');
   const scb = state.statCapBonuses || {};
   const physResSpent  = (scb.bleed || 0) + (scb.crush || 0) + (scb.burn || 0);
   const physResRemain = Math.max(0, physResEarned - physResSpent);
@@ -138,8 +143,13 @@ export default function BodyTab({ state, update }) {
             <div className="field-group">
               <label className="field-label">Race</label>
               <select className="fi" value={id.race} onChange={e => patchId('race', e.target.value)}>
+                {id.race && !RACES.includes(id.race) && <option value={id.race}>{id.race} (legacy)</option>}
                 {RACES.map(r => <option key={r}>{r}</option>)}
               </select>
+            </div>
+            <div className="field-group">
+              <label className="field-label">Species / Model</label>
+              <input className="fi" value={id.species || ''} onChange={e => patchId('species', e.target.value)} placeholder="e.g. Sea Lion" />
             </div>
             <div className="field-group">
               <label className="field-label">Level</label>
@@ -213,7 +223,7 @@ export default function BodyTab({ state, update }) {
         <div className="body-parts-grid">
           {state.bodyParts.map(bp => {
             const baseHp = bp.baseHp ?? bp.maxHp;
-            const effectiveMax = baseHp + hpBonus;
+            const effectiveMax = effectiveMaxHp(bp, state);
             const cls = dmgClass(bp.currentHp, effectiveMax);
             const boxes = Array.from({ length: effectiveMax }, (_, i) => i >= bp.currentHp);
             return (
@@ -230,7 +240,7 @@ export default function BodyTab({ state, update }) {
                   <span className="hp-label">HP</span>
                   <input className="hp-max-input" type="number" min="0" value={baseHp}
                     title={hpBonus > 0 ? `Base ${baseHp} + ${hpBonus} Physique = ${effectiveMax}` : undefined}
-                    onChange={e => patchBP(bp.id, 'baseHp', Math.max(0, +e.target.value))} />
+                    onChange={e => setBaseHp(bp.id, +e.target.value)} />
                   {hpBonus > 0 && <span style={{ fontSize: 9, color: 'var(--cyan)', marginLeft: 2 }}>+{hpBonus}</span>}
                   <div className="hp-boxes">
                     {boxes.map((isDmg, i) => (
@@ -294,8 +304,9 @@ export default function BodyTab({ state, update }) {
               className="btn btn-muted btn-xs"
               style={{ opacity: (state.shock?.tier ?? 0) === 0 ? 0.35 : 1 }}
               onClick={() => update(s => ({ ...s, shock: { ...s.shock, tier: 0 } }))}
+              title="Shock never decays in combat — it fully resets when the combat ends (R13)"
             >
-              Clear
+              Reset (combat end)
             </button>
             {(state.shock?.tier ?? 0) === 0 && (
               <span className="shock-none-label">No Shock</span>

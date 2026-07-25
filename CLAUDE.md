@@ -48,9 +48,12 @@ traits: {
 ### Skills (reference model)
 Skills on the character are references, not snapshots. Instance stores only:
 ```js
-{ id, templateId, level, capacity, cooldownRemaining, traitCosts }
+{ id, templateId, level, capacity, traitCosts }
 ```
 Display fields (name, effect, stats, etc.) are joined from `SkillTemplate` at runtime via `enrichSkills()` in `skillUtils.js`. Use `normalizeSkills()` before saving to DB to strip template fields.
+`traitCosts` is a list of per-level spend RECORDS (arrays of trait names, one per level-up);
+legacy data may contain flat strings — level-down refunds handle both. `cooldownRemaining`
+was removed 2026-07-23 (no cooldowns in the system — priming).
 
 ### Level Points
 Single unified pool — any trait can be leveled from it regardless of Body/Core pillar:
@@ -109,12 +112,46 @@ Do not add additional direct `apiFetch` saves on top of this — use `update()` 
 Admin manages skill templates via SkillLibrarySection. Templates stored in `skilltemplates` collection.
 Skills are granted to players by templateId. The player sheet joins template data at runtime.
 
-## Known Backlog (in priority order)
-1. Item uses/charges field (schema + UI)
-2. Player chat input — CommsTab is currently read-only. Players need to send messages. Check messages route and admin CommsSection for schema.
-3. Tag picker from master tag list instead of freetext
-4. Player-editable subtask checkboxes on objectives
-5. RPM field on ranged weapons
+## Rulebook & Wiki (added 2026-07-23)
+- **`rulebook/gpt-system-v0.92.md` is the canonical TTRPG rules master** (owner decision
+  D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
+- The player-facing **Wiki** (`/wiki` route, `client/src/pages/Wiki.jsx`) renders it via a
+  `?raw` import + `marked` — one committed copy, no drift. The 📖 Wiki button in the sheet
+  topbar opens it. `vite.config.js` has `server.fs.allow: ['..']` so dev mode can read it.
+- The full reconciliation plan (rules updates + app fixes, decisions D-1..D-8) lives in the
+  game repo: `Galactic-Prime-Time-Game/docs/ttrpg-update-plan.md`.
+
+## Known Backlog (updated 2026-07-23 — §B-1 bug pass DONE)
+1. ~~Bug fixes §B-1~~ **DONE 2026-07-23**: shared rules helpers in `constants.js`
+   (`traitTotal`/`capBonus`/`effectiveMaxHp` — import these, never re-derive); Combat Mode
+   uses effective max HP; refunds follow `traitCosts` spend records; affliction
+   resistances admin-settable (`PATCH /players/:userId/resistances` + PlayerPanel);
+   InventoryTab imports shared constants; new parts get `baseHp`; `cooldownRemaining`
+   removed; condition tiers to T4.
+2. ~~Rules alignment §B-2~~ **DONE — migration EXECUTED on the campaign DB 2026-07-25**
+   (Fedora Hat Psy→Dissolution ×2, Sea Lion→Animal, AI→Robot / AI; 100 tag descriptions
+   seeded; skill passover applied same day: 27 template repairs, 44 keyword sets, 5 new
+   skills. Backup: `server/backups/backup-2026-07-25T12-03-11`. The campaign DB lives
+   with the `ClaudeCodeTest` checkout — the `New\…` folder's DB is a sparse dev copy.)
+   Original code notes: `DMG_TYPES` = the 7 resistance keys (Bleed/Crush/Burn/Chill/
+   Poison/Infection/Dissolution — damage types and resistances now match 1:1); `RACES` =
+   Human/Animal/Robot / AI + `identity.species` freetext (legacy race values still render
+   until migrated); canonical condition-name datalist (freetext still allowed); `magazine`
+   on items (model+routes+both UIs); skill Lv0 shows "Untrained"; Shock clear button
+   relabeled "Reset (combat end)".
+   **Runbook (from `server/`, no mongodump needed):** `node backup-db.js` (EJSON dump of
+   every collection to `server/backups/backup-<ts>/`; restore via
+   `node restore-db.js backups/backup-<ts> --apply`) → `node migrate-rules-vocab.js`
+   (dry run, prints every change) → `--apply` (Psy→Dissolution, Toxic→Poison,
+   Shock→Burn; Sea Lion→Animal+species, AI→Robot / AI+species) →
+   `node seedTagDescriptions.js` → `--apply` (fills empty tag descriptions from
+   rulebook Appendix C). Prime display still rides the owner's skill passover.
+3. ~~Polish §B-4~~ **DONE 2026-07-23**: CommsTab whisper selector (📢 broadcast /
+   🤫 players / 🎭 NPCs via `/api/players`); admin tag input backed by the tag-catalog
+   datalist (freetext preserved, effect auto-copied on match); player tag picker and
+   owned-tag chips show the seeded rulebook descriptions (search includes them).
+   Deliberately NOT done: auto-decrement item uses (manual fits table play);
+   Moment-tracker 10→1 countdown display (cosmetic).
 
 ## Workflow
 - After completing any task, always commit the changes with a descriptive commit message summarizing what was done. Don't add your signature to it.
