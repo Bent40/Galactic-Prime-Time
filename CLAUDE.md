@@ -128,8 +128,12 @@ Skills are granted to players by templateId. The player sheet joins template dat
    resistances admin-settable (`PATCH /players/:userId/resistances` + PlayerPanel);
    InventoryTab imports shared constants; new parts get `baseHp`; `cooldownRemaining`
    removed; condition tiers to T4.
-2. ~~Rules alignment §B-2~~ **CODE DONE 2026-07-23 — DATA MIGRATION PENDING (owner runs
-   it after mongodump)**: `DMG_TYPES` = the 7 resistance keys (Bleed/Crush/Burn/Chill/
+2. ~~Rules alignment §B-2~~ **DONE — migration EXECUTED on the campaign DB 2026-07-25**
+   (Fedora Hat Psy→Dissolution ×2, Sea Lion→Animal, AI→Robot / AI; 100 tag descriptions
+   seeded; skill passover applied same day: 27 template repairs, 44 keyword sets, 5 new
+   skills. Backup: `server/backups/backup-2026-07-25T12-03-11`. The campaign DB lives
+   with the `ClaudeCodeTest` checkout — the `New\…` folder's DB is a sparse dev copy.)
+   Original code notes: `DMG_TYPES` = the 7 resistance keys (Bleed/Crush/Burn/Chill/
    Poison/Infection/Dissolution — damage types and resistances now match 1:1); `RACES` =
    Human/Animal/Robot / AI + `identity.species` freetext (legacy race values still render
    until migrated); canonical condition-name datalist (freetext still allowed); `magazine`
