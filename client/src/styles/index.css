@@ -140,6 +140,8 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .btn-success:hover { background: rgba(0,255,136,.12); }
 .btn-gold { border-color: var(--gold); color: var(--gold); }
 .btn-gold:hover { background: rgba(200,168,75,.15); }
+.btn-wiki { border-color: var(--gold); color: #ffd76a; background: rgba(200,168,75,.16); box-shadow: 0 0 10px rgba(200,168,75,.35); font-size: 11px; padding: 6px 14px; }
+.btn-wiki:hover { background: rgba(200,168,75,.32); box-shadow: 0 0 16px rgba(200,168,75,.6); color: #ffe9a8; }
 .btn-muted { border-color: var(--muted); color: var(--muted); }
 .btn-muted:hover { border-color: var(--text); color: var(--text); }
 .btn-sm { padding: 3px 8px; font-size: 9px; }
