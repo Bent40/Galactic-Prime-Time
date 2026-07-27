@@ -1,6 +1,16 @@
 # Economy Passover — currency, the store, loot boxes (the FINAL sitting)
 
-**Date:** 2026-07-25 · **Status:** AWAITING OWNER ANSWERS (GC1–GC6)
+**Date:** 2026-07-25 · **Status:** GC0 RULED · GC1–GC6 AWAITING OWNER ANSWERS
+
+## GC0 — RULED (owner, 2026-07-25): Boss Tokens RETIRED
+
+"Boss tokens were what upgrade tokens currently are — they serve no other purpose."
+Bosses now drop **Upgrade Tokens scaled by rank** (Neighbourhood 5 · District 10 ·
+City 25 · Precinct 50 · Country 100 · Stage 250 ⚖ — the old tiers survive as the
+payout ladder). Module unlocks re-denominated in UT; the D-2 tier-aware exchange is
+**amended** to a flat **25 UT → 1 Patron Token** ⚖; the app's Boss Token tracker is
+removed and `server/migrate-boss-tokens.js` converts legacy held tokens (unused →
+UT at the scale; spent → dropped). Book §19 rewritten.
 **Scope:** the last unruled territory in the book — Q49 (currency & the store), Q50
 (loot-box generation per tier), Q53's sliver (pre-affixed drops), Q54 (uses/charges
 refills), plus the undistributed Fantasy Item Coupons from the compendium.

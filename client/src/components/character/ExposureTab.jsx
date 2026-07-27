@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
-import { uid, BOSS_TIERS, capBonus } from '../../constants.js';
+import { uid, capBonus } from '../../constants.js';
 import { apiFetch } from '../../api.js';
 
 
@@ -7,7 +7,6 @@ export default function ExposureTab({ state, update, token }) {
   const portraitRefs = useRef([null, null, null]);
   const [tagSearch, setTagSearch] = useState('');
   const [tagPickerOpen, setTagPickerOpen] = useState(false);
-  const [tokenForm, setTokenForm] = useState({ tier: 'bronze' });
   const [masterTags, setMasterTags] = useState([]);
 
   useEffect(() => {
@@ -46,15 +45,6 @@ export default function ExposureTab({ state, update, token }) {
   }
 
   function adjustToken(k, delta) { update(s => ({ ...s, tokens: { ...s.tokens, [k]: Math.max(0, (s.tokens[k] || 0) + delta) } })); }
-  function addBossToken() {
-    update(s => ({ ...s, tokens: { ...s.tokens, bossTokens: [...(s.tokens.bossTokens || []), { id: uid(), tier: tokenForm.tier, used: false }] } }));
-  }
-  function toggleBossToken(id) {
-    update(s => ({ ...s, tokens: { ...s.tokens, bossTokens: (s.tokens.bossTokens || []).map(t => t.id === id ? { ...t, used: !t.used } : t) } }));
-  }
-  function rmBossToken(id) {
-    update(s => ({ ...s, tokens: { ...s.tokens, bossTokens: (s.tokens.bossTokens || []).filter(t => t.id !== id) } }));
-  }
 
   const rankLabel = ['', '🥇 Top Patron', '🥈 2nd Patron', '🥉 3rd Patron'];
   const rankClass = ['', 'r1', 'r2', 'r3'];
@@ -227,22 +217,6 @@ export default function ExposureTab({ state, update, token }) {
               </div>
             </div>
           ))}
-        </div>
-        <hr className="divider" />
-        <div className="section-label">Boss Tokens</div>
-        <div className="boss-tokens-grid">
-          {(state.tokens?.bossTokens || []).map(t => (
-            <div key={t.id} className={`boss-token t-${t.tier}${t.used ? ' used' : ''}`} onClick={() => toggleBossToken(t.id)}>
-              {t.tier[0].toUpperCase()}
-              <button className="boss-token-rm" onClick={e => { e.stopPropagation(); rmBossToken(t.id); }}>✕</button>
-            </div>
-          ))}
-        </div>
-        <div className="row gap-sm" style={{ marginTop: 8 }}>
-          <select className="mini-select" value={tokenForm.tier} onChange={e => setTokenForm({ tier: e.target.value })}>
-            {BOSS_TIERS.map(t => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
-          </select>
-          <button className="btn btn-cyan btn-sm" onClick={addBossToken}>+ Boss Token</button>
         </div>
       </div>
     </>
