@@ -50,13 +50,42 @@ Food NEVER restores HP (the no-HP-items ruling stands). Kitchen output works on
 **Exhausted and morale**: meals delay/resolve Exhausted and buy small pre-deployment
 boons. Keeps the healing economy honest.
 
+### GL6 — Healing is a PRICED, ESCALATING service (owner direction, 2026-07-25)
+
+**This amends the current "Lounge restores HP fully, free" rule.** The Corporation
+always provides medical — and invoices you. Premiums rise with every claim and with
+how deep you are:
+
+- **The Med Bay** (Living Facilities, auto-present like the Dormitories — the
+  Corporation would never let its assets die uninvoiced) sells the **full medical
+  restore**: all parts to max, all resolvable conditions resolved, reattachment triage
+  included.
+- **Price ⚖: `Floor × 2^(heals already taken this floor)` Upgrade Tokens**, per
+  contestant. Floor 1: 1 → 2 → 4 → 8… Floor 3: 3 → 6 → 12 → 24… Exponential in
+  usage, scaled by depth ("hazard pricing").
+- **The claim counter is per contestant and resets on descending to a new floor**
+  (each floor's ledger starts fresh — but the base price is now higher).
+- **Natural rest** (free, the Dormitories): resolvable conditions still resolve over a
+  downtime — time heals sickness — but HP recovery slows to **+1 HP per part per
+  downtime** ⚖. A mauled party without tokens limps for real story time; a funded
+  party pays the bill and re-deploys shiny.
+- Open sub-calls for the owner:
+  - **(a)** Free-rest rate: +1 HP/part/downtime (recommended — prevents an unwinnable
+    broke-and-broken lockout) · or NO free HP at all (hard mode) · or rest-to-half?
+  - **(b)** Currency confirm: Upgrade Tokens (recommended — healing becomes THE big UT
+    sink, with GM income as the difficulty lever) or something else?
+  - **(c)** Does a bleed-out stabilization count as a "heal" claim? (Recommend: no —
+    the claim is the restore, not the save.)
+  - **(d)** Formula shape confirm: `Floor × 2^claims`, or a different base/curve?
+
 ---
 
 ## Part 2 — Module effects (L1 = at unlock · L2/L3 per GL2) ⚖ all numbers placeholder
 
 | Module (unlock) | L1 | L2 | L3 |
 |---|---|---|---|
-| **Dormitories** (auto) | The full-restore engine (sleep = HP + resolvable conditions). Doesn't level. | — | — |
+| **Dormitories** (auto) | Free rest: resolvable conditions resolve over downtime; HP trickles back slowly (GL6). Doesn't level. | — | — |
+| **Med Bay** (auto) | The full medical restore, invoiced per GL6: `Floor × 2^claims` UT ⚖. The bill is itemized. On camera. | Bulk rate: heal the whole party at once for the sum minus the cheapest member's bill ⚖ | Premium plan: one claim per floor at half price ⚖ |
 | **Restrooms** (auto) | Monitored. The Corporation thanks you for your compliance. | — | — |
 | **Kitchen** (1 Bronze) | Each contestant carries **1 Meal** per deployment: eating (1 Moment + interaction economy) removes Exhausted T1 or delays any Exhausted one advancement | 2 Meals; meals also delay Infected once | Pre-deployment feast: the party is immune to Exhausted until the first Clock reset of the run |
 | **Farm** (1 Silver) | Ingredient supply (enables Kitchen L2+ recipes) + small animals: one **companion** per party (GM-statted, permanently losable) | **Mounts**: overworld travel + carry capacity (GM-adjudicated) | Exotic livestock: ingredients for crafting antitoxins/bandage stock at the Forge |
