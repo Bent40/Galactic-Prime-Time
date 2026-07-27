@@ -1,6 +1,14 @@
 # Lounge Passover — the sitting worksheet
 
-**Date:** 2026-07-25 · **Status:** AWAITING OWNER ANSWERS (GL1–GL5 + module table)
+**Date:** 2026-07-25 · **Status:** ✅ RULED (owner, 2026-07-25) — GL1–GL5 approved,
+GL6 sub-calls ruled (slow trickle · Upgrade Tokens · bleed-out stabilization FREE —
+"losing the contestant costs more than stabilizing them" · Floor × 2^claims), plus the
+**THINK BIGGER directive**: the Lounge is the **Golden Cage** — essential AND a crutch,
+so good contestants delay their own descent while the Corporation milks the house-drama.
+Advanced Fabricator = a giant 3D printer (L1 ammo only → L3 futuristic weaponry:
+plasma, railguns, even nuclear options). Module table amped accordingly.
+**The canonical ruled version now lives in book §20** — this worksheet is the record
+of the sitting; the draft table below is superseded by the book.
 **Scope:** what every module actually DOES · Upgrade-Token sinks (they currently buy
 nothing — review finding B14) · downtime structure (Q67) · threshold-die pricing (the
 D-5 parking spot) · respec pricing (Q6 said "Lounge, at a cost" — this prices it).

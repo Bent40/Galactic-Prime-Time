@@ -788,7 +788,18 @@ Applies in and out of combat.
   treat and delay conditions only. Applying a treatment to yourself or an ally
   costs **1 Moment** (§5.5's interaction economy applies).
 - Field HP recovery exists **only** via explicit, rare, stated abilities.
-- **At the Lounge:** HP restores fully; resolvable conditions resolve.
+- **At the Lounge** *(amended 2026-07-25 — healing is a priced service)*:
+  - **Free rest** (Dormitories): resolvable conditions resolve over a downtime —
+    time heals sickness — but HP trickles back at only **+1 per part per
+    downtime** ⚖.
+  - **The full medical restore is INVOICED** at the **Med Bay** (§20.3):
+    **`Floor × 2^(claims already made this floor)` Upgrade Tokens** per
+    contestant, claim counter resetting each floor. All parts to max, all
+    resolvable conditions cleared, reattachment triage included. Premiums rise
+    with every claim and every floor deeper — hazard pricing, itemized, on
+    camera.
+  - **Bleed-out stabilization is always free.** Losing the contestant costs the
+    Corporation more than stabilizing them. Almost always.
 - Deliberately harsh: wounds are content, and the audience loves a limp.
 
 ---
@@ -935,8 +946,9 @@ production awareness).
 ### 19.1 The currencies
 
 - **Upgrade Tokens** — from bosses, bartering, crowd donations, Directives, rare
-  loot boxes. 🎙️ Named sinks are still an open design item (every listed Lounge
-  cost is Boss Tokens); the GM prices ad-hoc purchases until the economy pass.
+  loot boxes. **Sinks (ruled 2026-07-25):** Med Bay bills (§16), module levels
+  (§20.2), extra downtime actions, threshold dice, and respec — the Lounge is
+  where the Corporation recoups.
 - **Boss Tokens** — tiered: Bronze / Silver / Gold / Legendary / Mythic / Godly.
   Unlock Lounge modules.
 - **Patron Tokens** — the skill-cap currency (§17.2).
@@ -959,36 +971,75 @@ the exchange is the overflow valve.)*
 
 ---
 
-## 20. The Lounge
+## 20. The Lounge *(ruled 2026-07-25 — the full pass)*
 
 The party's corporate-controlled modular base; unlocks after the Tutorial Boss.
 
+> **Design pillar — the Golden Cage.** The Lounge is essential AND a crutch. The
+> Corporation builds it so good that contestants delay their own descent —
+> every comfort is content, every upgrade is a reason to stay one more cycle,
+> and the cameras never stop: Lounge drama is half the show. Let it seduce.
+> The trade of comfort-now against progression is a real choice, and the
+> Corporation profits either way — you're either content in the dungeon or
+> content in the house.
+
 **House rules:** no entry during combat; all Loot Boxes must be opened inside, and
-opening opens ALL held boxes simultaneously; a guide is available; overstaying →
-ejection + 24h re-entry lock; fully monitored 24/7 — higher levels mean more
-surveillance.
+opening opens ALL held boxes simultaneously; a guide is available; overstaying
+past all pretense of content → ejection + 24h re-entry lock; fully monitored
+24/7 — higher levels mean more surveillance.
 
-**Sections & modules** (unlock costs in Boss Tokens):
+### 20.1 Downtime
 
-1. **Living Facilities** — Dormitories (auto), Restrooms (auto), Kitchen
-   (1 Bronze), Farm (1 Silver — animals, food, mounts).
-2. **Factory** — Forging Station (1 Bronze), Goldsmith (2 Bronze), Melding
-   Station (1 Silver — merge 2 same-type equipment into 1), Advanced Fabricator
-   (1 Silver — gunpowder/electricity tech), Enchantment Altar (2 Bronze —
-   extract/apply modifiers), Wizard's Tower (3 Bronze — modifiers & magical
-   relics).
-3. **Modification Center** — Skill Gemstone (1 Bronze — disassemble/consume/merge
-   skills), Tattoo Artist (1 Gold — permanent buff tattoos), Surgeon's Table
-   (2 Silver — biological body modification, **including race changes**),
-   Augmentation Hub (2 Silver — mechanical body modification). *(v0.92 erratum:
-   the old "+ race change" unlock precondition was circular — the module that does
-   race changes can't require one — and is deleted.)*
-4. **Garage** — Bike Shop (3 Silver), Car Shop (3 Silver), Armory (3 Gold —
-   armored vehicles).
-5. **Universal Travel** — the door of descent; fixed, no submodules.
+Between deployments each contestant gets **2 downtime actions**; one action = one
+module engagement (a craft, a merge, a surgery, a training session). Sleeping,
+eating, and free rest cost nothing. The GM may grant a third action across long
+story gaps; an **extra action costs 3 Upgrade Tokens** ⚖ (once per downtime).
 
-⚖️ A future module raises **threshold dice** (§14) — details arrive with the
-Lounge design pass.
+### 20.2 Module levels — the Upgrade-Token sink
+
+Every purchasable module has three levels: **L1** = what the Boss-Token unlock
+buys · **L2 = 5 Upgrade Tokens** · **L3 = 15 Upgrade Tokens** ⚖. The Lounge is
+where Upgrade Tokens go to die — happily.
+
+### 20.3 The modules (all numbers ⚖ placeholder)
+
+**Living Facilities**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Dormitories (auto) | Free rest: resolvable conditions resolve over downtime; +1 HP per part per downtime | — | — |
+| **Med Bay** (auto) | The full medical restore, invoiced: `Floor × 2^claims` UT (§16). Bleed-out stabilization always free | Bulk rate: heal the whole party for the sum minus the cheapest member's bill | Premium plan: first claim each floor at half price; recovery spa doubles the free-rest trickle |
+| Kitchen (1 Bronze) | **1 Meal** per contestant per deployment: eating (1 Moment) removes Exhausted T1 or delays Exhausted one advancement | Personal chef: 2 Meals; pre-deployment boon — the party is immune to Exhausted until the run's first Clock reset | Five-star gastronomy: feast episodes earn hype during downtime; meals also delay Infected; one bespoke dish per contestant per floor grants a chosen first-Clock boon (Exhausted immunity · +1 free-move space · Shock T1 immunity) |
+| Farm (1 Silver) | Ingredient supply + one party **companion animal** (GM-statted, permanently losable) | **Mounts** (overworld speed + carry) and livestock — bandage/antitoxin crafting stock | The menagerie: a trained **battle-beast**, exotic boss-livestock, and the petting-zoo segment (standing Patron draw) |
+
+**Factory**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Forging Station (1 Bronze) | Craft/repair **Crude–Basic** weapons and tools | Craft **Quality** | Master forge: **Superior**, plus one **signature weapon** commission per floor — named, hype-tagged, yours |
+| Goldsmith (2 Bronze) | **Trinkets** — ring-class items (the 20 slots) each holding one **Lesser** modifier | **Normal**-modifier trinkets + barter bench (valuables → Upgrade Tokens) | The luxury line: **Higher**-modifier trinkets; wearing the full set is a standing Patron draw — bling attracts donors |
+| Melding Station (1 Silver) | Merge 2 same-type items → 1: better base + ONE modifier from the sacrifice | Keep two modifiers from the sacrifice | True fusion: once per floor the meld bumps the result one item tier; cross-type chimera merges (GM-adjudicated) |
+| **Advanced Fabricator** (1 Silver) | **The giant 3D printer — L1 prints ammo only** (magazines, standard rounds; refills free) | Gadget printing: element-tipped special ammo, grapnels, flash/smoke, one-shot drones | **The impossible catalog: futuristic weaponry** — plasma cutters, railguns, energy shields… and yes, **nuclear options** (a micro-nuke is a once-per-campaign purchase the GM prices in tokens AND consequences; the crowd goes insane). Exotic prints consume rare materials + steep UT |
+| Enchantment Altar (2 Bronze) | Extract/apply modifiers; Lesser extraction destroys the modifier on a d6 roll of 1–2 | Destruction only on a 1; **Normal** extraction unlocked | Master ritual: Lesser never destroys; **Higher** extraction unlocked (the weapon still drops a tier — the ladder stands); the modifier vault stores extracted modifiers safely |
+| Wizard's Tower (3 Bronze) | The magic source: reveals magic skills (level 0) to qualifying contestants; craft **Lesser** modifiers | Craft **Normal**; arcane tutoring — one magic skill's training prerequisite per downtime | The sanctum: commission GM-authored **relics**; research unlocks exotic modifier crafting (access rules stand) |
+
+**Modification Center**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Skill Gemstone (1 Bronze) | Merges/mutations of compatible skills (§4.5 keywords) + **respec**: unlearn a skill, refund its recorded spend minus one point per level, +2 UT fee | Mutation preview: the outcome is revealed before you commit | Master facet: once per campaign a merge spares the consumed skill at level 0; a regretted merge may be undone within the same downtime |
+| Tattoo Artist (1 Gold) | One tattoo — choose: +1 flat physical resistance (Bleed/Crush/Burn) · +1 space of free movement · +1 Camera Call stack per session | Second tattoo slot; **threshold dice d4→d6 = 5 UT** (§14) | The masterpiece: third slot, free swaps each downtime, **d6→d8 = 15 UT + 1 Gold**, and the ink makes you recognizable (standing Patron draw) |
+| Surgeon's Table (2 Silver) | Reattach severed parts · prosthetic fitting · the canonical **race-change** service | **Animal-part grafts** (GM-statted from the beast you brought back) | Re-genesis: **boss-part grafts** with their quirks; restore one destroyed part permanently per floor |
+| Augmentation Hub (2 Silver) | Mechanical prosthetics + utility implants (built-in thin tool, storage compartment) | Weaponized prosthetics (count as a Light Small weapon, cannot be disarmed) | The exo-suite: subdermal plating (+1 flat resistance), integrated auto-loader, fabricator dock — refill ammo once per deployment in the field |
+
+**Garage & the door**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Bike Shop (3 Silver) | Fast overworld travel, 1–2 riders | Sidecars + saddlebags (carry) | Stunt fleet: televised race segments (hype) + arena-legal entrances |
+| Car Shop (3 Silver) | Party transport + real carry capacity | Off-road builds | **The tour bus: a mobile mini-Lounge** — once per deployment the party takes ONE downtime action in the field (the crutch on wheels) |
+| Armory (3 Gold) | One armored vehicle: mobile cover (GM-statted, ~10 HP) | Plating (+HP) and a ram (the vehicle can shove) | The war rig: heavy-ranged weapon mount (counts as steady ground); the crew cabin stabilizes bleed-outs in the field |
+| Universal Travel (fixed) | The door of descent. It doesn't level. It knows where you're going. | — | — |
 
 ---
 
@@ -1104,6 +1155,7 @@ ruling source (digital addendum R-ids / owner decisions D-ids):
 | **2026-07-23 rulings batch:** poison-type signature effects; infection cures; audience economy model (billions of Viewers, paying Followers, permanent Patron roster); Camera Call finalized (self-call legal); tier-aware exchange approved; equipment slots + 20 ring slots; terrain framework; fall-damage sketch; part-recovery paths; part-max-HP sources; permanent achievement stat awards; thresholds executed at the Gemstone via compatible skills; no multi-stat level bind; passives need no upkeep | Q4, Q8/Q9, Q11, Q15, Q31, Q32, Q34–Q37, Q48, Q51, Q57, Q59, Q63, Q64 | owner, in chat |
 | **Traits explicitly uncapped** — infinite growth; the over-10 "stat caps" are repeating milestone bonuses, not ceilings | Q5 | owner, 2026-07-23 |
 | **Tag effects ruled** — the six patterns (§18.1: domains/spotlight, quest-feed bias, Patron draw, lifecycle dial, 10 flagship riders, tag gates) + the 12-domain vocabulary; per-tag assignments for all 100 | Q42 | owner, 2026-07-25 |
+| **The Lounge ruled** — Golden Cage pillar; 2 downtime actions; module levels as the Upgrade-Token sink; **healing invoiced at `Floor × 2^claims` UT with free rest reduced to a slow trickle** (bleed-out stabilization always free); threshold dice + respec priced; the Fabricator as the 3D printer up to nuclear options | B14, Q65–Q67, D-5, Q6 pricing | owner, 2026-07-25 |
 
 **Deliberately NOT in this book** (video-game-only): force-vs-robustness damage,
 run types/respawn, Earth-life-only races, the pruned tag list, noise/absorption
@@ -1116,13 +1168,12 @@ layer.
 chapters above — including the last trait question: traits are uncapped, the
 over-10 thresholds are repeating milestone bonuses (§3.2). What remains:*
 
-1. **Currency, store pricing, loot-box generation tables** — large pass,
-   deferred.
-2. **Lounge module effects, Upgrade-Token sinks, downtime structure** — large
-   sitting, deferred.
+1. **Currency, store pricing, loot-box generation tables** — the last unruled
+   territory in the system.
 
-*(Resolved since: tag effects → §18.1–18.2, ruled 2026-07-25; skill
-compatibility → the keyword system in §4.5, ruled 2026-07-23.)*
+*(Resolved since: tag effects → §18.1–18.2 and the Lounge → §20 + the priced
+healing economy in §16, both ruled 2026-07-25; skill compatibility → the
+keyword system in §4.5, ruled 2026-07-23.)*
 
 ## Appendix C — Tag Compendium
 
