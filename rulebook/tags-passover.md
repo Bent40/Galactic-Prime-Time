@@ -1,6 +1,9 @@
 # Tags Passover — the sitting worksheet
 
-**Date:** 2026-07-25 · **Status:** AWAITING OWNER ANSWERS (GT1–GT5, then batches)
+**Date:** 2026-07-25 · **Status:** GT1–GT5 APPROVED + batch 1 approved (owner,
+2026-07-25). Batches 2–5 authored below — awaiting owner overrules.
+**Applied by:** `server/seedTagEffects.js` (dry-run default; writes each tag's
+`effect` line: domains + rider).
 **Scope:** mechanical effects for all 100 tags (TABLE canon). Descriptions (the earn
 guides) are already seeded; this sitting decides what tags DO.
 **Precedent honored:** the six-pattern effect model you approved for the game on
@@ -107,5 +110,102 @@ each approval or all at the end — your call.
 | 19 | Chunky Salsa Rule | carnage | — |
 | 20 | Coconut Superpowers | grit, comedy | — |
 
-*(Batches 2–5 follow the same shape once GT1–GT5 are ruled — no point authoring 80 more
-rows in a vocabulary you might edit.)*
+## Part 3 — Batch 2 (tags 21–40): the drama core
+
+| # | Tag | Domains | Rider? |
+|---|---|---|---|
+| 21 | Protagonist | showmanship, daring | — |
+| 22 | Antagonist | menace, meta | — |
+| 23 | Anti-Hero | menace, heart | — |
+| 24 | Incorrigible | comedy, daring | — |
+| 25 | No Cure For Evil | chaos, menace | — |
+| 26 | Munchkin | cunning, craft, meta | GT4 rider |
+| 27 | Little Dead Rising Hood | carnage, comedy | — |
+| 28 | Mascot | heart, showmanship | — |
+| 29 | Butcher | carnage | — |
+| 30 | Survivor | grit | — |
+| 31 | Spy | cunning | — |
+| 32 | Liability | chaos, comedy | — |
+| 33 | Method Actor | showmanship, grit | GT4 rider |
+| 34 | Understudy | craft, cunning | — |
+| 35 | Typecast | craft, meta | — |
+| 36 | Prima Donna | showmanship, comedy | — |
+| 37 | Scene Stealer | showmanship, cunning | GT4 rider |
+| 38 | The Monologue | showmanship, menace | GT4 rider |
+| 39 | Fourth Wall | meta, showmanship | — |
+| 40 | Box Office Bomb | comedy, daring | — |
+
+## Part 4 — Batch 3 (tags 41–60): production & the animal block
+
+| # | Tag | Domains | Rider? |
+|---|---|---|---|
+| 41 | Director's Cut | grit, showmanship | — |
+| 42 | Certified Fresh | daring, meta | — |
+| 43 | SAG Dispute | meta, grit | — |
+| 44 | Direct to DVD | heart, meta | — |
+| 45 | Callback | grit, showmanship | — |
+| 46 | Nepotism Hire | comedy, meta | — |
+| 47 | One Star Review | grit, showmanship | — |
+| 48 | Student Film | daring, craft | — |
+| 49 | Craft Services | comedy, heart | — |
+| 50 | Resting Loser Face | comedy, grit | — |
+| 51 | Applause Machine | comedy, showmanship | — |
+| 52 | Unlikely Menace | grit, cunning | — |
+| 53 | Adorable Threat | heart, carnage | — |
+| 54 | Waddled Into Frame | comedy, chaos | — |
+| 55 | The Bit | showmanship, comedy | GT4 rider |
+| 56 | Bark Bark Bark | teamwork, comedy | — |
+| 57 | Sea World Reject | showmanship, craft | — |
+| 58 | Flipper Mode | craft, grit | — |
+| 59 | Crowd's Baby | heart, meta | — |
+| 60 | Nine Lives | daring, grit | GT4 rider |
+
+## Part 5 — Batch 4 (tags 61–80): cats, birds & the idol block
+
+| # | Tag | Domains | Rider? |
+|---|---|---|---|
+| 61 | Knock It Off The Table | chaos, comedy | — |
+| 62 | Feral Consultant | chaos, cunning | — |
+| 63 | Witnessed | meta, cunning | — |
+| 64 | Murder Mittens | carnage, daring | — |
+| 65 | Dead Drop | cunning, meta | — |
+| 66 | Vet Visit | comedy, heart | — |
+| 67 | Territory Marked | cunning, menace | — |
+| 68 | 3am Energy | chaos, daring | — |
+| 69 | Indoor Cat | cunning, craft | — |
+| 70 | Birdwatcher | cunning, grit | — |
+| 71 | Main Vocalist | showmanship, meta | — |
+| 72 | Visual | showmanship | — |
+| 73 | Maknae | comedy, daring | — |
+| 74 | Rap Line | showmanship, craft | — |
+| 75 | Formation | teamwork, showmanship | — |
+| 76 | Comeback Stage | grit, showmanship | GT4 rider |
+| 77 | Internal Dispute | chaos, showmanship | — |
+| 78 | Solo Debut | daring, showmanship | — |
+| 79 | Parasocial | heart, meta | — |
+| 80 | All-Kill | showmanship, carnage, daring | — |
+
+## Part 6 — Batch 5 (tags 81–100): the software block & finale
+
+| # | Tag | Domains | Rider? |
+|---|---|---|---|
+| 81 | Disbandment Arc | chaos, heart | — |
+| 82 | Fan Service | showmanship, meta | — |
+| 83 | Blue Screen | comedy, meta | — |
+| 84 | Legacy Code | comedy, grit | — |
+| 85 | Corrupted File | chaos, comedy | — |
+| 86 | Unpatched | grit, meta | — |
+| 87 | 404 | comedy, meta | — |
+| 88 | Out of Memory | comedy, chaos | — |
+| 89 | Safe Mode | grit, craft | — |
+| 90 | Null Pointer | comedy, meta | — |
+| 91 | Overclock | daring, grit | — |
+| 92 | Peer Review | comedy, cunning | — |
+| 93 | Technical Difficulties | comedy, chaos, teamwork | — |
+| 94 | Off Script | chaos, showmanship | — |
+| 95 | Crossover Event | teamwork, chaos | — |
+| 96 | Genre Shift | showmanship, meta | — |
+| 97 | Background Character | cunning, meta | — |
+| 98 | The Recast | craft, teamwork | — |
+| 99 | Blooper Reel | comedy, grit | — |
+| 100 | Post-Credits Scene | meta, daring | — |

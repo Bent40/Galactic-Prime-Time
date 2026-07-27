@@ -1004,10 +1004,50 @@ contract.
 - **Gained via:** table consensus ("it's their thing"), hidden condition
   fulfillment, Goals/Directives, corporate narrative shaping. Player-proposed tags
   must appear on TVTropes.org.
-- **Lifecycle:** acquired → **Reinforced** (play into it; stack gear/skills;
-  potentially permanent) → **Faded** (neglected) → **Lost** → reacquirable.
-- 🎙️ **GM CALL:** most tags' mechanical weight is GM-played (loot bias, crowd
-  reads). Explicit per-tag effects are an open design pass.
+- **Lifecycle:** acquired → **Reinforced** (play into it; stack gear/skills) →
+  **Faded** (neglected) → **Lost** → reacquirable.
+
+### 18.1 What tags DO — the six patterns *(ruled 2026-07-25)*
+
+1. **On-brand spotlight.** Every tag carries 1–3 **domains** (below). Doing your
+   tag's thing on camera is what the crowd pays for — on-brand plays are the
+   reliable way to move Viewers (and, when Reinforced, Followers).
+2. **The Show writes for you.** Goals and Directives are drawn toward your tags —
+   your identity shapes your quest feed.
+3. **Patron draw.** Patrons adopt contestants whose tags match their taste; your
+   domains steer who takes interest in you and what paid Goals they set.
+4. **Lifecycle is the dial.** Active = normal effect · **Reinforced = doubled
+   pull, and the tag can only be lost by dramatically betraying it** · Faded =
+   no effect until played back into.
+5. **Flagship riders.** Ten hand-picked tags carry one bespoke trigger each
+   (table below). Everything else stays declarative.
+6. **Tag gates.** Items, skills, Directives, and unlocks may REQUIRE a tag —
+   authored per content piece.
+
+**The twelve domains:** carnage (kills, gore, overkill) · daring (risk, stunts) ·
+showmanship (performance, style) · comedy (failure-comedy, timing) · heart
+(empathy, protection) · menace (fear, villainy) · cunning (stealth, schemes) ·
+grit (survival, comebacks) · teamwork (combos, assists) · chaos (collateral,
+mayhem) · craft (improvisation, clever solutions) · meta (fourth-wall,
+production awareness).
+
+### 18.2 The flagship riders
+
+| Tag | Rider |
+|---|---|
+| The Monologue | Once per session, a delivered monologue makes your next action's crowd payout triple |
+| Comeback Stage | Returning from bleed-out or Helpless, your next action can't be interrupted and pays double hype |
+| Fan Favorite | Once per session, ask the crowd for a Goal of your choice (the GM prices its reward honestly) |
+| Scene Stealer | Once per session, redirect an ally's Camera Call spotlight onto yourself mid-scene |
+| The Bit | The third performance of your bit in a session is an automatic Viewer spike |
+| Nine Lives | Once per session, reroll one Forced Action die where the escape was movement-based |
+| Unkillable | Once per campaign arc, refuse a death: you land in bleed-out instead, regardless of cause |
+| Method Actor | Staying in character through a Forced Action consequence converts it into crowd favor |
+| Munchkin | Once per campaign, an exploit you found is grandfathered for you even after the GM patches it |
+| LEEROY JENKINS | Acting first in an ambush YOU triggered, your opening action costs 1 less Moment |
+
+- Per-tag domains live on the tags themselves (the sheet app shows them; the
+  master assignments are in \`rulebook/tags-passover.md\`).
 - **The full tag list with earn-conditions is Appendix C** — reading it is
   allowed; that's what it's for. The descriptions are the acquisition guide.
 
@@ -1186,6 +1226,7 @@ ruling source (digital addendum R-ids / owner decisions D-ids):
 | Stat-valued ranges convention; item variance rule; Surgeon's Table circular unlock fixed; Moments/Clocks vocabulary purge | F2, F4, B14, F9 | errata |
 | **2026-07-23 rulings batch:** poison-type signature effects; infection cures; audience economy model (billions of Viewers, paying Followers, permanent Patron roster); Camera Call finalized (self-call legal); tier-aware exchange approved; equipment slots + 20 ring slots; terrain framework; fall-damage sketch; part-recovery paths; part-max-HP sources; permanent achievement stat awards; thresholds executed at the Gemstone via compatible skills; no multi-stat level bind; passives need no upkeep | Q4, Q8/Q9, Q11, Q15, Q31, Q32, Q34–Q37, Q48, Q51, Q57, Q59, Q63, Q64 | owner, in chat |
 | **Traits explicitly uncapped** — infinite growth; the over-10 "stat caps" are repeating milestone bonuses, not ceilings | Q5 | owner, 2026-07-23 |
+| **Tag effects ruled** — the six patterns (§18.1: domains/spotlight, quest-feed bias, Patron draw, lifecycle dial, 10 flagship riders, tag gates) + the 12-domain vocabulary; per-tag assignments for all 100 | Q42 | owner, 2026-07-25 |
 
 **Deliberately NOT in this book** (video-game-only): force-vs-robustness damage,
 run types/respawn, Earth-life-only races, the pruned tag list, noise/absorption
@@ -1198,15 +1239,13 @@ layer.
 chapters above — including the last trait question: traits are uncapped, the
 over-10 thresholds are repeating milestone bonuses (§3.2). What remains:*
 
-1. **Tag mechanical effects** — per-tag design pass. **Scheduled: a dedicated
-   sitting with the owner.**
-2. **Currency, store pricing, loot-box generation tables** — large pass,
+1. **Currency, store pricing, loot-box generation tables** — large pass,
    deferred.
-3. **Lounge module effects, Upgrade-Token sinks, downtime structure** — large
+2. **Lounge module effects, Upgrade-Token sinks, downtime structure** — large
    sitting, deferred.
-4. **Skill compatibility marking** — a standard way to tag which skills are
-   compatible for Gemstone merges/upgrades (new TODO from the 2026-07-23
-   threshold ruling; §4.5).
+
+*(Resolved since: tag effects → §18.1–18.2, ruled 2026-07-25; skill
+compatibility → the keyword system in §4.5, ruled 2026-07-23.)*
 
 ## Appendix C — Tag Compendium
 
