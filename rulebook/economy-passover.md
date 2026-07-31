@@ -1,6 +1,12 @@
 # Economy Passover — currency, the store, loot boxes (the FINAL sitting)
 
-**Date:** 2026-07-25 · **Status:** GC0 RULED · GC1–GC6 AWAITING OWNER ANSWERS
+**Date:** 2026-07-25 · **Status:** ✅ FULLY RULED (owner, 2026-07-25) — GC0 (Boss
+Tokens retired), GC1 (UT is the money), GC2 (tutorial store + booster-pack boxes +
+Bronze shops), GC3–GC5 approved as proposed, GC6 = coupons are tutorial-only
+skip-payment vouchers (the design-your-own fantasy lives at the Forge L3 signature
+commission; honoring the party's pending coupon promise once is a table beat, the
+owner's call). **Appendix B is empty — the system is fully ruled.** Next: the big
+ITEM DRAFTING pass to fill the box tiers (content, not rules).
 
 ## GC0 — RULED (owner, 2026-07-25): Boss Tokens RETIRED
 

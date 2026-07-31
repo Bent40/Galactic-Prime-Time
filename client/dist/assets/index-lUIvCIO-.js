@@ -824,6 +824,10 @@ Balanced, Sure-grip). ⚖️
 destroy the modifier (odds improved by Lounge upgrades/skills). Higher+ —
 extraction drops the weapon one tier. Legendary+ — extraction destroys the weapon.
 
+**Pre-affixed drops** *(ruled 2026-07-25)*: dropped and looted gear of Quality
+and above arrives **pre-affixed about 1-in-3** ⚖, always within the tier's
+access rules. The Altar *moves* modifiers — it was never their only source.
+
 ### 12.4 Equipment slots *(ruled 2026-07-23)*
 
 - **One item per slot — no stacking.** Slots follow the body's actual anatomy: a
@@ -834,6 +838,15 @@ extraction drops the weapon one tier. Legendary+ — extraction destroys the wea
 - Non-standard bodies derive their slots from their parts (a sea lion has
   flippers, not hands). When in doubt, **think logically about the anatomy —
   that IS the rule.**
+
+### 12.5 Uses & charges *(ruled 2026-07-25)*
+
+- **Consumables** with uses are gone at 0. Buy another box.
+- **Charged gear** (magazines, batteries, printed devices) refills at the
+  Lounge — ammo free at the Fabricator, other charges **1 UT per full
+  recharge** ⚖ at the relevant module.
+- **In the field, nothing refills** except via explicit items — a spare magazine
+  is an item; the exo-suite's fabricator dock is the ruled exception.
 
 ---
 
@@ -997,6 +1010,19 @@ contract.
   **Mythic** (meta-breaking) · **Godly** (defying fate, almost never given).
 - Rewards: Buffs, Unlocks, Items, Abilities. Tiers can very rarely be upgraded.
 
+**What's inside** *(ruled 2026-07-25 — curated first: the GM stocks each floor's
+boxes to this shape; roll tables are the fallback; boxes are themed to the floor
+that dropped them)*:
+
+| Tier | Contents shape ⚖ |
+|---|---|
+| Bronze | 2d3 bulk-utility consumables; 1-in-5 boxes also hold a Crude–Basic item |
+| Silver | 1 Basic–Quality weapon/tool/armor piece + 1d3 consumables; 1-in-10 a limited-magic item |
+| Gold | 1 game-changer — Quality–Superior item, skill tome, or magic unlock — + a full Silver roll |
+| Legendary | 1 campaign-carrying NAMED item (from the GM's authored list) + a full Gold roll |
+| Mythic | 1 authored meta-breaking artifact — revealed as a **pick one of three** |
+| Godly | **Never random.** One-of-a-kind, authored, fate-defying. The box knows who opened it |
+
 ### 17.7 Narrative Tokens
 
 - Let players interfere with the script. Earned via crowd donations, corporate
@@ -1101,6 +1127,9 @@ the better Patron-Token income; the exchange is the overflow valve.
   Crude–Basic gear at friendly prices (consumables 1–2 UT · Crude 1 · Basic 3 ⚖)
   while you learn the economy. **It closes when the Lounge unlocks** — from then
   on, the Lounge is where contestants get their things.
+- **Coupons are tutorial furniture too:** Corporation vouchers that **skip
+  payment** on one store purchase. They retire with the store — after the
+  tutorial, nothing is free.
 - **Bronze box shops — the necessities channel.** Standing Corporation vendors
   (one in the Lounge, occasional stands on floors) sell **Bronze boxes at 5 UT**
   ⚖, repeatedly. You don't buy bandages — you buy a *box of necessities*.
@@ -1305,6 +1334,7 @@ ruling source (digital addendum R-ids / owner decisions D-ids):
 | **Tag effects ruled** — the six patterns (§18.1: domains/spotlight, quest-feed bias, Patron draw, lifecycle dial, 10 flagship riders, tag gates) + the 12-domain vocabulary; per-tag assignments for all 100 | Q42 | owner, 2026-07-25 |
 | **The Lounge ruled** — Golden Cage pillar; 2 downtime actions; module levels as the Upgrade-Token sink; **healing invoiced at \`Floor × 2^claims\` UT with free rest reduced to a slow trickle** (bleed-out stabilization always free); threshold dice + respec priced; the Fabricator as the 3D printer up to nuclear options | B14, Q65–Q67, D-5, Q6 pricing | owner, 2026-07-25 |
 | **Boss Tokens RETIRED** — merged into Upgrade Tokens: bosses drop UT scaled by rank (Neighbourhood 5 → Stage 250 ⚖); module unlocks re-denominated in UT; the tier-aware exchange replaced by 25 UT → 1 Patron Token (amends the 07-23 D-2 table); legacy held tokens convert via \`migrate-boss-tokens.js\` | Q49 partly, D-2 amended | owner, 2026-07-25 |
+| **Economy completed** — tutorial-only store + skip-payment coupons; Bronze box shops as the necessities channel; higher boxes as one-time found "booster pack" purchases; loot-box content shapes per tier (Godly never random); Quality+ drops pre-affixed 1-in-3; consumables vanish, charges refill at the Lounge. **Appendix B is empty — the system is fully ruled** | Q49, Q50, Q53, Q54 | owner, 2026-07-25 |
 
 **Deliberately NOT in this book** (video-game-only): force-vs-robustness damage,
 run types/respawn, Earth-life-only races, the pruned tag list, noise/absorption
@@ -1313,16 +1343,11 @@ layer.
 
 ## Appendix B — Open rules questions (the honest list)
 
-*Sixteen of the original nineteen were ruled on 2026-07-23 and folded into the
-chapters above — including the last trait question: traits are uncapped, the
-over-10 thresholds are repeating milestone bonuses (§3.2). What remains:*
-
-1. **Currency, store pricing, loot-box generation tables** — the last unruled
-   territory in the system.
-
-*(Resolved since: tag effects → §18.1–18.2 and the Lounge → §20 + the priced
-healing economy in §16, both ruled 2026-07-25; skill compatibility → the
-keyword system in §4.5, ruled 2026-07-23.)*
+**None.** As of 2026-07-25, every open question in the system has been ruled —
+the sittings of 2026-07-23 → 2026-07-25 closed advancement, skills, tags, the
+Lounge, healing, and the economy. What remains is **content and tuning, not
+rules**: drafting the item catalog to fill the loot-box tiers and Bronze shops,
+the parked new-skill candidates, and playtest tuning of every number marked ⚖.
 
 ## Appendix C — Tag Compendium
 
