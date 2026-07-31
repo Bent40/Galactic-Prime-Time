@@ -978,13 +978,18 @@ the better Patron-Token income; the exchange is the overflow valve.
   Crude–Basic gear at friendly prices (consumables 1–2 UT · Crude 1 · Basic 3 ⚖)
   while you learn the economy. **It closes when the Lounge unlocks** — from then
   on, the Lounge is where contestants get their things.
-- **Post-tutorial retail is the gacha.** Corporation-branded **loot-box kiosks**
-  stand on dungeon floors (and one in the Lounge): sealed **Bronze boxes 5 UT**,
-  occasionally **Silver 15 UT** ⚖. Gold and above are never sold — only earned.
-  The featured pool rotates per floor. **Boxes still only open at the Lounge** —
-  buy the mystery in the field, carry it home, open it in the cage.
-- **Pity rule ⚖:** every 5th box from the same kiosk guarantees a gear item. The
-  Corporation understands surprise mechanics.
+- **Bronze box shops — the necessities channel.** Standing Corporation vendors
+  (one in the Lounge, occasional stands on floors) sell **Bronze boxes at 5 UT**
+  ⚖, repeatedly. You don't buy bandages — you buy a *box of necessities*.
+  **Pity rule ⚖:** every 5th Bronze box from the same shop guarantees a gear
+  item. The Corporation understands surprise mechanics.
+- **Found boxes — the booster-pack rule.** Higher boxes are **one-time
+  purchasable finds, randomly placed in the dungeon**: a sealed Silver, Gold, or
+  Legendary box sitting on a shelf with a price tag ⚖ (Silver 15 · Gold 40 ·
+  Legendary 100). Buy it on the spot or leave it — each offer exists once and
+  never restocks. **Mythic and Godly are never for sale**, only earned.
+- **Boxes still only open at the Lounge** — buy the mystery in the field, carry
+  it home sealed, open it in the cage.
 - **Selling:** the Goldsmith's barter bench (§20.3) buys your surplus at about
   half value ⚖.
 

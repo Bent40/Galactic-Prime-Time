@@ -34,14 +34,11 @@ draft the split.)
   Crude–Basic gear at ⚖ bands (consumables 1–2 UT · Crude 1 · Basic 3) and teaches
   the economy. **When the Lounge unlocks, it closes** — from then on the Lounge IS
   where contestants get their things (Forge, Fabricator ammo, Farm stock, Kitchen).
-- **Post-tutorial retail = gacha kiosks.** Corporation-branded loot-box vendors on
-  dungeon floors plus one in the Lounge: **sealed Bronze boxes 5 UT, occasional
-  Silver 15 UT** ⚖; Gold+ is never sold, only earned; the featured pool rotates per
-  floor. **Boxes still only open at the Lounge** (canon) — buy the mystery in the
-  field, carry it home, open it in the cage. Golden Cage synergy: the kiosk sells
-  reasons to go back.
-- **Pity rule ⚖:** every 5th box bought from the same kiosk guarantees a gear item.
-  The Corporation understands surprise mechanics.
+- **AMENDED (owner, round 2): boxes are booster packs.** Higher boxes (Silver–
+  Legendary) are **one-time purchasable finds randomly placed in the dungeon** —
+  buy on the spot (⚖ 15/40/100) or leave forever; never restocked. **Bronze box
+  SHOPS** stand as the repeatable basic-necessities channel (5 UT, pity every 5th).
+  Mythic/Godly never for sale. Boxes still only open at the Lounge.
 - **Selling/buyback:** the Goldsmith's barter bench (§20.3, L2) is the channel —
   about half value ⚖.
 
