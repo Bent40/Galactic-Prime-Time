@@ -1095,6 +1095,22 @@ do. Legacy held tokens convert at the payout scale.)*
 **25 Upgrade Tokens → 1 Patron Token** ⚖, one-way. The audience loop remains
 the better Patron-Token income; the exchange is the overflow valve.
 
+### 19.3 Retail *(ruled 2026-07-25)*
+
+- **The general store ("Sup, nerds!") is a tutorial fixture.** Consumables and
+  Crude–Basic gear at friendly prices (consumables 1–2 UT · Crude 1 · Basic 3 ⚖)
+  while you learn the economy. **It closes when the Lounge unlocks** — from then
+  on, the Lounge is where contestants get their things.
+- **Post-tutorial retail is the gacha.** Corporation-branded **loot-box kiosks**
+  stand on dungeon floors (and one in the Lounge): sealed **Bronze boxes 5 UT**,
+  occasionally **Silver 15 UT** ⚖. Gold and above are never sold — only earned.
+  The featured pool rotates per floor. **Boxes still only open at the Lounge** —
+  buy the mystery in the field, carry it home, open it in the cage.
+- **Pity rule ⚖:** every 5th box from the same kiosk guarantees a gear item. The
+  Corporation understands surprise mechanics.
+- **Selling:** the Goldsmith's barter bench (§20.3) buys your surplus at about
+  half value ⚖.
+
 ---
 
 ## 20. The Lounge *(ruled 2026-07-25 — the full pass)*

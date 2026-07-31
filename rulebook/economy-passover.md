@@ -28,17 +28,25 @@ you spending money — the loop closes: **earn on camera, spend in the cage.**
 (Alternative if you want it: a separate "Sponsor Credits" cash layer — say so and I'll
 draft the split.)
 
-## GC2 — The store ("Sup, nerds!")
+## GC2 — RULED (owner, 2026-07-25, amended): the store is TUTORIAL-ONLY; retail after that is GACHA
 
-- **Rotating stock, refreshed per floor.** Sells: consumables (bandages, antitoxins,
-  torches, rope, ammo variants), **Crude–Quality gear only** — Superior+ is never
-  sold; that's loot and forge territory (item variance rule stands: store gear may
-  undercut class baselines).
-- **Price bands ⚖:** consumables 1–2 UT · Crude 1 · Basic 3 · Quality 8 · oddities
-  GM-priced. **Buyback/barter at half value.**
-- **The gacha counter:** the store sells **Bronze loot boxes at 5 UT** ⚖ as "daily
-  deals" — of course the Corporation runs a gacha. Higher-tier boxes are never sold,
-  only earned.
+- **The general store ("Sup, nerds!") is a tutorial fixture.** It sells consumables +
+  Crude–Basic gear at ⚖ bands (consumables 1–2 UT · Crude 1 · Basic 3) and teaches
+  the economy. **When the Lounge unlocks, it closes** — from then on the Lounge IS
+  where contestants get their things (Forge, Fabricator ammo, Farm stock, Kitchen).
+- **Post-tutorial retail = gacha kiosks.** Corporation-branded loot-box vendors on
+  dungeon floors plus one in the Lounge: **sealed Bronze boxes 5 UT, occasional
+  Silver 15 UT** ⚖; Gold+ is never sold, only earned; the featured pool rotates per
+  floor. **Boxes still only open at the Lounge** (canon) — buy the mystery in the
+  field, carry it home, open it in the cage. Golden Cage synergy: the kiosk sells
+  reasons to go back.
+- **Pity rule ⚖:** every 5th box bought from the same kiosk guarantees a gear item.
+  The Corporation understands surprise mechanics.
+- **Selling/buyback:** the Goldsmith's barter bench (§20.3, L2) is the channel —
+  about half value ⚖.
+
+*(GC1 is settled by GC0 in practice: Upgrade Tokens are the money — §19.1 already
+says so.)*
 
 ## GC3 — Loot-box generation (answers Q50)
 
