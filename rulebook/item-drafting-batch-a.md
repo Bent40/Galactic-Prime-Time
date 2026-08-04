@@ -1,10 +1,11 @@
 # Item Drafting — Batch A: Lounge-unlock playables (PROPOSAL)
 
-**Date:** 2026-08-04 · **Status:** 🟡 PROPOSED — trim, rename, or re-stat anything;
-⚖ on every number. Companion to `item-drafting-passover.md` (ID-4). Scope: what the
-table needs the session the Lounge opens — Bronze economy, the coupon beat, the
-Incineradile box, and F1's found boxes. Standard counter behavior: **one use of a
-condition counter reduces its condition by one tier** ⚖.
+**Date:** 2026-08-04 · **Status:** 🟢 BLESSED (owner, 2026-08-04) — delivered to
+the seed layer as `server/seeds/items-batch-a.js` (41 templates; the coupon beat
+rides the library's existing "Basic Weapon Coupon" + "Silver Modifier Coupon"
+vouchers instead of a new template). Seed via the ID-5 runbook. Companion to
+`item-drafting-passover.md` (ID-4). Standard counter behavior: **one use of a
+condition counter reduces its condition by one tier**.
 
 ---
 

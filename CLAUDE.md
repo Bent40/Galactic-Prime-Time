@@ -112,6 +112,19 @@ Do not add additional direct `apiFetch` saves on top of this — use `update()` 
 Admin manages skill templates via SkillLibrarySection. Templates stored in `skilltemplates` collection.
 Skills are granted to players by templateId. The player sheet joins template data at runtime.
 
+## Item Library & Drafting (added 2026-08-04)
+- Item instances on characters are **snapshots** (no templateId backlink), granted via
+  `POST /api/items/give`; `/api/items` routes are 100% admin-gated.
+- `ItemTemplate` carries pool metadata: `subtype`, `boxTiers[]`, `themes[]`, `source`
+  (template-side bookkeeping; the give-snapshot copies only `subtype`). Vocabulary in
+  `constants.js`: `BOX_TIERS` (Bronze→Godly, ≠ item tiers) + `ITEM_SUBTYPES`.
+- **Seeding runbook (from `server/`):** `node backup-db.js` → `node seed-items.js` (dry
+  run) → `--apply`; `--force` to overwrite differing existing templates, `--file` for
+  other batches. Batch data lives in `server/seeds/`.
+- The Item Drafting content pass (rules + pools + batches) is governed by
+  `rulebook/item-drafting-passover.md` + `rulebook/item-drafting-batch-a.md`; the live
+  **affix catalog is source of truth** over book §12.3's working list.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.

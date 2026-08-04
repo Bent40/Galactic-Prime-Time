@@ -1,10 +1,11 @@
 # Item Drafting Passover — stocking the box tiers (the content pass)
 
-**Date:** 2026-08-04 · **Status:** 🟢 SITTING ROUND 1 RULED (owner, 2026-08-04) —
-armor sliver, tiered Polish Kits, large pools + Creation Kits, app metadata, and
-catalog-is-truth are settled. Residuals R1–R5 below are the only open rules items.
-**Batch A content is authored as a proposal → `rulebook/item-drafting-batch-a.md`.**
-⚖ still marks placeholder numbers the owner may trim.
+**Date:** 2026-08-04 · **Status:** 🟢 ROUND 2 — R1–R5 all RULED as proposed and
+**Batch A BLESSED** (owner, 2026-08-04). The delivery layer is BUILT: `ItemTemplate`
+metadata fields, admin-form inputs, `BOX_TIERS`/`ITEM_SUBTYPES` constants, and
+`server/seed-items.js` + `server/seeds/items-batch-a.js` (41 templates). Runbook in
+ID-5 — awaiting an owner run against the campaign DB. ⚖ still marks numbers the
+owner may tune at the table.
 
 **Source canon:** book §12 / §17.6 / §19–20 · economy-passover GC0–GC6 · the live
 affix catalog (27 affixes, Lesser + Normal) · floor canon in the game repo
@@ -49,6 +50,26 @@ F4–6 pending design).
 13. **App metadata approved** (ID-5 fields land with the delivery phase).
 14. **The affix catalog is truth — and extendable.** Book-only entries (Hollow
     Point, Explosive Tip) become candidate *additions*, not deletions.
+
+**Sitting round 2 (owner, 2026-08-04):**
+
+15. **R1–R5 all approved as proposed:** shields' loose rule · Polish-Kit grade
+    gating + the Forge as venue · fail = kit consumed, item untouched · Draining's
+    once-per-Clock cap goes into the catalog effect text · Balanced + Sharpened II
+    are incompatible. (The two catalog edits ride Batch D's reconciliation.)
+16. **Batch A BLESSED** — delivered to the seed layer as authored.
+17. **Pools keep growing.** Items play a major role in everything; expansion
+    batches beyond B/C/D are planned — treat every pool as a floor, not a ceiling.
+18. **Skill books & tomes are first-class item content** (the library's "Tome Of
+    Submission" is the precedent): items that grant a skill unlock — magic or
+    literal skills alike. Mechanic sketch ⚖: consuming the tome makes the named
+    skill acquirable/revealed at L0 per §4.4 (the tome IS the external source);
+    designed in Batch B.
+19. **Growth items are story instruments, not just stat ladders** (owner
+    doctrine): design them with an innocent surface and a hidden trigger the GM
+    tracks — an item that quietly grows on betrayal, discovered only after you
+    kill an NPC friend by mistake. Growth events may advance arcs and tilt
+    players morally; the trigger reveal is a designed beat.
 
 ---
 
@@ -107,6 +128,10 @@ during downtime at the Forge ⚖ (venue = residual R2). One kit = one d6 roll:
 **Growth items** — authored specials that level with their wielder via
 kill-count / milestone / story triggers, re-checking §12.3 modifier access at each
 tier. First one approved in Batch A: the **Incineradile mycelium core**.
+Per ID-0.19, each growth item is authored with TWO layers: the public read (what
+players think feeds it) and the true trigger (what actually does — possibly moral,
+possibly ugly). The discovery of the true trigger is a story beat, authored
+alongside the item.
 
 ## ID-4 — The pools — counts RULED LARGE, Creation Kits inserted
 
@@ -133,14 +158,20 @@ every combination — the kit hands assembly to the player:
   mycelium core) · F1 found-box placements.
 - **Batch B — the standing catalog ⚖:** Silver base-weapon pool (~18 across
   Basic–Quality, every §12.1 class), armor per slot family (~12), tools (~8),
-  limited-magic items (~6), Gold game-changers (~8) + skill tomes (~4) + magic
-  unlocks; Creation and Polish Kits threaded through Silver/Gold pools.
+  limited-magic items (~6), Gold game-changers (~8); **skill books & tomes as a
+  designed set (~6 ⚖ — magic AND literal skills, per ID-0.18; "Tome Of
+  Submission" is the live precedent)** + magic unlocks; Creation and Polish Kits
+  threaded through Silver/Gold pools.
 - **Batch C — the top shelf ⚖:** Legendary named list (~6, route-hooked — the
   Easy-route mask is begging), Mythic artifacts (~4; the first Mythic box needs
   three on the table), Godly authoring guidance, Superior Polish Kits, remaining
   growth items.
 - **Batch D — repair pass:** tier + subtype the existing 28 templates (12
-  untiered), align to §12.1 baselines.
+  untiered), align to §12.1 baselines; apply the ruled catalog edits (Draining's
+  once-per-Clock cap · Balanced + Sharpened II incompatibility note).
+- **Batches E+ — expansion waves (ID-0.17):** pools keep growing as floors and
+  arcs land; F2/F3 themed pools once play approaches them, F4–6 after floor
+  design exists.
 
 **Affix reconciliation — RULED direction (catalog is truth, extendable):**
 Hollow Point & Explosive Tip → candidate ADDs (tier ⚖) · catalog Spiked/Barbed
@@ -148,14 +179,21 @@ effects stand over the book text · residual R4: write Draining's once-per-Clock
 into its catalog effect text (PROPOSED yes — the abuse case is documented) ·
 residual R5: Balanced + Sharpened II incompatibility (PROPOSED yes ⚖).
 
-## ID-5 — App-side delivery — metadata RULED
+## ID-5 — App-side delivery — BUILT (2026-08-04)
 
-- **Seed script, §B-2 runbook shape:** `node backup-db.js` → `node seed-items.js`
-  (dry-run prints every create/update, keyed by template name) → `--apply`. Never
-  touches character `state` (player items are snapshots — existing instances stay).
-- **RULED:** `ItemTemplate` gains optional `subtype`, `boxTiers: [String]`,
-  `themes: [String]`, `source` — the library becomes the compendium of record.
-  `BOX_TIERS` enters `constants.js`. Lands with the delivery phase, not before.
+- **Shipped:** `ItemTemplate` gained `subtype`, `boxTiers`, `themes`, `source`
+  (routes accept them; the give-snapshot now carries `subtype`); the admin item
+  form has plain inputs for all four; `BOX_TIERS` + `ITEM_SUBTYPES` live in
+  `constants.js`; `server/seed-items.js` + `server/seeds/items-batch-a.js`
+  (41 templates — no "Basic Weapon Creation Kit" seeded: the live "Basic Weapon
+  Coupon" + "Silver Modifier Coupon" ARE that kit as two vouchers).
+- **Owner runbook (from `server/`):** `node backup-db.js` → `node seed-items.js`
+  (dry run — prints every create and every name collision) → `node seed-items.js
+  --apply`. Existing templates are never overwritten without `--force` — expect
+  one flagged collision: **Bandage** (library has a Crude one; the seed's Basic
+  counter-spec differs — owner picks at apply time).
+- Verified here: syntax + seed-data validation + client build. **Not yet run
+  against a DB** — the campaign DB lives with the owner's checkout.
 
 ## ID-6 — Book pass (after content lands)
 
@@ -166,14 +204,12 @@ app-library-is-truth, book gets pointers (per ID-5 ruling).
 
 ---
 
-## Residuals — the only open rules items (R1–R5)
+## Residuals — ALL RULED (owner, 2026-08-04 round 2)
 
-1. **R1 Shields:** bless the loose rule (resist to the defended part, GM call)?
-2. **R2 Polish-Kit gating + venue:** grade-gates rungs as proposed? Polishing
-   happens at the Forge as a downtime action?
-3. **R3 Kit fail semantics:** fail = kit consumed, item untouched — confirm.
-4. **R4 Draining cap:** write once-per-Clock into the catalog effect text?
-5. **R5 Balanced + Sharpened II:** rule them incompatible?
+R1 shields' loose rule · R2 kit gating + Forge venue · R3 fail = kit consumed,
+item untouched · R4 Draining cap → catalog text · R5 Balanced + Sharpened II
+incompatible — **all approved as proposed.** R4/R5 are catalog edits queued in
+Batch D. No open rules items remain for Batches A–B.
 
-*Batch A stands as a trim-or-bless proposal in `item-drafting-batch-a.md`; none of
-R1–R5 block it.*
+*Next stop: owner runs the ID-5 runbook to seed Batch A, then Batch B authoring
+(standing catalog + the skill-tome set).*

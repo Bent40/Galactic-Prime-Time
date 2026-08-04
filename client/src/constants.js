@@ -29,6 +29,10 @@ export const CANON_CONDITIONS = ['Bleeding', 'Crushed', 'Burn', 'Chilled', 'Pois
 export const ITEM_TIERS   = ['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional'];
 export const AFFIX_TIERS  = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
 export const ITEM_CATS    = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'];
+// Loot-box tiers (rulebook §17.6) + item subtypes (item-drafting-passover ID-1).
+// Box tiers ≠ item tiers: a Gold BOX holds Quality–Superior ITEMS.
+export const BOX_TIERS      = ['Bronze', 'Silver', 'Gold', 'Legendary', 'Mythic', 'Godly'];
+export const ITEM_SUBTYPES  = ['Bladed', 'Crush', 'Martial', 'Ranged', 'Thrown', 'Armor', 'Shield', 'Trinket', 'Tool', 'Consumable', 'Charged gear', 'Limited-magic', 'Kit', 'Growth'];
 
 export const CAT_ICONS = {
   Weapons: '⚔️', Equipment: '🛡️', Tools: '🔧',

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
-import { ATK_TYPES, DMG_TYPES, ITEM_CATS, ITEM_TIERS } from '../../constants.js';
+import { ATK_TYPES, DMG_TYPES, ITEM_CATS, ITEM_TIERS, BOX_TIERS, ITEM_SUBTYPES } from '../../constants.js';
 
 function toggleArr(arr, val) { return arr.includes(val) ? arr.filter(x => x !== val) : [...arr, val]; }
 
@@ -67,11 +67,31 @@ function ItemForm({ value, onChange }) {
             }} />
         </div>
       </div>
+      <div className="modal-grid2" style={{ marginTop: 8 }}>
+        <div className="field-group"><label className="field-label">Subtype <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(pool metadata)</span></label>
+          <select className="fi" value={value.subtype || ''} onChange={e => onChange({ ...value, subtype: e.target.value })}>
+            <option value="">— None —</option>
+            {ITEM_SUBTYPES.map(s => <option key={s}>{s}</option>)}
+          </select>
+        </div>
+        <div className="field-group"><label className="field-label">Source <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(e.g. batch-a)</span></label><input className="fi" value={value.source || ''} onChange={e => onChange({ ...value, source: e.target.value })} /></div>
+      </div>
+      <div style={{ marginBottom: 10 }}>
+        <div className="field-label" style={{ marginBottom: 5 }}>Box Tiers <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(which loot-box pools carry this)</span></div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+          {BOX_TIERS.map(t => <button key={t} className={`badge-toggle${(value.boxTiers || []).includes(t) ? ' on' : ''}`} onClick={() => onChange({ ...value, boxTiers: toggleArr(value.boxTiers || [], t) })}>{t}</button>)}
+        </div>
+      </div>
+      <div className="field-group" style={{ marginBottom: 8 }}>
+        <label className="field-label">Themes <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(comma-separated: floor-1, incineradile, …)</span></label>
+        <input className="fi" value={(value.themes || []).join(', ')}
+          onChange={e => onChange({ ...value, themes: e.target.value.split(',').map(s => s.trim()) })} />
+      </div>
     </>
   );
 }
 
-const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', rpm: null, magazine: null, damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null } };
+const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', rpm: null, magazine: null, damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null }, subtype: '', boxTiers: [], themes: [], source: '' };
 
 const ITEM_TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 
