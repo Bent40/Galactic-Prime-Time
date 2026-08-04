@@ -83,6 +83,11 @@ F4–6 pending design).
 > Growth (ID-3) · Tome (ID-0.18 — teaches a skill; limited-magic casts one)
 > **System:** Key Items · System Items (exempt from tiers/affixes)
 
+**Naming economy (owner, 2026-08-04):** Basic (and Crude) items carry **plain
+functional names** — Dagger, Spear, Hammer, Shotgun. Nicknames and flair start at
+Quality; name fanciness signals tier at a glance. Also: never reuse an affix name
+(Weighted, Balanced…) inside an item name.
+
 **Per-tier meaning by category (⚖ numbers per item):**
 
 | Tier | Weapons (§12.1/12.3 stand) | Armor/Shield | Tools | Consumables |
