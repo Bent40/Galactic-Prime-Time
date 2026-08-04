@@ -202,6 +202,28 @@ all-items-tiered; armor per ID-2) · add the Exceptional path (Polish Kits + gro
 to §12.3 · Creation Kits + generic-vs-specific boxes into §17.6/§19.3 · pool tables:
 app-library-is-truth, book gets pointers (per ID-5 ruling).
 
+## ID-7 — Box Namer (GM tool) — PROPOSED, mockup shipped
+
+Owner request (2026-08-04): after players roll for loot, the GM inputs what
+dropped + how it was earned, and gets box names by tier — "Bronze Massacre Box",
+"Silver Incineradile Box" — instead of inventing names mid-session.
+
+**Proposed UX** (interactive mockup: `docs/mockups/box-namer-mockup.html` — the
+generation logic in it is real, not lorem):
+- **Inputs:** the loot (freetext, as the players report it) · earned-by (freetext
+  + quick chips for the §17.4 Goal deeds) · box tier (chips, with **Auto**
+  inferring the tier from the loot per the §17.6 contents shape — override wins).
+- **Output:** ~6 suggestions across three lanes — **earned** (deed lexicon:
+  Overkill→Massacre/Carnage…; unmatched freetext passes through title-cased, so
+  boss names like "Incineradile" just work) · **contents** (dominant loot
+  category: Arsenal/Care-Package/Arcana…) · **showbiz** (Corporation marketing:
+  Primetime, Sweeps-Week, Season-Finale…). Click a name to copy; 🎲 rerolls.
+- **Build shape:** client-only widget, no server or model changes; wordlists live
+  in the component. Placement ⚖: top of the admin Items section (recommended) or
+  its own section.
+
+Status: **awaiting mockup approval** (house rule: UI ships a mockup first).
+
 ---
 
 ## Residuals — ALL RULED (owner, 2026-08-04 round 2)

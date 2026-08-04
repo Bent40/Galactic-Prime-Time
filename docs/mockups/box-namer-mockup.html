@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Box Namer — mockup</title>
+<style>
+  :root {
+    --bg:#04050d; --panel:#090c1a; --panel2:#0d1020; --cyan:#00d4ff; --gold:#c8a84b;
+    --danger:#ff2255; --success:#00ff88; --text:#b8c8e0; --muted:#3a4560;
+    --border:#1a2540; --bronze:#cd7f32; --silver:#c0c0c0; --legendary:#a855f7; --mythic:#ec4899;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,sans-serif; padding:24px; }
+  .wrap { max-width:640px; margin:0 auto; }
+  h1 { font-family:'Courier New',monospace; color:var(--cyan); font-size:18px; letter-spacing:2px; text-transform:uppercase; }
+  h1 small { color:var(--muted); letter-spacing:0; text-transform:none; font-family:system-ui; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:14px; }
+  label.lbl { display:block; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin:0 0 6px; font-weight:700; }
+  textarea, input[type=text] { width:100%; background:var(--panel2); border:1px solid var(--border); border-radius:6px; color:var(--text); padding:8px 10px; font-size:14px; font-family:inherit; }
+  textarea { min-height:64px; resize:vertical; }
+  textarea:focus, input:focus { outline:none; border-color:var(--cyan); }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .chip { background:var(--panel2); border:1px solid var(--border); color:var(--text); border-radius:20px; padding:4px 12px; font-size:12px; cursor:pointer; user-select:none; }
+  .chip:hover { border-color:var(--cyan); }
+  .chip.on { border-color:var(--cyan); color:var(--cyan); background:rgba(0,212,255,.08); }
+  .chip.t-Bronze.on { border-color:var(--bronze); color:var(--bronze); background:rgba(205,127,50,.1); }
+  .chip.t-Silver.on { border-color:var(--silver); color:var(--silver); background:rgba(192,192,192,.1); }
+  .chip.t-Gold.on { border-color:var(--gold); color:var(--gold); background:rgba(200,168,75,.1); }
+  .chip.t-Legendary.on { border-color:var(--legendary); color:var(--legendary); background:rgba(168,85,247,.1); }
+  .chip.t-Mythic.on { border-color:var(--mythic); color:var(--mythic); background:rgba(236,72,153,.1); }
+  .chip.t-Godly.on { border-color:#fff; color:#fff; background:rgba(255,255,255,.08); }
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .btn { background:var(--cyan); color:#04121a; border:none; border-radius:6px; padding:9px 20px; font-weight:800; font-size:14px; cursor:pointer; letter-spacing:.5px; }
+  .btn:hover { filter:brightness(1.15); }
+  .btn.ghost { background:var(--panel2); color:var(--cyan); border:1px solid var(--cyan); font-weight:600; }
+  .names { display:flex; flex-direction:column; gap:8px; }
+  .name { display:flex; justify-content:space-between; align-items:center; background:var(--panel2); border:1px solid var(--border); border-radius:8px; padding:10px 14px; cursor:pointer; font-size:16px; }
+  .name:hover { border-color:var(--gold); }
+  .name .lane { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  .name.copied { border-color:var(--success); }
+  .name.copied .lane { color:var(--success); }
+  .hint { font-size:12px; color:var(--muted); margin-top:6px; }
+  .inferred { font-size:12px; color:var(--muted); }
+  .inferred b { color:var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📦 Box Namer <small>— mockup (fully functional; would live in the admin Items section)</small></h1>
+
+  <div class="card">
+    <label class="lbl">What did they roll? (the loot — one item per line or comma-separated)</label>
+    <textarea id="loot" placeholder="fire axe&#10;3 bandages&#10;mycelium core"></textarea>
+    <div class="hint">Used to detect contents flavor and to auto-infer the box tier from item-tier words (crude/basic/quality/superior/exceptional, tome, named…).</div>
+  </div>
+
+  <div class="card">
+    <label class="lbl">Earned by (boss · Goal · quest — freetext, or tap a deed)</label>
+    <input type="text" id="deed" placeholder="Incineradile / Overkill / spare the enemy…">
+    <div class="chips" id="deedChips"></div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <label class="lbl" style="margin:0">Box tier</label>
+      <span class="inferred" id="inferred"></span>
+    </div>
+    <div class="chips" id="tierChips"></div>
+  </div>
+
+  <div class="row" style="margin-bottom:14px">
+    <button class="btn" id="go">Generate names</button>
+    <button class="btn ghost" id="reroll">🎲 Reroll</button>
+  </div>
+
+  <div class="card">
+    <label class="lbl">Suggestions (click to copy)</label>
+    <div class="names" id="out"><div class="hint">Enter the loot and hit Generate.</div></div>
+  </div>
+</div>
+
+<script>
+const TIERS = ['Auto','Bronze','Silver','Gold','Legendary','Mythic','Godly'];
+const DEEDS = ['Overkill','Finish Fast','Environmental Kill','Play into a Tag','Say the Line','While Exposed','Without Healing','Solo','Spare the Enemy','Betray Expectations'];
+
+// Lane 1 — deed lexicon: how it was EARNED
+const DEED_LEX = [
+  [/overkill|massacre|slaughter/i, ['Massacre','Carnage','Overkill']],
+  [/fast|speed|blitz|rush/i,       ['Blitz','Speedrun','Primetime']],
+  [/environment/i,                 ['Stagecraft','Hazard-Pay']],
+  [/tag|typecast/i,                ['Typecast','In-Character']],
+  [/line|catchphrase/i,            ['Catchphrase','Quotable']],
+  [/exposed|risk|daredevil/i,      ['Daredevil','High-Wire']],
+  [/healing|iron/i,                ['Iron-Will','No-Sell']],
+  [/solo/i,                        ['One-Man-Show','Solo-Act']],
+  [/spare|mercy/i,                 ['Mercy','Clemency']],
+  [/betray|twist|subver/i,         ['Plot-Twist','Swerve']],
+];
+
+// Lane 2 — contents lexicon: what's INSIDE
+const CONTENT_LEX = [
+  [/axe|sword|knife|spear|club|baton|machete|gun|bow|sling|blade|weapon/i, ['Arsenal','Armory','Whetstone']],
+  [/vest|hat|glove|shield|wrap|armor|buckler|helm/i,                       ['Bulwark','Wardrobe','Understudy']],
+  [/bandage|gel|antitoxin|wash|salt|injector|stim|ration|flask|vial|potion|consumable|flare/i, ['Care-Package','Supply-Drop','Triage']],
+  [/rope|multitool|crowbar|lantern|tool|chalk|torch/i,                     ['Stagehand','Toolbox','Rigging']],
+  [/wand|orb|tome|scroll|magic|arcan/i,                                    ['Arcana','Spellbound','Matinee-Miracle']],
+  [/kit/i,                                                                 ['Assembly','DIY','Some-Assembly-Required']],
+  [/core|seed|growth|egg/i,                                                ['Sleeper','Seedling','Slow-Burn']],
+];
+
+// Lane 3 — the Corporation's marketing department
+const SHOW = ['Primetime','Encore','Fan-Favorite','Sweeps-Week','Golden-Hour','Season-Finale','Commercial-Break','Ratings-Spike','Standing-Ovation','Rerun','Cliffhanger','Cold-Open'];
+
+let tierPick = 'Auto';
+const $ = id => document.getElementById(id);
+const pick = (arr,n) => [...arr].sort(()=>Math.random()-.5).slice(0,n);
+const title = s => s.replace(/\w\S*/g, t => t[0].toUpperCase()+t.slice(1));
+
+function inferTier(loot) {
+  if (/exceptional|artifact|mythic/i.test(loot)) return 'Legendary';
+  if (/superior|tome|unlock|named/i.test(loot))  return 'Gold';
+  if (/quality|axe|sword|armor|shield|wand|weapon/i.test(loot)) return 'Silver';
+  return 'Bronze';
+}
+
+function flavors(lex, text) {
+  const out = [];
+  for (const [re, words] of lex) if (re.test(text)) out.push(...words);
+  return out;
+}
+
+function generate() {
+  const loot = $('loot').value.trim();
+  const deed = $('deed').value.trim();
+  const tier = tierPick === 'Auto' ? inferTier(loot) : tierPick;
+  $('inferred').innerHTML = tierPick === 'Auto' ? `auto-inferred: <b>${tier}</b>` : '';
+
+  const lanes = [];
+  const dW = flavors(DEED_LEX, deed);
+  if (deed && dW.length === 0) dW.push(title(deed));            // "Incineradile" passes straight through
+  pick(dW, 2).forEach(w => lanes.push([w, 'earned']));
+  pick(flavors(CONTENT_LEX, loot), 2).forEach(w => lanes.push([w, 'contents']));
+  pick(SHOW, 2).forEach(w => lanes.push([w, 'showbiz']));
+
+  const seen = new Set(); const out = [];
+  for (const [w, lane] of lanes) {
+    const name = `${tier} ${w} Box`;
+    if (!seen.has(name)) { seen.add(name); out.push([name, lane]); }
+  }
+  $('out').innerHTML = out.map(([n, l]) =>
+    `<div class="name" onclick="copyName(this,'${n.replace(/'/g,"\\'")}')"><span>${n}</span><span class="lane">${l}</span></div>`).join('')
+    || '<div class="hint">Nothing to work with — add loot or a deed.</div>';
+}
+
+function copyName(el, name) {
+  navigator.clipboard && navigator.clipboard.writeText(name);
+  el.classList.add('copied'); el.querySelector('.lane').textContent = 'copied!';
+  setTimeout(() => { el.classList.remove('copied'); }, 1200);
+}
+
+$('deedChips').innerHTML = DEEDS.map(d => `<span class="chip" onclick="$g('deed').value='${d}';generate()">${d}</span>`).join('');
+$('tierChips').innerHTML = TIERS.map(t => `<span class="chip t-${t}${t==='Auto'?' on':''}" data-t="${t}" onclick="setTier(this)">${t}</span>`).join('');
+window.$g = $;
+window.setTier = el => { tierPick = el.dataset.t; document.querySelectorAll('#tierChips .chip').forEach(c => c.classList.toggle('on', c === el)); generate(); };
+window.copyName = copyName;
+$('go').onclick = generate;
+$('reroll').onclick = generate;
+</script>
+</body>
+</html>

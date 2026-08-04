@@ -4,10 +4,12 @@
 
 ## Next actions
 
-1. Owner: residuals R1-R5 (passover) + trim/bless Batch A
-   (`rulebook/item-drafting-batch-a.md`).
-2. On bless: ItemTemplate metadata fields + `seed-items.js` (backup ->
-   dry-run -> --apply), seed Batch A.
-3. Author Batch B (standing catalog + kits threaded), then C (top shelf),
-   then D (repair pass + affix reconciliation edits).
+1. Owner: run the seed runbook on the campaign DB (backup-db.js ->
+   seed-items.js dry run -> --apply; watch the Bandage collision).
+2. Owner: approve/adjust the Box Namer mockup (passover ID-7,
+   docs/mockups/box-namer-mockup.html); on approval build it into the
+   admin Items section (client-only).
+3. Author Batch B (standing catalog + ~6 skill tomes per ID-0.18 + kits
+   threaded), then C (top shelf + two-layer growth items per ID-0.19),
+   then D (repair pass + catalog edits R4/R5).
 4. Book pass ID-6 last.
