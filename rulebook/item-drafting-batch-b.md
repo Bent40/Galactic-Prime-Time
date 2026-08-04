@@ -24,32 +24,32 @@ Claw Coverings and the Batch A gear stay the low-end coverage).
 
 | Item | Tier | Class/Subtype | Stats (⚖) |
 |---|---|---|---|
-| Stage Dagger | Basic | Light Small / Bladed | 2 Bleed · r1 · 1 Phy, Cost 1 |
-| Boning Knife "Craft Services" | Basic | Light Small / Bladed | 2 Bleed · r1 · 1 Phy, Cost 1 |
+| Dagger | Basic | Light Small / Bladed | 2 Bleed · r1 · 1 Phy, Cost 1 |
+| Boning Knife | Basic | Light Small / Bladed | 2 Bleed · r1 · 1 Phy, Cost 1 |
 | Showrunner's Stiletto | Quality | Light Small / Bladed | 2 Bleed · +1 Bleed vs Exposed targets |
-| Boom-Pole Spear | Basic | Light Large / Bladed | 2 Bleed · r2 line · 3 Phy, 2 hands |
+| Spear | Basic | Light Large / Bladed | 2 Bleed · r2 line · 3 Phy, 2 hands |
 | Duelist's Rapier "Encore" | Quality | Light Large / Bladed | 2 Bleed · r2 line · first hit each Clock +1 Bleed |
-| Stagehand's Hammer | Basic | Heavy Small / Crush | 2 Crush · r1 · 2 Phy |
+| Hammer | Basic | Heavy Small / Crush | 2 Crush · r1 · 2 Phy |
 | Pipe Wrench "Union Rules" | Quality | Heavy Small / Crush | 2 Crush · doubles as proper tools (no improvised penalty) |
 | Prop Axe "Method Actor" | Quality | Heavy Small / Bladed | 2 Bleed/Crush · double damage to objects & terrain |
-| Camera-Crane Maul | Basic | Heavy Large / Crush | 3 Crush · r2 arc · 5 Phy, 2 hands, Cost 2 |
+| Maul | Basic | Heavy Large / Crush | 3 Crush · r2 arc · 5 Phy, 2 hands, Cost 2 |
 | Greatsword "Season Finale" | Quality | Heavy Large / Bladed | 3 Bleed/Crush · r2 line/arc · on kill, adjacent enemy takes 1 Bleed |
-| Corp-Issue Autocrossbow | Basic | Light Ranged | 1 Bleed/rd · RPM 2 · mag 6 · r5 · 2 Ref |
+| Autocrossbow | Basic | Light Ranged | 1 Bleed/rd · RPM 2 · mag 6 · r5 · 2 Ref |
 | Teleprompter Pistol "Cue" | Quality | Light Ranged | 1 Bleed/rd · RPM 3 · mag 6 · r6 |
-| Confetti Cannon (Retrofitted) | Basic | Heavy Ranged | 4 Crush cone · RPM 1 · mag 2 · 4 Ref, 2 hands |
+| Shotgun | Basic | Heavy Ranged | 4 Crush cone · RPM 1 · mag 2 · 4 Ref, 2 hands |
 | Line-Producer Rifle "Deadline" | Quality | Heavy Ranged | 4 Bleed/rd · RPM 1 · mag 2 · line pierces 2 targets |
 | Championship Wraps | Quality | Martial | 2 Crush · +1 effective Physique for grapple initiation |
-| Balanced Throwing Irons | Basic | Thrown | 2 Bleed thrown · qty 3 |
+| Throwing Irons | Basic | Thrown | 2 Bleed thrown · qty 3 |
 
 ## B-2 — Armor & shields (~11) ⚖ · Silver pool (Quality also Gold)
 
 | Item | Tier | Slot / Subtype | Resist (⚖) |
 |---|---|---|---|
-| Studio Helmet | Basic | Head / Armor | Burn 1 |
+| Fire Helmet | Basic | Head / Armor | Burn 1 |
 | Insulated Coat | Basic | Torso / Armor | Burn 1 |
 | Flak Sleeves | Basic | Arms / Armor | Bleed 1 |
 | Grip Boots | Basic | Feet / Armor | Crush 1 |
-| Weighted Belt | Basic | Accessory / Armor | Crush 1 |
+| Sturdy Belt | Basic | Accessory / Armor | Crush 1 |
 | Riot Vest "Crowd Control" | Quality | Torso / Armor | Crush 2 |
 | Duelist's Coat | Quality | Torso / Armor | Bleed 2 |
 | Firewalker Boots | Quality | Feet / Armor | Burn 2 |

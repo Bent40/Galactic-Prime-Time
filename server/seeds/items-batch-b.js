@@ -14,32 +14,32 @@ const uses = (n) => ({ max: n, current: n });
 // ——— B-1: base weapons (16) — Silver pool, Quality also Gold ———————————————
 const W = (it) => ({ category: 'Weapons', source: 'batch-b', themes: [], boxTiers: it.tier === 'Basic' ? ['Silver'] : ['Silver', 'Gold'], ...it });
 const B1 = [
-  W({ name: 'Stage Dagger', icon: '🗡️', tier: 'Basic', subtype: 'Bladed', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Bleed'], requirements: '1 Physique, 1 Moment Cost', description: 'A prop that stopped pretending.' }),
-  W({ name: 'Boning Knife "Craft Services"', icon: '🔪', tier: 'Basic', subtype: 'Bladed', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Bleed'], requirements: '1 Physique, 1 Moment Cost' }),
+  W({ name: 'Dagger', icon: '🗡️', tier: 'Basic', subtype: 'Bladed', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Bleed'], requirements: '1 Physique, 1 Moment Cost' }),
+  W({ name: 'Boning Knife', icon: '🔪', tier: 'Basic', subtype: 'Bladed', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Bleed'], requirements: '1 Physique, 1 Moment Cost' }),
   W({ name: "Showrunner's Stiletto", icon: '🗡️', tier: 'Quality', subtype: 'Bladed', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Bleed'], requirements: '1 Physique, 1 Moment Cost', specialEffects: '+1 Bleed against Exposed targets.' }),
-  W({ name: 'Boom-Pole Spear', icon: '🎤', tier: 'Basic', subtype: 'Bladed', attackTypes: ['Line'], range: '2', damage: '2', damageType: ['Bleed'], requirements: '3 Physique, 1 Moment Cost, 2 hands + adjacent empty radius', description: 'The mic still works. Mostly.' }),
+  W({ name: 'Spear', icon: '🔱', tier: 'Basic', subtype: 'Bladed', attackTypes: ['Line'], range: '2', damage: '2', damageType: ['Bleed'], requirements: '3 Physique, 1 Moment Cost, 2 hands + adjacent empty radius' }),
   W({ name: 'Duelist\'s Rapier "Encore"', icon: '🤺', tier: 'Quality', subtype: 'Bladed', attackTypes: ['Line'], range: '2', damage: '2', damageType: ['Bleed'], requirements: '3 Physique, 1 Moment Cost, 2 hands + adjacent empty radius', specialEffects: 'First hit each Clock deals +1 Bleed.' }),
-  W({ name: "Stagehand's Hammer", icon: '🔨', tier: 'Basic', subtype: 'Crush', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Crush'], requirements: '2 Physique, 1 Moment Cost' }),
+  W({ name: "Hammer", icon: '🔨', tier: 'Basic', subtype: 'Crush', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Crush'], requirements: '2 Physique, 1 Moment Cost' }),
   W({ name: 'Pipe Wrench "Union Rules"', icon: '🔧', tier: 'Quality', subtype: 'Crush', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Crush'], requirements: '2 Physique, 1 Moment Cost', specialEffects: 'Doubles as proper tools — no improvised-tool penalty on mechanical work.' }),
   W({ name: 'Prop Axe "Method Actor"', icon: '🪓', tier: 'Quality', subtype: 'Bladed', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Bleed', 'Crush'], requirements: '2 Physique, 1 Moment Cost', specialEffects: 'Double damage to objects and terrain.' }),
-  W({ name: 'Camera-Crane Maul', icon: '🎥', tier: 'Basic', subtype: 'Crush', attackTypes: ['Arc'], range: '2', damage: '3', damageType: ['Crush'], requirements: '5 Physique, 2 Moment Cost, 2 hands + adjacent empty radius' }),
+  W({ name: 'Maul', icon: '⚒️', tier: 'Basic', subtype: 'Crush', attackTypes: ['Arc'], range: '2', damage: '3', damageType: ['Crush'], requirements: '5 Physique, 2 Moment Cost, 2 hands + adjacent empty radius' }),
   W({ name: 'Greatsword "Season Finale"', icon: '⚔️', tier: 'Quality', subtype: 'Bladed', attackTypes: ['Line', 'Arc'], range: '2', damage: '3', damageType: ['Bleed', 'Crush'], requirements: '5 Physique, 1-2 Moment Cost, 2 hands + adjacent empty radius', specialEffects: 'On kill, one adjacent enemy takes 1 Bleed.' }),
-  W({ name: 'Corp-Issue Autocrossbow', icon: '🏹', tier: 'Basic', subtype: 'Ranged', attackTypes: ['Single Target'], range: '5', rpm: 2, magazine: 6, damage: '1', damageType: ['Bleed'], requirements: '2 Reflexes, steady ground', description: 'Damage per round (§12.2).' }),
+  W({ name: 'Autocrossbow', icon: '🏹', tier: 'Basic', subtype: 'Ranged', attackTypes: ['Single Target'], range: '5', rpm: 2, magazine: 6, damage: '1', damageType: ['Bleed'], requirements: '2 Reflexes, steady ground', description: 'Damage per round (§12.2).' }),
   W({ name: 'Teleprompter Pistol "Cue"', icon: '🔫', tier: 'Quality', subtype: 'Ranged', attackTypes: ['Single Target'], range: '6', rpm: 3, magazine: 6, damage: '1', damageType: ['Bleed'], requirements: '2 Reflexes, steady ground', description: 'Damage per round (§12.2).' }),
-  W({ name: 'Confetti Cannon (Retrofitted)', icon: '🎉', tier: 'Basic', subtype: 'Ranged', attackTypes: ['Cone'], range: '5', rpm: 1, magazine: 2, damage: '4', damageType: ['Crush'], requirements: '4 Reflexes, 2 hands, steady ground', description: 'Still fires confetti. Also ball bearings.' }),
+  W({ name: 'Shotgun', icon: '💥', tier: 'Basic', subtype: 'Ranged', attackTypes: ['Cone'], range: '5', rpm: 1, magazine: 2, damage: '4', damageType: ['Crush'], requirements: '4 Reflexes, 2 hands, steady ground' }),
   W({ name: 'Line-Producer Rifle "Deadline"', icon: '🎯', tier: 'Quality', subtype: 'Ranged', attackTypes: ['Line'], range: '5', rpm: 1, magazine: 2, damage: '4', damageType: ['Bleed'], requirements: '4 Reflexes, 2 hands, steady ground', specialEffects: 'Line shot pierces up to 2 targets.' }),
   W({ name: 'Championship Wraps', icon: '🥊', tier: 'Quality', subtype: 'Martial', attackTypes: ['Single Target'], range: '1', damage: '2', damageType: ['Crush'], requirements: '1 Moment Cost', specialEffects: '+1 effective Physique for grapple initiation (§13).' }),
-  W({ name: 'Balanced Throwing Irons', icon: '🪃', tier: 'Basic', subtype: 'Thrown', attackTypes: ['Thrown'], range: 'Physique', damage: '2', damageType: ['Bleed'], qty: 3, requirements: '1 Moment Cost' }),
+  W({ name: 'Throwing Irons', icon: '🪃', tier: 'Basic', subtype: 'Thrown', attackTypes: ['Thrown'], range: 'Physique', damage: '2', damageType: ['Bleed'], qty: 3, requirements: '1 Moment Cost' }),
 ];
 
 // ——— B-2: armor & shields (11) — Silver pool, Quality also Gold ————————————
 const A = (it) => ({ category: 'Equipment', source: 'batch-b', themes: [], boxTiers: it.tier === 'Basic' ? ['Silver'] : ['Silver', 'Gold'], ...it });
 const B2 = [
-  A({ name: 'Studio Helmet', icon: '⛑️', tier: 'Basic', subtype: 'Armor', resistance: 'Burn 1', description: 'Head slot.' }),
+  A({ name: 'Fire Helmet', icon: '⛑️', tier: 'Basic', subtype: 'Armor', resistance: 'Burn 1', description: 'Head slot.' }),
   A({ name: 'Insulated Coat', icon: '🧥', tier: 'Basic', subtype: 'Armor', resistance: 'Burn 1', description: 'Torso slot.' }),
   A({ name: 'Flak Sleeves', icon: '💪', tier: 'Basic', subtype: 'Armor', resistance: 'Bleed 1', description: 'Arms slot.' }),
   A({ name: 'Grip Boots', icon: '🥾', tier: 'Basic', subtype: 'Armor', resistance: 'Crush 1', description: 'Feet slot.' }),
-  A({ name: 'Weighted Belt', icon: '🎽', tier: 'Basic', subtype: 'Armor', resistance: 'Crush 1', description: 'Accessory slot.' }),
+  A({ name: 'Sturdy Belt', icon: '🎽', tier: 'Basic', subtype: 'Armor', resistance: 'Crush 1', description: 'Accessory slot.' }),
   A({ name: 'Riot Vest "Crowd Control"', icon: '🦺', tier: 'Quality', subtype: 'Armor', resistance: 'Crush 2', description: 'Torso slot.' }),
   A({ name: "Duelist's Coat", icon: '🧥', tier: 'Quality', subtype: 'Armor', resistance: 'Bleed 2', description: 'Torso slot.' }),
   A({ name: 'Firewalker Boots', icon: '🔥', tier: 'Quality', subtype: 'Armor', resistance: 'Burn 2', description: 'Feet slot.' }),
