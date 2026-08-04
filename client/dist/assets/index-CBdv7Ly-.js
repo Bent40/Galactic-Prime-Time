@@ -123,7 +123,7 @@ ${i}</tr>
 `}strong({tokens:i}){return`<strong>${this.parser.parseInline(i)}</strong>`}em({tokens:i}){return`<em>${this.parser.parseInline(i)}</em>`}codespan({text:i}){return`<code>${oa(i,!0)}</code>`}br(i){return"<br>"}del({tokens:i}){return`<del>${this.parser.parseInline(i)}</del>`}link({href:i,title:r,tokens:c}){let u=this.parser.parseInline(c),d=Um(i);if(d===null)return u;i=d;let h='<a href="'+i+'"';return r&&(h+=' title="'+oa(r)+'"'),h+=">"+u+"</a>",h}image({href:i,title:r,text:c,tokens:u}){u&&(c=this.parser.parseInline(u,this.parser.textRenderer));let d=Um(i);if(d===null)return oa(c);i=d;let h=`<img src="${i}" alt="${oa(c)}"`;return r&&(h+=` title="${oa(r)}"`),h+=">",h}text(i){return"tokens"in i&&i.tokens?this.parser.parseInline(i.tokens):"escaped"in i&&i.escaped?i.text:oa(i.text)}},ru=class{strong({text:i}){return i}em({text:i}){return i}codespan({text:i}){return i}del({text:i}){return i}html({text:i}){return i}text({text:i}){return i}link({text:i}){return""+i}image({text:i}){return""+i}br(){return""}checkbox({raw:i}){return i}},ea=class $c{constructor(r){Ye(this,"options");Ye(this,"renderer");Ye(this,"textRenderer");this.options=r||An,this.options.renderer=this.options.renderer||new ar,this.renderer=this.options.renderer,this.renderer.options=this.options,this.renderer.parser=this,this.textRenderer=new ru}static parse(r,c){return new $c(c).parse(r)}static parseInline(r,c){return new $c(c).parseInline(r)}parse(r){var u,d;this.renderer.parser=this;let c="";for(let h=0;h<r.length;h++){let p=r[h];if((d=(u=this.options.extensions)==null?void 0:u.renderers)!=null&&d[p.type]){let m=p,g=this.options.extensions.renderers[m.type].call({parser:this},m);if(g!==!1||!["space","hr","heading","code","table","blockquote","list","html","def","paragraph","text"].includes(m.type)){c+=g||"";continue}}let y=p;switch(y.type){case"space":{c+=this.renderer.space(y);break}case"hr":{c+=this.renderer.hr(y);break}case"heading":{c+=this.renderer.heading(y);break}case"code":{c+=this.renderer.code(y);break}case"table":{c+=this.renderer.table(y);break}case"blockquote":{c+=this.renderer.blockquote(y);break}case"list":{c+=this.renderer.list(y);break}case"checkbox":{c+=this.renderer.checkbox(y);break}case"html":{c+=this.renderer.html(y);break}case"def":{c+=this.renderer.def(y);break}case"paragraph":{c+=this.renderer.paragraph(y);break}case"text":{c+=this.renderer.text(y);break}default:{let m='Token with "'+y.type+'" type was not found.';if(this.options.silent)return console.error(m),"";throw new Error(m)}}}return c}parseInline(r,c=this.renderer){var d,h;this.renderer.parser=this;let u="";for(let p=0;p<r.length;p++){let y=r[p];if((h=(d=this.options.extensions)==null?void 0:d.renderers)!=null&&h[y.type]){let g=this.options.extensions.renderers[y.type].call({parser:this},y);if(g!==!1||!["escape","html","link","image","strong","em","codespan","br","del","text"].includes(y.type)){u+=g||"";continue}}let m=y;switch(m.type){case"escape":{u+=c.text(m);break}case"html":{u+=c.html(m);break}case"link":{u+=c.link(m);break}case"image":{u+=c.image(m);break}case"checkbox":{u+=c.checkbox(m);break}case"strong":{u+=c.strong(m);break}case"em":{u+=c.em(m);break}case"codespan":{u+=c.codespan(m);break}case"br":{u+=c.br(m);break}case"del":{u+=c.del(m);break}case"text":{u+=c.text(m);break}default:{let g='Token with "'+m.type+'" type was not found.';if(this.options.silent)return console.error(g),"";throw new Error(g)}}}return u}},Vs,Si=(Vs=class{constructor(i){Ye(this,"options");Ye(this,"block");this.options=i||An}preprocess(i){return i}postprocess(i){return i}processAllTokens(i){return i}emStrongMask(i){return i}provideLexer(i=this.block){return i?Wt.lex:Wt.lexInline}provideParser(i=this.block){return i?ea.parse:ea.parseInline}},Ye(Vs,"passThroughHooks",new Set(["preprocess","postprocess","processAllTokens","emStrongMask"])),Ye(Vs,"passThroughHooksRespectAsync",new Set(["preprocess","postprocess","processAllTokens"])),Vs),r0=class{constructor(...i){Ye(this,"defaults",Wc());Ye(this,"options",this.setOptions);Ye(this,"parse",this.parseMarkdown(!0));Ye(this,"parseInline",this.parseMarkdown(!1));Ye(this,"Parser",ea);Ye(this,"Renderer",ar);Ye(this,"TextRenderer",ru);Ye(this,"Lexer",Wt);Ye(this,"Tokenizer",tr);Ye(this,"Hooks",Si);this.use(...i)}walkTokens(i,r){var u,d;let c=[];for(let h of i)switch(c=c.concat(r.call(this,h)),h.type){case"table":{let p=h;for(let y of p.header)c=c.concat(this.walkTokens(y.tokens,r));for(let y of p.rows)for(let m of y)c=c.concat(this.walkTokens(m.tokens,r));break}case"list":{let p=h;c=c.concat(this.walkTokens(p.items,r));break}default:{let p=h;(d=(u=this.defaults.extensions)==null?void 0:u.childTokens)!=null&&d[p.type]?this.defaults.extensions.childTokens[p.type].forEach(y=>{let m=p[y].flat(1/0);c=c.concat(this.walkTokens(m,r))}):p.tokens&&(c=c.concat(this.walkTokens(p.tokens,r)))}}return c}use(...i){let r=this.defaults.extensions||{renderers:{},childTokens:{}};return i.forEach(c=>{let u={...c};if(u.async=this.defaults.async||u.async||!1,c.extensions&&(c.extensions.forEach(d=>{if(!d.name)throw new Error("extension name required");if("renderer"in d){let h=r.renderers[d.name];h?r.renderers[d.name]=function(...p){let y=d.renderer.apply(this,p);return y===!1&&(y=h.apply(this,p)),y}:r.renderers[d.name]=d.renderer}if("tokenizer"in d){if(!d.level||d.level!=="block"&&d.level!=="inline")throw new Error("extension level must be 'block' or 'inline'");let h=r[d.level];h?h.unshift(d.tokenizer):r[d.level]=[d.tokenizer],d.start&&(d.level==="block"?r.startBlock?r.startBlock.push(d.start):r.startBlock=[d.start]:d.level==="inline"&&(r.startInline?r.startInline.push(d.start):r.startInline=[d.start]))}"childTokens"in d&&d.childTokens&&(r.childTokens[d.name]=d.childTokens)}),u.extensions=r),c.renderer){let d=this.defaults.renderer||new ar(this.defaults);for(let h in c.renderer){if(!(h in d))throw new Error(`renderer '${h}' does not exist`);if(["options","parser"].includes(h))continue;let p=h,y=c.renderer[p],m=d[p];d[p]=(...g)=>{let b=y.apply(d,g);return b===!1&&(b=m.apply(d,g)),b||""}}u.renderer=d}if(c.tokenizer){let d=this.defaults.tokenizer||new tr(this.defaults);for(let h in c.tokenizer){if(!(h in d))throw new Error(`tokenizer '${h}' does not exist`);if(["options","rules","lexer"].includes(h))continue;let p=h,y=c.tokenizer[p],m=d[p];d[p]=(...g)=>{let b=y.apply(d,g);return b===!1&&(b=m.apply(d,g)),b}}u.tokenizer=d}if(c.hooks){let d=this.defaults.hooks||new Si;for(let h in c.hooks){if(!(h in d))throw new Error(`hook '${h}' does not exist`);if(["options","block"].includes(h))continue;let p=h,y=c.hooks[p],m=d[p];Si.passThroughHooks.has(h)?d[p]=g=>{if(this.defaults.async&&Si.passThroughHooksRespectAsync.has(h))return(async()=>{let S=await y.call(d,g);return m.call(d,S)})();let b=y.call(d,g);return m.call(d,b)}:d[p]=(...g)=>{if(this.defaults.async)return(async()=>{let S=await y.apply(d,g);return S===!1&&(S=await m.apply(d,g)),S})();let b=y.apply(d,g);return b===!1&&(b=m.apply(d,g)),b}}u.hooks=d}if(c.walkTokens){let d=this.defaults.walkTokens,h=c.walkTokens;u.walkTokens=function(p){let y=[];return y.push(h.call(this,p)),d&&(y=y.concat(d.call(this,p))),y}}this.defaults={...this.defaults,...u}}),this}setOptions(i){return this.defaults={...this.defaults,...i},this}lexer(i,r){return Wt.lex(i,r??this.defaults)}parser(i,r){return ea.parse(i,r??this.defaults)}parseMarkdown(i){return(r,c)=>{let u={...c},d={...this.defaults,...u},h=this.onError(!!d.silent,!!d.async);if(this.defaults.async===!0&&u.async===!1)return h(new Error("marked(): The async option was set to true by an extension. Remove async: false from the parse options object to return a Promise."));if(typeof r>"u"||r===null)return h(new Error("marked(): input parameter is undefined or null"));if(typeof r!="string")return h(new Error("marked(): input parameter is of type "+Object.prototype.toString.call(r)+", string expected"));if(d.hooks&&(d.hooks.options=d,d.hooks.block=i),d.async)return(async()=>{let p=d.hooks?await d.hooks.preprocess(r):r,y=await(d.hooks?await d.hooks.provideLexer(i):i?Wt.lex:Wt.lexInline)(p,d),m=d.hooks?await d.hooks.processAllTokens(y):y;d.walkTokens&&await Promise.all(this.walkTokens(m,d.walkTokens));let g=await(d.hooks?await d.hooks.provideParser(i):i?ea.parse:ea.parseInline)(m,d);return d.hooks?await d.hooks.postprocess(g):g})().catch(h);try{d.hooks&&(r=d.hooks.preprocess(r));let p=(d.hooks?d.hooks.provideLexer(i):i?Wt.lex:Wt.lexInline)(r,d);d.hooks&&(p=d.hooks.processAllTokens(p)),d.walkTokens&&this.walkTokens(p,d.walkTokens);let y=(d.hooks?d.hooks.provideParser(i):i?ea.parse:ea.parseInline)(p,d);return d.hooks&&(y=d.hooks.postprocess(y)),y}catch(p){return h(p)}}}onError(i,r){return c=>{if(c.message+=`
 Please report this to https://github.com/markedjs/marked.`,i){let u="<p>An error occurred:</p><pre>"+oa(c.message+"",!0)+"</pre>";return r?Promise.resolve(u):u}if(r)return Promise.reject(c);throw c}}},En=new r0;function He(i,r){return En.parse(i,r)}He.options=He.setOptions=function(i){return En.setOptions(i),He.defaults=En.defaults,bp(He.defaults),He};He.getDefaults=Wc;He.defaults=An;He.use=function(...i){return En.use(...i),He.defaults=En.defaults,bp(He.defaults),He};He.walkTokens=function(i,r){return En.walkTokens(i,r)};He.parseInline=En.parseInline;He.Parser=ea;He.parser=ea.parse;He.Renderer=ar;He.TextRenderer=ru;He.Lexer=Wt;He.lexer=Wt.lex;He.Tokenizer=tr;He.Hooks=Si;He.parse=He;He.options;He.setOptions;He.use;He.walkTokens;He.parseInline;ea.parse;Wt.lex;const o0=`# GALACTIC PRIME TIME — System Rulebook
 
-**Version 0.92 — the Reconciled Edition** · 2026-07-23
+**Version 1.0** · 2026-07-25
 
 > **Lights. Camera. Action.**
 > You were abducted by an alien conglomerate. The Corporation™ films you running
@@ -132,17 +132,11 @@ Please report this to https://github.com/markedjs/marked.`,i){let u="<p>An error
 > through the ratings. Refusing to join the show? "We can't guarantee what will
 > happen to you afterwards."
 
-**About this edition.** v0.92 folds every ruling made since v0.91 back into one
-book: the defect catalog from the full rules review, the rulings recorded in the
-digital addendum where they apply to the table, and the owner decisions of
-2026-07-14 → 2026-07-23. The setting is unchanged — this is the original reality-TV
-show. Nothing from the video game's separate setting layer appears in this book.
-
-**Markers used throughout:**
-- ⚖️ **PROVISIONAL** — ruled and playable as written, but the numbers or the call
-  await playtest tuning or a final owner nod.
-- 🎙️ **GM CALL** — the rules deliberately hand this to the GM; the box says what's
-  known and what the GM decides.
+**About this book.** The complete rules of the show: timeline combat on a shared
+clock, damage that lives in body parts and conditions, no to-hit rolls anywhere,
+and an audience that is itself a game system. The rules are final; specific
+numbers — prices, payouts, damage values — are first-pass values that the show
+tunes in play.
 
 ---
 
@@ -177,16 +171,15 @@ slow-motion replay.
     under stress.
   - **Charm** — **presentability**: how objectively camera-ready you are —
     photogenics, striking looks, visual impressiveness. Charm 5 = "cinematic
-    gravity, the scene favors you." *(Clarified in v0.92: Charm is not warmth or
-    likability — those live in the audience's reaction to you, i.e. Tags and crowd
-    response, never in the number.)*
+    gravity, the scene favors you." Charm is not warmth or likability — those
+    live in the audience's reaction to you (Tags and crowd response), never in
+    the number.
 
 ### 2.2 Creation
 
 - At creation, allocate **7 points across the Body traits** and **7 points across
   the Core traits**. No trait may exceed **5 at creation**.
-- **The 1–5 scale is a creation-time scale only** *(new in v0.92 — this was
-  implicit)*: 1 = functionally impaired · 2 = below average · 3 = baseline adult
+- **The 1–5 scale is a creation-time scale only**: 1 = functionally impaired · 2 = below average · 3 = baseline adult
   human · 4 = exceptional · 5 = rare talent. Play pushes traits past 5 with no
   ceiling; the fiction table above simply stops describing you.
   - *Bookkeeping note:* the character-sheet app expresses the same 7 as
@@ -198,7 +191,7 @@ slow-motion replay.
 - Level: 1. Skill points come from traits (§3.3); skills are revealed and unlocked
   in play (§4.4).
 
-> **Sidebar — machines & conditions** ⚖️
+> **Sidebar — machines & conditions**
 > A Robot/AI contestant uses the same body-part and condition rules with these
 > readings:
 > - **Bleeding** = structural leaks (hydraulics, coolant, power). Tier effects are
@@ -231,23 +224,21 @@ Common mappings:
 
 ---
 
-## 3. Advancement *(new chapter — the biggest hole in v0.91)*
+## 3. Advancement
 
 ### 3.1 Levels and level points
 
 - **Levels are awarded by the GM at milestones** — bosses, floors, major
-  achievements. There is no XP curve. *(An XP-based award scheme is approved in
-  principle as a future option; amounts would be a tuning pass.)*
+  achievements. There is no XP curve. (An XP-based variant may arrive in a future edition.)
 - Each level grants **1 level point** into a shared pool. A level point buys
   **+1 to any one trait** — any trait, either pillar.
 - Levels grant nothing else by default (no automatic HP). More HP comes from
   Physique (§3.2) or explicit rewards.
 
-### 3.2 Trait growth past 10 — milestone bonuses *(clarified 2026-07-23)*
+### 3.2 Trait growth past 10 — milestone bonuses
 
-**Traits have no cap. They grow infinitely.** The old "stat cap" language named
-these thresholds, but they are not ceilings — they are **repeating milestone
-payouts**: from 10 upward, every trait automatically pays out an extra effect
+**Traits have no cap. They grow infinitely.** The over-10 thresholds are not
+ceilings — they are **repeating milestone payouts**: from 10 upward, every trait automatically pays out an extra effect
 point at each step, forever:
 
 | Trait | Every … points past 10 | Grants |
@@ -263,8 +254,7 @@ character-sheet app exactly.)
 ### 3.3 Skill points
 
 - Each trait grants **skill points equal to its total − 1** (minimum 0): the first
-  point in any trait earns nothing. *(Changed from v0.91's "equal to its level" —
-  this adopts the live table's app-tested rule.)*
+  point in any trait earns nothing.
 - **Multi-stat skills cost 1 point from EACH listed stat** to level.
 - Spends are tracked per skill; leveling a skill down refunds exactly what its
   spend history recorded.
@@ -331,7 +321,7 @@ Skills can combine/consume other **compatible** skills to upgrade or mutate. The
 happens. Consumed skills permanently alter the result and are unrecoverable
 unless stated. Never automatic — requires conditions AND player consent.
 
-**Compatibility — the keyword system** *(ruled 2026-07-23)*: every skill carries
+**Compatibility — the keyword system:** every skill carries
 2–4 keywords from a small hierarchy of **broad** groups and **narrow** members:
 
 | Broad | Narrow |
@@ -351,13 +341,13 @@ a **broad** group (two magic skills of different elements, say) is the "ask the
 GM with a fiction reason" case. No overlap = incompatible. New skills pick from
 this list; the GM may grow the taxonomy deliberately, never casually.
 
-**The canonical worked example** *(ruled 2026-07-23)*: **Intercept Lv 5 +
+**The canonical worked example:** **Intercept Lv 5 +
 Brace Lv 3** — compatible through *bracing* — merge at the Gemstone into
 **Iron Stance**: the mobile bodyguard consumes the self-brace and becomes the
 rooted bulwark (while you hold your ground, attacks on adjacent allies retarget
 to you). Both parents are consumed; the mutation arrives at level 1.
 
-### 4.6 Priming — there are no cooldowns *(v0.92: cooldowns are removed from the system entirely)*
+### 4.6 Priming — there are no cooldowns
 
 Powerful skills are gated by **preparation, not waiting**. A skill with a prime
 requirement cannot fire until its prime is satisfied. The five prime types:
@@ -372,10 +362,6 @@ requirement cannot fire until its prime is satisfied. The five prime types:
 
 - High-tier items may **skip specific prime requirements** — that's deliberate
   design space, not a loophole.
-- **Transitional rule** ⚖️: skills whose printed text still says "cooldown"
-  (Tactical Roll, Acrobatic Save, "-4 Moment cooldown" thresholds) are read as
-  **STANCE-gated** (the two defensive reactions) or as a **CHAIN discount** (the
-  threshold) until the owner's skill passover re-expresses each one as a prime.
 
 ### 4.7 Passive and reactive skills
 
@@ -408,7 +394,7 @@ requirement cannot fire until its prime is satisfied. The five prime types:
 
 - On your Moment, **declare** your action. Your next action comes at
   **current Moment − cost**.
-- **Crossing the Clock boundary** *(v0.92 — this was undefined)*: scheduling
+- **Crossing the Clock boundary**: scheduling
   simply continues into the next Clock. Declare a 2-cost action on Moment 1 and it
   resolves on **Moment 9 of the next Clock**. (Arithmetic: go below 1, add 10.)
 - **Instants:** actions costing **0 or 1** declare **and resolve on the same
@@ -421,7 +407,7 @@ requirement cannot fire until its prime is satisfied. The five prime types:
     collapses into **Forced Action – Tool**.
 - **Multi-Moment actions resolve before Forced Action consequences** apply.
 
-### 5.4 Simultaneity *(v0.92 — this was undefined)*
+### 5.4 Simultaneity
 
 Everything resolving on the same Moment computes against the **state at the start
 of that Moment**:
@@ -435,7 +421,7 @@ of that Moment**:
   ("the first melee attack against you misses") or as a **Dodge Threshold** an
   enemy or ability carries (§14).
 
-### 5.5 What one Moment allows *(v0.92 — caps; this closes infinite free actions)* ⚖️
+### 5.5 What one Moment allows
 
 Per Moment, a combatant gets at most:
 
@@ -449,8 +435,7 @@ Per Moment, a combatant gets at most:
 - Longer moves cost \`ceil((spaces − 3) / 4)\` Moments as a scheduled action.
 - You cannot move twice in one Moment.
 
-**Inventory** *(v0.92 — the old "resets after a different action" clause is
-deleted; it was an infinite-free-items loop)*:
+**Inventory**:
 - The **first** inventory interaction of a combat is free (consumes the free
   slot); **every later one costs 1 Moment**.
 - An item's own listed Moment cost **replaces** the interaction cost when higher —
@@ -458,7 +443,7 @@ deleted; it was an infinite-free-items loop)*:
 
 **Units:** 1 space = 1 hex on the map. Older item text saying "tile" means space.
 
-### 5.6 Reactions *(v0.92 — new; reactive skills existed with no economy)*
+### 5.6 Reactions
 
 - A reactive skill declares its **trigger** when readied. When the trigger fires,
   the reaction **resolves immediately**, out of schedule.
@@ -466,7 +451,7 @@ deleted; it was an infinite-free-items loop)*:
   scheduled action's Moment.
 - **Max one reaction per combatant per Moment.**
 
-### 5.7 Combined actions *(v0.92 — new)*
+### 5.7 Combined actions
 
 Contestants acting on the same Moment can act **together**:
 
@@ -516,10 +501,10 @@ Moment).
 | 5 | **Strained Grip** — +1 Moment cost on your next tool action |
 | 6 | **Overextension** — your next scheduled action is delayed +1 Moment |
 
-**Which table** *(v0.92 — was unstated)*: weapon/tool/stat-requirement shortfalls
+**Which table**: weapon/tool/stat-requirement shortfalls
 roll **Tool**; condition-driven strain and physical overreach roll **Body**.
 
-### 6.2 Unmet requirements are a real gate *(v0.92)* ⚖️
+### 6.2 Unmet requirements are a real gate
 
 Acting with unmet stat/equipment requirements triggers the Forced Action **and
 halves the action's damage or effect magnitude (round down)**. Desperation moves
@@ -554,7 +539,7 @@ Health is localized. Standard body:
   Helpless, or Overwhelmed** (ambush, execution, extreme speed disparity).
 - Torso, arms, legs: always targetable unless the fiction prevents it.
 
-### 7.3 Damage resolution *(v0.92 — "usually 1" is deleted; it contradicted every weapon in the game)*
+### 7.3 Damage resolution
 
 1. Choose a valid body part.
 2. Deal the attack's **listed damage** to that part, minus flat resistance
@@ -576,7 +561,7 @@ parts and *which* conditions.
   Augmentation Hub), regeneration skills, high-end healing skills, and truly
   exceptional potions.
 
-### 7.5 Death and bleed-out *(v0.92 — rewritten; the old list contradicted its own conditions)*
+### 7.5 Death and bleed-out
 
 - **Death:** head or torso at 0 HP.
 - **Bleed-out:** if head/torso hit 0 via a **delayable condition** — Bleeding,
@@ -592,14 +577,14 @@ parts and *which* conditions.
 
 ## 8. Conditions
 
-### 8.1 The universal condition engine *(v0.92 — this generalizes rules that were scattered or missing)*
+### 8.1 The universal condition engine
 
 - **Application:** a damage type applies its condition at **Tier 1** on first
   application to a part. While active, a new application of the same type to that
   part **advances it one tier** — at most one attack-driven advance per part per
   Moment.
 - **Advancement:** at **every Clock reset, every active, non-delayed condition
-  advances one tier.** (v0.91 stated this only for Bleeding.)
+  advances one tier.**
 - **Delayed:** a Delayed condition **skips exactly one advancement** and loses its
   delay.
 - **States:** Active / Delayed / Resolved. In-combat treatment usually **delays**
@@ -607,7 +592,7 @@ parts and *which* conditions.
   resolution needs downtime, advanced tools, or explicit abilities.
 - Conditions stack freely across types; multiple lethal timers can run at once.
 
-### 8.2 Condition tiers (complete tables — v0.92 fills every gap)
+### 8.2 Condition tiers
 
 **Bleeding** — HP on hit + condition; untreated wounds invite poison/infection.
 | Tier | Effect |
@@ -628,7 +613,7 @@ parts and *which* conditions.
 **Burn** — HP damage to a specific part.
 | Tier | Effect |
 |---|---|
-| T1 | Cauterizes: stops Bleeding, removes Chill — **and applies Shock T1** ⚖️ (the price of the field-cautery trade) |
+| T1 | Cauterizes: stops Bleeding, removes Chill — **and applies Shock T1** (the price of the field-cautery trade) |
 | T2 | Stops poison, clears infection; Forced Action–Body |
 | T3 | Part disabled/partial loss; on torso/head starts a **1-Clock death timer** |
 | T4 | **Death** |
@@ -640,7 +625,7 @@ parts and *which* conditions.
 | T2 | Forced Action–Body |
 | T3 | Part disabled (head: usually fatal/incapacitating) |
 
-**Exhausted** — whole body. ⚖️
+**Exhausted** — whole body.
 | Tier | Effect |
 |---|---|
 | T1 | +1 Moment on actions costing 2+ |
@@ -669,10 +654,9 @@ targets specific parts.
 | T2 | Crippling (disables, introduces clocks) |
 | T3 | Catastrophic (lethal clock — must be delayed or cured) |
 
-- **Types are compatibility classes** *(v0.92 — "incompatible" finally defined)*:
+- **Types are compatibility classes**:
   **same type stacks tiers; different types are incompatible → Poison Soup.**
-  Each type also carries a signature effect on top of the tier framework
-  *(ruled 2026-07-23)*:
+  Each type also carries a signature effect on top of the tier framework:
 
 | Type | Signature effect |
 |---|---|
@@ -682,7 +666,7 @@ targets specific parts.
 | **Pneumotoxin** | Starts the Suffocation timer once it reaches the torso; severity scales by tier |
 | **Cytotoxin** | Damage over time |
 - **Poison Soup:** all poison effects on the part end; direct HP damage equal to
-  the combined tiers — **capped at the part's max HP − 1 on head/torso** ⚖️
+  the combined tiers — **capped at the part's max HP − 1 on head/torso**
   (brutal, never a guaranteed instant kill — in either direction).
 - **Spread:** on advancement, spreads to an adjacent part at reduced intensity,
   sharing the advancement clock (Arm/Leg → Torso; Torso → Head or Limbs).
@@ -706,7 +690,7 @@ starts at the next reset.
 
 ---
 
-## 9. Shock *(v0.92 — rebuilt as momentary events, per the 2026-07-20 ruling)*
+## 9. Shock
 
 Shock is the body's pain response — **momentary events, not an accumulating
 pool**:
@@ -742,25 +726,25 @@ pool**:
 - **Classification:** Physical = Bleed/Crush/Burn (flat) · Affliction =
   Chill/Poison/Infection (tiered) · Psychic = Dissolution (tiered).
 - **Tiered resistance = immunity** to effects of its tier and below.
-- **Psychic resistance vs Dissolution** *(v0.92 — the timer has no tiers, so)*:
+- **Psychic resistance vs Dissolution**:
   each psychic tier **slows the Dissolution timer by +1 Clock** instead.
 - **Enemy mental resistance is FLAT**, and exceeding it by a significant margin
   grants the attacker a bonus (viewer spike / secondary effect).
-- Affliction resistance sourcing for players is deliberately parked 🎙️ (nothing
-  in the game currently grants it; the GM may award it explicitly).
+- Player affliction resistance (Chill/Poison/Infection tiers) has no automatic
+  source: it is GM-awarded, explicitly, when earned.
 
 ---
 
-## 11. States Glossary *(v0.92 — all of these were referenced but undefined)*
+## 11. States Glossary
 
 | State | Rules |
 |---|---|
 | **Exposed** | Lethal targeting allowed against you (head, executions). Caused by: Stumble, Prone, Helpless, Channeling, windups, exposing abilities. |
 | **Helpless** | Cannot act or react; you are Exposed; attackers may target **any** part including the head. |
-| **Prone** ⚖️ | You are Exposed; may only crawl 1 space per Moment; standing costs 1 Moment (scheduled). You cannot dodge (§14). |
-| **Slowed** ⚖️ | Free-move allowance drops 3 → 1 space; movement Moment costs double. |
+| **Prone** | You are Exposed; may only crawl 1 space per Moment; standing costs 1 Moment (scheduled). You cannot dodge (§14). |
+| **Slowed** | Free-move allowance drops 3 → 1 space; movement Moment costs double. |
 | **Channeling** | = performing a multi-Moment action. Already Exposed (§5.3); the word adds no new state. |
-| **Overwhelmed** | 🎙️ GM CALL — ambush, execution positioning, extreme speed disparity. Opens head targeting (§7.2). |
+| **Overwhelmed** | GM-adjudicated: ambush, execution positioning, extreme speed disparity. Opens head targeting (§7.2). |
 | **Alerted** | Knows *something* is there, not where (§15). |
 
 ---
@@ -770,7 +754,7 @@ pool**:
 ### 12.1 Weapon classes
 
 Requirements must be met or the Forced Action applies (§6). Base classes
-(unchanged from v0.91):
+:
 
 | Class | Req | Hands | Range | Cost | Damage |
 |---|---|---|---|---|---|
@@ -782,12 +766,11 @@ Requirements must be met or the Forced Action applies (§6). Base classes
 | Heavy Ranged (rifles, shotguns, cannons) | 4 Reflexes | 2, steady ground, ammo | 5+ line/cone/area | varies | 4 Bleed/Crush **per round** |
 
 - Items may deviate from their class baselines — a store spear can be worse than
-  the class line; unique items can be better. *(v0.92: this variance is now a
-  stated rule, not an inconsistency.)*
+  the class line; unique items can be better.
 - **Stat-valued ranges** ("Range: Reflexes") mean the range equals your current
-  stat total. *(v0.92: declared convention.)*
+  stat total.
 
-### 12.2 Ranged fire: RPM, magazines, reload *(v0.92 — RPM was uncostable as written)* ⚖️
+### 12.2 Ranged fire: RPM, magazines, reload
 
 - Firing is a **1-Moment action that delivers up to RPM rounds** — same target, or
   split across targets in your firing arc. Listed damage is **per round**.
@@ -796,7 +779,7 @@ Requirements must be met or the Forced Action applies (§6). Base classes
 - **Reload: 2 Moments, both hands** (auto-reload weapons excepted).
 - Multi-RPM authored items (e.g. the Spark-volver, RPM 3) are flagged for a
   per-round damage rebalance — at 3 rounds × (2 Burn + 1 Crush) per Moment the old
-  values out-damage a greatsword. 🎙️ Until rebalanced, the GM adjudicates.
+  values out-damage a greatsword. Until rebalanced, the GM adjudicates.
 
 ### 12.3 Weapon tiers & modifiers
 
@@ -818,17 +801,17 @@ Legendary, Mythic, Godly (only Lesser is designed so far).
 Point (ignores 1 armor), Chilling (Chilled T1 on hit), Explosive Tip (crit →
 1-space blast), Barbed (removal deals +1 Bleed). **Draining is capped once per
 Clock per target.** Padded and Reinforced are flagged out (candidates: Wrapped,
-Balanced, Sure-grip). ⚖️
+Balanced, Sure-grip).
 
 **Extraction (Enchantment Altar):** Lesser/Normal — extractable with a chance to
 destroy the modifier (odds improved by Lounge upgrades/skills). Higher+ —
 extraction drops the weapon one tier. Legendary+ — extraction destroys the weapon.
 
-**Pre-affixed drops** *(ruled 2026-07-25)*: dropped and looted gear of Quality
-and above arrives **pre-affixed about 1-in-3** ⚖, always within the tier's
+**Pre-affixed drops**: dropped and looted gear of Quality
+and above arrives **pre-affixed about 1-in-3**, always within the tier's
 access rules. The Altar *moves* modifiers — it was never their only source.
 
-### 12.4 Equipment slots *(ruled 2026-07-23)*
+### 12.4 Equipment slots
 
 - **One item per slot — no stacking.** Slots follow the body's actual anatomy: a
   standard human has 1 head, 1 torso, 2 hands, 2 legs, plus accessory slots —
@@ -839,18 +822,18 @@ access rules. The Altar *moves* modifiers — it was never their only source.
   flippers, not hands). When in doubt, **think logically about the anatomy —
   that IS the rule.**
 
-### 12.5 Uses & charges *(ruled 2026-07-25)*
+### 12.5 Uses & charges
 
 - **Consumables** with uses are gone at 0. Buy another box.
 - **Charged gear** (magazines, batteries, printed devices) refills at the
   Lounge — ammo free at the Fabricator, other charges **1 UT per full
-  recharge** ⚖ at the relevant module.
+  recharge** at the relevant module.
 - **In the field, nothing refills** except via explicit items — a spare magazine
-  is an item; the exo-suite's fabricator dock is the ruled exception.
+  is an item; the exo-suite's fabricator dock is the one exception.
 
 ---
 
-## 13. Grappling *(v0.92 — new; grapples previously had no rules and deleted bosses)* ⚖️
+## 13. Grappling
 
 - Grappling requires a **free hand** and a target **no more than one size
   larger**.
@@ -866,7 +849,7 @@ access rules. The Altar *moves* modifiers — it was never their only source.
 
 ---
 
-## 14. Dodge Thresholds *(v0.92 — the table's homebrew, now written down)*
+## 14. Dodge Thresholds
 
 "Miss" is never a universal rule — but some abilities and enemies carry a **Dodge
 Threshold**. One check, both directions (you dodging a boss; a slippery boss
@@ -882,7 +865,7 @@ dodging your aimed shot):
 - Collateral, condition damage, Forced-Action damage and environmental damage are
   **never dodged**.
 - **Threshold dice are upgradeable, per stat** (d4 → d6 → d8) at the **Tattoo
-  Artist** (§20.3 — d4→d6 = 5 UT, d6→d8 = 40 UT ⚖). The die is per-stat so
+  Artist** (§20.3 — d4→d6 = 5 UT, d6→d8 = 40 UT). The die is per-stat so
   future checks (Mind vs fear, Physique vs forced movement) inherit the
   mechanism.
 - **Authored counter-ladders** stay a design pattern: e.g. a boss charge with
@@ -891,7 +874,7 @@ dodging your aimed shot):
 
 ---
 
-## 15. Stealth, Detection & Cover *(v0.92 — new; stealth was referenced with no rules)*
+## 15. Stealth, Detection & Cover
 
 Applies in and out of combat.
 
@@ -917,17 +900,17 @@ Applies in and out of combat.
 
 ---
 
-## 16. Healing & Downtime *(v0.92 — new; nothing in v0.91 ever restored HP)*
+## 16. Healing & Downtime
 
 - **In the field:** conditions can only be **Delayed or Resolved** per their
   treatments. **HP does not regenerate**, and **no item restores HP** — items
   treat and delay conditions only. Applying a treatment to yourself or an ally
   costs **1 Moment** (§5.5's interaction economy applies).
 - Field HP recovery exists **only** via explicit, rare, stated abilities.
-- **At the Lounge** *(amended 2026-07-25 — healing is a priced service)*:
+- **At the Lounge:**
   - **Free rest** (Dormitories): resolvable conditions resolve over a downtime —
     time heals sickness — but HP trickles back at only **+1 per part per
-    downtime** ⚖.
+    downtime**.
   - **The full medical restore is INVOICED** at the **Med Bay** (§20.3):
     **\`Floor × 2^(claims already made this floor)\` Upgrade Tokens** per
     contestant, claim counter resetting each floor. All parts to max, all
@@ -942,7 +925,7 @@ Applies in and out of combat.
 
 ## 17. The Audience
 
-### 17.1 Exposure *(economy model ruled 2026-07-23)*
+### 17.1 Exposure
 
 **Entire galaxies are watching.**
 
@@ -959,7 +942,7 @@ Applies in and out of combat.
   donation already happened, **the Patron roster is permanent — once on your
   list, always on your list.**
 
-🎙️ Session-to-session numbers stay in the GM's hands; the structure above is the
+Session-to-session numbers stay in the GM's hands; the structure above is the
 contract.
 
 ### 17.2 Patron Tokens
@@ -975,7 +958,7 @@ contract.
 - **Effect:** the camera focuses a target: **Viewership, Follower, and Patron
   gains AND losses from that target are doubled** until the end of that target's
   current or next action.
-- **Self-calls are legal** *(ruled 2026-07-23)* — spotlighting yourself is the
+- **Self-calls are legal** — spotlighting yourself is the
   Charm build's play. **One spotlight at a time.** The doubling covers audience
   gains and losses attributed to the spotlit contestant and ends with their
   current-or-next action. Losses double too — the camera is a gamble, not a buff.
@@ -994,10 +977,8 @@ contract.
 - Issued by The Corporation and its subsidiaries. Optional, risky, no guaranteed
   benefit. Direct Action / Manipulation / Performance / Pressure / Sacrifice types
   as authored.
-- **Rewards: tiered loot via the Achievement system.** *(v0.92 — one reward
-  contract per system: the corporation pays in stuff; the audience pays in
-  belief. The old "completing a Directive awards a Patron Token" line is
-  replaced.)* ⚖️
+- **Rewards: tiered loot via the Achievement system** — one reward contract
+  per system: the Corporation pays in stuff; the audience pays in belief.️
 - Refusing a Directive is playable (see the SAG Dispute tag). Consequences are
   the Corporation's to write.
 
@@ -1010,11 +991,11 @@ contract.
   **Mythic** (meta-breaking) · **Godly** (defying fate, almost never given).
 - Rewards: Buffs, Unlocks, Items, Abilities. Tiers can very rarely be upgraded.
 
-**What's inside** *(ruled 2026-07-25 — curated first: the GM stocks each floor's
-boxes to this shape; roll tables are the fallback; boxes are themed to the floor
-that dropped them)*:
+**What's inside** — curated first: the GM stocks each floor's boxes to this
+shape; roll tables are the fallback; boxes are themed to the floor that dropped
+them:
 
-| Tier | Contents shape ⚖ |
+| Tier | Contents shape |
 |---|---|
 | Bronze | 2d3 bulk-utility consumables; 1-in-5 boxes also hold a Crude–Basic item |
 | Silver | 1 Basic–Quality weapon/tool/armor piece + 1d3 consumables; 1-in-10 a limited-magic item |
@@ -1044,7 +1025,7 @@ that dropped them)*:
 - **Lifecycle:** acquired → **Reinforced** (play into it; stack gear/skills) →
   **Faded** (neglected) → **Lost** → reacquirable.
 
-### 18.1 What tags DO — the six patterns *(ruled 2026-07-25)*
+### 18.1 What tags DO — the six patterns
 
 1. **On-brand spotlight.** Every tag carries 1–3 **domains** (below). Doing your
    tag's thing on camera is what the crowd pays for — on-brand plays are the
@@ -1083,276 +1064,12 @@ production awareness).
 | Munchkin | Once per campaign, an exploit you found is grandfathered for you even after the GM patches it |
 | LEEROY JENKINS | Acting first in an ambush YOU triggered, your opening action costs 1 less Moment |
 
-- Per-tag domains live on the tags themselves (the sheet app shows them; the
-  master assignments are in \`rulebook/tags-passover.md\`).
-- **The full tag list with earn-conditions is Appendix C** — reading it is
-  allowed; that's what it's for. The descriptions are the acquisition guide.
+- Per-tag domains live on the tags themselves — your sheet shows them.
 
----
-
-## 19. Tokens & Economy
-
-### 19.1 The currencies *(amended 2026-07-25 — Boss Tokens RETIRED)*
-
-- **Upgrade Tokens — the money.** Earned from **boss kills (payout scaled by
-  boss rank, table below)**, bartering, crowd donations, Directives, and rare
-  loot boxes. Spent on everything: Med Bay bills (§16), module unlocks and
-  levels (§20), extra downtime actions, threshold dice, respec, the store —
-  the Lounge is where the Corporation recoups.
-- **Patron Tokens** — the skill-cap currency (§17.2).
-- **Narrative Tokens** — script interference (§17.7).
-
-**Boss payouts ⚖** (the old token tiers survive as the payout ladder):
-
-| Boss rank | UT payout |
-|---|---|
-| Neighbourhood | 5 |
-| District | 10 |
-| City | 25 |
-| Precinct (Super) | 50 |
-| Country (Super) | 100 |
-| Stage (Super) | 250 |
-
-*(Boss Tokens retired 2026-07-25 — they only ever did what Upgrade Tokens now
-do. Legacy held tokens convert at the payout scale.)*
-
-### 19.2 Token exchange *(amended 2026-07-25 — the tier table retired with Boss Tokens)*
-
-**25 Upgrade Tokens → 1 Patron Token** ⚖, one-way. The audience loop remains
-the better Patron-Token income; the exchange is the overflow valve.
-
-### 19.3 Retail *(ruled 2026-07-25)*
-
-- **The general store ("Sup, nerds!") is a tutorial fixture.** Consumables and
-  Crude–Basic gear at friendly prices (consumables 1–2 UT · Crude 1 · Basic 3 ⚖)
-  while you learn the economy. **It closes when the Lounge unlocks** — from then
-  on, the Lounge is where contestants get their things.
-- **Coupons are tutorial furniture too:** Corporation vouchers that **skip
-  payment** on one store purchase. They retire with the store — after the
-  tutorial, nothing is free.
-- **Bronze box shops — the necessities channel.** Standing Corporation vendors
-  (one in the Lounge, occasional stands on floors) sell **Bronze boxes at 5 UT**
-  ⚖, repeatedly. You don't buy bandages — you buy a *box of necessities*.
-  **Pity rule ⚖:** every 5th Bronze box from the same shop guarantees a gear
-  item. The Corporation understands surprise mechanics.
-- **Found boxes — the booster-pack rule.** Higher boxes are **one-time
-  purchasable finds, randomly placed in the dungeon**: a sealed Silver, Gold, or
-  Legendary box sitting on a shelf with a price tag ⚖ (Silver 15 · Gold 40 ·
-  Legendary 100). Buy it on the spot or leave it — each offer exists once and
-  never restocks. **Mythic and Godly are never for sale**, only earned.
-- **Boxes still only open at the Lounge** — buy the mystery in the field, carry
-  it home sealed, open it in the cage.
-- **Selling:** the Goldsmith's barter bench (§20.3) buys your surplus at about
-  half value ⚖.
-
----
-
-## 20. The Lounge *(ruled 2026-07-25 — the full pass)*
-
-The party's corporate-controlled modular base; unlocks after the Tutorial Boss.
-
-> **Design pillar — the Golden Cage.** The Lounge is essential AND a crutch. The
-> Corporation builds it so good that contestants delay their own descent —
-> every comfort is content, every upgrade is a reason to stay one more cycle,
-> and the cameras never stop: Lounge drama is half the show. Let it seduce.
-> The trade of comfort-now against progression is a real choice, and the
-> Corporation profits either way — you're either content in the dungeon or
-> content in the house.
-
-**House rules:** no entry during combat; all Loot Boxes must be opened inside, and
-opening opens ALL held boxes simultaneously; a guide is available; overstaying
-past all pretense of content → ejection + 24h re-entry lock; fully monitored
-24/7 — higher levels mean more surveillance.
-
-### 20.1 Downtime
-
-Between deployments each contestant gets **2 downtime actions**; one action = one
-module engagement (a craft, a merge, a surgery, a training session). Sleeping,
-eating, and free rest cost nothing. The GM may grant a third action across long
-story gaps; an **extra action costs 3 Upgrade Tokens** ⚖ (once per downtime).
-
-### 20.2 Module levels — the Upgrade-Token sink
-
-Every purchasable module has three levels: **L1** = what the unlock price buys
-(unlock prices are in the module table — Upgrade Tokens, like everything since
-the Boss-Token retirement) · **L2 = 5 Upgrade Tokens** · **L3 = 15 Upgrade
-Tokens** ⚖. The Lounge is where Upgrade Tokens go to die — happily.
-
-### 20.3 The modules (all numbers ⚖ placeholder)
-
-**Living Facilities**
-
-| Module (unlock) | L1 | L2 | L3 |
-|---|---|---|---|
-| Dormitories (auto) | Free rest: resolvable conditions resolve over downtime; +1 HP per part per downtime | — | — |
-| **Med Bay** (auto) | The full medical restore, invoiced: \`Floor × 2^claims\` UT (§16). Bleed-out stabilization always free | Bulk rate: heal the whole party for the sum minus the cheapest member's bill | Premium plan: first claim each floor at half price; recovery spa doubles the free-rest trickle |
-| Kitchen (5 UT) | **1 Meal** per contestant per deployment: eating (1 Moment) removes Exhausted T1 or delays Exhausted one advancement | Personal chef: 2 Meals; pre-deployment boon — the party is immune to Exhausted until the run's first Clock reset | Five-star gastronomy: feast episodes earn hype during downtime; meals also delay Infected; one bespoke dish per contestant per floor grants a chosen first-Clock boon (Exhausted immunity · +1 free-move space · Shock T1 immunity) |
-| Farm (10 UT) | Ingredient supply + one party **companion animal** (GM-statted, permanently losable) | **Mounts** (overworld speed + carry) and livestock — bandage/antitoxin crafting stock | The menagerie: a trained **battle-beast**, exotic boss-livestock, and the petting-zoo segment (standing Patron draw) |
-
-**Factory**
-
-| Module (unlock) | L1 | L2 | L3 |
-|---|---|---|---|
-| Forging Station (5 UT) | Craft/repair **Crude–Basic** weapons and tools | Craft **Quality** | Master forge: **Superior**, plus one **signature weapon** commission per floor — named, hype-tagged, yours |
-| Goldsmith (10 UT) | **Trinkets** — ring-class items (the 20 slots) each holding one **Lesser** modifier | **Normal**-modifier trinkets + barter bench (valuables → Upgrade Tokens) | The luxury line: **Higher**-modifier trinkets; wearing the full set is a standing Patron draw — bling attracts donors |
-| Melding Station (10 UT) | Merge 2 same-type items → 1: better base + ONE modifier from the sacrifice | Keep two modifiers from the sacrifice | True fusion: once per floor the meld bumps the result one item tier; cross-type chimera merges (GM-adjudicated) |
-| **Advanced Fabricator** (10 UT) | **The giant 3D printer — L1 prints ammo only** (magazines, standard rounds; refills free) | Gadget printing: element-tipped special ammo, grapnels, flash/smoke, one-shot drones | **The impossible catalog: futuristic weaponry** — plasma cutters, railguns, energy shields… and yes, **nuclear options** (a micro-nuke is a once-per-campaign purchase the GM prices in tokens AND consequences; the crowd goes insane). Exotic prints consume rare materials + steep UT |
-| Enchantment Altar (10 UT) | Extract/apply modifiers; Lesser extraction destroys the modifier on a d6 roll of 1–2 | Destruction only on a 1; **Normal** extraction unlocked | Master ritual: Lesser never destroys; **Higher** extraction unlocked (the weapon still drops a tier — the ladder stands); the modifier vault stores extracted modifiers safely |
-| Wizard's Tower (15 UT) | The magic source: reveals magic skills (level 0) to qualifying contestants; craft **Lesser** modifiers | Craft **Normal**; arcane tutoring — one magic skill's training prerequisite per downtime | The sanctum: commission GM-authored **relics**; research unlocks exotic modifier crafting (access rules stand) |
-
-**Modification Center**
-
-| Module (unlock) | L1 | L2 | L3 |
-|---|---|---|---|
-| Skill Gemstone (5 UT) | Merges/mutations of compatible skills (§4.5 keywords) + **respec**: unlearn a skill, refund its recorded spend minus one point per level, +2 UT fee | Mutation preview: the outcome is revealed before you commit | Master facet: once per campaign a merge spares the consumed skill at level 0; a regretted merge may be undone within the same downtime |
-| Tattoo Artist (25 UT) | One tattoo — choose: +1 flat physical resistance (Bleed/Crush/Burn) · +1 space of free movement · +1 Camera Call stack per session | Second tattoo slot; **threshold dice d4→d6 = 5 UT** (§14) | The masterpiece: third slot, free swaps each downtime, **d6→d8 = 40 UT**, and the ink makes you recognizable (standing Patron draw) |
-| Surgeon's Table (20 UT) | Reattach severed parts · prosthetic fitting · the canonical **race-change** service | **Animal-part grafts** (GM-statted from the beast you brought back) | Re-genesis: **boss-part grafts** with their quirks; restore one destroyed part permanently per floor |
-| Augmentation Hub (20 UT) | Mechanical prosthetics + utility implants (built-in thin tool, storage compartment) | Weaponized prosthetics (count as a Light Small weapon, cannot be disarmed) | The exo-suite: subdermal plating (+1 flat resistance), integrated auto-loader, fabricator dock — refill ammo once per deployment in the field |
-
-**Garage & the door**
-
-| Module (unlock) | L1 | L2 | L3 |
-|---|---|---|---|
-| Bike Shop (30 UT) | Fast overworld travel, 1–2 riders | Sidecars + saddlebags (carry) | Stunt fleet: televised race segments (hype) + arena-legal entrances |
-| Car Shop (30 UT) | Party transport + real carry capacity | Off-road builds | **The tour bus: a mobile mini-Lounge** — once per deployment the party takes ONE downtime action in the field (the crutch on wheels) |
-| Armory (75 UT) | One armored vehicle: mobile cover (GM-statted, ~10 HP) | Plating (+HP) and a ram (the vehicle can shove) | The war rig: heavy-ranged weapon mount (counts as steady ground); the crew cabin stabilizes bleed-outs in the field |
-| Universal Travel (fixed) | The door of descent. It doesn't level. It knows where you're going. | — | — |
-
----
-
-## 21. Enemies & Encounter Design (GM chapter) *(v0.92 — new; a cold GM previously could not stat a goblin)*
-
-### 21.1 Categories
-
-- **Mobs** — die in one meaningful blow; never appear alone.
-- **Elites** — real statlines; personalities; the fight's texture.
-- **Bosses** — Neighbourhood → District → City variants.
-- **Super Bosses** — Precinct → Country → Stage (a Stage boss is not expected to
-  be beaten).
-
-### 21.2 Construction guidance
-
-- **Asymmetric statting is by design.** Player parts run 2–5 HP; boss parts can
-  run 6–50. Enemies don't obey creation budgets — stat the *character*, not the
-  process. An old man may sit at 2s; the same man at war may run 10s.
-- 🎙️ **GM CALL (heuristic until the numbers pass):** mob damage 1–2; elite parts
-  ~5–15 HP dealing ~2; boss parts 7–50 HP dealing 2–3, with one discoverable
-  weak system. Tune against: a competent party of 5 comfortably handles ~12
-  mobs/room.
-- **Enemies win by creating problems faster than the party can manage** — never by
-  out-rolling (there are no rolls to win).
-
-### 21.3 Boss doctrine
-
-- **Most bosses' win condition is reaching the position where a killing hit is
-  even possible** — not the hit itself. Raw damage races are anti-design.
-- Authored patterns at your disposal: **surface immunity** (damage is cosmetic
-  until a breach condition is met — e.g. reach Bleeding T2 on a part, or 7+ damage
-  in a **single hit**), **phase machines** (explosion beats, retreats, threshold
-  resets), **dodge thresholds** (§14) with Reflexes counter-ladders, **fire that
-  heals**, destroyable sub-parts that permanently remove abilities.
-- **Bosses are immune to grapple-Suffocation** (§13) and to anything else that
-  skips discovery.
-- **Reorganization happens only at narrative beats** — Clock reset, leadership
-  loss, phase change, condition shift; never mid-action. Bosses answer
-  catastrophic player effects with phase changes, acceleration, repositioning,
-  sacrifice.
-
-**Super Bosses** *(ruled 2026-07-23)* are large, **multi-stage, multi-area**
-encounters that demand understanding and preparation across multiple ways of
-fighting. The shape: a giant flower feeds on five different zones, each zone
-powering different abilities and damage types — the party builds immunities and
-plans the disabling of each zone, and only then faces the flower itself, which
-demands several damage types, complex attacks, and specific conditions to
-finish. A Super Boss is a campaign arc in one creature.
-
-### 21.4 Terrain (authoring framework) *(ruled 2026-07-23)*
-
-Stat any terrain by answering three questions:
-
-1. **Is it hard to walk in — and why?** (movement costs, Slowed, forced paths)
-2. **Is it a hazard — and how?** (damage, conditions, timers)
-3. **What effects does it have that aren't a direct danger?** (vision, noise,
-   cover, flammability, smell)
-
-Known table examples: Sludge, Flammable ground, water, difficult terrain, smoke.
-
-### 21.5 Falling ⚖️
-
-Falls longer than **3 hexes** deal damage, scaling with height: roughly
-**1d4–5d4 across 3–8 m**, **2d6–6d6 across 9–14 m**, continuing the pattern
-upward. (A sketch — falling has barely come up in play; tune it when it
-matters.)
-
----
-
-## Appendix A — Changelog v0.91 → v0.92
-
-Every change, mapped to the defect it closes (review-1 catalog ids) and its
-ruling source (digital addendum R-ids / owner decisions D-ids):
-
-| Change | Closes | Source |
-|---|---|---|
-| Clock-boundary scheduling; order of operations at reset | C1 | R0/R1 |
-| Declare/resolve timing; snapshot simultaneity; windup dodging; no universal miss | C2, A5 | R2 |
-| Reaction economy | A5 | R2/R3 |
-| Action caps; movement pricing; inventory reset-loop deletion; 0-cost skills legal | D1, D2, C6, F10 | R3 |
-| Cooldowns removed → priming (5 prime types) | F5, NQ1 | R3, #20 |
-| Listed damage ("usually 1" deleted) | A4 | R4 |
-| Universal condition advancement; Delayed semantics; application/advance rules | E1, C8 | R4 |
-| Missing tiers filled (Crushed T3/T4, Burn T1 Shock + T4, Exhausted, Infected); Chilled respecified; Suffocation-tier items re-read | E2, E3, E4, D3 | R4 |
-| Death/bleed-out rewritten; Exhausted off the death list; Bleeding T4 any-part | A1, A2 | R5, R11#12 |
-| Dissolution completion = permanent removal | A2 | R5 (amended) |
-| Advancement chapter (levels, level points, over-10 caps, creation-only 1–5 scale) | B1, C3 | R6 |
-| Skill points = traitTotal − 1; multi-stat costs each stat | C4 | R6 |
-| No-respec rule | — | Q6 ruling |
-| Psychic tiers slow Dissolution | A3 | R6 |
-| States glossary (Helpless, Prone, Slowed, Channeling, Sizes) | B2–B4, B6, B7 | R7 |
-| Shock as momentary events; high-water mark; combat-end reset | E5, Q21 | R13, #21 |
-| RPM/magazine/reload economy | C5 | R8 |
-| Grapple rules; boss grapple-Suffocation immunity | B5, D4 | R9 |
-| Poison types = compatibility classes; Soup cap | B12, D5 | R10 |
-| Requirements halving | D6 | R10 |
-| Spaces = hex; session = deployment | B8, B9 | R10 |
-| Healing/downtime chapter; treatments cost a Moment; no HP items | B11 | R10, Q29 |
-| Directive rewards = loot; Goals pay Patron Tokens | A6 | R10 |
-| Dodge thresholds (Reflexes + 1d4; upgradeable dice) | — | R22 |
-| Weapon tiers/modifiers/extraction promoted to core | — | R12 |
-| Skill 0–10 architecture | — | R19 |
-| Combined actions | — | R15 |
-| Charm = presentability | — | R18 |
-| Stealth/detection/cover chapter (no setting-specific levers) | B10 | R20 |
-| Enemy construction chapter | B15, F9 | compendium + live play |
-| Book keeps the listed-damage model (force-vs-robustness stays digital) | — | **D-1** |
-| Tier-aware Boss→Patron exchange | D7, D8-adjacent | **D-2** |
-| Machines & conditions sidebar; Robot/AI race kept | Q62 (table) | **D-4** |
-| Threshold-die upgrades = Lounge module | — | **D-5** |
-| Full original tag list retained (Appendix C) | — | **D-6** |
-| Stat-valued ranges convention; item variance rule; Surgeon's Table circular unlock fixed; Moments/Clocks vocabulary purge | F2, F4, B14, F9 | errata |
-| **2026-07-23 rulings batch:** poison-type signature effects; infection cures; audience economy model (billions of Viewers, paying Followers, permanent Patron roster); Camera Call finalized (self-call legal); tier-aware exchange approved; equipment slots + 20 ring slots; terrain framework; fall-damage sketch; part-recovery paths; part-max-HP sources; permanent achievement stat awards; thresholds executed at the Gemstone via compatible skills; no multi-stat level bind; passives need no upkeep | Q4, Q8/Q9, Q11, Q15, Q31, Q32, Q34–Q37, Q48, Q51, Q57, Q59, Q63, Q64 | owner, in chat |
-| **Traits explicitly uncapped** — infinite growth; the over-10 "stat caps" are repeating milestone bonuses, not ceilings | Q5 | owner, 2026-07-23 |
-| **Tag effects ruled** — the six patterns (§18.1: domains/spotlight, quest-feed bias, Patron draw, lifecycle dial, 10 flagship riders, tag gates) + the 12-domain vocabulary; per-tag assignments for all 100 | Q42 | owner, 2026-07-25 |
-| **The Lounge ruled** — Golden Cage pillar; 2 downtime actions; module levels as the Upgrade-Token sink; **healing invoiced at \`Floor × 2^claims\` UT with free rest reduced to a slow trickle** (bleed-out stabilization always free); threshold dice + respec priced; the Fabricator as the 3D printer up to nuclear options | B14, Q65–Q67, D-5, Q6 pricing | owner, 2026-07-25 |
-| **Boss Tokens RETIRED** — merged into Upgrade Tokens: bosses drop UT scaled by rank (Neighbourhood 5 → Stage 250 ⚖); module unlocks re-denominated in UT; the tier-aware exchange replaced by 25 UT → 1 Patron Token (amends the 07-23 D-2 table); legacy held tokens convert via \`migrate-boss-tokens.js\` | Q49 partly, D-2 amended | owner, 2026-07-25 |
-| **Economy completed** — tutorial-only store + skip-payment coupons; Bronze box shops as the necessities channel; higher boxes as one-time found "booster pack" purchases; loot-box content shapes per tier (Godly never random); Quality+ drops pre-affixed 1-in-3; consumables vanish, charges refill at the Lounge. **Appendix B is empty — the system is fully ruled** | Q49, Q50, Q53, Q54 | owner, 2026-07-25 |
-
-**Deliberately NOT in this book** (video-game-only): force-vs-robustness damage,
-run types/respawn, Earth-life-only races, the pruned tag list, noise/absorption
-pacing, AI targeting engines, and everything from the game's separate setting
-layer.
-
-## Appendix B — Open rules questions (the honest list)
-
-**None.** As of 2026-07-25, every open question in the system has been ruled —
-the sittings of 2026-07-23 → 2026-07-25 closed advancement, skills, tags, the
-Lounge, healing, and the economy. What remains is **content and tuning, not
-rules**: drafting the item catalog to fill the loot-box tiers and Bronze shops,
-the parked new-skill candidates, and playtest tuning of every number marked ⚖.
-
-## Appendix C — Tag Compendium
+### 18.3 The Tag Compendium
 
 *The complete list. Each description is the acquisition guide — knowing it is
-playing it.*
+playing it. Reading this chapter is allowed; that's what it's for.*
 
 - **Documentary** — Everyday life turned cinema. Narrate or frame a mundane action as if it were meaningful. The crowd agrees.
 - **Playa** — Flirting with danger. Voluntarily put yourself at risk for no tactical reason, and walk away from it.
@@ -1454,7 +1171,199 @@ playing it.*
 - **The Recast** — Someone else's role. Your performance now. Step into a function, position, or narrative role that belonged to another party member.
 - **Blooper Reel** — Three failures. Four. We've lost count. Fail at least three times in sequence in the same scene. The crowd never changes the channel.
 - **Post-Credits Scene** — The encounter ended. You weren't done. Take a significant action after the formal resolution of a combat or scene.
-`;function c0(i){return i.toLowerCase().replace(/[^a-z0-9\s-]/g,"").trim().replace(/\s+/g,"-")}function u0(i){return i.replace(/\*\*|\*|`|_/g,"").replace(/\\/g,"")}function d0(){const[i,r]=k.useState(""),c=k.useRef(null),{html:u,toc:d}=k.useMemo(()=>{const y=He.parse(o0,{gfm:!0,breaks:!1}),m=[],g={};return{html:y.replace(/<h([123])>([\s\S]*?)<\/h\1>/g,(S,w,D)=>{const E=D.replace(/<[^>]*>/g,"");let z=c0(E)||"section";return g[z]!=null?z=`${z}-${++g[z]}`:g[z]=0,w!=="1"&&m.push({id:z,text:u0(E),level:Number(w)}),`<h${w} id="${z}">${D}</h${w}>`}),toc:m}},[]),h=i?d.filter(y=>y.text.toLowerCase().includes(i.toLowerCase())):d;function p(y){var g;const m=(g=c.current)==null?void 0:g.querySelector(`#${CSS.escape(y)}`);m&&m.scrollIntoView({behavior:"smooth",block:"start"})}return l.jsxs("div",{className:"wiki-root",children:[l.jsx("style",{children:f0}),l.jsxs("div",{className:"wiki-topbar",children:[l.jsxs("div",{className:"wiki-title",children:["📖 GPT RULEBOOK ",l.jsx("span",{className:"wiki-ver",children:"v0.92"})]}),l.jsx("a",{className:"wiki-back",href:"/",children:"← Back to sheet"})]}),l.jsxs("div",{className:"wiki-body",children:[l.jsxs("nav",{className:"wiki-toc",children:[l.jsx("input",{className:"wiki-search",placeholder:"Filter sections…",value:i,onChange:y=>r(y.target.value)}),h.map(y=>l.jsx("div",{className:`wiki-toc-item lvl${y.level}`,onClick:()=>p(y.id),children:y.text},y.id))]}),l.jsx("main",{className:"wiki-content",ref:c,children:l.jsx("div",{dangerouslySetInnerHTML:{__html:u}})})]})]})}const f0=`
+
+---
+
+## 19. Tokens & Economy
+
+### 19.1 The currencies
+
+- **Upgrade Tokens — the money.** Earned from **boss kills** (payout scaled by
+  boss rank, table below), bartering, crowd donations, Directives, and rare
+  loot boxes. Spent on everything: Med Bay bills (§16), module unlocks and
+  levels (§20), extra downtime actions, threshold dice, respec, the store —
+  the Lounge is where the Corporation recoups.
+- **Patron Tokens** — the skill-cap currency (§17.2).
+- **Narrative Tokens** — script interference (§17.7).
+
+**Boss payouts:**
+
+| Boss rank | UT payout |
+|---|---|
+| Neighbourhood | 5 |
+| District | 10 |
+| City | 25 |
+| Precinct (Super) | 50 |
+| Country (Super) | 100 |
+| Stage (Super) | 250 |
+
+### 19.2 Token exchange
+
+**25 Upgrade Tokens → 1 Patron Token**, one-way. The audience loop remains
+the better Patron-Token income; the exchange is the overflow valve.
+
+### 19.3 Retail
+
+- **The general store ("Sup, nerds!") is a tutorial fixture.** Consumables and
+  Crude–Basic gear at friendly prices (consumables 1–2 UT · Crude 1 · Basic 3)
+  while you learn the economy. **It closes when the Lounge unlocks** — from then
+  on, the Lounge is where contestants get their things.
+- **Coupons are tutorial furniture too:** Corporation vouchers that **skip
+  payment** on one store purchase. They retire with the store — after the
+  tutorial, nothing is free.
+- **Bronze box shops — the necessities channel.** Standing Corporation vendors
+  (one in the Lounge, occasional stands on floors) sell **Bronze boxes at 5 UT**
+ , repeatedly. You don't buy bandages — you buy a *box of necessities*.
+  **Pity rule:** every 5th Bronze box from the same shop guarantees a gear
+  item. The Corporation understands surprise mechanics.
+- **Found boxes — the booster-pack rule.** Higher boxes are **one-time
+  purchasable finds, randomly placed in the dungeon**: a sealed Silver, Gold, or
+  Legendary box sitting on a shelf with a price tag (Silver 15 · Gold 40 ·
+  Legendary 100). Buy it on the spot or leave it — each offer exists once and
+  never restocks. **Mythic and Godly are never for sale**, only earned.
+- **Boxes still only open at the Lounge** — buy the mystery in the field, carry
+  it home sealed, open it in the cage.
+- **Selling:** the Goldsmith's barter bench (§20.3) buys your surplus at about
+  half value.
+
+---
+
+## 20. The Lounge
+
+The party's corporate-controlled modular base; unlocks after the Tutorial Boss.
+
+> **Design pillar — the Golden Cage.** The Lounge is essential AND a crutch. The
+> Corporation builds it so good that contestants delay their own descent —
+> every comfort is content, every upgrade is a reason to stay one more cycle,
+> and the cameras never stop: Lounge drama is half the show. Let it seduce.
+> The trade of comfort-now against progression is a real choice, and the
+> Corporation profits either way — you're either content in the dungeon or
+> content in the house.
+
+**House rules:** no entry during combat; all Loot Boxes must be opened inside, and
+opening opens ALL held boxes simultaneously; a guide is available; overstaying
+past all pretense of content → ejection + 24h re-entry lock; fully monitored
+24/7 — higher levels mean more surveillance.
+
+### 20.1 Downtime
+
+Between deployments each contestant gets **2 downtime actions**; one action = one
+module engagement (a craft, a merge, a surgery, a training session). Sleeping,
+eating, and free rest cost nothing. The GM may grant a third action across long
+story gaps; an **extra action costs 3 Upgrade Tokens** (once per downtime).
+
+### 20.2 Module levels — the Upgrade-Token sink
+
+Every purchasable module has three levels: **L1** = what the unlock price buys
+(unlock prices are in the module table) · **L2 = 5 Upgrade Tokens** · **L3 = 15 Upgrade
+Tokens**. The Lounge is where Upgrade Tokens go to die — happily.
+
+### 20.3 The modules
+
+**Living Facilities**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Dormitories (auto) | Free rest: resolvable conditions resolve over downtime; +1 HP per part per downtime | — | — |
+| **Med Bay** (auto) | The full medical restore, invoiced: \`Floor × 2^claims\` UT (§16). Bleed-out stabilization always free | Bulk rate: heal the whole party for the sum minus the cheapest member's bill | Premium plan: first claim each floor at half price; recovery spa doubles the free-rest trickle |
+| Kitchen (5 UT) | **1 Meal** per contestant per deployment: eating (1 Moment) removes Exhausted T1 or delays Exhausted one advancement | Personal chef: 2 Meals; pre-deployment boon — the party is immune to Exhausted until the run's first Clock reset | Five-star gastronomy: feast episodes earn hype during downtime; meals also delay Infected; one bespoke dish per contestant per floor grants a chosen first-Clock boon (Exhausted immunity · +1 free-move space · Shock T1 immunity) |
+| Farm (10 UT) | Ingredient supply + one party **companion animal** (GM-statted, permanently losable) | **Mounts** (overworld speed + carry) and livestock — bandage/antitoxin crafting stock | The menagerie: a trained **battle-beast**, exotic boss-livestock, and the petting-zoo segment (standing Patron draw) |
+
+**Factory**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Forging Station (5 UT) | Craft/repair **Crude–Basic** weapons and tools | Craft **Quality** | Master forge: **Superior**, plus one **signature weapon** commission per floor — named, hype-tagged, yours |
+| Goldsmith (10 UT) | **Trinkets** — ring-class items (the 20 slots) each holding one **Lesser** modifier | **Normal**-modifier trinkets + barter bench (valuables → Upgrade Tokens) | The luxury line: **Higher**-modifier trinkets; wearing the full set is a standing Patron draw — bling attracts donors |
+| Melding Station (10 UT) | Merge 2 same-type items → 1: better base + ONE modifier from the sacrifice | Keep two modifiers from the sacrifice | True fusion: once per floor the meld bumps the result one item tier; cross-type chimera merges (GM-adjudicated) |
+| **Advanced Fabricator** (10 UT) | **The giant 3D printer — L1 prints ammo only** (magazines, standard rounds; refills free) | Gadget printing: element-tipped special ammo, grapnels, flash/smoke, one-shot drones | **The impossible catalog: futuristic weaponry** — plasma cutters, railguns, energy shields… and yes, **nuclear options** (a micro-nuke is a once-per-campaign purchase the GM prices in tokens AND consequences; the crowd goes insane). Exotic prints consume rare materials + steep UT |
+| Enchantment Altar (10 UT) | Extract/apply modifiers; Lesser extraction destroys the modifier on a d6 roll of 1–2 | Destruction only on a 1; **Normal** extraction unlocked | Master ritual: Lesser never destroys; **Higher** extraction unlocked (the weapon still drops a tier — the ladder stands); the modifier vault stores extracted modifiers safely |
+| Wizard's Tower (15 UT) | The magic source: reveals magic skills (level 0) to qualifying contestants; craft **Lesser** modifiers | Craft **Normal**; arcane tutoring — one magic skill's training prerequisite per downtime | The sanctum: commission GM-authored **relics**; research unlocks exotic modifier crafting (access rules stand) |
+
+**Modification Center**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Skill Gemstone (5 UT) | Merges/mutations of compatible skills (§4.5 keywords) + **respec**: unlearn a skill, refund its recorded spend minus one point per level, +2 UT fee | Mutation preview: the outcome is revealed before you commit | Master facet: once per campaign a merge spares the consumed skill at level 0; a regretted merge may be undone within the same downtime |
+| Tattoo Artist (25 UT) | One tattoo — choose: +1 flat physical resistance (Bleed/Crush/Burn) · +1 space of free movement · +1 Camera Call stack per session | Second tattoo slot; **threshold dice d4→d6 = 5 UT** (§14) | The masterpiece: third slot, free swaps each downtime, **d6→d8 = 40 UT**, and the ink makes you recognizable (standing Patron draw) |
+| Surgeon's Table (20 UT) | Reattach severed parts · prosthetic fitting · the canonical **race-change** service | **Animal-part grafts** (GM-statted from the beast you brought back) | Re-genesis: **boss-part grafts** with their quirks; restore one destroyed part permanently per floor |
+| Augmentation Hub (20 UT) | Mechanical prosthetics + utility implants (built-in thin tool, storage compartment) | Weaponized prosthetics (count as a Light Small weapon, cannot be disarmed) | The exo-suite: subdermal plating (+1 flat resistance), integrated auto-loader, fabricator dock — refill ammo once per deployment in the field |
+
+**Garage & the door**
+
+| Module (unlock) | L1 | L2 | L3 |
+|---|---|---|---|
+| Bike Shop (30 UT) | Fast overworld travel, 1–2 riders | Sidecars + saddlebags (carry) | Stunt fleet: televised race segments (hype) + arena-legal entrances |
+| Car Shop (30 UT) | Party transport + real carry capacity | Off-road builds | **The tour bus: a mobile mini-Lounge** — once per deployment the party takes ONE downtime action in the field (the crutch on wheels) |
+| Armory (75 UT) | One armored vehicle: mobile cover (GM-statted, ~10 HP) | Plating (+HP) and a ram (the vehicle can shove) | The war rig: heavy-ranged weapon mount (counts as steady ground); the crew cabin stabilizes bleed-outs in the field |
+| Universal Travel (fixed) | The door of descent. It doesn't level. It knows where you're going. | — | — |
+
+---
+
+## 21. Enemies & Encounter Design (GM chapter)
+
+### 21.1 Categories
+
+- **Mobs** — die in one meaningful blow; never appear alone.
+- **Elites** — real statlines; personalities; the fight's texture.
+- **Bosses** — Neighbourhood → District → City variants.
+- **Super Bosses** — Precinct → Country → Stage (a Stage boss is not expected to
+  be beaten).
+
+### 21.2 Construction guidance
+
+- **Asymmetric statting is by design.** Player parts run 2–5 HP; boss parts can
+  run 6–50. Enemies don't obey creation budgets — stat the *character*, not the
+  process. An old man may sit at 2s; the same man at war may run 10s.
+- **A working heuristic:** mob damage 1–2; elite parts
+  ~5–15 HP dealing ~2; boss parts 7–50 HP dealing 2–3, with one discoverable
+  weak system. Tune against: a competent party of 5 comfortably handles ~12
+  mobs/room.
+- **Enemies win by creating problems faster than the party can manage** — never by
+  out-rolling (there are no rolls to win).
+
+### 21.3 Boss doctrine
+
+- **Most bosses' win condition is reaching the position where a killing hit is
+  even possible** — not the hit itself. Raw damage races are anti-design.
+- Authored patterns at your disposal: **surface immunity** (damage is cosmetic
+  until a breach condition is met — e.g. reach Bleeding T2 on a part, or 7+ damage
+  in a **single hit**), **phase machines** (explosion beats, retreats, threshold
+  resets), **dodge thresholds** (§14) with Reflexes counter-ladders, **fire that
+  heals**, destroyable sub-parts that permanently remove abilities.
+- **Bosses are immune to grapple-Suffocation** (§13) and to anything else that
+  skips discovery.
+- **Reorganization happens only at narrative beats** — Clock reset, leadership
+  loss, phase change, condition shift; never mid-action. Bosses answer
+  catastrophic player effects with phase changes, acceleration, repositioning,
+  sacrifice.
+
+**Super Bosses** are large, **multi-stage, multi-area**
+encounters that demand understanding and preparation across multiple ways of
+fighting. The shape: a giant flower feeds on five different zones, each zone
+powering different abilities and damage types — the party builds immunities and
+plans the disabling of each zone, and only then faces the flower itself, which
+demands several damage types, complex attacks, and specific conditions to
+finish. A Super Boss is a campaign arc in one creature.
+
+### 21.4 Terrain (authoring framework)
+
+Stat any terrain by answering three questions:
+
+1. **Is it hard to walk in — and why?** (movement costs, Slowed, forced paths)
+2. **Is it a hazard — and how?** (damage, conditions, timers)
+3. **What effects does it have that aren't a direct danger?** (vision, noise,
+   cover, flammability, smell)
+
+Known table examples: Sludge, Flammable ground, water, difficult terrain, smoke.
+
+### 21.5 Falling
+
+Falls longer than **3 hexes** deal damage, scaling with height: roughly
+**1d4–5d4 across 3–8 m**, **2d6–6d6 across 9–14 m**, continuing the pattern
+upward. (A sketch — falling has barely come up in play; tune it when it
+matters.)
+`;function c0(i){return i.toLowerCase().replace(/[^a-z0-9\s-]/g,"").trim().replace(/\s+/g,"-")}function u0(i){return i.replace(/\*\*|\*|`|_/g,"").replace(/\\/g,"")}function d0(){const[i,r]=k.useState(""),c=k.useRef(null),{html:u,toc:d}=k.useMemo(()=>{const y=He.parse(o0,{gfm:!0,breaks:!1}),m=[],g={};return{html:y.replace(/<h([123])>([\s\S]*?)<\/h\1>/g,(S,w,D)=>{const E=D.replace(/<[^>]*>/g,"");let z=c0(E)||"section";return g[z]!=null?z=`${z}-${++g[z]}`:g[z]=0,w!=="1"&&m.push({id:z,text:u0(E),level:Number(w)}),`<h${w} id="${z}">${D}</h${w}>`}),toc:m}},[]),h=i?d.filter(y=>y.text.toLowerCase().includes(i.toLowerCase())):d;function p(y){var g;const m=(g=c.current)==null?void 0:g.querySelector(`#${CSS.escape(y)}`);m&&m.scrollIntoView({behavior:"smooth",block:"start"})}return l.jsxs("div",{className:"wiki-root",children:[l.jsx("style",{children:f0}),l.jsxs("div",{className:"wiki-topbar",children:[l.jsxs("div",{className:"wiki-title",children:["📖 GPT RULEBOOK ",l.jsx("span",{className:"wiki-ver",children:"v1.0"})]}),l.jsx("a",{className:"wiki-back",href:"/",children:"← Back to sheet"})]}),l.jsxs("div",{className:"wiki-body",children:[l.jsxs("nav",{className:"wiki-toc",children:[l.jsx("input",{className:"wiki-search",placeholder:"Filter sections…",value:i,onChange:y=>r(y.target.value)}),h.map(y=>l.jsx("div",{className:`wiki-toc-item lvl${y.level}`,onClick:()=>p(y.id),children:y.text},y.id))]}),l.jsx("main",{className:"wiki-content",ref:c,children:l.jsx("div",{dangerouslySetInnerHTML:{__html:u}})})]})]})}const f0=`
 .wiki-root { display:flex; flex-direction:column; height:100vh; background:#0d0d12; color:#e8e6e3; font-family: system-ui, sans-serif; }
 .wiki-topbar { display:flex; align-items:center; justify-content:space-between; padding:10px 18px; background:#15151d; border-bottom:2px solid #e33; flex:0 0 auto; }
 .wiki-title { font-weight:800; letter-spacing:2px; }

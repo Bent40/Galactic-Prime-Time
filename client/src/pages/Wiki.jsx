@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { marked } from 'marked';
-import rulebookRaw from '../../../rulebook/gpt-system-v0.92.md?raw';
+import rulebookRaw from '../../../rulebook/gpt-system-v1.0.md?raw';
 
 function slugify(text) {
   return text
@@ -47,7 +47,7 @@ export default function Wiki() {
     <div className="wiki-root">
       <style>{WIKI_CSS}</style>
       <div className="wiki-topbar">
-        <div className="wiki-title">📖 GPT RULEBOOK <span className="wiki-ver">v0.92</span></div>
+        <div className="wiki-title">📖 GPT RULEBOOK <span className="wiki-ver">v1.0</span></div>
         <a className="wiki-back" href="/">← Back to sheet</a>
       </div>
       <div className="wiki-body">
