@@ -225,7 +225,11 @@ generation logic in it is real, not lorem):
   in the component. Placement ⚖: top of the admin Items section (recommended) or
   its own section.
 
-Status: **awaiting mockup approval** (house rule: UI ships a mockup first).
+Status: **BUILT (owner approved v2, 2026-08-04)** —
+`client/src/components/admin/BoxNamer.jsx`, rendered as a collapsible panel at
+the top of the admin Items section. Loot picker uses the live library (already
+loaded by the section); enemies fetch lazily from `/api/enemies` on first
+expand; suggestions copy to clipboard with a toast. Client build verified.
 
 ---
 

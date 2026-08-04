@@ -124,6 +124,10 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - The Item Drafting content pass (rules + pools + batches) is governed by
   `rulebook/item-drafting-passover.md` + `rulebook/item-drafting-batch-a.md`; the live
   **affix catalog is source of truth** over book §12.3's working list.
+- **Box Namer** (`admin/BoxNamer.jsx`, top of the Items section): GM picks dropped
+  loot + earned-by (Goals/enemies/custom), gets `<Tier> <Flavor> Box` name
+  suggestions; tier auto-inferred from picked items' tiers. Wordlists live in the
+  component.
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
