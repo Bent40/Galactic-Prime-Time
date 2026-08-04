@@ -113,7 +113,7 @@ Admin manages skill templates via SkillLibrarySection. Templates stored in `skil
 Skills are granted to players by templateId. The player sheet joins template data at runtime.
 
 ## Rulebook & Wiki (added 2026-07-23)
-- **`rulebook/gpt-system-v0.92.md` is the canonical TTRPG rules master** (owner decision
+- **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
 - The player-facing **Wiki** (`/wiki` route, `client/src/pages/Wiki.jsx`) renders it via a
   `?raw` import + `marked` — one committed copy, no drift. The 📖 Wiki button in the sheet
@@ -145,7 +145,7 @@ Skills are granted to players by templateId. The player sheet joins template dat
    (dry run, prints every change) → `--apply` (Psy→Dissolution, Toxic→Poison,
    Shock→Burn; Sea Lion→Animal+species, AI→Robot / AI+species) →
    `node seedTagDescriptions.js` → `--apply` (fills empty tag descriptions from
-   rulebook Appendix C). Prime display still rides the owner's skill passover.
+   the rulebook Tag Compendium). Prime display still rides the owner's skill passover.
 3. ~~Polish §B-4~~ **DONE 2026-07-23**: CommsTab whisper selector (📢 broadcast /
    🤫 players / 🎭 NPCs via `/api/players`); admin tag input backed by the tag-catalog
    datalist (freetext preserved, effect auto-copied on match); player tag picker and
