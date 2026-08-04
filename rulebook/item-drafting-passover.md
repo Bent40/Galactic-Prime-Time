@@ -210,9 +210,12 @@ dropped + how it was earned, and gets box names by tier — "Bronze Massacre Box
 
 **Proposed UX** (interactive mockup: `docs/mockups/box-namer-mockup.html` — the
 generation logic in it is real, not lorem):
-- **Inputs:** the loot (freetext, as the players report it) · earned-by (freetext
-  + quick chips for the §17.4 Goal deeds) · box tier (chips, with **Auto**
-  inferring the tier from the loot per the §17.6 contents shape — override wins).
+- **Inputs (v2, owner feedback 2026-08-04):** the loot is **picked from the item
+  library** (searchable checklist — the Items section already loads it) ·
+  earned-by is **picked from a grouped list**: §17.4 Goals + the live Enemies
+  section (custom freetext still allowed) · box tier chips, with **Auto**
+  inferring from the selected items' actual tier fields (Growth/tome bumps a
+  step) — override wins.
 - **Output:** ~6 suggestions across three lanes — **earned** (deed lexicon:
   Overkill→Massacre/Carnage…; unmatched freetext passes through title-cased, so
   boss names like "Incineradile" just work) · **contents** (dominant loot
