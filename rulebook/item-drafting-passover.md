@@ -80,7 +80,7 @@ F4–6 pending design).
 > **Weapon:** Bladed · Crush · Martial (unarmed-class) · Ranged · Thrown
 > **Wearable:** Armor (slot-anchored) · Shield · Trinket (ring-class)
 > **Carried:** Tool · Consumable · Charged gear · Limited-magic · Kit (ID-3/ID-4) ·
-> Growth (ID-3)
+> Growth (ID-3) · Tome (ID-0.18 — teaches a skill; limited-magic casts one)
 > **System:** Key Items · System Items (exempt from tiers/affixes)
 
 **Per-tier meaning by category (⚖ numbers per item):**
@@ -156,12 +156,14 @@ every combination — the kit hands assembly to the player:
   `rulebook/item-drafting-batch-a.md`:** Bronze consumable pool (~20) · Bronze
   pity-gear (~12) · coupon/creation-kit beat · the Incineradile box (with the
   mycelium core) · F1 found-box placements.
-- **Batch B — the standing catalog ⚖:** Silver base-weapon pool (~18 across
-  Basic–Quality, every §12.1 class), armor per slot family (~12), tools (~8),
-  limited-magic items (~6), Gold game-changers (~8); **skill books & tomes as a
-  designed set (~6 ⚖ — magic AND literal skills, per ID-0.18; "Tome Of
-  Submission" is the live precedent)** + magic unlocks; Creation and Polish Kits
-  threaded through Silver/Gold pools.
+- **Batch B — the standing catalog — AUTHORED as proposal, see
+  `rulebook/item-drafting-batch-b.md` + `server/seeds/items-batch-b.js` (57
+  templates):** 16 base weapons (every §12.1 class, Basic+Quality), 11
+  armor/shields, 8 tools, 6 limited-magic items (each casts an existing skill
+  without teaching it), 8 Gold game-changers, **6 skill tomes** (Fire Ball,
+  Frost Ball, Telekinesis, Lockpicking, Seal The Wound, Brace — all anchored to
+  live skill templates), and 2 kits (Quality Weapon Creation Kit, Normal Polish
+  Kit). Awaiting trim/bless; seed syncs to trims before apply.
 - **Batch C — the top shelf ⚖:** Legendary named list (~6, route-hooked — the
   Easy-route mask is begging), Mythic artifacts (~4; the first Mythic box needs
   three on the table), Godly authoring guidance, Superior Polish Kits, remaining
