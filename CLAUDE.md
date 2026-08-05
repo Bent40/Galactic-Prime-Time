@@ -120,7 +120,11 @@ Skills are granted to players by templateId. The player sheet joins template dat
   `constants.js`: `BOX_TIERS` (Bronze→Godly, ≠ item tiers) + `ITEM_SUBTYPES`.
 - **Seeding runbook (from `server/`):** `node backup-db.js` → `node seed-items.js` (dry
   run) → `--apply`; `--force` to overwrite differing existing templates, `--file` for
-  other batches. Batch data lives in `server/seeds/`.
+  other batches. Batch data lives in `server/seeds/` (a: Lounge-unlock, b: standing
+  catalog, c: top shelf, materials-f1: F1 material band, d-repairs: legacy metadata
+  stamps, needs `--force`). `node repair-affixes.js` applies the ruled affix edits.
+  The rulebook is at **v1.1** (Item Drafting update: §12.6 armor, §12.7 materials,
+  §21.2 horde doctrine; file name stays gpt-system-v1.0.md for the Wiki import).
 - The Item Drafting content pass (rules + pools + batches) is governed by
   `rulebook/item-drafting-passover.md` + `rulebook/item-drafting-batch-a.md`; the live
   **affix catalog is source of truth** over book §12.3's working list.

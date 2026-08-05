@@ -268,9 +268,12 @@ every combination — the kit hands assembly to the player:
   items scoring the verdict axes (public reads only in seeds — GM-secrecy
   discipline), the Superior Polish Kit, and Godly authoring guidance (no pool,
   by design). Awaiting trim/bless.
-- **Batch D — repair pass:** tier + subtype the existing 28 templates (12
-  untiered), align to §12.1 baselines; apply the ruled catalog edits (Draining's
-  once-per-Clock cap · Balanced + Sharpened II incompatibility note).
+- **Batch D — repair pass — BUILT (2026-08-04), see
+  `rulebook/item-drafting-batch-d.md`:** 26 of 28 legacy templates get subtype
+  stamps + tiers for the untiered (metadata only — owner stats untouched;
+  Bandage resolves at the A apply, the Doll is Key-exempt), via
+  `seeds/items-batch-d-repairs.js` (--force by design). The R4/R5 affix edits
+  ship as `server/repair-affixes.js` (dry-run default).
 - **Batches E+ — expansion waves (ID-0.17):** pools keep growing as floors and
   arcs land; F2/F3 themed pools once play approaches them, F4–6 after floor
   design exists.
@@ -297,12 +300,17 @@ residual R5: Balanced + Sharpened II incompatibility (PROPOSED yes ⚖).
 - Verified here: syntax + seed-data validation + client build. **Not yet run
   against a DB** — the campaign DB lives with the owner's checkout.
 
-## ID-6 — Book pass (after content lands)
+## ID-6 — Book pass — EXECUTED (2026-08-04, book now v1.1)
 
-Fix §12.3 stale affix line · write ID-0 rulings into §12 (Cost = Moments;
-all-items-tiered; armor per ID-2) · add the Exceptional path (Polish Kits + growth)
-to §12.3 · Creation Kits + generic-vs-specific boxes into §17.6/§19.3 · pool tables:
-app-library-is-truth, book gets pointers (per ID-5 ruling).
+`rulebook/gpt-system-v1.0.md` (file name kept — the Wiki imports by path)
+updated to **Version 1.1**: §4.4 tomes + limited-magic as legal sources ·
+§12.1 Cost = Moments · §12.3 stale affix line fixed (catalog is truth),
+all-items-tiered + naming economy, the Exceptional polish path + Creation
+Kits · §12.5 banded-ammo cost line · **new §12.6 Armor & protection** ·
+**new §12.7 Materials** (bands, parts, ranged/tech rule, carve/reforge —
+catalog of record pointed at `item-drafting-materials.md`) · §17.6
+generic-vs-specific boxes · §21.2 rewritten to the horde doctrine + struggle
+ratios. Pool tables stay app-side per ID-5.
 
 ## ID-7 — Box Namer (GM tool) — PROPOSED, mockup shipped
 

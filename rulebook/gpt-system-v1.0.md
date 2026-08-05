@@ -1,6 +1,9 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.0** · 2026-07-25
+**Version 1.1** · 2026-08-04 — the Item Drafting update: materials & parts
+(§12.7), armor rules (§12.6), polish & creation kits (§12.3), tomes (§4.4),
+box specificity (§17.6), the horde doctrine (§21.2). *(File name stays v1.0 —
+the Wiki imports it by path.)*
 
 > **Lights. Camera. Action.**
 > You were abducted by an alien conglomerate. The Corporation™ films you running
@@ -188,6 +191,10 @@ Skills run **0–10**:
   is revealed at level 0.
 - Magic and similar require an **external source**: appropriate-tier Loot Boxes,
   Achievements, or Lounge modules (e.g. the Wizard's Tower).
+- **Skill Tomes are a legal external source**: consumed in downtime, the named
+  skill becomes acquirable at level 0 (named `Skill Tome: <book title>` so
+  players always know one on sight). **Limited-magic items** instead *cast* one
+  specific skill without ever teaching it (the fireball orb).
 - Some skills are **character-exclusive** — tied to one contestant's nature and
   not obtainable by others.
 
@@ -644,6 +651,8 @@ Requirements must be met or the Forced Action applies (§6). Base classes
 
 - Items may deviate from their class baselines — a store spear can be worse than
   the class line; unique items can be better.
+- **Cost is in Moments** — the Moments an attack with the weapon takes. (Other
+  cost axes may appear on authored items.)
 - **Stat-valued ranges** ("Range: Reflexes") mean the range equals your current
   stat total.
 
@@ -671,9 +680,15 @@ Requirements must be met or the Forced Action applies (§6). Base classes
 | Exceptional | 2 / 2 | up to Legendary |
 
 Progression = **access**, not just slots. Modifier tiers: Lesser, Normal, Higher,
-Legendary, Mythic, Godly (only Lesser is designed so far).
+Legendary, Mythic, Godly. **Lesser and Normal are designed — the live app
+modifier catalog is the source of truth**; the working list below is historical.
 
-**Lesser modifiers (working list):** Poisoned (T1 Poison on hit), Serrated
+**Tiers apply to ALL items** — weapons, armor, tools, consumables alike. Naming
+follows the tier: plain functional names through Basic, solid-but-generic at
+Quality, flair from Superior up (and `<Tier> <Base>` — "Quality Rapier" — when
+one base spans tiers).
+
+**Lesser modifiers (historical working list):** Poisoned (T1 Poison on hit), Serrated
 (+1 Bleed), Weighted (+1 Crush), Spiked (secondary 1 Bleed on Crush hits), Hollow
 Point (ignores 1 armor), Chilling (Chilled T1 on hit), Explosive Tip (crit →
 1-space blast), Barbed (removal deals +1 Bleed). **Draining is capped once per
@@ -687,6 +702,19 @@ extraction drops the weapon one tier. Legendary+ — extraction destroys the wea
 **Pre-affixed drops**: dropped and looted gear of Quality
 and above arrives **pre-affixed about 1-in-3**, always within the tier's
 access rules. The Altar *moves* modifiers — it was never their only source.
+
+**Reaching Exceptional — polish, not drops.** Exceptional gear is never found;
+it is reached. **Polish Kits** are a downtime Forge action, one d6 per kit:
+Crude kit 1–3 fail / 4–6 +1 tier (works rungs up to →Quality) · Normal kit 1–2
+/ 3–6 (up to →Superior) · Superior kit 1 fail / 2–5 +1 tier / 6 **double
+success, +2 tiers** — the only kit that completes →Exceptional, and it is never
+sold. A fail consumes the kit, never the item; polishing an item up a tier
+includes re-naming it. Authored **growth items** are the other road up.
+
+**Creation Kits** let a player assemble a weapon of the kit's tier: any base of
+choice + modifier(s) of choice within the tier's slots and access (Basic kit =
+base + 1 Lesser; Quality kit = base + prefix + suffix ≤Normal). No Exceptional
+kit exists — the top of the ladder is polish-only.
 
 ### 12.4 Equipment slots
 
@@ -707,6 +735,43 @@ access rules. The Altar *moves* modifiers — it was never their only source.
   recharge** at the relevant module.
 - **In the field, nothing refills** except via explicit items — a spare magazine
   is an item; the exo-suite's fabricator dock is the one exception.
+- **Ammo carries a material** (§12.7): Standard rounds print free at the
+  Fabricator; banded ammo consumes its material — ranged power has a running
+  cost that melee doesn't.
+
+### 12.6 Armor & protection
+
+- **Armor is resistance** (§10): a worn piece grants flat resistance **to the
+  body part(s) it covers**, and resists **stack across worn pieces** — the
+  struck part's armor is what counts. Flat armor resists are **Bleed/Crush/Burn
+  only**; afflictions are tiered territory.
+- **Nullification lives at the top:** Superior armor may carry **T1
+  nullification** of its theme type on the covered part; Exceptional reaches T2
+  or full-type immunity on the part.
+- **Shields** occupy a hand and grant their resist to the part the wielder
+  defends (GM adjudicated).
+
+### 12.7 Materials — what a thing is made of IS the power
+
+- **Tier is craftsmanship; MATERIAL is scale.** Baseline materials (Scrap,
+  wood, leather, iron) carry no multiplier; each floor introduces a **material
+  band** that **doubles** damage and resist numbers (F1 ×2 … F9 ×512 across
+  the ten-floor campaign — three sets of three story floors, then the Floor-10
+  finale, which adds no band: it is fought with what you built). The catalog
+  of record: `rulebook/item-drafting-materials.md`.
+- **Parts are material capacity.** A weapon's parts (a sword: blade, guard,
+  hilt, pommel — 4) set how many materials it can socket. No per-part effects:
+  the **striking part** sets the damage band; every socketed material
+  contributes its inherent property. Premade single-material weapons are the
+  default; part-crafting is opt-in.
+- **Ranged & tech — the part that touches the target carries the band.**
+  Rounds, shells, bolts, and arrows are made from materials and set the band;
+  the delivery part (barrel, bow limbs) caps what it can safely fire; energy
+  weapons band by their emitter/core.
+- **Carve, gather, reforge.** Monsters are carved for materials (a boss yields
+  its named material); floors are gathered; the Forge **reforges** any part
+  into a better material — name, modifiers, and history survive. Consumables
+  are *made from* materials but never have a material identity of their own.
 
 ---
 
@@ -867,6 +932,9 @@ contract.
   magic) · **Gold** (game-changers) · **Legendary** (campaign-carrying) ·
   **Mythic** (meta-breaking) · **Godly** (defying fate, almost never given).
 - Rewards: Buffs, Unlocks, Items, Abilities. Tiers can very rarely be upgraded.
+- Boxes are **generic or specific** — boss-, quest-, or floor-themed; a
+  specific box carries its source's materials and flavor. (Box tier ≠ item
+  tier: a Gold *box* holds Quality–Superior *items*.)
 
 **What's inside** — curated first: the GM stocks each floor's boxes to this
 shape; roll tables are the fallback; boxes are themed to the floor that dropped
@@ -1192,10 +1260,15 @@ Tokens**. The Lounge is where Upgrade Tokens go to die — happily.
 - **Asymmetric statting is by design.** Player parts run 2–5 HP; boss parts can
   run 6–50. Enemies don't obey creation budgets — stat the *character*, not the
   process. An old man may sit at 2s; the same man at war may run 10s.
-- **A working heuristic:** mob damage 1–2; elite parts
-  ~5–15 HP dealing ~2; boss parts 7–50 HP dealing 2–3, with one discoverable
-  weak system. Tune against: a competent party of 5 comfortably handles ~12
-  mobs/room.
+- **Mobs are hordes — nearly always one-shot** by a weapon of the floor's
+  material band (mob HP ≈ one on-band hit; ~5 at F1, doubling per floor to
+  ~1.3k at F9). A mob that survives a hit does it through a **special effect**
+  — a gate, like surface immunity — never a fat HP bar. Mob fights are about
+  the crowd: cones, lines, positioning, ammo burn.
+- **Elites, Bosses, and Super Bosses are the struggle:** first-pass ratios of
+  the floor's mob HP — elite ≈ ×12, boss ≈ ×25, Super ≈ ×60 — each with at
+  least one discoverable weak system (§21.3). Tune against: a competent party
+  clears a mob room fast and *earns* every elite.
 - **Enemies win by creating problems faster than the party can manage** — never by
   out-rolling (there are no rolls to win).
 

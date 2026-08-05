@@ -21,7 +21,9 @@
 
 ## In progress
 
-- Awaiting owner's seed run (backup-db.js -> seed-items.js -> --apply).
+- Awaiting owner's seed runs on the campaign DB: batches A/B/C,
+  materials-f1, d-repairs (--force), repair-affixes. All content authored;
+  book at v1.1. Item Drafting pass is content-complete pending applies.
 
 ## Next
 

@@ -19,5 +19,6 @@
    at the book pass.
 6. Materials-on-items app design (parts model, material field shape) -
    design before build; crafting UI later wave.
-7. Then Batch D (repair pass + catalog edits R4/R5).
-8. Book pass ID-6 last.
+7. Batch D BUILT (seeds/items-batch-d-repairs.js --force + server/
+   repair-affixes.js) - owner applies after A/B/C/materials.
+8. Book pass ID-6 EXECUTED - rulebook at v1.1 (filename unchanged).
