@@ -26,19 +26,19 @@ Claw Coverings and the Batch A gear stay the low-end coverage).
 |---|---|---|---|
 | Dagger | Basic | Light Small / Bladed | 2 Bleed · r1 · 1 Phy, Cost 1 |
 | Boning Knife | Basic | Light Small / Bladed | 2 Bleed · r1 · 1 Phy, Cost 1 |
-| Showrunner's Stiletto | Quality | Light Small / Bladed | 2 Bleed · +1 Bleed vs Exposed targets |
+| Stiletto | Quality | Light Small / Bladed | 2 Bleed · +1 Bleed vs Exposed targets |
 | Spear | Basic | Light Large / Bladed | 2 Bleed · r2 line · 3 Phy, 2 hands |
-| Duelist's Rapier "Encore" | Quality | Light Large / Bladed | 2 Bleed · r2 line · first hit each Clock +1 Bleed |
+| Rapier | Quality | Light Large / Bladed | 2 Bleed · r2 line · first hit each Clock +1 Bleed |
 | Hammer | Basic | Heavy Small / Crush | 2 Crush · r1 · 2 Phy |
-| Pipe Wrench "Union Rules" | Quality | Heavy Small / Crush | 2 Crush · doubles as proper tools (no improvised penalty) |
-| Prop Axe "Method Actor" | Quality | Heavy Small / Bladed | 2 Bleed/Crush · double damage to objects & terrain |
+| Pipe Wrench | Quality | Heavy Small / Crush | 2 Crush · doubles as proper tools (no improvised penalty) |
+| Hand Axe | Quality | Heavy Small / Bladed | 2 Bleed/Crush · double damage to objects & terrain |
 | Maul | Basic | Heavy Large / Crush | 3 Crush · r2 arc · 5 Phy, 2 hands, Cost 2 |
-| Greatsword "Season Finale" | Quality | Heavy Large / Bladed | 3 Bleed/Crush · r2 line/arc · on kill, adjacent enemy takes 1 Bleed |
+| Greatsword | Quality | Heavy Large / Bladed | 3 Bleed/Crush · r2 line/arc · on kill, adjacent enemy takes 1 Bleed |
 | Autocrossbow | Basic | Light Ranged | 1 Bleed/rd · RPM 2 · mag 6 · r5 · 2 Ref |
-| Teleprompter Pistol "Cue" | Quality | Light Ranged | 1 Bleed/rd · RPM 3 · mag 6 · r6 |
+| Machine Pistol | Quality | Light Ranged | 1 Bleed/rd · RPM 3 · mag 6 · r6 |
 | Shotgun | Basic | Heavy Ranged | 4 Crush cone · RPM 1 · mag 2 · 4 Ref, 2 hands |
-| Line-Producer Rifle "Deadline" | Quality | Heavy Ranged | 4 Bleed/rd · RPM 1 · mag 2 · line pierces 2 targets |
-| Championship Wraps | Quality | Martial | 2 Crush · +1 effective Physique for grapple initiation |
+| Rifle | Quality | Heavy Ranged | 4 Bleed/rd · RPM 1 · mag 2 · line pierces 2 targets |
+| Grappler's Wraps | Quality | Martial | 2 Crush · +1 effective Physique for grapple initiation |
 | Throwing Irons | Basic | Thrown | 2 Bleed thrown · qty 3 |
 
 ## B-2 — Armor & shields (~11) ⚖ · Silver pool (Quality also Gold)
@@ -50,12 +50,12 @@ Claw Coverings and the Batch A gear stay the low-end coverage).
 | Flak Sleeves | Basic | Arms / Armor | Bleed 1 |
 | Grip Boots | Basic | Feet / Armor | Crush 1 |
 | Sturdy Belt | Basic | Accessory / Armor | Crush 1 |
-| Riot Vest "Crowd Control" | Quality | Torso / Armor | Crush 2 |
+| Riot Vest | Quality | Torso / Armor | Crush 2 |
 | Duelist's Coat | Quality | Torso / Armor | Bleed 2 |
-| Firewalker Boots | Quality | Feet / Armor | Burn 2 |
-| Set-Armor Pauldrons | Quality | Arms / Armor | Bleed 1 + Crush 1 |
-| Camera-Proof Visor | Quality | Head / Armor | Bleed 1 + Crush 1 |
-| Prop-Shield "Fourth Wall" | Quality | Shield | Crush 2 · occupies a hand |
+| Fireproof Boots | Quality | Feet / Armor | Burn 2 |
+| Pauldrons | Quality | Arms / Armor | Bleed 1 + Crush 1 |
+| Combat Visor | Quality | Head / Armor | Bleed 1 + Crush 1 |
+| Tower Shield | Quality | Shield | Crush 2 · occupies a hand |
 
 ## B-3 — Tools (~8) ⚖ · Silver pool
 
@@ -66,8 +66,8 @@ Claw Coverings and the Batch A gear stay the low-end coverage).
 | Spotter's Scope | Basic | Far detail; helps called shots & recon (GM adjudicated) |
 | Signal Kit | Basic | Mirror, whistle, flags — party signaling at range |
 | Trap Kit | Quality | Set/disarm simple traps; removes Forced Action – Tool on trapwork |
-| Boom Mic | Quality | Eavesdrop conversations at range; the Show approves |
-| Makeup Kit "New Face" | Quality | Disguise work (pairs with Camouflage); fools mobs, strains vs elites |
+| Directional Mic | Quality | Eavesdrop conversations at range |
+| Disguise Kit | Quality | Disguise work (pairs with Camouflage); fools mobs, strains vs elites |
 | Field Tool Roll | Quality | Counts as proper tools for any mechanical job |
 
 ## B-4 — Limited-magic items (~6) ⚖ · the Silver 1-in-10 slot (also Gold filler)
@@ -77,23 +77,23 @@ Each casts one named skill without teaching it (recharge at the Lounge, 1 UT ⚖
 | Item | Tier | Casts | Uses (⚖) |
 |---|---|---|---|
 | Ember Orb | Quality | Fire Ball | 3 |
-| Hoarfrost Lens | Quality | Frost Ball | 3 |
-| Blight Sprayer | Quality | Poison Ball | 2 |
+| Frost Lens | Quality | Frost Ball | 3 |
+| Poison Sprayer | Quality | Poison Ball | 2 |
 | Whisper Locket | Quality | Telepathy (one-way message) | 3 |
-| Unseen Hand Glove | Quality | Telekinesis (minor) | 2 |
-| Prompter's Echo | Quality | Voicebox (voice mimicry) | 3 |
+| Telekinetic Glove | Quality | Telekinesis (minor) | 2 |
+| Echo Box | Quality | Voicebox (voice mimicry) | 3 |
 
 ## B-5 — Gold game-changers (~8) ⚖ · Gold pool
 
 | Item | Tier | Effect (⚖) |
 |---|---|---|
-| Grapnel Rig "Ratings Hook" | Superior | Tool — fire-and-reel repositioning; counts as steady ground while anchored |
-| Deployable Cover "Commercial Break" | Superior | 1 Moment: half-cover panel, 2 spaces wide (§15 cover) |
-| Personal Camera Drone "Solo Shoot" | Quality | Your own camera: +1 Exposure gain while deployed; fragile (1 HP) |
+| Grapnel Rig | Superior | Tool — fire-and-reel repositioning; counts as steady ground while anchored |
+| Deployable Cover | Superior | 1 Moment: half-cover panel, 2 spaces wide (§15 cover) |
+| Personal Camera Drone | Quality | Your own camera: +1 Exposure gain while deployed; fragile (1 HP) |
 | Exo-Brace Harness | Superior | Accessory — +1 effective Physique for requirements only |
 | Adaptive Visor | Superior | Head — Bleed 1 + Crush 1 + Burn 1 |
-| Chainblade "Cliffhanger" | Superior | Heavy Small / Bladed — 3 Bleed · loud, the crowd loves it |
-| Modular Longarm "Prime Time" | Superior | Ranged — swaps profiles: light (1 Bleed/rd, RPM 2) / heavy (4 Bleed/rd, RPM 1) · mag 4 |
+| Chainblade | Superior | Heavy Small / Bladed — 3 Bleed |
+| Modular Longarm | Superior | Ranged — swaps profiles: light (1 Bleed/rd, RPM 2) / heavy (4 Bleed/rd, RPM 1) · mag 4 |
 | Aegis Projector | Superior | Accessory — once per Clock, negate one incoming ranged round |
 
 ## B-6 — Skill tomes (~6) ⚖ · Gold pool (the §17.6 "skill tome" slot)
@@ -104,12 +104,12 @@ exist in the skill library; the GM grants via the skills flow when consumed.
 
 | Tome | Teaches | Kind |
 |---|---|---|
-| Tome of the First Flame | Fire Ball | magic |
-| Tome of the Deep Chill | Frost Ball | magic |
-| Tome of the Unseen Hand | Telekinesis | magic |
-| Manual: "Locks & You" (Corp. Press) | Lockpicking | literal |
-| Field Medic's Primer | Seal The Wound | literal |
-| "Bracing for Impact: A Stuntman's Guide" | Brace | literal |
+| Fire Ball Tome | Fire Ball | magic |
+| Frost Ball Tome | Frost Ball | magic |
+| Telekinesis Tome | Telekinesis | magic |
+| Lockpicking Manual | Lockpicking | literal |
+| Field Medicine Manual | Seal The Wound | literal |
+| Bracing Manual | Brace | literal |
 
 ## B-7 — Kits threaded through the pools (2) ⚖
 

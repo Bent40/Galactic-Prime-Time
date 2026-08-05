@@ -70,6 +70,21 @@ F4–6 pending design).
     tracks — an item that quietly grows on betrayal, discovered only after you
     kill an NPC friend by mistake. Growth events may advance arcs and tilt
     players morally; the trigger reveal is a designed beat.
+20. **Theme by FLOOR, not by Show** (owner, naming/flavor round): the standing
+    catalog stays neutral and generic; thematic personality lives in the
+    floor/boss/quest pools (F1 forest, F2 desert, F3 capital…). Show-pun naming
+    on ordinary gear is out.
+21. **Power-fantasy naming ceiling** (owner): Basic AND Quality are commodity
+    gear — solid, generic names ("no need to be all that cool; they are things
+    all of them will have"). **Superior and above can start dealing out real
+    nonsense items.** The top of the ladder holds literal divinity — name
+    inflation at the bottom devalues it.
+22. **"Tome of the First Flame" RESERVED as a Batch C MYTHIC growth-tome**
+    (owner concept): teaches a skill "Fireball?" that acts exactly like Fire
+    Ball — but unlocking its L5 reveals another fire spell with a question mark,
+    and so on: a whole chain of fire spells. With enough effort it maxes out
+    fire magic — god-tier acquisition, Mythic delivery. (Needs the "Fireball?"
+    chain authored as SkillTemplates — Batch C work item.)
 
 ---
 
@@ -83,10 +98,13 @@ F4–6 pending design).
 > Growth (ID-3) · Tome (ID-0.18 — teaches a skill; limited-magic casts one)
 > **System:** Key Items · System Items (exempt from tiers/affixes)
 
-**Naming economy (owner, 2026-08-04):** Basic (and Crude) items carry **plain
-functional names** — Dagger, Spear, Hammer, Shotgun. Nicknames and flair start at
-Quality; name fanciness signals tier at a glance. Also: never reuse an affix name
-(Weighted, Balanced…) inside an item name.
+**Naming economy (owner, 2026-08-04, refined same day):** Crude/Basic = **plain
+functional names** (Dagger, Spear, Hammer, Shotgun). Quality = **solid but
+generic** (Stiletto, Rapier, Riot Vest, Fire Ball Tome) — commodity gear everyone
+will have. **Nicknames, epithets, and real nonsense start at Superior**; the
+Mythic/Godly end holds literal divinity, so name grandeur is budgeted from the
+top down. Theme comes from FLOOR pools, not Show puns (ID-0.20). Never reuse an
+affix name (Weighted, Balanced…) inside an item name.
 
 **Per-tier meaning by category (⚖ numbers per item):**
 
@@ -171,8 +189,10 @@ every combination — the kit hands assembly to the player:
   Kit). Awaiting trim/bless; seed syncs to trims before apply.
 - **Batch C — the top shelf ⚖:** Legendary named list (~6, route-hooked — the
   Easy-route mask is begging), Mythic artifacts (~4; the first Mythic box needs
-  three on the table), Godly authoring guidance, Superior Polish Kits, remaining
-  growth items.
+  three on the table — **one is reserved: the Tome of the First Flame, the
+  "Fireball?" chain growth-tome, ID-0.22**), Godly authoring guidance, Superior
+  Polish Kits, remaining growth items. This is where naming stops being polite
+  (ID-0.21).
 - **Batch D — repair pass:** tier + subtype the existing 28 templates (12
   untiered), align to §12.1 baselines; apply the ruled catalog edits (Draining's
   once-per-Clock cap · Balanced + Sharpened II incompatibility note).
