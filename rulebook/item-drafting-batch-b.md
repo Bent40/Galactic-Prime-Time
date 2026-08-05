@@ -104,12 +104,12 @@ exist in the skill library; the GM grants via the skills flow when consumed.
 
 | Tome | Teaches | Kind |
 |---|---|---|
-| Fire Ball Tome | Fire Ball | magic |
-| Frost Ball Tome | Frost Ball | magic |
-| Telekinesis Tome | Telekinesis | magic |
-| Lockpicking Manual | Lockpicking | literal |
-| Field Medicine Manual | Seal The Wound | literal |
-| Bracing Manual | Brace | literal |
+| Skill Tome: Fireballs for Beginners | Fire Ball | magic |
+| Skill Tome: The Frost Ball Primer | Frost Ball | magic |
+| Skill Tome: Mind Over Matter | Telekinesis | magic |
+| Skill Tome: Lockpicking for Dummies | Lockpicking | literal |
+| Skill Tome: Stop the Bleeding | Seal The Wound | literal |
+| Skill Tome: Bracing for Impact | Brace | literal |
 
 ## B-7 — Kits threaded through the pools (2) ⚖
 

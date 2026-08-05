@@ -93,12 +93,12 @@ const TOME = (name, icon, skill, kind) => ({
   source: 'batch-b', themes: [], boxTiers: ['Gold'],
 });
 const B6 = [
-  TOME('Fire Ball Tome', '📕', 'Fire Ball', 'magic'),
-  TOME('Frost Ball Tome', '📘', 'Frost Ball', 'magic'),
-  TOME('Telekinesis Tome', '📓', 'Telekinesis', 'magic'),
-  TOME('Lockpicking Manual', '📗', 'Lockpicking', 'literal'),
-  TOME('Field Medicine Manual', '📙', 'Seal The Wound', 'literal'),
-  TOME('Bracing Manual', '📔', 'Brace', 'literal'),
+  TOME('Skill Tome: Fireballs for Beginners', '📕', 'Fire Ball', 'magic'),
+  TOME('Skill Tome: The Frost Ball Primer', '📘', 'Frost Ball', 'magic'),
+  TOME('Skill Tome: Mind Over Matter', '📓', 'Telekinesis', 'magic'),
+  TOME('Skill Tome: Lockpicking for Dummies', '📗', 'Lockpicking', 'literal'),
+  TOME('Skill Tome: Stop the Bleeding', '📙', 'Seal The Wound', 'literal'),
+  TOME('Skill Tome: Bracing for Impact', '📔', 'Brace', 'literal'),
 ];
 
 // ——— B-7: kits threaded through the pools (2) ——————————————————————————————

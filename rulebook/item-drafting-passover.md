@@ -105,6 +105,10 @@ will have. **Nicknames, epithets, and real nonsense start at Superior**; the
 Mythic/Godly end holds literal divinity, so name grandeur is budgeted from the
 top down. Theme comes from FLOOR pools, not Show puns (ID-0.20). Never reuse an
 affix name (Weighted, Balanced…) inside an item name.
+**Tomes (owner):** named **`Skill Tome: <book title>`** — the prefix guarantees
+players KNOW it's usable; the book title can be playful but grounded
+("Lockpicking for Dummies" is fun; "Tome of the First Flame" is not — that name
+lives at Mythic, ID-0.22). The description always states what it teaches.
 
 **Per-tier meaning by category (⚖ numbers per item):**
 
