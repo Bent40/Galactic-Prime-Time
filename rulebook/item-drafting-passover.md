@@ -116,6 +116,16 @@ F4–6 pending design).
     the material decides the resulting damage and effects. Drops carry their
     floor's materials. Direction ruled; system sketch in ID-8; the material
     catalog becomes a floor-banded content workstream.
+27. **Materials round 2 (owner, 2026-08-04):** (a) **Consumables can't change
+    materials — but consumables can be MADE from materials** (materials are
+    crafting inputs for them; no reforge, no material identity on the result).
+    (b) **The ×1 baseline: Scrap, wood, normal leather — no multipliers.**
+    (c) **A per-floor materials list is unavoidable** if the fiction is to hold
+    — accepted as a content workstream. (d) **Method ruled: scavenge materials
+    from a bunch of stories**, keep what fits, tier them into floor bands, and
+    derive the damage numbers from the tiering. First source: the game repo's
+    `docs/research/mythology/` library (12 traditions, researched for this
+    game).
 
 ---
 
@@ -311,13 +321,15 @@ polish); MATERIAL is the power axis. A Crude Loong-scale club: huge numbers,
 zero slots.
 
 1. **Every item has a material.** All authored numbers in Batches A–C are the
-   **Standard band** (iron, wood, leather — commodity gear). No re-stat needed.
-2. **Bands ladder by floor ⚖:** Scrap (below Standard) · **Standard** · F1
-   forest band (Greenwood, Beastbone…) · F2 desert band (Sunglass, Chitin…) ·
-   F3 capital band (Crystal, Gravemetal…) · F4–6 continent band · apex
-   materials (Loong-scale, star-metal — the legendary-justifying stuff). Each
-   band multiplies base damage/resists ⚖ — the ladder must reach thousands-HP
-   monsters by the deep floors; numbers at the sitting.
+   **×1 baseline band** — RULED (ID-0.27b): **Scrap, wood, normal leather (and
+   commodity iron ⚖) carry no multiplier.** No re-stat needed.
+2. **Bands ladder by floor — RULED unavoidable (ID-0.27c), populated by the
+   scavenge method (ID-0.27d):** materials are harvested from myth/story
+   sources (first: the game repo's mythology research library), filtered for
+   fit, tiered into floor bands (F1 forest · F2 desert · F3 capital · F4–6
+   continent · apex/divine), and the band tiering then DERIVES the damage
+   multipliers ⚖ — proposal: ×2 per band step (reaches thousands-HP monsters
+   by the deep floors). Catalog doc: `rulebook/item-drafting-materials.md`.
 3. **Materials decide effects too** (owner): inherent properties riding the
    material, not the affix slots — chitin is light (−1 Phy req ⚖), crystal
    carries magic affinity, Loong-scale touches Dissolution. Inherent ≠ affix:
@@ -336,9 +348,13 @@ zero slots.
 7. **Naming does the display work:** `<Material> <Base>` — "Chitin Spear,"
    "Quality Crystal Rapier" (composes with the tier-span rule). Zero new UI;
    app impact is one optional `material` field + a catalog, later.
-8. **Open ⚖ (the materials sitting):** band multipliers · carve/harvest rules
-   (an action? who gets it? split?) · reforge cost · how inherent effects stack
-   with affixes · consumables (default: no materials).
+8. **Consumables — RULED (ID-0.27a):** consumables never change materials and
+   have no material identity; they are **made FROM materials** (crafting
+   inputs — Farm stock, carve yields; a Beastbone antitoxin is still an
+   antitoxin).
+8b. **Open ⚖ (the materials sitting):** confirm ×2-per-band · carve/harvest
+   rules (an action? who claims? split?) · reforge cost · inherent-effect ×
+   affix stacking.
 9. **Content workstream:** the MATERIAL CATALOG is authored per floor band —
    **F1 forest band first** (the party is standing on it); F4–6 bands wait on
    floor design. The Incineradile is the first carve ⚖ (mycelium-threaded
