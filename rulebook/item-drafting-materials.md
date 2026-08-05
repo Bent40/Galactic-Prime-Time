@@ -1,33 +1,43 @@
-# Item Drafting — The Materials Catalog (PROPOSAL)
+# Item Drafting — The Materials Catalog
 
-**Date:** 2026-08-04 · **Status:** 🟡 PROPOSED — scavenged from stories per
-ID-0.27d (primary source: the game repo's `docs/research/mythology/` library,
-155 grounded entries swept across 14 traditions), tiered into floor bands, with
-the damage numbers derived from the tiering. ⚖ everywhere. Governing system:
-passover ID-8; rulings ID-0.26–28.
+**Date:** 2026-08-04 · **Status:** 🟢 BLESSED (owner, 2026-08-04 — ladder
+approved with the catalog; ⚖ numbers remain table-tunable). Scavenged from
+stories per ID-0.27d (primary source: the game repo's `docs/research/mythology/`
+library, 155 grounded entries swept across 14 traditions), tiered into floor
+bands, damage derived from the tiering. Governing system: passover ID-8;
+rulings ID-0.26–30.
 
 **Campaign frame (RULED, owner 2026-08-04 — ID-0.29): 10 floors — three sets
 of three story floors, then Floor 10: a free-for-all between everyone left.**
 The damage spread is calibrated to exactly that.
 
-**The ladder (⚖ confirm): one band per floor, each floor DOUBLES.**
+**The ladder (APPROVED): one band per floor, each floor DOUBLES.**
 
-| Floor | Set | Band | Mult | Mob HP ~ (⚖) |
+**Mob doctrine (RULED, owner 2026-08-04 — ID-0.30): normal mobs are HORDES and
+nearly always ONE-SHOT** by an on-band weapon — when a mob survives a hit, it's
+because of a special effect (a gate: surface immunity, a shield, a phylactery-
+echo — the Incineradile's breach rule is the pattern), never because of a fat
+HP bar. **Elites, Bosses, and Super Bosses are the struggle** (Supers align
+with the §19.1 payout ladder's Super ranks). Mob fights are about the crowd:
+positioning, cones and lines, ammo burn — not attrition against bars.
+
+| Floor | Set | Band | Mult | Mob HP ≈ one on-band hit (⚖) |
 |---|---|---|---|---|
-| — | tutorial | Baseline (Scrap/Wood/Leather/Iron) | ×1 | ~12–25 |
-| F1 | Set 1 | Forest | ×2 | ~50 |
-| F2 | Set 1 | Desert | ×4 | ~100 |
-| F3 | Set 1 | Capital | ×8 | ~200 |
-| F4–F6 | Set 2 | (floors undesigned) | ×16 / ×32 / ×64 | ~400 / 800 / 1.6k |
-| F7–F9 | Set 3 | (floors undesigned) | ×128 / ×256 / ×512 | ~3.2k / 6.4k / 12.8k |
+| — | tutorial | Baseline (Scrap/Wood/Leather/Iron) | ×1 | hand-tuned (pre-doctrine) |
+| F1 | Set 1 | Forest | ×2 | ~5 |
+| F2 | Set 1 | Desert | ×4 | ~10 |
+| F3 | Set 1 | Capital | ×8 | ~20 |
+| F4–F6 | Set 2 | (floors undesigned) | ×16 / ×32 / ×64 | ~40 / 80 / 160 |
+| F7–F9 | Set 3 | (floors undesigned) | ×128 / ×256 / ×512 | ~320 / 640 / ~1.3k |
 | F10 | FFA | **no new band — the finale is fought with everything you built** | — | (each other) |
 
-The invariant this buys: **the sheet plays identically on every floor.** A mob
-dies in ~4–6 hits at F1 and ~4–6 hits at F9 — only the numbers inflate. The
-Incineradile's 50 HP is literally F1-mob-grade by this curve, exactly as
-predicted. Elites ~×3 mob, bosses ~×8–10 mob ⚖ (the shared-curve first draft —
-tune at the sitting). Worked example: Greatsword 3 baseline → Jade (F3) 24 →
-a Set-3 material 768–1536 a swing against five-digit monsters.
+**Struggle ranks ⚖ (of the floor's mob HP):** Elite ≈ ×12 · Boss ≈ ×25 ·
+Super Boss ≈ ×60. F1: elite ~60, boss ~125, super ~300. F9: elite ~15k, boss
+~32k, super ~77k. Note the convergence: an F9 MOB carries ~1.3k HP — "monsters
+with thousands of HP, even as a mob," exactly as called — and still dies in one
+on-band swing. The sheet plays identically on every floor; only the numbers
+inflate. Worked example: Greatsword 3 baseline → Jade (F3) 24 → a Set-3
+material 768–1536 a swing.
 
 **Floor 10 is the exam, not a shop**: no new materials — the FFA is contested
 with the arsenals, artifacts, and choices accumulated across nine floors (and

@@ -1,9 +1,9 @@
-# Item Drafting — Batch C: the top shelf (PROPOSAL)
+# Item Drafting — Batch C: the top shelf
 
-**Date:** 2026-08-04 · **Status:** 🟡 PROPOSED — this is the tier where naming
-stops being polite (ID-0.21). ⚖ everywhere; strike and reshape freely. Companion
-to `item-drafting-passover.md` (ID-4). Seed mirror:
-`server/seeds/items-batch-c.js` — synced to trims before apply.
+**Date:** 2026-08-04 · **Status:** 🟢 BLESSED (owner, 2026-08-04) — route arcs,
+Mythics, growth items, and kits as authored; ⚖ numbers remain table-tunable.
+Seed: `node seed-items.js --file ./seeds/items-batch-c.js` (backup first).
+Companion to `item-drafting-passover.md` (ID-4).
 
 **Tier-placement calls — RULED (owner, 2026-08-04):**
 1. **Legendary named items drop at item-tier Superior** — polishable to

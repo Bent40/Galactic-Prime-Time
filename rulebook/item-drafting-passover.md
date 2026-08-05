@@ -140,6 +140,14 @@ F4–6 pending design).
     story-canon's "paused at 6, potentially floor 20" — the game repo's
     `story-canon.md` / decision log should be updated (read-only from here;
     owner-side or a future session with push access).
+30. **Ladder APPROVED · Batch C BLESSED · Materials catalog BLESSED (owner,
+    2026-08-04). Mob doctrine RULED:** normal mobs are **hordes, nearly always
+    one-shot** by on-band weapons — survival comes from special effects
+    (gates like the Incineradile's breach rule), never fat HP bars. **Elites,
+    Bosses, and Super Bosses are the struggle** (Supers per §19.1's ladder).
+    Curve re-derived in the materials catalog (mob ≈ one on-band hit; elite
+    ≈ ×12, boss ≈ ×25, super ≈ ×60 ⚖). Feeds §21 enemy-construction guidance
+    at the book pass (ID-6).
 
 ---
 

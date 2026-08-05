@@ -10,12 +10,14 @@
    wordlist tweaks on request.
 3. Batch B BLESSED (2026-08-04) — owner runs
    `node seed-items.js --file ./seeds/items-batch-b.js` (backup first).
-4. Batch C round 3: placement calls RULED, route ARCS restructured
-   (F1 starter -> F3 grand; Toll/Phial/Heart added; 21 templates), Core
-   track GM-side. Awaiting final trim/bless.
-5. MATERIALS: catalog AUTHORED (rulebook/item-drafting-materials.md -
-   mythology sweep -> floor bands x2 ladder, F1 band detailed, parts
-   tables, guns/tech ammo-carries-the-band rule, carve/reforge). Awaiting
-   owner trim/bless; app `material` field queued until then.
-6. Then Batch D (repair pass + catalog edits R4/R5).
-7. Book pass ID-6 last.
+4. Batch C BLESSED + MATERIALS catalog BLESSED, ladder APPROVED
+   (2026-08-04). Seed queue for the campaign DB (backup first):
+   batch-a, batch-b, batch-c, items-materials-f1 (F1 band + Incineradile
+   carve as grantable Material items).
+5. Mob doctrine RULED: mobs = hordes, one-shot by on-band hits (gates not
+   HP bars); elite ~x12 / boss ~x25 / super ~x60 of mob. Feeds section 21
+   at the book pass.
+6. Materials-on-items app design (parts model, material field shape) -
+   design before build; crafting UI later wave.
+7. Then Batch D (repair pass + catalog edits R4/R5).
+8. Book pass ID-6 last.
