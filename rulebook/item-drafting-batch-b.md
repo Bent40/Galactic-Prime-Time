@@ -1,7 +1,9 @@
-# Item Drafting — Batch B: the standing catalog (PROPOSAL)
+# Item Drafting — Batch B: the standing catalog
 
-**Date:** 2026-08-04 · **Status:** 🟡 PROPOSED — trim, rename, re-stat anything; ⚖
-on every number. Companion to `item-drafting-passover.md` (ID-4). Scope: the
+**Date:** 2026-08-04 · **Status:** 🟢 BLESSED (owner, 2026-08-04 — "mostly
+approved, we can rethink things if need be later") after the de-theming +
+Skill-Tome naming passes. Seed: `node seed-items.js --file ./seeds/items-batch-b.js`
+(backup first, dry run, then --apply). ⚖ numbers may still be tuned at the table. Companion to `item-drafting-passover.md` (ID-4). Scope: the
 standing Silver/Gold pools — base weapons for every §12.1 class, armor per slot
 family, tools, limited-magic items, Gold game-changers, the first **skill-tome
 set** (ID-0.18), and the kits threaded through the pools. Seed data mirrors this

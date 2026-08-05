@@ -105,6 +105,11 @@ will have. **Nicknames, epithets, and real nonsense start at Superior**; the
 Mythic/Godly end holds literal divinity, so name grandeur is budgeted from the
 top down. Theme comes from FLOOR pools, not Show puns (ID-0.20). Never reuse an
 affix name (Weighted, Balanced…) inside an item name.
+**Tier-span rule (owner, 2026-08-04):** when the same base exists at more than
+one tier, the template is named **`<Tier> <Base>`** ("Rapier" Basic vs "Quality
+Rapier") — spoken-aloud clarity at the table; never a tier-adjective that reads
+like an affix ("Reinforced"). Polishing an item up a tier includes re-naming it
+at the Forge. Applied prospectively; no current collisions.
 **Tomes (owner):** named **`Skill Tome: <book title>`** — the prefix guarantees
 players KNOW it's usable; the book title can be playful but grounded
 ("Lockpicking for Dummies" is fun; "Tome of the First Flame" is not — that name
@@ -191,12 +196,15 @@ every combination — the kit hands assembly to the player:
   Frost Ball, Telekinesis, Lockpicking, Seal The Wound, Brace — all anchored to
   live skill templates), and 2 kits (Quality Weapon Creation Kit, Normal Polish
   Kit). Awaiting trim/bless; seed syncs to trims before apply.
-- **Batch C — the top shelf ⚖:** Legendary named list (~6, route-hooked — the
-  Easy-route mask is begging), Mythic artifacts (~4; the first Mythic box needs
-  three on the table — **one is reserved: the Tome of the First Flame, the
-  "Fireball?" chain growth-tome, ID-0.22**), Godly authoring guidance, Superior
-  Polish Kits, remaining growth items. This is where naming stops being polite
-  (ID-0.21).
+- **Batch C — the top shelf — AUTHORED as proposal, see
+  `rulebook/item-drafting-batch-c.md` + `server/seeds/items-batch-c.js` (17
+  templates + Godly guidance):** 6 route-hooked Legendary named items (arrive
+  Superior, polishable — call ⚖), 4 Mythic artifacts (arrive Exceptional —
+  call ⚖; incl. the Tome of the First Flame with the C-5 "Fireball?" chain
+  sketch), 3 nullification armor pieces (ID-2C cashed in), 3 two-layer growth
+  items scoring the verdict axes (public reads only in seeds — GM-secrecy
+  discipline), the Superior Polish Kit, and Godly authoring guidance (no pool,
+  by design). Awaiting trim/bless.
 - **Batch D — repair pass:** tier + subtype the existing 28 templates (12
   untiered), align to §12.1 baselines; apply the ruled catalog edits (Draining's
   once-per-Clock cap · Balanced + Sharpened II incompatibility note).
