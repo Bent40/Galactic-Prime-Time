@@ -13,9 +13,9 @@
 4. Batch C round 3: placement calls RULED, route ARCS restructured
    (F1 starter -> F3 grand; Toll/Phial/Heart added; 21 templates), Core
    track GM-side. Awaiting final trim/bless.
-5. MATERIALS (passover ID-8, supersedes levels - ID-0.26): materials
-   sitting needed (band multipliers, carve rules, reforge cost, inherent
-   vs affix stacking); then author the F1 forest material band catalog.
-   App `material` field queued until ruled.
+5. MATERIALS: catalog AUTHORED (rulebook/item-drafting-materials.md -
+   mythology sweep -> floor bands x2 ladder, F1 band detailed, parts
+   tables, guns/tech ammo-carries-the-band rule, carve/reforge). Awaiting
+   owner trim/bless; app `material` field queued until then.
 6. Then Batch D (repair pass + catalog edits R4/R5).
 7. Book pass ID-6 last.

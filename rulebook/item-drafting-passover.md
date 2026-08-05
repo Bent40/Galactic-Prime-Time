@@ -366,6 +366,29 @@ zero slots.
    have no material identity; they are **made FROM materials** (crafting
    inputs — Farm stock, carve yields; a Beastbone antitoxin is still an
    antitoxin).
+9. **Guns, cannons & tech weapons — PROPOSED ⚖ ("the part that touches the
+   target carries the band"):**
+   - **Firearms/cannons/bows — the AMMO is the blade.** Rounds, shells, bolts,
+     and arrows are crafted FROM banded materials (they're consumables —
+     ID-0.27a already covers them): Beastbone shot, Sunglass rounds, Crystal
+     slugs. The projectile's material sets the damage band.
+   - **The launcher's delivery part CAPS the band** ⚖: a barrel (or bow limbs)
+     of a given band safely fires ammo of its band or below — firing above it
+     bursts/degrades the weapon (GM call). Upgrade the barrel to unlock deeper
+     ammo; craft the ammo to spend the band. Platform + payload, two chase
+     targets.
+   - **Tech weapons (Fabricator exotics — plasma, railguns, energy):** no
+     bullets; the **emitter/core material** sets the band (the §20.3 line
+     "exotic prints consume rare materials" cashes in here). Cells/charges
+     refill per §12.5.
+   - **Economy consequence:** ranged damage burns materials per shot where
+     melee doesn't — a real running cost balancing §12.1's per-round damage
+     advantage. Fabricator prints Standard ammo free (canon); banded ammo
+     consumes the material, ⚖ N rounds per material unit.
+   - **Part sketches ⚖:** pistol/rifle/shotgun: barrel · action · stock (3) —
+     cannon: barrel · carriage (2) — bow: limbs · grip · string (3) —
+     crossbow: prod · stock · mechanism (3) — tech: emitter/core · housing ·
+     cell (3). Magazine stays a stat, not a part.
 8b. **Open ⚖ (the materials sitting):** confirm ×2-per-band · carve/harvest
    rules (an action? who claims? split?) · reforge cost · inherent-effect ×
    affix stacking.
