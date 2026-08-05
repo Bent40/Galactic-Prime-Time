@@ -92,7 +92,8 @@ F4–6 pending design).
     arrive Superior (polishable); Mythic artifacts arrive Exceptional; the
     Mycelium Core's growth track moved GM-side (template shows the public read
     only).
-24. **ITEM LEVELS — direction RULED, mechanics PROPOSED (ID-8).** Damage
+24. **[SUPERSEDED same day by 26 — levels dropped as too much bookkeeping.]**
+    ~~ITEM LEVELS~~ — direction was ruled, then reconsidered. Damage
     anchors to a basic HUMAN (1 = meaningful hit, 2 = lasting injury) — but the
     Incineradile's 50 HP will eventually be *mob-tier*, and late-campaign
     monsters may carry **thousands of HP**. The scaling answer is not fatter
@@ -109,6 +110,12 @@ F4–6 pending design).
     Hard: Loong-Scale Aegis → **Loong's Heart** (Dissolution immunity +
     vitality/magic boost). The Loong mirror: hunters take blood; the protected
     shares a heart.
+26. **MATERIALS over levels (owner, 2026-08-04 — supersedes 24).** Levels add
+    a per-item integer nobody wants to track. Instead, scaling is **a matter of
+    material**: a catalog of materials players choose from when they craft, and
+    the material decides the resulting damage and effects. Drops carry their
+    floor's materials. Direction ruled; system sketch in ID-8; the material
+    catalog becomes a floor-banded content workstream.
 
 ---
 
@@ -294,38 +301,48 @@ the top of the admin Items section. Loot picker uses the live library (already
 loaded by the section); enemies fetch lazily from `/api/enemies` on first
 expand; suggestions copy to clipboard with a toast. Client build verified.
 
-## ID-8 — Item levels & training (direction RULED ID-0.24; mechanics PROPOSED ⚖)
+## ID-8 — MATERIALS (supersedes the item-level draft; direction RULED ID-0.26, mechanics PROPOSED ⚖)
 
-**Two orthogonal axes:** TIER = craftsmanship (affix slots + access, naming
-economy, the polish ladder). LEVEL = raw power scale against a world whose
-monsters grow from 50 HP to thousands. A Crude L20 club out-hits a Quality L1
-rapier; it still takes no affixes.
+**The pivot:** a level is a per-item integer somebody has to track. A material
+puts the same scaling **inside the fiction**: every item is made of something,
+and the something IS the power. "Beastbone Spear" out-hits "Spear," and the
+name itself does the bookkeeping. TIER stays craftsmanship (slots + access +
+polish); MATERIAL is the power axis. A Crude Loong-scale club: huge numbers,
+zero slots.
 
-Proposed mechanics (all ⚖ — this needs its own numbers sitting):
-
-1. **Scaling:** an item's damage and flat resistance numbers **multiply by its
-   level** (L1 = authored baseline; an L10 Rapier hits for 20 Bleed + its
-   quirk). Alternative on the table: flat +1/level. Multiplication is what
-   keeps pace with thousands-HP monsters; flat-add dies by floor 6.
-2. **Drops:** loot arrives at the level of the encounter that dropped it —
-   a floor's boxes match its mobs ⚖ (box tier says HOW GOOD, level says HOW
-   BIG).
-3. **Training:** some items carry a **trainable** flag — their level can be
-   raised (venue/cost ⚖: Forge downtime action + UT ladder? use-milestones like
-   growth items?). Untrainable items stay at drop level — the chase between
-   "find a bigger one" and "raise the one with your name on it" is the loot
-   game.
-4. **Affix scaling ⚖:** do affix numbers ride the item's level (Serrated on an
-   L10 blade = +10 Bleed)? Proposed YES — else affixes become rounding errors
-   past L5. Owner call, possibly at half-rate.
-5. **Consumables ⚖:** condition counters probably do NOT level (conditions are
-   tiered, not HP-scaled); healing items might (Stimpack heals level×1 HP?).
-6. **The shared curve:** mob HP ladder × item levels × trait growth past 10
-   (§3.2) need one balance pass together — flagged as its own sitting, not
-   solved here.
-7. **App impact (queued until mechanics are ruled):** `level` + `trainable` on
-   ItemTemplate and instances, a level input on the give flow, damage display
-   showing effective numbers. Not built yet — rules first.
+1. **Every item has a material.** All authored numbers in Batches A–C are the
+   **Standard band** (iron, wood, leather — commodity gear). No re-stat needed.
+2. **Bands ladder by floor ⚖:** Scrap (below Standard) · **Standard** · F1
+   forest band (Greenwood, Beastbone…) · F2 desert band (Sunglass, Chitin…) ·
+   F3 capital band (Crystal, Gravemetal…) · F4–6 continent band · apex
+   materials (Loong-scale, star-metal — the legendary-justifying stuff). Each
+   band multiplies base damage/resists ⚖ — the ladder must reach thousands-HP
+   monsters by the deep floors; numbers at the sitting.
+3. **Materials decide effects too** (owner): inherent properties riding the
+   material, not the affix slots — chitin is light (−1 Phy req ⚖), crystal
+   carries magic affinity, Loong-scale touches Dissolution. Inherent ≠ affix:
+   uses no slot, can't be extracted at the Altar.
+4. **Acquisition is the world:** monsters are **carved** (the boss trophy is a
+   material — the crowd loves a carve), floors are gathered, boxes may hold
+   material bundles, the Farm stocks and the barter bench trades. §20.3 already
+   says the Fabricator's exotic prints "consume rare materials" — this cashes
+   that line in.
+5. **Craft = shape + material (+ modifiers).** The Forge asks all three.
+   Creation Kits gain a material choice from the player's banked stock ⚖ (or
+   include Standard).
+6. **Reforge replaces "trainable":** the Forge remakes an existing item in a
+   better material — name, affixes, and history survive; the material swaps.
+   "Raise the blade with your name on it," no counter required.
+7. **Naming does the display work:** `<Material> <Base>` — "Chitin Spear,"
+   "Quality Crystal Rapier" (composes with the tier-span rule). Zero new UI;
+   app impact is one optional `material` field + a catalog, later.
+8. **Open ⚖ (the materials sitting):** band multipliers · carve/harvest rules
+   (an action? who gets it? split?) · reforge cost · how inherent effects stack
+   with affixes · consumables (default: no materials).
+9. **Content workstream:** the MATERIAL CATALOG is authored per floor band —
+   **F1 forest band first** (the party is standing on it); F4–6 bands wait on
+   floor design. The Incineradile is the first carve ⚖ (mycelium-threaded
+   hide?).
 
 ---
 
