@@ -132,6 +132,14 @@ F4–6 pending design).
     material per part is opt-in for players who care. Explicitly NOT per-part
     effects — **the part count is the item's material capacity**: N parts = up
     to N materials socketed on the item.
+29. **CAMPAIGN FRAME for the damage spread (owner, 2026-08-04): 10 floors —
+    three sets of three story floors + Floor 10 as a free-for-all between
+    everyone left.** The material ladder is calibrated to it (materials
+    catalog: one band per floor, doubling F1→F9, ×512 at the top; F10 adds no
+    band — the finale is fought with what you built). Note: this revises
+    story-canon's "paused at 6, potentially floor 20" — the game repo's
+    `story-canon.md` / decision log should be updated (read-only from here;
+    owner-side or a future session with push access).
 
 ---
 

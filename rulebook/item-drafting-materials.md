@@ -6,15 +6,37 @@ ID-0.27d (primary source: the game repo's `docs/research/mythology/` library,
 the damage numbers derived from the tiering. ⚖ everywhere. Governing system:
 passover ID-8; rulings ID-0.26–28.
 
-**The ladder (⚖ confirm):** each band step **doubles** damage/resist numbers.
-×1 → ×2 → ×4 → ×8 → ×16 → ×32. Worked example: a Greatsword (3 Bleed/Crush
-baseline) in Jade (F3, ×8) hits for 24 — right-sized for capital-era elites; an
-apex-material build reaches 96 a swing, which is how a party takes apart a
-thousands-HP monster without the sheet changing shape.
+**Campaign frame (RULED, owner 2026-08-04 — ID-0.29): 10 floors — three sets
+of three story floors, then Floor 10: a free-for-all between everyone left.**
+The damage spread is calibrated to exactly that.
+
+**The ladder (⚖ confirm): one band per floor, each floor DOUBLES.**
+
+| Floor | Set | Band | Mult | Mob HP ~ (⚖) |
+|---|---|---|---|---|
+| — | tutorial | Baseline (Scrap/Wood/Leather/Iron) | ×1 | ~12–25 |
+| F1 | Set 1 | Forest | ×2 | ~50 |
+| F2 | Set 1 | Desert | ×4 | ~100 |
+| F3 | Set 1 | Capital | ×8 | ~200 |
+| F4–F6 | Set 2 | (floors undesigned) | ×16 / ×32 / ×64 | ~400 / 800 / 1.6k |
+| F7–F9 | Set 3 | (floors undesigned) | ×128 / ×256 / ×512 | ~3.2k / 6.4k / 12.8k |
+| F10 | FFA | **no new band — the finale is fought with everything you built** | — | (each other) |
+
+The invariant this buys: **the sheet plays identically on every floor.** A mob
+dies in ~4–6 hits at F1 and ~4–6 hits at F9 — only the numbers inflate. The
+Incineradile's 50 HP is literally F1-mob-grade by this curve, exactly as
+predicted. Elites ~×3 mob, bosses ~×8–10 mob ⚖ (the shared-curve first draft —
+tune at the sitting). Worked example: Greatsword 3 baseline → Jade (F3) 24 →
+a Set-3 material 768–1536 a swing against five-digit monsters.
+
+**Floor 10 is the exam, not a shop**: no new materials — the FFA is contested
+with the arsenals, artifacts, and choices accumulated across nine floors (and
+it's where the verdict system reads the answer sheet).
 
 **Band availability tracks floors** but isn't locked to them — earlier bands
 stay craftable forever (that's what commodity gear is), deeper bands only enter
-the world when their floor does.
+the world when their floor does. ⚖ Gentler alternative if doubling-per-floor
+feels hot: one band per SET (×2/×8/×32) — say the word and the table reflows.
 
 ---
 
@@ -58,13 +80,18 @@ material; the writing is the strength) · **Orichalcum** (Atlantean city-metal)
 · **Cursed Gold** ⭐rare (Andvari's hoard — highest numbers in band, and it
 *wants things* ⚖ GM rider).
 
-## M-4 — F4–6 CONTINENT band ×16 ⚖ — names only (floors undesigned)
+## M-4 — SET 2 (F4–F6) bands ×16/×32/×64 ⚖ — names only (floors undesigned)
 
 **Adamant** (Kronos's sickle, the chains) · **Dragonbone / Dragon Tendon**
 (Nezha's harvest) · **Petrified Aura** (Humbaba's seven — armor as stackable
-shed layers).
+shed layers). Assigned to floors when Set 2's stories exist.
 
-## M-5 — APEX / DIVINE ×32 — authored-only, never pooled, never sold
+## M-4b — SET 3 (F7–F9) bands ×128/×256/×512 ⚖ — reserved
+
+Unnamed until Set 3 design. The mythology library's divine shelf (M-9) is the
+mining vein.
+
+## M-5 — APEX / DIVINE — authored-only, never pooled, never sold (Set-3-grade ⚖)
 
 **Loong-Scale** (canon — shed, not taken) · **Gleipnir-Weave** (forged from six
 impossible things — the endgame gather-quest: a cat's footfall, a woman's
