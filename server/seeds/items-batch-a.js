@@ -105,8 +105,7 @@ const A2 = [
 // ——— A-4: The Incineradile Box (3) ————————————————————————————————————————
 const A4 = [
   { name: 'Mycelium Core', icon: '🍄', category: 'Misc', tier: 'Crude', subtype: 'Growth',
-    specialEffects: 'GROWTH — survives a floor with its carrier: +1 tier. Quality: 1 Burn resist (global). Superior: T1 Burn nullification. Exceptional: once per Clock, a disabled part of the carrier acts for 1 Moment.',
-    description: 'Inert, warm, faintly pulsing. The network remembers.' },
+    description: 'Inert, warm, faintly pulsing.' },
   { name: 'Flamehide Wrap', icon: '🧣', category: 'Equipment', tier: 'Basic', subtype: 'Armor',
     resistance: 'Burn 1', description: 'Torso slot. Still smells faintly of the arena.' },
   { name: 'Fire Axe "Retired Hero"', icon: '🪓', category: 'Weapons', tier: 'Quality', subtype: 'Bladed',

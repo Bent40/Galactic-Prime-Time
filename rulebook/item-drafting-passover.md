@@ -86,6 +86,30 @@ F4–6 pending design).
     fire magic — god-tier acquisition, Mythic delivery. (Needs the "Fireball?"
     chain authored as SkillTemplates — Batch C work item.)
 
+**Sitting round 3 (owner, 2026-08-04):**
+
+23. **Batch C tier-placement calls RULED as proposed:** Legendary named items
+    arrive Superior (polishable); Mythic artifacts arrive Exceptional; the
+    Mycelium Core's growth track moved GM-side (template shows the public read
+    only).
+24. **ITEM LEVELS — direction RULED, mechanics PROPOSED (ID-8).** Damage
+    anchors to a basic HUMAN (1 = meaningful hit, 2 = lasting injury) — but the
+    Incineradile's 50 HP will eventually be *mob-tier*, and late-campaign
+    monsters may carry **thousands of HP**. The scaling answer is not fatter
+    base stats: **items have levels.** Drops arrive at a level matching the
+    mobs being killed; **some items are trainable** — their level can be raised.
+    All authored damage/resist numbers across Batches A–C stand as **Level-1
+    baselines** (no re-stat needed; the level system carries them).
+25. **Legendary ROUTE ARCS ruled (rewards should be GRAND):** each route gives
+    an F1 starter + an F3 grand reward (the capital conjoins the Lounge at F3).
+    Easy: Chains → Nullrot's Bell, **combinable** into a once-per-session
+    room-wide crystallization toll (mob-tier dies instantly; so does any player
+    without T1 Infection protection — a mask suffices). Medium: Queensfang →
+    **Loong Blood Phial** per player (permanent Body stat or max-HP raise).
+    Hard: Loong-Scale Aegis → **Loong's Heart** (Dissolution immunity +
+    vitality/magic boost). The Loong mirror: hunters take blood; the protected
+    shares a heart.
+
 ---
 
 ## ID-1 — The authoring frame: subtypes and what each tier MEANS
@@ -269,6 +293,39 @@ Status: **BUILT (owner approved v2, 2026-08-04)** —
 the top of the admin Items section. Loot picker uses the live library (already
 loaded by the section); enemies fetch lazily from `/api/enemies` on first
 expand; suggestions copy to clipboard with a toast. Client build verified.
+
+## ID-8 — Item levels & training (direction RULED ID-0.24; mechanics PROPOSED ⚖)
+
+**Two orthogonal axes:** TIER = craftsmanship (affix slots + access, naming
+economy, the polish ladder). LEVEL = raw power scale against a world whose
+monsters grow from 50 HP to thousands. A Crude L20 club out-hits a Quality L1
+rapier; it still takes no affixes.
+
+Proposed mechanics (all ⚖ — this needs its own numbers sitting):
+
+1. **Scaling:** an item's damage and flat resistance numbers **multiply by its
+   level** (L1 = authored baseline; an L10 Rapier hits for 20 Bleed + its
+   quirk). Alternative on the table: flat +1/level. Multiplication is what
+   keeps pace with thousands-HP monsters; flat-add dies by floor 6.
+2. **Drops:** loot arrives at the level of the encounter that dropped it —
+   a floor's boxes match its mobs ⚖ (box tier says HOW GOOD, level says HOW
+   BIG).
+3. **Training:** some items carry a **trainable** flag — their level can be
+   raised (venue/cost ⚖: Forge downtime action + UT ladder? use-milestones like
+   growth items?). Untrainable items stay at drop level — the chase between
+   "find a bigger one" and "raise the one with your name on it" is the loot
+   game.
+4. **Affix scaling ⚖:** do affix numbers ride the item's level (Serrated on an
+   L10 blade = +10 Bleed)? Proposed YES — else affixes become rounding errors
+   past L5. Owner call, possibly at half-rate.
+5. **Consumables ⚖:** condition counters probably do NOT level (conditions are
+   tiered, not HP-scaled); healing items might (Stimpack heals level×1 HP?).
+6. **The shared curve:** mob HP ladder × item levels × trait growth past 10
+   (§3.2) need one balance pass together — flagged as its own sitting, not
+   solved here.
+7. **App impact (queued until mechanics are ruled):** `level` + `trainable` on
+   ItemTemplate and instances, a level input on the give flow, damage display
+   showing effective numbers. Not built yet — rules first.
 
 ---
 

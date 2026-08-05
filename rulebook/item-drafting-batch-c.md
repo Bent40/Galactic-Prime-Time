@@ -5,13 +5,18 @@ stops being polite (ID-0.21). ⚖ everywhere; strike and reshape freely. Compani
 to `item-drafting-passover.md` (ID-4). Seed mirror:
 `server/seeds/items-batch-c.js` — synced to trims before apply.
 
-**Two tier-placement calls to bless (⚖):**
-1. **Legendary named items drop at item-tier Superior** — so a campaign-carrying
-   weapon can still be *polished* to Exceptional with the Superior Kit. Named
-   gear becomes the natural target for the top polish path.
-2. **Mythic artifacts arrive at Exceptional** — the one authored exception to
-   "Exceptional is polish-only" (ID-0.6): that rule governs the mundane ladder,
-   and divinity does not queue at the Forge.
+**Tier-placement calls — RULED (owner, 2026-08-04):**
+1. **Legendary named items drop at item-tier Superior** — polishable to
+   Exceptional; named gear is what Superior Kits are for.
+2. **Mythic artifacts arrive at Exceptional** — the authored exception to
+   "Exceptional is polish-only"; divinity does not queue at the Forge.
+3. Route **F3 grand rewards arrive Exceptional** ⚖ (route-apex grade — the
+   capital conjoins the Lounge at F3; these land at the campaign's midpoint
+   turn and should feel like it).
+
+**Item levels (ID-8):** all damage/resist numbers below are **Level-1
+baselines** — the level system (passover ID-8) is what scales them to
+Incineradile-and-beyond HP pools. No number here is final without a level.
 
 **GM-secrecy discipline (growth items):** template fields (name, description,
 effects) are **player-visible** on grant — they carry ONLY the public read. True
@@ -19,18 +24,62 @@ triggers, growth tracks, and reveal beats live in THIS doc. Don't seed secrets.
 
 ---
 
-## C-1 — Legendary named list (6) ⚖ · Legendary boxes (§17.6: + a full Gold roll)
+## C-1 — Legendary ROUTE ARCS (owner restructure, 2026-08-04): F1 starter → F3 grand
 
-Campaign-carrying, route-hooked, all item-tier Superior (see call #1).
+Each route hands a starter legendary on F1 and a **grand** reward on F3 — the
+capital-conjoins-the-Lounge turn; these land at the campaign's midpoint and
+should feel like it. The two Loong rewards mirror each other: the hunters take
+blood; the protected shares a heart.
 
-| Item | Route hook | What it does (⚖) |
+**EASY — the arc that rings.** F1: **Chains of the Stairway Prophet** · F3:
+**Nullrot's Bell** · **COMBINABLE** (Melding Station chimera merge, GM-staged)
+into **The Prophet's Toll** (⚖ name):
+
+| Item | Arrives | What it does (⚖) |
 |---|---|---|
-| **Chains of the Stairway Prophet** | Easy (the chained man) | Chain weapon, 2 Crush r2. Vs demons/possessed: on hit, bind — target loses its next Moment (1/Clock). Once per campaign: **permanently bind one named entity** ("what it holds, it keeps"). |
-| **Nullrot's Bell** | Easy F3 (the disease) | Rings silently. Once per downtime: −1 Infection tier for the whole party. The disease remembers being told no. |
-| **Queensfang** | Medium (the demon court) | Dagger, 3 Bleed; +2 vs demons. Blooding a demon with it grants demon-sight for 1 Clock (see through demonic illusion/glamour). |
-| **Loong-Scale Aegis** | Hard (the Loong) | Shield: Crush 2 + Burn 2; Dissolution timers slow +1 Clock while borne. Crystallized citizens — and the Loong — recognize its bearer. |
-| **Patron's Favor Ring** | Any (the audience) | Trinket. Once per floor: reroll the outcome of one crowd Goal. Divinity-adjacent — a patron's thumb on the scale. |
-| **The Director's Cut** | Any (the Corporation) | Blade, 3 Bleed. Once per floor, call "cut": re-stage one of your own Moments and play it differently. The footage never shows the first take. |
+| Chains of the Stairway Prophet | F1 · Superior | Chain weapon, 2 Crush r2 (L1 baseline). Vs demons/possessed: on hit, bind — target loses its next Moment (1/Clock). Once per campaign: **permanently bind one named entity** (definition → C-1a). |
+| Nullrot's Bell | F3 · Exceptional | Rings silently. Once per downtime: −1 Infection tier for the whole party. The disease remembers being told no. |
+| **The Prophet's Toll** (combined) | meld · Exceptional | **Once per session: the toll fills THE ENTIRE ROOM with the crystallization curse — every mob-tier monster dies instantly; so does every player without T1 Infection protection (a mask is enough, in effect).** Elites/bosses unaffected ⚖. Retains the Chains' once-per-campaign bind. |
+
+**MEDIUM — the hunt.** F1: **Queensfang** · F3: **Loong Blood Phial** (one per
+player):
+
+| Item | Arrives | What it does (⚖) |
+|---|---|---|
+| Queensfang | F1 · Superior | Dagger, 3 Bleed (L1); +2 vs demons; blooding a demon grants demon-sight for 1 Clock. The starter blade — the F3 reward is the point. |
+| Loong Blood Phial | F3 · Exceptional · consumable, one per player | Drink, permanent, choose one: **+1 to a Body stat (Physique or Reflexes)** OR **+1 max HP to every body part** (⚖ amounts). Taken, not given. |
+
+**HARD — the guardianship.** F1: **Loong-Scale Aegis** · F3: **Loong's Heart**:
+
+| Item | Arrives | What it does (⚖) |
+|---|---|---|
+| Loong-Scale Aegis | F1 · Superior | Shield: Crush 2 + Burn 2 (L1); Dissolution timers slow +1 Clock while borne. Crystallized citizens — and the Loong — recognize its bearer. |
+| Loong's Heart | F3 · Exceptional | The Loong shares one of its hearts. While borne: **immune to Dissolution.** On attunement choose: **vitality** (+2 max HP to torso and head ⚖) or **magic** (magic skills cost 1 less Moment, min 1 ⚖). Given, not taken. |
+
+**Pool legendaries (non-route, Legendary boxes):**
+
+| Item | What it does (⚖) |
+|---|---|
+| Patron's Favor Ring | Trinket. Once per floor: reroll the outcome of one crowd Goal. Divinity-adjacent — a patron's thumb on the scale. |
+| The Director's Cut | Blade, 3 Bleed (L1). Once per floor, call "cut": re-stage one of your own Moments and play it differently. The footage never shows the first take. |
+
+**Support item (counterplay for the Toll; seeds into Bronze/Silver pools):**
+**Mask** — Basic accessory (face): counts as T1 Infection protection against
+airborne/miasmic sources. Cheap on purpose — the party CAN mask up before the
+bell rings. Whether they remember to is television.
+
+### C-1a — "Permanently bind one named entity" (definition ⚖)
+
+The chains' campaign power mirrors the F1 beat — the prophecy had you chain the
+possessed man to the wall; these are those chains, or their echo. Once per
+campaign, against a **named** entity (a being with name and identity — a boss, a
+demon noble, War Nikita; never a nameless mob) that is **subdued, Helpless, or
+willing**, the chains bind it to where it stands: it cannot act, move, or be
+moved beyond the anchor, indefinitely — years, if the story takes years (the F2
+man survived his chains by 70). No mechanic releases it; only a story-level key
+(prophecy, ritual, the Corporation's writ, the wielder's own choice). It is the
+answer to "we cannot kill this — and maybe we shouldn't." GM adjudicates what
+counts as named. The power survives the meld into the Toll.
 
 ## C-2 — Mythic artifacts (4) ⚖ · Mythic boxes, revealed as pick-one-of-three
 
@@ -106,6 +155,6 @@ Never random, never for sale, never generic. When a Godly box exists at all:
 
 ---
 
-*17 seeded templates (+ guidance). Trim or bless; seed ships via
+*21 seeded templates (+ guidance). Trim or bless; seed ships via
 `node seed-items.js --file ./seeds/items-batch-c.js` after sync. Batch D after:
 the repair pass on the 28 legacy templates + the two ruled affix-catalog edits.*

@@ -75,7 +75,7 @@ and televised triumph. Boss UT payout (Neighbourhood 5) is separate.
 
 | Content | Tier | Subtype | Effect (⚖) |
 |---|---|---|---|
-| **Mycelium Core** | Crude (growth) | Growth / Trinket | Inert, warm, faintly pulsing. **Growth track ⚖:** survives a floor with you → +1 tier. Quality: 1 Burn resist (global) · Superior: T1 Burn nullification · Exceptional: once per Clock, a disabled part of the carrier acts for 1 Moment (the network remembers). Feeds the "is this a good idea?" camera angle all campaign |
+| **Mycelium Core** | Crude (growth) | Growth / Trinket | **Public read (all the template shows):** "Inert, warm, faintly pulsing." **GM-ONLY growth track ⚖ (moved GM-side by owner order, 2026-08-04 — never seed this):** survives a floor with you → +1 tier. Quality: 1 Burn resist (global) · Superior: T1 Burn nullification · Exceptional: once per Clock, a disabled part of the carrier acts for 1 Moment (the network remembers). If Batch A was already seeded, re-run with `--force` to scrub the track from the live template |
 | Flamehide Wrap | Basic | Armor (torso) | 1 Burn resist |
 | Fire Axe "Retired Hero" | Quality | Bladed (Heavy Small) | 3 Bleed · Cost 1 · Req 2 Phy · arrives **pre-affixed: Chilling** (the 1-in-3 rule, showcased — irony intended) |
 | + 1d3 Bronze consumables | — | — | Rolled from A-1, Burn Gel weighted ⚖ |

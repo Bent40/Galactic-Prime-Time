@@ -10,7 +10,11 @@
    wordlist tweaks on request.
 3. Batch B BLESSED (2026-08-04) — owner runs
    `node seed-items.js --file ./seeds/items-batch-b.js` (backup first).
-4. Batch C AUTHORED (batch-c doc + seeds, 17 templates + Godly guidance)
-   — awaiting trim/bless + the two tier-placement calls (Legendary=Superior,
-   Mythic=Exceptional). Then D (repair pass + catalog edits R4/R5).
-5. Book pass ID-6 last.
+4. Batch C round 3: placement calls RULED, route ARCS restructured
+   (F1 starter -> F3 grand; Toll/Phial/Heart added; 21 templates), Core
+   track GM-side. Awaiting final trim/bless.
+5. ITEM LEVELS (passover ID-8): direction ruled, mechanics need a numbers
+   sitting (scaling formula, drops, training, affix scaling, shared curve).
+   App fields (level/trainable) queued until ruled.
+6. Then Batch D (repair pass + catalog edits R4/R5).
+7. Book pass ID-6 last.
