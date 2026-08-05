@@ -126,6 +126,12 @@ F4–6 pending design).
     derive the damage numbers from the tiering. First source: the game repo's
     `docs/research/mythology/` library (12 traditions, researched for this
     game).
+28. **Reforge RULED + weapons built of PARTS (owner, 2026-08-04):** reforges
+    are allowed. Weapons are built of parts — a sword has up to 4 (blade,
+    guard, hilt, pommel). **Premade weapons stay the default**; choosing a
+    material per part is opt-in for players who care. Explicitly NOT per-part
+    effects — **the part count is the item's material capacity**: N parts = up
+    to N materials socketed on the item.
 
 ---
 
@@ -342,9 +348,17 @@ zero slots.
 5. **Craft = shape + material (+ modifiers).** The Forge asks all three.
    Creation Kits gain a material choice from the player's banked stock ⚖ (or
    include Standard).
-6. **Reforge replaces "trainable":** the Forge remakes an existing item in a
-   better material — name, affixes, and history survive; the material swaps.
-   "Raise the blade with your name on it," no counter required.
+6. **Reforge — RULED allowed (ID-0.28):** the Forge remakes an item (or one of
+   its parts) in a better material — name, affixes, and history survive.
+   "Raise the blade with your name on it," no counter required. Consumables
+   are excluded (ID-0.27a).
+6b. **Parts = material capacity (ID-0.28):** each weapon shape has a part
+   count (sword 4: blade/guard/hilt/pommel · dagger 2 · spear 3 · maul 2 ⚖ —
+   table lands in the materials catalog). Premade catalog entries are standard
+   builds; opt-in part-crafting sockets up to N materials. Layer split
+   PROPOSED ⚖: the **striking part** (blade/head) sets the damage band; every
+   socketed material contributes its inherent effect; affix slots (tier)
+   remain a separate enchantment layer on top. Armor/tool parts: later wave ⚖.
 7. **Naming does the display work:** `<Material> <Base>` — "Chitin Spear,"
    "Quality Crystal Rapier" (composes with the tier-span rule). Zero new UI;
    app impact is one optional `material` field + a catalog, later.
