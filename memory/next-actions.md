@@ -22,3 +22,9 @@
 7. Batch D BUILT (seeds/items-batch-d-repairs.js --force + server/
    repair-affixes.js) - owner applies after A/B/C/materials.
 8. Book pass ID-6 EXECUTED - rulebook at v1.1 (filename unchanged).
+9. Owner: run the deploy cookbook (docs/deploy-render-atlas.md) -
+   Atlas M0 + Render Blueprint; render.yaml is on main.
+10. PARKED (owner position): v2 relational migration (Postgres) for
+   schema enforcement - start with a schema design doc when picked up,
+   timed to a campaign break. Near-term Mongo mitigations available on
+   request: state version field (clobber race), integrity checks.

@@ -104,6 +104,16 @@ shock: { tier: 0 }  // 0 = none, 1-4 = Shout/Stutter/Faint/Helpless
 - `PATCH /api/admin/players/:userId/traits` — set trait values
 - `POST /api/admin/players/:userId/skills/grant` — grant skill by templateId
 
+## Data layer direction (owner position, 2026-08-04)
+Mongo/Atlas is the accepted current stack (deploy: `render.yaml` +
+`docs/deploy-render-atlas.md`). **Owner conviction on record:** SQL's schema
+enforcement will likely be needed as the campaign leans harder on item/skill
+data — a **v2 relational migration is parked, not rejected**. First step when
+picked up: a full schema design doc (tables/FKs/constraints + the client
+autosave-contract change), timed to a campaign break. Don't re-litigate Mongo
+vs SQL in future sessions; the position is settled as "Atlas now, designed v2
+maybe later."
+
 ## Autosave
 `update()` in CharacterSheet triggers a 1500ms debounced save to `/api/character`.
 Do not add additional direct `apiFetch` saves on top of this — use `update()` only to avoid race conditions.
