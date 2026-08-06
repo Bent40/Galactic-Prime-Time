@@ -9,6 +9,11 @@ router.use(requireAdmin);
 
 const CATEGORIES = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'];
 
+// Normalize a string-array metadata field. Non-arrays → [], entries trimmed.
+function normalizeStrArr(arr) {
+  return Array.isArray(arr) ? arr.map(s => String(s).trim()).filter(Boolean) : [];
+}
+
 // Normalize a uses field from request body. Empty/missing → null.
 function normalizeUses(uses) {
   const max = uses && uses.max != null && uses.max !== '' ? Number(uses.max) : null;
@@ -30,7 +35,7 @@ router.get('/', async (req, res) => {
 // POST /api/items — create a new item template
 router.post('/', async (req, res) => {
   try {
-    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, subtype, boxTiers, themes, source, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (!CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
@@ -48,6 +53,10 @@ router.post('/', async (req, res) => {
       description: description || '',
       qty: qty || 1,
       uses: normalizeUses(uses),
+      subtype: subtype || '',
+      boxTiers: normalizeStrArr(boxTiers),
+      themes: normalizeStrArr(themes),
+      source: source || '',
       type: type || '', effect: effect || '', notes: notes || '',
     });
     res.json(item);
@@ -60,7 +69,7 @@ router.post('/', async (req, res) => {
 // PUT /api/items/:id — update an item template
 router.put('/:id', async (req, res) => {
   try {
-    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, subtype, boxTiers, themes, source, type, effect, notes } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (category && !CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
@@ -80,6 +89,10 @@ router.put('/:id', async (req, res) => {
         description: description || '',
         qty: qty || 1,
         uses: normalizeUses(uses),
+        subtype: subtype || '',
+        boxTiers: normalizeStrArr(boxTiers),
+        themes: normalizeStrArr(themes),
+        source: source || '',
         type: type || '', effect: effect || '', notes: notes || '',
       },
       { new: true, runValidators: true }
@@ -150,6 +163,7 @@ router.post('/give', async (req, res) => {
           name:           template.name,
           icon:           template.icon || '',
           tier:           template.tier || '',
+          subtype:        template.subtype || '',
           qty:            qty != null ? qty : template.qty,
           attackTypes:    template.attackTypes || [],
           range:          template.range || '',

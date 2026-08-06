@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "generated": "2026-08-04T07:24:32Z",
+  "mode": "brownfield",
+  "monorepo": true,
+  "monorepo_evidence": [
+    "2 package dirs at depth 1, no root manifest"
+  ],
+  "stack": {
+    "langs": [
+      "js"
+    ],
+    "framework": null,
+    "manifests": [],
+    "tests": [],
+    "ci": [],
+    "containers": false,
+    "git": {
+      "repo": true,
+      "branch": "claude/item-drafting-plan-hvi211",
+      "dirty": false,
+      "last_commit_days": 0
+    },
+    "file_count": 85,
+    "walk_capped": false,
+    "merged_deps": []
+  },
+  "bmad": {
+    "state": "none",
+    "version": null,
+    "phase": null,
+    "next_required": null,
+    "artifacts": {},
+    "sprint_status": null,
+    "note": null
+  },
+  "subsystems": {
+    "memory": {
+      "state": "absent"
+    },
+    "learn": {
+      "state": "absent"
+    },
+    "context": {
+      "state": "absent"
+    },
+    "validation": {
+      "state": "absent"
+    },
+    "spec": {
+      "state": "absent"
+    },
+    "packs": {
+      "state": "absent",
+      "packs": null,
+      "targets": null,
+      "profile": null,
+      "satellite_hint": false
+    },
+    "guard": {
+      "state": "off"
+    },
+    "locks": {
+      "state": "none",
+      "count": 0
+    },
+    "hooks": {
+      "state": "none",
+      "hooks": [],
+      "sandbox": false
+    },
+    "instruction_files": [
+      "CLAUDE.md"
+    ],
+    "traces": {
+      "state": "absent"
+    }
+  },
+  "readiness": {
+    "memory": "SETUP-NEEDED (wf memory init)",
+    "learn": "SETUP-NEEDED (first `wf learn add` creates _workflow/learnings.jsonl)",
+    "audit": "SETUP-NEEDED (needs a story file with acceptance criteria)",
+    "validate": "SETUP-NEEDED (seed the validation: block)",
+    "mutate": "SETUP-NEEDED (needs a runnable test command)"
+  },
+  "metrics": {
+    "skills_installed": 0,
+    "skills_referenced_always_loaded": 0,
+    "firing_path_pct": null,
+    "invocation_rate_baseline": null
+  },
+  "receipts": {
+    "last_scan": "2026-08-04T07:24:32Z"
+  },
+  "size": {
+    "proposed": "small",
+    "risk": [],
+    "confirmed": "small",
+    "at": "2026-08-04"
+  },
+  "posture": "civilian",
+  "activation": {
+    "profile": "cli-tool",
+    "confirmed": false,
+    "involvement": "observer",
+    "involvement_confirmed": true,
+    "involvement_proposed": "observer",
+    "score": 0.2,
+    "alternates": [
+      {
+        "profile": "library",
+        "score": 0.2
+      }
+    ],
+    "ambiguous": true,
+    "addons": [],
+    "addons_proposed": [],
+    "applied_at": null
+  }
+}
