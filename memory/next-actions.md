@@ -22,10 +22,10 @@
 7. Batch D BUILT (seeds/items-batch-d-repairs.js --force + server/
    repair-affixes.js) - owner applies after A/B/C/materials.
 8. Book pass ID-6 EXECUTED - rulebook at v1.1 (filename unchanged).
-9. LOOTBOX SYSTEM (passover ID-9): design + mockup shipped, awaiting
-   approval. New LootBox collection (contents server-side - state blob is
-   player-readable), open returns snapshots, client merges via update().
-   Box Builder absorbs Box Namer. Then: Higher affix-tier sitting.
+9. LOOTBOX SYSTEM BUILT + SHIPPED (2026-08-10): LootBox collection,
+   /api/boxes routes, reveal flow w/ item details, pick-one, permanent
+   Box Log (who/what/chosen/why), BoxBuilder absorbed BoxNamer.
+   NEXT UP: Higher affix-tier design sitting.
 10. Owner: run the deploy cookbook (docs/deploy-render-atlas.md) -
    Atlas M0 + Render Blueprint; render.yaml is on main.
 11. PARKED (owner position): v2 relational migration (Postgres) for

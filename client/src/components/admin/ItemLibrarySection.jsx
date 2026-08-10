@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
 import { ATK_TYPES, DMG_TYPES, ITEM_CATS, ITEM_TIERS, BOX_TIERS, ITEM_SUBTYPES } from '../../constants.js';
-import BoxNamer from './BoxNamer.jsx';
+import BoxBuilder from './BoxBuilder.jsx';
 
 function toggleArr(arr, val) { return arr.includes(val) ? arr.filter(x => x !== val) : [...arr, val]; }
 
@@ -135,7 +135,7 @@ export default function ItemLibrarySection({ token, players, showToast }) {
 
   return (
     <>
-      <BoxNamer items={items} token={token} showToast={showToast} />
+      <BoxBuilder items={items} players={players} token={token} showToast={showToast} />
       <div className="panel">
         <div className="panel-title admin">Item Library ({items.length})</div>
         {Object.entries(grouped).map(([cat, its]) => (

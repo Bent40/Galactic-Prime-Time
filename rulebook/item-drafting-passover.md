@@ -469,9 +469,17 @@ Namer: pick items from the library (same picker), pick recipients, mode, and
 the namer suggests the box name. Give → sealed boxes appear on the players'
 sheets.
 
-Status: awaiting mockup approval (`docs/mockups/lootbox-system-mockup.html`).
-**Queued after this: the Higher affix-tier design sitting** (Superior gear
-promises access nobody has designed).
+Status: **BUILT (owner approved + additions, 2026-08-10).** Owner additions
+delivered: (a) **click any item in the reveal for full details** — informed
+decisions, especially on pick-one; (b) **the permanent Box Log** — opened boxes
+are never deleted; the collection records who, what, what was chosen
+(chosenIndex), and WHY (`source`, fed by the Builder's earned-by field); the
+log view lives under the Box Builder; sealed boxes are revocable, opened ones
+are history. Shipped: LootBox model + /api/boxes routes, LootBoxes strip +
+reveal in the Inventory tab, BoxBuilder (absorbing the Box Namer — its suggest
+lanes, tier inference, and earned-by picker live inside; BoxNamer.jsx retired).
+**Queued next: the Higher affix-tier design sitting** (Superior gear promises
+access nobody has designed).
 
 ---
 
