@@ -16,6 +16,7 @@ const itemsRoutes = require('./routes/items');
 const enemiesRoutes = require('./routes/enemies');
 const affixesRoutes = require('./routes/affixes');
 const tagsRoutes = require('./routes/tags');
+const boxesRoutes = require('./routes/boxes');
 
 const path = require('path');
 
@@ -37,6 +38,7 @@ app.use('/api/items', itemsRoutes);
 app.use('/api/enemies', enemiesRoutes);
 app.use('/api/affixes', affixesRoutes);
 app.use('/api/tags', tagsRoutes);
+app.use('/api/boxes', boxesRoutes);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

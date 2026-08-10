@@ -421,6 +421,66 @@ zero slots.
    floor design. The Incineradile is the first carve ⚖ (mycelium-threaded
    hide?).
 
+## ID-9 — Lootbox distribution system (app) — PROPOSED, mockup shipped
+
+Owner request (2026-08-10): GM gives a player a sealed box of items; the player
+sees the sealed box, opens it, gets the "Items looted: …" reveal, and the items
+land in their inventory.
+
+**The load-bearing constraint:** sealed contents can NEVER live in
+`character.state` — the state blob is player-readable (it's their own autosave
+payload). Contents stay server-side until opened → a new collection, following
+the MomentTracker precedent (auth-read own, admin-write).
+
+**Data contract (⚖ approve before build — new collection = architecture):**
+```
+LootBox {
+  userId,                     // owner
+  name,                       // from the Box Namer ("Bronze Massacre Box")
+  boxTier,                    // Bronze..Godly (display color)
+  mode: 'all' | 'pick-one',   // pick-one = the Mythic reveal, day-one support
+  items: [ give-style snapshots ],   // hidden until opened
+  status: 'sealed' | 'opened',
+  source, createdAt, openedAt
+}
+```
+
+**Routes:** `GET /api/boxes` (requireAuth — own boxes; sealed return name/tier/
+mode ONLY, no contents, no count ⚖) · `POST /api/boxes/:id/open` (owner; marks
+opened, returns the item snapshots; pick-one returns the choices and a second
+`POST /:id/claim {index}` finalizes ⚖) · admin: `POST /api/boxes` (compose +
+give, multi-recipient), `GET /api/boxes/admin` (overview), `DELETE /:id`
+(revoke a sealed box).
+
+**Open flow (the race-safe part):** the server never writes `state`. The client
+receives the snapshots and merges them into inventory **through `update()`** —
+the existing autosave contract, no clobber risk. If a crash eats an opened
+box's items, the GM re-grants (table-recoverable; box status shows opened).
+
+**Player UX:** a sealed-boxes strip at the top of the Inventory tab (polled
+~12s, badge when boxes wait). Per the §20 house rule, opening opens **ALL held
+boxes** — one "crack the seals" action plays the reveals in sequence
+("Items looted: …" per box, tier-colored); pick-one boxes pause for the choice.
+Lounge location is socially enforced by default (auto-decrement precedent);
+optional later: an admin "Lounge window" toggle on the tracker ⚖.
+
+**Admin UX:** a **Box Builder** in the Items section that absorbs the Box
+Namer: pick items from the library (same picker), pick recipients, mode, and
+the namer suggests the box name. Give → sealed boxes appear on the players'
+sheets.
+
+Status: **BUILT (owner approved + additions, 2026-08-10).** Owner additions
+delivered: (a) **click any item in the reveal for full details** — informed
+decisions, especially on pick-one; (b) **the permanent Box Log** — opened boxes
+are never deleted; the collection records who, what, what was chosen
+(chosenIndex), and WHY (`source`, fed by the Builder's earned-by field); the
+log view lives under the Box Builder; sealed boxes are revocable, opened ones
+are history. Shipped: LootBox model + /api/boxes routes, LootBoxes strip +
+reveal in the Inventory tab, BoxBuilder (absorbing the Box Namer — its suggest
+lanes, tier inference, and earned-by picker live inside; BoxNamer.jsx retired).
+**Queued next: the Higher affix-tier design sitting** (Superior gear promises
+access nobody has designed).
+
 ---
 
 ## Residuals — ALL RULED (owner, 2026-08-04 round 2)
