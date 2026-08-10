@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lootbox System — mockup</title>
+<style>
+  :root {
+    --bg:#04050d; --panel:#090c1a; --panel2:#0d1020; --cyan:#00d4ff; --gold:#c8a84b;
+    --danger:#ff2255; --success:#00ff88; --text:#b8c8e0; --muted:#3a4560;
+    --border:#1a2540; --bronze:#cd7f32; --silver:#c0c0c0; --legendary:#a855f7; --mythic:#ec4899;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,sans-serif; padding:24px; }
+  .wrap { max-width:720px; margin:0 auto; }
+  h1 { font-family:'Courier New',monospace; color:var(--cyan); font-size:18px; letter-spacing:2px; text-transform:uppercase; }
+  h1 small, h2 small { color:var(--muted); letter-spacing:0; text-transform:none; font-family:system-ui; font-weight:400; }
+  h2 { font-family:'Courier New',monospace; font-size:14px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin:26px 0 10px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:14px; }
+  .lbl { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); font-weight:700; margin-bottom:6px; }
+  input[type=text] { width:100%; background:var(--panel2); border:1px solid var(--border); border-radius:6px; color:var(--text); padding:7px 10px; font-size:14px; }
+  input:focus { outline:none; border-color:var(--cyan); }
+  .btn { background:var(--cyan); color:#04121a; border:none; border-radius:6px; padding:9px 20px; font-weight:800; font-size:14px; cursor:pointer; letter-spacing:.5px; }
+  .btn:hover { filter:brightness(1.15); }
+  .btn.ghost { background:var(--panel2); color:var(--cyan); border:1px solid var(--cyan); font-weight:600; }
+  .btn.gold { background:var(--gold); color:#1a1200; }
+  .chip { display:inline-block; background:var(--panel2); border:1px solid var(--border); color:var(--text); border-radius:20px; padding:4px 12px; font-size:12px; cursor:pointer; user-select:none; margin:0 5px 5px 0; }
+  .chip.on { border-color:var(--cyan); color:var(--cyan); background:rgba(0,212,255,.08); }
+  /* sealed boxes strip */
+  .boxes { display:flex; gap:10px; flex-wrap:wrap; }
+  .box { width:150px; border-radius:10px; padding:14px 10px; text-align:center; cursor:default; border:1px solid var(--border); background:var(--panel2); position:relative; }
+  .box .seal { font-size:34px; }
+  .box .bname { font-size:12px; font-weight:700; margin-top:6px; line-height:1.3; }
+  .box.t-Bronze { border-color:var(--bronze); } .box.t-Bronze .bname { color:var(--bronze); }
+  .box.t-Silver { border-color:var(--silver); } .box.t-Silver .bname { color:var(--silver); }
+  .box.t-Mythic { border-color:var(--mythic); box-shadow:0 0 14px rgba(236,72,153,.25); } .box.t-Mythic .bname { color:var(--mythic); }
+  .box .tag { position:absolute; top:6px; right:8px; font-size:9px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  /* modal */
+  .overlay { position:fixed; inset:0; background:rgba(2,3,8,.85); display:none; align-items:center; justify-content:center; z-index:50; }
+  .overlay.show { display:flex; }
+  .modal { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:22px; width:min(480px, 92vw); max-height:86vh; overflow-y:auto; }
+  .modal h3 { margin:0 0 4px; font-size:17px; }
+  .modal .sub { color:var(--muted); font-size:12px; margin-bottom:14px; }
+  .loot { display:flex; align-items:center; gap:10px; background:var(--panel2); border:1px solid var(--border); border-radius:8px; padding:9px 12px; margin-bottom:7px; opacity:0; transform:translateY(6px); animation:pop .35s forwards; }
+  @keyframes pop { to { opacity:1; transform:none; } }
+  .loot .ic { font-size:22px; }
+  .loot .nm { font-weight:700; font-size:14px; }
+  .loot .tr { font-size:10px; margin-left:auto; padding:1px 8px; border-radius:9px; border:1px solid var(--border); }
+  .tr.Crude{color:var(--muted)} .tr.Basic{color:var(--text)} .tr.Quality{color:var(--cyan)} .tr.Superior{color:var(--gold)} .tr.Exceptional{color:var(--legendary)}
+  .pick3 { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:10px 0; }
+  .pcard { border:1px solid var(--border); border-radius:10px; background:var(--panel2); padding:12px 8px; text-align:center; cursor:pointer; }
+  .pcard:hover { border-color:var(--mythic); }
+  .pcard.on { border-color:var(--mythic); background:rgba(236,72,153,.1); box-shadow:0 0 12px rgba(236,72,153,.3); }
+  .pcard .ic { font-size:28px; } .pcard .nm { font-size:11px; font-weight:700; margin-top:6px; color:var(--legendary); }
+  .foot { display:flex; justify-content:flex-end; gap:8px; margin-top:14px; }
+  .hint { font-size:12px; color:var(--muted); }
+  /* admin picker */
+  .list { max-height:150px; overflow-y:auto; border:1px solid var(--border); border-radius:6px; margin-top:6px; background:rgba(0,0,0,.25); }
+  .li { display:flex; justify-content:space-between; padding:5px 10px; cursor:pointer; font-size:12px; border-bottom:1px solid var(--border); }
+  .li:hover { background:rgba(0,212,255,.06); } .li.on { color:var(--cyan); background:rgba(0,212,255,.08); }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:560px){ .grid2{grid-template-columns:1fr} }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--success); color:#03140a; font-weight:800; padding:10px 22px; border-radius:8px; display:none; z-index:60; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📦 Lootbox System <small>— mockup (both sides; reveal flow is fully playable)</small></h1>
+
+  <h2>Player — Inventory tab, sealed boxes strip <small>(polled; contents server-side until opened)</small></h2>
+  <div class="card">
+    <div class="lbl">Sealed boxes — 3 waiting</div>
+    <div class="boxes" id="boxStrip"></div>
+    <div style="margin-top:12px; display:flex; gap:10px; align-items:center;">
+      <button class="btn gold" id="openAll">🔓 Crack the seals — open ALL boxes</button>
+      <span class="hint">§20 house rule: all held boxes open together, at the Lounge.</span>
+    </div>
+  </div>
+
+  <h2>Admin — Box Builder <small>(absorbs the Box Namer; lives in the Items section)</small></h2>
+  <div class="card">
+    <div class="grid2">
+      <div>
+        <div class="lbl">Contents — pick from the library</div>
+        <input type="text" id="srch" placeholder="Search items…">
+        <div class="list" id="itemList"></div>
+        <div id="pickedChips" style="margin-top:8px;"></div>
+      </div>
+      <div>
+        <div class="lbl">Recipients</div>
+        <div id="players"></div>
+        <div class="lbl" style="margin-top:12px;">Reveal mode</div>
+        <span class="chip on" data-m="all" onclick="setMode(this)">Open all</span>
+        <span class="chip" data-m="pick" onclick="setMode(this)">Pick one of N</span>
+        <div class="lbl" style="margin-top:12px;">Box name</div>
+        <input type="text" id="bname" placeholder="Silver Incineradile Box">
+        <button class="btn ghost" style="margin-top:8px; padding:6px 14px; font-size:12px;" onclick="suggest()">📦 Suggest (Box Namer)</button>
+      </div>
+    </div>
+    <div class="foot">
+      <button class="btn" onclick="give()">Give sealed box</button>
+    </div>
+  </div>
+  <p class="hint">Build shape: new <b>lootboxes</b> collection (contents hidden server-side — the state blob is player-readable, so sealed loot can't live there); open returns snapshots and the <i>client</i> merges them via <code>update()</code> — no autosave race. Full contract: passover ID-9.</p>
+</div>
+
+<!-- reveal modal -->
+<div class="overlay" id="ov">
+  <div class="modal" id="modalBody"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const BOXES = [
+  { name:'Bronze Massacre Box', tier:'Bronze', mode:'all', items:[
+      ['🩹','Bandage','Basic'],['🧪','Antitoxin','Basic'],['✨','Glow Stick','Crude'],['🔦','Torch','Crude'],['🗡️','Duct-Tape Machete','Basic'] ]},
+  { name:'Silver Incineradile Box', tier:'Silver', mode:'all', items:[
+      ['🧣','Flamehide Wrap','Basic'],['🪓','Fire Axe "Retired Hero"','Quality'],['🍄','Mycelium Core','Crude'],['🧴','Burn Gel','Basic'] ]},
+  { name:'Mythic ??? Box', tier:'Mythic', mode:'pick', items:[
+      ['📕','Tome of the First Flame','Exceptional'],['⌚','The Missing Moment','Exceptional'],['✉️','Fan Mail','Exceptional'] ]},
+];
+const LIB = [['🗡️','Dagger','Basic'],['🤺','Rapier','Quality'],['💥','Shotgun','Basic'],['🩹','Bandage','Basic'],['🧪','Antitoxin','Basic'],['🌿','Sprig Wand','Quality'],['🍄','Mycelium Core','Crude'],['🧰','Quality Weapon Creation Kit','Quality'],['🧽','Crude Polish Kit','Crude'],['📗','Skill Tome: Lockpicking for Dummies','Quality'],['😷','Mask','Basic'],['🦴','Beastbone','—'],['🪵','Oak Heartwood','—']];
+const PLAYERS = ['Filipe','XQUEZ/T','Mario','Sasha'];
+const $ = id => document.getElementById(id);
+
+// ——— player strip ———
+$('boxStrip').innerHTML = BOXES.map((b,i) =>
+  `<div class="box t-${b.tier}"><span class="tag">${b.mode==='pick'?'pick 1 of '+b.items.length:'sealed'}</span>
+     <div class="seal">📦</div><div class="bname">${b.name}</div></div>`).join('');
+
+// ——— reveal sequence ———
+let seq = 0, picked = null;
+$('openAll').onclick = () => { seq = 0; showBox(); };
+function showBox() {
+  if (seq >= BOXES.length) { return finale(); }
+  const b = BOXES[seq];
+  if (b.mode === 'pick') {
+    picked = null;
+    $('modalBody').innerHTML = `
+      <h3 style="color:var(--mythic)">${b.name}</h3>
+      <div class="sub">The box opens itself. Three shapes rise. <b>Choose one — the others fade.</b></div>
+      <div class="pick3">${b.items.map(([ic,nm],i) =>
+        `<div class="pcard" onclick="pickOne(this,${i})"><div class="ic">${ic}</div><div class="nm">${nm}</div></div>`).join('')}</div>
+      <div class="foot"><button class="btn" id="claimBtn" style="opacity:.4" onclick="claim()">Claim</button></div>`;
+  } else {
+    $('modalBody').innerHTML = `
+      <h3 style="color:var(--${b.tier === 'Bronze' ? 'bronze' : 'silver'})">${b.name}</h3>
+      <div class="sub">Items looted:</div>
+      ${b.items.map(([ic,nm,tr],i) =>
+        `<div class="loot" style="animation-delay:${i*0.25}s"><span class="ic">${ic}</span><span class="nm">${nm}</span><span class="tr ${tr}">${tr}</span></div>`).join('')}
+      <div class="foot"><button class="btn" onclick="nextBox()">Take all → inventory</button></div>`;
+  }
+  $('ov').classList.add('show');
+}
+window.pickOne = (el,i) => { picked = i; document.querySelectorAll('.pcard').forEach(c=>c.classList.remove('on')); el.classList.add('on'); $('claimBtn').style.opacity=1; };
+window.claim = () => { if (picked === null) return; nextBox(); };
+window.nextBox = () => { seq++; showBox(); };
+function finale() {
+  $('modalBody').innerHTML = `
+    <h3 style="color:var(--success)">All boxes opened</h3>
+    <div class="sub">Every item has been added to your inventory. The cameras got the whole thing.</div>
+    <div class="foot"><button class="btn" onclick="document.getElementById('ov').classList.remove('show')">Done</button></div>`;
+}
+
+// ——— admin builder ———
+let sel = new Set(), mode = 'all', recips = new Set();
+function renderLib() {
+  const q = $('srch').value.toLowerCase();
+  $('itemList').innerHTML = LIB.filter(x=>x[1].toLowerCase().includes(q)).map((x,i) =>
+    `<div class="li${sel.has(x[1])?' on':''}" onclick="tog('${x[1].replace(/'/g,"\\'")}')">${x[0]} ${x[1]}<span style="color:var(--muted)">${x[2]}</span></div>`).join('');
+  $('pickedChips').innerHTML = [...sel].map(n=>`<span class="chip on" onclick="tog('${n.replace(/'/g,"\\'")}')">${n} ×</span>`).join('');
+}
+window.tog = n => { sel.has(n)?sel.delete(n):sel.add(n); renderLib(); };
+$('srch').oninput = renderLib;
+$('players').innerHTML = PLAYERS.map(p=>`<span class="chip" onclick="this.classList.toggle('on');recips.has('${p}')?recips.delete('${p}'):recips.add('${p}')">${p}</span>`).join('');
+window.setMode = el => { mode = el.dataset.m; document.querySelectorAll('[data-m]').forEach(c=>c.classList.toggle('on', c===el)); };
+window.suggest = () => {
+  const names = ['Bronze Care-Package Box','Silver Arsenal Box','Silver Incineradile Box','Bronze Sweeps-Week Box'];
+  $('bname').value = names[Math.floor(Math.random()*names.length)];
+};
+window.give = () => {
+  const t = $('toast');
+  t.textContent = `Sealed "${$('bname').value || 'Unnamed Box'}" → ${recips.size || 'no'} player(s)`;
+  t.style.display = 'block'; setTimeout(()=>t.style.display='none', 2200);
+};
+renderLib();
+</script>
+</body>
+</html>
