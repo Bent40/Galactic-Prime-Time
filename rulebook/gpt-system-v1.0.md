@@ -764,6 +764,10 @@ kit exists — the top of the ladder is polish-only.
   the **striking part** sets the damage band; every socketed material
   contributes its inherent property. Premade single-material weapons are the
   default; part-crafting is opt-in.
+- **Modifiers ride the band.** Affix damage numerics multiply by the item's
+  material band, exactly like base damage (Serrated III on a Jade blade is
+  +24 Bleed). Condition and utility modifiers don't scale — a T2 Poison or a
+  saved Moment is band-proof by nature.
 - **Ranged & tech — the part that touches the target carries the band.**
   Rounds, shells, bolts, and arrows are made from materials and set the band;
   the delivery part (barrel, bow limbs) caps what it can safely fire; energy
