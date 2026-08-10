@@ -149,6 +149,17 @@ F4–6 pending design).
     ≈ ×12, boss ≈ ×25, super ≈ ×60 ⚖). Feeds §21 enemy-construction guidance
     at the book pass (ID-6).
 
+**Sitting round 4 (owner, 2026-08-10):**
+
+31. **HIGHER affix tier BLESSED** (15 affixes,
+    `rulebook/item-drafting-higher-affixes.md`, seeded via `seed-affixes.js`)
+    **+ affix band-scaling RULED:** affix damage numerics multiply by the
+    item's material band exactly like base damage; condition and utility
+    affixes don't scale — they're band-proof by nature. Legendary-tier
+    affixes stay deferred until the first polished Exceptional exists.
+    (Also this round: the lootbox distribution system built, shipped, and
+    smoke-tested live — ID-9.)
+
 ---
 
 ## ID-1 — The authoring frame: subtypes and what each tier MEANS

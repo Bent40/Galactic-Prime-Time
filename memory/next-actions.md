@@ -26,11 +26,10 @@
    /api/boxes routes, reveal flow w/ item details, pick-one, permanent
    Box Log (who/what/chosen/why), BoxBuilder absorbed BoxNamer.
    Smoke-tested live by owner 2026-08-10.
-9b. HIGHER AFFIXES: proposal authored (rulebook/item-drafting-higher-
-   affixes.md + seeds/affixes-higher.js + seed-affixes.js runner, 15
-   affixes). Key question: affix numerics scale with material band
-   (recommended YES). Awaiting trim/bless; Legendary tier deliberately
-   deferred until the first polished Exceptional exists.
+9b. HIGHER AFFIXES BLESSED (2026-08-10) + band-scaling RULED (affix
+   numerics multiply by material band; conditions/utility don't scale;
+   in book section 12.7). Owner runs: backup-db.js -> seed-affixes.js ->
+   --apply. Legendary tier deferred until polished Exceptional exists.
 10. Owner: run the deploy cookbook (docs/deploy-render-atlas.md) -
    Atlas M0 + Render Blueprint; render.yaml is on main.
 11. PARKED (owner position): v2 relational migration (Postgres) for
