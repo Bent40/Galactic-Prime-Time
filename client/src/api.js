@@ -1,10 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
 
-// Primary target — set VITE_API_BASE in client/.env, e.g.:
-// Fallback is always localhost. If both addresses are the same, no discovery
+// Primary target — set VITE_API_BASE in client/.env for LAN play, e.g.:
+// Fallback is localhost in dev. If both addresses are the same, no discovery
 // is needed and the first request goes straight through.
-const PRIMARY  = import.meta.env.VITE_API_BASE ?? 'http://localhost:3001';
-const FALLBACK = 'http://localhost:3001';
+// PRODUCTION builds default to '' (same-origin relative paths): the deployed
+// Express serves both this client and /api, so the page's own origin IS the
+// API. Absolute localhost defaults would point players at their own machines.
+const DEV_DEFAULT = 'http://localhost:3001';
+const PRIMARY  = import.meta.env.VITE_API_BASE ?? (import.meta.env.DEV ? DEV_DEFAULT : '');
+const FALLBACK = import.meta.env.DEV ? DEV_DEFAULT : (import.meta.env.VITE_API_BASE ?? '');
 
 // ── Base discovery ────────────────────────────────────────────────────────────
 // Discovery happens on the very first apiFetch call rather than via a separate
