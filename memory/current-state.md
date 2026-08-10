@@ -4,34 +4,31 @@
 
 ## Done
 
-- 2026-08-04: Item Drafting scoped as the CONTENT pass (owner-confirmed) — stock
-  the box tiers, per economy-passover's queued "big ITEM DRAFTING pass".
-- Item-rules recap delivered and corrected by owner; rulings captured in
-  `rulebook/item-drafting-passover.md` §ID-0.
-- Floor canon located: game repo `docs/GPT_Master_Compendium.md` §4.
-- Passover/plan doc drafted and committed (`rulebook/item-drafting-passover.md`).
-
-- Sitting rounds 1+2 RULED (2026-08-04): armor sliver, tiered Polish Kits
-  (grade-gated, Forge venue, fail=kit consumed), large pools + Creation Kits,
-  app metadata, catalog-is-truth, R1-R5 all approved.
-- Batch A BLESSED and delivered: model metadata fields, admin form inputs,
-  BOX_TIERS/ITEM_SUBTYPES, seed-items.js + seeds/items-batch-a.js (41
-  templates). Verified: syntax, seed-data validation, client build. NOT yet
-  run against a DB (campaign DB is owner-side).
+- **Item Drafting pass COMPLETE and LIVE (2026-08-04 → 2026-08-10):** rules
+  (book v1.1: armor, materials/bands/parts, kits, tomes, ammo-carries-the-
+  band, horde doctrine, affix band-scaling), content (~155 item templates
+  seeded: batches A/B/C + F1 materials + D repairs; 15 Higher affixes
+  blessed), tools (Box Builder w/ integrated namer, seed runbooks).
+- **App deployed:** Render free + Atlas M0 (`render.yaml`,
+  `docs/deploy-render-atlas.md`); campaign DB migrated; owner smoke-tested.
+  Client uses same-origin API base in production (api.js).
+- **Lootbox system SHIPPED + smoke-tested:** LootBox collection (sealed
+  contents server-side — the state blob is player-readable), /api/boxes,
+  crack-the-seals reveal w/ per-item details, pick-one mode, permanent Box
+  Log (who/what/chosen/why), race-safe open (client merges via update()).
+- Campaign frame ruled: 10 floors — 3 sets of 3 + F10 FFA. Ladder x2 per
+  floor (F1 x2 ... F9 x512); mob ≈ one on-band hit.
 
 ## In progress
 
-- Awaiting owner's seed runs on the campaign DB: batches A/B/C,
-  materials-f1, d-repairs (--force), repair-affixes. All content authored;
-  book at v1.1. Item Drafting pass is content-complete pending applies.
+- Nothing mid-flight. Session closed clean 2026-08-10.
 
 ## Next
 
-- Batch B authoring (standing catalog + skill-tome set per ID-0.18), then C
-  (top shelf + growth items per ID-0.19 doctrine), D (repair pass + catalog
-  edits R4/R5), book pass ID-6. Batches E+ expansion waves planned.
+- **F1 enemy pass** — next session's opening task (full briefing in
+  next-actions.md #1). Then the queue in next-actions order.
 
 ## Blockers
 
-- Seed apply needs the owner's DB; expect the Bandage name collision at dry
-  run (kept as-is unless --force).
+- Owner-side applies pending (not blocking dev): seed-affixes on campaign
+  DB; story-canon 10-floor edit in the game repo.
