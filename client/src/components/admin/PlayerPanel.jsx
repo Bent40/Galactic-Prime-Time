@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
-import { uid, TRAIT_LABELS, ATK_TYPES, DMG_TYPES, BOSS_TIERS } from '../../constants.js';
+import { uid, TRAIT_LABELS, ATK_TYPES, DMG_TYPES } from '../../constants.js';
 
 export default function PlayerPanel({ player, token, showToast }) {
   const [charData, setCharData] = useState(null);
@@ -22,7 +22,6 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [objectives, setObjectives] = useState(null); // local objectives state for editing
   const [objSaving, setObjSaving] = useState(false);
   const [newSubtaskText, setNewSubtaskText] = useState({}); // { [objId]: text } per-objective input buffer
-  const [bossTokenTier, setBossTokenTier] = useState('bronze');
 
   useEffect(() => {
     setLoading(true);
@@ -83,16 +82,6 @@ export default function PlayerPanel({ player, token, showToast }) {
     if (d.ok) {
       setCharData(cd => ({ ...cd, state: { ...cd.state, statCapBonuses: { ...(cd.state.statCapBonuses || {}), [key]: v } } }));
       showToast('Saved');
-    } else showToast(d.error || 'Failed', 'err');
-  }
-  async function grantBossToken() {
-    const next = [...(state.tokens?.bossTokens || []), { id: uid(), tier: bossTokenTier, used: false }];
-    const d = await apiFetch(`/api/admin/players/${player.userId}/tokens`, {
-      method: 'PATCH', body: JSON.stringify({ bossTokens: next }),
-    }, token);
-    if (d.ok) {
-      setCharData(cd => ({ ...cd, state: { ...cd.state, tokens: { ...(cd.state.tokens || {}), bossTokens: next } } }));
-      showToast(`Granted ${bossTokenTier} boss token`);
     } else showToast(d.error || 'Failed', 'err');
   }
   async function saveTokens() {
@@ -376,15 +365,6 @@ export default function PlayerPanel({ player, token, showToast }) {
             </div>
           ))}
           <button className="btn btn-purple btn-sm" onClick={saveTokens} style={{ alignSelf: 'flex-end' }}>Save Tokens</button>
-        </div>
-        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--border)' }}>
-          <div className="section-label" style={{ marginBottom: 6 }}>Boss Tokens ({(state.tokens?.bossTokens || []).length})</div>
-          <div className="row" style={{ gap: 6 }}>
-            <select className="fi" style={{ flex: '0 0 140px' }} value={bossTokenTier} onChange={e => setBossTokenTier(e.target.value)}>
-              {BOSS_TIERS.map(t => <option key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</option>)}
-            </select>
-            <button className="btn btn-gold btn-sm" onClick={grantBossToken}>+ Grant Boss Token</button>
-          </div>
         </div>
       </div>
 

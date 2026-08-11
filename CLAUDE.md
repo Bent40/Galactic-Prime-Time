@@ -104,6 +104,16 @@ shock: { tier: 0 }  // 0 = none, 1-4 = Shout/Stutter/Faint/Helpless
 - `PATCH /api/admin/players/:userId/traits` — set trait values
 - `POST /api/admin/players/:userId/skills/grant` — grant skill by templateId
 
+## Data layer direction (owner position, 2026-08-04)
+Mongo/Atlas is the accepted current stack (deploy: `render.yaml` +
+`docs/deploy-render-atlas.md`). **Owner conviction on record:** SQL's schema
+enforcement will likely be needed as the campaign leans harder on item/skill
+data — a **v2 relational migration is parked, not rejected**. First step when
+picked up: a full schema design doc (tables/FKs/constraints + the client
+autosave-contract change), timed to a campaign break. Don't re-litigate Mongo
+vs SQL in future sessions; the position is settled as "Atlas now, designed v2
+maybe later."
+
 ## Autosave
 `update()` in CharacterSheet triggers a 1500ms debounced save to `/api/character`.
 Do not add additional direct `apiFetch` saves on top of this — use `update()` only to avoid race conditions.
@@ -112,8 +122,29 @@ Do not add additional direct `apiFetch` saves on top of this — use `update()` 
 Admin manages skill templates via SkillLibrarySection. Templates stored in `skilltemplates` collection.
 Skills are granted to players by templateId. The player sheet joins template data at runtime.
 
+## Item Library & Drafting (added 2026-08-04)
+- Item instances on characters are **snapshots** (no templateId backlink), granted via
+  `POST /api/items/give`; `/api/items` routes are 100% admin-gated.
+- `ItemTemplate` carries pool metadata: `subtype`, `boxTiers[]`, `themes[]`, `source`
+  (template-side bookkeeping; the give-snapshot copies only `subtype`). Vocabulary in
+  `constants.js`: `BOX_TIERS` (Bronze→Godly, ≠ item tiers) + `ITEM_SUBTYPES`.
+- **Seeding runbook (from `server/`):** `node backup-db.js` → `node seed-items.js` (dry
+  run) → `--apply`; `--force` to overwrite differing existing templates, `--file` for
+  other batches. Batch data lives in `server/seeds/` (a: Lounge-unlock, b: standing
+  catalog, c: top shelf, materials-f1: F1 material band, d-repairs: legacy metadata
+  stamps, needs `--force`). `node repair-affixes.js` applies the ruled affix edits.
+  The rulebook is at **v1.1** (Item Drafting update: §12.6 armor, §12.7 materials,
+  §21.2 horde doctrine; file name stays gpt-system-v1.0.md for the Wiki import).
+- The Item Drafting content pass (rules + pools + batches) is governed by
+  `rulebook/item-drafting-passover.md` + `rulebook/item-drafting-batch-a.md`; the live
+  **affix catalog is source of truth** over book §12.3's working list.
+- **Box Namer** (`admin/BoxNamer.jsx`, top of the Items section): GM picks dropped
+  loot + earned-by (Goals/enemies/custom), gets `<Tier> <Flavor> Box` name
+  suggestions; tier auto-inferred from picked items' tiers. Wordlists live in the
+  component.
+
 ## Rulebook & Wiki (added 2026-07-23)
-- **`rulebook/gpt-system-v0.92.md` is the canonical TTRPG rules master** (owner decision
+- **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
 - The player-facing **Wiki** (`/wiki` route, `client/src/pages/Wiki.jsx`) renders it via a
   `?raw` import + `marked` — one committed copy, no drift. The 📖 Wiki button in the sheet
@@ -145,7 +176,7 @@ Skills are granted to players by templateId. The player sheet joins template dat
    (dry run, prints every change) → `--apply` (Psy→Dissolution, Toxic→Poison,
    Shock→Burn; Sea Lion→Animal+species, AI→Robot / AI+species) →
    `node seedTagDescriptions.js` → `--apply` (fills empty tag descriptions from
-   rulebook Appendix C). Prime display still rides the owner's skill passover.
+   the rulebook Tag Compendium). Prime display still rides the owner's skill passover.
 3. ~~Polish §B-4~~ **DONE 2026-07-23**: CommsTab whisper selector (📢 broadcast /
    🤫 players / 🎭 NPCs via `/api/players`); admin tag input backed by the tag-catalog
    datalist (freetext preserved, effect auto-copied on match); player tag picker and

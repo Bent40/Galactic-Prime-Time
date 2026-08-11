@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Box Namer — mockup v2</title>
+<style>
+  :root {
+    --bg:#04050d; --panel:#090c1a; --panel2:#0d1020; --cyan:#00d4ff; --gold:#c8a84b;
+    --danger:#ff2255; --success:#00ff88; --text:#b8c8e0; --muted:#3a4560;
+    --border:#1a2540; --bronze:#cd7f32; --silver:#c0c0c0; --legendary:#a855f7; --mythic:#ec4899;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,sans-serif; padding:24px; }
+  .wrap { max-width:680px; margin:0 auto; }
+  h1 { font-family:'Courier New',monospace; color:var(--cyan); font-size:18px; letter-spacing:2px; text-transform:uppercase; }
+  h1 small { color:var(--muted); letter-spacing:0; text-transform:none; font-family:system-ui; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin-bottom:14px; }
+  label.lbl { display:block; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin:0 0 6px; font-weight:700; }
+  input[type=text] { width:100%; background:var(--panel2); border:1px solid var(--border); border-radius:6px; color:var(--text); padding:7px 10px; font-size:14px; font-family:inherit; }
+  input:focus { outline:none; border-color:var(--cyan); }
+  .list { max-height:180px; overflow-y:auto; border:1px solid var(--border); border-radius:6px; margin-top:8px; background:var(--panel2); }
+  .li { display:flex; justify-content:space-between; align-items:center; padding:6px 10px; cursor:pointer; font-size:13px; border-bottom:1px solid var(--border); }
+  .li:last-child { border-bottom:none; }
+  .li:hover { background:rgba(0,212,255,.06); }
+  .li.on { background:rgba(0,212,255,.1); color:var(--cyan); }
+  .li .meta { font-size:11px; color:var(--muted); }
+  .li.grp { cursor:default; background:var(--panel); color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:1px; font-weight:700; position:sticky; top:0; }
+  .tier-b { font-size:10px; padding:1px 7px; border-radius:9px; border:1px solid var(--border); margin-left:6px; }
+  .t-Crude  { color:var(--muted); }  .t-Basic { color:var(--text); }
+  .t-Quality{ color:var(--cyan); }   .t-Superior { color:var(--gold); }
+  .t-Exceptional { color:var(--legendary); }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .chip { background:var(--panel2); border:1px solid var(--border); color:var(--text); border-radius:20px; padding:4px 12px; font-size:12px; cursor:pointer; user-select:none; }
+  .chip:hover { border-color:var(--cyan); }
+  .chip.on { border-color:var(--cyan); color:var(--cyan); background:rgba(0,212,255,.08); }
+  .chip .x { margin-left:6px; color:var(--danger); font-weight:700; }
+  .chip.tc-Bronze.on { border-color:var(--bronze); color:var(--bronze); }
+  .chip.tc-Silver.on { border-color:var(--silver); color:var(--silver); }
+  .chip.tc-Gold.on { border-color:var(--gold); color:var(--gold); }
+  .chip.tc-Legendary.on { border-color:var(--legendary); color:var(--legendary); }
+  .chip.tc-Mythic.on { border-color:var(--mythic); color:var(--mythic); }
+  .chip.tc-Godly.on { border-color:#fff; color:#fff; }
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .btn { background:var(--cyan); color:#04121a; border:none; border-radius:6px; padding:9px 20px; font-weight:800; font-size:14px; cursor:pointer; letter-spacing:.5px; }
+  .btn:hover { filter:brightness(1.15); }
+  .btn.ghost { background:var(--panel2); color:var(--cyan); border:1px solid var(--cyan); font-weight:600; }
+  .names { display:flex; flex-direction:column; gap:8px; }
+  .name { display:flex; justify-content:space-between; align-items:center; background:var(--panel2); border:1px solid var(--border); border-radius:8px; padding:10px 14px; cursor:pointer; font-size:16px; }
+  .name:hover { border-color:var(--gold); }
+  .name .lane { font-size:10px; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+  .name.copied { border-color:var(--success); }
+  .name.copied .lane { color:var(--success); }
+  .hint { font-size:12px; color:var(--muted); margin-top:6px; }
+  .inferred { font-size:12px; color:var(--muted); }
+  .inferred b { color:var(--text); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>📦 Box Namer <small>— mockup v2 (item + earned-by pickers; would live in the admin Items section)</small></h1>
+
+  <div class="card">
+    <label class="lbl">The loot — pick from the item library</label>
+    <input type="text" id="itemSearch" placeholder="Search items…">
+    <div class="chips" id="pickedItems"></div>
+    <div class="list" id="itemList"></div>
+    <div class="hint">Real build: this list is the live library (the Items section already loads it). Tier badges shown; selection drives contents flavor + tier inference.</div>
+  </div>
+
+  <div class="card">
+    <label class="lbl">Earned by — pick a Goal or an enemy</label>
+    <input type="text" id="deedSearch" placeholder="Search goals & enemies… (or type a custom one and hit Enter)">
+    <div class="list" id="deedList"></div>
+    <div class="hint">Real build: enemies come from your Enemies section; Goals are the §17.4 set. Custom freetext still works — Enter keeps it.</div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between">
+      <label class="lbl" style="margin:0">Box tier</label>
+      <span class="inferred" id="inferred"></span>
+    </div>
+    <div class="chips" id="tierChips"></div>
+  </div>
+
+  <div class="row" style="margin-bottom:14px">
+    <button class="btn" id="go">Generate names</button>
+    <button class="btn ghost" id="reroll">🎲 Reroll</button>
+  </div>
+
+  <div class="card">
+    <label class="lbl">Suggestions (click to copy)</label>
+    <div class="names" id="out"><div class="hint">Pick some loot and hit Generate.</div></div>
+  </div>
+</div>
+
+<script>
+// ——— sample data: the live library (28 existing) + Batch A (41), deduped by name ———
+const RAW_ITEMS = [{"name":"Stun Net","tier":"Crude","cat":"Consumables"},{"name":"Pointed Clown Hat","tier":"Crude","cat":"Equipment"},{"name":"Ruffled Clown Collar","tier":"Crude","cat":"Equipment"},{"name":"Fedora Hat","tier":"Basic","cat":"Equipment"},{"name":"Scalpel (Used)","tier":"Crude","cat":"Weapons"},{"name":"Generic Outfit Coupon","tier":"","cat":"System Items"},{"name":"Silver Modifier Coupon","tier":"","cat":"System Items"},{"name":"Beachy - The Beach Ball","tier":"","cat":"Misc"},{"name":"Middle Brother's Doll","tier":"","cat":"Key Items"},{"name":"Superhero Outfit","tier":"Crude","cat":"Equipment"},{"name":"Metal Gauntlets","tier":"Basic","cat":"Weapons"},{"name":"Big Brother Roach's Suit","tier":"Basic","cat":"Equipment"},{"name":"Arrow","tier":"Crude","cat":"Consumables"},{"name":"Bag Of Trail Mix","tier":"","cat":"Consumables"},{"name":"Tome Of Submission","tier":"","cat":"System Items"},{"name":"Medical Suture Kit","tier":"Basic","cat":"Tools"},{"name":"Sewing Kit","tier":"Quality","cat":"Tools"},{"name":"Garden Gloves","tier":"Crude","cat":"Equipment"},{"name":"Wood scraps","tier":"","cat":"Misc"},{"name":"Fabric Scraps","tier":"","cat":"Misc"},{"name":"Metal Claw Coverings","tier":"Basic","cat":"Weapons"},{"name":"Kunai","tier":"Quality","cat":"Weapons"},{"name":"Short Sword","tier":"Basic","cat":"Weapons"},{"name":"Musketeer Hat","tier":"","cat":"Equipment"},{"name":"Soft Boots","tier":"","cat":"Equipment"},{"name":"Blue Cape","tier":"","cat":"Equipment"},{"name":"Basic Weapon Coupon","tier":"","cat":"System Items"},{"name":"Bandage","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Antitoxin","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Burn Gel","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Thermal Pack","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Antiseptic Wash","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Smelling Salts","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Antivenom Injector","tier":"Quality","cat":"Consumables","sub":"Consumable"},{"name":"Stimpack","tier":"Quality","cat":"Consumables","sub":"Consumable"},{"name":"Adrenaline Shot","tier":"Quality","cat":"Consumables","sub":"Consumable"},{"name":"Ration Pack","tier":"Crude","cat":"Consumables","sub":"Consumable"},{"name":"Water Flask","tier":"Crude","cat":"Consumables","sub":"Consumable"},{"name":"Glow Stick","tier":"Crude","cat":"Consumables","sub":"Consumable"},{"name":"Torch","tier":"Crude","cat":"Consumables","sub":"Consumable"},{"name":"Chalk","tier":"Crude","cat":"Consumables","sub":"Consumable"},{"name":"Flare","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Smoke Vial","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Spare Magazine","tier":"Basic","cat":"Consumables","sub":"Charged gear"},{"name":"Heavy Cell","tier":"Basic","cat":"Consumables","sub":"Charged gear"},{"name":"Patch Kit","tier":"Basic","cat":"Consumables","sub":"Consumable"},{"name":"Rope (20 m)","tier":"Basic","cat":"Tools","sub":"Tool"},{"name":"Camp Knife","tier":"Crude","cat":"Weapons","sub":"Bladed"},{"name":"Rebar Club","tier":"Crude","cat":"Weapons","sub":"Crush"},{"name":"Scrap Spear","tier":"Crude","cat":"Weapons","sub":"Bladed"},{"name":"Sling","tier":"Crude","cat":"Weapons","sub":"Ranged"},{"name":"Duct-Tape Machete","tier":"Basic","cat":"Weapons","sub":"Bladed"},{"name":"Riot Baton","tier":"Basic","cat":"Weapons","sub":"Crush"},{"name":"Show-Brand Buckler","tier":"Basic","cat":"Equipment","sub":"Shield"},{"name":"Padded Vest","tier":"Basic","cat":"Equipment","sub":"Armor"},{"name":"Hard Hat","tier":"Basic","cat":"Equipment","sub":"Armor"},{"name":"Work Gloves","tier":"Basic","cat":"Equipment","sub":"Armor"},{"name":"Multitool","tier":"Basic","cat":"Tools","sub":"Tool"},{"name":"Crowbar","tier":"Basic","cat":"Tools","sub":"Tool"},{"name":"Crude Polish Kit","tier":"Crude","cat":"Consumables","sub":"Kit"},{"name":"Crude Weapon Creation Kit","tier":"Crude","cat":"Consumables","sub":"Kit"},{"name":"Mycelium Core","tier":"Crude","cat":"Misc","sub":"Growth"},{"name":"Flamehide Wrap","tier":"Basic","cat":"Equipment","sub":"Armor"},{"name":"Fire Axe \"Retired Hero\"","tier":"Quality","cat":"Weapons","sub":"Bladed"},{"name":"Sprig Wand","tier":"Quality","cat":"Tools","sub":"Limited-magic"},{"name":"Chained Mirror-Shard","tier":"Quality","cat":"Equipment","sub":"Trinket"},{"name":"Ashen Lantern","tier":"Quality","cat":"Tools","sub":"Tool"},{"name":"Citizen's Signet","tier":"Quality","cat":"Equipment","sub":"Trinket"}];
+const ITEMS = RAW_ITEMS.sort((a,b) => a.cat.localeCompare(b.cat) || a.name.localeCompare(b.name));
+
+const GOALS = ['Overkill','Finish Fast','Environmental Kill','Play into a Tag','Say the Line','While Exposed','Without Healing','Solo','Spare the Enemy','Betray Expectations'];
+// Real build: from the Enemies section (GET /api/enemies). Sample rows below.
+const ENEMIES = [
+  { name:'Incineradile', tier:'boss' },
+  { name:'Forest Mob (sample)', tier:'mob' },
+  { name:'Forest Elite (sample)', tier:'elite' },
+];
+
+const TIERS = ['Auto','Bronze','Silver','Gold','Legendary','Mythic','Godly'];
+const DEED_LEX = [
+  [/overkill|massacre/i, ['Massacre','Carnage','Overkill']],
+  [/fast|speed/i,        ['Blitz','Speedrun','Primetime']],
+  [/environment/i,       ['Stagecraft','Hazard-Pay']],
+  [/tag/i,               ['Typecast','In-Character']],
+  [/line/i,              ['Catchphrase','Quotable']],
+  [/exposed/i,           ['Daredevil','High-Wire']],
+  [/healing/i,           ['Iron-Will','No-Sell']],
+  [/solo/i,              ['One-Man-Show','Solo-Act']],
+  [/spare/i,             ['Mercy','Clemency']],
+  [/betray/i,            ['Plot-Twist','Swerve']],
+];
+const CONTENT_FLAVOR = {
+  Weapons:      ['Arsenal','Armory','Whetstone'],
+  Equipment:    ['Bulwark','Wardrobe','Understudy'],
+  Consumables:  ['Care-Package','Supply-Drop','Triage'],
+  Tools:        ['Stagehand','Toolbox','Rigging'],
+  Misc:         ['Grab-Bag','Variety-Hour'],
+  'System Items': ['Fine-Print','Terms-and-Conditions'],
+  'Key Items':  ['MacGuffin','Plot-Device'],
+};
+const SUB_FLAVOR = { Kit:['Assembly','Some-Assembly-Required'], Growth:['Sleeper','Slow-Burn'], 'Limited-magic':['Arcana','Spellbound'], Trinket:['Bling','Red-Carpet'] };
+const SHOW = ['Primetime','Encore','Fan-Favorite','Sweeps-Week','Golden-Hour','Season-Finale','Commercial-Break','Ratings-Spike','Standing-Ovation','Rerun','Cliffhanger','Cold-Open'];
+
+let picked = new Set(), earnedBy = '', tierPick = 'Auto';
+const $ = id => document.getElementById(id);
+const pick = (arr,n) => [...new Set(arr)].sort(()=>Math.random()-.5).slice(0,n);
+const title = s => s.replace(/\w\S*/g, t => t[0].toUpperCase()+t.slice(1));
+
+function renderItems() {
+  const q = $('itemSearch').value.toLowerCase();
+  $('itemList').innerHTML = ITEMS.filter(i => i.name.toLowerCase().includes(q)).map(i =>
+    `<div class="li${picked.has(i.name) ? ' on' : ''}" onclick="toggleItem('${i.name.replace(/'/g,"\\'")}')">
+       <span>${i.name}<span class="tier-b t-${i.tier}">${i.tier || '—'}</span></span>
+       <span class="meta">${i.sub || i.cat}</span></div>`).join('');
+  $('pickedItems').innerHTML = [...picked].map(n =>
+    `<span class="chip on" onclick="toggleItem('${n.replace(/'/g,"\\'")}')">${n}<span class="x">×</span></span>`).join('');
+}
+function renderDeeds() {
+  const q = $('deedSearch').value.toLowerCase();
+  const rows = [];
+  const goals = GOALS.filter(g => g.toLowerCase().includes(q));
+  const foes  = ENEMIES.filter(e => e.name.toLowerCase().includes(q));
+  if (goals.length) rows.push(`<div class="li grp">🏆 Goals</div>`, ...goals.map(g =>
+    `<div class="li${earnedBy===g?' on':''}" onclick="setDeed('${g}')">${g}</div>`));
+  if (foes.length) rows.push(`<div class="li grp">👹 Enemies (sample — real build reads the Enemies section)</div>`, ...foes.map(e =>
+    `<div class="li${earnedBy===e.name?' on':''}" onclick="setDeed('${e.name.replace(/'/g,"\\'")}')">${e.name}<span class="meta">${e.tier}</span></div>`));
+  $('deedList').innerHTML = rows.join('') || '<div class="li"><span class="meta">No match — press Enter to keep your custom text.</span></div>';
+}
+window.toggleItem = n => { picked.has(n) ? picked.delete(n) : picked.add(n); renderItems(); generate(); };
+window.setDeed = d => { earnedBy = earnedBy === d ? '' : d; $('deedSearch').value = earnedBy; renderDeeds(); generate(); };
+
+const TIER_FROM_ITEM = { '':0, Crude:0, Basic:0, Quality:1, Superior:2, Exceptional:3 };
+const BOX_LADDER = ['Bronze','Silver','Gold','Legendary'];
+function inferTier() {
+  const sel = ITEMS.filter(i => picked.has(i.name));
+  if (!sel.length) return 'Bronze';
+  let step = Math.max(...sel.map(i => TIER_FROM_ITEM[i.tier] ?? 0));
+  if (sel.some(i => i.sub === 'Growth' || /tome/i.test(i.name))) step = Math.min(step + 1, 3);
+  return BOX_LADDER[step];
+}
+
+function generate() {
+  const sel = ITEMS.filter(i => picked.has(i.name));
+  const tier = tierPick === 'Auto' ? inferTier() : tierPick;
+  $('inferred').innerHTML = tierPick === 'Auto' ? `auto-inferred: <b>${tier}</b> (from selected item tiers)` : '';
+
+  const lanes = [];
+  const deed = earnedBy || $('deedSearch').value.trim();
+  if (deed) {
+    const dW = DEED_LEX.filter(([re]) => re.test(deed)).flatMap(([,w]) => w);
+    if (!dW.length) dW.push(title(deed));                       // enemy/custom passthrough
+    pick(dW, 2).forEach(w => lanes.push([w, 'earned']));
+  }
+  const cW = sel.flatMap(i => (SUB_FLAVOR[i.sub] || CONTENT_FLAVOR[i.cat] || []));
+  pick(cW, 2).forEach(w => lanes.push([w, 'contents']));
+  pick(SHOW, 2).forEach(w => lanes.push([w, 'showbiz']));
+
+  const seen = new Set(); const out = [];
+  for (const [w, lane] of lanes) {
+    const name = `${tier} ${w} Box`;
+    if (!seen.has(name)) { seen.add(name); out.push([name, lane]); }
+  }
+  $('out').innerHTML = out.map(([n, l]) =>
+    `<div class="name" onclick="copyName(this,'${n.replace(/'/g,"\\'")}')"><span>${n}</span><span class="lane">${l}</span></div>`).join('')
+    || '<div class="hint">Pick some loot (or an earner) first.</div>';
+}
+window.copyName = (el, name) => {
+  navigator.clipboard && navigator.clipboard.writeText(name);
+  el.classList.add('copied'); el.querySelector('.lane').textContent = 'copied!';
+  setTimeout(() => el.classList.remove('copied'), 1200);
+};
+
+$('tierChips').innerHTML = TIERS.map(t =>
+  `<span class="chip tc-${t}${t==='Auto'?' on':''}" data-t="${t}" onclick="setTier(this)">${t}</span>`).join('');
+window.setTier = el => { tierPick = el.dataset.t; document.querySelectorAll('#tierChips .chip').forEach(c => c.classList.toggle('on', c === el)); generate(); };
+$('itemSearch').oninput = renderItems;
+$('deedSearch').oninput = () => { earnedBy = ''; renderDeeds(); };
+$('deedSearch').onkeydown = e => { if (e.key === 'Enter') { earnedBy = $('deedSearch').value.trim(); renderDeeds(); generate(); } };
+$('go').onclick = generate;
+$('reroll').onclick = generate;
+renderItems(); renderDeeds();
+</script>
+</body>
+</html>

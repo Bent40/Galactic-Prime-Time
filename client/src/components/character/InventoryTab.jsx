@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { uid, catIcon, itemDmgLabel, ATK_TYPES, DMG_TYPES, AFFIX_TIERS, ITEM_TIERS, ITEM_CATS } from '../../constants.js';
 import { apiFetch } from '../../api.js';
+import LootBoxes from './LootBoxes.jsx';
 
 const AFFIX_TIER_COLOR = {
   Lesser: 'var(--muted)', Normal: 'var(--text)', Higher: 'var(--cyan)',
@@ -523,6 +524,7 @@ export default function InventoryTab({ state, update, token }) {
 
   return (
     <>
+      <LootBoxes token={token} update={update} />
       <div className="inv-stack">
         <CatPanel cat={equipped} fixed {...sharedProps} showReorder={false} />
         <CatPanel cat={hotbar} fixed {...sharedProps} showReorder={false} />

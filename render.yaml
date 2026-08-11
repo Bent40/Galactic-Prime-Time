@@ -1,0 +1,24 @@
+# Render Blueprint — Galactic Prime Time character sheet
+# One free web service: Express serves both the API and the built client
+# (server.js statically serves client/dist with an SPA fallback).
+# Cookbook: docs/deploy-render-atlas.md
+services:
+  - type: web
+    name: galactic-prime-time
+    runtime: node
+    plan: free
+    buildCommand: cd client && npm ci && npm run build && cd ../server && npm ci
+    startCommand: node server/server.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.22.2
+      - key: MONGODB_URI
+        sync: false          # set in the dashboard: the Atlas connection string
+      - key: JWT_SECRET
+        sync: false          # set in the dashboard: long random hex (rotating it logs everyone out)
+      - key: ADMIN_SECRET
+        sync: false          # set in the dashboard: gates POST /api/auth/make-admin
+      - key: LOG_LEVEL
+        value: http

@@ -6,8 +6,9 @@
  *   node seedTagDescriptions.js --apply    → write empty descriptions only
  *   node seedTagDescriptions.js --apply --force → overwrite non-empty ones too
  *
- * Source of truth: ../rulebook/gpt-system-v0.92.md, "Appendix C" entries of the
- * form "- **Name** — Description". Matches DB tags by name, case-insensitive.
+ * Source of truth: ../rulebook/gpt-system-v1.0.md, the "Tag Compendium" section
+ * (entries of the form "- **Name** — Description"). Matches DB tags by name,
+ * case-insensitive.
  */
 const fs = require('fs');
 const path = require('path');
@@ -16,12 +17,15 @@ const mongoose = require('mongoose');
 const Tag = require('./models/Tag');
 
 function parseCompendium() {
-  const book = fs.readFileSync(path.join(__dirname, '..', 'rulebook', 'gpt-system-v0.92.md'), 'utf8');
-  const idx = book.indexOf('## Appendix C');
-  if (idx === -1) throw new Error('Appendix C not found in the rulebook');
+  const book = fs.readFileSync(path.join(__dirname, '..', 'rulebook', 'gpt-system-v1.0.md'), 'utf8');
+  const idx = book.indexOf('The Tag Compendium');
+  if (idx === -1) throw new Error('Tag Compendium section not found in the rulebook');
+  // bound the scan to the compendium section (stop at the next chapter heading)
+  const end = book.indexOf('\n## ', idx);
+  const section = end === -1 ? book.slice(idx) : book.slice(idx, end);
   const entries = new Map();
   // split tolerates CRLF checkouts (Windows autocrlf) — a trailing \r broke the match
-  for (const line of book.slice(idx).split(/\r?\n/)) {
+  for (const line of section.split(/\r?\n/)) {
     const m = line.match(/^- \*\*(.+?)\*\* — (.+)$/);
     if (m) entries.set(m[1].trim().toLowerCase(), { name: m[1].trim(), description: m[2].trim() });
   }

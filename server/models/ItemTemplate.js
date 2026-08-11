@@ -20,6 +20,12 @@ const itemTemplateSchema = new mongoose.Schema({
     max:     { type: Number, default: null },
     current: { type: Number, default: null },
   },
+  // pool/authoring metadata (Item Drafting pass, 2026-08-04) — template-side
+  // bookkeeping only; instances snapshot `subtype` but not the pool fields
+  subtype:        { type: String, default: '' },
+  boxTiers:       [{ type: String }],
+  themes:         [{ type: String }],
+  source:         { type: String, default: '' },
   // legacy fields kept for compatibility
   type:           { type: String, default: '' },
   effect:         { type: String, default: '' },

@@ -23,10 +23,16 @@ export const RACES = ['Human', 'Animal', 'Robot / AI'];
 export const ATK_TYPES = ['Single Target', 'Line', 'Arc', 'Cone', 'Burst', 'Self', 'Thrown', 'All'];
 export const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
 export const CANON_CONDITIONS = ['Bleeding', 'Crushed', 'Burn', 'Chilled', 'Poison', 'Infected', 'Suffocation', 'Dissolution', 'Exhausted'];
-export const BOSS_TIERS   = ['bronze', 'silver', 'gold', 'legendary', 'mythic', 'godly'];
+// BOSS_TIERS retired 2026-07-25: Boss Tokens merged into Upgrade Tokens — bosses
+// drop UT scaled by rank (see rulebook §19.1). migrate-boss-tokens.js converts
+// legacy held tokens.
 export const ITEM_TIERS   = ['Crude', 'Basic', 'Quality', 'Superior', 'Exceptional'];
 export const AFFIX_TIERS  = ['Lesser', 'Normal', 'Higher', 'Legendary', 'Mythic', 'Godly'];
 export const ITEM_CATS    = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Misc', 'System Items', 'Key Items'];
+// Loot-box tiers (rulebook §17.6) + item subtypes (item-drafting-passover ID-1).
+// Box tiers ≠ item tiers: a Gold BOX holds Quality–Superior ITEMS.
+export const BOX_TIERS      = ['Bronze', 'Silver', 'Gold', 'Legendary', 'Mythic', 'Godly'];
+export const ITEM_SUBTYPES  = ['Bladed', 'Crush', 'Martial', 'Ranged', 'Thrown', 'Armor', 'Shield', 'Trinket', 'Tool', 'Consumable', 'Charged gear', 'Limited-magic', 'Kit', 'Growth', 'Tome', 'Material'];
 
 export const CAT_ICONS = {
   Weapons: '⚔️', Equipment: '🛡️', Tools: '🔧',
@@ -75,7 +81,7 @@ export const DEFAULT_STATE = {
     { rank: 2, name: '', amount: '', notes: '', avatar: '' },
     { rank: 3, name: '', amount: '', notes: '', avatar: '' },
   ],
-  tokens: { narrative: 0, upgrade: 0, patronTokens: 0, bossTokens: [] },
+  tokens: { narrative: 0, upgrade: 0, patronTokens: 0 },
   inventory: {
     categories: [
       { id: 1, name: 'Equipped', locked: true, items: [], order: 0 },
