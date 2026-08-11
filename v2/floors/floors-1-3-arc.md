@@ -570,36 +570,31 @@ century of a capital's devotion has been landing on seven dead queens who never 
 
 ---
 
-## 15. Open
+## 15. Status — everything raised against this set is ruled
 
-| # | Question | Rec |
-|---|---|---|
-| **Q-53** | Confirm the hunger = **unrouted reverence** (§11.1) | Yes — it explains both cures for free |
-| **Q-54** | Curing the hunger ends demons as **farmers**, not as demons — correct? | Yes |
-| **Q-55** | Does **Beelzebub actually bid on the party** during F1–F3? (§10, §13.4) | Yes — it is the arc's sharpest single scene, and §13.4 gives it a motive |
-| **Q-60** | Does the queen know she built over the **tongue** rather than the body? (§13.3) | Either works; (a) is more tragic, (b) is more dangerous |
-| **Q-61** | Adopt the **decoy-graves** explanation for the hundred-year search — Bifrons's *"seeming Candles"* and Bune's grave-moving, hired by Beelzebub? (§13.3) | Yes — free, and it gives F2 an author |
-| **Q-62** | Can Cinnabrus **hear** without speaking? | RULED — hear only |
-| **Q-63** | RULED — **yes.** Hunting Beelzebub's believers is the running floors-4–9 thread |
-| **Q-64** | RULED — **correct.** The city's reverence lands on seven queens who never existed; Vermilia gains nothing from ruling it |
-| **Q-65** | RULED — **Vermilia** |
-| **Q-66** | RULED — **yes.** Seven queens, mother to daughter, all her; the crypt above the tongue is full of her empty coffins |
+**No open questions remain for floors 1–3.** Every `Q-` item raised against this arc has an
+owner decision; the reasoning for each sits in the section that decided it, and the full
+deliberation is in [`../design/v2-decisions.md`](../design/v2-decisions.md).
 
-> **The F1–F3 set is now fully ruled.** Every question raised against it has an owner
-> decision. What remains is authoring — encounters, the F2 decoy-grave puzzle, the three
-> route walkthroughs, Vermilia's court, and stat blocks — not design.
-| **Q-56** | Does the queen have a **name**? | Draft on request |
-| **Q-57** | If the party gives her Beelzebub's name, can she **act** on it in-campaign, or is it a seed for a later floor-set? | Seed — a demon queen moving on a roster god is a floors-4–9 event |
-| **Q-58** | Is **Nullrot** loyal to Cinnabrus, or to the queen? | To Cinnabrus — which puts it at odds with her when their methods diverge |
+| Ruled | What it settled |
+|---|---|
+| Q-41 · Q-44 | The myth-source is the **tongue**; crystallization is a **mutation** of the original plague after 170 years underground, which is why Cinnabrus's dragon-blood cure is only *nearly* right |
+| Q-42 · Q-47 | The plague god is **Cinnabrus** — cinnabar, the ore that is both poison and medicine |
+| Q-43 · Q-48 | The opposition is **Beelzebub**, who killed him, cut out his tongue and buried it away |
+| Q-45 · Q-46 | The Medium route is **Vermilia's** story; only she and her followers know what lies under the palace |
+| Q-49 | She wants revenge and **has no target** — the hidden quest is the name |
+| Q-50 · Q-53 · Q-54 | The hunger is a curse from Cinnabrus's disease; stability flows down the vassalage **only if the god allows it**; curing ends demons as *farmers*, not as demons |
+| Q-51 | The full **Ars Goetia** is authored into the corpus — 72 demon gods |
+| Q-52 | The chain runs through **Cinnabrus, not the queen** — reviving him transfers both |
+| Q-55 | Beelzebub **bids both ways**, steering the party from the truth |
+| Q-56 · Q-66 | **Vermilia**; seven successive queens, all her, over a crypt of empty coffins |
+| Q-57 · Q-63 | The capital joins the Lounge; her war on Beelzebub's believers becomes the **floors 4–9 thread** |
+| Q-58 | **Nullrot** is loyal to Cinnabrus — an olden demon who owes him his life |
+| Q-59 | **Command is not reverence** — a legion bound by force is not a congregation |
+| Q-60 · Q-62 | She does **not** know she built over the tongue; he can **hear** but not speak |
+| Q-61 | The **decoy graves** are canon — Bifrons's *"seeming Candles"*, hired |
+| Q-64 | The city's reverence lands on queens who never existed, so **she gains nothing** from ruling it |
 
-### Settled
-
-**Q-41** the core is **the tongue** · **Q-44** crystallization is a **mutation** of the
-original plague after 170 years underground — which is why Cinnabrus's dragon-blood cure is
-only *nearly* right · **Q-45** the Medium route is the first follower's story · **Q-46**
-only the queen and her followers know · **Q-47** the name is **Cinnabrus** · **Q-48**
-**Beelzebub** is the opposition, who killed Cinnabrus, **cut out his tongue and buried it
-away separately** (§13) · **Q-49** she has no target yet · **Q-50** the hunger is a
-curse from Cinnabrus's disease and the capital is a farm · **Q-51** full goetic
-investigation commissioned — all 72 spirits of the Ars Goetia being authored into the
-corpus · **Q-52** the chain runs through Cinnabrus, not the queen.
+> **Design complete is not production complete.** What remains is authoring, not deciding:
+> encounters and stat blocks, the F2 decoy-grave puzzle, the three route walkthroughs,
+> Vermilia's court, floor pacing, rewards and transition states.
