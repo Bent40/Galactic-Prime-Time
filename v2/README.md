@@ -59,6 +59,7 @@ a tabletop edition. So v2's tabletop material belongs beside the tabletop rulebo
 |---|---|
 | [`design/v1-v2-fork-spec.md`](design/v1-v2-fork-spec.md) | **Start here.** What v2 changes from v1, chapter by chapter — ~211 graded findings, 461 content records classified, every entry cited |
 | [`design/v2-decisions.md`](design/v2-decisions.md) | The decision record — 10 rounds of owner rulings with the reasoning preserved |
+| [`design/divinity-accounting.md`](design/divinity-accounting.md) | **What you actually spend** — standing (the people) vs divinity (the prayer income they produce). Read after the fork spec; it is the economy's load-bearing detail |
 | [`design/three-way-consistency.md`](design/three-way-consistency.md) | The drift guard: book ↔ app ↔ digital addendum. *Any difference not listed there is a bug* |
 | [`floors/floors-1-3-arc.md`](floors/floors-1-3-arc.md) | **The Buried God** — floors 1–3, design complete |
 | [`floors/floors-4-6-proposal.md`](floors/floors-4-6-proposal.md) | **The Crowned** — floors 4–6. **Core ruled** (F-01…F-14); the kingdom tree and presiding god drafted |
@@ -95,6 +96,8 @@ remaining mythology entities**.
 ## 4. The spine of v2, in one page
 
 **The divinity economy is the whole design.** Almost everything else falls out of it.
+**Divinity is not a headcount** — followers are the principal, and the prayer they give each
+cycle is the yield you spend. See [`design/divinity-accounting.md`](design/divinity-accounting.md).
 
 ```
    SPECTACLE ──▶ Viewers          mass, anonymous, decays when boring
