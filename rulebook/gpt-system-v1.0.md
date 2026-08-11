@@ -49,11 +49,14 @@ slow-motion replay.
   - **Reflexes** — coordination, reaction speed, precision, spatial control.
   - **Mind** — mental resilience, magical affinity, processing speed, control
     under stress.
-  - **Charm** — **presentability**: how objectively camera-ready you are —
-    photogenics, striking looks, visual impressiveness. Charm 5 = "cinematic
-    gravity, the scene favors you." Charm is not warmth or likability — those
-    live in the audience's reaction to you (Tags and crowd response), never in
-    the number.
+  - **Charm** — **presence**: how compelling you are to look at and to listen
+    to — striking looks, bearing, voice, facial control, body language.
+    Presentation used as an instrument. Charm 5 = "cinematic gravity, the scene
+    favors you." Charm is **not** a cosmic pull, and it is not warmth or
+    likability — those live in the audience's reaction to you (Tags and crowd
+    response), never in the number. People *do* listen better to someone who
+    commands a room, which is why Command, Persuade and Intimidate key off it
+    (§2.3).
 
 ### 2.2 Creation
 
