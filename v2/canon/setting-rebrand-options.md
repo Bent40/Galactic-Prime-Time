@@ -1,6 +1,6 @@
 <!-- GENERATED SNAPSHOT — DO NOT EDIT HERE.
      Source of truth: Galactic-Prime-Time-Game/docs/setting-rebrand-options.md
-     Synced from commit c19c6b6 (2026-08-11T11:20:15+00:00)
+     Synced from commit 5d5099e (2026-08-11T11:32:59+00:00)
      Refresh: ./v2/sync-canon.sh -->
 
 # Setting Rebrand — Brainstorm & Options (status: DECIDED 2026-07-16 — Option A adopted **game-first**; residual decisions below)

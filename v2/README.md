@@ -13,6 +13,26 @@
 > **The v2 rulebook does not exist yet.** Nor does a v2 mode in the character-sheet app.
 > Judge this as a *design*, not a product. §5 below is the honest gap list.
 
+> ### Reviewing the idea? **This repository is enough.**
+> Everything needed to assess the design — the fork, the rulings, the story, the setting,
+> the cast, and the prior four-part review including the TTRPG defect catalogue — is here
+> or snapshotted into [`canon/`](canon/). The companion repo
+> (`Galactic-Prime-Time-Game`) holds the **Godot video game**: the simulation, its tests
+> and its seed data. **You do not need it to review the idea**, and nothing in it changes
+> the tabletop design.
+>
+> **Suggested reading order for an idea review:**
+> 1. this file · 2. [`design/v1-v2-fork-spec.md`](design/v1-v2-fork-spec.md) — what v2
+> changes and why · 3. [`floors/floors-1-3-arc.md`](floors/floors-1-3-arc.md) — the design
+> working at full depth on one arc · 4. [`design/v2-decisions.md`](design/v2-decisions.md)
+> — every ruling with its reasoning · 5. [`canon/cosmic-casino-canon.md`](canon/cosmic-casino-canon.md)
+> — the world · 6. [`canon/prior-review/review-1-ttrpg.md`](canon/prior-review/review-1-ttrpg.md)
+> — what a previous reviewer already found wrong with the **v1** system, so you don't
+> re-report it.
+>
+> The v1 rules master is [`../rulebook/gpt-system-v1.0.md`](../rulebook/gpt-system-v1.0.md) —
+> read it as the baseline the fork is measured against.
+
 ---
 
 ## 1. Why v2 lives here and not in the game repo

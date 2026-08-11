@@ -59,6 +59,31 @@ stamp docs/design/mythology-research-spec.md mythology-research-spec.md
 stamp docs/rules-addendum.md               rules-addendum.md
 stamp docs/rules-questionnaire.md          rules-questionnaire.md
 
+# --- Design record + story cast: needed to review the IDEA, not just the rules ---
+stamp docs/GPT_Master_Compendium.md        GPT_Master_Compendium.md
+stamp docs/ISSUES.md                       ISSUES.md
+stamp docs/design/skills-r19-ladders-FINAL.md skills-r19-ladders.md
+for f in "$GAME"/docs/characters/*.md; do
+  [ -f "$f" ] || continue
+  stamp "docs/characters/$(basename "$f")" "character-$(basename "$f")"
+done
+
+# --- The prior four-part review, including the TTRPG defect catalog A1–F10 ---
+mkdir -p "$OUT/prior-review"
+for f in "$GAME"/docs/review/*.md; do
+  [ -f "$f" ] || continue
+  b="$(basename "$f")"
+  {
+    echo "<!-- GENERATED SNAPSHOT — DO NOT EDIT HERE."
+    echo "     Source of truth: Galactic-Prime-Time-Game/docs/review/$b"
+    echo "     Synced from commit $SHA ($WHEN)$DIRTY"
+    echo "     Refresh: ./v2/sync-canon.sh -->"
+    echo
+    cat "$f"
+  } > "$OUT/prior-review/$b"
+done
+echo "  ✓ prior-review/ ($(ls -1 "$OUT/prior-review" | wc -l | tr -d ' ') files)"
+
 # --- Readable cast references, generated from the machine data ---
 python3 - "$GAME" "$OUT" "$SHA" "$WHEN" <<'PY'
 import json, sys, pathlib
