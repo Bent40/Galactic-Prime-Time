@@ -1,10 +1,11 @@
 # Item Drafting — the HIGHER affix tier (PROPOSAL)
 
-**Date:** 2026-08-10 · **Status:** 🟡 PROPOSED — the sitting Superior gear has
-been waiting for. ⚖ everywhere; trim/re-stat freely. Seed mirror:
-`server/seeds/affixes-higher.js`, applied with `node seed-affixes.js` (dry-run
-default; create-only unless `--force`). Catalog is truth (ID-0.14) — these are
-ADDITIONS.
+**Date:** 2026-08-10 · **Status:** 🟢 BLESSED (owner, 2026-08-10) — all 15 as
+authored, and **band scaling RULED**: affix damage numerics multiply by the
+item's material band, exactly like base damage; condition/utility affixes don't
+scale (band-proof by nature). Apply: `node backup-db.js` →
+`node seed-affixes.js` → `--apply` from `server/`. Catalog is truth (ID-0.14) —
+these are ADDITIONS.
 
 **Where Higher sits (§12.3, unchanged):** Superior = 2 prefix / 1 suffix, access
 up to Higher · Exceptional = 2/2, up to Legendary. Extraction of a Higher

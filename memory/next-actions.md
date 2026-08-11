@@ -4,36 +4,40 @@
 
 ## Next actions
 
-1. Owner: run the seed runbook on the campaign DB (backup-db.js ->
-   seed-items.js dry run -> --apply; watch the Bandage collision).
-2. ~~Box Namer~~ BUILT (admin/BoxNamer.jsx, top of Items section) —
-   wordlist tweaks on request.
-3. Batch B BLESSED (2026-08-04) — owner runs
-   `node seed-items.js --file ./seeds/items-batch-b.js` (backup first).
-4. Batch C BLESSED + MATERIALS catalog BLESSED, ladder APPROVED
-   (2026-08-04). Seed queue for the campaign DB (backup first):
-   batch-a, batch-b, batch-c, items-materials-f1 (F1 band + Incineradile
-   carve as grantable Material items).
-5. Mob doctrine RULED: mobs = hordes, one-shot by on-band hits (gates not
-   HP bars); elite ~x12 / boss ~x25 / super ~x60 of mob. Feeds section 21
-   at the book pass.
-6. Materials-on-items app design (parts model, material field shape) -
-   design before build; crafting UI later wave.
-7. Batch D BUILT (seeds/items-batch-d-repairs.js --force + server/
-   repair-affixes.js) - owner applies after A/B/C/materials.
-8. Book pass ID-6 EXECUTED - rulebook at v1.1 (filename unchanged).
-9. LOOTBOX SYSTEM BUILT + SHIPPED (2026-08-10): LootBox collection,
-   /api/boxes routes, reveal flow w/ item details, pick-one, permanent
-   Box Log (who/what/chosen/why), BoxBuilder absorbed BoxNamer.
-   Smoke-tested live by owner 2026-08-10.
-9b. HIGHER AFFIXES: proposal authored (rulebook/item-drafting-higher-
-   affixes.md + seeds/affixes-higher.js + seed-affixes.js runner, 15
-   affixes). Key question: affix numerics scale with material band
-   (recommended YES). Awaiting trim/bless; Legendary tier deliberately
-   deferred until the first polished Exceptional exists.
-10. Owner: run the deploy cookbook (docs/deploy-render-atlas.md) -
-   Atlas M0 + Render Blueprint; render.yaml is on main.
-11. PARKED (owner position): v2 relational migration (Postgres) for
-   schema enforcement - start with a schema design doc when picked up,
-   timed to a campaign break. Near-term Mongo mitigations available on
-   request: state version field (clobber race), integrity checks.
+1. **F1 ENEMY PASS — the next session's job (owner-chosen 2026-08-10).**
+   Everything needed to start:
+   - Goal: stat the Floor 1 (green forest) roster to the horde doctrine —
+     mobs ~5 HP one-shot hordes (survival only via GATE effects like the
+     Incineradile's surface immunity, never fat bars), elites ~60 HP with
+     one discoverable weak system each, route bosses ~125, supers ~300.
+     Canon: rulebook v1.1 section 21.2 + the materials catalog curve.
+   - Route beats to key encounters to: game repo (add_repo
+     bent40/galactic-prime-time-game, read) `docs/GPT_Master_Compendium.md`
+     section 4.2-4.4 — Easy (staircase dungeon, the mask, possession),
+     Medium (haunted house, NPC party, the demon girl), Hard (moving city,
+     the Loong, crystallized citizens). Incineradile (section 3.1) is the
+     boss-design pattern to follow.
+   - Vehicle: Enemy model exists (`server/models/Enemy.js`: name, tier
+     'mob'/elite/boss, color, description, notes, bodyParts[{name,maxHp}],
+     phases[{name,description,hpThreshold}]); admin 'enemies' section
+     renders it. Build `seed-enemies.js` + `seeds/enemies-f1.js` mirroring
+     the seed-items/seed-affixes pattern (dry-run default, name-matched,
+     --force). No UI work needed — proposal doc first (house style),
+     `rulebook/f1-enemy-pass.md` or similar.
+   - Carve hooks: each enemy should name its carve material (F1 band,
+     materials catalog M-1; boss carve precedent: Mycelium-Threaded Hide).
+2. Owner, campaign DB: `node seed-affixes.js` runbook (Higher tier, 15
+   affixes — blessed, not yet applied last we knew).
+3. Owner, game repo: update `story-canon.md` "paused at 6, maybe 20" to
+   the ruled 10-floor frame (3 sets of 3 + F10 FFA).
+4. Materials-on-items APP DESIGN (doc before build): how parts/materials
+   live on item instances, reforge data shape, crafting UI contract.
+   Forge L1 is 5 UT — players craft soon after Lounge unlock.
+5. Hygiene pair (quick): registration-code gate (open /register on a
+   public URL) + state version field (autosave-vs-admin clobber race).
+6. Later, in order of play: F2/F3 material band fills · "Fireball?" chain
+   SkillTemplates (before the first Mythic box) · Legendary affixes (after
+   the first polished Exceptional) · Batch E+ expansion pools · Set 2/3
+   floor design (game repo).
+7. PARKED (owner position, don't re-litigate): v2 relational migration —
+   schema design doc first, timed to a campaign break.

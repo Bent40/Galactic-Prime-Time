@@ -138,10 +138,24 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - The Item Drafting content pass (rules + pools + batches) is governed by
   `rulebook/item-drafting-passover.md` + `rulebook/item-drafting-batch-a.md`; the live
   **affix catalog is source of truth** over book §12.3's working list.
-- **Box Namer** (`admin/BoxNamer.jsx`, top of the Items section): GM picks dropped
-  loot + earned-by (Goals/enemies/custom), gets `<Tier> <Flavor> Box` name
-  suggestions; tier auto-inferred from picked items' tiers. Wordlists live in the
-  component.
+- **Affix catalog seeding:** `node seed-affixes.js` (dry run) → `--apply` from
+  `server/`; data in `server/seeds/affixes-higher.js` (15 Higher affixes, blessed
+  2026-08-10). Ruled: affix damage numerics multiply by the item's material band;
+  condition/utility affixes don't scale (book §12.7 "Modifiers ride the band").
+- **Materials system** (`rulebook/item-drafting-materials.md`, blessed): tier =
+  craftsmanship, material = power scale; one band per floor, ×2 each floor
+  (F1 ×2 → F9 ×512); parts = material capacity; striking part sets the band.
+  10-floor frame: 3 sets of 3 + F10 FFA. Mobs are one-shot hordes (§21.2).
+- **Lootbox system** (SHIPPED 2026-08-10): sealed contents live server-side in the
+  `LootBox` collection (`server/models/LootBox.js`, `server/routes/boxes.js`) because
+  the state blob is player-readable. Player side: `character/LootBoxes.jsx` in
+  InventoryTab — crack-the-seals reveal, per-item details, pick-one via `/claim`;
+  client merges items via `update()` (server never writes state). Opened boxes are
+  never deleted — they ARE the permanent Box Log (who/what/chosenIndex/source).
+- **Box Builder** (`admin/BoxBuilder.jsx`, top of the Items section — absorbed the
+  old BoxNamer): compose contents + recipients + mode + earned-by, tier
+  auto-inference, name suggestions, and the Box Log panel (chosen ✓ / unchosen
+  struck through).
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

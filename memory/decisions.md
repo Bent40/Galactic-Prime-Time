@@ -14,3 +14,43 @@
   1-2/3-6, Superior 1/2-5/6=double, capped at Exceptional); pools LARGE;
   Creation Kits introduced (base item + modifier(s) of choice by tier); app
   metadata fields approved; affix catalog is truth AND extendable.
+- 2026-08-04 naming economy (owner, multiple rounds): Basic = plain functional
+  names; Quality = solid-but-generic (`Quality <Base>` when a base spans
+  tiers — "Reinforced" rejected, collides with affix space); Superior+ =
+  flair/nonsense allowed; theme by FLOOR, not Show; tomes named
+  `Skill Tome: <book title>`, grounded titles; never reuse affix names in
+  item names. Full text: passover ID-2 naming notes.
+- 2026-08-04→06 (owner): item LEVELS rejected ("just add a bunch of
+  bookkeeping") — superseded by the MATERIALS system: tier = craftsmanship,
+  material = power scale. One band per floor, ×2 each floor (F1 ×2 … F9
+  ×512); parts = material capacity (no per-part effects; striking part sets
+  the band); guns/tech: the part that touches the target carries the band
+  (ammo sets it, barrel caps it); reforge allowed, consumables excluded.
+  Blessed catalog: `rulebook/item-drafting-materials.md`.
+- 2026-08-06 campaign frame (owner): 10 floors — 3 sets of 3 with stories +
+  F10 FFA (adds no band). Horde doctrine: mobs are hordes, one on-band hit
+  kills (~5 HP F1 → ~1.3k F9), survival only via GATE effects; elite ≈×12,
+  boss ≈×25, super ≈×60 of mob HP. Book §21.2.
+- 2026-08-06 (owner): batches A (41), B (57), C (21 incl. route arcs +
+  GM-only growth tracks) blessed; D = metadata-only repairs. Book pass →
+  **v1.1** (filename stays gpt-system-v1.0.md — Wiki imports by path).
+- 2026-08-08 deploy (owner): Render free tier + MongoDB Atlas M0 chosen over
+  Oracle Cloud (sysadmin/security burden) and free-Postgres offers. Cookbook:
+  `docs/deploy-render-atlas.md`. Client uses same-origin API base in prod.
+- 2026-08-08 data layer (owner, recorded in CLAUDE.md — don't re-litigate):
+  Atlas now; v2 relational migration PARKED not rejected; first step when
+  picked up = full schema design doc, timed to a campaign break.
+- 2026-08-10 lootbox system (owner-approved design, SHIPPED): sealed box
+  contents live SERVER-SIDE in the `LootBox` collection (the character
+  state blob is player-readable); open returns snapshots and the CLIENT
+  merges via update() (race-safe — server never writes state); opened boxes
+  are never deleted = the permanent Box Log (who/what/chosenIndex/source =
+  "why"); pick-one mode finalizes via /claim. BoxNamer absorbed into
+  `admin/BoxBuilder.jsx`.
+- 2026-08-10 (owner): Higher affix tier (15) blessed as authored; **band
+  scaling RULED**: affix damage numerics multiply by the item's material
+  band exactly like base damage; condition/utility affixes don't scale.
+  Book §12.7 "Modifiers ride the band". Legendary affixes deliberately wait
+  for the first polished Exceptional.
+- 2026-08-10 (owner): next up = the F1 ENEMY PASS, run in a fresh session
+  (briefing: next-actions.md #1).
