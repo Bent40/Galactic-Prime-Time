@@ -1,7 +1,7 @@
 # Divinity accounting — what you actually spend
 
-**Status:** RULED 2026-08-11 (the prayer cycle) · the two-quantity split below is my
-reading of it and needs one confirmation (**A-01**).
+**Status:** **FULLY RULED 2026-08-11** (A-01 … A-05). The prayer cycle, the two-quantity
+split and its names are canon.
 Answers the sharpest catch in the 2026-08-11 external review (its §26).
 
 ---
@@ -35,8 +35,8 @@ explaining the accounting.
 
 ## 3. The two quantities
 
-The confusion dissolves once the single word is split in two. ⟨**A-01** — confirm the split
-and the names⟩
+The confusion dissolves once the single word is split in two. **RULED (A-01): adopt the
+split, and these names.**
 
 | | **STANDING** | **DIVINITY** |
 |---|---|---|
@@ -117,12 +117,39 @@ out of the accounting rather than being written.
 
 ---
 
-## 7. Open
+## 7. RULED — A-01 … A-05
 
-| # | Question | Rec |
-|---|---|---|
-| **A-01** | Confirm the split, and the names **standing** / **divinity** | Yes — one word doing four jobs is what caused the problem |
-| **A-02** | Is a contract break paid by **spending** a balance equal to the patron's standing, or merely **holding** it? | Spending — a purchase, not a flex, and it leaves you poor and free |
-| **A-03** | Does a follower's **weight** (a village) multiply income, or is a village 1/cycle like a person? | Multiplies — otherwise a village is worth no more than a smith |
-| **A-04** | Can standing **decay** from neglect alone, or only from events? | Slow decay — it is what makes an unattended congregation a real loss |
-| **A-05** | Do the **Viewers → Followers** conversion rates get authored now, or with §17? | With §17 — this document supplies the base rate it needs |
+| # | Ruling |
+|---|---|
+| **A-01** | **Adopt the split.** *Standing* is the people; *divinity* is the prayer income |
+| **A-02** | Breaking a patron's contract is **SPENT**, not merely held — a purchase equal to their standing. **You walk away poor and free**, which is the right shape for buying your way out of a debt trap |
+| **A-03** | A follower's **weight multiplies income**. A village pays as a village, not as one person |
+| **A-04** | Standing **decays slowly from neglect alone** — an unattended congregation is a real loss, not a static asset |
+| **A-05** | Viewers → Followers conversion rates are authored **with §17**; this document supplies the base rate that chapter needs |
+
+### 7.1 What A-02 and A-04 do to the trap
+
+Together they make the Golden Cage bite from both ends.
+
+**A-02 — the buy-out is spent.** You do not merely need to *reach* your patron's standing;
+you must **hand it over**. So the moment you go free you are penniless, mid-campaign, with
+no patron and a congregation you must now defend alone. **Freedom is affordable and
+immediately dangerous** — which is a far better shape than a threshold you cross once and
+then keep your money.
+
+**A-04 — standing decays.** A congregation is not a trophy shelf. Neglect it while you
+chase a buy-out and the very base you are trying to leverage shrinks under you. The player
+who hoards single-mindedly to escape their patron will find the target moving *and* their
+income falling.
+
+> **The two together mean there is no passive path.** You cannot sit still and accumulate
+> your way out, because sitting still costs you standing; and you cannot spend your way to
+> power without staying in the contract that taxes you. **Every session you must choose
+> which pressure to take**, and that is the divinity economy working exactly as the spine
+> intends.
+
+### 7.2 Still open, deliberately
+
+Only the numbers: the weight scale for follower classes (A-03 gives the rule, not the
+figures), the decay rate (A-04 likewise), and the conversion rates that ship with §17.
+**No structural questions remain in the accounting.**
