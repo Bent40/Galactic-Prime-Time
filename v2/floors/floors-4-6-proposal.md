@@ -318,3 +318,83 @@ overarching management screen. **Neither is a tile map.**
 | **F-12** | Do the 5 kingdoms' gods get authored from the corpus, or invented? | From the corpus — it is 295 entities deep |
 | **F-13** | Can a player **decline to conquer** and reach 3 relics another way (trade, restoration, inheritance)? | Yes — otherwise §4's moral engine is a rail |
 | **F-14** | Does population dwindle on an **absolute** floor, or only relative to investment? (§9) | Absolute floor — a kingdom can die |
+
+---
+
+## 13. RULED — F-10 … F-14 (2026-08-11)
+
+| # | Ruling |
+|---|---|
+| **F-10** | **A combined table.** More than one ruin exists, and **the path you take leads you to the relic of the god you resemble more** |
+| **F-11** | The **Grail** is the relic that cannot be taken — see §14 |
+| **F-12** | The five kingdoms' gods come **from the corpus** |
+| **F-13** | **Yes** — a player can reach three relics without conquering |
+| **F-14** | **Absolute floor.** A kingdom can die, and losing every citizen is a loss condition |
+
+### 13.1 F-10 makes the verdict axes *route* content, not just score it
+
+Until now the question-axes have been an instrument that **measures** the player. F-10 turns
+them into a **switch**: which ruin you stumble into, and therefore which god's relic is
+within reach, depends on which of them you already resemble.
+
+- A player who has been extracting from their people finds **Gilgamesh's** ruin — the tyrant
+  who took from his city, failed to buy his own immortality, and left only walls.
+- A player who has been building for them finds **Arthur's** — the king who made a table
+  with no head seat, and watched it break from inside anyway.
+- Neither is the "good" ruin. Both men lost.
+
+**This is the cheapest possible way to make F4–6 replayable**, and it means two players who
+describe the same floor-set will not have seen the same content — which is exactly what
+path-dependent unlocks were supposed to buy and have not yet delivered anywhere else.
+
+---
+
+## 14. F-11 expanded — the Grail
+
+The corpus already writes it, and the wording does most of the work:
+
+> *"The untouchable pot at the centre of the room — feeds everyone, belongs to no one, and
+> burns the hand of anyone who reaches for it unclean."*
+> — `arthurian_medieval_holy_grail` · artifact · recognition 5 · healing, wisdom, protection
+
+**Four reasons it should be the one relic that cannot be taken.**
+
+### 1. It is the only relic with no god to silence
+Every other relic in the set is **a god's myth-source** (F-03) — take it and you foreclose
+that god exactly as Beelzebub foreclosed Cinnabrus. The Grail *"belongs to no one."*
+**There is nobody to silence.** It is not protected by being guarded; it is protected by
+being unowned, which is a much stranger and more interesting kind of immunity.
+
+### 2. It turns 3-of-5 from a sweep into a choice
+Five kingdoms, one untouchable relic, three needed. You take **two of four** — so which two
+gods you silence is a decision you make and the record keeps.
+
+### 3. It is the "power for many" path's payoff — and that fixes a real balance problem
+The kingdom tree has a known risk (§9.2, and the outside review named it): **Temples extract
+faster**, so the self-serving build may simply be stronger. The Grail is the counterweight.
+
+> *"Burns the hand of anyone who reaches for it unclean"* is not GM fiat — **it is a
+> requirement, checked against the verdict axes.** A player whose build order has been
+> extraction cannot hold it. A player who has spent six floors on fields, walls and
+> physicians can.
+
+So the two paths reach three relics by different routes:
+
+| Path | How you reach 3 |
+|---|---|
+| **Power for yourself** | Faster divinity, stronger army, **conquest** — you take two, and two gods go quiet |
+| **Power for many** | Slower growth, weaker army — but **the Grail admits you**, so you need only take one |
+
+Neither is punished. The extractive path really is faster and really does cost two gods; the
+welfare path really is slower and really does keep its hands clean. **The set's question
+gets answered by the route, and the route is chosen by the build order.**
+
+### 4. It is a worked example of what F-13 permits
+The Grail *"feeds everyone."* It is a relic that generates reverence **without being owned** —
+the set's whole thesis in one object. A player who understands why the Grail cannot be
+stolen has understood the alternative to stealing, which is the lesson F1–3 spent three
+floors teaching and F4–6 exists to test.
+
+**→ F-15: is holding the Grail permanent, or does it leave if your later choices turn?**
+Recommend it leaves. A relic that judges you once is a trophy; one that keeps judging you is
+a mechanic.
