@@ -4,6 +4,23 @@
 A full-stack TTRPG character sheet app for a tabletop game called **Galactic Prime Time** (GPT).
 Reality TV-themed dungeon crawler. Abducted humans compete in alien-broadcast dungeon runs.
 
+## Two editions — v1 (this rulebook) and v2 (`v2/`)
+
+- **v1 — the live campaign.** Abducted humans, the alien **Corporation™**. `rulebook/` and
+  the app are v1. **v1 is FROZEN**: where the editions conflict, v2 bends. The operative
+  test is *"any sentence that needs the word 'god' does not belong in the book."* Errata are
+  still allowed (e.g. the 2026-08-10 Charm clarification, §2.1).
+- **v2 — the mythology edition (`v2/`).** The show is a table in the **Cosmic Casino**: gods
+  wager on contestants, and the winner decides how the next 250 years are remembered.
+  **Fully designed, almost entirely unbuilt — the v2 rulebook does not exist yet.**
+  **Start at [`v2/README.md`](v2/README.md).**
+
+**Placement rule: content lives where it is consumed.** Tabletop material (rulebook, floor
+arcs, cast sheets) lives here. The Godot sim's data (mythology corpus, seed data,
+architecture) stays in `Galactic-Prime-Time-Game`. Shared setting canon is canonical in the
+game repo and snapshotted into `v2/canon/` by `v2/sync-canon.sh` — **if they disagree, the
+game repo is right.** Do not hand-edit `v2/canon/`.
+
 ## Stack
 - **Client:** React + Vite (`/client`)
 - **Server:** Express + MongoDB/Mongoose (`/server`)
