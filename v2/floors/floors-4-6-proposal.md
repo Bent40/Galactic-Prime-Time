@@ -1,6 +1,8 @@
 # Floors 4–6 — The Crowned (proposal)
 
-**Status:** ⟨PROPOSAL⟩ — owner's shape, my assessment and additions. Nothing here is ruled.
+**Status:** **CORE RULED 2026-08-11** (F-01…F-08). The spine, the question, the relic rule,
+the scale and the carry-overs are decided; the floor-set's god and the kingdom tree's
+contents are drafted below and await sign-off.
 **Owner's brief (2026-08-10):** *faction wars worldwide · control and large-scale fighting ·
 kingdom-based · champions build alliances and empires and conquer rival kingdoms · relic
 pieces gate the stairs · F4 establish your kingdom and make your relic part · F5 explore
@@ -152,15 +154,167 @@ choice, which is exactly what path-dependent unlocks were supposed to deliver.
 
 ---
 
-## 8. Open questions
+## 8. RULED — F-01 … F-08 (2026-08-11)
 
-| # | Question |
+| # | Ruling |
 |---|---|
-| **F-01** | Adopt "conquest = taking a congregation" as the set's spine? (§2) |
-| **F-02** | Confirm **power for yourself vs power for many** as the set's question, with Q-53's hoard-or-route as its mechanic? (§3) |
-| **F-03** | Adopt "each kingdom's relic is its god's myth-source", so taking it repeats Beelzebub's crime? (§4) |
-| **F-04** | Approve the **god of crowns** as the F4–6 bankrupt runner, and the crown as the missing relic? (§5) |
-| **F-05** | Are rival kingdom-builders **NPC champions with their own patrons**? (§7) |
-| **F-06** | How deep does kingdom management go — four numbers, or more? (§7) |
-| **F-07** | How many relics does the passage require, and out of how many kingdoms? |
-| **F-08** | Does the **Loong** survive into F4–6, and does Vermilia's war on Beelzebub start here or at F7? |
+| **F-01** | **Conquest is taking a congregation.** The divinity economy is the set's spine |
+| **F-02** | **Power for yourself vs power for many** is the question — and **divinity buys kingdom growth** (§9) |
+| **F-03** | **Each kingdom's relic is its god's myth-source.** Taking one repeats Beelzebub's crime |
+| **F-04** | The floor-runner comes from **Arthurian myth or Gilgamesh** — not the invented god of crowns (§10) |
+| **F-05** | Rival kingdom-builders are **NPC champions with their own patron gods** |
+| **F-06** | **More than four numbers**, but no tile placement and no build sim — an *overarching management* layer in the game; in the TTRPG, how the kingdom grows and what opportunities it gains |
+| **F-07** | **3 relics of 5 kingdoms**, your own included |
+| **F-08** | The **Loong survives** into F4–6, **and Vermilia's war on Beelzebub starts here** |
+
+---
+
+## 9. The kingdom tree — divinity as capital
+
+> **Owner's ruling:** *"Divinity is used to grow your kingdom stronger — you spend your own
+> earnings to grow your kingdom in every aspect. We need a tree much like the Lounge's, only
+> for your kingdom. Make it a good place to live and population will grow slowly. Choose not
+> to invest in growth, and your people will dwindle."*
+
+This closes the economy into a loop with a decay term, and it is the best structural
+addition the set has:
+
+```
+     INVEST divinity in the kingdom ──▶ a better place to live
+                                              │
+                                     population grows (slowly)
+                                              │
+                              more named beings who revere you
+                                              │
+                                     ═ MORE DIVINITY  ──┐
+                                                        │
+                    ◀───────────────────────────────────┘
+     WITHHOLD ──▶ conditions decay ──▶ people leave or die ──▶ less divinity
+```
+
+**Divinity now has three competing uses, and only one of them compounds:**
+
+| Use | Nature | Ruled at |
+|---|---|---|
+| **Personal advancement** (the divinity shop) | Consumption — you get stronger now | D-01 |
+| **Kingdom growth** (this tree) | **Investment** — it pays you back, and grows | F-02 |
+| **Held** | Leverage to break a patron's contract; and your standing in the pantheon you join or found at the end | Q-05, Q-12 |
+
+That is a genuinely hard allocation problem *in a single currency*, which is exactly what
+the F1–3 set lacked — there, divinity only ever went one way.
+
+### 9.1 Draft branch set
+
+Modelled on the Lounge's module levels (§20.2), with divinity as the sink instead of Upgrade
+Tokens. ⟨PROPOSAL — **F-09**⟩
+
+| Branch | Buys | Failure to invest |
+|---|---|---|
+| **Fields** | Population ceiling | The ceiling falls; growth stops before it starts |
+| **Walls & garrison** | Retention, and your F6 army | Raids cost you people permanently |
+| **Physicians** | Decay resistance; the crystallization plague bites less | The disease thread from F1–3 spreads into your own population |
+| **Temples** | **The share of your population that reveres *you* by name** | A large population that generates almost nothing (Q-64's trap) |
+| **Forge & market** | Items, trade, relic-working | No means to use a relic you take |
+| **Archive** | Reveals rival kingdoms' gods and where their relics sit | F5 becomes blind searching |
+| **Court** | Alliance capacity with rival NPC champions | You conquer alone, or not at all |
+
+### 9.2 The build order *is* the moral question
+
+**Temples buy your income. Fields, walls and physicians buy their lives.**
+
+- Pour into **Temples** and you extract faster from a population that is quietly getting
+  worse off — *power for yourself*, and it works, for a while.
+- Pour into **Fields, walls, physicians** and you grow slower — but people who live well
+  revere you anyway, and the base compounds — *power for many*.
+
+Neither is punished by fiat. The fast path really is faster, and the slow path really does
+overtake it if the campaign runs long enough. **The verdict axis scores the build order**,
+so the set's question is answered by a spreadsheet the player kept for six floors and never
+thought of as a moral document.
+
+---
+
+## 10. The floor-runner — Arthur or Gilgamesh (F-04)
+
+Both are already authored in the corpus, and both fit. They fit *differently*.
+
+### GILGAMESH — `mesopotamian_gilgamesh`
+`hero` · influence 1 · recognition 4 · role **contestant_legend** ·
+*"The house's most replayed contestant tape — the two-thirds-divine tyrant who beat every
+table except the one where the prize is not dying."*
+
+- **The Epic is the floor-set's question, verbatim.** He opens as a tyrant taking from his
+  own city and ends having failed to secure personal immortality — his only surviving legacy
+  being **the walls he built for other people**. That is *power for yourself vs power for
+  many*, resolved the hard way.
+- The corpus already frames him as **a former contestant who lost the final table**, with
+  Enkidu (*"chose friendship over his design spec — and got invoiced for it"*) and Humbaba
+  as a ready-made supporting cast.
+- **Weakness:** he is a *contestant legend*, not a presider. Making him run a floor means
+  re-casting him.
+
+### KING ARTHUR — `arthurian_medieval_arthur`
+`hero` · influence 1 · recognition 5 · roles **contestant_legend, table_boss** ·
+*"The house's retired champion brought back to preside — a table boss who'd rather judge
+your run than play it, crown catching the studio lights, always one dramatic sleep away
+from a comeback."*
+
+- **He is already cast as a presiding table boss.** No re-casting needed.
+- *"One dramatic sleep away from a comeback"* is the **once-and-future king** — which is the
+  **Phenex/Amy pattern** the Goetia attests twice: a demoted power serving out a term in
+  hope of restoration. His debt writes itself: **he needs a realm to return to, and has been
+  waiting fifteen centuries for one.** So he runs a floor where champions build realms.
+- **The whole Arthurian apparatus maps onto this set's mechanics** and is already in the
+  corpus: the **Round Table** (*"sit the oath and the whole party wins together; break it
+  and the felt goes cold"*) is F-05's alliance system; **Excalibur**, **the Grail** and the
+  **Siege Perilous** are the relic layer; **Mordred** (*"a boss you can't out-hit, only
+  out-heal-the-schism"*) is an empire collapsing from within.
+- **Weakness:** his fall is about betrayal, not about hoarding — a slightly looser fit to
+  *power for yourself vs many* than Gilgamesh.
+
+### Recommendation — use both, in different seats
+
+> **Arthur presides. Gilgamesh is the ruin you build on.**
+
+Arthur runs F4–6 as its bankrupt host, with the Round Table as the alliance mechanic and
+the Grail as the relic nobody may take. **Gilgamesh is the previous champion of this exact
+floor-set** — the one who built the largest kingdom anyone ever built and still lost the
+only table that mattered. **F4's "establish your kingdom" happens on his walls.**
+
+That gives the set a host with a debt *and* a cautionary predecessor, keeps the F1–3 pattern
+(the floor's author is an answer to the floor's question) without collapsing them into one
+figure, and spends two pieces of corpus that are already written. **→ F-10.**
+
+---
+
+## 11. Scale, relics and carry-over
+
+**F-07 — 3 relics of 5 kingdoms, yours included.** You must take **two**. Well judged: the
+act is forced twice, so it cannot be dodged, but **two kingdoms can be left standing** — the
+player chooses *which* gods to silence, and that choice is on the record.
+
+**F-06 — the depth.** A management layer, not a builder. At the table this is narrative: the
+kingdom is a short sheet of branch levels, and what it unlocks is *opportunities* — who will
+ally, what the Archive reveals, whether the garrison can hold. In the sim it is an
+overarching management screen. **Neither is a tile map.**
+
+**F-08 — both threads run here.**
+- **The Loong survives F1–3** into this set — still the only cure in the world, now moving
+  through kingdoms that have armies and reasons to want it.
+- **Vermilia's war on Beelzebub starts in F4–6, not F7.** Under Q-63 that is a campaign of
+  subtraction against a seated patron god's ledger — and it now runs *alongside* the player
+  building a ledger of their own. **The set therefore contains both directions of the
+  divinity economy at once**: you add congregations while she deletes them.
+
+---
+
+## 12. Open
+
+| # | Question | Rec |
+|---|---|---|
+| **F-09** | Approve the seven-branch kingdom tree? (§9.1) | Yes — Temples is the load-bearing one |
+| **F-10** | **Arthur presides, Gilgamesh is the ruin** — or pick one? (§10) | Both, in different seats |
+| **F-11** | Does the **Grail** sit in the set as the relic that *cannot* be taken? | Yes — it makes the two you do take a choice, not a sweep |
+| **F-12** | Do the 5 kingdoms' gods get authored from the corpus, or invented? | From the corpus — it is 295 entities deep |
+| **F-13** | Can a player **decline to conquer** and reach 3 relics another way (trade, restoration, inheritance)? | Yes — otherwise §4's moral engine is a rail |
+| **F-14** | Does population dwindle on an **absolute** floor, or only relative to investment? (§9) | Absolute floor — a kingdom can die |
