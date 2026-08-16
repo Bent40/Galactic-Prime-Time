@@ -70,7 +70,8 @@ A **finite** roster. Not donors; **wagerers**. A Patron holds a contract with yo
 negotiated **cut** of your income (§17.5), a stream of buffs, gifts with terms, and an
 interest in your survival that is entirely financial.
 
-**You may hold one Patron.** You may hold none — see §17.5.
+**You may hold one Patron.** You may hold none. You may, separately, hold any number of
+**markers** — short, scoped deals that are not patronage. See §17.5.
 
 ---
 
@@ -153,8 +154,10 @@ certainties, and a table that lets it will find the mechanic solved within a ses
 - **Success — you did what you declared:** all Follower and Viewer gains from that action
   are **doubled**, and the Viewer tier rises one step.
 - **Failure:** **you burn reverence.** Named Followers walk away — lose weight equal to the
-  weight you would have gained, taken from the Followers whose regard the failure most
-  embarrasses. The Viewer tier still rises one step. *Everyone saw.*
+  weight you would have gained. **The GM chooses which Followers leave**, and should pick the
+  ones whose regard the failure most embarrasses. Losing the *right* one is the sting; a
+  player choosing their own losses would simply shed their cheapest. The Viewer tier still
+  rises one step. *Everyone saw.*
 
 Losing standing costs you the annuity as well as the balance. **A failed call is the most
 expensive thing a contestant can do to themselves**, and it is entirely voluntary.
@@ -214,6 +217,40 @@ Performance · Pressure · Sacrifice.
   of a run.
 - **A Directive from a god who is not your Patron is a poaching attempt.** Accepting it is
   how a contract ends badly.
+
+### Markers — the deal that is not patronage
+
+**Patronage is exclusive. Markers are not.**
+
+A **marker** is a short, scoped contract: *this specific power, in return for these specific
+kinds of act.* It is the casino's own instrument — a credit note a god writes you against
+future behaviour, and it is how gods do business with contestants they have not signed.
+
+| | **Patronage** | **Marker** |
+|---|---|---|
+| Exclusive | **Yes — one only** | **No — hold as many as you can service** |
+| Duration | Ongoing, until bought out | Until the named condition is met, or failed |
+| Cost | A negotiated **cut of all income** | Named up front — a one-off price, an obligation, or a share of the income from *that act alone* |
+| Gives | The full buff profile: domain multipliers, tier odds, faction spill | **One named thing.** A power, a gift, an intervention |
+| Breaking it | Costs their entire standing | It simply lapses — and they remember |
+
+**How a marker is written.** The god names the *kind* of act, not the instance: *"strike
+first in three encounters"*, *"take no life on this floor"*, *"speak my name where the
+capital can hear it"*. The GM sets the terms; the player decides whether the power is worth
+the shape it forces on their play.
+
+> **Markers are how a Patron loses you.** A rival's marker is a poaching attempt with a
+> price tag — and most Patrons list *"take no marker from another god"* among their taboos.
+> Taking one anyway is not a technicality. It is a breach, and it is visible: the gallery
+> watches contracts more closely than it watches fights.
+
+**A patron-less contestant lives on markers.** With no cut taken and no exclusive contract,
+they can service several at once — which is the shape of the patron-less run: no protection,
+no steady buff stream, and a pocket full of other people's conditions.
+
+**What is left to the table.** How generous a marker is, how many a GM offers, and whether a
+given Patron tolerates them are deliberately GM-and-player calls. The rule fixes only the
+instrument: **scoped, non-exclusive, priced up front, and visible to everyone.**
 
 ### Breaking a contract
 
@@ -277,8 +314,13 @@ not tuned. **The structure is the contract; the numbers are the show's to tune.*
 
 | # | Question | Rec |
 |---|---|---|
-| **S-01** | Does a **failed Camera Call** let the player choose which Followers walk, or does the GM? | GM — losing the *right* one is the sting |
-| **S-02** | Can a contestant hold **more than one Patron** if the gods agree to split the cut? | No — the single patron is what makes the choice matter |
-| **S-03** | Do **Viewers** carry any mechanical effect besides the multiplier and Goal frequency? | No. Keep them an amplifier; a second currency would undo §17.2 |
-| **S-04** | Is standing **visible** to other contestants, and to the audience? | Visible to gods, hidden from contestants — it makes the F10 finale a guessing game |
-| **S-05** | What happens to a Follower who reveres **two** contestants? | Splits their weight, and both know |
+**RULED 2026-08-11:** **S-01** the GM chooses which Followers walk · **S-02** patronage is
+exclusive, **but markers are not** (§17.5) · **S-04** standing is **hidden** from other
+contestants and visible to gods — which is what makes the Floor-10 finale a guessing game ·
+**S-05** a Follower who reveres two contestants **splits their weight, and both know**.
+
+| # | Still open | Rec |
+|---|---|---|
+| **S-03** | Do **Viewers** carry any mechanical effect besides the weight multiplier and Goal frequency? | **No.** Keep them an amplifier — a second spendable currency would undo §17.2's whole asymmetry |
+| **S-06** | Does a **split Follower** pay each contestant full weight, or half each? | Half each, and the split is visible to both — it makes a contested village a live rivalry rather than a shared asset |
+| **S-07** | May a **marker** ever be written by the house itself rather than a god? | Yes — the house's markers are the floor's Directives, and it never offers a good rate |
