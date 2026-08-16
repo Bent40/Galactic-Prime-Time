@@ -164,22 +164,77 @@ expensive thing a contestant can do to themselves**, and it is entirely voluntar
 
 ---
 
-## 17.4 Goals — the crowd's challenges
+## 17.4 Goals and Markers — the two ladders of want
 
-Issued by the gallery. Optional, and the crowd does not care whether you survive them.
+Something always wants something from you. The difference is **who is asking**, and **how
+much they are prepared to pay**.
 
-Categories are unchanged from v1: **Spectacle** (Finish Fast, Overkill, Environmental Kill) ·
-**Performance** (Play into a Tag, Say the Line) · **Risk** (While Exposed, Without Healing,
-Solo) · **Subversion** (Spare the Enemy, Betray Expectations).
+### Goals — the crowd's challenges
 
-**What changed:** a completed Goal no longer converts a Patron. **A Goal that involves a
-named being converts that being into a Follower**, at its weight, with the viewer multiplier
-applied (§17.2). Goals that involve nobody pay in Viewers and Achievement rewards only.
+Issued by the gallery. Anonymous, optional, and the crowd does not care whether you survive
+them. Categories unchanged from v1: **Spectacle** (Finish Fast, Overkill, Environmental
+Kill) · **Performance** (Play into a Tag, Say the Line) · **Risk** (While Exposed, Without
+Healing, Solo) · **Subversion** (Spare the Enemy, Betray Expectations).
 
-> **Subversion Goals are now the most valuable category in the game.** *Spare the Enemy*
-> names a being and gives them a reason to revere you. The crowd asks for it because it is
-> good television; the economy pays for it because it is a Follower. **The one category that
-> looks like a joke is the one that compounds.**
+**What changed:** a completed Goal no longer converts a Patron. **A Goal involving a named
+being converts that being into a Follower**, at its weight, with the viewer multiplier
+applied (§17.2). Goals involving nobody pay in Viewers and Achievement rewards only.
+
+> **Subversion is now the most valuable category in the game.** *Spare the Enemy* names a
+> being and gives them a reason to revere you. The crowd asks because it is good television;
+> the economy pays because it is a Follower. **The category that looks like a joke is the one
+> that compounds.**
+
+### Markers — a god's challenge
+
+**A marker is the top of the same ladder.** Where a Goal is the crowd wanting a spectacle, a
+marker is **one named god wanting a thing done in the world**, and paying a boon to have you
+do it.
+
+> *"Kill this entity."* · *"Spare no traitors."* · *"Act with mercy in mind, this floor."*
+
+**Why gods use them.** A god can act directly — and it costs them, out of their own winnings
+(§17.5). **A contestant who already wants a boon is cheaper than an intervention.** A marker
+is a god's agenda executed by proxy at a discount, which is why they are offered constantly
+and why the offer is rarely as simple as it sounds.
+
+| | |
+|---|---|
+| **Issuer** | A specific, named god — **not necessarily your Patron**, and not necessarily one you have met |
+| **Asks for** | A deed (*kill X*), a restraint (*spare no traitors*), or a **disposition** (*act with Z in mind*) — a marker may demand a manner, not only an act |
+| **Pays** | A boon: a power, a gift, an intervention. Named up front |
+| **Exclusive** | **No.** Hold as many as you can service |
+| **Duration** | Until the condition is met, or failed. Then it lapses |
+| **Refusing** | Always legal. The god remembers, which is sometimes the entire point |
+
+### The three dispositions — and the player should not be able to tell
+
+Every marker is one of these, and **the GM should mix them so that no player ever learns to
+read the offer**:
+
+| | **Harmless** | **Trapped** | **A blessing in disguise** |
+|---|---|---|---|
+| What it is | The god genuinely wants the thing, and pays fairly | The deed serves an agenda that will cost you — a patron's taboo breached, a Follower alienated, a rival's hand strengthened | The deed looks ugly or thankless and turns out to have protected you, or someone |
+| How it reads at the table | A clean trade | A clean trade | A clean trade |
+
+**That is the whole point.** A marker is how a god makes you play to their wants, and the
+best ones are indistinguishable from generosity until afterwards. A player who starts
+refusing every marker has learned caution, and will watch the boons go to someone bolder.
+
+### Markers as interference
+
+**A marker is also how one god meddles with another god's candidate.** Offering your rival's
+contestant a boon for an act that breaches their Patron's taboo is cheap, deniable and
+entirely within the rules. Most Patrons list *"take no marker from another god"* among their
+taboos — which is precisely why rival gods keep offering.
+
+**A patron-less contestant lives on markers.** No cut, no exclusive contract, no protection —
+and a pocket full of other people's conditions. That is the shape of the patron-less run.
+
+**What is left to the table.** How generous a marker is, how often they come, and how many a
+GM lets a player juggle are deliberately GM-and-player calls. The rule fixes only the
+instrument: **named issuer, scoped ask, boon priced up front, non-exclusive, refusable, and
+visible to everyone** — the gallery watches paper more closely than it watches fights.
 
 ---
 
@@ -205,52 +260,17 @@ A god opens with a **deal sheet**:
 stream spread thinly across every god whose domain the act touched. **No safety, all the
 upside.**
 
-### Directives
+### Directives are your Patron's markers
 
-**A Directive is the condition attached to a gift.** The gift is the carrot; the Directive
-is what you agreed to in taking it. Types as authored: Direct Action · Manipulation ·
-Performance · Pressure · Sacrifice.
+A **Directive** is simply a marker (§17.4) issued by the god you are signed to — a standing
+instruction rather than a one-off commission. Types as authored: Direct Action ·
+Manipulation · Performance · Pressure · Sacrifice.
 
 - **Refusing is playable.** You keep nothing, and the god remembers.
-- **Directives conflict.** Two gods bidding on you will want incompatible things, and the
-  house issues its own on top. Choosing whose Directive to honour is the ordinary texture
-  of a run.
-- **A Directive from a god who is not your Patron is a poaching attempt.** Accepting it is
-  how a contract ends badly.
-
-### Markers — the deal that is not patronage
-
-**Patronage is exclusive. Markers are not.**
-
-A **marker** is a short, scoped contract: *this specific power, in return for these specific
-kinds of act.* It is the casino's own instrument — a credit note a god writes you against
-future behaviour, and it is how gods do business with contestants they have not signed.
-
-| | **Patronage** | **Marker** |
-|---|---|---|
-| Exclusive | **Yes — one only** | **No — hold as many as you can service** |
-| Duration | Ongoing, until bought out | Until the named condition is met, or failed |
-| Cost | A negotiated **cut of all income** | Named up front — a one-off price, an obligation, or a share of the income from *that act alone* |
-| Gives | The full buff profile: domain multipliers, tier odds, faction spill | **One named thing.** A power, a gift, an intervention |
-| Breaking it | Costs their entire standing | It simply lapses — and they remember |
-
-**How a marker is written.** The god names the *kind* of act, not the instance: *"strike
-first in three encounters"*, *"take no life on this floor"*, *"speak my name where the
-capital can hear it"*. The GM sets the terms; the player decides whether the power is worth
-the shape it forces on their play.
-
-> **Markers are how a Patron loses you.** A rival's marker is a poaching attempt with a
-> price tag — and most Patrons list *"take no marker from another god"* among their taboos.
-> Taking one anyway is not a technicality. It is a breach, and it is visible: the gallery
-> watches contracts more closely than it watches fights.
-
-**A patron-less contestant lives on markers.** With no cut taken and no exclusive contract,
-they can service several at once — which is the shape of the patron-less run: no protection,
-no steady buff stream, and a pocket full of other people's conditions.
-
-**What is left to the table.** How generous a marker is, how many a GM offers, and whether a
-given Patron tolerates them are deliberately GM-and-player calls. The rule fixes only the
-instrument: **scoped, non-exclusive, priced up front, and visible to everyone.**
+- **Directives conflict** with the markers other gods offer you, and with the house's own.
+  Choosing whose want to serve is the ordinary texture of a run.
+- Most Patrons list *"take no marker from another god"* among their taboos — which is
+  precisely why rival gods keep offering.
 
 ### Breaking a contract
 
@@ -300,7 +320,8 @@ behalf, because they liked what you did.
 
 ## Designer's notes — what is settled and what is a number
 
-**Settled:** the three tiers and their kinds; acts-not-attention as the conversion; the
+**Settled:** the three tiers and their kinds; acts-not-attention as the conversion; markers
+as a god's agenda executed by proxy, with three dispositions the player cannot read; the
 viewer multiplier's *shape*; Camera Call as a declared bet restricted to uncertain outcomes;
 Goals converting Followers; Directives as conditions on gifts; the patron market; the
 buy-out; Patron Tokens as favour milestones with a patron-less path.
@@ -314,13 +335,13 @@ not tuned. **The structure is the contract; the numbers are the show's to tune.*
 
 | # | Question | Rec |
 |---|---|---|
-**RULED 2026-08-11:** **S-01** the GM chooses which Followers walk · **S-02** patronage is
+**RULED 2026-08-11:** **S-03** Viewers do **nothing** beyond the weight multiplier and Goal
+frequency — they amplify, they are never spent · **S-01** the GM chooses which Followers walk · **S-02** patronage is
 exclusive, **but markers are not** (§17.5) · **S-04** standing is **hidden** from other
 contestants and visible to gods — which is what makes the Floor-10 finale a guessing game ·
 **S-05** a Follower who reveres two contestants **splits their weight, and both know**.
 
 | # | Still open | Rec |
 |---|---|---|
-| **S-03** | Do **Viewers** carry any mechanical effect besides the weight multiplier and Goal frequency? | **No.** Keep them an amplifier — a second spendable currency would undo §17.2's whole asymmetry |
 | **S-06** | Does a **split Follower** pay each contestant full weight, or half each? | Half each, and the split is visible to both — it makes a contested village a live rivalry rather than a shared asset |
 | **S-07** | May a **marker** ever be written by the house itself rather than a god? | Yes — the house's markers are the floor's Directives, and it never offers a good rate |
