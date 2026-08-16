@@ -231,6 +231,30 @@ taboos — which is precisely why rival gods keep offering.
 **A patron-less contestant lives on markers.** No cut, no exclusive contract, no protection —
 and a pocket full of other people's conditions. That is the shape of the patron-less run.
 
+### House markers — the dealer touching the bet
+
+**The house may write a marker. It is not supposed to.**
+
+The god running a floor is the *dealer*. Gods wagering at that table accept its outcomes
+because the dealer has no stake in them. **A marker from the house is the dealer paying a
+player to change the result** — dealing off the bottom, in front of everyone with money on
+it.
+
+So house markers exist, and they are **scandalous**:
+
+- **The gallery objects**, loudly, if it surfaces. The house-runner's debt (§17.5) is the
+  reason it happened and the thing that gets worse when it is caught.
+- **Accepting one makes you complicit.** You are not merely serving a god's agenda — you are
+  helping rig the table you are being bet on. The gods who lose money remember which
+  contestant took the paper.
+- **They are therefore rare, large, and a tell.** A floor-runner who offers you a marker has
+  just shown you how desperate it is. That is information about its debt, and a lever — you
+  now know something about your floor's author that the other contestants do not.
+
+> **A house marker is never a routine reward.** It is a bankrupt god breaking the one rule
+> that makes the table function, because it has run out of better ideas. Treat it as a
+> story event with a price, not an item on a menu.
+
 **What is left to the table.** How generous a marker is, how often they come, and how many a
 GM lets a player juggle are deliberately GM-and-player calls. The rule fixes only the
 instrument: **named issuer, scoped ask, boon priced up front, non-exclusive, refusable, and
@@ -321,7 +345,8 @@ behalf, because they liked what you did.
 ## Designer's notes — what is settled and what is a number
 
 **Settled:** the three tiers and their kinds; acts-not-attention as the conversion; markers
-as a god's agenda executed by proxy, with three dispositions the player cannot read; the
+as a god's agenda executed by proxy, with three dispositions the player cannot read; house
+markers as a scandal rather than a reward; the
 viewer multiplier's *shape*; Camera Call as a declared bet restricted to uncertain outcomes;
 Goals converting Followers; Directives as conditions on gifts; the patron market; the
 buy-out; Patron Tokens as favour milestones with a patron-less path.
@@ -335,7 +360,10 @@ not tuned. **The structure is the contract; the numbers are the show's to tune.*
 
 | # | Question | Rec |
 |---|---|---|
-**RULED 2026-08-11:** **S-03** Viewers do **nothing** beyond the weight multiplier and Goal
+**RULED 2026-08-11:** **S-06** a split Follower pays each contestant **half** weight, and
+the split is visible to both — a contested village is a live rivalry, not a shared asset ·
+**S-07** the house **may** write markers, but doing so is the dealer touching the bet (above)
+· **S-03** Viewers do **nothing** beyond the weight multiplier and Goal
 frequency — they amplify, they are never spent · **S-01** the GM chooses which Followers walk · **S-02** patronage is
 exclusive, **but markers are not** (§17.5) · **S-04** standing is **hidden** from other
 contestants and visible to gods — which is what makes the Floor-10 finale a guessing game ·
@@ -343,5 +371,4 @@ contestants and visible to gods — which is what makes the Floor-10 finale a gu
 
 | # | Still open | Rec |
 |---|---|---|
-| **S-06** | Does a **split Follower** pay each contestant full weight, or half each? | Half each, and the split is visible to both — it makes a contested village a live rivalry rather than a shared asset |
-| **S-07** | May a **marker** ever be written by the house itself rather than a god? | Yes — the house's markers are the floor's Directives, and it never offers a good rate |
+| **S-08** | Should a **caught** house marker have a stated mechanical consequence for the floor-runner, or stay GM fiction? | Stated — its debt grows by the boon's value, which makes the floor's ending harder and is felt |
