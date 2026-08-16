@@ -20,7 +20,7 @@ and an automated audit to nearly analyse them as live content.
 verified from this repository.** The live campaign database lives with a different
 checkout. Anything needing current content must come from Atlas or a fresh export.
 
-## `galactic-prime-time.users.json` — read before doing anything with it
+## `galactic-prime-time.users.json` — DELETED 2026-08-11
 
 Five accounts, each carrying a **bcrypt hash** (`$2a$`, 60 chars) alongside a username and
 an admin flag. Bcrypt is doing its job — these are not plaintext — but:
@@ -31,5 +31,10 @@ an admin flag. Bcrypt is doing its job — these are not plaintext — but:
 - If any of those five people reused that password elsewhere, an offline attack on the
   hash is the realistic risk.
 
-**Recommended:** delete the file outright — it costs nothing — and have those five accounts
-set new passwords. That closes the exposure regardless of what history retains.
+**Deleted on the owner's instruction.** It carried nothing of design or review value, so
+removing it cost nothing and closed the forward-facing exposure.
+
+**Git history still contains it.** Deletion removes the file from the working tree and from
+every future clone's checkout, but the blob remains reachable in the repository's history.
+The complete fix, whenever convenient, is for those five accounts to set new passwords —
+after which the retained hashes protect nothing worth having.
