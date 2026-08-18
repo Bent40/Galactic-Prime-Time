@@ -1,6 +1,7 @@
 # Floors 7–9 — The Hunt (proposal)
 
-**Status:** ⟨PROPOSAL⟩ — owner's shape from 2026-08-11, my assessment and the gaps.
+**Status:** ⟨PROPOSAL, partly ruled⟩ — the pilgrimage, the open stairs, the floor-runner, the
+parasite and the two Dissolutions are RULED (2026-08-11); the rest awaits H-01…H-12.
 Nothing here is ruled. Completes the campaign spine: Floor 0 → 1–3 → 4–6 → **7–9** → 10.
 
 > **Owner's brief.** Scale up once more from countries. The players experience **the start of
@@ -77,22 +78,50 @@ creations are both coherent, and both are answers.
 
 ---
 
-## 3. Scale — and the one thing the brief does not yet solve
+## 3. The pilgrimage — corrected (RULED 2026-08-11)
 
-F1–3 was a capital. F4–6 was kingdoms and empires. **F7–9 must be the world**, and F10 is
-Earth's remains — so this set is the last time the world is intact enough to lose people in.
+I had read "pilgrimage" as the world's faithful gathering. **It is the opposite, and much
+better.**
 
-**The gap:** the brief says *"the followers of every other god converge on one area"* and
-calls it the most vulnerable stage, but not **why they are all there.** Two candidates:
+> **The pilgrimage is your champions' journey, and what they are doing is taking down the
+> beast's pillars of faith — while you fight the beast itself.**
 
-| | Reading | Consequence |
-|---|---|---|
-| **a** | **The beasts converge first.** Something draws them — the divine beast, a dying god's territory, the place the games began. The faithful follow because their gods sent them to compete for the kill | The area is a **crowded hunting ground**; every other god's champions are working the same quarry |
-| **b** | **It is a pilgrimage.** The site is holy, the hunt is the season, and the world's congregations arrive because this is where reverence is *made* this cycle | The area is a **holy city under siege by its own festival** — more vulnerable, more tragic, better television |
+**This is the divinity economy as a boss fight.** A divine beast cannot be killed while it
+still has standing; its followers hold it up. So F9 is two attacks on the same target:
 
-**Recommend (b)**, with (a)'s hunting pressure layered on top. A pilgrimage explains the
-density, makes the civilian casualties inevitable rather than contrived, and gives the
-"people lost with each action" theme a body count that is nobody's fault. ⟨**H-02**⟩
+```
+      YOU ────────▶ the beast's body
+                          ▲
+   divinity sent          │  it is held up by its standing
+      downward            │
+        │                 │
+   YOUR CHAMPIONS ────▶ its PILLARS OF FAITH
+```
+
+**Nothing about this is a new rule.** It is the same principle the whole edition runs on —
+a god's power *is* their named followers — pointed at a boss for the first time.
+
+**Degree of success, not pass/fail.** How far the pilgrimage gets is scaled by how well it
+was equipped: a champion who grows strong enough can take down an **offspring of the beast**
+or **one of its own champions**, not merely a pillar. The floor rewards preparation with
+reach.
+
+### The stairs are open from the start — and that is the set's real design
+
+> **Owner's ruling: the way down is given immediately. A party may skip F7 and F8 entirely
+> and walk straight to F9 — but then their people have nothing to defend themselves with.**
+
+**This is the strongest structural decision in the set, and possibly in the campaign.**
+
+- **F7 and F8 become pure investment**, declinable, with a visible price paid by somebody
+  else. No gate, no lock, no "you must gather 12 of these."
+- It is the **first time the campaign lets a player refuse content and feel it** — and what
+  they feel is not a weaker character. It is a weaker *congregation*.
+- **It asks the set's question by the shape of the floor, not by dialogue.** *Will you accept
+  what depends on you, or run ahead?* A party in a hurry can be at the boss in one session.
+  Their champion arrives carrying nothing, and the pillars stay standing.
+
+That is the campaign's thesis expressed as a corridor with an open door at the end of it.
 
 ---
 
@@ -157,24 +186,40 @@ floors. **Their death costs the floor and the standing.**
 
 ---
 
-## 5. The floor-runner (§11.2 requires one)
+## 5. The floor-runner — the god about to be released (RULED 2026-08-11)
 
-The brief does not name one. The F1–3 pattern says the host is a cautionary answer to their
-own floor's question, and this set has an obvious candidate:
+> **A god who *did* make it. Hubris made it gamble hard. It is now on the verge of being
+> released — and release means the beast absorbs it immediately, making the F9 fight far
+> harder.**
 
-⟨PROPOSAL⟩ **A god who barely made it.** The first rung of the mortal→god pipeline — a
-contestant who accumulated *just* enough, by a margin they know was luck. Every beast on
-this floor is someone they beat by nothing. Their congregation is largely **the beasts'
-abandoned followers**, inherited by default rather than earned.
+This is better than what I proposed, because it puts the floor-runner **on a timer that the
+party can move in either direction.**
 
-- They profit from every beast the party kills, and are sickened by it.
-- They **accepted their place** — the "accept it" answer, lived out as a small, guilty,
-  comfortable godhood.
-- Their debt is the cheapest kind: they have never done anything worth being named for.
+| | |
+|---|---|
+| **What it is** | Not a failure like the beasts, and not a survivor like a roster god. **A success that gambled its winnings away.** It ascended, believed it was owed more, and bet accordingly |
+| **Its debt** | Enormous, and nearly called in |
+| **Release** | The house letting it go. Which sounds like mercy and is a disposal — **the beast is right there, and takes it** |
+| **The party's stake** | Every point of its debt is a point of F9's difficulty. **Keeping it solvent is keeping the boss beatable** |
 
-**Their myth-source (Q-33)** would be the thing they carried as a contestant and never
-earned — and its hiding place is *shallow*, because their debt is small. **The one floor-god
-the party could actually save easily, who may not want to be.** ⟨**H-06**⟩
+### This detonates the house-marker rule
+
+§17.4's house markers were written as *"a trap with a delay"* — the boon is real, but taking
+it grows the offering god's debt, and its temple sinks further out of reach.
+
+**On this floor that delay has a body.** Take the runner's marker on F7, and:
+
+1. Its debt grows.
+2. Release comes sooner.
+3. **The beast absorbs it.**
+4. **The boss you fight on F9 is the one you made.**
+
+A party that accepted every generous offer on the way in arrives to find the difficulty is
+their own signature. **Nothing announces it.** The GM simply describes a larger beast.
+
+**Its myth-source (Q-33)** sits at a depth matching that debt — so the more markers the party
+took, the harder its temple is to find, and the harder it becomes to save the thing whose
+survival is keeping their boss fight winnable. ⟨**H-06**⟩
 
 **The divine beast of F9**, by contrast, should be the opposite failure: ⟨PROPOSAL⟩ **a
 contestant who accumulated enormous divinity and became a beast anyway**, because appetite
@@ -186,43 +231,73 @@ the beast that is genuinely frightening to a party sitting on six floors of stan
 
 ## 6. Two side rulings from the same conversation
 
-### The Parasocial Parasite — an Incinedile reward
+### The Parasocial Parasite — an Incinedile reward (RULED 2026-08-11)
 
-An item granting a danger-sense, from the Floor-0 puppeteer boss. ⟨PROPOSAL for the details⟩
+> **It feeds on the strength and mind of its user.** It takes a portion of their **Mind** and
+> **Charm** — Mind being how well it can warn and detect, Charm being how well it blends with
+> its host. **The user closes their eyes and sees eyes staring back out of the darkness.** By
+> the **colour of the pupils** and their **movement**, they read how dangerous a thing is. At
+> high enough Mind, it may be able to **speak**.
 
-**It should feed on attention, because that is what makes it a parasite and not a trinket:**
+**It is a parasite because it is paid in stats, not in charges.** The tax is permanent while
+worn, and it is the whole design: you are weaker in two traits so that a thing living on you
+can see for you.
 
-- **It senses eyes.** Warns of being targeted, of Exposed status, of something intending you
-  harm — the "spidey sense" as *an organ for the audience*.
-- **It runs on Viewers.** At tier 0 (Ignored) it is inert. It sharpens as the Viewer tier
-  climbs, and is at its best when you are Headlining.
-- **So it rewards exactly the play the show wants** — safety that only works while you are
-  being watched. A parasite that keeps you alive on condition you stay interesting.
+| Fed with | Buys |
+|---|---|
+| **Mind** | Fidelity. How much the eyes tell you, how far, how early — and past a threshold, **it talks** |
+| **Charm** | Concealment. How well it passes as part of you, and whether anyone else can tell you are carrying it |
 
-That is a better item than a flat danger-sense, and it belongs to the boss it drops from:
-the Incinedile was a puppet, and **something was riding it too.** ⟨**H-08**⟩
+**Reading the dark** ⟨proposal for the legend — **H-08**⟩:
 
-### Lovecraftian entities own Dissolution
+| Signal | Tells you |
+|---|---|
+| **Pupil colour** | *What kind* of danger — a hunting thing, a waiting thing, a thing that has already decided |
+| **Movement** | *How close to acting* — drifting, tracking you, fixed |
+| **Number of eyes** | How many. Uncounted eyes are worse than many eyes |
 
-If Cthulhu-mythos material is added, its powers should be **Dissolution specialists, beyond
-what demons do** — the owner's phrase: *dissolution that pumps your brain out your ears like
-a meat grinder.*
+**Why it belongs to the Incinedile.** That boss is a puppet with strings in it, and the
+tutorial's lesson is *there are strings on things.* The parasite is **the second half of that
+lesson**: something was riding the puppet too, and now it is riding you. **It is the only
+item in the game that is also a passenger.**
 
-**The distinction worth keeping:** demons cause Dissolution as **erosion** — corruption,
-wearing away, a soul degraded over time. Lovecraftian entities cause it as **structural
-incompatibility**: nothing is attacking you, your mind simply is not built to hold what it
-just perceived, and it fails all at once. Same damage type, opposite mechanism, and the
-second is far more frightening because there is nothing to resist.
+**Deliberately not tied to Viewers.** The owner was unsure about coupling it to the audience,
+and the stat-fed version is stronger without it — a private organ rather than a public one.
+*(Available if wanted later: eyes get harder to read at low Viewer tiers, on the reasoning
+that a thing feeding on attention sees less when nobody is watching. Not adopted.)*
 
-**Two flags before authoring** ⟨**H-09**⟩:
+### Demonic vs Lovecraftian Dissolution — corrected (RULED 2026-08-11)
 
-- **IP:** Lovecraft's own work is public domain and would be `ip_status: public_domain_literary`
-  in the corpus. Later Mythos additions by other authors are **not uniformly** so, and the
-  repo's risk notes already flag SCP and Slenderman as needing clearance. Stay on
-  Lovecraft-original entities and the corpus stays clean.
-- **Dissolution is currently tierless** (per the digital addendum). An entity class that
-  exceeds demons at it needs either a new expression or an explicit exception, not just a
-  bigger number.
+I framed these as *erosion vs structural failure*, implying a severity ladder. **The owner's
+framing is better and is not about strength at all:**
+
+> **Two kinds of poison. Both end with your demise as a being. The difference is what the
+> thing doing it needs from you.**
+
+| | **Demonic** | **Lovecraftian** |
+|---|---|---|
+| **What it needs** | To **puppeteer** you | To **disassemble** you, for its own purposes |
+| **So it does** | Hollows out the occupant and **preserves the shell** — the body must still work when it is done | Takes you apart for components. **Nothing is preserved**, because nothing needs to be |
+| **What it looks like** | You are still standing, still walking, still wearing your face | Brain out the ears. A meat grinder that wanted parts |
+| **The horror of it** | Something is wearing you and everyone can see you | Something needed a piece of you and did not consider the rest |
+
+**Same damage type. Opposite purpose.** Neither is a bigger number than the other, and the
+book should not present them as tiers.
+
+> **And it closes the campaign's oldest loop.** Floor 0 teaches *there are strings on things.*
+> **Demonic Dissolution is that lesson at soul depth** — the string tied directly to the
+> occupant. The puppeteering tutorial, the demon race, and the demonic damage type are all
+> the same idea at three scales.
+
+**Two flags before authoring Lovecraftian entities** ⟨**H-09**⟩:
+
+- **IP:** Lovecraft's own work is public domain (`ip_status: public_domain_literary`). Later
+  Mythos material by other authors is **not uniformly** so, and the repo's risk notes already
+  flag SCP and Slenderman as needing clearance. Staying on Lovecraft-original entities keeps
+  the corpus clean.
+- **Dissolution is currently tierless** in the digital addendum. Two purposes for one damage
+  type is a **rules distinction, not a numeric one** — so it likely wants a *rider* or a
+  *tag*, not a new tier.
 
 ---
 
@@ -242,10 +317,11 @@ second is far more frightening because there is nothing to resist.
 | # | Question | Rec |
 |---|---|---|
 | **H-01** | Adopt *"accept your place or fight it / will of nature vs will of its creations"* as the set's question? | Yes — it could not have been asked earlier |
-| **H-02** | Why do the world's faithful converge — hunting ground, or **pilgrimage**? | Pilgrimage, with hunting pressure layered on |
+| **H-11** | What is the **beast's own congregation** doing during F9 — defending the pillars, or fleeing? | Defending. It makes the pilgrimage a fight, not a chore |
+| **H-12** | If the party **skips F7–F8 entirely**, is there a floor beneath failure — a minimum the champion carries? | No. The point is that nothing is what nothing buys |
 | **H-03** | Adopt the four ingredient classes — matter, myth, name, relic? | Yes; "collecting myths" is the set's signature verb |
 | **H-04** | Does the F8 gift's quality depend on **how** F7 was played, not just what was gathered? | Yes — it is the set's cheapest moral consequence |
-| **H-05** | Adopt **divinity-spent remote intervention** during F9's parallel journey? | Yes — without it the journey is dead air, and with it the floor teaches godhood |
+| **H-05** | Confirm **divinity sent downward** during F9 — the player spends to strengthen the pilgrimage in real time? | Yes; the owner's brief already describes it |
 | **H-06** | Approve the floor-runner: **the god who barely made it**, with a shallow myth-source? | Yes |
 | **H-07** | Is the F9 divine beast **a contestant who had enough divinity and became a beast anyway**? | Yes — the only genuinely frightening version |
 | **H-08** | Approve the Parasocial Parasite running on Viewer tier? | Yes |
