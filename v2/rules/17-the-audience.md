@@ -255,6 +255,32 @@ So house markers exist, and they are **scandalous**:
 > that makes the table function, because it has run out of better ideas. Treat it as a
 > story event with a price, not an item on a menu.
 
+### What it costs, on each side
+
+**The god carries the real loss, and it is fiction rather than arithmetic.** Do not track a
+debt number. Track what the debt *does*:
+
+> **The deeper a floor-runner's debt, the more deeply hidden its temple, and the more
+> faintly it can be heard.**
+
+That is the same dial as **Q-33's myth-source**: a god's debt is *why* its temple is buried
+where it is. A lightly indebted god is findable and can murmur; a ruinously indebted one is
+under a hundred years of somebody else's city and cannot make a sound.
+
+**Which means a house marker is a trap with a delay.** The boon is real. But taking it
+grows the debt of the god who offered it — **so the temple sinks further and the voice gets
+quieter, and the floor's own rescue gets harder.** A party that accepts a floor-runner's
+marker on F1 may find on F3 that they can no longer hear the thing they were trying to save.
+Nothing announces this. It is simply true afterwards.
+
+**The players' cost is small, targeted, and social.** You do not take a general penalty.
+**You lose standing with the gods who bet against the table** — the counterparties whose
+money the rigging cost. The GM names one or two; they are now gods who will not bid on you,
+and who will remember when you need something.
+
+*This is the first time in the chapter that* **which** *gods dislike you matters more than*
+**how many** *do.*
+
 **What is left to the table.** How generous a marker is, how often they come, and how many a
 GM lets a player juggle are deliberately GM-and-player calls. The rule fixes only the
 instrument: **named issuer, scoped ask, boon priced up front, non-exclusive, refusable, and
