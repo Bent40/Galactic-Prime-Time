@@ -66,7 +66,13 @@ willing to let a trait *be* a number directly. That is the door.
 
 ---
 
-## L-9 — The fix, and why it also solves L-6
+> ⚠️ **L-9 and L-10 are SUPERSEDED by L-19** (owner, 2026-08-18): the ceiling is
+> ~level 150 with stats reaching 100+, kept deliberately *manageable*. The trait
+> curve is **linear**, not exponential. L-8's finding still stands — traits do not
+> multiply weapon damage — and L-11/L-14's answer to it stands too. Read L-9/L-10
+> only for the reasoning that led there.
+
+## L-9 — ⬇ SUPERSEDED — the fix, and why it also solves L-6
 
 **Make trait growth exponential, on the same doubling ladder as the materials.**
 
@@ -87,7 +93,7 @@ cosmetic one.
 
 ---
 
-## L-10 — The curve ⚖
+## L-10 — ⬇ SUPERSEDED — the exponential curve ⚖
 
 **Points per level start at 12 and double every floor**, tracking the band.
 Levels stay at **3 per floor**; the *grant* does the scaling, not the pacing.
@@ -222,13 +228,120 @@ quietly deletes the pure caster).
 
 ---
 
+## L-17 / L-18 ✅ **RULED 2026-08-18**
+
+- **L-17 — skills scale with their governing trait.** So Mind and Charm builds have
+  a real damage axis, and the trait band earns its keep on the skill side exactly as
+  Architecture A framed it.
+- **L-18 — part HP scales off TOTAL trait points**, not Physique alone. The caster
+  chasm is closed: everyone's body grows as they grow. Physique may still keep a
+  bonus on top (⚖ open detail), but it is no longer the only source.
+
+---
+
+## L-19 — The ceiling ⚖ — yes, ~150 works. Here is the shape
+
+Anchors: **Physique ~50 at level 5** ("pretty solid"), **level ~150 at F8/F9**,
+**stats reaching 100+**, **numbers stay manageable**.
+
+That means **the trait curve is LINEAR, not exponential** — the L-10 draft
+(36 800 at F9) is superseded. Levels stay **1 point each** per §3.1, and the
+tutorial front-loads:
+
+| | Tut | F1 | F3 | F5 | F7 | F9 |
+|---|---|---|---|---|---|---|
+| **Level** | 5 | 21 | 53 | 85 | 117 | **149** |
+| **Total points** | 54 | 70 | 102 | 134 | 166 | **198** |
+| **Focused main stat** | 50 | 61 | 83 | 105 | 127 | **149** |
+| **+HP per part** | +8 | +11 | +17 | +24 | +30 | **+36** |
+| **Torso** | 13 | 16 | 22 | 29 | 35 | **41** |
+
+- **Creation 14** (unchanged, §2.2) · **tutorial L1→L5 grants 10/level** → 54 points
+  at level 5, so a full dump reads **Physique ~50**. ✔ your anchor
+- **F1–F9: ~16 levels per floor at 1 point each** → level **149** at the end of F9.
+  ✔ your anchor
+- A focused build finishes around **149 in its main stat**; a balanced build sits
+  near **50 in each**. ✔ "100+ potentially"
+- **Part HP = +1 per 5 total trait points past creation** ⚖ — which lands a
+  **13 HP torso entering F1**, exactly the number the ×5 damage re-base assumed.
+
+Everything stays two- and three-digit. The sheet stays readable for 150 levels.
+
+---
+
+## L-20 — 🔴 But this collides with the material band, and hard
+
+Linear stats mean **player HP grows ~3× across the campaign** (13 → 41) while the
+material band multiplies weapon damage by **256×** (F1 ×2 → F9 ×512).
+
+Hits to destroy a torso with a plain greatsword:
+
+| | F1 | F3 | F5 | F7 | F9 |
+|---|---|---|---|---|---|
+| **×512 per-floor band** | 2.7 | **0.9** | 0.3 | 0.09 | **0.03** |
+| **×2/×8/×32 set bands** | 2.7 | 3.7 | 1.2 | 0.36 | **0.43** |
+
+**With the per-floor band, a greatsword one-shots a torso from Floor 3 onward and
+by F9 does 37× overkill.** Set bands delay it to F4. Either way the game becomes
+rocket tag long before the finale, and no amount of level budget fixes it —
+because linear points can never chase an exponential band.
+
+**Something has to give, and it is not the level curve.** Three ways:
+
+### Option 1 — Gentle the band to one per SET ⚖
+`×2 / ×8 / ×32`. **The materials catalog already offers exactly this** — M-0:
+*"Gentler alternative if doubling-per-floor feels hot: one band per SET
+(×2/×8/×32) — say the word and the table reflows."* Buys three floors; not enough alone.
+
+### Option 2 — Armour carries HP on the band ⭐ recommended, alongside 1
+**"What a thing is made of IS the power" should apply to what you wear, not just
+what you swing.** Let armour parts contribute **HP × the material band**, so
+survivability at F9 comes from wearing F9-band plate rather than from your stats.
+
+An armour piece worth **8 HP** gives +16 at F1 and **+256 at F9**. Combined with
+set bands that holds **~3–5 hits per torso on every floor**, which is the stable
+ratio the whole campaign needs — and it makes the materials catalog the
+progression spine on the defensive side too, which it already is offensively.
+
+### Option 3 — accept rocket tag
+§7.3 does say *"parts fail fast; small pools are the design."* One could rule that
+late floors are genuinely one-hit-per-part and the game becomes about conditions,
+positioning and initiative. **Coherent, but it deletes the tank fantasy** and makes
+the Physique investment pointless at exactly the floors it was saved for.
+
+**Recommendation: 1 + 2 together.** Stats stay manageable (your ask), armour and
+materials carry the exponential, and the hit-count stays stable end to end.
+
+---
+
+## L-21 — What this does to the enemy ladder
+
+Under set bands the §21.2 numbers move for **Set 2 and 3 only**:
+
+| | F1 mob | F3 mob | F6 mob | F9 mob | F9 elite | F9 super |
+|---|---|---|---|---|---|---|
+| **Per-floor band (current)** | 5 | 20 | 160 | 1 280 | 15 360 | 76 800 |
+| **Set bands (proposed)** | 5 | 5 | 20 | **96** | **1 152** | **5 760** |
+
+**F1 is untouched either way** — Set 1 is ×2 in both schemes, so the entire
+`f1-enemy-pass.md` roster stands exactly as written, damage re-base included.
+Only F4+ would need re-basing, and none of it is authored yet.
+
+⚖ Note this also makes the **hordes ruling (L-15) cheaper**: with a flatter band,
+an F1 Bramblewretch stays relevant as horde fodder for longer before it becomes
+purely decorative.
+
+---
+
 ## L-13 — Open questions
 
 | # | Question | Why it matters |
 |---|---|---|
 | ~~L-g~~ | ~~Architecture A or B~~ | **RULED: A**, refined — stats gate, weapons carry (L-11, L-14) |
-| **L-17** 🔴 | **Do skills scale with the governing trait, or not at all?** | Decides whether a caster has any damage axis. If not, Mind/Charm buy only access and fiction |
-| **L-18** 🔴 | **Does part HP get a non-Physique source?** (L-16) | Decides whether non-Physique builds are playable past F2 |
+| ~~L-17~~ | ~~Do skills scale with the trait~~ | **RULED: yes** |
+| ~~L-18~~ | ~~Non-Physique HP source~~ | **RULED: HP scales off TOTAL trait points** |
+| **L-19** 🔴 | **Confirm the 150-level curve** — 10/level tutorial, then 16 levels/floor at 1 point | Sets every number downstream |
+| **L-20** 🔴 | **The band collision** — gentle to set bands, and/or armour carries HP on the band? | Without a fix the game is rocket tag from F3–F4 |
 | **L-h** | Is the trait band `÷5, doubling` the right curve, or gentler (÷5, doubling every ×4)? | Sets the whole ceiling |
 | **L-i** | 12 points per level at the tutorial, doubling per floor — right, or steeper? | The anchor fits; the tail is a choice |
 | **L-j** | Does the **creation** allocation rescale from 14, or stay? | 14 is now a rounding error by F1 |

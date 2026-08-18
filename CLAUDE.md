@@ -258,14 +258,23 @@ Skills are granted to players by templateId. The player sheet joins template dat
   greatsword for the same number. **No level budget can produce a nuclear punch — a
   rule has to change.** Precedent to build on: §12.1's stat-valued ranges
   ("Range: Reflexes") already let a trait BE a number.
-- **The fix (L-9/L-10): a TRAIT BAND parallel to the material band** —
-  `×2^floor(log2(trait/5))`. Level grants start at 12 and double per floor; levels
-  stay 3/floor. Focused build enters F1 at **Physique 53**, ends F9 at **~36,800**,
-  trait band **×4096**. The trait band gains exactly one doubling per floor, in
-  lockstep with the material band — they stay in step by construction.
-- **It also repairs the L-6 flaw**: linear HP under exponential damage made every F9
-  hit lethal regardless of build. Exponential traits inflate HP alongside damage, so
-  the sheet keeps playing the same — which is what the materials catalog promises.
+- ✅ **RULED: skills scale with their governing trait (L-17)** — so Mind/Charm builds
+  have a real damage axis. ✅ **RULED: part HP scales off TOTAL trait points (L-18)**,
+  not Physique alone — the caster chasm is closed.
+- ✅ **THE CURVE IS LINEAR, ~150 levels (L-19).** The exponential L-9/L-10 draft is
+  **superseded**. Creation 14 · tutorial L1–L5 grants 10/level (→ **Physique ~50 at
+  level 5**) · then **16 levels/floor at 1 point each** → **level ~149 at F9**, 198
+  total points, focused main stat **~149**, balanced ~50 each. Part HP = +1 per part
+  per 5 total points past creation → **13 HP torso entering F1**, which is exactly
+  what the ×5 damage re-base assumed. Everything stays 2–3 digits.
+- 🔴 **L-20 — THE COLLISION, unresolved and load-bearing.** Linear stats grow player
+  HP ~3× (13→41) while the material band multiplies damage **256×**. A plain
+  greatsword **one-shots a torso from F3** on the per-floor band, F4 on set bands;
+  by F9 it is 37× overkill. No level budget can fix this — linear points cannot chase
+  an exponential band. Recommended: **set bands (×2/×8/×32 — the catalog's own
+  gentler alternative, M-0) PLUS armour carrying HP × the band**, which holds ~3–5
+  hits per torso end to end. **F1 is untouched either way** (Set 1 is ×2 in both), so
+  the whole F1 roster stands.
 - ✅ **RULED: Architecture A, refined (L-11/L-14).** Weapons ride the **material
   band**; the §21.2 ladder and the whole F1 roster stand. **Stats are the KEY, not the
   gun** — trait growth buys the *right to hold* the weapon, part HP, skill points and
