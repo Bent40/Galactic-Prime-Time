@@ -16,7 +16,11 @@
       questions L-a..L-f. It is upstream of every statline: until the curve is
       ruled, no enemy number can be checked against anything real.
    c. Then run the E-5 runbook on the campaign DB: `node backup-db.js` →
-      `node seed-enemies.js` → `--apply`.
+      `node seed-enemies.js` → `--apply`, and again with
+      `--file ./seeds/enemies-f2.js` for Floor 2.
+   d. **F1 AND F2 ROSTERS BOTH EXIST** (19 + 16 entries) plus the cross-floor frame
+      (`enemy-scaling.md`: damage bands per floor, horde counts ~12×2^(N−S), and an
+      authoring checklist). F3 is now a filling-in job, not a design one.
    Then the follow-on content in E-4: encounter tables and room counts, §21.4
    terrain blocks for the four F1 environments, Exposure values and §19.1/§17.6
    payouts per rank.

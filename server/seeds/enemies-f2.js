@@ -1,0 +1,439 @@
+/**
+ * Floor 2 — the great desert, seventy years after Floor 1. PROPOSAL, per
+ * rulebook/f2-enemy-pass.md. Seed via: node seed-enemies.js --file ./seeds/enemies-f2.js
+ *
+ * ALL NUMBERS ARE BAND UNITS (§12.7 errata) — the F2 Desert band (×4) multiplies
+ * every native number equally and cancels, so HP budgets are IDENTICAL to F1:
+ * mob 5 exact · elite ~60 ±tol · boss ~125 ±tol · super ~300.
+ * Only DAMAGE moves, tracking the contestant's body (enemy-scaling S-1):
+ *   F2 torso 9 → mob 5 · elite 8 · boss 10 · super 15 (signature hits).
+ * Windups may exceed the band; per-Moment ticks sit below it.
+ *
+ * Carves are M-2 Desert: Sky-Iron · Flint · Sunglass · Scorpion Chitin · Turquoise⭐.
+ */
+
+const MOB = (name, { part = 'Body', ...o }) => ({
+  tier: 'mob', name, size: 'Medium', phases: [],
+  bodyParts: [{ name: part, maxHp: 5 }],
+  ...o,
+});
+const E = (tier) => (name, o) => ({ tier, name, size: 'Medium', phases: [], ...o });
+const ELITE = E('elite');
+const BOSS  = E('boss');
+
+module.exports = [
+
+  // ───────── Layer A — The Great Desert (shared, all routes) ─────────
+
+  MOB('Glass Wasp', {
+    part: 'Body', size: 'Small',
+    color: '#cfe0e8',
+    description: 'F2 SHARED. Wings of fused sand, thin enough to see the sun through. Appears 5-10.',
+    notes: [
+      'HORDE. 5 Bleed on contact. Flies, so cover and low walls do not stop it.',
+      'GATE: none — F2\'s plain horde, the Bramblewretch of the desert.',
+      'Carve: none individually (E-0.4); a cleared room is one F2 gather roll.',
+    ].join('\n'),
+  }),
+
+  MOB('Saltbound', {
+    part: 'Salt Crust',
+    color: '#e8e4d8',
+    description: 'F2 SHARED. Something died in the flats and the salt kept the shape.',
+    notes: [
+      '5 Crush, slow, relentless.',
+      'GATE: IMMUNE IN DIRECT SUNLIGHT. The crust hardens to stone under the sun and',
+      'damage is cosmetic. Break it with water, with a heavy Crush, or fight in shade —',
+      'or at night, when the whole floor changes character.',
+      'This is the terrain-coupled gate (§21.4): the answer is WHERE, not what.',
+    ].join('\n'),
+  }),
+
+  MOB('Sand-Scarab', {
+    part: 'Shell', size: 'Small',
+    color: '#b08442',
+    description: 'F2 SHARED. Finger-length, and it is not interested in fighting you.',
+    notes: [
+      'GATE: IT BURROWS INTO WORN GEAR. Once attached it cannot be targeted by an',
+      'ordinary attack — hitting it means hitting yourself. Removal costs 1 Moment and',
+      'deals its 5 Bleed to that part regardless.',
+      'Left alone it eats through an armour part in 1 Clock and the part is destroyed.',
+      'The teaching mob for "not every threat is fought".',
+      'Carve: room gather — Scorpion Chitin.',
+    ].join('\n'),
+  }),
+
+  MOB('Mirage-Walker', {
+    part: 'Body',
+    color: '#d9b382',
+    description: 'F2 SHARED. It walks toward you from three directions at once.',
+    notes: [
+      '5 Bleed when the real one reaches you.',
+      'GATE: IT PRESENTS AS THREE. Two are light. Attacks on a false image do nothing',
+      'and cost the Moment anyway. Detection is the answer (§15 — vision cones, sound,',
+      'the fact that only one casts a shadow), not damage.',
+      'A party that never works it out simply loses three times the ammunition.',
+    ].join('\n'),
+  }),
+
+  MOB('Ash-Lung Pilgrim', {
+    part: 'Body',
+    color: '#9aa8b0',
+    description: 'F2 SHARED. They walked out here to get away from it. It came with them.',
+    notes: [
+      '5 Crush, and they are still trying to speak.',
+      'GATE: ON DEATH IT PUFFS — 1-space cloud, Infected T1 (contact). The same crystal',
+      'as Floor 1\'s Hard route, seventy years on and now in the sand.',
+      '',
+      'THIS IS THE PLAGUE\'S SPREAD, VISIBLE, ON EVERY ROUTE. A party that never took the',
+      'Hard route meets the disease here for the first time and has no idea what it is.',
+      'A party that did will recognise it immediately, and that recognition is the point.',
+      'Counterplay is unchanged (E-6): Forest Resin, Antiseptic Wash, Burn T2.',
+    ].join('\n'),
+  }),
+
+  ELITE('Sky-Iron Revenant', {
+    size: 'Large',
+    color: '#6e7b8a',
+    description: 'F2 SHARED. Meteoric iron that fell a long time ago and has been standing up ever since.',
+    bodyParts: [
+      { name: 'Head-Mass',    maxHp: 12 },
+      { name: 'Core Lattice', maxHp: 26 },
+      { name: 'Arm L',        maxHp: 9 },
+      { name: 'Arm R',        maxHp: 9 },
+      { name: 'Leg L',        maxHp: 7 },
+      { name: 'Leg R',        maxHp: 7 },
+    ],
+    notes: [
+      'GATE — THE LATTICE CATCHES METAL. A metal weapon that strikes it is held: the',
+      'wielder is disarmed unless they spend 1 Moment wrenching it free, and the',
+      'Revenant may strike them while they do.',
+      '',
+      'WEAK SYSTEM — bring something that is not metal. Wood, bone, glass, claw and',
+      'unarmed all ignore the gate entirely. So does a heavy Crush, which shatters the',
+      'lattice rather than sticking to it. The party\'s F1 Beastbone and Oak Heartwood',
+      'gear is suddenly the right kit, which is the reward for having kept it.',
+      '',
+      'Attacks: a sweeping arm, 8 Crush. A magnetic haul (1-Clock windup) that drags',
+      'every metal-carrying contestant 2 spaces toward it — 12 Crush on arrival, above',
+      'the band because it is telegraphed (enemy-scaling S-1).',
+      '',
+      'CARVE: Sky-Iron — the good metal, and the F2 band\'s best base.',
+    ].join('\n'),
+  }),
+
+  ELITE('Glasswright', {
+    size: 'Large',
+    color: '#8fd0d8',
+    description: 'F2 SHARED. It does not kill you. It finishes you, and leaves you standing.',
+    bodyParts: [
+      { name: 'Head',        maxHp: 8 },
+      { name: 'Torso',       maxHp: 18 },
+      { name: 'Casting Arm', maxHp: 8 },
+      { name: 'Off Arm',     maxHp: 6 },
+      { name: 'Leg L',       maxHp: 4 },
+      { name: 'Leg R',       maxHp: 4 },
+    ],
+    notes: [
+      'GATE — THE GLASSING. A 2-Moment windup that fuses the sand around one target',
+      'into a shell. On completion that contestant is ENCASED: Helpless (§11), and the',
+      'shell has 20 HP that someone else must break. It deals no damage. It removes a',
+      'person from the fight, which at four contestants is worse.',
+      '',
+      'WEAK SYSTEM — it is a windup, so it can be beaten three ways: interrupt it',
+      '(the Casting Arm at 8 HP stops it outright when destroyed), leave its range',
+      'before resolution (§5.3), or LET IT FINISH ON SOMETHING ELSE — a shield planted',
+      'in the sand, a corpse, a decoy — and the shell it builds becomes hard cover the',
+      'party can fight from for the rest of the encounter.',
+      '',
+      'Attacks: a glass shard, 8 Bleed. Underfoot the ground it has already worked is',
+      'difficult terrain and cuts (§21.4).',
+      '',
+      'CARVE: Sunglass.',
+    ].join('\n'),
+  }),
+
+  // ───────── Layer B — Easy Route: the ruined stair ─────────
+
+  MOB('Rubble-Wight', {
+    part: 'Body',
+    color: '#6a6a72',
+    description: 'EASY ROUTE. The stairwell came down seventy years ago. They are still descending it.',
+    notes: [
+      '5 Bleed. Moves through rubble as though it were open floor.',
+      'GATE: IT REFORMS from the rubble at the next Clock reset unless Burned, dissolved,',
+      'or put down somewhere with nothing left to build from. F1\'s Stair-Wight rule, in a',
+      'room that is now made entirely of the thing it rebuilds from.',
+      '',
+      'ALSO: F1\'s STAIR-WIGHTS RETURN AS A TIDE (~25, enemy-scaling S-2). Same 5 HP, same',
+      'gate, and now they come down the whole stair at once.',
+    ].join('\n'),
+  }),
+
+  ELITE('Hollow Custodian', {
+    size: 'Large',
+    color: '#7d8f7a',
+    description: 'EASY ROUTE. Corporation maintenance kit, seventy years without a work order, still trying.',
+    bodyParts: [
+      { name: 'Optic',         maxHp: 8 },
+      { name: 'Chassis',       maxHp: 22 },
+      { name: 'Manipulator L', maxHp: 7 },
+      { name: 'Manipulator R', maxHp: 7 },
+      { name: 'Tread Unit',    maxHp: 11 },
+    ],
+    notes: [
+      'GATE — IT REPAIRS ITSELF. At every Clock reset it restores 6 HP to its most',
+      'damaged part, drawn from the rubble it is standing in.',
+      '',
+      'WEAK SYSTEM — deny it the rubble. Push, lure or wreck it onto bare stone and the',
+      'repair stops dead. Destroying the Tread Unit (11) pins it in place, which is the',
+      'same answer arrived at the other way round. The fight is about GROUND.',
+      '',
+      'Attacks: a two-handed press, 8 Crush. It will try to repair the STAIRCASE',
+      'mid-combat if the party damages it, which is both an opening and a warning about',
+      'what happens to the exit.',
+      '',
+      'CARVE: Sky-Iron (salvage) + Flint.',
+    ].join('\n'),
+  }),
+
+  BOSS('The Doorward', {
+    size: 'Large',
+    color: '#8a3f6d',
+    description: 'EASY ROUTE BOSS. A demon in the doorway. It has been there a very long time and it is not in a hurry. NAME IS A PROPOSAL.',
+    bodyParts: [
+      { name: 'Mouth', maxHp: 18 },
+      { name: 'Head',  maxHp: 14 },
+      { name: 'Torso', maxHp: 46 },
+      { name: 'Arm L', maxHp: 12 },
+      { name: 'Arm R', maxHp: 12 },
+      { name: 'Leg L', maxHp: 14 },
+      { name: 'Leg R', maxHp: 14 },
+    ],
+    notes: [
+      'THE CANON BEAT: a demon blocks the exit; defeat it; free the man (Compendium §4.2).',
+      '',
+      'GATE — IT HOLDS WHAT YOU GAVE IT. It does not attack first. It ASKS, and it takes',
+      'payment in things that are not objects: a name, a memory, a Tag, the use of a',
+      'skill. Anything it holds cannot be used for the rest of the floor. WHILE IT HOLDS',
+      'ANYTHING OF YOURS, damage to the Torso is cosmetic.',
+      '',
+      'WEAK SYSTEM — take it back. The Mouth (18) is where it keeps them. Destroy the',
+      'Mouth and everything it holds returns at once, to everyone, and the Torso opens.',
+      'A party that gave it nothing skips the gate entirely — and will almost certainly',
+      'have given it something, because the price it asks first is always cheap.',
+      '',
+      'Attacks: a reaching arm, 10 Crush. On any Clock where it holds something of yours,',
+      'it speaks with your voice and the crowd loves it (§17).',
+      '',
+      '=== THE THING THE PARTY MUST NOT BE TOLD ===',
+      'IT IS NOT GUARDING THE EXIT. IT IS GUARDING THE FLOOR ABOVE.',
+      'For seventy years it has been eating the plague out of the chained man — that is',
+      'what it feeds on, and why it never left. It blocks the door because letting anyone',
+      'out lets the crystal out.',
+      '',
+      'KILLING IT IS THE CORRECT MOVE AND THE WRONG ONE. It is how Nullrot reaches the',
+      'capital at F3 (§4.3), and it is why he arrives as BOTH the disease and its cure —',
+      'seventy years a sealed reservoir, opened by the people who came to free him.',
+      'Do not warn them. The Doorward will, in its way, and they will not believe it.',
+      '',
+      'CARVE: none — demons are not carved. The doorway yields Sunglass and Flint.',
+    ].join('\n'),
+    phases: [
+      { name: 'The Price', hpThreshold: 'the encounter opens here',
+        description: 'It does not fight. It offers passage and names a price — small, reasonable, and payable. It will haggle. Every contestant who pays hands it a hold. A party that simply attacks skips straight to phase 2 with its gate already down, which is a legitimate and much harder win.' },
+      { name: 'The Holding', hpThreshold: 'on the first attack, or when the last price is paid',
+        description: 'Torso damage is cosmetic while it holds anything. Reaching arm, 10 Crush. It uses the voices it took — a contestant hears their own skill named by something else and cannot use it.' },
+      { name: 'Open', hpThreshold: 'Mouth destroyed (18)',
+        description: 'Everything it held returns at once. The Torso is open, it stops bargaining, and it fights to keep the door shut with a desperation that reads, in hindsight, as something other than malice.' },
+    ],
+  }),
+
+  // ───────── Layer C — Medium Route: the queen's court ─────────
+
+  MOB('Court Servitor', {
+    part: 'Body',
+    color: '#7a4a8a',
+    description: 'MEDIUM ROUTE. Bound staff of a demonic court. Some are human. Nobody asks which.',
+    notes: [
+      '5 Bleed, and they fight badly and know it.',
+      'GATE: none mechanically — but they DO NOT FIGHT unless the court is threatened.',
+      'Killing them is not combat, it is a diplomatic act, and the room is full of',
+      'witnesses who outrank you.',
+    ].join('\n'),
+  }),
+
+  ELITE("The Queen's Blade", {
+    color: '#a03a7a',
+    description: 'MEDIUM ROUTE. Her enforcer. Immaculate, bored, and faster than anything the party has met.',
+    bodyParts: [
+      { name: 'Head',  maxHp: 10 },
+      { name: 'Torso', maxHp: 24 },
+      { name: 'Arm L', maxHp: 7 },
+      { name: 'Arm R', maxHp: 7 },
+      { name: 'Leg L', maxHp: 7 },
+      { name: 'Leg R', maxHp: 7 },
+    ],
+    notes: [
+      'GATE — DODGE THRESHOLD 8 (§14). Not immunity: a threshold. Reflexes 8 auto-dodges',
+      'it, Reflexes 10 auto-dodges and counters, below 8 is the 1d4 fallback. It is the',
+      'first enemy the party cannot simply hit.',
+      '',
+      'WEAK SYSTEM — it cannot dodge what it does not choose to. Area attacks, lines,',
+      'cones and collateral are never dodged (§14), and neither is condition damage.',
+      'The answer is the kit the desert mobs have been teaching them to use.',
+      '',
+      'Attacks: two strikes a Clock, 8 Bleed each. It targets whoever is speaking.',
+      '',
+      'CARVE: Flint (its blades) + Scorpion Chitin.',
+    ].join('\n'),
+  }),
+
+  BOSS('The Rival Noble', {
+    size: 'Large',
+    color: '#5a2a8a',
+    description: 'MEDIUM ROUTE BOSS. A demon who helped humans, and wants the throne for it. The Dissolution-songs encounter. NAME IS A PROPOSAL.',
+    bodyParts: [
+      { name: 'Head',  maxHp: 18 },
+      { name: 'Torso', maxHp: 52 },
+      { name: 'Arm L', maxHp: 14 },
+      { name: 'Arm R', maxHp: 14 },
+      { name: 'Leg L', maxHp: 15 },
+      { name: 'Leg R', maxHp: 15 },
+      { name: 'Choir', maxHp: 17 },
+    ],
+    notes: [
+      'THE CANON BEAT (Compendium §4.3 + §3.5): the party is sent to assassinate a rival',
+      'demon who helped humans and wants to overthrow the queen. This is the encounter',
+      'the Dissolution songs were written for.',
+      '',
+      '=== IT BRANCHES ON FLOOR 1 ===',
+      'IF THE GIRL WAS SPARED: she is the queen, the Rival is a genuine rebel, and the',
+      '  party is her assassin. The moral weight sits on killing someone who helped people.',
+      'IF THE GIRL WAS KILLED: the Rival is BEELZEBUB\'S VICEROY and does not know it.',
+      '  The party is either killing his man or being hired by him and not told by whom.',
+      '  Same statline. Completely different scene. (f1-enemy-pass C-4.)',
+      '',
+      'NOBLE-CLASS PRESENCE — DISSOLUTION, ESCALATION +2 PER MOMENT (§8.2 errata).',
+      'One Clock of grace, then a Hold Threshold climbing 2 per Moment against Mind.',
+      'THE F1 DEMONIC BRAND IS FULL IMMUNITY TO THIS. A branded party walks in and has a',
+      'fight. An unbranded party has a countdown, and the GM must say the remaining',
+      'Moments out loud (§14).',
+      '',
+      'THE CHOIR (17) IS THE SOURCE. It sings each contestant their own song — the one',
+      'thing that is true about them and that they have not said (Compendium §3.5:',
+      'Mario "Every Living Breathing Moment"; Sasha "Dark is the Night", and the fear is',
+      'NIKITA\'S, not hers; XQUEZ/T "Human"). Destroy the Choir and the Dissolution stops',
+      'and freezes where it stands — it never resets.',
+      '',
+      'WEAK SYSTEM — answer the song. A contestant who SPEAKS the true thing aloud, at',
+      'the table, in character, freezes their own threshold without touching the Choir.',
+      'That is the intended win, and it is worth more Exposure than the kill (§17).',
+      '',
+      'Attacks: 10 Bleed, contemptuous and unhurried. It would rather talk.',
+      '',
+      'CARVE: none. YIELDS: its claim to the throne, which is a story object and a',
+      'faction lever at F3.',
+    ].join('\n'),
+    phases: [
+      { name: 'Audience', hpThreshold: 'the encounter opens here',
+        description: 'It receives them. It knows why they came and says so. Presence is live from the first Moment: unbranded contestants are already on the clock while it is still being polite.' },
+      { name: 'The Choir', hpThreshold: '<=100 total, or the first attack',
+        description: 'The singing starts. Each contestant hears their own song. Escalation +2 per Moment; the GM announces remaining Moments as §14 requires.' },
+      { name: 'Unhurried', hpThreshold: '<=45 total',
+        description: 'It stops defending and starts explaining — what it did for the humans, and what it thinks the party is. It fights well and talks better. Killing it here is easy and the table will feel it.' },
+    ],
+  }),
+
+  // ───────── Layer D — Hard Route: the escort ─────────
+
+  MOB('Hunt-Hound', {
+    part: 'Body',
+    color: '#8a2f2f',
+    description: 'HARD ROUTE. Demon-bred, desert-run, and there are always more behind.',
+    notes: [
+      '5 Bleed. Runs down anything Slowed or Prone.',
+      'GATE: none — but they do not fight the party. THEY GO FOR THE LOONG, every time,',
+      'and a contestant who blocks that is choosing to be hit.',
+      'The teaching mob for escort geometry: you cannot kill your way out of a hunt.',
+    ].join('\n'),
+  }),
+
+  ELITE('Kennel-Warden', {
+    color: '#a8503a',
+    description: 'HARD ROUTE. It does not hunt. It points.',
+    bodyParts: [
+      { name: 'Head',  maxHp: 9 },
+      { name: 'Torso', maxHp: 22 },
+      { name: 'Arm L', maxHp: 7 },
+      { name: 'Arm R', maxHp: 7 },
+      { name: 'Leg L', maxHp: 7 },
+      { name: 'Leg R', maxHp: 6 },
+    ],
+    notes: [
+      'GATE — WHILE IT LIVES, THE HOUNDS DO NOT STOP. Hunt-Hounds arrive 3 per Clock,',
+      'indefinitely. Killing hounds is arithmetic the party cannot win.',
+      '',
+      'WEAK SYSTEM — it is the reason there are hounds. Kill it and the tide ends within',
+      'a Clock. It knows this, and it stays at the back, behind its own pack, which is',
+      'the actual problem: REACHING it is the encounter.',
+      '',
+      'Attacks: a lash that pulls a target 2 spaces, 8 Bleed. It aims at whoever is',
+      'closest to the Loong, not whoever is closest to it.',
+      '',
+      'CARVE: Scorpion Chitin + Flint.',
+    ].join('\n'),
+  }),
+
+  BOSS("The Hunt's Owner", {
+    size: 'Large',
+    color: '#c2452f',
+    description: 'HARD ROUTE BOSS. It bought the hunt. It has never run one. NAME IS A PROPOSAL.',
+    bodyParts: [
+      { name: 'Head',  maxHp: 14 },
+      { name: 'Torso', maxHp: 44 },
+      { name: 'Arm L', maxHp: 12 },
+      { name: 'Arm R', maxHp: 12 },
+      { name: 'Leg L', maxHp: 13 },
+      { name: 'Leg R', maxHp: 13 },
+      { name: 'Horn',  maxHp: 12 },
+    ],
+    notes: [
+      'THE CANON BEAT (Compendium §4.4): the Loong is hunted in the desert; escort it to',
+      'a village where it finds purpose.',
+      '',
+      'THE WIN CONDITION IS ARRIVAL, NOT A CORPSE (§21.3). The encounter ends the moment',
+      'the Loong reaches the village. The Owner can be outrun, and outrunning it is a',
+      'clean win that pays the same. It cannot be killed by a party that stops to fight —',
+      'the hounds are infinite until the Kennel-Warden falls, and the Owner will simply',
+      'buy more.',
+      '',
+      'THE HORN (12) IS THE WHOLE FIGHT. It calls: every Clock it sounds, a fresh pack',
+      'arrives wherever the Loong is, not wherever the party is. Destroy the Horn and the',
+      'hunt is over even if the Owner lives — which is the discoverable position §21.3',
+      'asks for, and it is reachable, unlike the Owner itself.',
+      '',
+      'Attacks: 10 Crush from a distance, on a mount it never dismounts. It does not',
+      'engage; it herds.',
+      '',
+      '=== THE LOONG FIGHTS BESIDE YOU ===',
+      'It is the same creature from Floor 1 and the same 300-point block — Warden Form',
+      'Large, Loong Form Huge, the truth-sense intact. AS AN ALLY. Last floor it was the',
+      'thing that could not be beaten; this floor it is on the party\'s side, and it is',
+      'terrified, because it is being hunted and it has never been prey.',
+      'It will not fight in Loong Form unless the party is about to die. If it Turns, the',
+      'hunt breaks immediately and the village sees what arrived.',
+      '',
+      'CARVE: none. If the Loong reaches the village, it sheds a scale (M-5 Loong-Scale —',
+      'shed, not taken; the only way that material enters the world).',
+    ].join('\n'),
+    phases: [
+      { name: 'The Herding', hpThreshold: 'the encounter opens here',
+        description: 'It does not approach. Hounds arrive on the Horn every Clock, aimed at the Loong. The party is being steered toward open ground, and the village is the wrong way.' },
+      { name: 'Closing', hpThreshold: 'Kennel-Warden dead, or <=70 total',
+        description: 'With the pack thinning it commits, and the Horn sounds twice a Clock. 10 Crush, mounted, still refusing to be reached.' },
+      { name: 'It Was Never Its Hunt', hpThreshold: 'Horn destroyed (12), or the Loong reaches the village',
+        description: 'The hounds scatter within a Clock. The Owner leaves without ceremony — it bought this, it did not believe in it, and there is nothing here it is willing to die for. Pursuing it is possible and pays nothing.' },
+    ],
+  }),
+];

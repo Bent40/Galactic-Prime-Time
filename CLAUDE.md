@@ -217,6 +217,28 @@ Skills are granted to players by templateId. The player sheet joins template dat
   `seeds/items-materials-f1.js`. Mobs don't carve individually (E-0.4) — a cleared
   room is one gather roll.
 
+## F2 Enemy Pass (PROPOSAL, added 2026-08-18)
+- **`rulebook/f2-enemy-pass.md`** + `server/seeds/enemies-f2.js` — 16 entries, the
+  great desert seventy years on. **HP budgets identical to F1** (band units are
+  floor-invariant); only damage moves — mob 5 · elite 8 · boss 10.
+- **F2 is the DEMON floor** — one blocks the Easy exit, the Medium route *is* demon
+  politics, the Hard route is a demon hunt. The shared desert layer is deliberately
+  thin so the routes carry the weight.
+- **The plague is loose on every route** via the Ash-Lung Pilgrim: a party that
+  skipped Hard at F1 meets the crystal here with no idea what it is. Seeds F3.
+- **The Doorward (Easy boss) is the F2 twist:** it is not guarding the exit, it is
+  guarding the floor above — seventy years eating the plague out of the chained man.
+  **Killing it is the correct move and the wrong one**; it is how Nullrot reaches the
+  capital, and why he arrives as both disease and cure. THE MASKED's shape, one floor on.
+- **The Rival Noble (Medium boss) branches on F1's Girl ruling** — genuine rebel if she
+  was spared, Beelzebub's unwitting viceroy if she was killed. Same statline, different
+  scene. Carries the Dissolution songs (Compendium §3.5) at **+2/Moment**; the F1 brand
+  is full immunity; **answering the song beats destroying the Choir** and pays more.
+- **The Hard route flips the Loong to an ALLY** with its same 300 block — the win is
+  the village, not a corpse, and the Horn (12) ends the hunt even if the Owner lives.
+- Carves are M-2 Desert (Sky-Iron · Flint · Sunglass · Scorpion Chitin). **Turquoise ⭐
+  has no source yet** — open item.
+
 ## Enemy scaling — F2+ damage and horde counts (PROPOSAL, added 2026-08-18)
 - **`rulebook/enemy-scaling.md`** + **`server/floor-bands.js`** — the cross-floor
   authoring frame. **The doc's tables are the script's output; regenerate with

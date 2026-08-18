@@ -27,8 +27,10 @@ const fileIdx   = process.argv.indexOf('--file');
 const seedFile  = fileIdx !== -1 ? process.argv[fileIdx + 1] : './seeds/enemies-f1.js';
 
 // §21.2 part budgets, in BAND UNITS (§12.7 errata 2026-08-18: the material band is
-// floor-relative and cancels inside a floor, so these numbers are the same on every
-// floor). --floor is kept only for reading a roster written in ABSOLUTE terms.
+// floor-relative and cancels inside a floor, so these numbers are the same on EVERY
+// floor — an F2 roster checks against the same 5/60/125/300 an F1 roster does).
+// --floor is only for reading a roster written in ABSOLUTE terms; leave it alone for
+// anything authored in band units, which is everything.
 const FLOOR_MOB_HP = { 1: 5, 2: 10, 3: 20, 4: 40, 5: 80, 6: 160, 7: 320, 8: 640, 9: 1280 };
 const RANK_RATIO   = { mob: 1, elite: 12, boss: 25, legendary: 60 };
 
@@ -111,8 +113,11 @@ async function run() {
     process.exit(1);
   }
   const m = FLOOR_MOB_HP[floor];
-  console.log(`§21.2 doctrine check PASSED — ${seeds.length} entries on the F${floor} ladder ` +
-              `(mob ${m} exact · elite ~${m * 12} · boss ~${m * 25} · super ~${m * 60}, ±tolerance).`);
+  const scale = floor === 1
+    ? 'BAND UNITS (floor-invariant — §12.7 errata)'
+    : `ABSOLUTE terms at floor ${floor}`;
+  console.log(`§21.2 doctrine check PASSED — ${seeds.length} entries, ${scale}: ` +
+              `mob ${m} exact · elite ~${m * 12} · boss ~${m * 25} · super ~${m * 60}, ±tolerance.`);
   const spread = seeds.filter(e => e.tier !== 'mob').map(e => `${e.name} ${partsSum(e)}`).join(' · ');
   if (spread) console.log(`Non-mob spread: ${spread}`);
   if (checkOnly) { console.log('--check: doctrine only, no DB touched.'); return; }

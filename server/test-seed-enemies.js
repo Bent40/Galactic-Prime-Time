@@ -6,6 +6,7 @@
  */
 const { doctrineCheck, diffFields, partsSum, SIZES } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
+const f2 = require('./seeds/enemies-f2.js');
 
 let pass = 0, fail = 0;
 const ok = (name, cond, extra = '') => {
@@ -96,6 +97,29 @@ for (const e of f1) {
   for (const n of nums) if (n > band * 2 || n < 1) outliers.push(`${e.name}:${n} (band ${band})`);
 }
 ok('no authored F1 damage is wildly outside its band', outliers.length === 0, outliers.join(' · '));
+
+console.log('F2 roster');
+ok('the F2 roster passes the doctrine gate', doctrineCheck(f2, 1).length === 0,
+   JSON.stringify(doctrineCheck(f2, 1)));
+ok('F2 HP budgets are identical to F1 — band units are floor-invariant',
+   f2.filter(e => e.tier === 'mob').every(e => partsSum(e) === 5));
+ok('F2 varies its elites and bosses',
+   new Set(f2.filter(e => e.tier === 'elite').map(partsSum)).size > 1 &&
+   new Set(f2.filter(e => e.tier === 'boss').map(partsSum)).size > 1);
+ok('every F2 entry carries a legal size', f2.every(e => SIZES.includes(e.size)));
+ok('every F2 non-mob names a weak system', f2.filter(e => e.tier !== 'mob').every(e => (e.notes || '').trim()));
+ok('no name collides between the F1 and F2 rosters',
+   f2.every(e => !f1.some(x => x.name.toLowerCase() === e.name.toLowerCase())));
+{
+  const b2 = floorState(2).dmg, bad = [];
+  for (const e of f2) {
+    const text = (e.notes || '') + ' ' + (e.phases || []).map(p => p.description).join(' ');
+    const nums = [...text.matchAll(/(\d+)\s+(Bleed|Crush|Burn|Chill)/g)].map(m => +m[1]);
+    const band = b2[e.tier === 'legendary' ? 'super' : e.tier];
+    for (const n of nums) if (n > band * 2 || n < 1) bad.push(`${e.name}:${n} (band ${band})`);
+  }
+  ok('F2 authored damage sits in the F2 band', bad.length === 0, bad.join(' · '));
+}
 
 console.log('diff (what --force would overwrite)');
 const seed = f1[0];
