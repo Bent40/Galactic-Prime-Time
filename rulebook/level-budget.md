@@ -274,7 +274,14 @@ at F1**, 35 at F9. Modest, readable, and it grows for every build (L-18).
 
 ---
 
-## L-20 — 🔴 But this collides with the material band, and hard
+## L-20 — ⬇ The collision as first diagnosed (**dissolved by L-22 — read that instead**)
+
+> **This section is kept for its arithmetic, but its conclusion was wrong.** The
+> mismatch below comes from comparing a band-multiplied weapon against an unbanded
+> body — a units error on my part, not a balance flaw in the game. **L-22 is the
+> resolution**, and it needs no change to the material band at all.
+
+### The collision as first diagnosed
 
 Linear stats mean **player HP grows ~5× across the campaign** (7 → 35) while the
 material band multiplies weapon damage by **256×** (F1 ×2 → F9 ×512).
@@ -299,6 +306,10 @@ because linear points can never chase an exponential band.
 
 **Something has to give, and it is not the level curve.** Three ways:
 
+> ⚠️ The three options below are **superseded by L-22**. Option 2
+> (armour-carries-HP) was rejected by the owner — the contestant's body should
+> matter — and L-22 makes the whole question moot.
+
 ### Option 1 — Gentle the band to one per SET ⚖
 `×2 / ×8 / ×32`. **The materials catalog already offers exactly this** — M-0:
 *"Gentler alternative if doubling-per-floor feels hot: one band per SET
@@ -322,6 +333,82 @@ the Physique investment pointless at exactly the floors it was saved for.
 
 **Recommendation: 1 + 2 together.** Stats stay manageable (your ask), armour and
 materials carry the exponential, and the hit-count stays stable end to end.
+
+---
+
+## L-22 — The fix: **the band is a RATIO, not a number on the sheet** ⭐
+
+**Owner ruled out armour-carrying-HP: the contestant's body should matter.** Good —
+because the real answer is smaller than either of my earlier proposals, and the
+materials catalog already states it:
+
+> *"The sheet plays identically on every floor; only the numbers inflate."*
+> *"An F9 MOB carries ~1.3k HP … and still dies in one on-band swing."* — M-0
+
+**The catalog is already describing a system where the band cancels inside a floor.**
+It is written in absolute numbers, which is what makes it *look* like an
+escalating gap, but its own stated behaviour is relative. L-20 is therefore not a
+balance flaw — it is a **units** error, mine, from comparing a band-multiplied
+weapon against an unbanded body.
+
+### The rule
+
+> **Everything native to a floor is written in BAND UNITS. The floor's material
+> band multiplies every native number equally, so it cancels — and never appears on
+> a character sheet at all.**
+>
+> The band's real job is **cross-floor**: it is what makes last floor's sword a
+> letter-opener and last floor's elite a mob.
+
+### What that looks like
+
+| Written on the sheet (band units) | Value | Changes with floor? |
+|---|---|---|
+| Weapon class damage (§12.1) | 2–4 | **No — forever** |
+| Enemy mob / elite / boss / super HP (§21.2) | 5 / 60 / 125 / 300 | **No — forever** |
+| **Part HP** = `5 + (total trait points − 14) ÷ 5` ⚖ | **7 → 35** | **Yes — the body is the only thing that moves** |
+
+**So the body is the only variable, which is exactly the ask.** Hits to destroy a
+torso with a plain on-band greatsword:
+
+| | F1 | F3 | F5 | F7 | F9 |
+|---|---|---|---|---|---|
+| **Torso (band units)** | 7 | 11 | 17 | 25 | **35** |
+| **Hits to destroy** | 2.3 | 3.7 | 5.7 | 8.3 | **11.7** |
+
+The curve now runs the *right* way: a contestant gets **steadily harder to kill as
+they grow**, from a bit over two hits to nearly twelve, and **every point of that
+comes from their own trait total** — not their armour, not the floor.
+
+### And the fiction survives intact
+
+In absolute terms an F9 contestant carries a **17 920 HP torso** and swings for
+**1 536**. Against a Floor 1 human — 7 HP, 6 damage — they are, arithmetically, a
+god. **Practical gods, with nobody doing six-digit arithmetic at the table.**
+
+### What it costs
+
+Almost nothing, and no blessed content is invalidated:
+
+- **§21.2's ladder is reinterpreted, not rewritten.** Mob 5 / elite 60 / boss 125 /
+  super 300 become **the numbers for every floor**, in band units. The
+  "doubling per floor" column in the catalog is the same ladder expressed
+  absolutely — both are true, and M-0 already says the mob dies in one on-band
+  swing on every floor.
+- **The F1 roster is untouched.** F1 *is* band units, so all 19 entries and the ×2
+  damage re-base stand exactly as written.
+- **The hordes ruling (L-15) becomes mechanical, not just flavour.** An F1
+  Bramblewretch met at F5 is 5 *F1-band* units — one sixteenth of an F5 unit — so
+  the party genuinely cuts through two hundred of them. That is the power fantasy
+  falling out of the arithmetic rather than being asserted.
+- **§12.7 needs a clarifying errata**, not a redesign: state that the band is a
+  floor-relative scalar and that sheets are written in band units. The catalog's own
+  sentence is already the rule; it just needs to be *stated as* the rule.
+
+⚖ **The one genuine open question:** whether an *item* can outpace its floor —
+an Exceptional or apex-material weapon reading 6 band units instead of 3. It should,
+or gear stops mattering within a floor. That is a normal item-design lever and needs
+no new machinery.
 
 ---
 
@@ -352,7 +439,8 @@ purely decorative.
 | ~~L-17~~ | ~~Do skills scale with the trait~~ | **RULED: yes** |
 | ~~L-18~~ | ~~Non-Physique HP source~~ | **RULED: HP scales off TOTAL trait points** |
 | **L-19** ⚖ | **Confirm the per-floor level grants** (10/10/10 · 16/16/16 · 24/24/24 = 150) | Sets every number downstream. All anchors land as drafted |
-| **L-20** 🔴 | **The band collision** — gentle to set bands, and/or armour carries HP on the band? | Without a fix the game is rocket tag from F3–F4 |
+| ~~L-20~~ | ~~The band collision~~ | **Dissolved by L-22** — it was a units error, not a balance flaw. No band change needed; the ×512 per-floor ladder can stay |
+| **L-22** ⚖ | **Confirm: sheets are written in band units; the band is floor-relative and cancels within a floor** | Keeps stats manageable AND makes the body the only variable |
 | **L-h** | Is the trait band `÷5, doubling` the right curve, or gentler (÷5, doubling every ×4)? | Sets the whole ceiling |
 | **L-i** | 12 points per level at the tutorial, doubling per floor — right, or steeper? | The anchor fits; the tail is a choice |
 | **L-j** | Does the **creation** allocation rescale from 14, or stay? | 14 is now a rounding error by F1 |

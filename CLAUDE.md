@@ -270,14 +270,25 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - ⚠️ **F1 enemy damage is ×2 of the book baseline**, not ×5. The first pass misread
   the anchor as *level* 5 and sized against a 13 HP torso; the real F1 torso is 7.
   Corrected same day.
-- 🔴 **L-20 — THE COLLISION, unresolved and load-bearing.** Linear stats grow player
-  HP ~3× (13→41) while the material band multiplies damage **256×**. A plain
-  greatsword **one-shots a torso from F3** on the per-floor band, F4 on set bands;
-  by F9 it is 37× overkill. No level budget can fix this — linear points cannot chase
-  an exponential band. Recommended: **set bands (×2/×8/×32 — the catalog's own
-  gentler alternative, M-0) PLUS armour carrying HP × the band**, which holds ~3–5
-  hits per torso end to end. **F1 is untouched either way** (Set 1 is ×2 in both), so
-  the whole F1 roster stands.
+- ✅ **L-20 DISSOLVED by L-22 — it was a UNITS error, not a balance flaw.** The
+  materials catalog already states the answer: *"the sheet plays identically on every
+  floor; only the numbers inflate,"* and an F9 mob at 1.3k *"still dies in one on-band
+  swing."* **Everything native to a floor is written in BAND UNITS**; the band
+  multiplies every native number equally, so it **cancels inside a floor and never
+  appears on a character sheet.** Its real job is cross-floor — it is what makes last
+  floor's sword a letter-opener and last floor's elite a mob.
+- **Consequence: the BODY is the only variable.** Weapon class stays 2–4 forever;
+  §21.2's mob 5 / elite 60 / boss 125 / super 300 become the numbers for **every**
+  floor in band units; part HP = `5 + (total points − 14)/5` runs **7 → 35**. Hits to
+  destroy a torso rise **2.3 → 11.7** across the campaign, and every point of that
+  comes from the contestant's own trait total. In absolute terms an F9 contestant has
+  a 17,920 HP torso and swings for 1,536 — practical gods, with no six-digit
+  arithmetic at the table.
+- **Nothing blessed is invalidated.** §21.2 is reinterpreted, not rewritten; the F1
+  roster is untouched (F1 *is* band units); the hordes ruling becomes mechanical
+  rather than flavour (an F1 mob met at F5 is 1/16th of an F5 unit). §12.7 needs a
+  clarifying errata stating the band is floor-relative — the catalog's own sentence
+  is already the rule.
 - ✅ **RULED: Architecture A, refined (L-11/L-14).** Weapons ride the **material
   band**; the §21.2 ladder and the whole F1 roster stand. **Stats are the KEY, not the
   gun** — trait growth buys the *right to hold* the weapon, part HP, skill points and
