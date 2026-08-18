@@ -1,8 +1,9 @@
 # Floors 7–9 — The Hunt (proposal)
 
-**Status:** ⟨PROPOSAL, partly ruled⟩ — the pilgrimage, the open stairs, the floor-runner, the
-parasite and the two Dissolutions are RULED (2026-08-11); the rest awaits H-01…H-12.
-Nothing here is ruled. Completes the campaign spine: Floor 0 → 1–3 → 4–6 → **7–9** → 10.
+**Status:** **CORE RULED 2026-08-11** — H-01 … H-15 all answered. The question, the
+pilgrimage, the open stairs, the floor-runner, the divine beast, the raid structure, the
+gift's inputs, the parasite and the two Dissolutions are settled. What remains is encounters,
+stat blocks and numbers. Completes the campaign spine: Floor 0 → 1–3 → 4–6 → **7–9** → 10.
 
 > **Owner's brief.** Scale up once more from countries. The players experience **the start of
 > being a deity** — *"when faced with your place in the universe, will you accept it, or
@@ -146,45 +147,74 @@ materials — feeds §12.7's bands) · **myth** (the story, taken by witnessing 
 
 **Create a gift for your people.** The deity act: you build something and give it away.
 
-- Spends **divinity** and the F7 ingredients — the first time the two economies meet.
-- Its properties come from what you gathered, so **F7's choices are the F8 crafting table.**
-- **You do not keep it.** That is the point of the floor, and the first time the game asks a
-  player to build something excellent and hand it over.
+**You do not keep it.** That is the point of the floor, and the first time the game asks a
+player to build something excellent and hand it over.
+
+**Five inputs decide what it becomes** (RULED — H-04):
+
+| Input | What it contributes |
+|---|---|
+| **The ingredients** | What F7 gathered — matter, myth, name, relic |
+| **The maker** | **You do not forge it yourself.** You commission a being to make it, and who they are is in the object. *(The bankrupt smith-god fronting F4–6's Advanced Fabricator is sitting right there.)* |
+| **The place** | Where you choose to have it made. A site with its own history puts that history into the work |
+| **Your congregation's prayers to it** | **Your people pray to the thing while it is being made.** Under the economy that is not flavour — the gift is partly *made of their faith*, so it arrives already carrying standing |
+| **The divinity invested** | The straightforward lever, and the only one that is just a number |
+
+> **The fourth input is the one that makes this a deity floor.** A god does not make a
+> tool — a god makes **a thing their people believe in**, and the believing is part of the
+> manufacture. A party with a thin, frightened congregation cannot buy their way past that
+> with materials, which is exactly the consequence H-04 was for.
 
 **A quiet, brutal beat available here:** the gift is only as good as what you were willing to
 do to get it. A party that slaughtered congregations on F7 arrives at F8 with superb
 materials and a thin, frightened people to give them to. ⟨**H-04**⟩
 
-### F9 — Two fights, one of them not yours
+### F9 — The raid, and the pillars
 
-The divine beast, and simultaneously **a champion of your choosing carries your gift on their
-own journey.** Both must succeed.
+**RULED (H-10): the divine beast is not your boss. It is *the* boss.**
 
-> **This is the deity lesson made mandatory, and it is the strongest single structure in the
-> campaign.** After nine floors of personal agency, the set's climax is **half out of your
-> hands, and the half you cannot touch is being carried by someone who reveres you.**
->
-> A god's power is exercised through others. The floor does not explain that. It makes you
-> live it, once, under a timer.
+> **Everyone left in the campaign engages it — players and otherwise.** You need to survive
+> until somebody kills it. It is a campaign-wide effort, fought while competing for the
+> achievement of being the **highest contributor**.
 
-**The gap the brief leaves:** a parallel journey the player cannot influence is dead air at
-the table. **The player must be able to affect it without controlling it** — and the way to
-do that is the thing the whole set is about:
+**This is the bridge from party game to free-for-all, and it is the right one.** F9 puts
+every surviving contestant in one fight, where:
 
-> **You may spend divinity to intervene at a distance.** A warning. A turned blade. A road
-> that stays passable. Each intervention costs, arrives imperfectly, and you learn how it
-> landed *later*.
+- **You need them.** Nobody kills this alone.
+- **You are being scored against them.** Contribution is ranked, publicly.
+- **Then F10 removes the shared enemy** and leaves the ranking.
 
-**That is F9's real teaching.** You act through a mortal, at a price, with bad information,
-and it is never quite enough. **It is also exactly how every god has treated the party for
-nine floors** — which is the moment the campaign's whole patron system lands as something
-felt rather than understood. ⟨**H-05**⟩
+A party arrives at the one-winner floor having already spent a session cooperating with the
+people they will have to outlive — **and knowing exactly where each of them placed.**
 
-**Choosing the champion is a real choice:** their weight is your loss if they die, their
-skills are what the journey can survive, and they are a named Follower you have known for
-floors. **Their death costs the floor and the standing.**
+### The pillars (RULED — H-11)
 
----
+Its congregation **defends its pillars, and swarms other congregations.** The reference model
+is a pillar whose shield only falls once enough of its guardians are down.
+
+```
+   THE BEAST ── unkillable while its pillars stand
+        │
+   ┌────┴────┬─────────┬─────────┐
+ PILLAR    PILLAR    PILLAR    PILLAR      each shielded by its own congregation
+   │         │         │         │
+ champions and congregations of every remaining contestant, fighting for them
+```
+
+**The shield is the reverence.** You cannot break a pillar until the believers holding it up
+are broken, converted or gone — which is the edition's rule, on a boss, at raid scale. And
+because the beast's followers **swarm other congregations**, the pilgrimage is not an errand:
+it is a war between congregations happening underneath the boss fight.
+
+**Failure states (H-10, H-12):**
+
+- **Champion dies:** your standing is hurt **because your investment is gone** — the gift,
+  the follower, the prayers that went into both. Not a separate penalty; simply the loss.
+- **Skipped F7–F8 entirely:** your champion carries nothing. **A strong follower can still
+  achieve something on their own merits**, but without help they will not get far — and the
+  pillars they cannot reach are pillars someone else gets credit for.
+- **The run does not end.** You arrive at F10 poor, ranked low, and publicly known to have
+  contributed least.
 
 ## 5. The floor-runner — the god about to be released (RULED 2026-08-11)
 
@@ -221,11 +251,25 @@ their own signature. **Nothing announces it.** The GM simply describes a larger 
 took, the harder its temple is to find, and the harder it becomes to save the thing whose
 survival is keeping their boss fight winnable. ⟨**H-06**⟩
 
-**The divine beast of F9**, by contrast, should be the opposite failure: ⟨PROPOSAL⟩ **a
-contestant who accumulated enormous divinity and became a beast anyway**, because appetite
-outran identity. The one who had *enough* and lost regardless — which is the only version of
-the beast that is genuinely frightening to a party sitting on six floors of standing.
-⟨**H-07**⟩
+### The divine beast (RULED — H-07, H-15)
+
+**A contestant who had enormous divinity and *chose* to become a beast.** Not a failure —
+a decision. And it **keeps its mind and its speech**:
+
+> **Like a dragon. Hoarding its treasure, greeding for more, with no remorse.**
+
+That framing settles what it hoards. **Under this economy, a dragon's gold is reverence** —
+so its pillars *are* the hoard, its congregation is the pile, and the swarming (H-11) is it
+**still collecting.** It is not defending a territory. It is defending a fortune, and adding
+to it while you fight.
+
+**Lucid is worse than feral.** It can explain itself, and its explanation is coherent: it
+looked at godhood — at being *owed* to a congregation, taxed by the house, obliged forever —
+and preferred to simply **own** them instead. A party six floors deep into accumulating
+standing is being offered, mid-fight, the argument for the other option.
+
+**That is the set's question with teeth in it.** *Are you the will of nature, or the will of
+its creations?* The beast answered, out loud, and is winning.
 
 ---
 
@@ -312,23 +356,69 @@ book should not present them as tiers.
 
 ---
 
-## 8. Open questions
+## 8. RULED — H-01 … H-15 (2026-08-11)
 
-**Closed by the owner's 2026-08-11 corrections:** **H-02** (the pilgrimage is the champions
-taking down the beast's pillars, §3) · **H-06** (the runner is the god near release, §5) ·
-**H-07** (the divine beast is a contestant who had enormous divinity and **chose** to become
-one) · **H-08** (the parasite is stat-fed, not Viewer-fed, §6).
+| # | Ruling |
+|---|---|
+| **H-01** | The set's question is **"when faced with your place in the universe, do you accept it or fight it — are you the will of nature, or the will of its creations?"** |
+| **H-02** | The pilgrimage is the **champions taking down the beast's pillars of faith** (§3) |
+| **H-03** | Four F7 ingredient classes: **matter · myth · name · relic** |
+| **H-04** | The F8 gift depends on **five** inputs — ingredients, **the maker**, **the place**, **the congregation's prayers to it**, and the divinity invested (§4) |
+| **H-05** | **Divinity is sent downward** during F9 to strengthen the pilgrimage |
+| **H-06** | The floor-runner is **the god near release**, whose absorption makes the beast worse (§5) |
+| **H-07 · H-15** | The divine beast **chose** this, having had enormous divinity — and **keeps its mind and speech**. *Like a dragon: hoarding, greeding for more, no remorse* |
+| **H-08** | The Parasocial Parasite is **stat-fed** (Mind and Charm), not Viewer-fed (§6) |
+| **H-09** | Lovecraftian entities are the **disassembly** purpose of Dissolution, against the demonic **puppeteering** purpose |
+| **H-10** | F9 is a **campaign-wide raid**. Survive until someone kills it; compete for **highest contributor**. Champion death hurts standing because the investment is gone. **The run does not end** |
+| **H-11** | The beast's congregation **defends its pillars and swarms other congregations** — shielded pillars, broken by breaking the believers |
+| **H-12** | A party that skips F7–F8 carries **nothing**. A strong follower may still achieve something alone; it will not get far |
+| **H-13** | The runner's release is delayed by **restoring its myth-source** — which ties the set's optional content directly to the boss's difficulty |
+| **H-14** | The parasite's reading legend is approved: **pupil colour** = kind of danger · **movement** = how close to acting · **number of eyes** = how many |
 
-| # | Question | Rec |
-|---|---|---|
-| **H-01** | Adopt *"when faced with your place in the universe, do you accept it or fight it — are you the will of nature, or the will of its creations?"* as the set's question, replacing the two unused canon shapes for this slot? | **Yes.** It is the only shape that could not have been asked earlier; it needs a character who has already *become* something |
-| **H-03** | Adopt four **ingredient classes** for F7 — **matter** (parts, materials), **myth** (the story, taken by witnessing its end), **name** (what its followers call it), **relic** (what it carried from its contestant life)? | **Yes.** "Collecting myths" is the set's signature verb, and a myth is the transmissible part of reverence |
-| **H-04** | Does the **F8 gift's quality depend on *how* F7 was played**, not only on what was gathered — so a party that slaughtered congregations arrives with superb materials and a thin, frightened people to give them to? | **Yes.** Cheapest moral consequence in the set |
-| **H-05** | Confirm the **divinity sent downward** during F9: the player spends in real time to strengthen the pilgrimage, imperfectly and with late information | **Yes** — your brief already describes it; confirming it as a rule |
-| **H-09** | Add **Lovecraftian entities** as the second Dissolution purpose (disassembly, vs demonic puppeteering)? Two flags: stay **Lovecraft-original** for IP cleanliness, and Dissolution is currently **tierless**, so this wants a rider or tag rather than a new tier | **Yes**, with the tierless question settled first |
-| **H-10** | What happens to a party that **fails F9** — champion dead, or beast alive? | Costs standing heavily, **does not end the run.** F10 is the one-winner floor; failing here should arrive you at it poor and known to have failed |
-| **H-11** | What is the **beast's own congregation** doing during F9 — defending the pillars, or fleeing? | **Defending.** It makes the pilgrimage a fight rather than a chore, and it puts named believers between your champion and the objective |
-| **H-12** | If a party **skips F7 and F8 entirely**, is there a floor beneath failure — some minimum the champion still carries? | **No.** The point is that nothing is what nothing buys |
-| **H-13** | *(new, from H-06)* Can the party **prevent or delay the runner's release** — and if so, how? Paying down its debt, restoring its myth-source, or something else? | Restoring its myth-source. It ties the set's optional content to the boss's difficulty |
-| **H-14** | *(new, from H-08)* Approve the parasite's **reading legend** — pupil **colour** = kind of danger, **movement** = how close to acting, **number of eyes** = how many, with *uncounted* eyes worse than many? | **Yes**, as a first pass — the exact colours are yours to name |
-| **H-15** | *(new)* The divine beast **chose** this. Does it retain **mind and speech**, or is it now pure appetite? | **Retains both.** A lucid thing that looked at godhood and picked hunger is far worse than a monster, and it can explain itself to you mid-fight |
+---
+
+## 9. What the set now does, end to end
+
+```
+  F7  GATHER          optional · the stairs are already open
+       │              hunt failed contestants; take matter, myth, name, relic
+       │              every beast has a congregation in the way
+       ▼
+  F8  MAKE            optional · commission a gift you will not keep
+       │              ingredients + maker + place + your people's prayers + divinity
+       ▼
+  F9  THE RAID        every remaining contestant, one beast
+       │
+       ├── YOU ──────────────▶ the beast's body
+       │      divinity sent downward
+       └── YOUR CHAMPION ────▶ its pillars, shielded by its congregation
+              carrying whatever F7 and F8 bought them — or nothing
+
+       survive until it dies · be ranked on contribution
+       ▼
+  F10 THE FREE-FOR-ALL   the shared enemy is removed. The ranking is not.
+```
+
+**Three things this set does that nothing earlier does:**
+
+1. **It lets you decline content and feel it** — and what you feel is a weaker congregation,
+   not a weaker character.
+2. **It makes you act through someone else**, at a cost, with late information — the patron
+   system experienced from the other side.
+3. **It puts every surviving contestant in one room, cooperating and ranked**, immediately
+   before the floor where only one of them walks out.
+
+---
+
+## 10. Still open — content, not design
+
+No structural questions remain. What is unwritten:
+
+- The **pillar count** and what each is themed to.
+- The **contribution scoring** rule — what counts, and how publicly it is displayed.
+- The **beast's name**, and its pre-beast contestant identity.
+- The **floor-runner's name** and the shape of its myth-source restoration (H-13).
+- Whether **Lovecraftian Dissolution** is expressed as a rider or a tag, given the type is
+  tierless.
+- The **parasite's pupil colours** — the legend is approved, the palette is the owner's.
+- Encounters, stat blocks, and every number.
