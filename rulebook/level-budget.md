@@ -7,10 +7,14 @@ level point = +1 to any one trait**; no XP curve), **§2.2** (creation is 7 Body
 and the ten-floor frame in `item-drafting-materials.md`.
 
 > **Why this document exists.** Every enemy statline in `f1-enemy-pass.md` is
-> calibrated against *a guess* — the level-6 party snapshot. Until the curve is
-> ruled, "is 60 HP right for an F1 elite" has no answer, because the question is
-> really "how hard does the party hit at F1", and nothing says. **This is upstream
-> of every roster.**
+> calibrated against *a guess*. Until the curve is ruled, "is 60 HP right for an F1
+> elite" has no answer. **This is upstream of every roster.**
+>
+> **Revised 2026-08-18 (owner):** *"50 Physique at level 5 and go 'well this is
+> pretty solid I guess.' At F9 they should be practical gods — throwing nuclear
+> punches and eradicating stars with each skill or spell."* The linear 36-level
+> budget below L-2 was drafted before that and is **superseded**; it is kept only
+> as the arithmetic baseline. **L-8 onward is the live proposal.**
 
 ---
 
@@ -32,6 +36,147 @@ banked. So the campaign has, so far, granted **≈1 level per level**, and spent
 none of it.
 
 ---
+
+## L-8 — 🔴 The blocker: traits do not multiply damage
+
+Before any curve can deliver "nuclear punches", this has to be said plainly:
+
+**In v1 as written, Physique past 5 adds nothing to how hard you hit.**
+
+| Where damage comes from | Where it does not |
+|---|---|
+| The **weapon class** — flat 2–4 (§12.1) | Physique. It is a **requirement gate** |
+| The **material band** — ×2 … ×512 (§12.7) | Any trait |
+| **Affix riders** and **skill levels** (§4.1) | Any trait |
+
+§12.1's heaviest class, Heavy Large, requires **5 Physique** and deals **3**. A
+contestant with Physique 5 and one with Physique 500 swing the same greatsword for
+exactly the same number. There is no rule anywhere in the book that adds a trait to
+damage.
+
+**So what does Physique 50 buy today?** `floor((50−10)/5)` = **+8 max HP to every
+body part** (§3.2), **49 skill points** (§3.3), and access to weapon classes that
+capped out at a requirement of 5. That is "pretty solid" — but it is *durability
+and breadth*, not force. **The punch is not nuclear and no level budget can make it
+so.** A rule has to change.
+
+**There is a precedent to build on.** §12.1 already has **stat-valued numbers**:
+*"Range: Reflexes"* means the range equals your current stat total. The book is
+willing to let a trait *be* a number directly. That is the door.
+
+---
+
+## L-9 — The fix, and why it also solves L-6
+
+**Make trait growth exponential, on the same doubling ladder as the materials.**
+
+Define a **trait band**, exactly parallel to the material band:
+
+> **Trait band** = the trait doubled against a base of 5 —
+> `×2^floor(log₂(trait ÷ 5))`, minimum ×1.
+>
+> Phy 5 → ×1 · 10 → ×2 · 20 → ×4 · 40 → ×8 · 80 → ×16 · 160 → ×32 · …
+
+**This is not just bigger numbers — it repairs the flaw flagged at L-6.** Under the
+linear budget, part HP grew linearly off Physique while band damage doubled per
+floor, so by F9 every hit was lethal regardless of build. With traits on their own
+doubling ladder, **HP and damage inflate together** and the sheet keeps playing the
+same way — which is exactly what the materials catalog already promises: *"only the
+numbers inflate."* The owner's instinct to think bigger is the correct fix, not a
+cosmetic one.
+
+---
+
+## L-10 — The curve ⚖
+
+**Points per level start at 12 and double every floor**, tracking the band.
+Levels stay at **3 per floor**; the *grant* does the scaling, not the pacing.
+
+| | Tut | F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **Points per level** | 12 | 24 | 48 | 96 | 192 | 384 | 768 | 1 536 | 3 072 | 6 144 |
+| **Main stat** (full dump) | **53** | 125 | 269 | 557 | 1 133 | 2 285 | 4 589 | 9 197 | 18 413 | **36 845** |
+| **Trait band** | ×8 | ×16 | ×32 | ×64 | ×128 | ×256 | ×512 | ×1 024 | ×2 048 | **×4 096** |
+| **Material band** | ×1 | ×2 | ×4 | ×8 | ×16 | ×32 | ×64 | ×128 | ×256 | ×512 |
+| **+HP per part** (§3.2) | +8 | +23 | +51 | +109 | +224 | +455 | +915 | +1 837 | +3 680 | **+7 367** |
+
+**The anchor lands exactly.** Four tutorial levels at 12 points put a focused build
+at **Physique 53 entering Floor 1** — "pretty solid, I guess."
+
+**And the two ladders stay in step by construction.** The trait band gains exactly
+one doubling per floor, in lockstep with the material band, without either being
+tuned against the other. That is the sign the shape is right rather than fitted.
+
+**At F9:** Physique ~36 800, trait band **×4 096**, material band **×512**, a
+level-10 skill on top. Practical gods.
+
+---
+
+## L-11 — 🔴 The fork: where does the trait band apply?
+
+This is the decision, and it is genuinely load-bearing.
+
+### Architecture A — the trait band drives **SKILLS**; the material band drives **WEAPONS** ⭐ recommended
+
+- **Weapons** keep the material band alone. **The entire §21.2 enemy ladder stands
+  unchanged** — an F1 mob still dies to one on-band hit, and every number in
+  `f1-enemy-pass.md` survives.
+- **Skills** scale on their governing trait's band. Mario's **Heroic Punch** at
+  Physique 30 000 *is* the nuclear punch — which is the owner's phrasing almost
+  word for word: *"with each skill or spell they do."*
+- **Cost:** weapons become the small gun late. Items stay valuable for affixes,
+  conditions, riders and utility, but not raw damage.
+
+### Architecture B — the trait band multiplies **everything**
+
+- Weapons and skills both ride trait × material.
+- **Cost: the whole enemy ladder needs a second exponent.** F9 elite goes from
+  ~15 k to ~61 M, and **every statline written so far is invalidated**, F1 included.
+
+**Recommendation: A.** It gives the owner the sentence he actually asked for, keeps
+the materials investment meaningful on its own axis, and does not throw away the
+roster. B is coherent but expensive, and buys little that A does not.
+
+---
+
+## L-12 — 🔴 What this costs the F1 roster either way
+
+Under **A**, enemy *HP* is fine. Enemy **damage** is not.
+
+Every attack value in `f1-enemy-pass.md` was written against **2–5 HP body parts**.
+Under this curve a focused contestant enters F1 with a **28 HP torso**. So a
+Bramblewretch dealing 2 Bleed is no longer a threat — it is weather.
+
+**Enemy attack values must double per floor exactly as their HP does**, and the F1
+values need re-basing against the new part HP (roughly **×5** at F1). That is a
+mechanical pass over the roster, not a rewrite: the gates, weak systems, phases,
+carves and story all stand. Only the damage numbers move.
+
+⚖ Note also that the `Enemy` model has **no trait fields** — enemy attacks are
+authored numbers. That is fine under A (author them on the doubling ladder), but it
+means enemies never get a trait band of their own.
+
+---
+
+## L-13 — Open questions
+
+| # | Question | Why it matters |
+|---|---|---|
+| **L-g** | **Architecture A or B?** (L-11) | Decides whether the existing roster survives |
+| **L-h** | Is the trait band `÷5, doubling` the right curve, or gentler (÷5, doubling every ×4)? | Sets the whole ceiling |
+| **L-i** | 12 points per level at the tutorial, doubling per floor — right, or steeper? | The anchor fits; the tail is a choice |
+| **L-j** | Does the **creation** allocation rescale from 14, or stay? | 14 is now a rounding error by F1 |
+| **L-k** | Do skill *levels* (0–10) also scale, or is the trait band enough? | 10 is a hard cap in a world with no other caps |
+| **L-l** | Routes still pay identical levels? (L-4 recommendation stands) | ±1 floor of grants compounds hard now |
+
+**Superseded but retained below:** L-2 through L-7 record the linear 36-level
+baseline and the arithmetic that proves the book's fixed points. The route
+recommendation (L-4) and the milestone-source table (L-3) still apply — only the
+*size* of the grants changed.
+
+---
+
+# ⬇ SUPERSEDED — the linear baseline (kept for its arithmetic)
 
 ## L-2 — The proposed curve ⚖
 

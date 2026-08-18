@@ -247,23 +247,36 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - Owner-approved; the campaign has not met the mechanic yet. **Not yet propagated**
   to the game repo's `rules-addendum.md` or the Godot sim (4 files) — see backlog.
 
-## The level budget (PROPOSAL, added 2026-08-18)
-- **`rulebook/level-budget.md`** — **upstream of every enemy statline.** §3.1 fixes
-  1 level = 1 point = +1 trait, §2.2 fixes creation at 14 points, so the curve is the
-  only free variable and nothing can be balanced until it is ruled.
-- Proposed: **36 levels over 9 floors** (3/floor Set 1 · 4 Set 2 · 5 Set 3; F10 pays
-  nothing). Trait totals run 14 → 50; a focused build crosses **Mind 20 around F6**.
-- **Mobs pay ZERO levels, ever** (materials and Exposure instead — otherwise the horde
-  doctrine becomes the XP farm §3.1 says this system doesn't have), and **individual
-  elites pay zero** too (they roll into floor-clear + discovery — otherwise the roster
-  author controls the power curve).
-- **Bosses pay for being RESOLVED, not killed** — chaining THE MASKED and out-arguing
-  the Loong pay the same as a corpse, or the boss doctrine is a lie the payout contradicts.
-- **Recommendation: all three routes pay identical levels**; difficulty repays in loot
-  and story access. A +1/floor differential compounds to +9 by F9, decided at F1.
-- **Flagged risk (L-6):** part HP grows linearly (Physique ÷5) while band damage doubles
-  per floor. By F9 every hit is lethal regardless of Physique — either intended, or
-  Set 3 needs a non-Physique HP source. Ruling needed BEFORE Set 3 is designed.
+## The level budget (PROPOSAL, added 2026-08-18) — **numbers go exponential**
+- **`rulebook/level-budget.md`** — upstream of every enemy statline. Owner direction:
+  *"50 Physique at level 5 and go 'well this is pretty solid I guess.' At F9 they
+  should be practical gods."* The linear 36-level draft is **superseded**; L-8 onward
+  is live.
+- 🔴 **The blocker (L-8): traits do NOT multiply damage in v1.** §12.1 damage is flat
+  per weapon class (2–4) × the material band; Physique is a **requirement gate** that
+  caps out at 5 for the heaviest class. Physique 5 and Physique 500 swing the same
+  greatsword for the same number. **No level budget can produce a nuclear punch — a
+  rule has to change.** Precedent to build on: §12.1's stat-valued ranges
+  ("Range: Reflexes") already let a trait BE a number.
+- **The fix (L-9/L-10): a TRAIT BAND parallel to the material band** —
+  `×2^floor(log2(trait/5))`. Level grants start at 12 and double per floor; levels
+  stay 3/floor. Focused build enters F1 at **Physique 53**, ends F9 at **~36,800**,
+  trait band **×4096**. The trait band gains exactly one doubling per floor, in
+  lockstep with the material band — they stay in step by construction.
+- **It also repairs the L-6 flaw**: linear HP under exponential damage made every F9
+  hit lethal regardless of build. Exponential traits inflate HP alongside damage, so
+  the sheet keeps playing the same — which is what the materials catalog promises.
+- 🔴 **OPEN — the fork (L-11).** **A (recommended):** trait band drives SKILLS,
+  material band drives WEAPONS → the §21.2 ladder and the whole F1 roster survive
+  unchanged, and "each skill or spell" is literally the owner's phrasing.
+  **B:** trait band multiplies everything → the enemy ladder needs a second exponent
+  (F9 elite 15k → ~61M) and every statline written so far is invalidated.
+- 🔴 **Cost either way (L-12):** enemy *damage* values were written against 2–5 HP
+  parts. A focused contestant enters F1 with a **28 HP torso**, so F1 attack numbers
+  need re-basing (~×5) and enemy damage must double per floor like enemy HP does.
+  Gates, weak systems, phases, carves and story all stand — only the damage moves.
+- Still standing from the linear draft: **mobs and individual elites pay ZERO levels**;
+  **bosses pay for being RESOLVED, not killed**; **all routes pay identical levels**.
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
