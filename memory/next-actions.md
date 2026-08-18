@@ -6,8 +6,21 @@
 
 **Two live threads. The owner picks.**
 
-0. **THE F1 ENEMY PASS (v1, live campaign)** — still the highest-value work for
-   the table that is actually being played. Unchanged; see item 1 below.
+0. **THE F1 ENEMY PASS — DRAFTED 2026-08-18, awaiting owner rulings.**
+   `rulebook/f1-enemy-pass.md` (18 entries) + `server/seeds/enemies-f1.js` +
+   `server/seed-enemies.js`. **Blocked on the owner, not on Claude.** What is
+   needed, in order:
+   a. Rule on **E-0.1–E-0.4** — the part-budget reading, one-part mobs, the
+      gate/weak-system requirement, mob carve policy. Everything else rests on
+      these.
+   b. Bless or replace **"Foreman Bex"** — the name becomes canon at F3.
+   c. Decide whether **the Girl in the House** is fightable at F1. Deliberately
+      left unwritten; ruling her winnable changes F2 and F3.
+   d. Then run the E-5 runbook on the campaign DB: `node backup-db.js` →
+      `node seed-enemies.js` → `--apply`.
+   Then the follow-on content in E-4: encounter tables and room counts, §21.4
+   terrain blocks for the four F1 environments, Exposure values and §19.1/§17.6
+   payouts per rank.
 
 0b. **v2 CONTENT AUTHORING (v2, designed not built).** No structural design
    questions remain in any floor set. What is unwritten, in rough priority:
@@ -25,8 +38,8 @@
 no urgency); have the five app accounts set new passwords (their bcrypt hashes
 were removed from the working tree but remain in git history).
 
-1. **F1 ENEMY PASS — the next session's job (owner-chosen 2026-08-10).**
-   Everything needed to start:
+1. **F1 ENEMY PASS — original briefing (2026-08-10), kept for reference.**
+   Delivered as item 0 above. The briefing as it stood:
    - Goal: stat the Floor 1 (green forest) roster to the horde doctrine —
      mobs ~5 HP one-shot hordes (survival only via GATE effects like the
      Incineradile's surface immunity, never fat bars), elites ~60 HP with

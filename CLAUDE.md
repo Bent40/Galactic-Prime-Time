@@ -174,6 +174,32 @@ Skills are granted to players by templateId. The player sheet joins template dat
   auto-inference, name suggestions, and the Box Log panel (chosen ✓ / unchosen
   struck through).
 
+## F1 Enemy Pass (PROPOSAL, added 2026-08-18)
+- **`rulebook/f1-enemy-pass.md`** is the Floor 1 roster proposal — 18 entries
+  (6+2 shared forest · 3 Easy · 4 Medium · 3 Hard), keyed to the Compendium's
+  route beats (§4.2–4.4) and the Incineradile boss pattern (§3.1). **Nothing in
+  it is ruled yet**; E-0 lists the four interpretation calls that need blessing,
+  E-4 is the backlog.
+- **The load-bearing reading (E-0.1/E-0.2):** §21.2's mob 5 / elite 60 / boss 125
+  / super 300 is a **part BUDGET summed across `bodyParts`**, not a pooled bar —
+  because §7.3 resolves damage per part. **Mobs are ONE part at 5.** A mob that
+  survives a hit gets a **gate** (surface immunity, damage-type immunity,
+  untargetable-while-X), never a fatter number.
+- **Seeding runbook (from `server/`):** `node backup-db.js` →
+  `node seed-enemies.js` (dry run) → `--apply`; `--force` overwrites differing
+  existing docs, `--file` for other batches, `--floor N` rescales the doctrine
+  gate. Data in `server/seeds/enemies-f1.js`.
+- **The seeder refuses to run on data that misses the doctrine** — wrong budget,
+  a multi-part mob, a non-mob with no weak system, an unknown tier. `--check`
+  runs that gate alone and **needs no `node_modules` and no DB**.
+- `node test-seed-enemies.js` — 16 dependency-free checks over the doctrine gate
+  and the array-aware diff. The DB create/diff path is **not** covered (no mongod
+  in the dev container); it is a near-verbatim clone of the proven `seed-affixes.js`.
+- Carve hooks: every elite and boss names an F1-band material from
+  `item-drafting-materials.md` M-1, and all of them resolve against
+  `seeds/items-materials-f1.js`. Mobs don't carve individually (E-0.4) — a cleared
+  room is one gather roll.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.

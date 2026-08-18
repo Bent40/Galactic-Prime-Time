@@ -4,6 +4,28 @@
 
 ## Done
 
+- **F1 ENEMY PASS drafted (2026-08-18) — PROPOSAL, awaiting owner blessing.**
+  `rulebook/f1-enemy-pass.md` + `server/seeds/enemies-f1.js` +
+  `server/seed-enemies.js` (+ `server/test-seed-enemies.js`, 16 checks, the
+  app's first automated tests).
+  - **18 entries**: a shared forest layer (6 mobs, 2 elites) every party meets,
+    plus one stack per route — Easy (Stair-Wight · Chainbearer · **THE MASKED**),
+    Medium (Torchbearer · The Kindler · **Foreman Bex** · the Girl, unfightable),
+    Hard (Crystallized Citizen · Step-Warden · **Loong Kin**, super).
+  - **The four rulings it needs (E-0):** the rank number is a **part budget**
+    summed across `bodyParts`, not a pooled bar · **mobs are ONE part at 5** ·
+    every non-mob names a weak system and every surviving mob names a gate ·
+    mobs don't carve individually, a cleared room is one gather roll.
+  - **Boss doctrine honoured, not decorated:** THE MASKED's win condition is the
+    **chain**, and killing him costs the route its F2 and F3; Foreman Bex's is the
+    **house**, and he cannot die on this floor; the Loong Kin's is the
+    **conversation**, and it sheds a scale rather than being carved.
+  - **The exploration payoff:** The Rack (optional, shared layer) carves
+    **Mistletoe**, whose Oathbreaker effect is the answer to THE MASKED's Mask.
+    A shortcut, never the only key.
+  - Every carve resolves against `seeds/items-materials-f1.js`. Budgets verified
+    18/18 against §21.2.
+
 - **v2 — THE MYTHOLOGY EDITION now exists as a designed edition (2026-08-11).**
   Lives in **`v2/`** (moved here from the game repo — content lives where it is
   consumed; `v2/README.md` is the entry point). v1 is FROZEN and unchanged
@@ -47,12 +69,17 @@
 
 ## In progress
 
-- Nothing mid-flight. Session closed clean 2026-08-10.
+- **F1 enemy pass is drafted and unblessed.** Nothing seeded to any DB — the
+  seeder has never been run against Mongo (no mongod in the dev container; the
+  environment's network policy blocks the binary download). The doctrine gate and
+  the diff logic ARE verified; the create/diff DB path is not.
 
 ## Next
 
-- **F1 enemy pass** — next session's opening task (full briefing in
-  next-actions.md #1). Then the queue in next-actions order.
+- **Owner: read `rulebook/f1-enemy-pass.md` §E-0 and rule on the four calls**,
+  plus the two named items in E-4 (Foreman Bex's name becomes F3 canon; whether
+  the Girl is fightable at F1 changes F2 and F3). Then run the E-5 seeding
+  runbook. Then the queue in next-actions order.
 
 ## Blockers
 
