@@ -266,15 +266,25 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - **It also repairs the L-6 flaw**: linear HP under exponential damage made every F9
   hit lethal regardless of build. Exponential traits inflate HP alongside damage, so
   the sheet keeps playing the same — which is what the materials catalog promises.
-- 🔴 **OPEN — the fork (L-11).** **A (recommended):** trait band drives SKILLS,
-  material band drives WEAPONS → the §21.2 ladder and the whole F1 roster survive
-  unchanged, and "each skill or spell" is literally the owner's phrasing.
-  **B:** trait band multiplies everything → the enemy ladder needs a second exponent
-  (F9 elite 15k → ~61M) and every statline written so far is invalidated.
-- 🔴 **Cost either way (L-12):** enemy *damage* values were written against 2–5 HP
-  parts. A focused contestant enters F1 with a **28 HP torso**, so F1 attack numbers
-  need re-basing (~×5) and enemy damage must double per floor like enemy HP does.
-  Gates, weak systems, phases, carves and story all stand — only the damage moves.
+- ✅ **RULED: Architecture A, refined (L-11/L-14).** Weapons ride the **material
+  band**; the §21.2 ladder and the whole F1 roster stand. **Stats are the KEY, not the
+  gun** — trait growth buys the *right to hold* the weapon, part HP, skill points and
+  fiction, never extra damage. **§12.1's requirement ceiling of 5 lifts:** items may
+  demand any amount of any trait (the gravity axe needs Physique to hold; the
+  corrupting staff needs Mind to resist). Apex M-5 materials are the nuclear bases.
+- ✅ **RULED: old enemies become hordes (L-15).** Nothing is rescaled — a Bramblewretch
+  is 5 HP forever, and at F5 the party meets two hundred. The power fantasy as
+  *content*, not as a stat block, and already what §21.2 describes. **Every floor's
+  roster is a permanent asset**; later floors need horde COUNTS, not new blocks.
+- ✅ **DONE: F1 enemy damage re-based ×5** (2026-08-18) against the new part HP
+  (focused build enters F1 with a 13 HP torso). HP budgets unchanged; condition tiers
+  unchanged (§12.7). Enemy damage doubles per floor like enemy HP.
+- 🔴 **OPEN L-17:** do **skills** scale with the governing trait, or not at all?
+  Decides whether a caster has any damage axis.
+- 🔴 **OPEN L-18 — the serious one:** §3.2 sources part HP from **Physique only**.
+  Exponentially, a Mind build at F9 has a 13 HP torso against thousands of damage —
+  unplayable from F2 onward. Recommended fix: **part HP scales off TOTAL trait
+  points**, Physique keeping a bonus. **Must be ruled before Set 2 is designed.**
 - Still standing from the linear draft: **mobs and individual elites pay ZERO levels**;
   **bosses pay for being RESOLVED, not killed**; **all routes pay identical levels**.
 

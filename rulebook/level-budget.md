@@ -112,49 +112,113 @@ level-10 skill on top. Practical gods.
 
 ---
 
-## L-11 — 🔴 The fork: where does the trait band apply?
+## L-11 — The fork ✅ **RULED 2026-08-18: Architecture A**
 
-This is the decision, and it is genuinely load-bearing.
+**The trait band does not drive weapons. The material band does.** The §21.2 enemy
+ladder stands unchanged, an F1 mob still dies to one on-band hit, and every HP
+number in `f1-enemy-pass.md` survives.
 
-### Architecture A — the trait band drives **SKILLS**; the material band drives **WEAPONS** ⭐ recommended
+**And the owner sharpened it past what I proposed:**
 
-- **Weapons** keep the material band alone. **The entire §21.2 enemy ladder stands
-  unchanged** — an F1 mob still dies to one on-band hit, and every number in
-  `f1-enemy-pass.md` survives.
-- **Skills** scale on their governing trait's band. Mario's **Heroic Punch** at
-  Physique 30 000 *is* the nuclear punch — which is the owner's phrasing almost
-  word for word: *"with each skill or spell they do."*
-- **Cost:** weapons become the small gun late. Items stay valuable for affixes,
-  conditions, riders and utility, but not raw damage.
+> *"The weapons will be the ones reaching the nuclear level, but the stats rising
+> will have narrative trails of improvement rather than be the cause for more
+> damage."*
 
-### Architecture B — the trait band multiplies **everything**
+So **stats are the key, not the gun.** Trait growth buys: the **right to hold** the
+weapon (L-14), part HP (§3.2), skill points (§3.3), auto-success on stat-gated
+actions (§2.3), and the fiction of a person becoming enormous. It does **not**
+multiply damage.
 
-- Weapons and skills both ride trait × material.
-- **Cost: the whole enemy ladder needs a second exponent.** F9 elite goes from
-  ~15 k to ~61 M, and **every statline written so far is invalidated**, F1 included.
-
-**Recommendation: A.** It gives the owner the sentence he actually asked for, keeps
-the materials investment meaningful on its own axis, and does not throw away the
-roster. B is coherent but expensive, and buys little that A does not.
+🔴 **One thing this leaves genuinely unresolved — see L-17: do SKILLS scale with the
+governing trait, or not at all?** Architecture A as I originally framed it said they
+do; the refinement above says stats never cause damage. Those two cannot both be
+fully true, and the answer changes what a caster is.
 
 ---
 
-## L-12 — 🔴 What this costs the F1 roster either way
+## L-14 — Requirements go insane, and that is the whole design ✅ **RULED**
 
-Under **A**, enemy *HP* is fine. Enemy **damage** is not.
+§12.1 currently caps requirements at **5 Physique** for the heaviest weapon class.
+**That ceiling lifts.** Items may require any amount of any trait:
 
-Every attack value in `f1-enemy-pass.md` was written against **2–5 HP body parts**.
-Under this curve a focused contestant enters F1 with a **28 HP torso**. So a
-Bramblewretch dealing 2 Bleed is no longer a threat — it is weather.
+> *"An axe that manipulates gravity needs more Physique to hold. A staff that
+> corrupts the user needs more Mind to resist."*
 
-**Enemy attack values must double per floor exactly as their HP does**, and the F1
-values need re-basing against the new part HP (roughly **×5** at F1). That is a
-mechanical pass over the roster, not a rewrite: the gates, weak systems, phases,
-carves and story all stand. Only the damage numbers move.
+This is what makes exponential traits matter without touching the damage formula:
 
-⚖ Note also that the `Enemy` model has **no trait fields** — enemy attacks are
-authored numbers. That is fine under A (author them on the doubling ladder), but it
-means enemies never get a trait band of their own.
+| The trait does | The item does |
+|---|---|
+| grows exponentially (L-10) | carries the nuclear number |
+| **unlocks** the item by meeting its requirement | is authored, not rolled |
+| pays HP, skill points, action access, fiction | rides the material band + apex materials (M-5) |
+
+**Requirements become the progression gate the level curve is actually for.** An F9
+artifact might read **Req 20 000 Physique** — and the reason to have 36 000 Physique
+is that the axe exists, not that your arm got stronger by a factor of a thousand.
+
+It also connects to work already done: **M-5 APEX/DIVINE materials** (Loong-Scale,
+Gleipnir-Weave, Five-Colored Sky-Stone) are already *"authored-only, never pooled,
+never sold."* Those are the nuclear-tier bases, and insane requirements are how they
+stay earned rather than looted.
+
+⚖ Requirements are also a **narrative** lever, not only a number: a staff that
+corrupts the user is gated on Mind because failing the gate should *do something*,
+not merely deny the item. §6's Forced Actions are the existing hook — the book
+already says an unmet requirement is a real gate, not a soft warning.
+
+---
+
+## L-15 — Old enemies become hordes ✅ **RULED — and it closes a loop**
+
+> *"We can use older enemies as larger hordes and the likes, allowing the power
+> fantasy play as well."*
+
+**Nothing about an old enemy gets rescaled.** A Bramblewretch is 5 HP forever. At F5
+the party simply meets **two hundred of them**, and cuts through the lot — which is
+the power fantasy expressed as *content*, not as a stat block.
+
+This is a genuinely economical ruling:
+
+- **The rosters compound instead of expiring.** F1's 19 entries stay useful for the
+  whole campaign. Every floor's roster is a permanent asset.
+- **It is already the doctrine.** §21.2 says mob fights are about "the crowd:
+  cones, lines, positioning, ammo burn" — a 200-strong Bramblewretch tide is that
+  sentence at scale, and it rewards exactly the area skills the party spent nine
+  floors building.
+- **It gives the power fantasy somewhere to live** that is not "the numbers got
+  bigger." Killing forty things a Moment *feels* different from killing one thing
+  with a bigger number, and only one of those needs new content.
+
+⚖ Implication for encounter design: later floors need **horde-count** guidance, not
+just enemy HP. That belongs with the encounter tables in E-4.
+
+---
+
+## L-16 — 🔴 The problem this creates: the caster has no HP
+
+§3.2 gives part HP from **Physique only** — `floor((Phy − 10) / 5)` per part. Under
+an exponential curve that is no longer a modest difference between builds. It is a
+chasm:
+
+| At F9 | Physique | HP per part |
+|---|---|---|
+| Physique build | ~36 800 | **+7 367** |
+| Mind build (Physique left near creation) | ~50 | **+8** |
+
+Enemy damage re-based to threaten a 7 372 HP torso will be in the thousands. **A
+Mind build's 13 HP torso dies to literally anything, on every floor from F2 onward,
+forever.** That is not a glass cannon; that is an unplayable character.
+
+**This is the L-6 flaw again, wearing different clothes** — it was never really
+about exponential *damage*, it was about HP having exactly one source.
+
+**Recommended fix ⚖ — part HP scales off TOTAL trait points, with Physique keeping a
+bonus on top.** Everyone's body grows as they become enormous; the Physique
+specialist is still the tank. Alternatives: a per-floor baseline HP every contestant
+gets, or accepting that every build must buy Physique (which makes builds samey and
+quietly deletes the pure caster).
+
+**This needs ruling before Set 2 is designed.** It is fine at F1 and fatal by F4.
 
 ---
 
@@ -162,7 +226,9 @@ means enemies never get a trait band of their own.
 
 | # | Question | Why it matters |
 |---|---|---|
-| **L-g** | **Architecture A or B?** (L-11) | Decides whether the existing roster survives |
+| ~~L-g~~ | ~~Architecture A or B~~ | **RULED: A**, refined — stats gate, weapons carry (L-11, L-14) |
+| **L-17** 🔴 | **Do skills scale with the governing trait, or not at all?** | Decides whether a caster has any damage axis. If not, Mind/Charm buy only access and fiction |
+| **L-18** 🔴 | **Does part HP get a non-Physique source?** (L-16) | Decides whether non-Physique builds are playable past F2 |
 | **L-h** | Is the trait band `÷5, doubling` the right curve, or gentler (÷5, doubling every ×4)? | Sets the whole ceiling |
 | **L-i** | 12 points per level at the tutorial, doubling per floor — right, or steeper? | The anchor fits; the tail is a choice |
 | **L-j** | Does the **creation** allocation rescale from 14, or stay? | 14 is now a rounding error by F1 |

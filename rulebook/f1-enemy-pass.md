@@ -2,8 +2,15 @@
 
 **Date:** 2026-08-18 · **Status:** 🟢 **E-0 RULED** (owner, 2026-08-18) — the four
 interpretation calls are blessed and the seeder enforces them. Statlines and
-encounter content remain 🟡 PROPOSAL. **Calibration caveat:** every number here is
-measured against the level-6 party until `level-budget.md` is ruled — see L-6.
+encounter content remain 🟡 PROPOSAL.
+
+**⚠️ Damage re-based 2026-08-18 (×5).** [`level-budget.md`](level-budget.md) ruled
+**Architecture A** and an exponential trait curve, which puts a focused contestant at
+**Physique ~53 entering Floor 1** — a **13 HP torso** where the book's baseline is 5.
+Every attack number below was written against 2–5 HP parts and has been multiplied
+by **5**. **HP budgets are unchanged** (L-11: weapons ride the material band, so the
+§21.2 ladder stands), and **condition tiers are unchanged** (§12.7: "condition and
+utility modifiers don't scale"). Gates, weak systems, phases and carves all stand.
 Nothing here is ruled. Governing canon: rulebook **§21** (Enemies & Encounter
 Design), **§21.2** horde doctrine, **§21.3** boss doctrine, **§12.7** materials,
 and `rulebook/item-drafting-materials.md` **M-1** (the F1 Forest band ×2).
@@ -120,6 +127,27 @@ The crystallised *citizens* are still statues, of course. They just aren't playe
 **Super Boss**; the admin UI's tier list predates that and calls it
 `legendary`. The seed file uses `legendary` because that is what the model
 accepts. Renaming the enum is app work, out of scope here.
+
+---
+
+## E-0.7 — Two rulings that change how this roster is USED
+
+### Requirements go insane ✅ **RULED** (level-budget L-14)
+§12.1's requirement ceiling of 5 Physique lifts. Items may demand any amount of any
+trait — *a gravity-manipulating axe needs the Physique to hold it; a corrupting staff
+needs the Mind to resist it.* **Stats are the key, not the gun:** trait growth buys
+the right to hold the nuclear weapon, not extra damage. For this roster it means
+**carve materials and boss drops should eventually name a requirement**, not just an
+effect — that is where F1's loot connects to the endgame.
+
+### Old enemies become hordes ✅ **RULED** (level-budget L-15)
+**Nothing here expires.** A Bramblewretch is 5 HP forever; at F5 the party meets two
+hundred of them and cuts through the lot. That is the power fantasy expressed as
+content rather than as a stat block, and it is already what §21.2 describes — "mob
+fights are about the crowd: cones, lines, positioning, ammo burn."
+
+**So this roster is a permanent asset, not a floor's worth of content.** Later floors
+need **horde counts** for these entries, which is now an E-4 item.
 
 ---
 
@@ -628,6 +656,8 @@ is already a complete answer — the respirator only makes it *comfortable*.
 | ~~Infected T3 = statue?~~ | **RULED 2026-08-18** — T3 kills normally; the statue idea is dropped, and the crystal needs no rules exception |
 | **The respirator template** | ⚖ the only genuinely new item E-6 asks for |
 | ~~Nullrot's direction of causality~~ | **RULED 2026-08-18** — he is **both**. Open follow-on: the F1 timeline (does the mask carry it?) — see E-0.6 |
+| **Horde counts for later floors** | ⚖ new from L-15 — these 19 entries get reused at F2–F9 as larger tides. Needs per-floor counts, not new stat blocks |
+| **Requirements on F1 loot** | ⚖ new from L-14 — carves and boss drops should name a trait requirement, connecting F1 loot to the endgame |
 | **F2/F3 rosters** | The bands exist (M-2 ×4, M-3 ×8) but are sketches; the rosters do not |
 | **Lotus Root has no enemy source** | Correct as written — M-1 lists it as a gather ingredient, not a carve. Noted so it is not mistaken for an omission |
 | **`legendary` → `superboss`** | The model enum disagrees with §21.1's vocabulary. App work, not content work |
