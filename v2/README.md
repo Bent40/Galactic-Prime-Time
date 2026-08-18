@@ -63,6 +63,7 @@ a tabletop edition. So v2's tabletop material belongs beside the tabletop rulebo
 | [`design/three-way-consistency.md`](design/three-way-consistency.md) | The drift guard: book ↔ app ↔ digital addendum. *Any difference not listed there is a bug* |
 | [`floors/floors-1-3-arc.md`](floors/floors-1-3-arc.md) | **The Buried God** — floors 1–3, design complete |
 | [`floors/floors-4-6-proposal.md`](floors/floors-4-6-proposal.md) | **The Crowned** — floors 4–6. **Core ruled** (F-01…F-14); the kingdom tree and presiding god drafted |
+| [`floors/floors-7-9-proposal.md`](floors/floors-7-9-proposal.md) | **The Hunt** — floors 7–9, ⟨PROPOSAL⟩. The beasts are failed contestants; the campaign spine is now Floor 0 → 10 |
 | [`rules/`](rules/) | **The v2 book, as it gets written.** `17-the-audience.md` is the first authored chapter — the one part of the system that needed genuine redesign rather than a reskin |
 | [`research/`](research/) | The seven source research passes the fork spec summarises (A–G) |
 | [`canon/`](canon/) | **Generated snapshot** of the shared setting canon + cast (§3) |
@@ -142,7 +143,7 @@ Verified 2026-08-11 against `Galactic-Prime-Time` `36c10ca` / `Galactic-Prime-Ti
 | **No v2 mode in the app** | No `version` field on `Character.js`; 0 hits for `divinity`/`epithet`/`champion` in models or constants |
 | **The mythology corpus is wired to nothing** | 0 GDScript references to `entities.jsonl`. The engine's god data is `patron_gods.json` — **5 rows** (`controller/dal.gd:18`) — not the 295-entity corpus. This applies to all of it, not just the new Goetia |
 | **§17 (The Audience) is unwritten** | The one chapter needing genuine redesign — Exposure forks from a fluid to a graph. Designed, not written |
-| **Floors 7–9 do not exist** | Floors 4–6 has its spine, question, scale and carry-overs ruled; its encounters and numbers are unwritten |
+| **Floors 7–9 are a proposal, not rulings** | The shape exists ([`floors/floors-7-9-proposal.md`](floors/floors-7-9-proposal.md)); H-01…H-10 are unanswered, and no encounters or numbers are written. Floors 4–6 likewise has its spine ruled and its content unwritten |
 | **The Godot sim implements v1 combat, not v2's setting** | 11,416 sim LOC · 17,609 test LOC · 570 tests — genuinely built, and orthogonal to the v2 fork |
 | **The v1 app has zero automated tests** | — |
 
