@@ -217,6 +217,29 @@ Skills are granted to players by templateId. The player sheet joins template dat
   `seeds/items-materials-f1.js`. Mobs don't carve individually (E-0.4) — a cleared
   room is one gather roll.
 
+## Enemy scaling — F2+ damage and horde counts (PROPOSAL, added 2026-08-18)
+- **`rulebook/enemy-scaling.md`** + **`server/floor-bands.js`** — the cross-floor
+  authoring frame. **The doc's tables are the script's output; regenerate with
+  `node server/floor-bands.js`, never hand-edit them.**
+- **Enemy HP does not change across floors** — §21.2's mob 5 / elite ~60 / boss ~125 /
+  super ~300 are band units, true everywhere. **Only enemy DAMAGE moves**, because it
+  tracks the contestant's growing body: torso runs **7 → 35**, so the signature hit
+  runs mob **4 → 19**, elite **6 → 30**, boss **8 → 39**, super **12 → 60**.
+- Ratios ⚖: mob ≈ 0.55 × torso (two hits destroy it) · elite ≈ 0.85 · boss ≈ 1.1
+  (its signature blow ends a torso — that is why it is a boss) · super ≈ 1.7.
+  **Constant by construction, so combat feels the same on every floor.**
+- **Two legitimate band exceptions:** a telegraphed 1-Clock windup hits ABOVE it (the
+  Step-Warden's 10 vs an elite band of 6 — the party is paid in a punish window), and
+  a per-Moment tick sits BELOW it (Husk-Moth 2 vs mob 4). Anything else is a bug; the
+  test suite checks the whole F1 roster against the band.
+- **Hordes (L-15):** a floor-S mob met at floor N arrives **~12 × 2^(N−S)** strong —
+  an F1 mob is a tide of 200 at F5 and 3,000 at F9, sized as one Clock of slaughter
+  for four contestants. **A horde is ONE entity with a count**, not N entities: an
+  attack removes `floor(damage ÷ mob HP)`, area attacks multiply by spaces covered,
+  and **gates still apply** (a Crystallized Citizen tide is still Crush-only).
+- ⚠️ Enemy damage lives in free-text `notes`, so the seeder cannot gate it the way it
+  gates HP. A `damage` field on the Enemy model would fix that — app work, not content.
+
 ## The crystal plague (RULED 2026-08-18)
 - **The Hard route's crystal IS Nullrot's disease** — the same plague the Easy route's
   chained man spreads-and-cures at F3 (§4.3) and the Loong contains at F3 (§4.4).

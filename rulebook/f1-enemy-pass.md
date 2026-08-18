@@ -679,9 +679,9 @@ is already a complete answer — the respirator only makes it *comfortable*.
 | ~~Infected T3 = statue?~~ | **RULED 2026-08-18** — T3 kills normally; the statue idea is dropped, and the crystal needs no rules exception |
 | **The respirator template** | ⚖ the only genuinely new item E-6 asks for |
 | ~~Nullrot's direction of causality~~ | **RULED 2026-08-18** — he is **both**. Open follow-on: the F1 timeline (does the mask carry it?) — see E-0.6 |
-| **Horde counts for later floors** | ⚖ new from L-15 — these 19 entries get reused at F2–F9 as larger tides. Needs per-floor counts, not new stat blocks |
+| ~~Horde counts for later floors~~ | **DONE 2026-08-18** — [`enemy-scaling.md`](enemy-scaling.md) S-2: ~12 × 2^(N−S), and how to run a tide as one entity with a count |
 | **Requirements on F1 loot** | ⚖ new from L-14 — carves and boss drops should name a trait requirement, connecting F1 loot to the endgame |
-| **F2/F3 rosters** | The bands exist (M-2 ×4, M-3 ×8) but are sketches; the rosters do not |
+| **F2/F3 rosters** | The *frame* now exists ([`enemy-scaling.md`](enemy-scaling.md) S-1/S-3 — damage bands and an authoring checklist); the rosters do not |
 | **Lotus Root has no enemy source** | Correct as written — M-1 lists it as a gather ingredient, not a carve. Noted so it is not mistaken for an omission |
 | **`legendary` → `superboss`** | The model enum disagrees with §21.1's vocabulary. App work, not content work |
 

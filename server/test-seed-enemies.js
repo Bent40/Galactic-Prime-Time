@@ -73,6 +73,30 @@ ok('the Loong Kin opens in Warden Form and turns',
 ok('a changed size is reported as a difference',
    diffFields({ ...JSON.parse(JSON.stringify(f1[0])), size: 'Huge' }, f1[0]).join() === 'size');
 
+console.log('floor bands (enemy-scaling S-1)');
+const { floorState, hordeSize } = require('./floor-bands');
+const b1 = floorState(1).dmg;
+ok('F1 bands are 4/6/8/12', b1.mob === 4 && b1.elite === 6 && b1.boss === 8 && b1.super === 12);
+ok('F9 torso is 35 band units', floorState(9).torso === 35);
+ok('the ladder is monotonic in torso and damage',
+   [1,2,3,4,5,6,7,8].every(f => floorState(f).torso < floorState(f + 1).torso &&
+                                floorState(f).dmg.mob <= floorState(f + 1).dmg.mob));
+ok('a horde of F1 mobs at F5 is ~200', Math.abs(hordeSize(1, 5) - 200) <= 50);
+ok('the 12 x 2^(N-S) rule tracks the computed tide',
+   [2,3,4,5,6,7,8,9].every(n => Math.abs(hordeSize(1, n) - 12 * 2 ** (n - 1)) / (12 * 2 ** (n - 1)) < 0.15));
+ok('hordeSize refuses a floor at or below the mob\'s own', hordeSize(3, 3) === null && hordeSize(3, 2) === null);
+
+// Every damage number authored into F1 notes/phases must sit in the F1 band, allowing
+// telegraphed windups above it and per-Moment ticks below it (enemy-scaling S-1).
+const outliers = [];
+for (const e of f1) {
+  const text = (e.notes || '') + ' ' + (e.phases || []).map(p => p.description).join(' ');
+  const nums = [...text.matchAll(/(\d+)\s+(Bleed|Crush|Burn|Chill)/g)].map(m => +m[1]);
+  const band = b1[e.tier === 'legendary' ? 'super' : e.tier];
+  for (const n of nums) if (n > band * 2 || n < 1) outliers.push(`${e.name}:${n} (band ${band})`);
+}
+ok('no authored F1 damage is wildly outside its band', outliers.length === 0, outliers.join(' · '));
+
 console.log('diff (what --force would overwrite)');
 const seed = f1[0];
 const clone = () => JSON.parse(JSON.stringify(seed));
