@@ -4,6 +4,27 @@
 
 ## Next actions
 
+**Two live threads. The owner picks.**
+
+0. **THE F1 ENEMY PASS (v1, live campaign)** — still the highest-value work for
+   the table that is actually being played. Unchanged; see item 1 below.
+
+0b. **v2 CONTENT AUTHORING (v2, designed not built).** No structural design
+   questions remain in any floor set. What is unwritten, in rough priority:
+   - **F9's pillar count + contribution scoring**, and the divine beast's name
+     and pre-beast contestant identity.
+   - **F1–3 production**: encounters, stat blocks, the three route walkthroughs,
+     Vermilia's court, the F2 decoy-grave puzzle.
+   - **F4–6**: the five kingdoms and their gods (from the corpus), the kingdom
+     tree's numbers.
+   - **The next v2 chapter.** section 17 is written; the rest of the v2 book is not, and
+     D-06 wants one source rendering two books — that pipeline does not exist.
+   - **Loose ends named in `v2/floors/floors-7-9-proposal.md` section 10.**
+
+**Owner-only, not blocked on Claude:** rotate the Atlas credential (deferred,
+no urgency); have the five app accounts set new passwords (their bcrypt hashes
+were removed from the working tree but remain in git history).
+
 1. **F1 ENEMY PASS — the next session's job (owner-chosen 2026-08-10).**
    Everything needed to start:
    - Goal: stat the Floor 1 (green forest) roster to the horde doctrine —

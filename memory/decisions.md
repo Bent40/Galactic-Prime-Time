@@ -1,5 +1,22 @@
 # Decisions
 
+<!-- 2026-08-11 — the v2 session. Full record with reasoning: v2/design/v2-decisions.md -->
+
+## 2026-08-11 — v2 mythology edition
+
+- **v1 is FROZEN; v2 bends.** Resolved a contradiction live since July
+  (`setting-rebrand-options.md:155` said the live table re-skins; the never-approved
+  update plan said the opposite). v1 changes only by errata.
+- **v2 is a tabletop edition** (D-06), so its material lives in `v2/` beside the
+  rulebook, not in the Godot project. Rule: **content lives where it is consumed.**
+- **Divinity is not a headcount.** Standing (people) vs divinity (prayer income).
+- **Command is not reverence** — a legion bound by force is not a congregation.
+- **The winner takes everything**: one winner, everything resets, only they
+  remember, they author the next 250 years and dispose of those who lost —
+  bounded only by leaving room for humanity to survive.
+- **Demons are a race revering the 72 goetic demon gods**, now all authored.
+- **Floor 0 is the tutorial, outside the ten-floor count.**
+
 <!-- wf memory: required sections below; keep the headings. -->
 
 ## Decisions
