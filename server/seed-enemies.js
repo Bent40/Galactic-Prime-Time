@@ -26,10 +26,17 @@ const checkOnly = process.argv.includes('--check');
 const fileIdx   = process.argv.indexOf('--file');
 const seedFile  = fileIdx !== -1 ? process.argv[fileIdx + 1] : './seeds/enemies-f1.js';
 
-// Floor-scaled part budgets. §21.2: mob ≈ one on-band hit, elite ×12, boss ×25,
-// Super ×60 — of the FLOOR's mob HP, which doubles every floor (materials M-0).
+// §21.2 part budgets, in BAND UNITS (§12.7 errata 2026-08-18: the material band is
+// floor-relative and cancels inside a floor, so these numbers are the same on every
+// floor). --floor is kept only for reading a roster written in ABSOLUTE terms.
 const FLOOR_MOB_HP = { 1: 5, 2: 10, 3: 20, 4: 40, 5: 80, 6: 160, 7: 320, 8: 640, 9: 1280 };
 const RANK_RATIO   = { mob: 1, elite: 12, boss: 25, legendary: 60 };
+
+// ONLY MOBS ARE EXACT. Owner ruling 2026-08-18: "the only one we can decisively say
+// always dies in one meaningful shot is mobs" — elites and above should DIFFER from
+// one another, so §21.2's ratios are a centre with a tolerance band, not a law.
+// The gate exists to catch gross errors, not to flatten the roster.
+const TOLERANCE = { elite: [0.5, 2.0], boss: [0.5, 2.0], legendary: [0.5, 2.0] };
 // §7.1 — every combatant has a size, and §13 reads it for grapple legality.
 const SIZES = ['Small', 'Medium', 'Large', 'Huge'];
 const floorIdx = process.argv.indexOf('--floor');
@@ -63,7 +70,17 @@ function doctrineCheck(seeds, atFloor = floor) {
     const ratio = RANK_RATIO[e.tier];
     if (!ratio) { problems.push(`${e.name}: unknown tier "${e.tier}" (mob|elite|boss|legendary)`); continue; }
     const want = mobHp * ratio, got = partsSum(e);
-    if (got !== want) problems.push(`${e.name}: ${e.tier} part budget ${got}, doctrine wants ${want} (F${atFloor})`);
+    const tol = TOLERANCE[e.tier];
+    if (!tol) {
+      // Mobs are exact: one meaningful hit, every time, on every floor.
+      if (got !== want) problems.push(`${e.name}: mob part budget ${got}, doctrine wants exactly ${want} (F${atFloor})`);
+    } else {
+      const [lo, hi] = [Math.round(want * tol[0]), Math.round(want * tol[1])];
+      if (got < lo || got > hi) {
+        problems.push(`${e.name}: ${e.tier} part budget ${got} is outside ${lo}–${hi} ` +
+                      `(§21.2 centre ${want} ±tolerance, F${atFloor})`);
+      }
+    }
     if (e.tier === 'mob' && (e.bodyParts || []).length !== 1) {
       problems.push(`${e.name}: mobs are ONE part (E-0.2), found ${(e.bodyParts || []).length}`);
     }
@@ -93,8 +110,11 @@ async function run() {
     console.error('\nRefusing to run. Fix the seed file or pass the right --floor.');
     process.exit(1);
   }
+  const m = FLOOR_MOB_HP[floor];
   console.log(`§21.2 doctrine check PASSED — ${seeds.length} entries on the F${floor} ladder ` +
-              `(mob ${FLOOR_MOB_HP[floor]} · elite ${FLOOR_MOB_HP[floor] * 12} · boss ${FLOOR_MOB_HP[floor] * 25} · super ${FLOOR_MOB_HP[floor] * 60}).`);
+              `(mob ${m} exact · elite ~${m * 12} · boss ~${m * 25} · super ~${m * 60}, ±tolerance).`);
+  const spread = seeds.filter(e => e.tier !== 'mob').map(e => `${e.name} ${partsSum(e)}`).join(' · ');
+  if (spread) console.log(`Non-mob spread: ${spread}`);
   if (checkOnly) { console.log('--check: doctrine only, no DB touched.'); return; }
 
   require('dotenv').config({ path: path.join(__dirname, '.env') });
@@ -132,6 +152,6 @@ async function run() {
   await mongoose.disconnect();
 }
 
-module.exports = { doctrineCheck, diffFields, partsSum, FLOOR_MOB_HP, RANK_RATIO, SIZES };
+module.exports = { doctrineCheck, diffFields, partsSum, FLOOR_MOB_HP, RANK_RATIO, SIZES, TOLERANCE };
 
 if (require.main === module) run().catch(e => { console.error(e); process.exit(1); });

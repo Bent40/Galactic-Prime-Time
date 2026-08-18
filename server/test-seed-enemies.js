@@ -20,6 +20,22 @@ ok('the same roster fails at F3 (floor scaling is live)', doctrineCheck(f1, 3).l
 ok('an over-fat mob is caught',
    doctrineCheck([{ name: 'x', tier: 'mob', notes: '', bodyParts: [{ name: 'B', maxHp: 6 }] }], 1)
      .some(p => p.includes('part budget 6')));
+console.log('non-mob tolerance (owner ruling: only mobs are exact)');
+const elite = (hp) => [{ name: 'x', tier: 'elite', size: 'Medium', notes: 'n',
+                         bodyParts: [{ name: 'H', maxHp: 1 }, { name: 'T', maxHp: hp - 1 }] }];
+ok('an elite at 45 passes (the Chainbearer)', doctrineCheck(elite(45), 1).length === 0);
+ok('an elite at 78 passes (the Step-Warden)', doctrineCheck(elite(78), 1).length === 0);
+ok('an elite at 30 passes — the low edge', doctrineCheck(elite(30), 1).length === 0);
+ok('an elite at 120 passes — the high edge', doctrineCheck(elite(120), 1).length === 0);
+ok('an elite at 12 is caught as a gross error', doctrineCheck(elite(12), 1).some(p => p.includes('outside')));
+ok('an elite at 400 is caught as a gross error', doctrineCheck(elite(400), 1).some(p => p.includes('outside')));
+ok('a mob is still EXACT — 6 is rejected',
+   doctrineCheck([{ name: 'x', tier: 'mob', size: 'Medium', notes: '', bodyParts: [{ name: 'B', maxHp: 6 }] }], 1)
+     .some(p => p.includes('exactly 5')));
+ok('the shipped roster VARIES its elites', new Set(f1.filter(e => e.tier === 'elite').map(partsSum)).size > 1);
+ok('the shipped roster VARIES its bosses', new Set(f1.filter(e => e.tier === 'boss').map(partsSum)).size > 1);
+ok('every shipped mob is exactly 5', f1.filter(e => e.tier === 'mob').every(e => partsSum(e) === 5));
+
 ok('a multi-part mob is caught (E-0.2)',
    doctrineCheck([{ name: 'x', tier: 'mob', notes: '', bodyParts: [{ name: 'H', maxHp: 2 }, { name: 'T', maxHp: 3 }] }], 1)
      .some(p => p.includes('ONE part')));

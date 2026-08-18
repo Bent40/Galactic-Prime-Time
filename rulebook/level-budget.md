@@ -405,10 +405,18 @@ Almost nothing, and no blessed content is invalidated:
   floor-relative scalar and that sheets are written in band units. The catalog's own
   sentence is already the rule; it just needs to be *stated as* the rule.
 
-⚖ **The one genuine open question:** whether an *item* can outpace its floor —
-an Exceptional or apex-material weapon reading 6 band units instead of 3. It should,
-or gear stops mattering within a floor. That is a normal item-design lever and needs
-no new machinery.
+✅ **RULED: an item CAN outpace its floor.** An Exceptional, apex-material or
+authored weapon may read **above** its class baseline in band units — a 6 where the
+class says 3. *"Part of the fun."* **The band sets the era; the item earns its rank
+inside it.** Written into §12.7's errata.
+
+✅ **RULED: only MOBS are exact.** *"The only one we can decisively say always dies
+in one meaningful shot is mobs."* §21.2's elite/boss/super ratios are a **centre with
+a tolerance band**, and elites should **differ from one another** as a matter of
+course — a regenerator needs less raw HP than a lump of masonry. The seeder enforces
+mobs exactly and gives everything above ±tolerance, so the gate catches gross errors
+without flattening the roster. The F1 elites now run **45 · 48 · 52 · 68 · 78**, and
+the bosses **110 · 125 · 140**.
 
 ---
 

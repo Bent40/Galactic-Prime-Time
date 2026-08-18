@@ -178,6 +178,15 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - **E-0 is RULED (2026-08-18)** — the part-budget reading, **mobs = ONE part /
   elite+ = MULTI-part**, the gate/weak-system requirement, and mob carve policy.
   The seeder enforces all four and exits 1 on a violation.
+- **ONLY MOBS ARE EXACT (ruled).** A mob is always 5 band units — one meaningful hit,
+  every floor. **Elites and above should DIFFER from one another**; §21.2's ratios are
+  a centre with a **±tolerance band**, not a law. The gate catches gross errors without
+  flattening the roster. F1 elites run **45 · 48 · 52 · 68 · 78**, bosses **110 · 125 ·
+  140**, each number answering to its design (a regenerator needs less raw HP than
+  masonry does).
+- **An item CAN outpace its floor (ruled)** — an Exceptional/apex/authored weapon may
+  read above its class baseline in band units. The band sets the era; the item earns
+  its rank inside it.
 - **`rulebook/f1-enemy-pass.md`** is the Floor 1 roster — 19 entries
   (6+2 shared forest · 3 Easy · 4 Medium · 4 Hard), keyed to the Compendium's
   route beats (§4.2–4.4) and the Incineradile boss pattern (§3.1). **Nothing in
@@ -287,8 +296,8 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - **Nothing blessed is invalidated.** §21.2 is reinterpreted, not rewritten; the F1
   roster is untouched (F1 *is* band units); the hordes ruling becomes mechanical
   rather than flavour (an F1 mob met at F5 is 1/16th of an F5 unit). §12.7 needs a
-  clarifying errata stating the band is floor-relative — the catalog's own sentence
-  is already the rule.
+  clarifying errata stating the band is floor-relative — **written 2026-08-18** into
+  §12.7 of the rulebook.
 - ✅ **RULED: Architecture A, refined (L-11/L-14).** Weapons ride the **material
   band**; the §21.2 ladder and the whole F1 roster stand. **Stats are the KEY, not the
   gun** — trait growth buys the *right to hold* the weapon, part HP, skill points and

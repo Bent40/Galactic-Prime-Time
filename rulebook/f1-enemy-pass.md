@@ -160,20 +160,38 @@ need **horde counts** for these entries, which is now an E-4 item.
 
 Band: **F1 Forest ×2**. An on-band F1 weapon swings for roughly **4–6**.
 
-| Rank | Budget ⚖ | Reads as | Layout shape |
+| Rank | Budget | Reads as | Layout shape |
 |---|---|---|---|
-| **Mob** | **5** | one on-band hit | 1 part |
-| **Elite** | **60** (×12) | ~5 torso hits, plus its gate | 6–7 parts, torso ~24 |
-| **Boss** | **125** (×25) | a real fight with a discovery in it | 7 parts, torso ~45 |
-| **Super** | **300** (×60) | *do not* | 9 parts, no single part under 10 |
+| **Mob** | **exactly 5** | one on-band hit, **always** | 1 part |
+| **Elite** | **~60**, spread **30–120** ⚖ | its gate, then a real fight | 5–7 parts |
+| **Boss** | **~125**, spread **62–250** ⚖ | a fight with a discovery in it | 7 parts |
+| **Super** | **~300**, spread **150–600** ⚖ | *do not* | 9 parts, nothing under 10 |
+
+✅ **RULED 2026-08-18 — only mobs are exact.** *"The only one we can decisively say
+always dies in one meaningful shot is mobs."* Elites and above **should differ from
+one another**, and §21.2's ratios were always "first-pass ratios", not law. The
+seeder enforces mobs exactly and gives everything above a **±tolerance band** — the
+gate exists to catch gross errors, not to flatten the roster.
+
+**As shipped, the F1 non-mobs vary, and each number answers to its design:**
+
+| Entry | HP | Why that number |
+|---|---|---|
+| The Chainbearer | **45** | a straight fight you are *meant* to be able to walk away from |
+| The Kindler | **48** | his fuel can is the answer; out-damaging him was never the plan |
+| The Rack | **52** | it regenerates — raw HP is not its defence, the Crown is |
+| Mycelium Bloomkeeper | **68** | surface-immune trunk; the real fight is three 4 HP cords |
+| Step-Warden | **78** | masonry, and cosmetic damage until the Keystone |
+| Foreman Bex | **110** | a man, and he leaves at 40 regardless |
+| THE MASKED | **125** | the reference boss |
+| The Girl in the House | **140** | a demon, and a queen by Floor 2 |
+| Loong Kin | **300** | the reference super |
 
 **Sizes as assigned** ⚖ — Small: Camera Gnat, the Girl · Large: Husk-Moth Cloud,
 The Rack, Mycelium Bloomkeeper, The Chainbearer, **the Loong's Warden Form** ·
 Huge: Step-Warden, **the Loong's Loong Form** · everything else Medium.
 
-Standard elite layout ⚖: Head 10 · Torso 24 · Arms 6/6 · Legs 7/7 = 60.
-Standard boss layout ⚖: Head 14 · Torso 45 · Arms 12/12 · Legs 13/13 + one
-signature part 16 = 125.
+Layouts are per-entry, not templated — see each entry below.
 
 ---
 
@@ -259,8 +277,8 @@ to have killed.
 
 ### A-7 · The Rack (Antler-Crowned Stag) — elite
 The forest's landlord. It does not charge; it waits, and the wood closes.
-**Parts (60):** Crown **8** · Head 10 · Torso 24 · Foreleg L 6 · Foreleg R 6 ·
-Hindquarters 6.
+**Parts (52):** Crown **8** · Head 9 · Torso 20 · Foreleg L 5 · Foreleg R 5 ·
+Hindquarters 5.
 **Weak system — the Crown.** ⚖ While the Crown is above 0, every **other** part
 regains **1 HP per Clock reset**. Attrition against the body is a losing game
 and the party must notice why. Break the Crown (8) and the regrowth stops
@@ -273,8 +291,8 @@ crown. *This matters — see E-3.*
 
 ### A-8 · Mycelium Bloomkeeper — elite
 The network's gardener. It does not move from its patch, and its patch grows.
-**Parts (60):** Bloom-Head 12 · Trunk 24 · Root Cord A 4 · Root Cord B 4 ·
-Root Cord C 4 · Fruiting Arm L 6 · Fruiting Arm R 6.
+**Parts (68):** Bloom-Head 14 · Trunk 28 · Root Cord A 4 · Root Cord B 4 ·
+Root Cord C 4 · Fruiting Arm L 7 · Fruiting Arm R 7.
 **Gate — surface immunity while tethered.** ⚖ All damage to Bloom-Head and Trunk
 is **cosmetic** while any Root Cord lives. The Cords are visible, reachable, and
 4 HP each.
@@ -308,7 +326,7 @@ Teaching mob for "kill it properly, and mind the Clock."
 ### B-2 · The Chainbearer — elite
 It has held this chain since before the mural was painted. It will not give it
 up, and it cannot follow you out of the room.
-**Parts (60):** Head 10 · Torso 24 · Arm L 6 · Arm R 6 · Leg L 7 · Leg R 7.
+**Parts (45):** Head 8 · Torso 18 · Arm L 5 · Arm R 5 · Leg L 5 · Leg R 4.
 **Weak system — the doorway.** ⚖ It cannot leave the mural chamber. The party
 does not have to beat it: the **chain can be worked free in 2 Moments** under
 fire, and then they can simply go. Beating it is *allowed* and slower.
@@ -381,7 +399,7 @@ they are people, and the cameras are running (§17).
 
 ### C-2 · The Kindler — elite
 Carries the fuel. Enjoys the work.
-**Parts (60):** Head 10 · Torso 22 · Arm L 6 · Arm R 6 · Leg L 6 · Leg R 6 ·
+**Parts (48):** Head 8 · Torso 18 · Arm L 5 · Arm R 5 · Leg L 4 · Leg R 4 ·
 **Fuel Can (worn) 4**.
 **Weak system — he is his own liability.** ⚖ The Fuel Can is a targetable worn
 part at 4 HP. **Burn 5 on the Can** detonates it: **3-space radius, 2 Burn** —
@@ -398,7 +416,7 @@ in it. **He must survive this floor** — he is the F3 human-farm operator.
 *The name is mine, not the owner's; it needs blessing before it enters the
 library, because it becomes canon at F3.*
 
-**Parts (125):** Head 14 · Torso 45 · Arm L 12 · Arm R 12 · Leg L 13 · Leg R 13 ·
+**Parts (110):** Head 12 · Torso 40 · Arm L 10 · Arm R 10 · Leg L 11 · Leg R 11 ·
 **Pack 16**.
 
 **The win condition is the house, not the man (§21.3).** ⚖ Three ways this ends,
@@ -430,8 +448,8 @@ already knowing what it is. ⚖
 She is what the NPCs were right about. She is also a child in a burning house, and
 both are true.
 
-**Parts (125):** Head 14 · Torso 45 · Arm L 12 · Arm R 12 · Leg L 13 · Leg R 13 ·
-**Shadow 16** · **Size: Small**
+**Parts (140):** Head 16 · Torso 50 · Arm L 13 · Arm R 13 · Leg L 14 · Leg R 14 ·
+**Shadow 20** · **Size: Small**
 
 **She can be killed.** The 125 is real, there is no gate and no special weak
 system. She is a demon in a burning house and she can be put down. **What it costs
@@ -534,7 +552,7 @@ infection outright if they're willing to do that to a limb.
 
 ### D-2 · Step-Warden — elite
 An ambulatory section of staircase. The city built its own guards out of itself.
-**Parts (60):** Crown Block 12 · Body Mass 26 · **Keystone 6** ·
+**Parts (78):** Crown Block 16 · Body Mass 34 · **Keystone 6** ·
 Leg Column L 8 · Leg Column R 8.
 **Gate — surface immunity.** ⚖ Damage to Crown Block and Body Mass is cosmetic.
 It is masonry.

@@ -786,6 +786,37 @@ kit exists — the top of the ladder is polish-only.
   the ten-floor campaign — three sets of three story floors, then the Floor-10
   finale, which adds no band: it is fought with what you built). The catalog
   of record: `rulebook/item-drafting-materials.md`.
+
+> **Errata 2026-08-18 — the band is FLOOR-RELATIVE, and sheets are written in
+> band units.**
+>
+> The band multiplies **everything native to a floor** equally — weapon damage,
+> enemy HP, enemy damage, part HP, resist numbers. Because it multiplies both
+> sides of every exchange, **it cancels inside a floor and never appears on a
+> character sheet.** A greatsword is written as **3**, a mob as **5**, and a
+> torso as **7** on Floor 1 and on Floor 9 alike.
+>
+> **The band's job is comparison ACROSS floors**, and that is the whole of it:
+> it is what makes last floor's sword a letter-opener, last floor's elite a mob,
+> and a Floor-9 contestant a god beside a Floor-1 human. In absolute terms that
+> contestant carries a **17,920 HP torso** and swings for **1,536** — and none
+> of those digits are ever written down, because on their sheet it reads 35 and 3.
+>
+> This states as a rule what the catalog already asserts: *"the sheet plays
+> identically on every floor; only the numbers inflate,"* and an F9 mob at ~1.3k
+> HP *"still dies in one on-band swing."*
+>
+> **Consequences.** §21.2's ladder — mob 5 · elite ~60 · boss ~125 · Super ~300 —
+> is read as **band units, true on every floor**, not as a number that doubles.
+> The doubling column in the materials catalog is the same ladder written
+> absolutely; both are correct. **Only the contestant's body moves within the
+> ladder**, growing with total trait points, which is why a floor-9 contestant
+> survives roughly five times the hits a floor-1 one does.
+>
+> **An item may outpace its floor.** An Exceptional, apex-material or authored
+> weapon can read **above** its class baseline in band units — a 6 where the class
+> says 3 — and that is exactly where gear earns its place inside a floor. The
+> band sets the era; the item earns its rank within it.
 - **Parts are material capacity.** A weapon's parts (a sword: blade, guard,
   hilt, pommel — 4) set how many materials it can socket. No per-part effects:
   the **striking part** sets the damage band; every socketed material
