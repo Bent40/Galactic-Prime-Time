@@ -4,7 +4,17 @@
 
 ## Done
 
-- **F1 ENEMY PASS drafted (2026-08-18) — PROPOSAL, awaiting owner blessing.**
+- **F1 ENEMY PASS — drafted 2026-08-18, and SIX owner rulings landed the same day.**
+  Ruled: Foreman Bex's name · the Girl is **killable** (Beelzebub takes the throne
+  through the F2 rival; the unbent demons rampage leaderless; Bex's F3 farm survives
+  only under Beelzebub's eye) · the **Dissolution errata** (grace-and-hold on Mind,
+  one failure is permanent, escalation rides the source) · **enemy `size`** is now a
+  real field, and it makes the Loong's two forms a trap (Warden Form Large =
+  grappleable; Loong Form Huge = not) · the **crystal is Nullrot's plague**, one
+  disease across three routes, with a tempting mist whose inhalation route is
+  Infected + Suffocation. Still open: E-0.1–E-0.4, and whether Infected T3 = statue.
+
+- **(original draft note)**
   `rulebook/f1-enemy-pass.md` + `server/seeds/enemies-f1.js` +
   `server/seed-enemies.js` (+ `server/test-seed-enemies.js`, 16 checks, the
   app's first automated tests).

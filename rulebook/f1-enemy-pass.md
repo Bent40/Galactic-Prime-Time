@@ -65,7 +65,31 @@ It is not decoration. §13 makes **Large** (one size over a Medium contestant)
 grappleable and **Huge** (two sizes over) not — which is the whole trap in the
 Loong Kin encounter (D-3).
 
-**Vocabulary bridge (not a ruling, just a note):** §21.1 calls the fourth rank
+### E-0.6 ⚖ The crystal is a **disease**, and it is Nullrot's — ✅ **RULED 2026-08-18**
+
+The Hard route's crystal is not scenery and not a golem theme. It is **the plague**,
+and it is **part of Nullrot's story** — the same disease the Easy route's chained man
+is *simultaneously spreading and curing* in the capital at F3 (§4.3), and the same one
+the Loong is *preventing the spread of* at F3 (§4.4).
+
+**That unifies three routes into one plague.** It also means the Hard route's F1 now
+seeds its own F3 payoff instead of arriving there cold.
+
+**Mechanically it uses only what the book already has** — no new condition class:
+
+| Exposure | What it does |
+|---|---|
+| **Contact** | **Infected T1** on the touched **part**, advancing per §8.1. Localised, visible, breakable off a limb |
+| **Inhalation** | **Infected T1 *plus* Suffocation** (§8.2 — torso only, tierless 2-Clock death timer). Precedent: Pneumotoxin "starts the Suffocation timer once it reaches the torso" |
+
+🔴 **The one thing still needing a ruling: what Infected T3 does.** Proposal — instead
+of the normal 2-Clock death timer, **crystallisation completes and the contestant is a
+statue: not dead, and not recoverable until the F3 cure exists.** That is a
+player-removed-from-play severity in the same class as Dissolution, so it is your call,
+not mine. The alternative is that T3 just kills normally and the horror stays in the
+fiction.
+
+**Vocabulary bridge
 **Super Boss**; the admin UI's tier list predates that and calls it
 `legendary`. The seed file uses `legendary` because that is what the model
 accepts. Renaming the enum is app work, out of scope here.
@@ -106,9 +130,9 @@ reuse is.
 | **A — The Forest** | 6 mobs · 2 elites | every party |
 | **B — Easy: the grand staircase** | 1 mob · 1 elite · 1 boss | Easy only |
 | **C — Medium: the haunted house** | 1 mob · 1 elite · 1 boss · 1 unfightable | Medium only |
-| **D — Hard: the moving city** | 1 mob · 1 elite · 1 super | Hard only |
+| **D — Hard: the moving city** | 2 mobs · 1 elite · 1 super | Hard only |
 
-**18 entries total.** Every party meets 8 of them; the route adds 3–4.
+**19 entries total.** Every party meets 8 of them; the route adds 3–4.
 
 ---
 
@@ -397,19 +421,56 @@ crystallized. It is escorted through the desert at F2 and hides in the capital
 at F3 — **it survives, and it must.**
 
 ### D-1 · Crystallized Citizen — mob
-They are still standing where they stopped. Some are mid-sentence.
-**Part:** Body 5.
-**Attack:** 2 Crush, slow, and it will follow you across the whole floor.
-**Gate:** ⚖ **Bleed does nothing** — there is no blood in it. **Crush only**
-(Burn and Chill are cosmetic; Poison and Infection have no entry condition per
-§8.2). The party's Bleed-heavy F1 kit is suddenly the wrong kit. Teaching mob
-for damage-type gates.
-**Carve (room gather, per E-0.4):** **Obsidian Shard** ⭐ ⚖ — the crystal is
-close enough to work.
-**Colour:** `#9ad4e0`
-**Note for the GM:** these are the citizens the Loong is guarding. Every one the
-party breaks is evidence for the argument they are about to make — and a thing
-they did to a person. Do not editorialise; just keep count where they can see it.
+`#9ad4e0` · **Size: Medium** · They are still standing where they stopped. Some are
+mid-sentence, and **all of them are facing the same way** — toward wherever the mist
+was.
+
+| | |
+|---|---|
+| **Parts** | Body **5** |
+| **Attack** | 2 Crush — slow, and it will follow you across the whole floor |
+| **Gate** | ⚖ **Bleed does nothing** — there is nothing left in it to bleed. **Crush only.** Burn and Chill are cosmetic; Poison and Infection have no entry condition (§8.2) |
+| **Carve** | Room gather: **Obsidian Shard** ⭐ ⚖ — and taking it is looting a person |
+
+**It is a host, not scenery.** The crystal is a disease and this is what it built. It
+is not finished with them, and **contact spreads** (D-1b). **Breaking it is the cure**
+— and it is also killing a person who is still in there. That is the floor's whole
+argument, and the party has to make it with their hands before they make it out loud
+to the Loong.
+
+The Crush-only gate is no longer a puzzle. **The only thing that works is the thing
+that shatters them.**
+
+**GM note:** these are the citizens the Loong is guarding. Every one the party breaks
+is evidence for the argument they're about to make — *and* a thing they did to a
+person. Don't editorialise; just keep count where they can see it.
+
+### D-1b · Crystal Spore Mist — mob ✅ **new 2026-08-18**
+`#bfe9f5` · **Size: Large** · A twinkling mist. It is genuinely beautiful, it drifts
+toward warmth, and it is **the single most dangerous thing on Floor 1**.
+
+| | |
+|---|---|
+| **Parts** | Mist **5** |
+| **Gate** | ⚖ **Immune to single-target damage.** Cones, lines, area and wind move it; a sword does nothing. Burn disperses a 2-space pocket for one Clock |
+| **Carve** | None. Don't let anyone bottle it — if they try, that's a story, not a loot roll |
+
+**It tempts, and there is no roll.** It glitters like a find. The party walks toward
+it or they don't — that's a choice, not a save, and GPT doesn't roll to hit anyway.
+**Every crystallized citizen on this floor walked toward it.** Their poses say so, and
+a party that looks will notice they're all facing the same way.
+
+**Two exposure routes, and they are not the same** (E-0.6):
+
+- **Contact** → **Infected T1** on that **part**, advancing per §8.1. Localised,
+  visible, breakable off a limb.
+- **Inhalation** → **Infected T1 *plus* Suffocation** (§8.2 — torso only, tierless
+  2-Clock death timer). **This one is deadly immediately.**
+
+Counterplay is E-6, and it mostly already exists: **Forest Resin** for contact, a
+respirator for the air, **Antiseptic Wash** for the tiers, and **Burn T2** clears
+infection outright if they're willing to do that to a limb.
+
 
 ### D-2 · Step-Warden — elite
 An ambulatory section of staircase. The city built its own guards out of itself.
@@ -504,6 +565,28 @@ the route stack has the lock, and neither one tells you.
 
 ---
 
+## E-6 — Safety measures (because the mist earns them)
+
+Inhaling crystal is the deadliest thing on Floor 1, so the counterplay has to be real
+and reachable. **Almost all of it already exists** — this pass makes existing kit
+load-bearing rather than inventing a new answer:
+
+| Measure | Covers | Status |
+|---|---|---|
+| **Sealed respirator** ⚖ | inhalation only — **not** contact | new; wants a Batch-A-style template |
+| **Forest Resin** smeared on skin and gear ⚖ | contact — the crystal grips the resin and peels off with it, one coat per exposure | **already an F1 material** (M-1) and already a consumable ingredient |
+| **Antiseptic Wash** | −1 Infected tier per use, 2 uses | **already seeded** (Batch A) |
+| **Burn T2** | *clears infection outright* (§8.2) | **already in the book.** Cauterising a crystallising limb works, and it is exactly as ugly as it sounds |
+
+The shape to keep: **the forest sells the answer to the floor's worst thing**, the same
+way The Rack sells the Mistletoe that answers THE MASKED (E-3). A party that gathered
+resin walks in protected. A party that didn't has Burn T2 and a hard choice.
+
+⚖ Only the respirator is genuinely new. If you'd rather it not exist, Resin plus Burn
+is already a complete answer — the respirator only makes it *comfortable*.
+
+---
+
 ## E-4 — What this pass does NOT cover (the backlog)
 
 | Item | Note |
@@ -515,6 +598,9 @@ the route stack has the lock, and neither one tells you.
 | ~~Foreman Bex's name~~ | **BLESSED 2026-08-18** |
 | ~~The Girl's F1 fightability~~ | **RULED 2026-08-18** — killable; the cost is the Beelzebub chain (C-4) |
 | **Level budget per route / per combat** | ⚖ **Upstream of everything here.** These statlines assume roughly the level-6 party. Until the progression curve is planned, every number is calibrated against a guess |
+| **Infected T3 = statue?** | 🔴 open — see E-0.6. Player-removed-from-play severity, owner call |
+| **The respirator template** | ⚖ the only genuinely new item E-6 asks for |
+| **Nullrot's direction of causality** | The crystal is his story (E-0.6) — but is he patient zero, the antibody, or both? Changes what the Easy route's chained man *is* |
 | **F2/F3 rosters** | The bands exist (M-2 ×4, M-3 ×8) but are sketches; the rosters do not |
 | **Lotus Root has no enemy source** | Correct as written — M-1 lists it as a gather ingredient, not a carve. Noted so it is not mistaken for an omission |
 | **`legendary` → `superboss`** | The model enum disagrees with §21.1's vocabulary. App work, not content work |

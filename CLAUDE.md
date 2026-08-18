@@ -175,8 +175,8 @@ Skills are granted to players by templateId. The player sheet joins template dat
   struck through).
 
 ## F1 Enemy Pass (PROPOSAL, added 2026-08-18)
-- **`rulebook/f1-enemy-pass.md`** is the Floor 1 roster proposal — 18 entries
-  (6+2 shared forest · 3 Easy · 4 Medium · 3 Hard), keyed to the Compendium's
+- **`rulebook/f1-enemy-pass.md`** is the Floor 1 roster proposal — 19 entries
+  (6+2 shared forest · 3 Easy · 4 Medium · 4 Hard), keyed to the Compendium's
   route beats (§4.2–4.4) and the Incineradile boss pattern (§3.1). **Nothing in
   it is ruled yet**; E-0 lists the four interpretation calls that need blessing,
   E-4 is the backlog.
@@ -204,6 +204,21 @@ Skills are granted to players by templateId. The player sheet joins template dat
   `item-drafting-materials.md` M-1, and all of them resolve against
   `seeds/items-materials-f1.js`. Mobs don't carve individually (E-0.4) — a cleared
   room is one gather roll.
+
+## The crystal plague (RULED 2026-08-18)
+- **The Hard route's crystal IS Nullrot's disease** — the same plague the Easy route's
+  chained man spreads-and-cures at F3 (§4.3) and the Loong contains at F3 (§4.4).
+  **Three routes, one plague**; the Hard route's F1 now seeds its own F3 payoff.
+- **Crystal Spore Mist** (`enemies-f1.js`) is the vector: a twinkling mist that
+  **tempts** — no roll, it just looks like a find, and every crystallized citizen
+  walked toward it. **Contact** → Infected on that part. **Inhalation** → Infected
+  **plus Suffocation** (§8.2, torso-only 2-Clock timer). Deadly immediately.
+- Crystallized Citizens are **hosts**, not scenery. Crush-only isn't a puzzle any more:
+  the only thing that works is the thing that shatters a person who is still in there.
+- **Counterplay already existed** — Forest Resin (contact), Antiseptic Wash (tiers),
+  **Burn T2 clears infection outright** (§8.2). Only a respirator is new. See E-6.
+- **OPEN:** whether Infected T3 = statue (out of play until the F3 cure) or just death.
+  Player-removed-from-play severity — owner call, see E-0.6.
 
 ## Dissolution errata (2026-08-18 — v1 §8.2 + §10)
 - The flat **2-Clock timer is gone**. Now: **one Clock of grace**, then a **Hold
