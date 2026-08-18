@@ -54,6 +54,17 @@ above carve a **named** material (§12.7 "a boss yields its named material");
 mob rooms yield one gather from the floor's band. Named carves are listed per
 entry below.
 
+### E-0.5 ⚖ Every enemy carries a **size** — and it is now a real field
+
+§7.1 says *"every combatant has a size: Small / Medium / Large / Huge. Humans are
+Medium. Effects referencing size read this field."* The `Enemy` model had no such
+field, and §13's grapple rules already depended on it. **Added 2026-08-18** to the
+model, the admin panel, the API and every entry below.
+
+It is not decoration. §13 makes **Large** (one size over a Medium contestant)
+grappleable and **Huge** (two sizes over) not — which is the whole trap in the
+Loong Kin encounter (D-3).
+
 **Vocabulary bridge (not a ruling, just a note):** §21.1 calls the fourth rank
 **Super Boss**; the admin UI's tier list predates that and calls it
 `legendary`. The seed file uses `legendary` because that is what the model
@@ -71,6 +82,10 @@ Band: **F1 Forest ×2**. An on-band F1 weapon swings for roughly **4–6**.
 | **Elite** | **60** (×12) | ~5 torso hits, plus its gate | 6–7 parts, torso ~24 |
 | **Boss** | **125** (×25) | a real fight with a discovery in it | 7 parts, torso ~45 |
 | **Super** | **300** (×60) | *do not* | 9 parts, no single part under 10 |
+
+**Sizes as assigned** ⚖ — Small: Camera Gnat, the Girl · Large: Husk-Moth Cloud,
+The Rack, Mycelium Bloomkeeper, The Chainbearer, **the Loong's Warden Form** ·
+Huge: Step-Warden, **the Loong's Loong Form** · everything else Medium.
 
 Standard elite layout ⚖: Head 10 · Torso 24 · Arms 6/6 · Legs 7/7 = 60.
 Standard boss layout ⚖: Head 14 · Torso 45 · Arms 12/12 · Legs 13/13 + one
@@ -249,9 +264,11 @@ See E-3.
    and he apologises between attacks. Backhand 3 Crush; a grab that pulls a
    contestant to the mural.
 2. **The Mask Speaks** *(≤60 total)* — the voice changes. Gains a **Dissolution
-   aura** ⚖: any contestant who ends a Clock adjacent begins a Dissolution timer
-   (§8.2 — tierless, 2 Clocks, pauses when the source is removed). The room stops
-   being a fight and starts being a countdown.
+   aura** ⚖: any contestant who ends a Clock adjacent begins Dissolution under the
+   2026-08-18 errata (§8.2 — one Clock of grace, then the climbing Hold Threshold).
+   **Escalation +1 per Moment** — it is a haunted object, not a god. Leaving the
+   aura freezes the threshold where it stands. The room stops being a fight and
+   starts being a countdown, and **the GM says the remaining Moments out loud**.
 3. **The Collapse** *(≤25 total, **or** the moment the chain is set)* — the
    ceiling starts coming down. **3-Clock** ⚖ timer to be out. Falling stone is
    environmental (§14: never dodged). If the chain is set, he stops fighting and
@@ -325,26 +342,49 @@ brought to 0, which names the buyers. This is the only F1 way to reach F3's farm
 already knowing what it is. ⚖
 **Colour:** `#a03a3a`
 
-### C-4 · ⛔ The Girl in the House — boss statline, **not a fight**
-She is what the NPCs were right about. She is also a child in a burning house,
-and both are true.
+### C-4 · The Girl in the House — boss (125) ✅ **RULED 2026-08-18**
+She is what the NPCs were right about. She is also a child in a burning house, and
+both are true.
 
 **Parts (125):** Head 14 · Torso 45 · Arm L 12 · Arm R 12 · Leg L 13 · Leg R 13 ·
-**Shadow 16**.
+**Shadow 16** · **Size: Small**
 
-**Statted so the GM can say no with numbers.** ⚖ Her F1 role is the **brand**,
-not a fight. She asks to be fed; she grants the demonic brand (immunity to
-noble-class presence/Dissolution — the thing the F2 Demonic Noble encounter is
-built around) and faction points.
+**She can be killed.** The 125 is real, there is no gate and no special weak
+system. She is a demon in a burning house and she can be put down. **What it costs
+is the floor above.**
 
-**Presence (this is live even though the fight is not):** ⚖ noble-class presence.
-An unbranded contestant who refuses her, in the room, begins a **Dissolution**
-timer (§8.2). The brand is the answer, and taking the brand is a *choice with a
-bill attached* — she is a demonic queen at F2.
+**The chain, if she dies:**
 
-**Weak system, if the table forces it:** none written. **A party that attacks her
-at F1 should lose.** If the owner wants her winnable here, that is a design
-decision that changes F2 and F3, and it should be ruled, not improvised.
+1. **The throne empties.** She was the *director*. Her god collapses with her — no
+   queen, no congregation, no prayers.
+2. **Beelzebub takes the vacancy, and he uses the rival.** The demon who helped
+   humans and wanted to overthrow her is exactly the useful shape: already
+   positioned, already ambitious, already trusted by the humans he protected. **He
+   does not know whose instrument he has become**, and neither does the party.
+3. **The demons who did not bend the knee are just rampaging monsters.**
+   Leaderless, agenda-less, pure threat. This is *why* the rampage gets worse
+   rather than better — it is a schism, not an absence.
+4. **F2 flips.** The assassination beat still happens, but the rival is now
+   Beelzebub's **viceroy** rather than a rebel — the party is either killing his
+   man, or being hired by him and not told by whom.
+5. **F3: Bex runs the farm under Beelzebub's watching eye, and that is the only
+   reason it is still intact.** The humans inside are alive because they are useful
+   to a Prince of Demons; the ones outside are hunted in the dark by the unbent.
+   The farm stops being an atrocity and becomes **protection, sold at a price** —
+   and Foreman Bex's ledger is a Beelzebub document he may not know he is keeping.
+
+**Sparing her** is the other bill: the brand's price, and a demonic queen at F2 —
+but the rival stays a real rebel, and Beelzebub never gets a foot in the capital.
+**Neither option is safe, and the party will not learn that until Floor 3.**
+
+**Her F1 role is still the brand.** She asks to be fed; she grants the demonic
+brand (immunity to noble-class presence/Dissolution — what the F2 Demonic Noble
+encounter is built around) plus faction points.
+
+**Presence:** noble-class. An **unbranded** contestant who refuses her, in the
+room, begins Dissolution (§8.2). **Escalation +2 per Moment** — she is noble-class,
+and at F2 she is a queen. Half the Moments of a haunted object. Say the number out
+loud.
 **Colour:** `#6a2a6a`
 
 ---
@@ -384,48 +424,63 @@ Keystone is reachable. Bait it, get behind it, or have someone tall.
 **Carve:** **Obsidian Shard** ⭐ (guaranteed, from the Keystone).
 **Colour:** `#7a8fa0`
 
-### D-3 · ☠☠ LOONG KIN — SUPER BOSS (300) ⚖
+### D-3 · ☠☠ LOONG KIN — SUPER BOSS (300) ⚖ · **two forms**
 It has guarded a city that has been empty for a very long time. Nobody has told
 it. It is not stupid; it is *loyal*, which is worse.
+
+| Form | What it is | Size |
+|---|---|---|
+| **Warden Form** | a woman, **2.5 m**, towering over everyone in the room | **Large** |
+| **Loong Form** | buildings — hundreds of metres, and it does not obviously end | **Huge** |
+
+The `size` field carries **Huge**, because that is the form the combat rules read.
+The 300-point statline below **is the Loong Form**.
 
 **Parts (300):** Head 30 · Neck 25 · Body Coil (fore) 55 · Body Coil (mid) 55 ·
 Body Coil (rear) 45 · Foreclaw L 20 · Foreclaw R 20 · **Whiskers 10** · Tail 40.
 
-**THE WIN CONDITION IS THE CONVERSATION.** ⚖ The statline exists so that "let's
-just fight it" is legible as a bad idea *from the numbers*, before anyone
-commits. Per §21.3, the position that makes a killing hit possible is, here, a
-sentence: **that the city is abandoned, and its citizens are the crystal.**
-Evidence beats rhetoric — a crystallized citizen carried up the stairs is the
-argument. Charm helps; **proof is what actually lands.**
+#### The size difference is the trap, and it falls straight out of the book
 
-**The Whiskers (10) are the tell.** ⚖ They are sensory: it reads truth through
-them at close range. A party that notices this can work out that it *cannot be
-lied to* — which is why the honest argument is the only one that works, and why
-attacking the Whiskers to "blind" it is the single worst move available.
+Warden Form is **Large** — exactly **one** size larger than a Medium contestant —
+so **§13 makes grappling her legal**. Loong Form is **Huge**, two sizes larger, so
+it cannot be grappled at all, and §21.3 makes it immune to grapple-Suffocation
+besides.
 
-**It survives.** It is escorted at F2 and hides in the capital at F3. If the
-party kills it, that route ends at F1 and the owner should be told at the table
-what they just spent.
+**You can lay hands on the woman. You cannot lay hands on the dragon. Doing the
+first causes the second.** Don't warn them; let the size line do the work.
 
-**Phases — what happens if they attack anyway:**
-1. **Warning** *(first attack)* — it does not retaliate. It coils, and it says
-   so. One free Clock to stop. ⚖
-2. **The Coil** *(≤240)* — it stops being polite. Constriction (§13 grapple, and
-   it is two-plus sizes larger — **the party cannot grapple it and it is immune
-   to grapple-Suffocation**, §13/§21.3), 6 Crush, and it repositions the fight
-   onto the stairs where falling applies (§21.5).
-3. **Storm-Breath** *(≤150)* — a 10-hex line ⚖, 6 Chill, terrain becomes
-   difficult (§21.4). Dodge Threshold **7** with the §14 counter-ladder:
-   Reflexes 7 auto-dodge + 1 space, Reflexes 9 auto-dodge + counterattack, below
-   7 the 1d4 fallback.
-4. **It Decides You Are Not Contestants** *(≤60)* — it stops treating the fight
-   as an interruption. **A TPK is the expected outcome and the GM should say so
-   out loud when this phase opens.** ⚖ Retreat is still open; the stairs are long.
+**Warden Form has no separate HP pool.** The first meaningful wound — or any
+grapple — triggers the Turn, and the Loong enters at a **full 300**. There is no
+cheap window and no chip damage: hitting her is strictly worse than not.
 
-**Carve: NONE.** **Loong-Scale is shed, not taken** (materials catalog M-5 —
-APEX/DIVINE, authored-only, never pooled, never sold). ⚖ **If it is persuaded,
-it sheds one scale**, freely, as thanks. That is the only way that material
-enters the world, and it should stay that way.
+**THE WIN CONDITION IS THE CONVERSATION.** ⚖ The statline exists so "let's just
+fight it" is legible as a bad idea **from the numbers**. Per §21.3 the position
+that makes a killing hit possible is, here, a sentence: *the city is abandoned, and
+its citizens are the crystal.* Evidence beats rhetoric — a crystallized citizen
+carried up the stairs is the argument. Charm helps; **proof is what lands.**
+
+**The truth-sense is the tell, and it runs in both forms** ⚖ — the Whiskers (10)
+are only where you can *see* it. It reads truth at close range. A party that
+notices can work out that it **cannot be lied to**, which is why the honest
+argument is the only one that works, and why attacking the Whiskers to "blind" it
+is the worst move available.
+
+**It survives.** Escorted at F2, hides in the capital at F3. If the party kills it,
+that route ends at F1 and they should be told at the table what they just spent.
+
+**Phases**
+
+| # | Name | Trigger | What happens |
+|---|---|---|---|
+| 0 | **Warden Form** | the encounter opens here | A woman, 2.5 m, and she has to look down at everyone. **Large — grappleable.** Polite, patient, and patient for a very long time. This is the whole encounter if the party is any good: make the argument, bring the evidence, **never touch her** |
+| 1 | **The Turn** | first meaningful wound, **or** any grapple, **or** the argument fails | She unfolds. Hundreds of metres of her, the far end somewhere out past the stairs. **Huge — no longer grappleable.** Enters at a full 300. It does not retaliate on the first Clock; it coils, and it says so. **That Clock is the last exit** |
+| 2 | **The Coil** | ≤240 | Constriction. 6 Crush, and it repositions the fight onto the stairs where falling applies (§21.5) |
+| 3 | **Storm-Breath** | ≤150 | 10-hex line ⚖, 6 Chill, difficult terrain. **Dodge Threshold 7** with the §14 ladder: Reflexes 7 → auto-dodge + 1 space · Reflexes 9 → auto-dodge + counterattack · below 7 → 1d4 |
+| 4 | **It Decides You Are Not Contestants** | ≤60 | It stops treating the fight as an interruption. **A TPK is expected and the GM should say so out loud when this phase opens** ⚖. Retreat is still open; the stairs are long, and it is longer |
+
+**Carve: NONE.** Loong-Scale is **shed, not taken** (M-5 — APEX/DIVINE,
+authored-only, never pooled, never sold). ⚖ **If it is persuaded, it sheds one
+scale**, freely, as thanks. That is the only way that material enters the world.
 **Colour:** `#2a8f7a`
 
 ---
@@ -457,8 +512,9 @@ the route stack has the lock, and neither one tells you.
 | **F1 terrain blocks** | §21.4 wants three answers per terrain. The forest, the stairwell, the burning house and the moving city all need one; none is written |
 | **Exposure/viewer values per enemy** | §17 pays out for spectacle. No enemy below carries a viewer number |
 | **Token/loot payouts** | §19.1 currencies and §17.6 box drops per rank are not assigned |
-| **Foreman Bex's name** | ⚖ mine, not the owner's. It becomes canon at F3 — bless or replace before seeding |
-| **The Girl's F1 fightability** | Deliberately unwritten. Ruling it winnable changes F2 and F3 |
+| ~~Foreman Bex's name~~ | **BLESSED 2026-08-18** |
+| ~~The Girl's F1 fightability~~ | **RULED 2026-08-18** — killable; the cost is the Beelzebub chain (C-4) |
+| **Level budget per route / per combat** | ⚖ **Upstream of everything here.** These statlines assume roughly the level-6 party. Until the progression curve is planned, every number is calibrated against a guess |
 | **F2/F3 rosters** | The bands exist (M-2 ×4, M-3 ×8) but are sketches; the rosters do not |
 | **Lotus Root has no enemy source** | Correct as written — M-1 lists it as a gather ingredient, not a carve. Noted so it is not mistaken for an omission |
 | **`legendary` → `superboss`** | The model enum disagrees with §21.1's vocabulary. App work, not content work |

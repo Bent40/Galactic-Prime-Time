@@ -3,8 +3,11 @@ import { apiFetch } from '../../api.js';
 
 const BLANK_BP    = { name: '', maxHp: 3 };
 const BLANK_PHASE = { name: 'Phase', description: '', hpThreshold: '' };
-const BLANK = { name: '', tier: 'mob', color: '#ff2255', description: '', notes: '', bodyParts: [], phases: [] };
+const BLANK = { name: '', tier: 'mob', size: 'Medium', color: '#ff2255', description: '', notes: '', bodyParts: [], phases: [] };
 const TIERS = ['mob', 'elite', 'boss', 'legendary'];
+// Rulebook §7.1 — every combatant has a size; humans are Medium. §13 reads it for
+// grapple legality (no more than one size larger) and grapple-Suffocation immunity.
+const SIZES = ['Small', 'Medium', 'Large', 'Huge'];
 const TIER_COLOR = { mob: 'var(--muted)', elite: 'var(--cyan)', boss: 'var(--gold)', legendary: 'var(--purple)' };
 
 const DEFAULT_BODY_PARTS = [
@@ -137,6 +140,14 @@ function EnemyForm({ value, onChange }) {
           </select>
         </div>
         <div className="field-group">
+          <label className="field-label">Size</label>
+          <select className="fi" value={value.size || 'Medium'} onChange={e => onChange({ ...value, size: e.target.value })}>
+            {SIZES.map(sz => <option key={sz} value={sz}>{sz}</option>)}
+          </select>
+        </div>
+      </div>
+      <div className="modal-grid2" style={{ marginBottom: 8 }}>
+        <div className="field-group">
           <label className="field-label">Tracker Color</label>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <input type="color" value={value.color} onChange={e => onChange({ ...value, color: e.target.value })}
@@ -144,16 +155,14 @@ function EnemyForm({ value, onChange }) {
             <span style={{ fontSize: 11, color: 'var(--muted)' }}>{value.color}</span>
           </div>
         </div>
-      </div>
-      <div className="modal-grid2" style={{ marginBottom: 8 }}>
         <div className="field-group">
           <label className="field-label">Description</label>
           <input className="fi" value={value.description} onChange={e => onChange({ ...value, description: e.target.value })} placeholder="Short description..." />
         </div>
-        <div className="field-group">
-          <label className="field-label">Notes</label>
-          <textarea className="fi" value={value.notes} onChange={e => onChange({ ...value, notes: e.target.value })} placeholder="Abilities, weaknesses, lore..." style={{ minHeight: 52 }} />
-        </div>
+      </div>
+      <div className="field-group" style={{ marginBottom: 8 }}>
+        <label className="field-label">Notes</label>
+        <textarea className="fi" value={value.notes} onChange={e => onChange({ ...value, notes: e.target.value })} placeholder="Gate, weak system, attacks, carve..." style={{ minHeight: 72, width: '100%', boxSizing: 'border-box' }} />
       </div>
       <BodyPartsEditor
         parts={value.bodyParts || []}
@@ -221,8 +230,11 @@ export default function EnemiesSection({ token, showToast, onEnemiesChange }) {
                 <div key={e._id} className="enemy-card" style={{ borderLeft: `3px solid ${e.color}` }}>
                   <div className="enemy-card-header">
                     <span className="enemy-card-name" style={{ color: e.color }}>{e.name}</span>
-                    <span className="badge badge-muted" style={{ borderColor: TIER_COLOR[e.tier], color: TIER_COLOR[e.tier] }}>
-                      {e.tier}
+                    <span style={{ display: 'flex', gap: 4 }}>
+                      <span className="badge badge-muted" title="Size (§7.1)">{e.size || 'Medium'}</span>
+                      <span className="badge badge-muted" style={{ borderColor: TIER_COLOR[e.tier], color: TIER_COLOR[e.tier] }}>
+                        {e.tier}
+                      </span>
                     </span>
                   </div>
                   {e.description && <div className="enemy-card-desc">{e.description}</div>}
@@ -250,7 +262,7 @@ export default function EnemiesSection({ token, showToast, onEnemiesChange }) {
                   )}
                   {e.notes && <div className="enemy-card-notes">{e.notes}</div>}
                   <div className="item-card-actions">
-                    <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...e, bodyParts: e.bodyParts ? [...e.bodyParts] : [], phases: e.phases ? [...e.phases] : [] })}>Edit</button>
+                    <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ size: 'Medium', ...e, bodyParts: e.bodyParts ? [...e.bodyParts] : [], phases: e.phases ? [...e.phases] : [] })}>Edit</button>
                     <button className="btn btn-danger btn-xs" onClick={() => del(e._id)}>Delete</button>
                   </div>
                 </div>

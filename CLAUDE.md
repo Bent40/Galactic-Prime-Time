@@ -195,10 +195,32 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - `node test-seed-enemies.js` — 16 dependency-free checks over the doctrine gate
   and the array-aware diff. The DB create/diff path is **not** covered (no mongod
   in the dev container); it is a near-verbatim clone of the proven `seed-affixes.js`.
+- **Enemies carry a `size`** (`Small|Medium|Large|Huge`, §7.1) — added 2026-08-18 to
+  `models/Enemy.js`, `routes/enemies.js` (both POST and PUT whitelist it), and
+  `admin/EnemiesSection.jsx`. It is not decoration: §13 makes **Large** grappleable
+  by a Medium contestant and **Huge** not, which is the whole trap in the Loong Kin
+  encounter (Warden Form Large ↔ Loong Form Huge).
 - Carve hooks: every elite and boss names an F1-band material from
   `item-drafting-materials.md` M-1, and all of them resolve against
   `seeds/items-materials-f1.js`. Mobs don't carve individually (E-0.4) — a cleared
   room is one gather roll.
+
+## Dissolution errata (2026-08-18 — v1 §8.2 + §10)
+- The flat **2-Clock timer is gone**. Now: **one Clock of grace**, then a **Hold
+  Threshold** equal to `1 + Moments elapsed`, checked against **Mind** on §14's
+  mechanism (Mind ≥ threshold → auto-hold; else Mind + the Mind threshold die).
+  The check is **free** — no Moment, no free-action slot. **One failure is
+  permanent removal**; there is no second roll and no grace Moment.
+- §14 obliges the GM to announce when a threshold is unreachable, so **the table is
+  told exactly how many Moments remain**. That disclosure is the bargain the
+  harshness rests on.
+- Removing the cause **freezes** the threshold (never resets). Psychic resistance
+  now buys **+1 Clock of grace per tier** instead of slowing a timer.
+- **Escalation rate rides the SOURCE** — haunted object +1/Moment, noble-class or
+  divine +2/+3. That is the knob that keeps Dissolution lethal against a Mind
+  farmed into the 20s; the victim's stat is not where difficulty is expressed.
+- Owner-approved; the campaign has not met the mechanic yet. **Not yet propagated**
+  to the game repo's `rules-addendum.md` or the Godot sim (4 files) — see backlog.
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

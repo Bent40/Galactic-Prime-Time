@@ -30,6 +30,8 @@ const seedFile  = fileIdx !== -1 ? process.argv[fileIdx + 1] : './seeds/enemies-
 // Super ×60 — of the FLOOR's mob HP, which doubles every floor (materials M-0).
 const FLOOR_MOB_HP = { 1: 5, 2: 10, 3: 20, 4: 40, 5: 80, 6: 160, 7: 320, 8: 640, 9: 1280 };
 const RANK_RATIO   = { mob: 1, elite: 12, boss: 25, legendary: 60 };
+// §7.1 — every combatant has a size, and §13 reads it for grapple legality.
+const SIZES = ['Small', 'Medium', 'Large', 'Huge'];
 const floorIdx = process.argv.indexOf('--floor');
 const floor    = floorIdx !== -1 ? Number(process.argv[floorIdx + 1]) : 1;
 
@@ -43,7 +45,7 @@ const normPhase = (a) => JSON.stringify((a || []).map(p => ({ name: p.name, desc
  * bookkeeping never reads as a difference. Exported for testing without a DB.
  */
 function diffFields(existing, seed) {
-  const diffs = ['tier', 'color', 'description', 'notes']
+  const diffs = ['tier', 'size', 'color', 'description', 'notes']
     .filter(k => String(existing[k] || '') !== String(seed[k] || ''));
   if (normParts(existing.bodyParts) !== normParts(seed.bodyParts)) diffs.push('bodyParts');
   if (normPhase(existing.phases)    !== normPhase(seed.phases))    diffs.push('phases');
@@ -67,6 +69,9 @@ function doctrineCheck(seeds, atFloor = floor) {
     }
     if (e.tier !== 'mob' && !(e.notes || '').trim()) {
       problems.push(`${e.name}: ${e.tier} with no notes — every non-mob names its weak system (E-0.3)`);
+    }
+    if (!SIZES.includes(e.size)) {
+      problems.push(`${e.name}: size "${e.size}" is not one of ${SIZES.join('|')} (§7.1)`);
     }
   }
   return problems;
@@ -103,7 +108,7 @@ async function run() {
     const existing = await Enemy.findOne({ name: new RegExp(`^${esc(seed.name)}$`, 'i') });
     if (!existing) {
       created++;
-      console.log(`+ CREATE  [${seed.tier}]  ${seed.name} — ${partsSum(seed)} HP across ${seed.bodyParts.length} part(s)` +
+      console.log(`+ CREATE  [${seed.tier}/${seed.size}]  ${seed.name} — ${partsSum(seed)} HP across ${seed.bodyParts.length} part(s)` +
                   `${seed.phases.length ? `, ${seed.phases.length} phase(s)` : ''}`);
       if (apply) await Enemy.create(seed);
       continue;
@@ -124,6 +129,6 @@ async function run() {
   await mongoose.disconnect();
 }
 
-module.exports = { doctrineCheck, diffFields, partsSum, FLOOR_MOB_HP, RANK_RATIO };
+module.exports = { doctrineCheck, diffFields, partsSum, FLOOR_MOB_HP, RANK_RATIO, SIZES };
 
 if (require.main === module) run().catch(e => { console.error(e); process.exit(1); });

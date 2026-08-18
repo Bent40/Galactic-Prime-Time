@@ -562,12 +562,36 @@ targets specific parts.
 timer**. Item text saying "Suffocation Tier 1" means **"delay Suffocation by one
 Clock."**
 
-**Dissolution** — the Mind's Suffocation: a **tierless 2-Clock death timer on the
-Mind**. Cannot be applied by standard attacks — requires an explicit source.
-Removing the cause **pauses** the timer (never resets it). **Completion = the mind
-collapses: the contestant is permanently removed from play.** No revival. Whether
-what remains is a husk, a puppet, or something worse is the story's to tell — but
-the person is gone, and it is worse than death.
+**Dissolution** — the Mind's Suffocation. Tierless. Cannot be applied by standard
+attacks — it requires an explicit source. *(Errata 2026-08-18: the flat 2-Clock
+timer is replaced by the grace-and-hold below. Everything else is unchanged.)*
+
+- **Grace.** On application, **one full Clock** runs with no rolls. Nothing is
+  asked of the victim yet. (A timer created mid-Clock counts the partial Clock at
+  the first reset, §8.3.)
+- **The hold.** At that Clock's reset the **Hold Threshold** opens, and equals
+  **1 + the Moments elapsed** since the reset — 2 on the first Moment, 3 on the
+  second, climbing to 11 if the Clock runs out.
+- **The check** is **Mind** against the threshold, on §14's mechanism:
+  **Mind ≥ threshold → you hold automatically, no roll.** Otherwise **Mind + the
+  Mind threshold die** (d4 by default, upgradeable at the Tattoo Artist) ≥
+  threshold. The check is **free** — it costs no Moment and no free-action slot,
+  and the victim may still act. Holding on is not what stops you fighting.
+- **One failure ends it.** **The mind collapses: the contestant is permanently
+  removed from play.** No revival. There is no second roll and no grace Moment.
+- **The last Moment is knowable.** §14 requires the GM to say when a threshold has
+  become unreachable — so the table is told, out loud, exactly how many Moments
+  remain. *Being clear about the danger is the whole bargain: after that, their
+  lives are in their hands.*
+- **Removing the cause freezes the threshold** where it stands and stops the
+  rolling — it never resets. Re-exposure resumes from the frozen number.
+- **Escalation rate rides the source.** A haunted object climbs **+1 per Moment**;
+  a noble-class, divine or authored horror may climb **+2 or +3**. This is where a
+  stronger source is expressed — not in the victim. It is also what keeps
+  Dissolution lethal to a Mind that has been farmed into the 20s.
+
+Whether what remains is a husk, a puppet, or something worse is the story's to
+tell — but the person is gone, and it is worse than death.
 
 ### 8.3 Timers and partial Clocks
 
@@ -613,8 +637,8 @@ pool**:
 - **Classification:** Physical = Bleed/Crush/Burn (flat) · Affliction =
   Chill/Poison/Infection (tiered) · Psychic = Dissolution (tiered).
 - **Tiered resistance = immunity** to effects of its tier and below.
-- **Psychic resistance vs Dissolution**:
-  each psychic tier **slows the Dissolution timer by +1 Clock** instead.
+- **Psychic resistance vs Dissolution**: each psychic tier adds **+1 Clock of
+  grace** before the Hold Threshold opens (§8.2). It buys time, never immunity.
 - **Enemy mental resistance is FLAT**, and exceeding it by a significant margin
   grants the attacker a bonus (viewer spike / secondary effect).
 - Player affliction resistance (Chill/Poison/Infection tiers) has no automatic

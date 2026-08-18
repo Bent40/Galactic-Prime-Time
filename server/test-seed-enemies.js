@@ -4,7 +4,7 @@
  * Covers the two pieces that are NOT a copy of seed-affixes.js: the §21.2
  * doctrine gate, and the array-aware diff that decides what --force overwrites.
  */
-const { doctrineCheck, diffFields, partsSum } = require('./seed-enemies');
+const { doctrineCheck, diffFields, partsSum, SIZES } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
 
 let pass = 0, fail = 0;
@@ -30,8 +30,27 @@ ok('an unknown tier is caught',
    doctrineCheck([{ name: 'x', tier: 'miniboss', notes: 'n', bodyParts: [{ name: 'T', maxHp: 60 }] }], 1)
      .some(p => p.includes('unknown tier')));
 ok('a mob is not required to carry notes',
-   doctrineCheck([{ name: 'x', tier: 'mob', notes: '', bodyParts: [{ name: 'B', maxHp: 5 }] }], 1).length === 0);
+   doctrineCheck([{ name: 'x', tier: 'mob', size: 'Medium', notes: '', bodyParts: [{ name: 'B', maxHp: 5 }] }], 1).length === 0);
 ok('partsSum sums the F1 super to 300', partsSum(f1.find(e => e.tier === 'legendary')) === 300);
+
+console.log('size (§7.1)');
+ok('every shipped entry carries a legal size', f1.every(e => SIZES.includes(e.size)),
+   f1.filter(e => !SIZES.includes(e.size)).map(e => e.name).join());
+ok('a bad size is caught',
+   doctrineCheck([{ name: 'x', tier: 'mob', size: 'Enormous', notes: '', bodyParts: [{ name: 'B', maxHp: 5 }] }], 1)
+     .some(p => p.includes('is not one of')));
+ok('a missing size is caught',
+   doctrineCheck([{ name: 'x', tier: 'mob', notes: '', bodyParts: [{ name: 'B', maxHp: 5 }] }], 1)
+     .some(p => p.includes('is not one of')));
+ok('the Loong Kin is Huge — two sizes over Medium, so ungrappleable (§13)',
+   f1.find(e => e.name === 'Loong Kin').size === 'Huge');
+ok('the Loong Kin keeps 300 across its Loong-form parts',
+   partsSum(f1.find(e => e.name === 'Loong Kin')) === 300);
+ok('the Loong Kin opens in Warden Form and turns',
+   f1.find(e => e.name === 'Loong Kin').phases[0].name === 'Warden Form' &&
+   f1.find(e => e.name === 'Loong Kin').phases[1].name === 'The Turn');
+ok('a changed size is reported as a difference',
+   diffFields({ ...JSON.parse(JSON.stringify(f1[0])), size: 'Huge' }, f1[0]).join() === 'size');
 
 console.log('diff (what --force would overwrite)');
 const seed = f1[0];

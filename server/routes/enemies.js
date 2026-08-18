@@ -14,10 +14,11 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, tier, color, description, notes, bodyParts, phases } = req.body;
+    const { name, tier, size, color, description, notes, bodyParts, phases } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     const enemy = await Enemy.create({
       name, tier: tier || 'mob',
+      size: size || 'Medium',
       color: color || '#ff2255',
       description: description || '', notes: notes || '',
       bodyParts: Array.isArray(bodyParts) ? bodyParts : [],
@@ -29,12 +30,12 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const { name, tier, color, description, notes, bodyParts, phases } = req.body;
+    const { name, tier, size, color, description, notes, bodyParts, phases } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     const enemy = await Enemy.findByIdAndUpdate(
       req.params.id,
       {
-        name, tier, color, description, notes,
+        name, tier, size: size || 'Medium', color, description, notes,
         bodyParts: Array.isArray(bodyParts) ? bodyParts : [],
         phases:    Array.isArray(phases)    ? phases    : [],
       },

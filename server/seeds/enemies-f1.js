@@ -15,12 +15,12 @@
 
 // Mob: one part, 5 HP, no phases. The shape IS the doctrine.
 const MOB = (name, { part = 'Body', ...o }) => ({
-  tier: 'mob', name, phases: [],
+  tier: 'mob', name, size: 'Medium', phases: [],
   bodyParts: [{ name: part, maxHp: 5 }],
   ...o,
 });
 
-const E = (tier) => (name, o) => ({ tier, name, phases: [], ...o });
+const E = (tier) => (name, o) => ({ tier, name, size: 'Medium', phases: [], ...o });
 const ELITE = E('elite');
 const BOSS  = E('boss');
 const SUPER = E('legendary');
@@ -43,6 +43,7 @@ module.exports = [
   MOB('Husk-Moth Cloud', {
     part: 'Cloud',
     color: '#8a8fa8',
+    size: 'Large',
     description: 'Statted and counted as ONE body, not a swarm of bodies. Blocks vision through its space.',
     notes: [
       '1 Chill to a random part per Moment in contact.',
@@ -89,6 +90,7 @@ module.exports = [
   MOB('Camera Gnat', {
     part: 'Chassis',
     color: '#c0c0c8',
+    size: 'Small',
     description: 'Corporation kit, not fauna. Hovers at head height and does not blink. No attack.',
     notes: [
       'GATE: social, not mechanical. Destroying one is trivial and costs Exposure',
@@ -98,6 +100,7 @@ module.exports = [
 
   ELITE('The Rack', {
     color: '#8b5a2b',
+    size: 'Large',
     description: 'Antler-crowned stag. The forest\'s landlord. It does not charge; it waits, and the wood closes.',
     bodyParts: [
       { name: 'Crown',         maxHp: 8 },
@@ -122,6 +125,7 @@ module.exports = [
 
   ELITE('Mycelium Bloomkeeper', {
     color: '#a0616a',
+    size: 'Large',
     description: 'The network\'s gardener. It does not move from its patch, and its patch grows.',
     bodyParts: [
       { name: 'Bloom-Head',    maxHp: 12 },
@@ -166,6 +170,7 @@ module.exports = [
 
   ELITE('The Chainbearer', {
     color: '#7a7a8c',
+    size: 'Large',
     description: 'EASY ROUTE. It has held this chain since before the mural was painted. It will not give it up, and it cannot follow you out of the room.',
     bodyParts: [
       { name: 'Head',  maxHp: 10 },
@@ -225,7 +230,7 @@ module.exports = [
       { name: 'Wearing It', hpThreshold: 'opening — 61 total',
         description: 'He still speaks, in his own voice, and he apologises between attacks. Backhand 3 Crush; a grab that pulls a contestant to the mural.' },
       { name: 'The Mask Speaks', hpThreshold: '<=60 total',
-        description: 'The voice changes. Gains a Dissolution aura: any contestant who ends a Clock adjacent begins a Dissolution timer (§8.2 — tierless, 2 Clocks, pauses when the source is removed). The room stops being a fight and starts being a countdown.' },
+        description: 'The voice changes. Gains a Dissolution aura: any contestant who ends a Clock adjacent begins Dissolution (§8.2 — one Clock of grace, then the Hold Threshold). ESCALATION +1 PER MOMENT: it is a haunted object, not a god. Leaving the aura freezes the threshold where it stands; it never resets. The room stops being a fight and starts being a countdown, and the GM says the remaining Moments out loud.' },
       { name: 'The Collapse', hpThreshold: '<=25 total, OR the chain is set',
         description: 'The ceiling starts coming down. 3-Clock timer to be out. Falling stone is environmental (§14: never dodged). If the chain is set he stops fighting and watches them leave.' },
     ],
@@ -309,7 +314,8 @@ module.exports = [
 
   BOSS('The Girl in the House', {
     color: '#6a2a6a',
-    description: 'MEDIUM ROUTE — NOT A FIGHT. She is what the NPCs were right about. She is also a child in a burning house, and both are true.',
+    size: 'Small',
+    description: 'MEDIUM ROUTE. She is what the NPCs were right about. She is also a child in a burning house, and both are true. Killable — and killing her mortgages Floors 2 and 3.',
     bodyParts: [
       { name: 'Head',   maxHp: 14 },
       { name: 'Torso',  maxHp: 45 },
@@ -320,18 +326,39 @@ module.exports = [
       { name: 'Shadow', maxHp: 16 },
     ],
     notes: [
-      'STATTED SO THE GM CAN SAY NO WITH NUMBERS. Her F1 role is the BRAND, not a fight.',
-      'She asks to be fed; she grants the demonic brand (immunity to noble-class',
-      'presence/Dissolution — what the F2 Demonic Noble encounter is built around) plus',
-      'faction points.',
+      'SHE CAN BE KILLED (owner ruling 2026-08-18). The 125 is real, there is no gate and',
+      'no special weak system — she is a demon in a burning house and she can be put down.',
+      'WHAT IT COSTS IS THE FLOOR ABOVE. Killing her is a win that mortgages F2 and F3:',
       '',
-      'PRESENCE (live even though the fight is not): noble-class presence. An unbranded',
-      'contestant who refuses her, in the room, begins a Dissolution timer (§8.2). The',
-      'brand is the answer, and taking it is a choice with a bill attached — she is a',
-      'demonic queen at F2.',
+      '  1. THE THRONE EMPTIES. She was the DIRECTOR, and nothing about her death replaces',
+      '     her. Her god collapses with her — no queen, no congregation, no prayers.',
+      '  2. BEELZEBUB TAKES THE VACANCY, AND HE USES THE RIVAL. The demon who helped humans',
+      '     and wanted to overthrow her is exactly the useful shape: already positioned,',
+      '     already ambitious, already trusted by the humans he protected. He does not know',
+      '     whose instrument he has become, and neither does the party.',
+      '  3. THE DEMONS WHO DID NOT BEND THE KNEE ARE JUST RAMPAGING MONSTERS. Leaderless,',
+      '     agenda-less, pure threat. This is why the rampage gets WORSE and not better —',
+      '     it is a schism, not an absence.',
+      '  4. F2 FLIPS. The assassination beat still happens, but the rival is now Beelzebub\'s',
+      '     viceroy rather than a rebel — the party is either killing his man, or being',
+      '     hired by him and not told by whom.',
+      '  5. F3: BEX RUNS THE FARM UNDER BEELZEBUB\'S WATCHING EYE, AND THAT IS THE ONLY',
+      '     REASON IT IS STILL INTACT. The humans inside are alive because they are useful',
+      '     to a Prince of Demons; the ones outside are hunted in the dark by the unbent.',
+      '     The farm stops being an atrocity and becomes PROTECTION, sold at a price.',
+      '     Foreman Bex\'s ledger is a Beelzebub document and he may not know it.',
       '',
-      'WEAK SYSTEM: none written. A PARTY THAT ATTACKS HER AT F1 SHOULD LOSE. If the owner',
-      'wants her winnable here, that changes F2 and F3 and should be ruled, not improvised.',
+      'SPARING HER is the other bill: the brand\'s price, and a demonic queen at F2 — but the',
+      'rival stays a real rebel and Beelzebub never gets a foot in the capital at all.',
+      'NEITHER OPTION IS SAFE, and the party will not learn that until Floor 3.',
+      '',
+      'HER F1 ROLE IS STILL THE BRAND. She asks to be fed; she grants the demonic brand',
+      '(immunity to noble-class presence/Dissolution — what the F2 Demonic Noble encounter is',
+      'built around) plus faction points.',
+      '',
+      'PRESENCE: noble-class. An UNBRANDED contestant who refuses her, in the room, begins',
+      'Dissolution (§8.2). ESCALATION +2 PER MOMENT — she is noble-class, and at F2 she is a',
+      'queen. Half the Moments of a haunted object. Tell them the number out loud.',
     ].join('\n'),
   }),
 
@@ -357,6 +384,7 @@ module.exports = [
 
   ELITE('Step-Warden', {
     color: '#7a8fa0',
+    size: 'Huge',
     description: 'HARD ROUTE. An ambulatory section of staircase. The city built its own guards out of itself.',
     bodyParts: [
       { name: 'Crown Block',   maxHp: 12 },
@@ -379,7 +407,8 @@ module.exports = [
 
   SUPER('Loong Kin', {
     color: '#2a8f7a',
-    description: 'HARD ROUTE SUPER BOSS. It has guarded a city that has been empty for a very long time. Nobody has told it. It is not stupid; it is loyal, which is worse.',
+    size: 'Huge',
+    description: 'HARD ROUTE SUPER BOSS. Two forms. WARDEN FORM: a woman, 2.5m, towering over everyone in the room. LOONG FORM: the size of buildings — hundreds of metres, and it does not obviously end. It has guarded a city that has been empty for a very long time. Nobody has told it. It is not stupid; it is loyal, which is worse.',
     bodyParts: [
       { name: 'Head',              maxHp: 30 },
       { name: 'Neck',              maxHp: 25 },
@@ -392,16 +421,35 @@ module.exports = [
       { name: 'Tail',              maxHp: 40 },
     ],
     notes: [
+      'TWO FORMS. The encounter opens in WARDEN FORM and should, if it goes well, never',
+      'leave it.',
+      '  WARDEN FORM — a woman, 2.5m, towering. SIZE: LARGE. This is who you talk to.',
+      '  LOONG FORM  — buildings. Hundreds of metres, and it does not obviously end.',
+      '                SIZE: HUGE. The 300-point statline below IS this form.',
+      'The `size` field carries HUGE because that is the form the combat rules read.',
+      '',
+      'THE SIZE DIFFERENCE IS THE TRAP, AND IT FALLS OUT OF THE BOOK.',
+      'Warden Form is LARGE — exactly ONE size larger than a Medium contestant — so',
+      'GRAPPLING HER IS LEGAL (§13). Loong Form is HUGE, two sizes larger, so it cannot',
+      'be grappled at all, and §21.3 makes it immune to grapple-Suffocation besides.',
+      'You can lay hands on the woman. You cannot lay hands on the dragon. Doing the',
+      'first causes the second. Do not warn them; let the size line do the work.',
+      '',
+      'WARDEN FORM HAS NO SEPARATE HP POOL. The first meaningful wound (or any grapple)',
+      'triggers the Turn, and the Loong enters at a FULL 300. Hitting her is strictly',
+      'worse than not hitting her. There is no cheap window and no chip damage.',
+      '',
       'THE WIN CONDITION IS THE CONVERSATION. The statline exists so that "let\'s just',
       'fight it" is legible as a bad idea FROM THE NUMBERS, before anyone commits. Per',
       '§21.3, the position that makes a killing hit possible is here a sentence: that the',
       'city is abandoned, and its citizens are the crystal. Evidence beats rhetoric — a',
       'crystallized citizen carried up the stairs is the argument. Charm helps; PROOF lands.',
       '',
-      'THE WHISKERS (10) ARE THE TELL. They are sensory: it reads truth through them at',
-      'close range. A party that notices can work out that it CANNOT BE LIED TO — which is',
-      'why the honest argument is the only one that works, and why attacking the Whiskers',
-      'to "blind" it is the single worst move available.',
+      'THE TRUTH-SENSE IS THE TELL, and it runs in BOTH forms — the Whiskers (10) are',
+      'only where you can SEE it. It reads truth at close range. A party that notices can',
+      'work out that it CANNOT BE LIED TO, which is why the honest argument is the only',
+      'one that works, and why attacking the Whiskers to "blind" it is the worst move',
+      'available.',
       '',
       'IT SURVIVES. It is escorted at F2 and hides in the capital at F3. If the party kills',
       'it, that route ends at F1 and the owner should be told at the table what they spent.',
@@ -411,14 +459,16 @@ module.exports = [
       'freely, as thanks. That is the only way that material enters the world.',
     ].join('\n'),
     phases: [
-      { name: 'Warning', hpThreshold: 'on the first attack',
-        description: 'It does not retaliate. It coils, and it says so. One free Clock to stop.' },
+      { name: 'Warden Form', hpThreshold: 'the encounter opens here',
+        description: 'A woman, 2.5m, and she has to look down at everyone. SIZE: LARGE — grappleable, one size up. She is polite, she is patient, and she has been patient for a very long time. This is the whole encounter if the party is any good: make the argument, bring the evidence, and never touch her. She has no separate HP pool.' },
+      { name: 'The Turn', hpThreshold: 'first meaningful wound, OR any grapple, OR the argument fails',
+        description: 'She unfolds. Buildings; hundreds of metres of her, and the far end is somewhere out past the stairs. SIZE: HUGE — no longer grappleable at all (§13). The Loong enters at a FULL 300; nothing done to the Warden carries over. It does not retaliate on the first Clock. It coils, and it says so. That Clock is the last exit.' },
       { name: 'The Coil', hpThreshold: '<=240 total',
-        description: 'It stops being polite. Constriction (§13) — it is two-plus sizes larger, so the party cannot grapple it and it is immune to grapple-Suffocation (§13/§21.3). 6 Crush, and it repositions the fight onto the stairs where falling applies (§21.5).' },
+        description: 'It stops being polite. Constriction — two-plus sizes larger, so the party cannot grapple it and it is immune to grapple-Suffocation (§13/§21.3). 6 Crush, and it repositions the fight onto the stairs where falling applies (§21.5).' },
       { name: 'Storm-Breath', hpThreshold: '<=150 total',
         description: 'A 10-hex line, 6 Chill, terrain becomes difficult (§21.4). Dodge Threshold 7 with the §14 counter-ladder: Reflexes 7 auto-dodge + 1 space, Reflexes 9 auto-dodge + counterattack, below 7 the 1d4 fallback.' },
       { name: 'It Decides You Are Not Contestants', hpThreshold: '<=60 total',
-        description: 'It stops treating the fight as an interruption. A TPK is the expected outcome and the GM should say so out loud when this phase opens. Retreat is still open; the stairs are long.' },
+        description: 'It stops treating the fight as an interruption. A TPK is the expected outcome and the GM should say so out loud when this phase opens. Retreat is still open; the stairs are long, and it is longer.' },
     ],
   }),
 ];
