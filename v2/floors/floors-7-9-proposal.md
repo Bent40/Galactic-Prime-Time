@@ -312,18 +312,23 @@ book should not present them as tiers.
 
 ---
 
-## 8. Open
+## 8. Open questions
+
+**Closed by the owner's 2026-08-11 corrections:** **H-02** (the pilgrimage is the champions
+taking down the beast's pillars, §3) · **H-06** (the runner is the god near release, §5) ·
+**H-07** (the divine beast is a contestant who had enormous divinity and **chose** to become
+one) · **H-08** (the parasite is stat-fed, not Viewer-fed, §6).
 
 | # | Question | Rec |
 |---|---|---|
-| **H-01** | Adopt *"accept your place or fight it / will of nature vs will of its creations"* as the set's question? | Yes — it could not have been asked earlier |
-| **H-11** | What is the **beast's own congregation** doing during F9 — defending the pillars, or fleeing? | Defending. It makes the pilgrimage a fight, not a chore |
-| **H-12** | If the party **skips F7–F8 entirely**, is there a floor beneath failure — a minimum the champion carries? | No. The point is that nothing is what nothing buys |
-| **H-03** | Adopt the four ingredient classes — matter, myth, name, relic? | Yes; "collecting myths" is the set's signature verb |
-| **H-04** | Does the F8 gift's quality depend on **how** F7 was played, not just what was gathered? | Yes — it is the set's cheapest moral consequence |
-| **H-05** | Confirm **divinity sent downward** during F9 — the player spends to strengthen the pilgrimage in real time? | Yes; the owner's brief already describes it |
-| **H-06** | Approve the floor-runner: **the god who barely made it**, with a shallow myth-source? | Yes |
-| **H-07** | Is the F9 divine beast **a contestant who had enough divinity and became a beast anyway**? | Yes — the only genuinely frightening version |
-| **H-08** | Approve the Parasocial Parasite running on Viewer tier? | Yes |
-| **H-09** | Add Lovecraftian entities as Dissolution specialists, Lovecraft-original only? | Yes, with the tierless-Dissolution question resolved first |
-| **H-10** | What happens to a party that **fails** F9 — champion dead, or beast alive? | Unruled. Given F10 is one-winner, a failure here should cost standing rather than end the run |
+| **H-01** | Adopt *"when faced with your place in the universe, do you accept it or fight it — are you the will of nature, or the will of its creations?"* as the set's question, replacing the two unused canon shapes for this slot? | **Yes.** It is the only shape that could not have been asked earlier; it needs a character who has already *become* something |
+| **H-03** | Adopt four **ingredient classes** for F7 — **matter** (parts, materials), **myth** (the story, taken by witnessing its end), **name** (what its followers call it), **relic** (what it carried from its contestant life)? | **Yes.** "Collecting myths" is the set's signature verb, and a myth is the transmissible part of reverence |
+| **H-04** | Does the **F8 gift's quality depend on *how* F7 was played**, not only on what was gathered — so a party that slaughtered congregations arrives with superb materials and a thin, frightened people to give them to? | **Yes.** Cheapest moral consequence in the set |
+| **H-05** | Confirm the **divinity sent downward** during F9: the player spends in real time to strengthen the pilgrimage, imperfectly and with late information | **Yes** — your brief already describes it; confirming it as a rule |
+| **H-09** | Add **Lovecraftian entities** as the second Dissolution purpose (disassembly, vs demonic puppeteering)? Two flags: stay **Lovecraft-original** for IP cleanliness, and Dissolution is currently **tierless**, so this wants a rider or tag rather than a new tier | **Yes**, with the tierless question settled first |
+| **H-10** | What happens to a party that **fails F9** — champion dead, or beast alive? | Costs standing heavily, **does not end the run.** F10 is the one-winner floor; failing here should arrive you at it poor and known to have failed |
+| **H-11** | What is the **beast's own congregation** doing during F9 — defending the pillars, or fleeing? | **Defending.** It makes the pilgrimage a fight rather than a chore, and it puts named believers between your champion and the objective |
+| **H-12** | If a party **skips F7 and F8 entirely**, is there a floor beneath failure — some minimum the champion still carries? | **No.** The point is that nothing is what nothing buys |
+| **H-13** | *(new, from H-06)* Can the party **prevent or delay the runner's release** — and if so, how? Paying down its debt, restoring its myth-source, or something else? | Restoring its myth-source. It ties the set's optional content to the boss's difficulty |
+| **H-14** | *(new, from H-08)* Approve the parasite's **reading legend** — pupil **colour** = kind of danger, **movement** = how close to acting, **number of eyes** = how many, with *uncounted* eyes worse than many? | **Yes**, as a first pass — the exact colours are yours to name |
+| **H-15** | *(new)* The divine beast **chose** this. Does it retain **mind and speech**, or is it now pure appetite? | **Retains both.** A lucid thing that looked at godhood and picked hunger is far worse than a monster, and it can explain itself to you mid-fight |
