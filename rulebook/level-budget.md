@@ -239,47 +239,58 @@ quietly deletes the pure caster).
 
 ---
 
-## L-19 — The ceiling ⚖ — yes, ~150 works. Here is the shape
+## L-19 — The curve ✅ **the anchors are per FLOOR, not per level**
 
-Anchors: **Physique ~50 at level 5** ("pretty solid"), **level ~150 at F8/F9**,
-**stats reaching 100+**, **numbers stay manageable**.
+**Corrected 2026-08-18.** The anchor is *"50 on a trait at **floor** 5"*, not at
+level 5 — which resolves the whole thing. **§3.1 needs no change: one level still
+grants one point.** Only the *number of levels per floor* is the design knob.
 
-That means **the trait curve is LINEAR, not exponential** — the L-10 draft
-(36 800 at F9) is superseded. Levels stay **1 point each** per §3.1, and the
-tutorial front-loads:
+**Levels granted per floor, escalating by set** ⚖ — 10 · 10 · 10 · 16 · 16 · 16 ·
+24 · 24 · 24 = **150 levels across F1–F9**:
 
-| | Tut | F1 | F3 | F5 | F7 | F9 |
-|---|---|---|---|---|---|---|
-| **Level** | 5 | 21 | 53 | 85 | 117 | **149** |
-| **Total points** | 54 | 70 | 102 | 134 | 166 | **198** |
-| **Focused main stat** | 50 | 61 | 83 | 105 | 127 | **149** |
-| **+HP per part** | +8 | +11 | +17 | +24 | +30 | **+36** |
-| **Torso** | 13 | 16 | 22 | 29 | 35 | **41** |
+| | F1 | F2 | F3 | F4 | **F5** | F6 | F7 | **F8** | **F9** |
+|---|---|---|---|---|---|---|---|---|---|
+| **Level** | 16 | 26 | 36 | 52 | 68 | 84 | 108 | **132** | **156** |
+| **Total points** | 24 | 34 | 44 | 60 | 76 | 92 | 116 | 140 | **164** |
+| **Focused main stat** | 12 | 19 | 26 | 37 | **48** | 60 | 76 | 93 | **110** |
+| **+HP per part** ⚖ | +2 | +4 | +6 | +9 | +12 | +15 | +20 | +25 | **+30** |
+| **Torso** | 7 | 9 | 11 | 14 | 17 | 20 | 25 | 30 | **35** |
 
-- **Creation 14** (unchanged, §2.2) · **tutorial L1→L5 grants 10/level** → 54 points
-  at level 5, so a full dump reads **Physique ~50**. ✔ your anchor
-- **F1–F9: ~16 levels per floor at 1 point each** → level **149** at the end of F9.
-  ✔ your anchor
-- A focused build finishes around **149 in its main stat**; a balanced build sits
-  near **50 in each**. ✔ "100+ potentially"
-- **Part HP = +1 per 5 total trait points past creation** ⚖ — which lands a
-  **13 HP torso entering F1**, exactly the number the ×5 damage re-base assumed.
+**Every anchor lands, and none of them had to be forced:**
 
-Everything stays two- and three-digit. The sheet stays readable for 150 levels.
+- **Floor 5 → main stat 48.** ✔ *"50 on a trait at floor 5."*
+- **F8/F9 → level 132–156.** ✔ *"around level 150 is where F8/F9 is at."*
+- **F9 → main stat 110**, balanced builds ~40 each. ✔ *"100+ potentially."*
+- Nothing on the sheet exceeds three digits. ✔ *"somewhat manageable."*
+
+**Part HP** = +1 per part per 5 total trait points past creation ⚖ — a **7 HP torso
+at F1**, 35 at F9. Modest, readable, and it grows for every build (L-18).
+
+> **This corrected a real error.** The earlier reading ("50 at *level* 5") forced a
+> front-loaded tutorial and put a **13 HP torso** at F1, which is what the first
+> damage re-base was sized against. The true F1 torso is **7**, so that pass was
+> ~2.5× too aggressive. **`f1-enemy-pass.md` has been re-based again, to ×2 of the
+> book baseline** — Bramblewretch 2 → 4, the Loong's coil 6 → 12, and so on.
 
 ---
 
 ## L-20 — 🔴 But this collides with the material band, and hard
 
-Linear stats mean **player HP grows ~3× across the campaign** (13 → 41) while the
+Linear stats mean **player HP grows ~5× across the campaign** (7 → 35) while the
 material band multiplies weapon damage by **256×** (F1 ×2 → F9 ×512).
 
-Hits to destroy a torso with a plain greatsword:
+Hits to destroy a torso with a plain greatsword (recomputed against the corrected
+L-19 curve — **the collision is worse than the first estimate**, because the true
+HP numbers are lower):
 
 | | F1 | F3 | F5 | F7 | F9 |
 |---|---|---|---|---|---|
-| **×512 per-floor band** | 2.7 | **0.9** | 0.3 | 0.09 | **0.03** |
-| **×2/×8/×32 set bands** | 2.7 | 3.7 | 1.2 | 0.36 | **0.43** |
+| **×512 per-floor band** | 1.2 | **0.5** | 0.18 | 0.07 | **0.02** |
+| **×2/×8/×32 set bands** | 1.2 | 1.8 | 0.7 | 0.26 | **0.36** |
+
+**Note the F1 column: 1.2 hits.** Even at Floor 1 a greatsword nearly one-shots a
+torso — which is arguably correct for this system (§7.3: *"parts fail fast"*), but
+it means the ratio never had much headroom to lose.
 
 **With the per-floor band, a greatsword one-shots a torso from Floor 3 onward and
 by F9 does 37× overkill.** Set bands delay it to F4. Either way the game becomes
@@ -340,7 +351,7 @@ purely decorative.
 | ~~L-g~~ | ~~Architecture A or B~~ | **RULED: A**, refined — stats gate, weapons carry (L-11, L-14) |
 | ~~L-17~~ | ~~Do skills scale with the trait~~ | **RULED: yes** |
 | ~~L-18~~ | ~~Non-Physique HP source~~ | **RULED: HP scales off TOTAL trait points** |
-| **L-19** 🔴 | **Confirm the 150-level curve** — 10/level tutorial, then 16 levels/floor at 1 point | Sets every number downstream |
+| **L-19** ⚖ | **Confirm the per-floor level grants** (10/10/10 · 16/16/16 · 24/24/24 = 150) | Sets every number downstream. All anchors land as drafted |
 | **L-20** 🔴 | **The band collision** — gentle to set bands, and/or armour carries HP on the band? | Without a fix the game is rocket tag from F3–F4 |
 | **L-h** | Is the trait band `÷5, doubling` the right curve, or gentler (÷5, doubling every ×4)? | Sets the whole ceiling |
 | **L-i** | 12 points per level at the tutorial, doubling per floor — right, or steeper? | The anchor fits; the tail is a choice |

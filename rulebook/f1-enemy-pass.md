@@ -4,13 +4,18 @@
 interpretation calls are blessed and the seeder enforces them. Statlines and
 encounter content remain 🟡 PROPOSAL.
 
-**⚠️ Damage re-based 2026-08-18 (×5).** [`level-budget.md`](level-budget.md) ruled
-**Architecture A** and an exponential trait curve, which puts a focused contestant at
-**Physique ~53 entering Floor 1** — a **13 HP torso** where the book's baseline is 5.
-Every attack number below was written against 2–5 HP parts and has been multiplied
-by **5**. **HP budgets are unchanged** (L-11: weapons ride the material band, so the
-§21.2 ladder stands), and **condition tiers are unchanged** (§12.7: "condition and
-utility modifiers don't scale"). Gates, weak systems, phases and carves all stand.
+**⚠️ Damage re-based 2026-08-18 (×2).** [`level-budget.md`](level-budget.md) L-19
+puts a focused contestant at a **7 HP torso entering Floor 1** (the book's baseline
+is 5), so every attack number below is **×2 of the book baseline** — Bramblewretch
+2 → 4, the Loong's coil 6 → 12.
+
+*An earlier pass this same day used ×5, sized against a 13 HP torso from a
+misread anchor ("50 on a trait at level 5" rather than **floor** 5). That was ~2.5×
+too aggressive and has been corrected.*
+
+**HP budgets are unchanged** (L-11: weapons ride the material band, so the §21.2
+ladder stands), and **condition tiers are unchanged** (§12.7: "condition and utility
+modifiers don't scale"). Gates, weak systems, phases and carves all stand.
 Nothing here is ruled. Governing canon: rulebook **§21** (Enemies & Encounter
 Design), **§21.2** horde doctrine, **§21.3** boss doctrine, **§12.7** materials,
 and `rulebook/item-drafting-materials.md` **M-1** (the F1 Forest band ×2).

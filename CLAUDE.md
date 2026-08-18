@@ -262,11 +262,14 @@ Skills are granted to players by templateId. The player sheet joins template dat
   have a real damage axis. ✅ **RULED: part HP scales off TOTAL trait points (L-18)**,
   not Physique alone — the caster chasm is closed.
 - ✅ **THE CURVE IS LINEAR, ~150 levels (L-19).** The exponential L-9/L-10 draft is
-  **superseded**. Creation 14 · tutorial L1–L5 grants 10/level (→ **Physique ~50 at
-  level 5**) · then **16 levels/floor at 1 point each** → **level ~149 at F9**, 198
-  total points, focused main stat **~149**, balanced ~50 each. Part HP = +1 per part
-  per 5 total points past creation → **13 HP torso entering F1**, which is exactly
-  what the ×5 damage re-base assumed. Everything stays 2–3 digits.
+  **superseded**. **The anchors are per FLOOR, not per level** — "50 on a trait at
+  floor 5" — so **§3.1 is unchanged: 1 level = 1 point.** The only knob is levels per
+  floor: **10/10/10 · 16/16/16 · 24/24/24 = 150 across F1–F9.** Lands F5 main stat
+  **48**, F8/F9 level **132/156**, F9 main stat **110**, balanced ~40 each. Part HP =
+  +1 per part per 5 total points past creation → **7 HP torso at F1**, 35 at F9.
+- ⚠️ **F1 enemy damage is ×2 of the book baseline**, not ×5. The first pass misread
+  the anchor as *level* 5 and sized against a 13 HP torso; the real F1 torso is 7.
+  Corrected same day.
 - 🔴 **L-20 — THE COLLISION, unresolved and load-bearing.** Linear stats grow player
   HP ~3× (13→41) while the material band multiplies damage **256×**. A plain
   greatsword **one-shots a torso from F3** on the per-floor band, F4 on set bands;
