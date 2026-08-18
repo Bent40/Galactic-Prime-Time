@@ -23,11 +23,16 @@ ok('an over-fat mob is caught',
 ok('a multi-part mob is caught (E-0.2)',
    doctrineCheck([{ name: 'x', tier: 'mob', notes: '', bodyParts: [{ name: 'H', maxHp: 2 }, { name: 'T', maxHp: 3 }] }], 1)
      .some(p => p.includes('ONE part')));
+ok('a single-part elite is caught (E-0.2 — elite and above are multi-part)',
+   doctrineCheck([{ name: 'x', tier: 'elite', size: 'Medium', notes: 'n', bodyParts: [{ name: 'T', maxHp: 60 }] }], 1)
+     .some(p => p.includes('MULTI-part')));
+ok('every shipped non-mob is multi-part', f1.filter(e => e.tier !== 'mob').every(e => e.bodyParts.length >= 2));
+ok('every shipped mob is exactly one part', f1.filter(e => e.tier === 'mob').every(e => e.bodyParts.length === 1));
 ok('a non-mob with no weak system is caught (E-0.3)',
-   doctrineCheck([{ name: 'x', tier: 'elite', notes: '   ', bodyParts: [{ name: 'T', maxHp: 60 }] }], 1)
+   doctrineCheck([{ name: 'x', tier: 'elite', size: 'Medium', notes: '   ', bodyParts: [{ name: 'H', maxHp: 10 }, { name: 'T', maxHp: 50 }] }], 1)
      .some(p => p.includes('no notes')));
 ok('an unknown tier is caught',
-   doctrineCheck([{ name: 'x', tier: 'miniboss', notes: 'n', bodyParts: [{ name: 'T', maxHp: 60 }] }], 1)
+   doctrineCheck([{ name: 'x', tier: 'miniboss', size: 'Medium', notes: 'n', bodyParts: [{ name: 'H', maxHp: 10 }, { name: 'T', maxHp: 50 }] }], 1)
      .some(p => p.includes('unknown tier')));
 ok('a mob is not required to carry notes',
    doctrineCheck([{ name: 'x', tier: 'mob', size: 'Medium', notes: '', bodyParts: [{ name: 'B', maxHp: 5 }] }], 1).length === 0);

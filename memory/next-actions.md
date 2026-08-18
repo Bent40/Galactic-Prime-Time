@@ -10,13 +10,12 @@
    `rulebook/f1-enemy-pass.md` (18 entries) + `server/seeds/enemies-f1.js` +
    `server/seed-enemies.js`. **Blocked on the owner, not on Claude.** What is
    needed, in order:
-   a. Rule on **E-0.1–E-0.4** — the part-budget reading, one-part mobs, the
-      gate/weak-system requirement, mob carve policy. Everything else rests on
-      these.
-   b. Bless or replace **"Foreman Bex"** — the name becomes canon at F3.
-   c. Decide whether **the Girl in the House** is fightable at F1. Deliberately
-      left unwritten; ruling her winnable changes F2 and F3.
-   d. Then run the E-5 runbook on the campaign DB: `node backup-db.js` →
+   a. ~~E-0.1–E-0.4~~ · ~~Foreman Bex~~ · ~~the Girl~~ · ~~Infected T3~~ ·
+      ~~Nullrot~~ — **all ruled 2026-08-18.**
+   b. **THE LEVEL BUDGET is now the blocker** — `rulebook/level-budget.md`,
+      questions L-a..L-f. It is upstream of every statline: until the curve is
+      ruled, no enemy number can be checked against anything real.
+   c. Then run the E-5 runbook on the campaign DB: `node backup-db.js` →
       `node seed-enemies.js` → `--apply`.
    Then the follow-on content in E-4: encounter tables and room counts, §21.4
    terrain blocks for the four F1 environments, Exposure values and §19.1/§17.6

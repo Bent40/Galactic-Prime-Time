@@ -1,6 +1,9 @@
 # Floor 1 — The Enemy Pass (PROPOSAL)
 
-**Date:** 2026-08-18 · **Status:** 🟡 PROPOSAL — awaiting owner blessing.
+**Date:** 2026-08-18 · **Status:** 🟢 **E-0 RULED** (owner, 2026-08-18) — the four
+interpretation calls are blessed and the seeder enforces them. Statlines and
+encounter content remain 🟡 PROPOSAL. **Calibration caveat:** every number here is
+measured against the level-6 party until `level-budget.md` is ruled — see L-6.
 Nothing here is ruled. Governing canon: rulebook **§21** (Enemies & Encounter
 Design), **§21.2** horde doctrine, **§21.3** boss doctrine, **§12.7** materials,
 and `rulebook/item-drafting-materials.md` **M-1** (the F1 Forest band ×2).
@@ -14,9 +17,10 @@ the model. `⚖` marks a table-tunable number.
 
 ---
 
-## E-0 — The four rulings this pass needs before it can be seeded
+## E-0 — The rulings this pass rests on ✅ **BLESSED 2026-08-18**
 
-These are the load-bearing interpretation calls. Bless, amend, or reject each.
+These are the load-bearing interpretation calls. **E-0.1–E-0.4 are ruled**; the
+seeder refuses to write data that breaks them.
 
 ### E-0.1 ⚖ The rank number is a **part budget**, not a pooled bar
 
@@ -29,7 +33,7 @@ budget you distribute; the lethal parts carry the bulk. The Incineradile's
 "single HP bar (total 50)" stays valid as a *tutorial-boss* exception — it
 predates the doctrine and it is a puppet, which is why it has one bar.
 
-### E-0.2 ⚖ **Mobs are statted as ONE part**
+### E-0.2 ✅ **Mobs are ONE part; elite and above are MULTI-part**
 
 A mob is a horde member. Give it a single part at **5 HP** and nothing else: no
 head, no limbs, no targeting minigame. One on-band F1 hit removes it. This is
@@ -38,6 +42,9 @@ makes the admin panel usable at table speed: one number, then delete the row.
 
 **Corollary — the number is the doctrine, not a dial.** Every F1 mob below is
 exactly 5. A mob that needs to survive a hit gets a **gate** (E-0.3), never a 6.
+
+**And the converse is ruled too: elite and above are always multi-part.** A single
+fat bar is not an elite, it is a mob that cheated. The seeder rejects both errors.
 
 ### E-0.3 ⚖ Every enemy above mob rank names its **weak system**; every mob that survives names its **gate**
 
@@ -75,6 +82,19 @@ the Loong is *preventing the spread of* at F3 (§4.4).
 **That unifies three routes into one plague.** It also means the Hard route's F1 now
 seeds its own F3 payoff instead of arriving there cold.
 
+**Nullrot is BOTH patient zero and the antibody** ✅ **RULED 2026-08-18** — which is
+precisely why §4.3 has him *simultaneously spreading and curing* at F3. That line
+stops being poetry and becomes a mechanism: he is the disease's source and its only
+known cure, carried in the same body, and neither can be taken without the other.
+It is also why the demons at F3 want him and the Loong both (§4.4).
+
+⚖ **One timeline consequence to rule later** (E-4): the Hard route's city is
+*already* crystallised at F1, before the Easy route's man puts the mask on. The
+tidy reading is that **the mask carries the plague and he is only its newest
+host** — making the moving city the work of a previous bearer, and making Easy and
+Hard *the same story at two stages*. A party on Hard sees the ending before the
+beginning.
+
 **Mechanically it uses only what the book already has** — no new condition class:
 
 | Exposure | What it does |
@@ -82,14 +102,21 @@ seeds its own F3 payoff instead of arriving there cold.
 | **Contact** | **Infected T1** on the touched **part**, advancing per §8.1. Localised, visible, breakable off a limb |
 | **Inhalation** | **Infected T1 *plus* Suffocation** (§8.2 — torso only, tierless 2-Clock death timer). Precedent: Pneumotoxin "starts the Suffocation timer once it reaches the torso" |
 
-🔴 **The one thing still needing a ruling: what Infected T3 does.** Proposal — instead
-of the normal 2-Clock death timer, **crystallisation completes and the contestant is a
-statue: not dead, and not recoverable until the F3 cure exists.** That is a
-player-removed-from-play severity in the same class as Dissolution, so it is your call,
-not mine. The alternative is that T3 just kills normally and the horror stays in the
-fiction.
+**Infected T3 kills, normally.** ✅ **RULED 2026-08-18.** The statue idea is
+dropped, and the owner's reason is the correct one: *a contestant crystallised
+until F3 is out of play either way, and no player waits ten sessions to play their
+character again.* "Not dead, just unavailable for a third of the campaign" is death
+with extra bookkeeping.
 
-**Vocabulary bridge
+**Which means the crystal needs no rules exception at all.** It is Infected (§8.2)
+plus Suffocation on the inhalation route, and Infected T3's normal **2-Clock death
+timer** *is* the mercy window. All the drama lives at T1–T2, where Resin, Antiseptic
+Wash and Burn T2 can still reach it. The statue was solving a problem the earlier
+tiers already solved.
+
+The crystallised *citizens* are still statues, of course. They just aren't players.
+
+**Vocabulary bridge**Vocabulary bridge
 **Super Boss**; the admin UI's tier list predates that and calls it
 `legendary`. The seed file uses `legendary` because that is what the model
 accepts. Renaming the enum is app work, out of scope here.
@@ -597,10 +624,10 @@ is already a complete answer — the respirator only makes it *comfortable*.
 | **Token/loot payouts** | §19.1 currencies and §17.6 box drops per rank are not assigned |
 | ~~Foreman Bex's name~~ | **BLESSED 2026-08-18** |
 | ~~The Girl's F1 fightability~~ | **RULED 2026-08-18** — killable; the cost is the Beelzebub chain (C-4) |
-| **Level budget per route / per combat** | ⚖ **Upstream of everything here.** These statlines assume roughly the level-6 party. Until the progression curve is planned, every number is calibrated against a guess |
-| **Infected T3 = statue?** | 🔴 open — see E-0.6. Player-removed-from-play severity, owner call |
+| **Level budget** | 🟡 now drafted at [`level-budget.md`](level-budget.md) — **still the calibration dependency for every number in this document.** L-6 checks the F1 ladder against it and the F1 numbers hold |
+| ~~Infected T3 = statue?~~ | **RULED 2026-08-18** — T3 kills normally; the statue idea is dropped, and the crystal needs no rules exception |
 | **The respirator template** | ⚖ the only genuinely new item E-6 asks for |
-| **Nullrot's direction of causality** | The crystal is his story (E-0.6) — but is he patient zero, the antibody, or both? Changes what the Easy route's chained man *is* |
+| ~~Nullrot's direction of causality~~ | **RULED 2026-08-18** — he is **both**. Open follow-on: the F1 timeline (does the mask carry it?) — see E-0.6 |
 | **F2/F3 rosters** | The bands exist (M-2 ×4, M-3 ×8) but are sketches; the rosters do not |
 | **Lotus Root has no enemy source** | Correct as written — M-1 lists it as a gather ingredient, not a carve. Noted so it is not mistaken for an omission |
 | **`legendary` → `superboss`** | The model enum disagrees with §21.1's vocabulary. App work, not content work |

@@ -175,7 +175,10 @@ Skills are granted to players by templateId. The player sheet joins template dat
   struck through).
 
 ## F1 Enemy Pass (PROPOSAL, added 2026-08-18)
-- **`rulebook/f1-enemy-pass.md`** is the Floor 1 roster proposal — 19 entries
+- **E-0 is RULED (2026-08-18)** — the part-budget reading, **mobs = ONE part /
+  elite+ = MULTI-part**, the gate/weak-system requirement, and mob carve policy.
+  The seeder enforces all four and exits 1 on a violation.
+- **`rulebook/f1-enemy-pass.md`** is the Floor 1 roster — 19 entries
   (6+2 shared forest · 3 Easy · 4 Medium · 4 Hard), keyed to the Compendium's
   route beats (§4.2–4.4) and the Incineradile boss pattern (§3.1). **Nothing in
   it is ruled yet**; E-0 lists the four interpretation calls that need blessing,
@@ -217,8 +220,15 @@ Skills are granted to players by templateId. The player sheet joins template dat
   the only thing that works is the thing that shatters a person who is still in there.
 - **Counterplay already existed** — Forest Resin (contact), Antiseptic Wash (tiers),
   **Burn T2 clears infection outright** (§8.2). Only a respirator is new. See E-6.
-- **OPEN:** whether Infected T3 = statue (out of play until the F3 cure) or just death.
-  Player-removed-from-play severity — owner call, see E-0.6.
+- **Infected T3 KILLS NORMALLY (ruled)** — the statue idea is dropped, because a
+  contestant crystallised until F3 is out of play either way. **So the crystal needs
+  no rules exception at all:** Infected + Suffocation, and T3's own 2-Clock death
+  timer is the mercy window. The drama lives at T1–T2 where Resin / Antiseptic Wash /
+  Burn T2 can still reach it.
+- **Nullrot is BOTH patient zero and the antibody (ruled)** — which is why §4.3 has him
+  simultaneously spreading and curing. Open follow-on: the Hard route's city is already
+  crystallised at F1, so the tidy reading is that **the mask carries the plague and he
+  is only its newest host** — making Easy and Hard the same story at two stages.
 
 ## Dissolution errata (2026-08-18 — v1 §8.2 + §10)
 - The flat **2-Clock timer is gone**. Now: **one Clock of grace**, then a **Hold
@@ -236,6 +246,24 @@ Skills are granted to players by templateId. The player sheet joins template dat
   farmed into the 20s; the victim's stat is not where difficulty is expressed.
 - Owner-approved; the campaign has not met the mechanic yet. **Not yet propagated**
   to the game repo's `rules-addendum.md` or the Godot sim (4 files) — see backlog.
+
+## The level budget (PROPOSAL, added 2026-08-18)
+- **`rulebook/level-budget.md`** — **upstream of every enemy statline.** §3.1 fixes
+  1 level = 1 point = +1 trait, §2.2 fixes creation at 14 points, so the curve is the
+  only free variable and nothing can be balanced until it is ruled.
+- Proposed: **36 levels over 9 floors** (3/floor Set 1 · 4 Set 2 · 5 Set 3; F10 pays
+  nothing). Trait totals run 14 → 50; a focused build crosses **Mind 20 around F6**.
+- **Mobs pay ZERO levels, ever** (materials and Exposure instead — otherwise the horde
+  doctrine becomes the XP farm §3.1 says this system doesn't have), and **individual
+  elites pay zero** too (they roll into floor-clear + discovery — otherwise the roster
+  author controls the power curve).
+- **Bosses pay for being RESOLVED, not killed** — chaining THE MASKED and out-arguing
+  the Loong pay the same as a corpse, or the boss doctrine is a lie the payout contradicts.
+- **Recommendation: all three routes pay identical levels**; difficulty repays in loot
+  and story access. A +1/floor differential compounds to +9 by F9, decided at F1.
+- **Flagged risk (L-6):** part HP grows linearly (Physique ÷5) while band damage doubles
+  per floor. By F9 every hit is lethal regardless of Physique — either intended, or
+  Set 3 needs a non-Physique HP source. Ruling needed BEFORE Set 3 is designed.
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

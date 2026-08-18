@@ -67,6 +67,9 @@ function doctrineCheck(seeds, atFloor = floor) {
     if (e.tier === 'mob' && (e.bodyParts || []).length !== 1) {
       problems.push(`${e.name}: mobs are ONE part (E-0.2), found ${(e.bodyParts || []).length}`);
     }
+    if (e.tier !== 'mob' && (e.bodyParts || []).length < 2) {
+      problems.push(`${e.name}: elite and above are MULTI-part (E-0.2), found ${(e.bodyParts || []).length}`);
+    }
     if (e.tier !== 'mob' && !(e.notes || '').trim()) {
       problems.push(`${e.name}: ${e.tier} with no notes — every non-mob names its weak system (E-0.3)`);
     }
