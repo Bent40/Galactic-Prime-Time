@@ -4,6 +4,13 @@
 
 ## Done
 
+- **SET 1 ENEMY ROSTERS COMPLETE (2026-08-18) — F1, F2 and F3, 51 entries.**
+  `rulebook/f1-enemy-pass.md` · `f2-enemy-pass.md` · `f3-enemy-pass.md`, plus the
+  cross-floor frame in `enemy-scaling.md` and the curve in `level-budget.md`.
+  Seeds: `server/seeds/enemies-f{1,2,3}.js`. Tests 56/56. Shareable GM page via
+  `node server/build-bestiary.js` (generated from the seeds, cannot drift).
+  **Set 2 (F4–F6) has no floors designed — only band names.**
+
 - **F1 ENEMY PASS — drafted 2026-08-18, and SIX owner rulings landed the same day.**
   Ruled: Foreman Bex's name · the Girl is **killable** (Beelzebub takes the throne
   through the F2 rival; the unbent demons rampage leaderless; Bex's F3 farm survives

@@ -7,6 +7,7 @@
 const { doctrineCheck, diffFields, partsSum, SIZES } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
 const f2 = require('./seeds/enemies-f2.js');
+const f3 = require('./seeds/enemies-f3.js');
 
 let pass = 0, fail = 0;
 const ok = (name, cond, extra = '') => {
@@ -119,6 +120,32 @@ ok('no name collides between the F1 and F2 rosters',
     for (const n of nums) if (n > band * 2 || n < 1) bad.push(`${e.name}:${n} (band ${band})`);
   }
   ok('F2 authored damage sits in the F2 band', bad.length === 0, bad.join(' · '));
+}
+
+console.log('F3 roster');
+ok('the F3 roster passes the doctrine gate', doctrineCheck(f3, 1).length === 0,
+   JSON.stringify(doctrineCheck(f3, 1)));
+ok('F3 varies its elites', new Set(f3.filter(e => e.tier === 'elite').map(partsSum)).size > 1);
+ok('F3 has a super boss at 300 (Nullrot)',
+   f3.some(e => e.tier === 'legendary' && partsSum(e) === 300));
+ok('every F3 entry carries a legal size', f3.every(e => SIZES.includes(e.size)));
+{
+  const b3 = floorState(3).dmg, bad = [];
+  for (const e of f3) {
+    const text = (e.notes || '') + ' ' + (e.phases || []).map(p => p.description).join(' ');
+    const nums = [...text.matchAll(/(\d+)\s+(Bleed|Crush|Burn|Chill)/g)].map(m => +m[1]);
+    const band = b3[e.tier === 'legendary' ? 'super' : e.tier];
+    for (const n of nums) if (n > band * 2 || n < 1) bad.push(`${e.name}:${n} (band ${band})`);
+  }
+  ok('F3 authored damage sits in the F3 band', bad.length === 0, bad.join(' · '));
+}
+
+// The seeder matches by NAME across one collection, so a duplicate between rosters
+// would silently overwrite. Guard every pair.
+{
+  const all = [...f1, ...f2, ...f3].map(e => e.name.toLowerCase());
+  const dupes = [...new Set(all.filter((n, i) => all.indexOf(n) !== i))];
+  ok('no name is reused across the F1/F2/F3 rosters', dupes.length === 0, dupes.join(', '));
 }
 
 console.log('diff (what --force would overwrite)');

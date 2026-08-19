@@ -239,6 +239,30 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - Carves are M-2 Desert (Sky-Iron · Flint · Sunglass · Scorpion Chitin). **Turquoise ⭐
   has no source yet** — open item.
 
+## F3 Enemy Pass (PROPOSAL, added 2026-08-18) — **Set 1 is complete**
+- **`rulebook/f3-enemy-pass.md`** + `server/seeds/enemies-f3.js` — 16 entries, the grand
+  capital, 100 years after F2 and **170 after F1**. Set 1's finale; the capital then
+  attaches to the Lounge (§4.1). Damage mob 6 · elite 9 · boss 12 · super 19.
+- **ALL THREE ROUTES CONVERGE ON THE PLAGUE, and there are TWO cures** — the crystal's
+  (Nullrot, the Loong) and a cure for *being a demon* (what the Petitioner and the One
+  Who Would Be Human want). **They are the same cure**, and nothing in the city knows
+  it, because nothing in the city shares anything.
+- **Nullrot is the floor's super (300)** — Reservoir 40 holds the plague, Halo of Cures
+  34 sheds the cure; he cannot have one without the other. **The party caused this**:
+  killing the F2 Doorward freed the reservoir. The win is the ARGUMENT, and he is right.
+  Destroying the Reservoir alone is the surgical answer, and it almost certainly ends him.
+- ⚠️ **The timeline forced a fix the F1 ruling already supplied.** F3 is 170 years on, so
+  Bex should be dead — §4.4 says he runs the farm. **He was KEPT**, and that is now his
+  encounter: unkillable while owned, and the Ledger names his patron. Filed as
+  **"Foreman Bex, Kept"** because the seeder matches by name and would otherwise
+  overwrite his F1 record. A test now guards cross-roster name collisions.
+- The capital is a **stealth-and-tools floor** — the Bellringer summons, the Crystal
+  Bloom spreads when hit by anything but Burn, the Mirror-Bronze Warden reflects ranged
+  attacks. After two floors of open ground it is a deliberate change of register.
+- Returning tides: F1 mobs at **~50**, F2 mobs at **~25**.
+- **`server/build-bestiary.js`** renders F1–F3 into a shareable GM page from the seed
+  data, so it cannot drift. Rebuild: `node server/build-bestiary.js`.
+
 ## Enemy scaling — F2+ damage and horde counts (PROPOSAL, added 2026-08-18)
 - **`rulebook/enemy-scaling.md`** + **`server/floor-bands.js`** — the cross-floor
   authoring frame. **The doc's tables are the script's output; regenerate with

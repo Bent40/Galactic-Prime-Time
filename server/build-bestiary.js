@@ -27,6 +27,14 @@ const FLOORS = [
       { key: 'medium', title: "Medium · the queen's court", note: 'Demon politics, and a song you have to answer.' },
       { key: 'hard',   title: 'Hard · the escort',       note: 'The Loong is yours now, and it is afraid.' },
     ] },
+  { n: 3, name: 'The Grand Capital', sub: 'Floor 3 · a hundred years further', band: 'M-3 Capital ×8',
+    seed: './seeds/enemies-f3.js', accent: '#7C6BA8',
+    layers: [
+      { key: 'shared', title: 'The Grand Capital', note: 'Shared — a quarantine the party never read the terms of.' },
+      { key: 'easy',   title: 'Easy · Nullrot',        note: 'He is the disease and the cure, and the party caused it.' },
+      { key: 'medium', title: 'Medium · the human farm', note: 'A demon with paperwork, and a name in the pens.' },
+      { key: 'hard',   title: 'Hard · the Loong in hiding', note: 'Keep it still while everything comes to it.' },
+    ] },
 ];
 
 const ROUTE_OF = (e) => {
@@ -130,7 +138,7 @@ for (const F of FLOORS) {
       <dl class="floor-facts">
         <div><dt>Band</dt><dd>${esc(F.band)}</dd></div>
         <div><dt>Party torso</dt><dd>${st.torso} HP</dd></div>
-        <div><dt>Signature hits</dt><dd>mob ${st.dmg.mob} · elite ${st.dmg.elite} · boss ${st.dmg.boss}${F.n === 1 ? ` · super ${st.dmg.super}` : ''}</dd></div>
+        <div><dt>Signature hits</dt><dd>mob ${st.dmg.mob} · elite ${st.dmg.elite} · boss ${st.dmg.boss}${F.n !== 2 ? ` · super ${st.dmg.super}` : ''}</dd></div>
         <div><dt>Entries</dt><dd>${seed.length}</dd></div>
       </dl>
     </div>`;
@@ -276,7 +284,7 @@ footer code{font-family:var(--mono);font-size:12.5px}
   <div class="wrap" style="display:block">
     <p class="strap">Galactic Prime Time · GM reference · proposal, not yet blessed</p>
     <h1>Broadcast Bestiary</h1>
-    <p class="lede">Floors 1 and 2, statted to the §21.2 horde doctrine. Every number below is
+    <p class="lede">Floors 1 through 3 — all of Set 1 — statted to the §21.2 horde doctrine. Every number below is
     in <b>band units</b> — the floor's material band multiplies both sides of every exchange, so
     it cancels and never reaches the page. A mob is 5 here and 5 on Floor 9. What grows is the
     contestant.</p>
@@ -295,7 +303,7 @@ footer code{font-family:var(--mono);font-size:12.5px}
     </div>
     ${body}
     <footer>
-      <p>Generated from <code>server/seeds/enemies-f1.js</code> and <code>enemies-f2.js</code> by
+      <p>Generated from <code>server/seeds/enemies-f1.js</code>, <code>-f2.js</code> and <code>-f3.js</code> by
       <code>server/build-bestiary.js</code> — the page cannot drift from the seed data.
       Rebuild with <code>node server/build-bestiary.js</code>.</p>
       <p>Enemy HP is identical on every floor; only damage tracks the contestant's growing body.
