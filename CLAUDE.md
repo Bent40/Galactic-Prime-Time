@@ -262,9 +262,29 @@ Skills are granted to players by templateId. The player sheet joins template dat
   the best ending, on the first floor, before anyone knows.** And **Bex helped** — he was
   burning out a rival claimant and did not know she was the last, which is exactly why he
   is farming humans 170 years later. *The easy road was closed and he closed it.*
-- **The mask is a demon prince's tool — a vessel.** F1's "possession" is Nullrot's
-  conversion beginning; the chains hold it mid-conversion; the F2 Doorward's feeding stalls
-  it; killing the Doorward lets it finish and Nullrot walks out.
+- ✅ **THE MASK IS NULLROT'S OWN RELIQUARY (ruled 2026-08-20).** **Cinnabrus blessed it**
+  for his champion — *worn back if killed* — and **Beelzebub SEALED it** (not destroyed:
+  a champion is a return ticket). So the F1 "possession" is **a sealed door being forced
+  from the inside**, which is why it dismantles the host, why it leaks, and why it takes
+  seventy years. It also explains the Mask's Oathbreaker gate (a blessing under a seal is
+  exactly what Mistletoe ignores) and makes the mural a sane person's note. The chains hold
+  it mid-conversion; the F2 Doorward's feeding stalls it; killing the Doorward lets the seal
+  give and Nullrot walks out.
+- ✅ **THE HOST CO-PILOTS (ruled 2026-08-20).** The staircase man is still in there — *"not
+  for or against, just different after 170 years of this mess."* At F3 he **can be talked
+  to** and answers honestly, which is worse than a monster. Unmasking kills him within a
+  Clock, unhurried and neither grateful nor accusing.
+- ✅ **BEX ACTS FOR DEMONKIND, NOT HIMSELF (ruled 2026-08-20).** He wants the hunger lifted
+  off every demon and Beelzebub's leash cut; his personal cure is only the version he can
+  *reach*. He does what he thinks is necessary, his means are ugly, and he does not defend
+  them. **Test: offer a cure that scales and he drops the sacrifice instantly.**
+- ✅ **THE TONGUE IS REQUIRED FOR THE REVIVAL (ruled 2026-08-20).** Beelzebub buried it
+  **apart, in its own prison** — the queen's two-century dig found the god and never the
+  mouth. Finding it **unlocks interaction** with Cinnabrus; settling it after that is
+  🔒 **edition-split**: **v1 = a catalyst or a physical release from the prison**;
+  **v2 = paying his debt with collected divinity, which does NOT exist in v1.**
+  🟡 Proposed (unblessed): the catalyst is *the mixture itself*, and the Loong's blood-claim
+  is what a prince's seal has no reply to — which would collapse S-6's three steps into one.
 - **Rival contestant parties + a 0–3 trade track** per route (S-7): +1 per floor cleared,
   ±1 from interference. One party runs one route deeply and **trades** for the rest.
 

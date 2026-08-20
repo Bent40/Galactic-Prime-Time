@@ -17,7 +17,8 @@ editions must not be conflated.** What crosses the line and what does not:
 | **Cinnabrus** — the buried plague god, and everything about *what he did and what it cost him* | **The Cosmic Casino, tables, the house, patrons bidding** — none of it exists in v1 |
 | **Beelzebub** taking his domain, title and tongue | **"Bankrupt floor-runner"** — a *table* concept. In v1 he is not running anything |
 | **Nullrot** as his champion · **Vermilia** as his last follower · **the Loong** as the dragon's descendant | **Divinity / standing / reverence as an economy.** v1 has Exposure, and that is a TV audience, not worship |
-| **The mask** as a demon prince's tool | Q-numbers, verdict axes, and the v2 decision record |
+| **The mask** — the champion's own reliquary, blessed by Cinnabrus, **sealed by Beelzebub** | Q-numbers, verdict axes, and the v2 decision record |
+| **The tongue** as the gate on the revival — find it, and the god can be spoken to | **Paying his debt with collected divinity.** That is a *table* settlement. **v1 revives him physically**, not financially — see S-6 |
 
 **In v1 the Corporation™ runs the show.** No god is running anything.
 
@@ -40,12 +41,18 @@ editions must not be conflated.** What crosses the line and what does not:
         │
  Desperate, he turns to DRAGON'S BLOOD, and finds a method.
         │
+ He BLESSES A MASK for his champion NULLROT — a reliquary, so that
+ if the champion is killed, the champion can be worn back.
+        │
  BEELZEBUB sends champions. Cinnabrus is put down before he can finish the cure.
  Beelzebub takes his domain and his title, CUTS OUT HIS TONGUE,
- and buries it separately.
+ and buries it separately, in its own prison.
+        │
+ And he SEALS THE MASK, because a champion is a return ticket.
         │
         ▼
  Buried under the forest. Mute. One follower left alive.
+ A sealed mask, lying in a treasure room, waiting for someone to pick it up.
 ```
 
 **His weapon ate his congregation.** That is the whole tragedy and it needs no further
@@ -59,9 +66,10 @@ explanation — no villainy, no economy, just a god who was very good at one thi
 |---|---|---|
 | **Cinnabrus** | The buried plague god. Mute — Beelzebub took the tongue | To finish the cure he was interrupted making, and to be answerable again |
 | **Vermilia** | **The queen.** His first follower and **the only one who survived his plague** | To revive him — so she can be cured of the **hunger** |
-| **Nullrot** | **His champion** — an olden demon who owes Cinnabrus his life. Loyal to the god, not the regent | To complete the cure. He needs a body to do it, and the **mask** is how he gets one |
+| **Nullrot** | **His champion** — an olden demon who owes Cinnabrus his life. Loyal to the god, not the regent | To complete the cure. He needs a body to do it, and **his own reliquary mask** is how he comes back |
+| **The host** | The man who put the mask on at the staircase. ✅ **He is still in there** | Nothing, particularly. **He co-pilots.** Not for, not against — 170 years of this makes a person *different*, not loyal |
 | **The Loong** | **Descendant of the dragon Cinnabrus killed.** A living blood-claim | To find the source of what took its city — and it has heard of the mask |
-| **Bex** | A rival demon, working through humans | His own hunger cured, and Vermilia out of his way |
+| **Bex** | A rival demon, working through humans | ✅ **The hunger lifted off demonkind.** His own cure is the only version he can reach — he takes the reachable one and does what it costs |
 | **Beelzebub** | The scavenger who won | To keep what he took — and to keep his followers *needing* him |
 
 ### The two hungers, and the one cure
@@ -80,6 +88,27 @@ explanation — no villainy, no economy, just a god who was very good at one thi
 **That makes the optimal path a necessity, not a courtesy.** The cure does not exist
 until they meet.
 
+### 🎭 The mask ✅ RULED 2026-08-20
+
+**It is not a stray demon prince's toy reaching into the world. It is Nullrot's own.**
+
+| | |
+|---|---|
+| **Blessed by** | **Cinnabrus**, for his champion — *"if you are killed, you can be worn back."* A reliquary, not a weapon |
+| **Sealed by** | **Beelzebub**, when he removed Cinnabrus. He did not destroy it. He *shut* it — because a champion is a return ticket, and a scavenger closes doors rather than making enemies of them |
+| **Therefore** | Everything the mask does to a host is **a sealed door being forced from the inside.** That is why it takes a body apart and rebuilds it. That is why it leaks. That is why it takes **seventy years** |
+
+**Three things this fixes, and they were already written:**
+
+- **The F1 mural is right, and someone sane wrote it.** *Chain him* is not a prophecy; it is
+  a note left by people who knew what the object in that room was.
+- **The Mask's Oathbreaker gate stops being arbitrary.** It resists normal harm because it is
+  **blessed**, and Mistletoe cuts it because Mistletoe is the material that ignores an oath.
+  A god's blessing under a prince's seal is exactly the thing that rule was written for.
+- **The host survives, and that is now load-bearing.** The seal is why the conversion never
+  fully completed even after it finished: **there are two of them in there.** At F3 the man
+  can be *spoken to*. He will not take a side. He will answer questions, which is worse.
+
 **And Loong blood alone is a trap.** It sustains, so a captured Loong is not a murder —
 it is **livestock**, bled for the foreseeable future by demons who only need it to keep
 working. That is what the hunt actually intends.
@@ -90,7 +119,7 @@ working. That is what the hunt actually intends.
 
 | Route | The beat | What is really happening |
 |---|---|---|
-| **Easy** | A man by a grand staircase takes **the mask**. A mural says **chain him**. | **The mask is a vessel.** Nullrot is coming through it, and it is tearing the man apart and rebuilding him into something a demon can wear. The "possession" is a *conversion in progress*. **The chains hold the vessel, mid-conversion, for seventy years.** |
+| **Easy** | A man by a grand staircase takes **the mask**. A mural says **chain him**. | **The mask is Nullrot's own reliquary, sealed shut by Beelzebub.** The champion is forcing it open from the inside, and forcing it is what tears the man apart and rebuilds him into something wearable. The "possession" is a *conversion in progress*. **The chains hold the vessel, mid-conversion, for seventy years.** |
 | **Medium** | NPCs are burning a house with **a girl** inside. Free her and she is a demon who asks to be **fed**, and grants the **brand**. | **The girl is VERMILIA**, hiding among humans. **The arsonists' leader is BEX**, a rival demon burning out a rival claimant — **and he does not know she is the last follower alive.** |
 | **Hard** | A **moving city** on giant stairs, guarded by a **Loong Kin**. Its citizens have **crystallised**. | This is Cinnabrus's plague still leaking out of the ground. The Loong is the **dragon's descendant**, guarding what is left of a people it could not save. |
 
@@ -114,7 +143,7 @@ god at zero cannot be prayed back.**
 
 | Route | The beat | What is really happening |
 |---|---|---|
-| **Easy** | The ruined stair, the man still chained. **A demon blocks the exit.** | **The Doorward is sick and feeding.** It has drunk the leak off the vessel for seventy years — and *that drain is what stalled the conversion.* **Kill it and the mask finishes. Nullrot walks out.** |
+| **Easy** | The ruined stair, the man still chained. **A demon blocks the exit.** | **The Doorward is sick and feeding.** It has drunk the leak off the vessel for seventy years — and *that drain is what stalled the conversion.* **Kill it and the seal gives. Nullrot walks out — with the man still inside.** |
 | **Medium** | The girl is a **queen**. Assassinate a **rival demon** who helped humans and wants her throne. | It is **Bex**. They may kill him. **It does not take.** |
 | **Hard** | The Loong, **hurt and hunted**, escorted to a village. | **It is on an errand.** Seventy years crossing the desert hunting the source — and out here **it heard of the mask.** It is right, and not in the way it hopes. |
 
@@ -136,7 +165,9 @@ to daughter, all of them her.
 | **Medium** | **Bex** runs a **human farm**; he wants one specific sacrifice. | The farm is **how the city's demons eat**. The sacrifice is his private hope — a fallback, because the road through Cinnabrus is shut. **He is also looking for the Loong** |
 | **Hard** | The Loong hides in the capital; demons hunt it for its blood. | **It followed the mask here.** Its suppressing the plague is a side effect the capital mistook for a purpose — and **the hunt believes it holds a cure it has never had** |
 
-**Under the palace: Cinnabrus, and the empty socket where his tongue was.**
+**Under the palace: Cinnabrus, and the empty socket where his tongue was.** The tongue is
+**not** down there with him. Beelzebub buried it apart, in its own prison, and **two
+centuries of digging have found the god and never found the mouth.**
 
 ---
 
@@ -154,8 +185,29 @@ to daughter, all of them her.
 > **Every antagonist in Set 1 wants something reasonable and is reaching for it the only
 > way they can see. The optimal ending is not mercy — it is introductions.**
 
-**And the tongue is the gate.** A god with no tongue cannot answer. Recovering it —
-Beelzebub buried it *separately* — is literally opening the channel.
+### 🗝 The revival, in two steps ✅ RULED 2026-08-20
+
+**The tongue is REQUIRED. There is no other route.** A god with no mouth cannot answer,
+cannot be bargained with, and cannot be prayed back no matter how many followers he has.
+
+| Step | v1 | v2 |
+|---|---|---|
+| **1 · Find the tongue** | Same in both. It is a physical object in a prison Beelzebub built. Finding it **unlocks interaction with Cinnabrus** — that is all it does, and it is everything | Same |
+| **2 · Settle what is owed** | 🟡 **A catalyst, or breaking the prison by some means** — a physical release, because v1 has no ledger to pay | ⛔ **Pay his debt with the party's collected divinity.** A *table* settlement. **This does not exist in v1** |
+
+> 🔒 **Firewall note (S-0).** Step 2 is where the editions genuinely diverge and it must not
+> be blurred. v2 buys a god out of bankruptcy. **v1 digs him up.** Same tongue, same god,
+> completely different verb.
+
+**🟡 PROPOSED — what the v1 catalyst should be:** *the cure itself.* He was killed reaching
+for the mixture; finishing it is the one offering that means anything to him, and the party
+is already carrying it if they took S-6's path. And **🟡 PROPOSED — what opens the prison:**
+**the Loong.** Beelzebub's seal answers demons and gods; it does not answer the blood-claim
+of the dragon Cinnabrus killed. The descendant standing on it is a claim the seal has no
+reply to. *Both need owner blessing — they are the tidiest answers, not ruled ones.*
+
+**If both land, the three steps collapse into one act:** getting the Loong to the capital
+creates the cure, frees the Loong, **and opens the tongue.** Three routes, one room.
 
 ---
 
@@ -184,11 +236,19 @@ prices social play. ⚖ Betrayal is always on the table, and the crowd pays for 
 
 ---
 
-## S-8 — 🔴 Still open
+## S-8 — ✅ Closed 2026-08-20
+
+| # | Question | Ruling |
+|---|---|---|
+| **S-a** | Whose tool is the mask? | ✅ **Nullrot's own** — blessed by Cinnabrus as a reliquary for his champion, **sealed by Beelzebub** to prevent the return. See S-2 |
+| **S-b** | Does the staircase man survive inside Nullrot? | ✅ **Yes — he co-pilots.** Not for, not against. *"Just different after 170 years of this mess."* He can be talked to at F3 |
+| **S-c** | Bex's fate on the spared branch | ✅ **He was never in it for himself alone.** He does what is necessary **for demonkind**; the means are ugly and he knows it. A working cure is a win he will take from anyone's hand |
+| **S-d** | Is the tongue required for the revival? | ✅ **Required.** Find it → interaction unlocks → then settle (v1 catalyst / v2 debt). See S-6 |
+
+## S-9 — 🔴 Still open
 
 | # | Question |
 |---|---|
-| **S-a** | **Who is the demon prince whose tool the mask is?** Cinnabrus himself, Beelzebub, or a third party — it changes who has been reaching into the city all along |
-| **S-b** | Does **the man from the staircase** survive inside Nullrot in any sense, or is the host simply spent? F3's "remove the Mask and a 170-year-old man dies" beat assumes *something* is left |
-| **S-c** | **Bex's fate on the spared branch** — if Vermilia lives and Cinnabrus is revived, does Bex simply *get what he wanted*? |
-| **S-d** | Does reviving Cinnabrus require the **tongue specifically**, or is it one of several routes? |
+| **S-e** | **Where is the tongue's prison, and does it sit inside Set 1 at all?** If it is on F3, the best ending is reachable in one campaign; if Beelzebub keeps it, revival is a Set 2 payoff. 🟡 Recommended: on F3, in a second vault the excavation could never open |
+| **S-f** | **Bless or reject the two S-6 proposals** — the mixture as the catalyst, and the Loong's blood-claim as what breaks the seal |
+| **S-g** | **Does the capital converge the routes?** §4.1 gives a party one route per campaign, but the path of least casualties needs knowledge from all three. S-7's trade track is the current answer; a real convergence at F3 is the alternative |
