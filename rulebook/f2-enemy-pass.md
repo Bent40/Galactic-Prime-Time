@@ -140,7 +140,7 @@ the **Dissolution songs** (Compendium §3.5) were written for.
 |---|---|---|---|
 | **C-1** | **Court Servitor** | 5 | they don't fight back; killing them is a *diplomatic* act |
 | **C-2** | **The Queen's Blade** | **62** | **Dodge Threshold 8** — the first thing they cannot simply hit |
-| **C-3** | ☠ **The Rival Noble** | **145** | the songs |
+| **C-3** | ☠ **Bex, the Rival Noble** | **145** | the songs — **and the man from Floor 1** |
 
 **C-2 is the mechanical lesson of the route.** A threshold, not immunity: Reflexes 8
 auto-dodges, 10 auto-dodges and counters, below is the 1d4 fallback. **And it cannot
@@ -151,7 +151,18 @@ damage are never dodged (§14). The desert mobs spent the whole floor teaching t
 
 **Parts:** Head 18 · Torso 52 · Arms 14/14 · Legs 15/15 · **Choir 17** · **Large**
 
-**It branches on Floor 1:**
+> **The Rival is Foreman Bex.** The man who led the arsonists at F1 was never a man —
+> he was a demon killing a rival by proxy, using humans, because using humans is the
+> only way he knows how to be near them. **That is why he could not be killed at the
+> house.** He does not announce it; he apologises between attacks in exactly the voice
+> he used there, and if nobody notices, the Choir sings it for them.
+>
+> **They were sent to assassinate him and they may succeed. It does not take.** A demon
+> is not killed by killing its body, and nobody told them that either. He is at Floor 3
+> running a human farm regardless — and what happens in this room decides what he thinks
+> of them when they arrive.
+
+**It also branches on Floor 1:**
 
 - **The Girl was spared** → she is queen, the Rival is a genuine rebel, and the party
   is her assassin. The weight sits on killing someone who helped people.

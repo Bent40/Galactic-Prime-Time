@@ -241,25 +241,30 @@ Skills are granted to players by templateId. The player sheet joins template dat
 
 ## F3 Enemy Pass (PROPOSAL, added 2026-08-18) — **Set 1 is complete**
 - **`rulebook/f3-enemy-pass.md`** + `server/seeds/enemies-f3.js` — 16 entries, the grand
-  capital, 100 years after F2 and **170 after F1**. Set 1's finale; the capital then
-  attaches to the Lounge (§4.1). Damage mob 6 · elite 9 · boss 12 · super 19.
-- **ALL THREE ROUTES CONVERGE ON THE PLAGUE, and there are TWO cures** — the crystal's
-  (Nullrot, the Loong) and a cure for *being a demon* (what the Petitioner and the One
-  Who Would Be Human want). **They are the same cure**, and nothing in the city knows
-  it, because nothing in the city shares anything.
+  capital, 170 years after F1. Damage mob 6 · elite 9 · boss 12 · super 19.
+- ✅ **RULED — the F3 design rule: every mob is a CONSEQUENCE of a previous floor**, not
+  a thing that happens to be there. The capital is where the party finds the climax of
+  the story they have been in since F1, and **they may perform it however they like —
+  this is NOT a stealth floor** and not a floor "about" any tactic.
+- Roster is people and consequences: **infected citizens · rogue demons · hoodlums ·
+  crystal clusters · quarantine enforcers**, plus **royal guards** on Medium. The
+  **quarantine is a PLACE, not an obstacle** — half the floor is behind the line,
+  getting in is easy, getting out is the ask.
+- **Rogue Demons and Royal Guards branch on the F1 Girl ruling** — killed → the unbent
+  demons are everywhere and the crown is human and frightened; spared → far fewer, still
+  under orders, and the crown is HERS. Same statlines, different rooms.
+- ✅ **BEX WAS ALWAYS THE RIVAL DEMON (owner, 2026-08-18)** — hiding among humans and
+  manipulating them across three floors. F1 he burns a house to kill a rival by proxy
+  (which is *why* he cannot be killed there — a clue, not GM protection); F2 he is the
+  Rival Noble and **the assassination may succeed and not take**, because a demon is not
+  killed by killing its body; F3 he runs the farm, and the farm exists to find the ONE
+  human whose sacrifice ends his nature. **He wants to be human**, has never lied, and
+  the Petition does not permit him to. Three seed entries: `Foreman Bex` (110) →
+  `Bex, the Rival Noble` (145) → `Bex, the Petitioner` (155).
 - **Nullrot is the floor's super (300)** — Reservoir 40 holds the plague, Halo of Cures
-  34 sheds the cure; he cannot have one without the other. **The party caused this**:
-  killing the F2 Doorward freed the reservoir. The win is the ARGUMENT, and he is right.
-  Destroying the Reservoir alone is the surgical answer, and it almost certainly ends him.
-- ⚠️ **The timeline forced a fix the F1 ruling already supplied.** F3 is 170 years on, so
-  Bex should be dead — §4.4 says he runs the farm. **He was KEPT**, and that is now his
-  encounter: unkillable while owned, and the Ledger names his patron. Filed as
-  **"Foreman Bex, Kept"** because the seeder matches by name and would otherwise
-  overwrite his F1 record. A test now guards cross-roster name collisions.
-- The capital is a **stealth-and-tools floor** — the Bellringer summons, the Crystal
-  Bloom spreads when hit by anything but Burn, the Mirror-Bronze Warden reflects ranged
-  attacks. After two floors of open ground it is a deliberate change of register.
-- Returning tides: F1 mobs at **~50**, F2 mobs at **~25**.
+  34 sheds the cure. **The party caused this** by killing the F2 Doorward. The win is the
+  ARGUMENT, and he is right. Destroying the Reservoir alone is surgical and ends him.
+- Returning tides: F1 mobs ~50, F2 mobs ~25.
 - **`server/build-bestiary.js`** renders F1–F3 into a shareable GM page from the seed
   data, so it cannot drift. Rebuild: `node server/build-bestiary.js`.
 
