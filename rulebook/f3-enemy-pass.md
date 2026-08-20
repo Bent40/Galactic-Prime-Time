@@ -32,14 +32,32 @@ answers a question the party created.
 
 ### All three routes converge on the plague — and there are two cures
 
-| Route | What it wants cured |
-|---|---|
-| **Easy** | Nullrot *is* the plague and the cure, in one body |
-| **Medium** | **Bex** wants a human sacrifice to cure **his demonic nature** |
-| **Hard** | demons hunt the Loong because its cure might work on **theirs** |
+**There are TWO cures, they are DIFFERENT, and each is held by whoever does not need it.**
 
-**They are the same cure.** Nothing in the city knows it, because nothing in the city
-shares anything — the floor's theme as a fact rather than a speech.
+| Cure | Held by | Wanted by |
+|---|---|---|
+| **The plague cure** | **Nullrot** — he is patient zero *and* the antibody | **the Loong**, which has been holding the plague back by standing in the city |
+| **Loong blood** — cures demonic tendencies | **the Loong** | **every demon on the floor** — Bex, the One Who Would Be Human, the hunt |
+
+**Neither party knows the other exists.** Nullrot could free the Loong; the Loong's
+blood could end Bex's petition without a sacrifice and stop the hunts. Nobody in this
+city has put it together, because nothing in this city shares anything — the floor's
+theme as a fact rather than a speech.
+
+### The path of least casualties ✅ **owner, 2026-08-18**
+
+**Get the Loong out of the city · make the Loong and Nullrot meet in the capital ·
+help the queen revive her god.**
+
+- Nullrot's cure takes over containment, so **the Loong no longer has to stand still**.
+- Loong blood then cures demonic nature freely — **Bex needs no human sacrifice**, and
+  the hunts have nothing left to hunt.
+- A revived god gives the demons a patron and direction again, so **the rogue demons
+  stop being rogue**.
+
+🔴 **This requires knowledge from all three routes**, and §4.1 says a party runs *one*
+route per campaign. Whether the capital is where the routes converge — or whether the
+optimal ending is deliberately out of any single party's reach — is an open call.
 
 ### The quarantine is a place, not an obstacle
 
@@ -194,7 +212,7 @@ Loong apart to get it. **The Wanting (14)** cannot be reasoned with or repositio
 every Clock it moves one space closer, and the party is fighting a compass.
 
 **Weak system — give it what it wants.** The cure works on demons and the Loong will
-say so if asked. **The third answer, if they worked it out: there is enough for both.**
+say so if asked. **The third answer, if they worked it out: the Loong's blood is not scarce, and Nullrot can free it to give some.**
 
 > ### The Loong is why the capital is still standing
 > It has held the plague off for a century **by being here** — so it cannot fight

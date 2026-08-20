@@ -261,6 +261,17 @@ Skills are granted to players by templateId. The player sheet joins template dat
   human whose sacrifice ends his nature. **He wants to be human**, has never lied, and
   the Petition does not permit him to. Three seed entries: `Foreman Bex` (110) →
   `Bex, the Rival Noble` (145) → `Bex, the Petitioner` (155).
+- ⚠️ **TWO CURES, NOT ONE (owner correction 2026-08-18).** I had written that the plague
+  cure and the demon cure were the same thing. **They are different, and each is held by
+  whoever does not need it:** **Nullrot** holds the *plague* cure; **Loong blood** cures
+  *demonic tendencies*. The Loong wants Nullrot's; every demon wants the Loong's; neither
+  knows the other exists.
+- **The path of least casualties (owner):** get the Loong **out of the city** · make the
+  Loong and Nullrot **meet in the capital** · help the queen **revive her god**. Nullrot
+  takes over containment so the Loong need not stand still; Loong blood then cures demons
+  freely so Bex needs no sacrifice and the hunts end; a revived god gives the rogue demons
+  a patron again. 🔴 It requires knowledge from all three routes, and §4.1 gives a party
+  one route per campaign — whether the capital is where routes converge is an OPEN call.
 - **Nullrot is the floor's super (300)** — Reservoir 40 holds the plague, Halo of Cures
   34 sheds the cure. **The party caused this** by killing the F2 Doorward. The win is the
   ARGUMENT, and he is right. Destroying the Reservoir alone is surgical and ends him.
