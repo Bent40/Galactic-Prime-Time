@@ -4,6 +4,11 @@
 [`level-budget.md`](level-budget.md) · §12.7 errata · [`f1-enemy-pass.md`](f1-enemy-pass.md) E-0.
 Route beats from Compendium §4.2–4.4. Data: `server/seeds/enemies-f3.js`.
 
+> **Story:** [`set1-story-canon.md`](set1-story-canon.md) — the Cinnabrus arc, reconciled into v1.
+> 🔒 **Firewall (S-0):** the god, his champion, his queen and the dragon's descendant cross into v1.
+> **The Cosmic Casino, tables, patrons and divinity-as-economy do not.** In v1 the Corporation
+> runs the show and no god is running anything — Cinnabrus is *background a good run uncovers*.
+
 **The grand capital, a hundred years after Floor 2 — 170 after Floor 1.** Set 1's
 finale; afterwards the capital attaches to the Lounge as a persistent location (§4.1).
 

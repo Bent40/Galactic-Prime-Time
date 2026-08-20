@@ -239,6 +239,35 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - Carves are M-2 Desert (Sky-Iron · Flint · Sunglass · Scorpion Chitin). **Turquoise ⭐
   has no source yet** — open item.
 
+## Set 1 story canon — the Cinnabrus arc (RULED 2026-08-18)
+- **`rulebook/set1-story-canon.md`** is the story source of truth for F1–F3. The enemy
+  passes reference it; do not re-derive the plot from the Compendium alone.
+- 🔒 **THE v1/v2 FIREWALL (S-0) — do not conflate the editions.** **Cinnabrus** (the buried
+  plague god), **Beelzebub** (took his domain, title and tongue), **Nullrot** (his champion),
+  **Vermilia** (his last living follower, the F1 girl → the F3 queen) and **the Loong**
+  (descendant of the dragon he killed) all cross into v1. **The Cosmic Casino, tables, the
+  house, patrons bidding, bankruptcy-as-debt and divinity-as-economy DO NOT.** In v1 the
+  Corporation™ runs the show and no god runs anything — **Cinnabrus is background a
+  thorough party uncovers**, never the reason the cameras are on. His ruin needs no economy:
+  his own plague killed everyone who worshipped him.
+- ✅ **THE CURE IS A MIXTURE (ruled).** Nullrot's flesh only *stalls* what it leaks; Loong
+  blood only holds the plague at bay and soothes demonic hunger *temporarily*. **Neither is
+  a cure. Together they are** — strong enough to resist rather than delay. That is what
+  Cinnabrus was reaching for when Beelzebub stopped him, and it makes the optimal path a
+  **necessity, not a courtesy: the cure does not exist until the two are in the same room.**
+- ⚠️ **Loong blood alone is a trap** — it sustains, so a captured Loong is not a murder, it
+  is **livestock**, bled indefinitely. That is what the hunt actually intends.
+- 🔴 **VERMILIA IS KILLABLE AND SHE IS THE LAST FOLLOWER.** Cinnabrus's ledger reads **1**.
+  A god at zero cannot be prayed back. **Killing the F1 girl permanently deletes him and
+  the best ending, on the first floor, before anyone knows.** And **Bex helped** — he was
+  burning out a rival claimant and did not know she was the last, which is exactly why he
+  is farming humans 170 years later. *The easy road was closed and he closed it.*
+- **The mask is a demon prince's tool — a vessel.** F1's "possession" is Nullrot's
+  conversion beginning; the chains hold it mid-conversion; the F2 Doorward's feeding stalls
+  it; killing the Doorward lets it finish and Nullrot walks out.
+- **Rival contestant parties + a 0–3 trade track** per route (S-7): +1 per floor cleared,
+  ±1 from interference. One party runs one route deeply and **trades** for the rest.
+
 ## F3 Enemy Pass (PROPOSAL, added 2026-08-18) — **Set 1 is complete**
 - **`rulebook/f3-enemy-pass.md`** + `server/seeds/enemies-f3.js` — 16 entries, the grand
   capital, 170 years after F1. Damage mob 6 · elite 9 · boss 12 · super 19.

@@ -6,6 +6,11 @@ damage, hordes), [`level-budget.md`](level-budget.md) (the curve), §12.7's erra
 (band units), and [`f1-enemy-pass.md`](f1-enemy-pass.md) E-0 (mobs exact, one part;
 elite+ multi-part and varied; gates and weak systems; mob carve policy).
 
+> **Story:** [`set1-story-canon.md`](set1-story-canon.md) — the Cinnabrus arc, reconciled into v1.
+> 🔒 **Firewall (S-0):** the god, his champion, his queen and the dragon's descendant cross into v1.
+> **The Cosmic Casino, tables, patrons and divinity-as-economy do not.** In v1 the Corporation
+> runs the show and no god is running anything — Cinnabrus is *background a good run uncovers*.
+
 **Floor 2 is the great desert, seventy years after Floor 1** (Compendium §4.1).
 Route beats are the owner's, from §4.2–4.4. Data: `server/seeds/enemies-f2.js`.
 

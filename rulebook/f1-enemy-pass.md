@@ -4,6 +4,11 @@
 interpretation calls are blessed and the seeder enforces them. Statlines and
 encounter content remain 🟡 PROPOSAL.
 
+> **Story:** [`set1-story-canon.md`](set1-story-canon.md) — the Cinnabrus arc, reconciled into v1.
+> 🔒 **Firewall (S-0):** the god, his champion, his queen and the dragon's descendant cross into v1.
+> **The Cosmic Casino, tables, patrons and divinity-as-economy do not.** In v1 the Corporation
+> runs the show and no god is running anything — Cinnabrus is *background a good run uncovers*.
+
 **⚠️ Damage re-based 2026-08-18 (×2).** [`level-budget.md`](level-budget.md) L-19
 puts a focused contestant at a **7 HP torso entering Floor 1** (the book's baseline
 is 5), so every attack number below is **×2 of the book baseline** — Bramblewretch
