@@ -1,253 +1,194 @@
-# Set 1 — The Story, Chronologically (WORKING CANON)
+# Set 1 — The Story (WORKING CANON, v1)
 
-**Date:** 2026-08-18 · **Status:** 🟡 owner-dictated this session; recorded so it stops
-living in chat. Source: Compendium §4.1–4.4 plus owner rulings 2026-08-18.
-Companion to the three enemy passes.
-
----
-
-## S-0 — The frame
-
-The floors are **eras**, not rooms. **F1 → F2 is 70 years. F2 → F3 is 100 more** — 170
-in total. The contestants do not age between them. **So the party keeps meeting the
-consequences of its own choices, decades on, at full growth.** That is why every F3
-mob is a consequence rather than an encounter.
+**Date:** 2026-08-18 · **Status:** 🟡 owner-dictated; recorded so it stops living in chat.
+Sources: Compendium §4.1–4.4, owner rulings 2026-08-18, and the character/relationship
+layer reconciled from [`../v2/floors/floors-1-3-arc.md`](../v2/floors/floors-1-3-arc.md)
+under the firewall in **S-0**.
 
 ---
 
-## S-1 — The mask (the object the whole set turns on)
+## S-0 — 🔒 The v1 / v2 firewall (read this first)
 
-> **The mask tears its host apart and rebuilds them into something a demon can wear
-> better.** It **leaks the plague** while it works. And a host's own flesh, **given
-> enough time, stalls the infection**.
+The owner ruled the v1 enemy passes should carry the **Cinnabrus** arc — **but the two
+editions must not be conflated.** What crosses the line and what does not:
 
-Everything else follows from those three sentences.
+| ✅ Crosses into v1 | ⛔ Stays in v2 |
+|---|---|
+| **Cinnabrus** — the buried plague god, and everything about *what he did and what it cost him* | **The Cosmic Casino, tables, the house, patrons bidding** — none of it exists in v1 |
+| **Beelzebub** taking his domain, title and tongue | **"Bankrupt floor-runner"** — a *table* concept. In v1 he is not running anything |
+| **Nullrot** as his champion · **Vermilia** as his last follower · **the Loong** as the dragon's descendant | **Divinity / standing / reverence as an economy.** v1 has Exposure, and that is a TV audience, not worship |
+| **The mask** as a demon prince's tool | Q-numbers, verdict axes, and the v2 decision record |
 
-- The **crystal plague** is a *leak*, not a purpose. It is a side effect of the mask
-  doing its job.
-- **Nullrot ends up both source and stall** because he wore it longest: still leaking,
-  and by now flesh that has learned to arrest what it leaks.
-- ⚖ **Open:** who made the mask, and for which demon.
+**In v1 the Corporation™ runs the show.** No god is running anything.
+
+> **Cinnabrus is BACKGROUND.** He is what a thorough party can uncover across three
+> floors and a good run rewards. He is never the reason the cameras are on. Nothing in
+> the v1 rulebook should require a table to make sense — his ruin is simply that
+> **his own plague killed everyone who worshipped him**, which needs no economy to land.
 
 ---
 
-## S-2 — The two sicknesses, and the cures
+## S-1 — The chain, before the campaign starts
 
-| Sickness | Who has it | Cures |
+```
+ CINNABRUS, a plague demon, rises on the strength of his disease.
+        │
+ He KILLS A DRAGON with it ─────────────▶ the deed that makes his name.
+        │
+ The plague does not stop. It spreads.
+ It kills EVERY ONE OF HIS OWN FOLLOWERS — except one.
+        │
+ Desperate, he turns to DRAGON'S BLOOD, and finds a method.
+        │
+ BEELZEBUB sends champions. Cinnabrus is put down before he can finish the cure.
+ Beelzebub takes his domain and his title, CUTS OUT HIS TONGUE,
+ and buries it separately.
+        │
+        ▼
+ Buried under the forest. Mute. One follower left alive.
+```
+
+**His weapon ate his congregation.** That is the whole tragedy and it needs no further
+explanation — no villainy, no economy, just a god who was very good at one thing.
+
+---
+
+## S-2 — The cast, and what each one wants
+
+| Who | What they are | What they want |
 |---|---|---|
-| **The crystal plague** | the Loong's city, the desert, the capital | **Nullrot** — and he is the only one |
-| **Demonic tendency** | every demon, and **they want rid of it** | **three**, below |
+| **Cinnabrus** | The buried plague god. Mute — Beelzebub took the tongue | To finish the cure he was interrupted making, and to be answerable again |
+| **Vermilia** | **The queen.** His first follower and **the only one who survived his plague** | To revive him — so she can be cured of the **hunger** |
+| **Nullrot** | **His champion** — an olden demon who owes Cinnabrus his life. Loyal to the god, not the regent | To complete the cure. He needs a body to do it, and the **mask** is how he gets one |
+| **The Loong** | **Descendant of the dragon Cinnabrus killed.** A living blood-claim | To find the source of what took its city — and it has heard of the mask |
+| **Bex** | A rival demon, working through humans | His own hunger cured, and Vermilia out of his way |
+| **Beelzebub** | The scavenger who won | To keep what he took — and to keep his followers *needing* him |
 
-**Three cures for demonic tendency:**
+### The two hungers, and the one cure
 
-1. **Loong blood.** A solution — and the one the hunt is willing to kill for.
-2. **The god's boon.** The table's demon god can lift it from his followers **if he
-   wills it**. He is diminished because **Beelzebub stole his powers**. Revive him and
-   the boon returns, and it costs nobody anything.
-3. **Beelzebub.** He *can* do it. He does not — **a cured follower is a free one.**
-   That is the leash Bex is on.
+| | Holds the plague at bay | Soothes demonic hunger | **Actually cures** |
+|---|---|---|---|
+| **Nullrot** (the champion's flesh) | ✅ partially — he stalls what he leaks | ✖ | ✖ alone |
+| **Loong blood** | ✅ temporarily | ✅ temporarily | ✖ alone |
+| **Both together** | — | — | ✅ **RULED 2026-08-18** |
 
-**Nobody in the story knows all three.** The hunt knows only the first.
+> **Neither is a cure. Together they are** — the mixture is strong enough to *resist* the
+> plague rather than merely delay it. This is the cure Cinnabrus was reaching for when
+> Beelzebub's champions stopped him, and **it is why the two of them have to be in the
+> same room.**
+
+**That makes the optimal path a necessity, not a courtesy.** The cure does not exist
+until they meet.
+
+**And Loong blood alone is a trap.** It sustains, so a captured Loong is not a murder —
+it is **livestock**, bled for the foreseeable future by demons who only need it to keep
+working. That is what the hunt actually intends.
 
 ---
 
 ## S-3 — Floor 1 · the green forest
 
-| Route | What happens |
-|---|---|
-| **Easy** | A man by a grand staircase descends with the party, takes **the mask**, and begins to change. A prophecy mural says **chain him to the wall**. The dungeon collapses behind them. |
-| **Medium** | A haunted house. An NPC crew is burning it with **a girl** inside. Free her and she is a demon: she asks to be **fed**, and grants the **demonic brand**. |
-| **Hard** | A **moving city** on giant stairs, guarded by a **Loong Kin**. Its citizens have **crystallised**. The party must persuade it. |
+| Route | The beat | What is really happening |
+|---|---|---|
+| **Easy** | A man by a grand staircase takes **the mask**. A mural says **chain him**. | **The mask is a vessel.** Nullrot is coming through it, and it is tearing the man apart and rebuilding him into something a demon can wear. The "possession" is a *conversion in progress*. **The chains hold the vessel, mid-conversion, for seventy years.** |
+| **Medium** | NPCs are burning a house with **a girl** inside. Free her and she is a demon who asks to be **fed**, and grants the **brand**. | **The girl is VERMILIA**, hiding among humans. **The arsonists' leader is BEX**, a rival demon burning out a rival claimant — **and he does not know she is the last follower alive.** |
+| **Hard** | A **moving city** on giant stairs, guarded by a **Loong Kin**. Its citizens have **crystallised**. | This is Cinnabrus's plague still leaking out of the ground. The Loong is the **dragon's descendant**, guarding what is left of a people it could not save. |
 
-**What is really happening**
+> ⚠️ **The forest is the last of the green.** The thing buried underneath is still
+> leaking, which is why Floor 2 is a desert.
 
-- **The chaining works.** It holds the *man*, mid-transformation, for seventy years.
-- **The arsonists' leader is Bex, and Bex is a demon** — killing a rival (the girl) by
-  proxy, using humans, because using humans is the only way he knows to be near them.
-  **That is why he cannot be killed here.**
-- **The Loong's city is the plague's first visible victim.** It does not know a cure and
-  does not claim one. It knows a sickness has a **beginning**, and it means to find it.
+### 🔴 The killable queen — the campaign's heaviest consequence
+
+Cinnabrus's followers number **one**. If Vermilia dies, **he hits absolute zero, and a
+god at zero cannot be prayed back.**
+
+- **Kill her at F1** → **Cinnabrus is permanently deleted.** The best ending is gone from
+  the campaign, at the first floor, before anyone knows what they did.
+- **And Bex helped.** He wanted a rival gone. **He destroyed the one road he needed** —
+  which is exactly why, 170 years later, he is farming humans for a sacrifice. *The easy
+  road was closed and he closed it.*
 
 ---
 
 ## S-4 — Floor 2 · the great desert, +70 years
 
-| Route | What happens |
-|---|---|
-| **Easy** | The ruined stair. The man is still chained, still masked, ravaged by time. **A demon blocks the exit.** Kill it; free him. |
-| **Medium** | The girl is a **demonic queen** (if spared). The party is sent to assassinate a **rival demon** who helped humans and wants her throne. |
-| **Hard** | The Loong is in the desert, **hurt and hunted by demons**. Escort it to a village. |
+| Route | The beat | What is really happening |
+|---|---|---|
+| **Easy** | The ruined stair, the man still chained. **A demon blocks the exit.** | **The Doorward is sick and feeding.** It has drunk the leak off the vessel for seventy years — and *that drain is what stalled the conversion.* **Kill it and the mask finishes. Nullrot walks out.** |
+| **Medium** | The girl is a **queen**. Assassinate a **rival demon** who helped humans and wants her throne. | It is **Bex**. They may kill him. **It does not take.** |
+| **Hard** | The Loong, **hurt and hunted**, escorted to a village. | **It is on an errand.** Seventy years crossing the desert hunting the source — and out here **it heard of the mask.** It is right, and not in the way it hopes. |
 
-**What is really happening**
-
-- **The Doorward is not a guardian. It is sick, and it is feeding.** It caught the
-  plague long ago and has lived seventy years drinking the leak off the chained man. It
-  blocks the door because **it does not want its food taken away.**
-- **The feeding is what stalled the transformation.** Drain the leak daily and the mask
-  never finishes its work. **Kill the Doorward and the mask finishes** — and what the
-  chains were built to hold is no longer what is in them. He walks out.
-- **The rival demon is Bex.** The party may kill him. **It does not take.**
-- **The Loong is on an errand, not adrift.** Seventy years crossing the desert hunting
-  the source — and **somewhere out here it heard of the mask**, and believes finding it
-  is the road to healing its people. **It is right, and not in the way it hopes.**
+**The demons are combing the desert** for Cinnabrus's grave. That is why F2 is a search,
+and why demons are on all three routes.
 
 ---
 
 ## S-5 — Floor 3 · the grand capital, +100 more
 
-| Route | What happens |
-|---|---|
-| **Easy** | The man is **Nullrot**, spreading and curing in the same street. Fight, or help. |
-| **Medium** | Bex runs a **human farm**. He wants one specific human sacrificed to end his nature. |
-| **Hard** | The Loong is in the capital. Demons hunt it for its blood. |
+**Vermilia searched a hundred years, found the grave, and built a capital on top of it** —
+because a palace is the only building nobody digs under. **The capital is a two-century
+excavation disguised as a civilisation.** She has ruled as a succession of queens, mother
+to daughter, all of them her.
 
-**What is really happening**
+| Route | The beat | What is really happening |
+|---|---|---|
+| **Easy** | **Nullrot** spreads and cures in the same street. Fight or help. | The champion, embodied at last, doing what a champion does: **finishing his god's interrupted cure.** He leaks because the mask leaks. He heals because he is half of the answer |
+| **Medium** | **Bex** runs a **human farm**; he wants one specific sacrifice. | The farm is **how the city's demons eat**. The sacrifice is his private hope — a fallback, because the road through Cinnabrus is shut. **He is also looking for the Loong** |
+| **Hard** | The Loong hides in the capital; demons hunt it for its blood. | **It followed the mask here.** Its suppressing the plague is a side effect the capital mistook for a purpose — and **the hunt believes it holds a cure it has never had** |
 
-- **Nullrot is the leak and the stall in one body**, and he is in the capital because
-  the chains failed once the mask finished — which the party caused.
-- **The Loong is here because the source is here.** It followed the mask for 170 years
-  and has caught up. Its presence suppressing the plague is a **side effect the capital
-  mistook for a purpose** — and the whole hunt rests on demons believing it holds a
-  cure it has never claimed.
-- **The farm is how the city's demons eat and go on existing**, and it may be hidden
-  rather than open. **Bex's sacrifice is a private hope riding on top of it** — and
-  **Bex is also looking for the Loong**, because he knows what its blood does. The
-  sacrifice is the plan he can reach; the Loong is the plan he cannot.
+**Under the palace: Cinnabrus, and the empty socket where his tongue was.**
 
 ---
 
 ## S-6 — The path of least casualties ✅ owner
 
-**Get the Loong out of the city · make the Loong and Nullrot meet · revive the queen's god.**
+**Get the Loong out of the city · make the Loong and Nullrot meet · revive Cinnabrus.**
 
-| Step | Why it costs nobody |
+| Step | Why |
 |---|---|
-| **Loong + Nullrot meet** | The Loong gets what it crossed two floors for: the source, and the only thing that can actually arrest the plague. Its city, and the capital, are answered at once |
-| **The Loong is free to move** | It stops being a containment device it never volunteered to be |
-| **Loong blood can then be given** | Freely, not taken — **so Bex needs no sacrifice**, and the hunts have nothing to hunt |
-| **The god is revived** | Beelzebub's stolen power comes back to its owner; the boon returns; the rogue demons have a patron and a direction again — **and Bex's leash comes off** |
+| **Loong + Nullrot meet** | **The cure only exists as a mixture.** This is the step that creates it, and it is the thing Cinnabrus was killed for attempting |
+| **The Loong is freed** | It stops being a containment device it never volunteered to be — and stops being worth capturing |
+| **Cinnabrus is revived** | Only possible while **Vermilia lives**. He can finish the cure, answer the follower who prayed for two centuries, and **lift the hunger from demons who ask** |
+| **Beelzebub loses his leverage** | He withholds the cure because *a cured follower is a free one*. A working cure ends that — **and Bex's leash comes off** |
 
-**Every antagonist in Set 1 wants something reasonable and is reaching for it the only
-way they can see.** The optimal ending is not mercy. **It is introductions.**
+> **Every antagonist in Set 1 wants something reasonable and is reaching for it the only
+> way they can see. The optimal ending is not mercy — it is introductions.**
+
+**And the tongue is the gate.** A god with no tongue cannot answer. Recovering it —
+Beelzebub buried it *separately* — is literally opening the channel.
 
 ---
 
-## S-7 — Rival contestant parties, and the trade track ✅ **owner, 2026-08-18**
+## S-7 — Rival contestant parties, and the trade track ✅ owner
 
-**One party runs one route deeply. The other two are run by rival contestant parties —
-other countries' contestants, limited in number — and the party TRADES with them for
-what it missed.** Advancing all three yourself was considered and rejected: it triples
-the content per floor, flattens route identity, and deletes the "you chose, and you will
-never know" pathos. Trading keeps the choice while making the gap *recoverable at a price*.
-
-### The rival-progress track ⚖
-
-**Two named rival parties**, so all three routes are covered between you.
+**One party runs one route deeply. The other two are run by rival contestant parties** —
+other countries' contestants, limited in number — **and the party trades with them.**
+Advancing all three yourself triples the content, flattens route identity, and deletes
+the "you chose, and you will never know" pathos. Trading keeps the choice while making
+the gap **recoverable at a price**.
 
 | | |
 |---|---|
 | **Track** | each rival holds **Progress 0–3** on its route, one step per floor |
-| **Advance** | **+1 automatically per floor the players clear** — they are running in parallel, on the clock, exactly as the players are |
-| **Player interference** | **±1**. Help them, hinder them, or sell them something. This is the lever |
-| **At F3** | the track decides how their route resolved: **3 = resolved their way · 2 = resolved badly · 0–1 = unresolved, and that thread is simply open in the capital** |
+| **Advance** | **+1 per floor the players clear** — they are on the same clock |
+| **Interference** | **±1.** Help them, hinder them, or sell them something |
+| **At F3** | **3 = resolved their way · 2 = resolved badly · 0–1 = unresolved, thread open** |
 
 **Why a track and not GM fiat:** without a number, offscreen parties become whatever the
 GM needs that week. With one, **the players can see the race** and choose whether to
-spend a floor's time on somebody else's story.
+spend a floor on somebody else's story.
 
-### Trading
-
-Rivals meet the players at floor transitions and in the capital. What changes hands:
-
-- **Knowledge** — the thing the optimal ending actually needs. A rival who escorted the
-  Loong knows what its blood does; a rival who chained the man knows what the mask is.
-- **Materials and carves** from a band the players never visited.
-- **Favours and standing** — and §17's Exposure economy already prices social play, so
-  this needs no new instrument.
-
-**The optimal ending therefore requires diplomacy with rivals, not just competence** —
-which is exactly right for a show whose win condition is an audience. ⚖ Betrayal is
-always on the table, and the crowd pays for it.
+**What trades:** knowledge (what the mask is, what the blood does, who the girl was),
+materials from bands they never visited, and favours. §17's Exposure economy already
+prices social play. ⚖ Betrayal is always on the table, and the crowd pays for it.
 
 ---
 
-## S-8 — 🔴 Open calls
+## S-8 — 🔴 Still open
 
 | # | Question |
 |---|---|
-| ~~S-a~~ | **RULED** — rival parties + the trade track (S-7) |
-| ~~S-b~~ | **RULED** — the mask is **a demon prince's tool**: a vessel through which a demon can act in the city, and it can carry **the bankrupt god's champion** |
-| ~~S-c~~ | **RULED** — the Loong survives giving blood, but **it is not a permanent cure**; it sustains for a long while. **So a captured Loong is a livestock problem, not a murder** — harvested for the foreseeable future, which is worse |
-| ~~S-d~~ | **RULED** — see S-9. Killing the queen deletes the god permanently |
-| **S-e** 🔴 | **THE EDITION QUESTION — see S-9.** Do the v1 F1–F3 enemy passes carry the v2 Cinnabrus arc, or stay on Compendium §4? |
-
----
-
-## S-9 — 🔴 Cinnabrus exists, and he is **v2** material
-
-**Found:** [`../v2/floors/floors-1-3-arc.md`](../v2/floors/floors-1-3-arc.md) —
-**"Floors 1–3 — The Buried God", status DESIGN COMPLETE, fully ruled by the owner
-2026-08-10**, marked *"v2 (Cosmic Casino) only — v1 is frozen."*
-
-**The name is right: Cinnabrus.** *Cinnabar* — the mercury ore used for centuries as both
-poison and cure. "The medicine that kills."
-
-### What is already ruled there
-
-- **Cinnabrus** is the F1–F3 **bankrupt floor-runner**, buried under his own floors. A
-  plague demon who killed a dragon with his disease — and then **the plague killed every
-  one of his own followers.** His weapon deleted his income. Mute, indebted, and *under
-  the players for three floors.*
-- **Beelzebub is the scavenger who won** — he sent champions, took the domain and the
-  title, **cut out Cinnabrus's tongue and buried it separately.**
-- **Nullrot is Cinnabrus's champion** — *"an olden demon who owes Cinnabrus his life"*,
-  loyal to the god over the regent.
-- **The Loong is the descendant of the dragon Cinnabrus killed**, and **dragon's blood
-  does two things: cures the crystallization AND soothes the appetite of demons.**
-- **The queen is VERMILIA** — Cinnabrus's **first follower and the only one who survived
-  his plague.** She has spent two centuries trying to revive him, and **built the capital
-  over his grave** because a palace is the only building nobody digs under. She has ruled
-  as **seven successive queens**, mother to daughter, all of them her.
-
-### The revivability rule, exactly as written (§8.1)
-
-> Divinity is **named, living beings who revere you.** Cinnabrus's ledger reads
-> **1 — the queen.** *"It is not a dead god. It is a god with one name left."*
->
-> **"If she dies, it hits absolute zero — and a god at zero cannot be prayed back."**
-
-**So he is revivable only while she lives.** And the F1 "Girl in the House" **is** that
-queen, hiding among humans — which means the owner's F1 ruling that she is **killable**
-carries the full weight: **killing her at Floor 1 permanently deletes Cinnabrus and
-forecloses the best ending for the whole campaign.** That is the answer to S-d, and it is
-already written down.
-
-### 🔴 The problem I have to hand back
-
-**The v1 enemy passes I built this session have been re-deriving this story in parallel,
-and they diverge.** Both are internally coherent; they are not the same story.
-
-| Already ruled in **v2** | What I built into the **v1** passes |
-|---|---|
-| Nullrot is Cinnabrus's **champion**, an olden demon paying a debt | Nullrot is the masked man from the staircase — patient zero and antibody |
-| **Dragon's blood cures both** the plague and demon hunger | Nullrot alone cures the plague; Loong blood only cures demons |
-| The queen is **Vermilia**, first follower, 200 years excavating | The Girl is a demon child who becomes a demonic queen |
-| The destination is **the grave under the capital**; the relic is **the tongue** | The capital is where the plague converges; no relic |
-| **Bex does not exist** | Bex is the rival demon across all three floors |
-
-The owner's inputs this session lean **toward v2** — the mask as a demon prince's tool
-carrying the bankrupt god's champion, Beelzebub having stolen the god's powers, Loong
-blood soothing demonic appetite. But `CLAUDE.md` says **v1 is frozen and the editions are
-separate**, and the v2 arc says so too.
-
-**This needs the owner, not a guess.** Three ways:
-
-| | Option | Cost |
-|---|---|---|
-| **A** | **Reconcile v1's passes onto the Cinnabrus arc** — Nullrot becomes the champion, the Loong the dragon's descendant, the Girl becomes Vermilia, Bex is folded in or dropped | One rewrite pass over the three enemy docs and seeds. The rosters, numbers and gates all survive — only the *whys* change |
-| **B** | **Keep them separate** — v1 runs Compendium §4, v2 runs Cinnabrus, and Cinnabrus does not appear in `rulebook/` at all | Nothing to redo, but this session's story conversation was largely about v2 while editing v1 |
-| **C** | **Port the v1 passes into `v2/` as the mythology edition's rosters** and leave v1's rulebook alone | The enemy work becomes v2 content; v1's live campaign keeps the older, thinner story |
-
-**My recommendation: A**, because the Cinnabrus arc is stronger and already ruled, and
-because the enemy work is 95% reusable — the statlines, gates, weak systems and phases do
-not care whose story they are in.
+| **S-a** | **Who is the demon prince whose tool the mask is?** Cinnabrus himself, Beelzebub, or a third party — it changes who has been reaching into the city all along |
+| **S-b** | Does **the man from the staircase** survive inside Nullrot in any sense, or is the host simply spent? F3's "remove the Mask and a 170-year-old man dies" beat assumes *something* is left |
+| **S-c** | **Bex's fate on the spared branch** — if Vermilia lives and Cinnabrus is revived, does Bex simply *get what he wanted*? |
+| **S-d** | Does reviving Cinnabrus require the **tongue specifically**, or is it one of several routes? |
