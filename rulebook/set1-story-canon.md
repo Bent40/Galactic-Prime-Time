@@ -132,12 +132,122 @@ way they can see.** The optimal ending is not mercy. **It is introductions.**
 
 ---
 
-## S-7 — 🔴 Open calls
+## S-7 — Rival contestant parties, and the trade track ✅ **owner, 2026-08-18**
+
+**One party runs one route deeply. The other two are run by rival contestant parties —
+other countries' contestants, limited in number — and the party TRADES with them for
+what it missed.** Advancing all three yourself was considered and rejected: it triples
+the content per floor, flattens route identity, and deletes the "you chose, and you will
+never know" pathos. Trading keeps the choice while making the gap *recoverable at a price*.
+
+### The rival-progress track ⚖
+
+**Two named rival parties**, so all three routes are covered between you.
+
+| | |
+|---|---|
+| **Track** | each rival holds **Progress 0–3** on its route, one step per floor |
+| **Advance** | **+1 automatically per floor the players clear** — they are running in parallel, on the clock, exactly as the players are |
+| **Player interference** | **±1**. Help them, hinder them, or sell them something. This is the lever |
+| **At F3** | the track decides how their route resolved: **3 = resolved their way · 2 = resolved badly · 0–1 = unresolved, and that thread is simply open in the capital** |
+
+**Why a track and not GM fiat:** without a number, offscreen parties become whatever the
+GM needs that week. With one, **the players can see the race** and choose whether to
+spend a floor's time on somebody else's story.
+
+### Trading
+
+Rivals meet the players at floor transitions and in the capital. What changes hands:
+
+- **Knowledge** — the thing the optimal ending actually needs. A rival who escorted the
+  Loong knows what its blood does; a rival who chained the man knows what the mask is.
+- **Materials and carves** from a band the players never visited.
+- **Favours and standing** — and §17's Exposure economy already prices social play, so
+  this needs no new instrument.
+
+**The optimal ending therefore requires diplomacy with rivals, not just competence** —
+which is exactly right for a show whose win condition is an audience. ⚖ Betrayal is
+always on the table, and the crowd pays for it.
+
+---
+
+## S-8 — 🔴 Open calls
 
 | # | Question |
 |---|---|
-| **S-a** | **Rival contestant parties.** Owner's proposal: other parties from other countries run the other routes, resolving *depending on time*. Does the party get to advance all three, or trade with rivals for what they missed? *(Recommendation: trade — see the session notes.)* |
-| **S-b** | Who made the mask, and for which demon? |
-| **S-c** | Does the Loong survive giving blood, or is that what the hunt intends to take? |
-| **S-d** | If the Girl was killed at F1 there is no queen — **is the god still revivable**, or does killing her foreclose the best ending permanently? |
-| **S-e** | The demon god's name, and its place in the Casino/table framing from the earlier session |
+| ~~S-a~~ | **RULED** — rival parties + the trade track (S-7) |
+| ~~S-b~~ | **RULED** — the mask is **a demon prince's tool**: a vessel through which a demon can act in the city, and it can carry **the bankrupt god's champion** |
+| ~~S-c~~ | **RULED** — the Loong survives giving blood, but **it is not a permanent cure**; it sustains for a long while. **So a captured Loong is a livestock problem, not a murder** — harvested for the foreseeable future, which is worse |
+| ~~S-d~~ | **RULED** — see S-9. Killing the queen deletes the god permanently |
+| **S-e** 🔴 | **THE EDITION QUESTION — see S-9.** Do the v1 F1–F3 enemy passes carry the v2 Cinnabrus arc, or stay on Compendium §4? |
+
+---
+
+## S-9 — 🔴 Cinnabrus exists, and he is **v2** material
+
+**Found:** [`../v2/floors/floors-1-3-arc.md`](../v2/floors/floors-1-3-arc.md) —
+**"Floors 1–3 — The Buried God", status DESIGN COMPLETE, fully ruled by the owner
+2026-08-10**, marked *"v2 (Cosmic Casino) only — v1 is frozen."*
+
+**The name is right: Cinnabrus.** *Cinnabar* — the mercury ore used for centuries as both
+poison and cure. "The medicine that kills."
+
+### What is already ruled there
+
+- **Cinnabrus** is the F1–F3 **bankrupt floor-runner**, buried under his own floors. A
+  plague demon who killed a dragon with his disease — and then **the plague killed every
+  one of his own followers.** His weapon deleted his income. Mute, indebted, and *under
+  the players for three floors.*
+- **Beelzebub is the scavenger who won** — he sent champions, took the domain and the
+  title, **cut out Cinnabrus's tongue and buried it separately.**
+- **Nullrot is Cinnabrus's champion** — *"an olden demon who owes Cinnabrus his life"*,
+  loyal to the god over the regent.
+- **The Loong is the descendant of the dragon Cinnabrus killed**, and **dragon's blood
+  does two things: cures the crystallization AND soothes the appetite of demons.**
+- **The queen is VERMILIA** — Cinnabrus's **first follower and the only one who survived
+  his plague.** She has spent two centuries trying to revive him, and **built the capital
+  over his grave** because a palace is the only building nobody digs under. She has ruled
+  as **seven successive queens**, mother to daughter, all of them her.
+
+### The revivability rule, exactly as written (§8.1)
+
+> Divinity is **named, living beings who revere you.** Cinnabrus's ledger reads
+> **1 — the queen.** *"It is not a dead god. It is a god with one name left."*
+>
+> **"If she dies, it hits absolute zero — and a god at zero cannot be prayed back."**
+
+**So he is revivable only while she lives.** And the F1 "Girl in the House" **is** that
+queen, hiding among humans — which means the owner's F1 ruling that she is **killable**
+carries the full weight: **killing her at Floor 1 permanently deletes Cinnabrus and
+forecloses the best ending for the whole campaign.** That is the answer to S-d, and it is
+already written down.
+
+### 🔴 The problem I have to hand back
+
+**The v1 enemy passes I built this session have been re-deriving this story in parallel,
+and they diverge.** Both are internally coherent; they are not the same story.
+
+| Already ruled in **v2** | What I built into the **v1** passes |
+|---|---|
+| Nullrot is Cinnabrus's **champion**, an olden demon paying a debt | Nullrot is the masked man from the staircase — patient zero and antibody |
+| **Dragon's blood cures both** the plague and demon hunger | Nullrot alone cures the plague; Loong blood only cures demons |
+| The queen is **Vermilia**, first follower, 200 years excavating | The Girl is a demon child who becomes a demonic queen |
+| The destination is **the grave under the capital**; the relic is **the tongue** | The capital is where the plague converges; no relic |
+| **Bex does not exist** | Bex is the rival demon across all three floors |
+
+The owner's inputs this session lean **toward v2** — the mask as a demon prince's tool
+carrying the bankrupt god's champion, Beelzebub having stolen the god's powers, Loong
+blood soothing demonic appetite. But `CLAUDE.md` says **v1 is frozen and the editions are
+separate**, and the v2 arc says so too.
+
+**This needs the owner, not a guess.** Three ways:
+
+| | Option | Cost |
+|---|---|---|
+| **A** | **Reconcile v1's passes onto the Cinnabrus arc** — Nullrot becomes the champion, the Loong the dragon's descendant, the Girl becomes Vermilia, Bex is folded in or dropped | One rewrite pass over the three enemy docs and seeds. The rosters, numbers and gates all survive — only the *whys* change |
+| **B** | **Keep them separate** — v1 runs Compendium §4, v2 runs Cinnabrus, and Cinnabrus does not appear in `rulebook/` at all | Nothing to redo, but this session's story conversation was largely about v2 while editing v1 |
+| **C** | **Port the v1 passes into `v2/` as the mythology edition's rosters** and leave v1's rulebook alone | The enemy work becomes v2 content; v1's live campaign keeps the older, thinner story |
+
+**My recommendation: A**, because the Cinnabrus arc is stronger and already ruled, and
+because the enemy work is 95% reusable — the statlines, gates, weak systems and phases do
+not care whose story they are in.
