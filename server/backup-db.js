@@ -18,6 +18,18 @@ function getEJSON() {
   return mongoose.mongo.BSON.EJSON;
 }
 
+
+/**
+ * The connection string with the password blanked out, for logging.
+ * A seed run gets pasted into chat, issues and commit messages routinely — the
+ * banner must never be the thing that leaks a live Atlas credential.
+ * (Learned the hard way 2026-08-25: a pasted runbook exposed the campaign
+ * password and it had to be rotated.)
+ */
+function redactUri(uri) {
+  return String(uri).replace(/(mongodb(?:\+srv)?:\/\/[^:@/]+:)[^@]*@/i, '$1****@');
+}
+
 async function run() {
   const EJSON = getEJSON();
   const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/galactic-prime-time';
@@ -28,7 +40,7 @@ async function run() {
   const outDir = path.join(__dirname, 'backups', `backup-${stamp}`);
   fs.mkdirSync(outDir, { recursive: true });
 
-  console.log(`Backing up ${uri}\n→ ${outDir}\n`);
+  console.log(`Backing up ${redactUri(uri)}\n→ ${outDir}\n`);
 
   const collections = await db.listCollections().toArray();
   let total = 0;

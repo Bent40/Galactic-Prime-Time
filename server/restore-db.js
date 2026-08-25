@@ -18,6 +18,18 @@ function getEJSON() {
   return mongoose.mongo.BSON.EJSON;
 }
 
+
+/**
+ * The connection string with the password blanked out, for logging.
+ * A seed run gets pasted into chat, issues and commit messages routinely — the
+ * banner must never be the thing that leaks a live Atlas credential.
+ * (Learned the hard way 2026-08-25: a pasted runbook exposed the campaign
+ * password and it had to be rotated.)
+ */
+function redactUri(uri) {
+  return String(uri).replace(/(mongodb(?:\+srv)?:\/\/[^:@/]+:)[^@]*@/i, '$1****@');
+}
+
 async function run() {
   const EJSON = getEJSON();
   const args = process.argv.slice(2).filter(a => a !== '--apply');
@@ -44,7 +56,7 @@ async function run() {
   await mongoose.connect(uri);
   const db = mongoose.connection.db;
   console.log(`${apply ? '=== APPLY: REPLACING collections ===' : '=== DRY RUN (pass --apply to restore) ==='}`);
-  console.log(`${backupDir} → ${uri}\n`);
+  console.log(`${backupDir} → ${redactUri(uri)}\n`);
 
   for (const file of files) {
     const name = path.basename(file, '.json');
