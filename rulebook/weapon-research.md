@@ -1,7 +1,9 @@
 # Weapon Research — the graded item corpus
 
-**Started 2026-08-25 · Status: 🟡 TRANCHE 2 of N — resumable, incomplete**
-**Queue #1 (classical myth) COMPLETE 2026-08-25 — see W-4b + the essence averages in W-6.**
+**Started 2026-08-25 · Status: 🟡 TRANCHE 3 of N — resumable, incomplete**
+**Queue #1 (classical myth) COMPLETE — W-4b + the essence averages in W-6.**
+**Queue #6 (game loot tables) COMPLETE — W-4c + the distribution shape in W-7.**
+🔴 **One owner decision is now waiting: W-7 §3.**
 Purpose: build a corpus of weapons/artifacts from myth + the anime/manhwa/manhua/game
 canon, extracted into a schema that grades each one onto **GPT's own axes** so it can be
 placed: which floor band, which route or idea it serves, and how a party gets it.
@@ -23,7 +25,7 @@ session, exactly as the previous session's diagnosis predicted. Tranche 2 was ha
 | **Fidelity** | 🟢 **High.** Full page reads — stat details, costs and the fine print all survive |
 | **Throughput** | ~1 weapon per fetch, parallelisable ~6 at a time |
 | **Provenance** | ⚠️ **Every entry names its source.** Fan wikis are user-authored and inconsistent; do not silently blend them with myth sources |
-| **Still blocked** | 🔴 `*.fandom.com` — but **not by the egress policy.** See below |
+| **Still blocked** | 🔴 `*.fandom.com` — but **not by the egress policy.** See the host table below |
 
 ### The egress finding, resolved (2026-08-25)
 
@@ -39,11 +41,20 @@ concluded a **fresh session** would pick up the owner's added domains. **That wa
 > permitted *by policy* and blocked one layer further out, by Fandom's own edge. **No
 > allowlist change can fix this** — it is not our proxy refusing, it is their CDN.
 
-**Consequence for the queue:** #1 (myth) and #6 (games — mostly official wikis + Wikipedia)
-are unaffected. #2, #3 and #4 lean heavily on `*.fandom.com` and need a substitute route:
-try the non-Fandom mirrors first (`*.wiki.gg`, `*.miraheze.org`, `*.fextralife.com`,
-`ja.wikipedia.org`), and fall back to search-result summaries with the fidelity caveat that
-tranche 1 carried. Do not route around the CDN block.
+**Consequence for the queue — mirrors probed 2026-08-25, results below.** #1 (myth) ran
+entirely on Wikipedia; #6 ran entirely on Fextralife. #2/#3/#4 lean on `*.fandom.com` and need
+a substitute route. Verified host status, so the next session does not re-probe:
+
+| Host | Status | Use |
+|---|---|---|
+| `en.wikipedia.org` | ✅ **200** | queue #1 — done |
+| `*.wiki.fextralife.com` | ✅ **200** | queue #6 — done. The working substitute for game wikis |
+| `*.fandom.com` | 🔴 **403** Cloudflare | queues #2/#3/#4 — **blocked at their CDN, unfixable by allowlist** |
+| `diablo4.wiki.fextralife.com` | ⚠️ **301** | redirect not followed — retry the redirect target |
+| `minecraft.wiki` | 🔴 **egress** — `CONNECT tunnel failed, 403` | genuinely not on the allowlist, unlike Fandom |
+
+For #2/#3/#4, try `*.wiki.gg` and `*.miraheze.org` first, then fall back to search-result
+summaries with the fidelity caveat tranche 1 carried. Do not route around the CDN block.
 
 **Nothing in this file is written from memory.** An entry with no source line is a bug.
 
@@ -341,6 +352,94 @@ they agree with L-14.** Three independent sources, one rule.
 
 ---
 
+## W-4c — Tranche 3: games with real loot tables (queue #6, promoted)
+
+Run out of order. **W-6 §5 promoted this pass**: myth is only 16% loot and structurally
+cannot fill the grid's loot column, so this is where the distribution shape actually lives.
+Sourced from `*.wiki.fextralife.com`, which is reachable (200) where `*.fandom.com` is not.
+
+### Elden Ring — the ratio, and a choose-one mechanic GPT already owns
+
+| | |
+|---|---|
+| **Weapon categories** | **40** (32 base + 8 in *Shadow of the Erdtree*) |
+| **Total weapons** | **~308 base**, plus "100 new and exciting Weapons" in the DLC |
+| **Apex tier** | **9 Legendary Armaments** |
+| **Apex ratio** | 🔴 **9 / 308 ≈ 2.9%** — about **one apex per 34 weapons** |
+| **Second tier** | **25 Remembrances** (15 base + 10 DLC) — "Boss Souls… which grant the Power of their namesake Bosses" |
+
+**Acquisition of the 9 Legendary Armaments** (the only apex set the page enumerates cleanly):
+
+| Class | n | Which |
+|---|---|---|
+| 🎯 **boss drop** | **5** | Ruins Greatsword · Grafted Blade Greatsword · Marais Executioner's Sword · Devourer's Scepter · Golden Order Greatsword |
+| **world find** | **3** | Eclipse Shotel · Sword of Night and Flame · Bolt of Gransax |
+| **story/quest** | **1** | Dark Moon Greatsword — the Ranni questline |
+| **crafted** | **0** | — |
+
+🔴 **This is the near-exact inverse of myth** (W-6 §5: 44% story · 40% crafted · 16% loot).
+Games put **56% of their apex items behind a boss corpse and none behind a forge**; myth puts
+almost half behind a solved problem and none behind a drop rate. **Neither medium fills GPT's
+grid on its own — which is why the corpus needed both passes.**
+
+⭐ **The Remembrance mechanic is the single most directly usable thing in this tranche.**
+Each Remembrance is exchanged with Enia for **one of two rewards**, and *"only one reward may
+be selected per playthrough."* Duplication exists but is deliberately incomplete — **7
+Wandering Mausoleums + 3 Duplication Coffins, once per mausoleum per remembrance, and the
+top-tier Shardbearer remembrances cannot be duplicated at all.**
+
+⚙️ 🎯 **GPT ALREADY SHIPPED THIS AND HAS NOT POINTED IT AT BOSSES.** The Lootbox system
+(2026-08-10) is exactly a choose-one: sealed server-side contents, a reveal, `pick-one via
+/claim`, and a permanent Box Log recording `chosenIndex` with *"chosen ✓ / unchosen struck
+through."* **A boss-drop box holding two apex options, one claim, permanently logged, is a
+zero-new-code feature** — Box Builder already composes contents, recipients and earned-by.
+The unchosen strike-through *is* the Remembrance's "what you gave up," already rendered.
+🔗 [Weapons](https://eldenring.wiki.fextralife.com/Weapons) ·
+[Legendary Armaments](https://eldenring.wiki.fextralife.com/Legendary+Armaments) ·
+[Remembrance](https://eldenring.wiki.fextralife.com/Remembrance)
+
+### Monster Hunter Wilds — the pure crafted class, and zero drops
+
+| | |
+|---|---|
+| **Weapon types** | **14** — Great Sword · Sword & Shield · Dual Blades · Long Sword · Hammer · Hunting Horn · Lance · Gunlance · Switch Axe · Charge Blade · Insect Glaive · Bow · Light Bowgun · Heavy Bowgun |
+| **Acquisition** | 🔴 **crafting and upgrade trees, essentially exclusively.** The page describes no straight monster drops at all |
+| **Materials** | Weapons are grouped by their source material — "Great Sword **Bone** Weapons", "Great Sword **Expedition** Weapons", "Great Sword **Independent** Weapons" |
+| **Rarity** | ⚠️ **not fully stated** — the page names a "Rarity 8 Artian Weapon" but gives no tier count. Recorded as a gap, not guessed |
+
+⭐ **14 weapon types × deep upgrade trees is the opposite strategy to Elden Ring's 40 × 308.**
+Monster Hunter gets its breadth from **one axis (the monster you carved) crossed with a small
+fixed set of classes**, not from a large flat catalog.
+
+⚙️ 🔴 **That is GPT's model exactly, and it means the grid may be over-specified.** GPT already
+has **weapon class (2–4 damage) × material band (×2 per floor, F1 ×2 → F9 ×512)**. The band
+*already* makes one greatsword serve all nine floors — so **the 9-floor axis of the 9 × 3 × 3
+grid is largely solved by a rule we already shipped, not by 9× the items.**
+🟡 **Proposal, unblessed:** the corpus's real target may be closer to **~27 concepts (3 routes
+× 3 acquisition classes), each carried across floors by the band**, plus a small apex set —
+rather than 81 distinct authored weapons. This is a **scope finding for the owner**, not a
+ruling; the 9 × 3 × 3 framing came from the owner and stands until they say otherwise.
+🔗 [Weapons](https://monsterhunterwilds.wiki.fextralife.com/Weapons)
+
+### Dark Souls 3 — thin, recorded honestly
+
+| | |
+|---|---|
+| **Categories** | **23** |
+| **Total weapons** | ⚠️ **the page does not state one.** Not guessed |
+| **Apex tier** | **Boss Souls Weapons** exist as a named category; ⚠️ **count not given on this page** |
+| **Acquisition** | **Soul Transposition** — boss souls are converted into weapons rather than dropping as weapons |
+
+⚠️ **This entry is deliberately incomplete.** It was fetched as a second data point for the
+apex ratio and did not carry the numbers. Left in the corpus as a **negative result with a
+live source**, so a later pass knows to try the `/Boss_Soul_Weapons` sub-page instead.
+⭐ Even so, one structural point lands: **Soul Transposition is the same shape as Elden Ring's
+Remembrance** — the boss does not drop a weapon, it drops a **token you convert into a choice.**
+Two of the biggest loot games in the genre both refuse to let their apex items be simple drops.
+🔗 [Weapons](https://darksouls3.wiki.fextralife.com/Weapons)
+
+---
+
 ## W-5 — The sweep queue
 
 Ordered so each pass adds a *distinct* grading signal rather than more of the same.
@@ -352,7 +451,7 @@ Ordered so each pass adds a *distinct* grading signal rather than more of the sa
 | 3 | ⚠️ *fandom-blocked, needs a mirror* — Progression manhwa — Solo Leveling · Tower of God · Omniscient Reader | **Acquisition classes.** These genres are explicit about drop vs craft vs story |
 | 4 | ⚠️ *fandom-blocked, needs a mirror* — Sacred-set anime — Nanatsu no Taizai · Fate (Noble Phantasms) · Akame ga Kill (Teigu) | **Categorical powers**, and per-wielder gating |
 | 5 | Crafting-heavy — Arifureta · Dungeon Meshi · Frieren | **The crafted class**, and material-driven power (our M-band model) |
-| 6 | 🔴 **PROMOTE** — Games with real loot tables — Elden Ring · Monster Hunter · Diablo | **Distribution shape** — how many commons per unique, which is what fills the grid. **W-6 §5 raised this to the highest-value remaining pass:** myth is only 16% loot and structurally cannot fill the grid's loot column |
+| ~~6~~ | ~~Games with real loot tables~~ ✅ **DONE 2026-08-25** — W-4c, run out of order after W-6 §5 promoted it. Elden Ring · Monster Hunter Wilds · Dark Souls 3 (Diablo unreachable — fandom) | **Distribution shape**, delivered in **W-7**. Apex ratio ≈ **2.9%**; games are **56% boss-drop / 0% crafted** against myth's 16% / 40%. 🔴 Raised one owner question: the band may already solve the grid's floor axis (W-7 §3) |
 
 **Resume by:** appending to W-4 under a new tranche heading, keeping the schema, and never
 dropping the source line.
@@ -494,3 +593,72 @@ split out of `inevitability`, and `redirection` flagged as non-mythic. The bucke
 survived unchanged — severance, dominion, world-scale, transformation, oath/geas — are now
 evidence-backed rather than guessed. **Treat W-3 as blessed for myth, still provisional for
 the game/anime passes.**
+
+---
+
+## W-7 — The distribution shape (from tranche 3)
+
+What queue #6 existed to answer: **how many ordinary items per unique**, and therefore what
+actually fills a 9 × 3 × 3 grid.
+
+### 1. The apex ratio is ~3%, and myth cannot supply it
+
+| Source | Apex items | Pool | Ratio |
+|---|---|---|---|
+| Elden Ring | 9 Legendary Armaments | ~308 base weapons | **2.9%** |
+| Elden Ring (incl. boss tier) | 9 + 25 Remembrances = 34 | ~308 | **11%** |
+
+⚙️ **Read against GPT:** the grid has **81 cells** (9 floors × 3 routes × 3 acquisition
+classes). At Elden Ring's 2.9% apex ratio, 81 *apex* items would imply a pool near 2,800 —
+which is not a tabletop game, it is a database. **So the 81 cells cannot all be apex.** Either
+the grid is mostly ordinary items with a handful of apexes scattered through it, or (see §3)
+the floor axis is not an item axis at all.
+
+### 2. Games and myth are near-inverses on acquisition — use both, for different columns
+
+| Class | Myth (n=25, W-6 §5) | Elden Ring apex (n=9) |
+|---|---|---|
+| 🎯 **loot / boss drop** | **16%** | 🔴 **56%** (+33% world find) |
+| **crafted** | **40%** | 🔴 **0%** |
+| **story** | **44%** | **11%** |
+
+⭐ **This is the most useful single table in the corpus.** Myth is a **story-and-forge**
+tradition; loot games are a **corpse-and-map** tradition; and Monster Hunter is a pure
+**forge** tradition with *zero* drops. **Grade against myth for the crafted and story columns,
+and against loot games for the loot column** — the essence averages in W-6 are the right
+yardstick for *what a weapon is about*, and W-7 is the right yardstick for *how many and from
+where*. Do not use one where the other belongs.
+
+### 3. 🔴 The floor axis may already be solved — a scope finding for the owner
+
+Monster Hunter reaches full breadth on **14 weapon types**, because breadth comes from
+*material × class*, not from catalog size. **GPT is built the same way** — §12.1 gives weapon
+class (2–4 damage) and §12.7 gives the material band (×2 per floor, F1 ×2 → F9 ×512), and the
+materials catalog already states *"the sheet plays identically on every floor; only the numbers
+inflate."*
+
+⚙️ **If the band already carries a greatsword from F1 to F9, then the grid's 9-floor axis is
+not asking for 9× the weapons** — it is asking for 9 bands of the same weapons, which is a rule
+we shipped, not content we owe.
+
+🟡 **Unblessed proposal:** the corpus's real target is **~27 authored concepts (3 routes × 3
+acquisition classes), carried across floors by the band**, plus a small apex set at roughly
+Elden Ring's ratio. That is a tractable authoring job; 81 distinct weapons is not.
+🔴 **This contradicts the owner's framing note at the top of this file** ("the output has to
+fill a 9 floors × 3 routes × 3 acquisition classes grid"), so it is **flagged, not adopted.**
+The grid stands until the owner rules. **This is the one open question the sweep has produced
+that needs a decision rather than more research.**
+
+### 4. Two mechanics to add to W-6 §6's steal list
+
+5. **The boss drops a TOKEN, not a weapon.** Elden Ring converts a Remembrance to **one of two
+   rewards, "only one reward may be selected per playthrough"**; Dark Souls 3 does the same via
+   Soul Transposition. Two of the genre's biggest loot games both refuse to let an apex item be
+   a simple drop. 🎯 **GPT can ship this with no new code** — the Lootbox system already does
+   sealed contents → reveal → `pick-one via /claim` → permanent Box Log with the unchosen
+   options struck through. Point a two-item box at a boss and the mechanic is live.
+6. **Incomplete duplication as a scarcity dial.** Remembrances can be duplicated — but only at
+   **7 Wandering Mausoleums + 3 Coffins, once each per remembrance**, and **the top-tier
+   Shardbearer remembrances not at all.** A partial second chance is a finer scarcity control
+   than a binary one, and it is exactly the knob a campaign wants when a party made a choice
+   they regret on Floor 3 and will live with it until Floor 9.
