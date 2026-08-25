@@ -227,6 +227,73 @@ say so if asked. **The third answer, if they worked it out: the Loong's blood is
 
 ---
 
+## Layer E — The Prison Beneath the Palace ✅ **RULED 2026-08-25**
+
+**These two only exist if the party arrives incomplete.** The tongue's prison sits deep
+under the capital in the **ribs of the dragon Cinnabrus killed** — and because he killed it
+*with the plague*, the corpse is saturated. **Two locks:**
+
+| Lock | Answers to | Why |
+|---|---|---|
+| **The corpse** | **The Loong** | Beelzebub's seal answers gods and demons. It has no reply to the descendant of the body it was built inside |
+| **The crystal** | **Nullrot** | The Halo of Cures is the only antibody that has ever existed |
+
+> **The prison is the cure, verified.** The pair who must share a room to make the mixture
+> are the pair who open the door. **Bring both and neither statline comes off the shelf.**
+
+| Brought | What they get |
+|---|---|
+| **Both** | Nothing. The anchors let go, the bloom recedes, and the scene is what they say to a god |
+| **Nullrot only** | **The Dragon.** Hard and *survivable* — the Halo eats the Fracture |
+| **Loong only** | **The Reservoir.** No corpse, no Fracture, no antibody, in a sealed rib cavity. Feels like the easy path until the second Clock |
+| **Neither** | Both, Fracture uncontained. **The capital is lost.** Say so before the first Moment |
+
+### E-1 · ☠☠ The Dragon in the Foundations — SUPER (380 · Huge)
+
+`Skull 60 · Spine 70 · Ribcage 90 · Foreclaw L/R 42 · Seal-Anchor I–IV 19 each`
+
+**Beelzebub is the enemy of this room and he is not in it.** The wards, the anchors and the
+dead thing standing up *are* him — present as architecture, with no lines. Play a mechanism.
+
+- **Win condition: the four Seal-Anchors (§21.3), not the body.** Release all four and it
+  lies down; it has been dead the whole time. Body parts re-knit to 1 HP every second Clock.
+- 🔴 **FRACTURE is the real resource.** Every anchor broken **by force** adds 1. **At
+  Fracture 4 the reservoir cracks into a city of two million** — not a TPK, a *city*.
+  **Nullrot's Halo removes 1 per Clock**, which is exactly why the Nullrot-only branch is
+  survivable and the empty-handed one is not. **Announce the count aloud every time it
+  rises** (§14), like a Dissolution threshold.
+- ⚠️ **The Ribcage is not a target — it is the prison.** Destroying it = instant Fracture 4.
+  Let a player who declares that attack hear the crystal shift first.
+- **Damage:** foreclaw sweep **19 Crush** at anything near an intact anchor — it defends the
+  marks, not itself. **The Settling**, a telegraphed 1-Clock windup, **30 Crush in a line** —
+  the legitimate above-band exception (`enemy-scaling` S-1).
+- **Carve:** the four anchors, in **Cursed Gold ⭐** — the only physical object Beelzebub has
+  ever left where a contestant could pick it up.
+
+### E-2 · ☠☠ The Reservoir — SUPER (260 · Huge)
+
+`The Throat 58 · First–Fourth Bloom 40 each · The Seed 42`
+
+**It is not an animal and not undead. It is a volume**, grown over the seal like frost on a
+window — the F1 Crystal Spore Mist in the one place it has ever had a ceiling.
+
+- **Gate: it cannot be killed, only opened.** Every Bloom regrows to full at each Clock
+  reset. The party will try attrition; let them spend one Clock finding out.
+- **Weak system: The Seed (42), under The Throat (58).** The Blooms are not the enemy —
+  they are the door being held shut. **Burn T2 clears infection outright** (§8.2) and is the
+  one thing that works at scale, but fire in a sealed rib cavity is its own decision.
+- **The enclosure is the weapon.** Contact → Infected. **Inhalation → Infected *plus*
+  Suffocation** (§8.2, torso-only 2-Clock timer). There is no open air. **Announce it before
+  initiative** and let anyone who wants to leave and come back with a respirator do it.
+- **Damage:** a Bloom in reach does **4 Infected per Moment** — deliberately *below* the F3
+  super band (the per-Moment-tick exception), because the number is not what kills anyone
+  here; the tier ladder is. **The Throat** does **19 Crush** once per Clock to whatever is
+  inside it.
+- **Carve:** none. If the Seed dies the chamber is safe **permanently** — worth more than any
+  material on the floor, and the one thing Vermilia could never buy in two centuries.
+
+---
+
 ## F3-1 — Still open
 
 | Item | Note |
