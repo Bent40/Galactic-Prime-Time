@@ -1,6 +1,7 @@
 # Weapon Research — the graded item corpus
 
-**Started 2026-08-25 · Status: 🟡 TRANCHE 1 of N — resumable, incomplete**
+**Started 2026-08-25 · Status: 🟡 TRANCHE 2 of N — resumable, incomplete**
+**Queue #1 (classical myth) COMPLETE 2026-08-25 — see W-4b + the essence averages in W-6.**
 Purpose: build a corpus of weapons/artifacts from myth + the anime/manhwa/manhua/game
 canon, extracted into a schema that grades each one onto **GPT's own axes** so it can be
 placed: which floor band, which route or idea it serves, and how a party gets it.
@@ -11,38 +12,38 @@ placed: which floor band, which route or idea it serves, and how a party gets it
 
 ---
 
-## W-0 — ⚠️ Method note, and the blocker
+## W-0 — Method note, and the egress record
 
-**Direct page fetching is blocked by this container's network egress policy** — fan wikis
-*and* Wikipedia alike (`EGRESS_BLOCKED` on every domain tried; `curl` gets 000). **Search
-still works.** So tranche 1 was harvested from search-result summaries, not page reads.
+**Egress is OPEN as of 2026-08-25.** The owner's allowlist edit took effect in a fresh
+session, exactly as the previous session's diagnosis predicted. Tranche 2 was harvested from
+**real page reads**, not search summaries.
 
 | | |
 |---|---|
-| **Fidelity** | Lower than a page read. Summaries give abilities and acquisition but rarely full stat blocks or the fine print |
-| **Throughput** | ~2 weapons per search → a 60–80 entry corpus is 30–40 searches |
+| **Fidelity** | 🟢 **High.** Full page reads — stat details, costs and the fine print all survive |
+| **Throughput** | ~1 weapon per fetch, parallelisable ~6 at a time |
 | **Provenance** | ⚠️ **Every entry names its source.** Fan wikis are user-authored and inconsistent; do not silently blend them with myth sources |
-| **Unblocked route** | 🔴 **A FRESH SESSION.** See below |
+| **Still blocked** | 🔴 `*.fandom.com` — but **not by the egress policy.** See below |
 
-### The egress finding (2026-08-25, diagnosed)
+### The egress finding, resolved (2026-08-25)
 
-The proxy is an **allowlist**, not a blocklist — `github.com` fetches fine, `en.wikipedia.org`
-and every `*.fandom.com` return `EGRESS_BLOCKED`. Per `/root/.ccr/README.md`, a block means
-*"the destination host is not allowed by your organization's egress policy **for this
-session**"*, and the policy is chosen per environment and **bound at session start**.
+The previous session diagnosed the proxy as an allowlist bound at session start, and
+concluded a **fresh session** would pick up the owner's added domains. **That was correct.**
 
-> 🔴 **So adding domains does not affect a session already running.** The owner added
-> `*.fandom.com`, `en.wikipedia.org`, `*.wiki.gg`, `*.wiki.fextralife.com`, `*.miraheze.org`,
-> `ja.wikipedia.org`, `static.wikia.nocookie.net`, `sportskeeda.com` and `myanimelist.net`
-> — and this session still enforces the policy it booted with. **Start a NEW session on the
-> same environment and re-probe.** Do not route around it.
+- ✅ `en.wikipedia.org` → **HTTP 200**, full content. The whole of queue #1 ran on it.
+- 🔴 `*.fandom.com` → **HTTP 403**, body `<title>Just a moment...</title>` — that is a
+  **Cloudflare bot challenge**, not `EGRESS_BLOCKED`. The request *leaves the network and
+  reaches Fandom*, which then refuses it as datacenter traffic.
 
-**Probe to run first thing in the new session** — if this returns content, the sweep is live:
+> ⚠️ **The wildcard question is moot.** The allowlist edit worked; `*.fandom.com` is now
+> permitted *by policy* and blocked one layer further out, by Fandom's own edge. **No
+> allowlist change can fix this** — it is not our proxy refusing, it is their CDN.
 
-```
-WebFetch https://en.wikipedia.org/wiki/Mjölnir
-WebFetch https://nanatsu-no-taizai.fandom.com/wiki/Sacred_Treasure
-```
+**Consequence for the queue:** #1 (myth) and #6 (games — mostly official wikis + Wikipedia)
+are unaffected. #2, #3 and #4 lean heavily on `*.fandom.com` and need a substitute route:
+try the non-Fandom mirrors first (`*.wiki.gg`, `*.miraheze.org`, `*.fextralife.com`,
+`ja.wikipedia.org`), and fall back to search-result summaries with the fidelity caveat that
+tranche 1 carried. Do not route around the CDN block.
 
 **Nothing in this file is written from memory.** An entry with no source line is a bug.
 
@@ -84,7 +85,7 @@ Every entry carries these. Fields the source does not support are left blank, ne
 | `form` | What it physically is — class matters, GPT weapons are 2–4 damage by class |
 | `essence` | The power-concept. See W-3 |
 | `quantitative_or_categorical` | 🔴 **The load-bearing field.** Does it hit *harder*, or does it do a *thing numbers cannot*? L-14 ruled stats are the key and not the gun, so **only categorical powers can ride an apex item** |
-| `cost` | What it takes from the wielder. Myth weapons almost always have one; invented ones often do not |
+| `cost` | What it takes from the wielder. ⚠️ **Measured 2026-08-25: only 40% of myth weapons carry one** (W-6 §1) — the earlier "almost always" note was wrong. The reliable myth gate is `requirement_shape`, at 64% |
 | `requirement_shape` | What the wielder must *be* to use it — the §12.1 requirement, post-L-14 |
 | `acquisition` | 🎯 **loot** (it drops) · **crafted** (you make it from a carve) · **story** (it only exists after a problem is solved) |
 | `band_read` | Which GPT floor its power level suggests, and why |
@@ -93,14 +94,28 @@ Every entry carries these. Fields the source does not support are left blank, ne
 
 ---
 
-## W-3 — The essence list (provisional, grows with the corpus)
+## W-3 — The essence list (grown by tranche 2; blessed for myth)
 
-Working set. **Not blessed** — it is an emergent classification and tranche 1 is too small
-to trust it. Current buckets: **severance** (cuts the uncuttable) · **inevitability** (does
-not miss / returns) · **dominion** (commands a domain rather than damaging) · **oath/geas**
-(binds, and charges the wielder) · **multiplicity** (one becomes many) · **restoration** ·
-**world-scale** (ends a place, not a person) · **transformation** (the weapon changes shape
-to the need) · **redirection** (takes an attack and sends it elsewhere).
+Working set. **Blessed for the myth corpus** (n=25, W-6) — **still provisional** for the
+game/anime passes. Current buckets: **severance** (cuts the uncuttable) · **bypass** 🆕
+(ignores the armour/resistance/immunity layer) · **inevitability** (does not miss / returns) ·
+**dominion** (commands a domain rather than damaging) · **oath/geas** (binds, and charges the
+wielder) · **multiplicity** (one becomes many) · **restoration** · **world-scale** (ends a
+place, not a person) · **transformation** (the weapon changes shape to the need) ·
+**redirection** (takes an attack and sends it elsewhere) · **investiture** 🆕 (possession *is*
+the claim — legitimacy, not damage) · **reciprocity** 🆕 (the weapon reads the target's stance
+and answers it).
+
+**Tranche 2 changed this list in three ways** (evidence in W-6 §3, §4):
+- 🆕 **`investiture`** — Mjölnir sanctifies brides and blesses funeral ships; Kusanagi is
+  Imperial Regalia; Zulfiqar *is* Ali. Their most durable power is not a combat power.
+- 🆕 **`reciprocity`** — Narayanastra's intensity "rises in proportion to the resistance of
+  the target," and total submission stops it. Neither dominion nor redirection.
+- 🔴 **`bypass` split out of `inevitability`** — because GPT has **no to-hit rolls**, "never
+  misses" is mechanically void here while "no armour blocks it" is the strongest categorical
+  power in our combat math. Do not let one bucket hide both.
+- ⚠️ **`redirection` has zero myth instances** — it is an anime/game essence (Gideon, our own
+  Forest Resin), so it will not carry mythic weight.
 
 **GPT already sits on this grid without having named it:** *Mistletoe* is **severance** and
 is myth-accurate (the one thing unsworn); the *Seal-Anchors* in Cursed Gold are **dominion**;
@@ -161,18 +176,321 @@ mode* costs the body. §12.5 has uses/charges; it has no "you may push this, and
 
 ---
 
+## W-4b — Tranche 2: classical myth (queue #1, COMPLETE)
+
+**25 weapons** across seven traditions, every one from a page read (not a search summary).
+A 26th page — [Astra (weapon)](https://en.wikipedia.org/wiki/Astra_(weapon)) — was read as a
+**system** source, not a weapon entry, and is excluded from every count in **W-6**.
+
+### Norse — the dwarf-forge cluster
+
+| Weapon | origin | form | essence | quant/cat | cost | requirement_shape | acquisition |
+|---|---|---|---|---|---|---|---|
+| **Mjölnir** | mythological | short-handled hammer | **investiture** + restoration | **categorical** | none to wielder | 🔴 **iron gloves (Járngreipr) + belt (Megingjörð)** — "Thor must wear his gloves with his hammer" | **crafted** — Eitri & Brokkr, then judged best and presented |
+| **Gungnir** | mythological | spear | inevitability | **categorical** | not stated | 🔴 **none — it removes the requirement**: hits "regardless of the attacker's skill" | **crafted** — Sons of Ivaldi under Dvalinn; extracted by Loki as reparation for cutting Sif's hair |
+| **Tyrfing** | mythological | golden-hilted sword, "a light shone from it like a ray of the sun" | severance + inevitability | **categorical** | 🔴 **"it would kill a man every time it was drawn"** + "the cause of three great evils" | 🔴 **"had always to be sheathed with blood still warm upon it"** | **crafted under coercion** — Svafrlami trapped the dwarfs and forced it |
+| **Gram** | mythological | gold-decked sword | severance | mixed | not stated | drawn from Barnstokkr by Sigmund alone — worthiness implied | **crafted (reforged)** — Regin reforges the two halves Sigurd brings |
+| **Freyr's sword** | mythological | sword that "fights of itself" | dominion (autonomous) | **categorical** | 🔴 **deferred and total** — he gives it away for Gerðr and "since he does not have his sword he will be defeated" at Ragnarök | "if wise be he who wields it" | **story** — given away as payment to Skírnir |
+| **Mistletoe** | mythological | sprig → spear/arrow | **severance** | **categorical** | Höðr is killed for it by Váli | 🔴 **none — that is the whole point** | **story** — exists as a weapon only once Loki finds the gap in the oath |
+
+⭐ **The dwarf pattern is the find here.** Mjölnir, Gungnir, Tyrfing, Gram, Skíðblaðnir and
+Gullinbursti are all dwarf-work, and the *manner of commissioning changes the product*:
+Loki's wager gets Mjölnir with a **short handle** (a fly bit Brokkr mid-forge); Svafrlami
+*traps* the dwarfs and they **curse the blade in revenge**. Willing craft comes out clean;
+coerced craft comes out **flawed or cursed**.
+⚙️ **GPT's crafted class has no crafter-agency at all** — a carve is a material, not a
+negotiation. "Who made it, and did they want to" is a free acquisition axis we are not using.
+🔗 [Mjölnir](https://en.wikipedia.org/wiki/Mj%C3%B6lnir) · [Gungnir](https://en.wikipedia.org/wiki/Gungnir) ·
+[Tyrfing](https://en.wikipedia.org/wiki/Tyrfing) · [Gram](https://en.wikipedia.org/wiki/Gram_(mythology)) ·
+[Freyr](https://en.wikipedia.org/wiki/Freyr) · [Baldr](https://en.wikipedia.org/wiki/Baldr)
+
+### Greek — the loaned-regalia cluster
+
+| Weapon | origin | form | essence | quant/cat | cost | requirement_shape | acquisition |
+|---|---|---|---|---|---|---|---|
+| **Aegis** | mythological | goatskin / shield, Gorgon-faced | **dominion** (terror) | **categorical** | not stated | borne by Zeus, lent to Athena and Apollo | **story** — lent, never won |
+| **Harpe** | mythological | sickle-sword, **adamant** ("unconquerable") | **severance** | **categorical** | not stated | not stated | **story** — given to Perseus by Hephaestus (or Hermes) |
+| **Trident** | mythological | three-pronged spear | **world-scale** | **categorical** | not stated | divine attribute | **crafted** — forged by the Cyclopes |
+| **Cap of Invisibility** | mythological | dog-skin cap | dominion (unseen) | **categorical** | not stated | not stated | **crafted** — Cyclopes, for Hades after he freed them; then **lent** to Athena, Hermes, Perseus |
+| **Bow of Heracles** | mythological | bow + arrows | inevitability (prophecy-bound) | **categorical** | 🔴 **a festering wound and ten years marooned on Lemnos** | named by prophecy: Helenus reveals Troy cannot fall without it | **story** — payment for lighting Heracles' pyre |
+
+⭐ **Greek apex gear is overwhelmingly LENT, not owned.** The Cap passes to Athena, Hermes
+and Perseus; the Aegis passes from Zeus to Athena and Apollo; the Harpe is handed to Perseus
+for one job. **The item is a loan against a task, and it goes back.**
+⚙️ **That is an acquisition class GPT does not have.** Our three are loot / crafted / story —
+all *permanent*. A **loaned** apex item (yours for one floor, then it returns) gives the F7–F9
+band a way to show players apex power without permanently inflating them. Directly addresses
+W-1's "F7–F9 must feel like ascending, not plateauing".
+🔗 [Aegis](https://en.wikipedia.org/wiki/Aegis) · [Harpe](https://en.wikipedia.org/wiki/Harpe) ·
+[Trident of Poseidon](https://en.wikipedia.org/wiki/Trident_of_Poseidon) ·
+[Cap of invisibility](https://en.wikipedia.org/wiki/Cap_of_invisibility) ·
+[Philoctetes](https://en.wikipedia.org/wiki/Philoctetes)
+
+### Celtic — the maintenance-cost cluster
+
+| Weapon | origin | form | essence | quant/cat | cost | requirement_shape | acquisition |
+|---|---|---|---|---|---|---|---|
+| **Gáe Bulg** | mythological | spear of **Curruid sea-monster bone**, seven heads × seven barbs | **severance** | **categorical** | 🔴 "used as a last resort"; **the body must be cut apart to retrieve it** | 🔴 **a withheld technique** — "made ready for use on a stream and cast from the fork of the toes"; Scáthach taught it to Cú Chulainn alone, not even to Ferdiad | **crafted from a carve** + **story** (the teaching) |
+| **Lúin of Celtchar** | mythological | fiery lance, fifty rivets, shaft "a load for a team of oxen" | dominion (fire) | **quantitative** — "each thrust will kill a man, even if it does not reach him; if cast, it will kill nine" | 🔴 **it turns on its bearer** — unquenched it "blazed up over its shaft" and "will pierce him or the lord of the royal house"; Celtchar died by a drop of blood running down it | 🔴 **"a cauldron full of venom is required to quench it"** + four men to hold the cauldron | found at the Battle of Mag Tuired |
+| **Fragarach** | mythological | sword, "The Answerer" | **bypass** | **categorical** | not stated | not stated | **story** — an Otherworld gift to Lugh on becoming provisional king |
+| **Caladbolg** | mythological | sword, "hard lightning"; "as big as a rainbow in the air" when swung | **world-scale** | **categorical** | not stated | 🔴 **a forbidden target** — barred from use against Conchobar | **story** — Cú Chulainn gives it to Fergus |
+
+⭐ **Gáe Bulg is the best single entry in the whole corpus for GPT.** Its gate is not a stat,
+not a cost and not a rarity — it is **a technique one teacher taught to one student and
+deliberately withheld from another.** The spear is bone anyone could carve; what makes it
+apex is *knowing how to throw it*.
+⚙️ **This is L-14 made literal, and it is the second gate tranche 1 asked for.** Solo Leveling
+gated an apex item twice (forge it *and* be given it). Gáe Bulg gates it twice too: **carve the
+material, then be taught the throw.** GPT can gate an apex item on a *skill* the party must be
+taught in-fiction — which is a story beat, not a drop table.
+⚠️ **Lúin is the counter-example worth keeping:** it is the one flatly **quantitative** myth
+weapon in the tranche (it kills by the numbers, one and nine), and it is *also* the one that
+most reliably kills its own wielder. Myth prices raw numbers with danger.
+🔗 [Gáe Bulg](https://en.wikipedia.org/wiki/G%C3%A1e_Bulg) ·
+[Lúin of Celtchar](https://en.wikipedia.org/wiki/L%C3%BAin_of_Celtchar) ·
+[Fragarach](https://en.wikipedia.org/wiki/Fragarach) · [Caladbolg](https://en.wikipedia.org/wiki/Caladbolg)
+
+### Japanese — the legitimacy cluster
+
+| Weapon | origin | form | essence | quant/cat | cost | requirement_shape | acquisition |
+|---|---|---|---|---|---|---|---|
+| **Kusanagi-no-Tsurugi** | mythological | sword, ~82cm, "resembled a calamus leaf" | **investiture** + dominion (wind) | **categorical** | none stated; Yamato Takeru dies after leaving it behind | 🔴 **regalia** — possession is the claim to rule; too divine to display | 🎯 **loot from a carve** — Susanoo finds it **inside the body of Yamata no Orochi** |
+| **Ame-no-Nuhoko** | mythological | jewelled lance / naginata | **world-scale** (creation) | **categorical** | not stated | divine status — only Izanagi and Izanami | **story** — received from the older heavenly gods |
+| **Muramasa** | mythological (legend over a real smith) | katana / spears | **oath/geas** | **categorical** | 🔴 **"once drawn, a Muramasa blade has to draw blood before it can be returned to its scabbard, even to the point of forcing its wielder to wound himself or commit suicide"** | the same clause is the requirement | **crafted** — Sengo Muramasa's school |
+
+⭐ **Kusanagi is a boss carve that became a crown.** Susanoo kills the eight-headed serpent and
+finds a sword *in the corpse* — mechanically identical to a GPT carve — and that object then
+becomes one of the three Imperial Regalia. **The same item is loot at the moment of the kill and
+political legitimacy a thousand years later.**
+⚙️ **GPT has no way for an item's MEANING to appreciate.** Our items have tiers and bands; they
+do not gain significance from what was done with them. A carve that later becomes a claim is a
+free progression axis for a show about being *watched*.
+⚠️ **Muramasa's curse is documented as legend, not history** — the article is explicit that the
+Tokugawa deaths reflect "most Mikawa samurai used these superior weapons — misfortune followed
+statistically, not supernaturally." Recorded here as a *design* source, not a factual one.
+🔗 [Kusanagi-no-Tsurugi](https://en.wikipedia.org/wiki/Kusanagi-no-Tsurugi) ·
+[Amenonuhoko](https://en.wikipedia.org/wiki/Amenonuhoko) · [Muramasa](https://en.wikipedia.org/wiki/Muramasa)
+
+### Chinese — the cost-at-forge cluster
+
+| Weapon | origin | form | essence | quant/cat | cost | requirement_shape | acquisition |
+|---|---|---|---|---|---|---|---|
+| **Ruyi Jingu Bang** | mythological | iron staff, gold-ringed; **13,500 catties (~7,960 kg)** | **transformation** + multiplicity | **categorical** | not stated | 🔴 **the weight itself is the gate** — an immovable "useless iron pillar" to everyone else | 🎯 **loot, socially negotiated** — surrendered by Ao Guang once the dragon queen says Wukong is "fated to own it" |
+| **Gan Jiang & Mo Ye** | mythological | paired male/female swords | — (no supernatural power stated) | **quantitative** | 🔴 **cost is entirely at the forge**: "the couple cut their hair and nails and cast them into the furnace"; in the other account "Mo Ye sacrificed herself… by throwing herself into the furnace". Gan Jiang is then executed for keeping the male sword | three months demanded, three years taken | **crafted under coercion** — commissioned by King Helü of Wu |
+
+⭐ **Ruyi Jingu Bang inverts the requirement.** Every other myth weapon's gate is knowledge,
+worth or ritual. This one's gate is **a stat, nakedly** — it weighs eight tonnes and you either
+can lift it or you cannot. It is the closest thing in myth to a §12.1 Physique requirement, and
+it is *also* the most transformation-heavy item in the corpus (needle-to-pillar, self-copying).
+⚙️ **Power and requirement are on the same axis and that is why it reads clean:** the thing that
+makes it hard to hold is the same thing that makes it hit.
+⭐ **Gan Jiang & Mo Ye is the purest cost-at-forge case in the corpus** — and note the swords
+themselves have **no stated powers at all.** The entire mythic weight sits in *what the making
+cost*, not in what the object does. An item can be legendary purely by provenance.
+🔗 [Ruyi Jingu Bang](https://en.wikipedia.org/wiki/Ruyi_Jingu_Bang) ·
+[Gan Jiang and Mo Ye](https://en.wikipedia.org/wiki/Gan_Jiang_and_Mo_Ye)
+
+### Hindu — the licensed-armament cluster (the most system-like tradition found)
+
+| Weapon | origin | form | essence | quant/cat | cost | requirement_shape | acquisition |
+|---|---|---|---|---|---|---|---|
+| **Brahmastra** | mythological | invoked fireball | **world-scale** | **categorical** | 🔴 **area denial for an age** — the Brahmashirsha variant prevents "even a single blade of grass from ever growing in that area again. Rivers completely dry up, ensuring famines" | 🔴 **you must know how to invoke it AND how to recall it** — Ashvatthama had "the entire teaching… " missing the recall | **story** — knowledge, not object |
+| **Sudarshana Chakra** | mythological | spinning disc | severance / "wheel of time" | **categorical** | not stated | not stated | 🎯 **loot** — Vishnu "slays a danava named Hayagriva… seizing the disc from him" |
+| **Vajra** | mythological | ribbed metal scepter | **bypass** | **categorical** | 🔴 **a life, at the forge** — Dadhichi "gave up his life by the art of yoga after which the devas fashioned the vajrayudha from his spine" | mastery implied (Vajrabhrit / Vajrahasta) | **crafted from a carve — of a willing person** |
+| **Narayanastra** | mythological | volley of missiles | **reciprocity** | **categorical** | rebounds on the user and his own troops if invoked twice | 🔴 **once only** | **story** — mantra-bound |
+
+⭐ **The astra SYSTEM is the single most transferable structure in this tranche.** Not any one
+weapon — the licensing model around all of them:
+- **Transmission is gated on character, not level** — knowledge passes "from a Guru to a Shishya
+  by word of mouth, and only after the student's character had been established."
+- **Some cannot be taught at all** — "certain astras had to be handed down from the deity
+  directly; knowledge of the incantation was insufficient."
+- **Use is conditional and the conditions bite** — "specific conditions existed involving the
+  usage of astras, violating them could be fatal."
+- **Charges are real** — Narayanastra "could be used only once", and "any attempt to invoke it a
+  second time rebounds on the user and his troops."
+
+⚙️ **This is §12.5 uses/charges with teeth, and it is the missing "you may push this, and it
+will hurt" that tranche 1 flagged via Chastiefol.** Myth's version is sharper than Chastiefol's:
+the second use does not cost *you* — it hits **your own party**. That is a cost a table will
+actually feel, and it is trivially implementable.
+⭐ **Vajra is Gáe Bulg's mirror and the corpus's best acquisition story.** Both are *weapons
+carved from a body*. Gáe Bulg's body was a monster that died fighting another monster; Vajra's
+was **a sage who volunteered his own spine.** Same mechanic, opposite moral weight — and GPT
+currently has only the monster version.
+⭐ **Narayanastra is a genuinely new essence.** It is not dominion and not redirection: **its
+intensity "rises in proportion to the resistance of the target," and "total submission before
+the missiles hit… would cause them to stop and spare the target."** The weapon reads the
+target's *stance* and answers it. Nothing in W-3 covered this — see **reciprocity** in W-3.
+🔗 [Brahmastra](https://en.wikipedia.org/wiki/Brahmastra) · [Astra (weapon)](https://en.wikipedia.org/wiki/Astra_(weapon)) ·
+[Sudarshana Chakra](https://en.wikipedia.org/wiki/Sudarshana_Chakra) · [Vajra](https://en.wikipedia.org/wiki/Vajra) ·
+[Narayanastra](https://en.wikipedia.org/wiki/Narayanastra)
+
+### Islamic
+
+| Weapon | origin | form | essence | quant/cat | cost | requirement_shape | acquisition |
+|---|---|---|---|---|---|---|---|
+| **Zulfiqar** | mythological | **bifurcated blade** — splits into two points at the tip | **investiture** | **categorical** | not stated | 🔴 **be the person** — "There is no sword but the Zulfiqar, and there is no Hero but Ali" | **story** — granted; Muhammad replaced Ali's broken sword with it, acquired "on the day of Badr" |
+
+⭐ **Zulfiqar is the requirement_shape taken to its limit**: the weapon's gate is not a stat, a
+technique or a rite — it is **an identity**. The couplet is the requirement, stated as verse.
+⚙️ Pairs exactly with Nanatsu no Taizai's Sacred Treasure rule from tranche 1 (issued to a
+specific person, draws out the powers they already have). **Myth and the anime canon agree, and
+they agree with L-14.** Three independent sources, one rule.
+🔗 [Zulfiqar](https://en.wikipedia.org/wiki/Zulfiqar)
+
+---
+
 ## W-5 — The sweep queue
 
 Ordered so each pass adds a *distinct* grading signal rather than more of the same.
 
 | # | Target | What it is for |
 |---|---|---|
-| 1 | Classical myth — Norse · Greek · Celtic · Japanese · Chinese · Hindu · Islamic | The **essence averages**. Myth weapons reliably carry a cost; this is where the "what is an apex item ABOUT" answer lives |
-| 2 | Cultivation manhua ladders — Apotheosis · Global Martial Arts · Eternal Supreme | **Band grading.** W-1's ladder, verified across series |
-| 3 | Progression manhwa — Solo Leveling · Tower of God · Omniscient Reader | **Acquisition classes.** These genres are explicit about drop vs craft vs story |
-| 4 | Sacred-set anime — Nanatsu no Taizai · Fate (Noble Phantasms) · Akame ga Kill (Teigu) | **Categorical powers**, and per-wielder gating |
+| ~~1~~ | ~~Classical myth~~ ✅ **DONE 2026-08-25** — 25 weapons, W-4b | The **essence averages**, delivered in **W-6**. ⚠️ Finding: myth weapons *do not* reliably carry a cost (38%) — they carry a **requirement** (64%) |
+| 2 | ⚠️ *fandom-blocked, needs a mirror* — Cultivation manhua ladders — Apotheosis · Global Martial Arts · Eternal Supreme | **Band grading.** W-1's ladder, verified across series |
+| 3 | ⚠️ *fandom-blocked, needs a mirror* — Progression manhwa — Solo Leveling · Tower of God · Omniscient Reader | **Acquisition classes.** These genres are explicit about drop vs craft vs story |
+| 4 | ⚠️ *fandom-blocked, needs a mirror* — Sacred-set anime — Nanatsu no Taizai · Fate (Noble Phantasms) · Akame ga Kill (Teigu) | **Categorical powers**, and per-wielder gating |
 | 5 | Crafting-heavy — Arifureta · Dungeon Meshi · Frieren | **The crafted class**, and material-driven power (our M-band model) |
-| 6 | Games with real loot tables — Elden Ring · Monster Hunter · Diablo | **Distribution shape** — how many commons per unique, which is what fills the grid |
+| 6 | 🔴 **PROMOTE** — Games with real loot tables — Elden Ring · Monster Hunter · Diablo | **Distribution shape** — how many commons per unique, which is what fills the grid. **W-6 §5 raised this to the highest-value remaining pass:** myth is only 16% loot and structurally cannot fill the grid's loot column |
 
 **Resume by:** appending to W-4 under a new tranche heading, keeping the schema, and never
 dropping the source line.
+
+---
+
+## W-6 — ⭐ The essence averages (computed from tranche 2, n=25)
+
+This is what queue #1 existed to produce: **what an apex item is ABOUT**, measured rather
+than assumed. Counts are over the **25 classical-myth weapons** in W-4b only — the Astra
+*system* page is excluded (it describes no single weapon), and tranche 1's anime/manhwa
+entries are excluded too so the myth baseline stays clean.
+
+### 1. 🔴 Myth gates on REQUIREMENT, not on COST — and tranche 1 got this backwards
+
+| Gate | Count | Share |
+|---|---|---|
+| Carries a **requirement** on the wielder | 16 / 25 | **64%** |
+| Carries a **cost** of any kind | 10 / 25 | **40%** |
+| Carries **neither** | 8 / 25 | 32% |
+
+⚠️ **Correction to W-2.** The tranche-1 schema note reads *"Myth weapons almost always have
+[a cost]."* **They do not.** Only two in five do. Gungnir, Harpe, the Trident, the Cap
+of Invisibility, Fragarach, Sudarshana and Zulfiqar are all free to use. What myth reliably
+attaches is **a condition on who you must be or what you must know** — gloves and a belt,
+a withheld throwing technique, a cauldron of venom, the recall-mantra, being Ali.
+
+⚙️ **GPT already picked the right lever.** §12.1 gates weapons on a stat requirement, and
+L-14 ruled stats are the key and not the gun. **The myth average agrees with L-14 by a
+24-point margin.** The item that needs a *cost* is the exception, not the rule — so stop
+treating "what does it take from you" as the mandatory apex-item question. The mandatory
+question is **"what must you be to hold it."**
+
+### 2. 🔴 Myth has no quantitative weapons — and the genre canon is the opposite
+
+| | Count | Share |
+|---|---|---|
+| **Categorical** | 22 / 25 | **88%** |
+| Quantitative or no power stated | 3 / 25 | 12% |
+| **Flat stat-bonus items ("+X damage")** | **0 / 25** | **0%** |
+
+Not one myth weapon in the corpus is a numeric upgrade. The three non-categorical entries
+are Lúin of Celtchar (kills one per thrust, nine if cast), Gram (cuts well), and Gan Jiang &
+Mo Ye (**no stated power at all** — it is legendary purely by what the forging cost).
+
+⭐ **Set that against tranche 1**: Solo Leveling's two entries are *both* quantitative
+(+1500 attack; +110 attack / +10 agility). **The split is not myth-vs-fiction, it is
+myth-vs-GAME.** Numeric apex items are a loot-table artifact; myth never needed them because
+myth has no character sheet to inflate.
+⚙️ **L-14's "only categorical powers can ride an apex item" is myth-accurate at 88%.** This
+is the strongest empirical backing any GPT rule has picked up in this sweep.
+
+### 3. 🔴 "Never misses" is worth NOTHING in GPT — split the essence
+
+Verified against the live rules, not assumed: `rulebook/gpt-system-v1.0.md` §29 —
+**"No to-hit rolls. Actions auto-succeed when their requirements are met"** — and §307:
+**"'Miss' is not a general mechanic. It exists only as an explicit effect… or as a Dodge
+Threshold."**
+
+So **inevitability** (Gungnir "hits regardless of the attacker's skill"; Tyrfing "never
+misses a stroke") buys a GPT player **almost exactly zero**, biting only against the narrow
+set of enemies carrying a Dodge Threshold.
+
+But the neighbouring myth power is *devastating* in GPT:
+
+| Myth text | Reads in GPT as | Value |
+|---|---|---|
+| Gungnir: hits "regardless of skill" | accuracy — a stat GPT does not have | ❌ **void** |
+| Fragarach: **"no mail or armour could block it"** | **ignores resistances** | ✅ **enormous** |
+| Vajra: harms Vritra, who was **immune to all known weapons** | **ignores immunity** | ✅ **enormous** |
+
+⚙️ **Action: W-3 splits `inevitability` into `inevitability` (void in GPT — do not spend an
+apex slot on it) and `bypass` (ignores the resistance/immunity layer — the single most
+valuable categorical power available in our combat math).** GPT's defence is body-part HP
+and seven resistances; a weapon that answers the *defence layer* is the one that matters.
+
+### 4. Essence frequencies — severance is myth's default apex concept
+
+| Essence | n | Notes |
+|---|---|---|
+| **severance** | 6 | Tyrfing · Gram · Harpe · Mistletoe · Gáe Bulg · Sudarshana |
+| **dominion** | 4 | Aegis · Cap of Invisibility · Freyr's sword · Lúin |
+| **world-scale** | 4 | Trident · Caladbolg · Ame-no-Nuhoko · Brahmastra |
+| **investiture** 🆕 | 3 | Mjölnir · Kusanagi · Zulfiqar |
+| **bypass** 🆕 | 2 | Fragarach · Vajra |
+| **inevitability** | 2 | Gungnir · Bow of Heracles |
+| transformation · oath/geas · **reciprocity** 🆕 | 1 each | Ruyi Jingu Bang · Muramasa · Narayanastra |
+| **redirection** | **0** | ⚠️ **no myth instances at all** |
+
+Two results worth keeping:
+- **severance at 24% (6/25) is the mythic default.** "Cuts the thing that cannot be cut" is what an
+  apex weapon is *for*, more often than anything else. GPT's Mistletoe is already exactly this.
+- 🔴 **`redirection` has zero myth support.** It entered W-3 from tranche 1 (Gideon) and from
+  our own Forest Resin. It is an **anime/game** essence, not a mythic one — so it will not
+  inherit mythic weight, and it should not be used where the intent is "this feels ancient."
+
+### 5. Acquisition: myth will not populate the loot column
+
+| Class | n | Share |
+|---|---|---|
+| **story** (exists only after a problem is solved) | 11 | 44% |
+| **crafted** | 10 | 40% |
+| 🎯 **loot** (it drops) | **4** | **16%** |
+
+Only four myth weapons are drops — Kusanagi (found inside Orochi's corpse), Sudarshana
+(seized off Hayagriva), Ruyi Jingu Bang (surrendered by Ao Guang), Lúin (found at Mag Tuired).
+
+⚙️ **This validates the queue order.** The 9 × 3 × 3 grid needs its loot column filled and
+**myth structurally cannot fill it** — myth does not think in drop rates. That is precisely
+what queue **#6 (Elden Ring · Monster Hunter · Diablo)** is for, and it is now the
+highest-value remaining pass, not the last one. Consider promoting it.
+
+⭐ **Three of the four myth "drops" are carves** — the weapon is made *from the body of the
+thing you killed* (Orochi's corpse, the Curruid's bone, Dadhichi's spine). GPT's crafted
+class is myth-accurate as designed; it is our *loot* class that has no mythic analogue.
+
+### 6. 🎯 Four mechanics worth stealing, ranked by cheapness
+
+1. **The second use hits your own party.** Narayanastra: "any attempt to invoke it a second
+   time rebounds on the user **and his troops**." Sharper than tranche 1's Chastiefol strain
+   (which costs only the wielder) and trivially implementable on top of §12.5 charges.
+2. **The loan.** Greek apex gear is *lent against a task* and goes back (Cap → Athena, Hermes,
+   Perseus; Aegis → Athena, Apollo; Harpe → Perseus for one job). A **fourth acquisition
+   class** that lets F7–F9 show apex power without permanently inflating the party — the
+   direct answer to W-1's "ascending, not plateauing."
+3. **Coerced craft comes out flawed.** Loki's wager → Mjölnir's short handle; Svafrlami
+   *traps* the dwarfs → Tyrfing is cursed. **The crafter is a character with a grudge.** GPT's
+   carve is a material with no opinion; giving the smith agency is free narrative leverage.
+4. **The withheld technique as second gate.** Gáe Bulg is ordinary bone; what makes it apex is
+   a throw Scáthach taught to one student and refused to Ferdiad. Tranche 1 asked for a
+   **second gate** on apex items (Solo Leveling forges *and* gifts) — **myth's second gate is
+   knowledge, and knowledge is a story beat rather than a drop table.**
+
+### 7. What this pass says about the essence list itself
+
+W-3 was provisional on a 5-entry sample. On 26 myth entries it holds up structurally but
+needed **three additions and one split**: `investiture` and `reciprocity` added, `bypass`
+split out of `inevitability`, and `redirection` flagged as non-mythic. The buckets that
+survived unchanged — severance, dominion, world-scale, transformation, oath/geas — are now
+evidence-backed rather than guessed. **Treat W-3 as blessed for myth, still provisional for
+the game/anime passes.**
