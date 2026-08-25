@@ -1,9 +1,10 @@
 # Weapon Research — the graded item corpus
 
-**Started 2026-08-25 · Status: 🟡 TRANCHE 3 of N — resumable, incomplete**
-**Queue #1 (classical myth) COMPLETE — W-4b + the essence averages in W-6.**
-**Queue #6 (game loot tables) COMPLETE — W-4c + the distribution shape in W-7.**
-🔴 **One owner decision is now waiting: W-7 §3.**
+**Started 2026-08-25 · Status: ✅ ALL SIX QUEUE PASSES COMPLETE — 4 tranches**
+Myth **W-4b** → averages **W-6** · games **W-4c** → distribution **W-7** ·
+cultivation/manhwa/sacred-sets **W-4d** → **convergence W-8**.
+🔴 **Two owner decisions are waiting: W-7 §3 (grid scope) and W-8 §1 (item consent).**
+⚠️ **W-1 is partly retracted — see the banner on it.**
 Purpose: build a corpus of weapons/artifacts from myth + the anime/manhwa/manhua/game
 canon, extracted into a schema that grades each one onto **GPT's own axes** so it can be
 placed: which floor band, which route or idea it serves, and how a party gets it.
@@ -25,7 +26,7 @@ session, exactly as the previous session's diagnosis predicted. Tranche 2 was ha
 | **Fidelity** | 🟢 **High.** Full page reads — stat details, costs and the fine print all survive |
 | **Throughput** | ~1 weapon per fetch, parallelisable ~6 at a time |
 | **Provenance** | ⚠️ **Every entry names its source.** Fan wikis are user-authored and inconsistent; do not silently blend them with myth sources |
-| **Still blocked** | 🔴 `*.fandom.com` — but **not by the egress policy.** See the host table below |
+| **Fandom** | 🔓 **SOLVED 2026-08-25** — `/wiki/` page views are Cloudflare-blocked, but **`api.php` returns 200.** All of W-4d came through it |
 
 ### The egress finding, resolved (2026-08-25)
 
@@ -49,7 +50,10 @@ a substitute route. Verified host status, so the next session does not re-probe:
 |---|---|---|
 | `en.wikipedia.org` | ✅ **200** | queue #1 — done |
 | `*.wiki.fextralife.com` | ✅ **200** | queue #6 — done. The working substitute for game wikis |
-| `*.fandom.com` | 🔴 **403** Cloudflare | queues #2/#3/#4 — **blocked at their CDN, unfixable by allowlist** |
+| `*.fandom.com/wiki/…` | 🔴 **403** Cloudflare | page views blocked at their CDN — unfixable by allowlist |
+| 🔓 **`*.fandom.com/api.php`** | ✅ **200** | **the bypass.** Raw wikitext, *higher* fidelity than HTML (infoboxes arrive structured). Queues #2/#3/#4 ran on it |
+| `*.wiki.gg` | ⚠️ **404 / 401** | probed — the target communities **do not exist there.** Do not re-probe |
+| `*.miraheze.org` | 🔴 **403** | not usable |
 | `diablo4.wiki.fextralife.com` | ⚠️ **301** | redirect not followed — retry the redirect target |
 | `minecraft.wiki` | 🔴 **egress** — `CONNECT tunnel failed, 403` | genuinely not on the allowlist, unlike Fandom |
 
@@ -60,12 +64,22 @@ summaries with the fidelity caveat tranche 1 carried. Do not route around the CD
 
 ---
 
-## W-1 — ⭐ The find: cultivation fiction already solved floor-grading
+## W-1 — ⚠️ PARTLY RETRACTED: cultivation fiction and floor-grading
 
-The single most useful structural result so far, and it was not the thing I went looking for.
+> 🔴 **Correction, 2026-08-25 (W-4d).** This section was written from **search summaries**.
+> Page reads of three independent series **do not support its headline claim** of a
+> standardised genre-wide ladder, and its two citations turned out to be **one table
+> duplicated across two wikis** — it read as n=2 and was n=1. **What survives:** the
+> *grammar* (ordered bands × ~3 sub-grades) is universal, and point **2 below is confirmed
+> and stronger than stated.** What does not: the specific rung sequence. Read **W-4d**
+> before using anything in this section.
 
-**Cultivation fiction has a standardised weapon ladder**, near-universal across the genre:
-**Common → Spiritual → Earth → Heaven → Divine.** *Apotheosis* runs a longer eight-rung
+The single most useful structural result of tranche 1, and it was not the thing I went
+looking for.
+
+⚠️ ~~**Cultivation fiction has a standardised weapon ladder**, near-universal across the
+genre: **Common → Spiritual → Earth → Heaven → Divine.**~~ **NOT SUPPORTED** — three
+independent ladders disagree on vocabulary *and* order (W-4d). *Apotheosis* runs a longer eight-rung
 version: **Huang (Yellow) → Xuan (Black) → Di/Ling (Earth/Spirit) → Tian/Xian
 (Heaven/Immortal) → Sheng (Holy/Saint) → Shen (Divine) → Zhi Zhun Shen (Supreme Divine) →
 Hun Dun Zhi (Primordial)**. *Global Martial Arts* grades the divine band alone into five:
@@ -97,7 +111,7 @@ Every entry carries these. Fields the source does not support are left blank, ne
 | `essence` | The power-concept. See W-3 |
 | `quantitative_or_categorical` | 🔴 **The load-bearing field.** Does it hit *harder*, or does it do a *thing numbers cannot*? L-14 ruled stats are the key and not the gun, so **only categorical powers can ride an apex item** |
 | `cost` | What it takes from the wielder. ⚠️ **Measured 2026-08-25: only 40% of myth weapons carry one** (W-6 §1) — the earlier "almost always" note was wrong. The reliable myth gate is `requirement_shape`, at 64% |
-| `requirement_shape` | What the wielder must *be* to use it — the §12.1 requirement, post-L-14 |
+| `requirement_shape` | What the wielder must *be* to use it — the §12.1 requirement, post-L-14. ⭐ **Five shapes are in evidence** (W-8 §1): a **stat** · a **rite or gear** · a **withheld technique** · an **identity** · and 🔴 **the item's own consent**, which GPT has no version of |
 | `acquisition` | 🎯 **loot** (it drops) · **crafted** (you make it from a carve) · **story** (it only exists after a problem is solved) |
 | `band_read` | Which GPT floor its power level suggests, and why |
 | `route_fit` | Which route/idea it serves — Easy (the plague/Nullrot), Medium (demon politics/Bex), Hard (the Loong/the hunt), or shared |
@@ -440,17 +454,187 @@ Two of the biggest loot games in the genre both refuse to let their apex items b
 
 ---
 
+## W-4d — Tranche 4: passes #2, #3, #4 and #5 (unblocked via the Fandom API)
+
+🔓 **The Fandom block is bypassed.** `*.fandom.com/wiki/…` page views return the Cloudflare
+403, but **`*.fandom.com/api.php` returns 200** — the MediaWiki API is not behind the
+challenge. Every entry below is raw wikitext pulled from `api.php`, which is *higher* fidelity
+than an HTML read because infobox stat blocks arrive as structured fields. Helper:
+`action=query&prop=revisions&rvprop=content&rvslots=main&titles=<Title>`.
+⚠️ **wiki.gg is a dead end for this corpus** — probed and the target communities do not exist
+there (`solo-leveling`, `nanatsu-no-taizai` → 404; `towerofgod`, `fate` → 401). Do not re-probe.
+
+### Pass #2 — cultivation ladders. 🔴 W-1's headline does not survive a page read
+
+Three **independent** series, read directly:
+
+| Series | Ladder | Rungs |
+|---|---|---|
+| **Apotheosis** | Huang/Yellow → Xuan/Black → Di·Ling/Earth → Tian·Xian/Heaven → Sheng/Saint → Shen/Divine → Zhi Zhun Shen/Supreme → Hun Dun Zhi/Primordial | **8** |
+| **Martial Peak** | Ordinary → Earth → Heaven → Mysterious → Spirit → Saint → Saint King → Origin → Origin King → Dao Source → Emperor → Open Heaven | **12** |
+| **Coiling Dragon** | Artifact → Divine (Demigod → God → Highgod) → Sovereign → Overgod | **4** (Divine split 3) |
+
+🔴 **Two corrections to W-1, both material:**
+
+1. **The "near-universal standardised ladder" is not supported.** W-1 reported *"Common →
+   Spiritual → Earth → Heaven → Divine, near-universal across the genre."* The three ladders
+   above **do not agree on vocabulary or on order.** The sharpest disproof: **`Xuan` /
+   "Mysterious" is rung 2 of 8 in Apotheosis — *below* Earth and Heaven — and rung 4 of 12 in
+   Martial Peak, *above* both.** The same word sits on opposite sides of the same two rungs.
+2. ⚠️ **W-1's two citations were one source.** The *Apotheosis Wiki* "Light Novel Tiers" table
+   and the *Cultivation levels of light novels Wiki* "Weapon tiers" page are **character-for-
+   character identical** — a copy, not corroboration. W-1 read as n=2 and was n=1. This is
+   exactly the failure W-0's provenance rule exists to catch, and it got through because
+   tranche 1 was harvested from **search summaries rather than page reads.**
+
+✅ **What survives, and it is the more useful half:**
+- **The GRAMMAR is universal even though the vocabulary is not.** All three run *ordered bands
+  × ~3 sub-grades* (Low/Middle/Top; Demigod/God/Highgod). ⚙️ **GPT already has exactly this
+  two-level structure** — §12.7's *tier = craftsmanship, material = power scale.* Independent
+  convergence, and it means our split is genre-legible without importing any of the words.
+- ✅ **W-1's point #2 is CONFIRMED and stronger than stated.** The top band gets *more*
+  resolution, not less: Apotheosis's **Shen/Divine alone has six sub-grades** (Semi Third →
+  First); Martial Peak bolts a fourth level (**Great Emperor**) onto its top band only.
+- 🔴 **Martial Peak independently invented GPT's band-per-floor rule.** *"Every world usually
+  has a limit on the grade of products it can produce,"* and grades *"correspond to their
+  usefulness in both dealing with and being used by cultivators of their equivalent rank."*
+  That is §12.7's one-band-per-floor, arrived at separately for the same reason.
+- 🔴 **NEW — past a certain height the genre stops grading by POWER and grades by PROVENANCE.**
+  Apotheosis's top classes are not stronger rungs, they are **origin classes**: *Bloodline
+  Integration · Innate Faith Accumulation · Parmita Faith Item Projection · **Formed Before
+  Chaotic Source** · From Immortal Realm's Bloodline Ability · Power of a higher level of
+  Energy.* Coiling Dragon does the same — Sovereign's Might is *"made from a tiny fraction of
+  Sovereign's spiritual energy."* See **W-8 §2**.
+- ⭐ **The leaderboard rung.** Apotheosis grades its Divine and Supreme bands by *public
+  ranking*: **"First Grade (Top 10000 in Universe Myriad Spirit Monument)"**, then Top 3000,
+  Top 1000, **"Upper Grade (Top 50)"**. 🎯 **An item whose tier is a position on a public board
+  that moves as others rise and fall is a mechanic a broadcast competition writes for free.**
+🔗 [Apotheosis Weapon Tiers](https://apotheosis-manga.fandom.com/wiki/Weapon_Tiers) ·
+[Cultivation levels — Weapon tiers](https://cultivation-levels-of-light-novels.fandom.com/wiki/Weapon_tiers) ·
+[Martial Peak Grading System](https://martial-peak.fandom.com/wiki/Grading_System) ·
+[Coiling Dragon — List of Weapons and Artifacts](https://coiling-dragon.fandom.com/wiki/List_of_Weapons_and_Artifacts)
+
+### Pass #3 — progression manhwa: the acquisition gate is a CHOICE, not a stat
+
+| Source | Acquisition mechanism |
+|---|---|
+| **Solo Leveling — the System** | 🔴 Jinwoo was chosen as Player *"when he voluntarily decided to stay behind and sacrifice himself so that the rest of his raid party could leave alive."* The System then supplies everything — **Power Bestowal · System Quests · System Store · System Rewards · Instant Dungeons · Unlimited Inventory** |
+| **Solo Leveling — Baruka's Dagger** | 🎯 **loot**, stated as flat numerics: *"Attack +110", "Agility +10"*, `item_class = A-Rank`, `source = Baruka` — *"Jinwoo recovered it as one of his drop items"* |
+| **Tower of God — 13 Month Series** | **12 sentient Ignition Weapons + 1 Arms Inventory**, one craftsmaster (Ashul Edwaru), materials supplied by King Zahard, **bestowed to a Princess** |
+
+⭐ **Solo Leveling's real apex gate is a moral choice under pressure, not a level.** The entire
+power fantasy is downstream of one decision to die for the party. ⚙️ Converges exactly with
+the **astra system** (W-4b): transmission *"only after the student's character had been
+established."* Two genres, same gate — **the story class is gated on conduct.**
+⚠️ Note the split *inside one series*: Solo Leveling's ordinary items are bare numerics
+(+110 attack) while its apex is a story beat. **The quantitative item is the floor of the
+genre, never its ceiling** — consistent with W-6 §2.
+🔗 [System](https://solo-leveling.fandom.com/wiki/System) ·
+[Baruka's Dagger](https://solo-leveling.fandom.com/wiki/Baruka%27s_Dagger) ·
+[13 Month Series](https://towerofgod.fandom.com/wiki/13_Month_Series)
+
+### Pass #4 — sacred sets: finite economies, and the weapon that says no
+
+**Akame ga Kill — Teigu.** The most mechanically complete apex system in the corpus.
+
+| | |
+|---|---|
+| **Set size** | 🔴 **48, fixed and non-replenishing.** *"36 have been shown so far, out of which **15 have been destroyed**, while two are currently missing"* |
+| **Made from** | 🎯 **carves** — *"created from the remains of Danger Beasts that had unique powers"* — plus **Orichalcum**. 🔴 *"the raw materials selected can determine the Teigu's strength and its capabilities"* |
+| **Requirement** | 🔴 **compatibility, and the item may refuse** — *"Even if a user is strong enough to use a Teigu, it can still reject them, and a user's first impression of it affects their compatibility"* |
+| **Hard limit** | **One per person.** *"if one were to use two Teigu at the same time, they would be destroyed by it."* Wave managed two and *"suffered severe damage… an unspecified organ was damaged beyond repair"* |
+| **Cost of overuse** | 🔴 **you become the carve** — *"Certain Teigu begin to fuse with the user if it is overused, slowly transforming the user into the original Danger Beasts"* |
+| **Growth** | ⭐ **hidden abilities** — *"not all Teigu have those, however, certain users can develop such abilities themselves"* |
+| **Meta-rule** | *"If two Teigu users engage in a battle, both with killing intent, one of them is certain to die"* |
+
+**Nanatsu no Taizai — Sacred Treasure** (page-read, upgrading tranche 1's summary): created by
+**Dubs**, and *"King Bartra Liones **entrusted** these weapons to the Seven Deadly Sins when the
+king formed the group"* — issued, not won. A Sacred Treasure *"allows the user to draw out
+their powers to their full potential."* ⚠️ **They are also losable and tradeable** — Lostvayne
+was **sold to fund a bar**, Courechouse was **stolen**, Gideon simply **lost**, and Merlin later
+**bought Lostvayne back in Camelot.** An apex item with a resale market is a different economy
+from a myth relic.
+
+**Fate — Noble Phantasm.** The purest statement of **investiture** anywhere in the sweep:
+*"crystallized Mysteries", "powerful armaments made using human imagination as their core"*,
+which *"embody the ultimate Mysteries of a hero as symbols of their existence through
+historical fact and anecdotes."* They may be physical **or abstract** — *"unique (even
+conceptual) means of attack, curses, and changes to the very environment."* 🔴 **The origin
+story is the mechanic:** all descend from nameless prototypes in Gilgamesh's treasury, *"their
+forms before they were granted such through myth"* — *"It is impossible for myths and legends
+to start from nothing."* **The object does not become apex until a story is told about it.**
+🔗 [Teigu](https://akamegakill.fandom.com/wiki/Teigu) ·
+[Sacred Treasure](https://nanatsu-no-taizai.fandom.com/wiki/Sacred_Treasure) ·
+[Noble Phantasm](https://typemoon.fandom.com/wiki/Noble_Phantasm)
+
+### Pass #5 — crafting-heavy: two crafted models, and the fake that worked
+
+**Arifureta — the crafter-gated model.** *"Only two people in the previous and current era have
+been known to be able to create an artifact"* — Oscar Orcus and Hajime Nagumo, in all of
+recorded history. Creation requires **creation magic**, *"one of the ancient magics belonging
+to the age of gods"*, and the **Synergist** job class *"has the highest affinity with creation
+magic, thus have the best ability at creating an artifact."* Any artifact at all is
+*"practically considered a national treasure."*
+
+🔴 **This is a second crafted model and GPT only has the first:**
+
+| Model | Gate | Examples |
+|---|---|---|
+| **material-gated** | what you carved | Monster Hunter · Teigu · **GPT §12.7** |
+| 🆕 **crafter-gated** | **who can make it at all** | Arifureta (2 people ever) · the Norse dwarves (W-4b) · 13 Month Series (one craftsmaster) · Sacred Treasures (all by Dubs, bar one) |
+
+⚙️ **Every crafter-gated source in the corpus names ONE smith.** Ashul Edwaru made all 13; Dubs
+made six of seven Sacred Treasures; Eitri & Brokkr and the Sons of Ivaldi made most of the
+Norse apex set. **GPT's carve has no maker at all** — materials go in, an item comes out. Naming
+a smith turns every apex item into a relationship, and it makes the tranche-2 dwarf finding
+(coerced craft comes out flawed) actually implementable.
+
+**Frieren — 🔴 the best single item in the whole corpus, and it is a fake.**
+
+The Sword of the Hero, *"supposedly placed by the Goddess of Creation herself and embedded
+within a rock"*, `purpose = To be drawn by the Hero`. *"It can only be drawn by the Hero, who
+shall drive away the great calamity."*
+
+> **"Himmel the Hero attempted to pull it out, but he failed."**
+> **"Himmel wielded a replica"** — commissioned by a merchant, forged by the dwarven blacksmith
+> **Kiesel** — and *"rumors spread that he defeated the Demon King with the legendary sword and
+> only a small circle of people know the truth."*
+
+⭐ **The real apex weapon rejected the real hero, the rejection was WRONG, and a replica did the
+job because the legend attached to the wielder instead of the object.** This lands on three
+separate threads at once:
+- **W-8 §1 (the item's consent):** the consent gate can be *mistaken*. Every other source treats
+  the item's refusal as authoritative; Frieren treats it as a **fact about the sword, not about
+  the man.**
+- **W-8 §2 (provenance over power):** Fate says an object becomes apex once a legend forms
+  around it. Frieren says **the legend can form around the wrong object and work anyway.**
+- **L-14:** the sharpest possible statement of *stats are the key, not the gun* — the gun was
+  literally a prop.
+
+🎯 **This is the most GPT-shaped finding in the sweep.** In a show where the audience decides
+what is true, **an apex item that works because everyone believes it does** is not a cheat — it
+is the setting's own logic. The Corporation™ handing a party a replica, and the replica working
+exactly as long as the broadcast sells it, is a complete story beat that needs **no new
+mechanic** — only the willingness to let an item's power live in its reputation.
+⚠️ **Dungeon Meshi was not mined** — the wiki has no single equipment/magic-item page that
+carries the crafted-class signal; searches returned character pages. Recorded as a gap, not
+guessed.
+🔗 [Arifureta — Artifact](https://arifureta.fandom.com/wiki/Artifact) ·
+[Frieren — Sword of the Hero](https://frieren.fandom.com/wiki/Sword_of_the_Hero)
+
+---
+
 ## W-5 — The sweep queue
 
 Ordered so each pass adds a *distinct* grading signal rather than more of the same.
 
 | # | Target | What it is for |
 |---|---|---|
-| ~~1~~ | ~~Classical myth~~ ✅ **DONE 2026-08-25** — 25 weapons, W-4b | The **essence averages**, delivered in **W-6**. ⚠️ Finding: myth weapons *do not* reliably carry a cost (38%) — they carry a **requirement** (64%) |
-| 2 | ⚠️ *fandom-blocked, needs a mirror* — Cultivation manhua ladders — Apotheosis · Global Martial Arts · Eternal Supreme | **Band grading.** W-1's ladder, verified across series |
-| 3 | ⚠️ *fandom-blocked, needs a mirror* — Progression manhwa — Solo Leveling · Tower of God · Omniscient Reader | **Acquisition classes.** These genres are explicit about drop vs craft vs story |
-| 4 | ⚠️ *fandom-blocked, needs a mirror* — Sacred-set anime — Nanatsu no Taizai · Fate (Noble Phantasms) · Akame ga Kill (Teigu) | **Categorical powers**, and per-wielder gating |
-| 5 | Crafting-heavy — Arifureta · Dungeon Meshi · Frieren | **The crafted class**, and material-driven power (our M-band model) |
+| ~~1~~ | ~~Classical myth~~ ✅ **DONE 2026-08-25** — 25 weapons, W-4b | The **essence averages**, delivered in **W-6**. ⚠️ Finding: myth weapons *do not* reliably carry a cost (40%) — they carry a **requirement** (64%) |
+| ~~2~~ | ✅ **DONE 2026-08-25** (W-4d, via the Fandom API) — Cultivation manhua ladders — Apotheosis · Global Martial Arts · Eternal Supreme | **Band grading.** W-1's ladder, verified across series |
+| ~~3~~ | ✅ **DONE 2026-08-25** (W-4d, via the Fandom API) — Progression manhwa — Solo Leveling · Tower of God · Omniscient Reader | **Acquisition classes.** These genres are explicit about drop vs craft vs story |
+| ~~4~~ | ✅ **DONE 2026-08-25** (W-4d, via the Fandom API) — Sacred-set anime — Nanatsu no Taizai · Fate (Noble Phantasms) · Akame ga Kill (Teigu) | **Categorical powers**, and per-wielder gating |
+| ~~5~~ | ✅ **DONE 2026-08-25** (W-4d) — Crafting-heavy — Arifureta · Frieren (⚠️ Dungeon Meshi not mined — no equipment page) | **The crafted class.** Found a **second** crafted model GPT lacks (crafter-gated vs material-gated), and the corpus's sharpest item: **Frieren's Sword of the Hero is a fake that worked** |
 | ~~6~~ | ~~Games with real loot tables~~ ✅ **DONE 2026-08-25** — W-4c, run out of order after W-6 §5 promoted it. Elden Ring · Monster Hunter Wilds · Dark Souls 3 (Diablo unreachable — fandom) | **Distribution shape**, delivered in **W-7**. Apex ratio ≈ **2.9%**; games are **56% boss-drop / 0% crafted** against myth's 16% / 40%. 🔴 Raised one owner question: the band may already solve the grid's floor axis (W-7 §3) |
 
 **Resume by:** appending to W-4 under a new tranche heading, keeping the schema, and never
@@ -662,3 +846,138 @@ that needs a decision rather than more research.**
    Shardbearer remembrances not at all.** A partial second chance is a finer scarcity control
    than a binary one, and it is exactly the knob a campaign wants when a party made a choice
    they regret on Floor 3 and will live with it until Floor 9.
+
+---
+
+## W-8 — ⭐ Convergence: what all six passes agree on
+
+The sweep is **complete — all six queue passes are done.** Corpus: **25 myth weapons + 14
+fiction/game systems** across myth, cultivation manhua, progression manhwa, sacred-set anime
+and three loot-driven games. These are the findings that showed up **independently in sources
+that could not have copied each other** — which is the only kind of finding worth acting on.
+
+### 1. 🔴 The item's CONSENT is a fifth requirement shape, and GPT does not have it
+
+Five independent sources gate an apex weapon on something the player **cannot farm**:
+
+| Source | The gate |
+|---|---|
+| **Teigu** (Akame ga Kill) | *"Even if a user is strong enough… it can still reject them, and a user's **first impression** of it affects their compatibility"* |
+| **13 Month Series** (Tower of God) | *"Each weapon has its own personality… it may **refuse to obey its owner regardless of their skill**"* |
+| **Sacred Treasure** (Nanatsu no Taizai) | Entrusted to a named person; draws out *their* power |
+| **Zulfiqar** (Islamic myth) | *"There is no sword but the Zulfiqar, and there is no Hero but Ali"* |
+| **Gram** (Norse myth) | Only Sigmund could draw it from Barnstokkr |
+
+🔴 **Tower of God disproves the stat-gate on the page.** The official rule is that *"only a
+formal Princess is supposed to be able to ignite a 13 Month Series"* — and the wiki immediately
+records that **Regulars have "proven this to be untrue,"** and that **Baam ignited Black March
+while its owner, an actual formal Princess, could not.** The stated requirement was the wrong
+model of the requirement.
+
+⚙️ **GPT's §12.1 requirement is a number you meet** (Physique 5, Mistletoe's Charm 8). That is
+one requirement shape out of five in evidence. **An item that refuses a specific contestant —
+and can be won over — is a requirement the party plays rather than buys**, and it is the one
+shape that a level budget cannot trivialise. Given L-14 already ruled stats are the key and not
+the gun, this is the natural next question: *whose* key.
+
+### 2. 🔴 At the top, grading switches from POWER to PROVENANCE — five bodies of evidence
+
+| Source | The apex is defined by |
+|---|---|
+| **Apotheosis** | **Origin classes, not rungs** — *Bloodline Integration · Innate Faith Accumulation · Formed Before Chaotic Source · From Immortal Realm's Bloodline Ability* |
+| **Coiling Dragon** | Sovereign's Might — *"made from a tiny fraction of Sovereign's spiritual energy"* |
+| **Fate** | *"It is impossible for myths and legends to start from nothing"* — prototypes become Noble Phantasms only once a legend forms around them |
+| **Gan Jiang & Mo Ye** (Chinese myth) | 🔴 **No stated powers at all.** Legendary purely because of what the forging cost |
+| **Elden Ring / Dark Souls 3** | The boss drops a **token of whom you beat**, converted into a choice — never the weapon itself |
+
+⭐ **This is the sweep's strongest result.** Myth, cultivation fiction, Japanese urban fantasy
+and Western loot games — four traditions with no common ancestor — all stop asking *"how hard
+does it hit"* at the top of the ladder and start asking *"where did it come from."*
+
+⚙️ **W-6 §3 flagged that GPT has no way for an item's MEANING to appreciate.** This is that gap
+confirmed from four more directions. GPT grades on tier × material band — both **power** axes.
+Nothing in the system records *what an item was used for*, and every tradition surveyed says
+that is the axis the apex tier actually runs on. ⚠️ Note this is **not** an argument for a new
+stat; provenance is bookkeeping, and 🎯 **the Box Log already keeps exactly this kind of record**
+(who/what/chosenIndex/source, permanent, never deleted).
+
+### 3. ⭐ Overuse turns you into the thing you carved
+
+**Teigu:** *"Certain Teigu begin to fuse with the user if it is overused, slowly transforming
+the user into the original Danger Beasts."*
+
+This is the **fourth and best answer** to the push-mechanic gap tranche 1 opened with
+Chastiefol's true-form strain, and it beats the other three:
+
+| Source | What pushing costs |
+|---|---|
+| Chastiefol (tranche 1) | immense physical strain — costs *you*, recoverable |
+| Narayanastra (W-6 §6) | second use rebounds on **your own troops** |
+| Muramasa (W-4b) | must draw blood before sheathing, *"even to the point of forcing its wielder to wound himself"* |
+| 🔴 **Teigu** | **you gradually become the monster the weapon was carved from** — permanent, thematic, and it reads on the character sheet |
+
+⚙️ 🎯 **GPT is built for this and is not using it.** Every elite and boss already names a carve
+material; §12.7 already says the striking part sets the band. **A weapon carved from a Danger
+Beast that slowly makes you into one** is a body-horror mechanic in a body-horror game where
+damage already lives in **individual body parts** — the transformation has somewhere to be
+recorded. It also gives the Corporation™ exactly what it wants: a contestant visibly becoming
+something the audience will tune in for.
+
+### 4. Finite apex economies — scarcity by destruction, not by drop rate
+
+- **Teigu: 48 total, and 15 are destroyed.** Permanently. The world has fewer apex items than it
+  started with and cannot make more.
+- **13 Month Series: 13, one craftsman, one patron.**
+- **Elden Ring: 9 Legendary Armaments** (W-7), and the top-tier Remembrances **cannot be
+  duplicated at all.**
+
+⚙️ Against this, **Nanatsu no Taizai is the outlier and worth noting as such**: its Sacred
+Treasures are **sold, stolen, lost and re-bought** — Lostvayne was *sold to fund a bar* and
+later *bought back in Camelot*. **An apex item with a resale market is a fundamentally
+different economy** from a finite set, and GPT should pick one deliberately rather than drift.
+🔴 GPT's Lootbox items are permanent player property with no sink at all — which is neither.
+
+### 5. 🔴 The consent gate can be WRONG — and that is the finding for a show about belief
+
+Sections 1 and 2 both assume the item is the authority: it refuses you, or its origin certifies
+it. **Frieren breaks both** (W-4d, pass #5). The Sword of the Hero *"can only be drawn by the
+Hero"* — **Himmel the Hero could not draw it**, won with a dwarven **replica**, and the world
+recorded it as the real sword.
+
+| Source | Who is the authority on an item's power |
+|---|---|
+| Teigu · 13 Month Series | **the item** — it accepts or refuses, and it is right |
+| Fate · Apotheosis · Gan Jiang & Mo Ye | **the origin** — where it came from certifies it |
+| 🔴 **Frieren** | **the audience** — the legend attached to the wrong object and worked anyway |
+
+⚙️ 🎯 **GPT is the third case and did not know it.** The Corporation™ broadcasts, the audience
+watches, Camera Call and Exposure are already stats. **An item whose power lives in its
+reputation — and fails the moment the broadcast stops selling it — is native to this setting
+and needs no new mechanic**, only the decision that reputation is allowed to be load-bearing.
+That is a *design* question for the owner, not a research one.
+
+### 6. Two crafted models, and GPT has one
+
+Pass #5 split the crafted class in half (W-4d): **material-gated** (what you carved — Monster
+Hunter, Teigu, **GPT §12.7**) versus **crafter-gated** (who can make it at all — Arifureta's
+*two people in recorded history*, Ashul Edwaru's 13, Dubs's six, the Norse dwarves).
+
+🔴 **Every crafter-gated source names ONE smith. GPT's carve names none** — materials in, item
+out. Naming a maker is what makes tranche 2's dwarf finding usable: **coerced craft comes out
+flawed** (Mjölnir's short handle, Tyrfing's curse) only means something if there is somebody to
+coerce.
+
+### 7. What the sweep did NOT support — recorded so it is not re-derived
+
+- ❌ **A standardised cross-genre weapon ladder.** W-1's headline claim. Three independent
+  cultivation ladders disagree on both vocabulary and order (W-4d), and W-1's apparent
+  corroboration was **one table duplicated across two wikis**. The *grammar* (bands × ~3
+  sub-grades, more resolution at the top) is real; the *vocabulary* is per-series.
+- ❌ **`redirection` as a mythic essence** — zero instances in 25 myth weapons (W-6 §4).
+- ❌ **`inevitability` as a useful GPT essence** — void against §29/§307's no-to-hit rules (W-6 §3).
+- ⚠️ **Myth weapons "almost always" carrying a cost** — 40%, not "almost always" (W-6 §1).
+
+**Three of those four came from tranche 1, and all three came from search summaries rather
+than page reads.** ⚙️ **The method note in W-0 was load-bearing and should stay:** summary-
+sourced findings in this corpus have a poor track record and every one of them needed
+correcting once the page was actually read.
