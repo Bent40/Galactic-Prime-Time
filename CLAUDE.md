@@ -507,7 +507,7 @@ Skills are granted to players by templateId. The player sheet joins template dat
   divine +2/+3. That is the knob that keeps Dissolution lethal against a Mind
   farmed into the 20s; the victim's stat is not where difficulty is expressed.
 - Owner-approved; the campaign has not met the mechanic yet. ✅ **PROPAGATED 2026-08-25**
-  to the game repo: `docs/rules-addendum.md` **R30** (and the three older places that
+  to the game repo: `docs/rules-addendum.md` **R36** (and the three older places that
   described the flat timer are amended), and **the Godot sim now implements it** —
   `condition_engine.on_moment()` is the engine's first per-Moment condition hook,
   `apply_condition` takes an `escalation` of 1/2/3, and §14's disclosure is an emitted
@@ -605,7 +605,7 @@ anything else.
 | **6** | 🔬 **The weapon research sweep.** Schema, tranche 1 and a 6-pass queue are written; the sweep needs a session whose egress allowlist includes `*.fandom.com` and `en.wikipedia.org` | `rulebook/weapon-research.md` |
 | **7** | **Set 2 (F4–F6).** No floors designed — only band names in M-4. The level budget, the scaling frame and the horde rules all reach that far already | — |
 | **8** | Rival-resolution rule is RULED, but **rival party defaults are unwritten** — author what each would do by default, as prep and never as promise | `set1-story-canon.md` S-7 |
-| **9** | Game repo: **automatic Dissolution cause-tracking.** `freeze_dissolution()` is the API; nothing calls it, because the engine cannot yet tell that a contestant left an aura | `Galactic-Prime-Time-Game` R30 |
+| **9** | Game repo: **automatic Dissolution cause-tracking.** `freeze_dissolution()` is the API; nothing calls it, because the engine cannot yet tell that a contestant left an aura | `Galactic-Prime-Time-Game` R36 |
 | **10** | ⚠️ The Atlas URI carries **no database name** (`…mongodb.net/?appName=…`), so everything lives in the driver's default DB. It works and the app agrees — but "fixing" the URI later would point at an empty database | `docs/deploy-render-atlas.md` |
 
 ---
