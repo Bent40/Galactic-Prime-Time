@@ -588,6 +588,28 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - The full reconciliation plan (rules updates + app fixes, decisions D-1..D-8) lives in the
   game repo: `Galactic-Prime-Time-Game/docs/ttrpg-update-plan.md`.
 
+## 🔴 OPEN ITEMS (as of 2026-08-25 — Set 1 shipped)
+
+**Set 1 is DONE and LIVE.** 53 enemies (F1 19 · F2 16 · F3 18), the safety kit and the F1
+material requirements are seeded into Atlas; every story call from the review packet, the two
+external reviews and the 2026-08-24 changelog is ruled and propagated. Nothing below blocks
+anything else.
+
+| # | Item | Where |
+|---|---|---|
+| **1** | 🔴 **E-7 — two entries the signature gate flagged.** THE MASKED punches **6** against a boss band of **8**; **Vermilia has no attack number at all**. My read: both are correct-as-designed (his threat is the Dissolution aura, hers is noble presence) and what is missing is a third `exception` word, not a number change. **Needs an owner call — do not guess.** | `rulebook/f1-enemy-pass.md` E-7 |
+| **2** | 🟡 **S-f·1 — the mixture as the v1 revival catalyst.** Effectively settled by the two-lock ruling (the pair opens the door, the mixture they create is the catalyst) but never formally closed | `rulebook/set1-story-canon.md` S-6, S-9 |
+| **3** | **Naming and fix pass.** Deferred until there was a base to work with. There is now: 53 statted entries with working names | all three enemy passes |
+| **4** | **F1 follow-on content (E-4).** Encounter tables / room counts · §21.4 terrain blocks · Exposure and viewer values per enemy · token/loot payouts | `rulebook/f1-enemy-pass.md` E-4 |
+| **5** | **Migrate F2/F3 to `Enemy.signature`.** F1 is done (14 of 19); the gate is optional by design so the others still pass. Do it during the naming pass | `server/seeds/enemies-f2.js`, `-f3.js` |
+| **6** | 🔬 **The weapon research sweep.** Schema, tranche 1 and a 6-pass queue are written; the sweep needs a session whose egress allowlist includes `*.fandom.com` and `en.wikipedia.org` | `rulebook/weapon-research.md` |
+| **7** | **Set 2 (F4–F6).** No floors designed — only band names in M-4. The level budget, the scaling frame and the horde rules all reach that far already | — |
+| **8** | Rival-resolution rule is RULED, but **rival party defaults are unwritten** — author what each would do by default, as prep and never as promise | `set1-story-canon.md` S-7 |
+| **9** | Game repo: **automatic Dissolution cause-tracking.** `freeze_dissolution()` is the API; nothing calls it, because the engine cannot yet tell that a contestant left an aura | `Galactic-Prime-Time-Game` R30 |
+| **10** | ⚠️ The Atlas URI carries **no database name** (`…mongodb.net/?appName=…`), so everything lives in the driver's default DB. It works and the app agrees — but "fixing" the URI later would point at an empty database | `docs/deploy-render-atlas.md` |
+
+---
+
 ## Known Backlog (updated 2026-07-23 — §B-1 bug pass DONE)
 1. ~~Bug fixes §B-1~~ **DONE 2026-07-23**: shared rules helpers in `constants.js`
    (`traitTotal`/`capBonus`/`effectiveMaxHp` — import these, never re-derive); Combat Mode
