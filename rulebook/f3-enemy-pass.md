@@ -241,6 +241,11 @@ under the capital in the **ribs of the dragon Cinnabrus killed** — and because
 > **The prison is the cure, verified.** The pair who must share a room to make the mixture
 > are the pair who open the door. **Bring both and neither statline comes off the shelf.**
 
+✅ **Numbers blessed 2026-08-25**, and 🔒 **the asymmetry is deliberate and RULED:** the
+Loong-only branch is the harder one. It takes no Fracture and fights no dragon, so it reads
+as the soft half until the second Clock — **because the corpse is survivable with half the
+answer and the plague is not.** Do not even it out.
+
 | Brought | What they get |
 |---|---|
 | **Both** | Nothing. The anchors let go, the bloom recedes, and the scene is what they say to a god |

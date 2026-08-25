@@ -615,6 +615,10 @@ module.exports = [
   //                     sealed rib cavity with the largest plague bloom in the world.
   //   Neither         → both at once, Fracture uncontained. The capital is lost.
   //                     Say that out loud before the first Moment.
+  //
+  // NUMBERS BLESSED 2026-08-25, AND THE ASYMMETRY IS RULED DELIBERATE: Loong-only is the
+  // HARDER branch and must stay that way. The corpse is survivable with half the answer.
+  // The plague is not. Do not balance these against each other.
 
   SUPER('The Dragon in the Foundations', {
     size: 'Huge',

@@ -381,8 +381,18 @@ Skills are granted to players by templateId. The player sheet joins template dat
   the accent in player-facing text.
 
 ## F3 Enemy Pass (PROPOSAL, added 2026-08-18) — **Set 1 is complete**
-- **`rulebook/f3-enemy-pass.md`** + `server/seeds/enemies-f3.js` — 16 entries, the grand
+- **`rulebook/f3-enemy-pass.md`** + `server/seeds/enemies-f3.js` — **18 entries**, the grand
   capital, 170 years after F1. Damage mob 6 · elite 9 · boss 12 · super 19.
+- **Layer E — the two locks of the prison (statted + numbers blessed 2026-08-25).** They only
+  exist if the party arrives incomplete. **The Dragon in the Foundations (380 · Huge)** — win
+  on the four **Seal-Anchors**, not the body (it re-knits); **FRACTURE** is the real resource
+  (forced anchor = +1; **at 4 the reservoir cracks into a city of two million**; Nullrot's
+  Halo eats 1/Clock); the **Ribcage is a part they must NOT destroy**; carve = the anchors in
+  Cursed Gold ⭐, the only object Beelzebub ever leaves reachable. **The Reservoir (260 ·
+  Huge)** — a *volume*, not a creature; **cannot be killed, only opened** (Blooms regrow every
+  Clock; **The Seed** sits under **The Throat**); the **enclosure is the weapon** (inhalation =
+  Infected **+ Suffocation**, announced *before* initiative). 🔒 **The asymmetry is ruled
+  deliberate — Loong-only is the HARDER branch.** Do not even it out.
 - ✅ **RULED — the F3 design rule: every mob is a CONSEQUENCE of a previous floor**, not
   a thing that happens to be there. The capital is where the party finds the climax of
   the story they have been in since F1, and **they may perform it however they like —
