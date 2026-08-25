@@ -595,12 +595,25 @@ Skills are granted to players by templateId. The player sheet joins template dat
   forever if she was killed** — and it `REFUSES Witnessed`, which is Vermilia's own *"was I a
   coward?"* turned outward. ⭐ **C-8 Kin-Carve** is the Teigu rule: **overuse makes you kin**,
   and a contestant becoming Loong-like is not carrying loot, they are becoming livestock.
-- **`REFUSES` is the one new authored form** (W-9 R-2). 7 of 9 concepts carry a predicate;
-  the loot column carries the fewest by design (W-7 §2 grades loot against games, which leave
-  56% of apex drops ungated).
-- 🔴 **Nothing is ruled and there are NO stat blocks** — numbers come after the shapes are
-  blessed. **C-10** holds five open calls, the load-bearing one being whether `Charm 8` survives
-  on Mistletoe alongside the predicate (it is already seeded into Atlas).
+- 🔒 **RULED 2026-08-25:** `Charm 8` **stays** on Mistletoe and carries C-2's gate alone (the
+  proposed predicate is dropped — it was already doing the work and is already seeded); and the
+  predicates are **trimmed from 7 gates to 2** (C-6 `REFUSES Witness`, C-8 `REFUSES Animal
+  Planet`) — *"there will be normal weapons too so its not that big of a deal."*
+- ⭐ **What replaced them is better: three concepts now GRANT a Mark instead of refusing a tag.**
+  An item that marks you creates consequences; an item that refuses you only closes a door.
+- 🆕 **C-0b — MARKS (owner proposal, unruled).** Tags that **never fade**, because a deed is not
+  a performance: **Witness · Dragon Slayer · Regicide**. Granted automatically and
+  non-negotiably, and *"might unlock new interactions, not necessarily good."*
+  🔴 **This repairs a hole the first draft shipped** — §18's lifecycle fades every tag, so
+  C-6's original `REFUSES Witnessed` was defeatable by *neglect*. A Mark cannot be shed, so the
+  gate actually holds, and it closes R-3's loop (a myth born from a deed cannot lapse).
+  ⭐ **Regicide is the case that justifies it:** kill the girl at F1 and you have committed
+  regicide against the queen of the world — **Sealed**, because nobody can tell you, and you
+  find out at F3. The campaign's heaviest consequence currently has **no carrier at all**.
+  ⚠️ **v1 is FROZEN and this is new mechanics, not an erratum** — `REFUSES` rides §18.1.6,
+  Marks does not. **C-10 #6 is the call.**
+- 🔴 **NO stat blocks** — numbers come after the shapes are blessed. **C-10** holds six open
+  calls; the top three are all Marks (is it in · do Sealed states ship · what else grants them).
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

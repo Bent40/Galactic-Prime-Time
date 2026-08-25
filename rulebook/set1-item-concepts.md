@@ -14,7 +14,15 @@ pieces (Chains of the Stairway Prophet · Nullrot's Bell · The Prophet's Toll �
 Loong Blood Phial · Loong-Scale Aegis). W-7 §1 puts the genre's apex ratio near **3%**, so those
 stay few. These nine are the backbone every route should reliably offer.
 
-🔴 **Nothing here is ruled.** Nine concepts, no stat blocks — numbers come after the shapes are
+🔒 **Two owner rulings applied 2026-08-25:** `Charm 8` stays on Mistletoe (C-2), and the
+predicates are **trimmed from 7 gates to 2** (C-6, C-8). Three concepts now **grant a Mark**
+instead of demanding a tag.
+
+🆕 **C-0b — MARKS** is an owner proposal for tags that never fade, and it is currently the most
+consequential open thread in this document. It **repairs a hole in C-6** that the first draft
+shipped.
+
+🔴 **The rest is unruled.** Nine concepts, no stat blocks — numbers come after the shapes are
 blessed. Open calls are in **C-10**.
 
 ---
@@ -29,8 +37,96 @@ blessed. Open calls are in **C-10**.
 
 **Grading rule applied throughout (W-7 §2):** the **loot** column is graded against loot games
 (56% ungated boss drops), the **crafted** and **story** columns against myth (which gates on
-requirement 64%, cost 40%). That is why the loot row carries the fewest predicates and the
-story row carries the heaviest.
+requirement 64%, cost 40%).
+
+🔒 **TRIMMED 2026-08-25 (owner).** The first draft put a predicate on **7 of 9** concepts. The
+owner cut it: *"trim the predicates down. Remember there will be normal weapons too so its not
+that big of a deal."* **Only 2 gates remain** — C-6 and C-8, the two where the predicate *is*
+the story. The rest are ungated, because ordinary weapons carry the load and a spine of nine
+locks reads as a lock collection rather than a set of items.
+
+⭐ **What replaced them is better.** Three concepts now **GRANT a Mark** (C-0b) instead of
+demanding a tag. **An item that marks you is more generative than an item that refuses you** —
+it creates consequences rather than closing doors.
+
+---
+
+## C-0b — 🆕 **MARKS** — tags that do not fade (owner proposal, 2026-08-25)
+
+> **Owner:** *"Should some tags be a permanent mark on contestants? Something like being a
+> witness to a crime is not something that fades… you receive a tag you carry with yourself,
+> that might unlock new interactions, not necessarily good. Dragon slayer or Regicide could be
+> those too."*
+
+🔴 **This fixes a real hole in the first draft of this document, and the hole was mine.**
+§18's lifecycle is *acquired → Reinforced → **Faded** (neglected) → Lost → reacquirable* —
+**every §18 tag can fade.** So the original `REFUSES Witnessed` on C-6 was defeatable by
+*neglect*: stop playing the tag, wait for it to lapse, pick the item up. That made the sharpest
+predicate in the set toothless, and a permanent Mark is what repairs it.
+
+### What a Mark is, and why it is a different thing
+
+| | §18 **Tag** | 🆕 **Mark** |
+|---|---|---|
+| **What it records** | a **performance** — who the Show says you are | a **deed** — what you actually did |
+| **Granted by** | table consensus · hidden condition · Goals · corporate shaping | 🔴 **automatic and non-negotiable.** Nobody votes on whether you killed a king |
+| **Lifecycle** | Active → Reinforced → Faded → Lost → reacquirable | 🔒 **permanent. It never fades and cannot be shed** |
+| **Answers** | *"are you still being that?"* | *"did you do it?"* — a **fact**, not a state |
+
+⭐ **This makes Marks the *better* R-2 predicate, on the owner's own standard.** R-2 requires a
+gate to be BE / NOT-BE and never arbitrary. A Tag asks a **lifecycle** question that can drift;
+a Mark asks a **historical** one that cannot. **You either did it or you didn't** is the
+cleanest decidable predicate the system can offer.
+
+⚙️ **And it closes R-3's loop, which currently leaks.** R-3 says *deeds birth a tag → the tag
+gates the weapon.* If that tag can fade, the loop leaks — the myth you made stops being true
+about you because you got bored of performing it. **A deed cannot be un-done, so a Mark holds.**
+*The weapon that made your myth requires you to keep living it* only works if you cannot stop.
+
+### The three the owner named, and where Set 1 already earns them
+
+| Mark | Earned by | 🔴 What it unlocks — *"not necessarily good"* |
+|---|---|---|
+| **Witness** | Seeing a thing and not stopping it — the man taking the mask · Bex firing the house · the crystal taking a street | ⭐ **You are standing in Vermilia's exact position.** Canon: *"she saw the child's corruption and said nothing"* — she **is** the witness, and her question is *"was I a coward?"* A contestant who has this Mark can be **spoken to by her differently**, because she recognises it |
+| **Dragon Slayer** | Killing the Loong Kin (F1 Hard), or the Loong | 🔴 **Every demon wants Loong blood.** This Mark tells them you have handled it. **The F2/F3 hunt turns onto you personally** — which is already written as C-8's cost, and now has a carrier |
+| **Regicide** | 🔴 **Killing the girl at F1** | ⭐ **The best example in the campaign.** You kill a frightened girl in a burning house — and you have committed regicide against the queen of the world, **which nobody can tell you, because nobody knows she is one.** You carry a Mark you cannot read for two floors. **At F3 you find out what you did.** |
+
+⭐ **Regicide is why this mechanic is worth building.** The campaign's heaviest consequence —
+*"kill her and Cinnabrus is permanently deleted, at the first floor, before anyone knows"* —
+currently has **no carrier at all**. A Mark makes it a thing on the sheet from the moment it
+happens: unexplained, unremovable, and waiting.
+
+### 🔴 Marks can be secret, and that is the sharpest version
+
+A Tag is *"your public identity as the Show sees you."* A Mark is not necessarily public — the
+cameras may not have caught it, and **Witness** in particular means *you saw, and possibly
+nobody knows you saw.*
+
+That gives three states worth distinguishing:
+
+| State | Meaning |
+|---|---|
+| **Open** | the broadcast caught it. Everyone plays against it |
+| **Sealed** | true, on the sheet, **but nobody in the fiction knows** — including, in the Regicide case, the player |
+| **Broken** | someone finds out. 🎯 **A Sealed Mark going Open is a scene, and the Corporation would pay for it** |
+
+⚙️ **This is W-8 §2's provenance finding pointed at the CONTESTANT instead of the item.** The
+corpus said: at the top, grading stops being about power and starts being about where a thing
+came from. **A Mark says the same about a person.**
+
+### What Marks would cost to build
+
+| Piece | Status |
+|---|---|
+| Definability | ✅ **inherited free.** §18 already requires player-proposed tags to appear on TVTropes.org — *Dragon Slayer* and *Regicide* are both tropes, so the anti-arbitrariness guarantee carries over untouched |
+| Storage | ✅ tags already live on the character; a Mark is a tag with `fades: false` |
+| Predicate use | ✅ §18.1 pattern 6 already permits item tag-gates |
+| 🔴 **New** | the **permanence** flag, and the **Open / Sealed / Broken** state |
+
+⚠️ 🔒 **v1 is FROZEN, and this is new mechanics rather than an erratum.** `REFUSES` (R-2) at
+least rides §18.1.6, which already exists. **Marks does not** — it adds a lifecycle rule §18
+does not have. That is the owner's call to make, but it should be made deliberately rather than
+drifted into. **See C-10 #6.**
 
 ---
 
@@ -68,7 +164,7 @@ kept separate so R-3's forward-accrual stays clean.
 |---|---|
 | **essence** | 🔴 **bypass** — the highest-value categorical power in GPT's math (W-6 §3) |
 | **quant/cat** | **categorical** |
-| **requirement_shape** | 🔒 **`REQUIRES Vengeful` · `REFUSES Corporate Asset`** |
+| **requirement_shape** | 🔒 **`Charm 8` — RULED KEPT (owner, 2026-08-25). No predicate.** |
 | **cost** | none at use — the requirement *is* the price (W-6 §1: myth gates on requirement 64%, cost 40%) |
 
 **This concept already exists and this is a restatement, not an invention.** Mistletoe's seed
@@ -77,16 +173,17 @@ warded because **you are owed the cut**, and a contestant nobody would side with
 sprig."* `set1-story-canon.md` records that the Mask's Oathbreaker gate *"stops being
 arbitrary."*
 
-🔴 **That Charm 8 is a predicate wearing a stat's clothes.** R-2 lets it be written directly:
+🔒 **RULED (owner, 2026-08-25): Charm 8 stays, and carries the gate alone.** C-10 #1 is closed.
 
-- **`REQUIRES Vengeful`** — *"Take a significant action specifically to repay harm done to you
-  or someone you care about."* **That is the claim, verbatim.** You are owed the cut.
-- **`REFUSES Corporate Asset`** — *"Complete a Directive without deviation, complaint, or asking
-  what it's for."* 🔴 **Someone executing an order has no claim of their own to make.** The two
-  are structurally incompatible, which is exactly the NOT-BE shape R-2 asks for.
+The first draft proposed restating it as `REQUIRES Vengeful` + `REFUSES Corporate Asset`. **That
+is dropped.** Charm 8 is already doing the work — *"a contestant nobody would side with is
+holding a sprig"* is a claim-test expressed as a stat, it is **already seeded into Atlas**, and
+stacking two predicates on top of a shipped requirement is exactly the over-locking the owner
+trimmed.
 
-⚠️ **Recommendation: keep Charm 8 as well, or drop it?** Flagged in C-9 — the predicate is the
-truer gate, but removing a shipped stat requirement touches seeded data.
+⚙️ **The finding survives even though the mechanic didn't.** W-6 §1 said myth gates on
+requirement (64%) far more than on cost (40%), and Mistletoe *is* a pure requirement gate. The
+research backed the design that was already there; it did not need to replace it.
 
 **Band readings**
 
@@ -104,7 +201,8 @@ truer gate, but removing a shipped stat requirement touches seeded data.
 |---|---|
 | **essence** | **reciprocity** — it reads the target's stance and answers it (the Narayanastra shape, W-4b) |
 | **quant/cat** | **categorical** |
-| **requirement_shape** | 🔒 **`REFUSES Butcher`** |
+| **requirement_shape** | 🎯 **none** — trimmed |
+| 🆕 **grants** | 🔒 **Mark: `Witness`** (C-0b) |
 | **cost** | it does not work twice on the same creature |
 
 The staircase man is still in there, and at F3 he *"can be talked to and answers honestly,
@@ -112,9 +210,13 @@ which is worse than a monster."* Canon says **only RECOGNITION was ever missing.
 that, as an object: it does not damage, it makes a thing **answerable** — forcing the scene
 where there would have been a fight.
 
-🔒 **`REFUSES Butcher`** — *"Reduce an enemy to component parts. Deliberately."* A contestant
-who does that **cannot hold the thing that asks a monster its name.** Decidable, on the sheet,
-and it makes the party choose what kind of act they are known for.
+🆕 **It GRANTS rather than gates.** The first draft had this `REFUSES Butcher`; trimmed. What
+it does instead is better: **using it earns the Mark `Witness`.** You asked the thing its name
+and it answered — *you now know what is under there*, permanently, and you did not stop it.
+
+⭐ **That puts the party in Vermilia's exact position** (C-0b): she saw and said nothing, and
+spent two centuries trying to get a verdict on it. A contestant who learns the host's name and
+walks on has done the same thing, and **now has it on the sheet.**
 
 **Band readings**
 
@@ -137,7 +239,7 @@ rule pointed at the Easy route's actual question.
 |---|---|
 | **essence** | **dominion** — social, not damaging |
 | **quant/cat** | **categorical** |
-| **requirement_shape** | 🔒 **`REQUIRES Menace`** |
+| **requirement_shape** | 🎯 **none** — trimmed |
 | **cost** | it names you to that clan — in both directions |
 
 🔒 The clan law: *a demon dies only when its CLAN dies.* So a body-part taken off a demon whose
@@ -145,8 +247,9 @@ death **did not take** is not a trophy, it is a **clan artifact** — and demons
 acknowledge it. On a route that is entirely demon politics, a social bypass is worth more than
 a weapon.
 
-🔒 **`REQUIRES Menace`** — *"Cause an enemy to retreat, surrender, or hesitate purely based on
-your presence or reputation."* You cannot present a clan's own token and be ignorable.
+⚠️ **Ungated (trimmed).** The draft asked for `REQUIRES Menace`; the cost line already does the
+work — **a clan token names you to that clan in both directions**, and being recognised by
+demons is not obviously a benefit on a route that is entirely demon politics.
 
 **Band readings**
 
@@ -164,17 +267,17 @@ your presence or reputation."* You cannot present a clan's own token and be igno
 |---|---|
 | **essence** | **oath/geas** — binds, and charges the wielder |
 | **quant/cat** | **categorical** |
-| **requirement_shape** | 🔒 **`REFUSES Spy`** |
+| **requirement_shape** | 🎯 **none** — trimmed |
 | **cost** | 🔴 **the mark is public, and readable by anyone who knows the script** |
 
 Vermilia grants **the brand** at F1, and at F2 it is full immunity to the Dissolution songs.
 Brand-Iron is the brand made portable: you can put the mark on someone else. Immunity, in
 exchange for **wearing whose you are** where the cameras can see it.
 
-🔒 **`REFUSES Spy`** — *"Operate without anyone — ally or enemy — knowing your real objective
-for an entire session."* 🔴 **A mark that announces your allegiance and a contestant whose
-objective is unknown cannot coexist.** The cleanest NOT-BE in the set: it is not a judgment on
-the player, it is a structural contradiction.
+⚠️ **Ungated (trimmed).** The draft had `REFUSES Spy` — a genuine structural contradiction
+(a public allegiance vs. an unknown objective), but the **cost already enforces it in fiction**:
+wear the mark and your allegiance is readable. A spy simply will not take one. **Fiction is
+cheaper than a rule here.**
 
 ⭐ **Name the smith (W-8 §6).** Every crafter-gated source in the corpus names one maker —
 Ashul Edwaru's 13, Dubs's six Sacred Treasures, the Norse dwarves. GPT's carve currently names
@@ -198,7 +301,8 @@ flawed.* Commission it politely and it is clean; lean on them and it carries a d
 |---|---|
 | **essence** | 🔒 **investiture** — possession *is* the claim (W-4b: Mjölnir · Kusanagi · Zulfiqar) |
 | **quant/cat** | **categorical** |
-| **requirement_shape** | 🔒 **`REFUSES Witnessed`** |
+| **requirement_shape** | 🔒 **`REFUSES Witness`** — ⭐ **the Mark, not the §18 tag** (C-0b). **KEPT in the trim** |
+| 🆕 **grants** | 🔴 **Mark: `Regicide`** — on the killed branch |
 | **cost** | none — 🔴 **and that is the point.** Its value is entirely what the party did |
 
 **This is W-9 R-3 demonstrated in one object.** The party frees a girl from a burning house.
@@ -214,12 +318,19 @@ She gives them something small — a token of thanks, worth nothing, no effect. 
 weapon.** It closes W-6 §3's gap — *GPT has no way for an item's MEANING to appreciate* — with
 no new subsystem, because appreciation here is just the story having happened.
 
-🔒 **`REFUSES Witnessed`** — *"Observe a significant event without intervening. The crowd
-respects this. Or resents it."* 🔴 **Vermilia's entire sin is that she watched and did not
-speak.** Her question is *"was I a coward?"* An object of her gratitude that **refuses a
-contestant who stood by** is her own unanswerable judgment, turned outward and made mechanical.
-A party member with `Witnessed` cannot carry it — and the reason is written, specific, and
-exactly the story.
+🔒 **`REFUSES Witness` — one of the two gates that survived the trim, and C-0b is what makes it
+work.** Vermilia's entire sin is that she watched and did not speak; her question is *"was I a
+coward?"* An object of her gratitude that **refuses a contestant who stood by** is her own
+unanswerable judgment, turned outward.
+
+🔴 **The first draft got this wrong and the owner's Marks proposal is the fix.** It originally
+read `REFUSES Witnessed` — the **§18 tag**, which *fades when neglected*. That made the sharpest
+predicate in the document **defeatable by waiting**: let the tag lapse, pick the token up. As a
+permanent **Mark**, it cannot be shed, and the judgment actually holds.
+
+🔴 **And the killed branch now has a carrier.** Kill her and you take the Mark **`Regicide`** —
+**Sealed** (C-0b), because nobody can tell you what you did. You committed regicide against the
+queen of the world in a burning house on the first floor, and **you find out at F3.**
 
 **Band readings**
 
@@ -265,7 +376,8 @@ pierce him."* No predicate needed; the thing is simply loaded.
 |---|---|
 | **essence** | 🔴 **bypass** — dragon-blood cuts what the plague has warded |
 | **quant/cat** | **categorical** |
-| **requirement_shape** | 🔒 **`REFUSES Animal Planet`** |
+| **requirement_shape** | 🔒 **`REFUSES Animal Planet`** — **KEPT in the trim** |
+| 🆕 **grants** | 🔒 **Mark: `Dragon Slayer`** (C-0b) |
 | **cost** | 🔴 **overuse makes you kin** — and every demon wants what you are becoming |
 
 **Teigu's rule, and GPT is built for it:** *"Certain Teigu begin to fuse with the user if it is
@@ -278,10 +390,17 @@ elite and boss; §12.7 already says **the striking part sets the band**; damage 
 are becoming livestock**, which is precisely what the hunt intends. The F2 and F3 hunts turn
 onto them personally.
 
-🔒 **`REFUSES Animal Planet`** — *"Establish a non-hostile relationship with a creature that has
-no reason to tolerate you."* 🔴 **You cannot befriend the Loong and swing its kin.** A real fork
-with no way to hold both sides, decidable on the sheet, and it is the Hard route's actual
-question stated as a requirement.
+🔒 **`REFUSES Animal Planet` — the other gate that survived the trim.** *"Establish a non-hostile
+relationship with a creature that has no reason to tolerate you."* 🔴 **You cannot befriend the
+Loong and swing its kin.** A real fork with no way to hold both sides, and it is the Hard route's
+actual question stated as a requirement.
+
+🆕 **It also grants the Mark `Dragon Slayer`** (C-0b), which is where the cost stops being
+flavour: **every demon wants Loong blood**, and a Mark saying you have handled it is what turns
+the F2 and F3 hunts onto the party personally. ⚠️ Note the interaction — `Animal Planet` is a
+§18 tag and **can fade**, but `Dragon Slayer` is a Mark and **cannot.** Let the tag lapse and the
+weapon becomes usable again; the Mark stays regardless. **That asymmetry is correct**, and it is
+the clearest illustration of why the two systems are different.
 
 ⚠️ Distinct from the shipped **Loong-Scale Aegis** (armor, batch-c) and from M-5's apex
 **Loong-Scale** (*canon — shed, not taken*). This is a **weapon**, carved from **Loong Kin**,
@@ -303,7 +422,7 @@ and the difference between *shed* and *taken* is the whole moral load.
 |---|---|
 | **essence** | **dominion** — it commands the hunt rather than fighting it |
 | **quant/cat** | **categorical** |
-| **requirement_shape** | 🔒 **`REQUIRES Pinky Promise`** |
+| **requirement_shape** | 🎯 **none** — trimmed |
 | **cost** | it calls hunters **wherever the target is**, and it cannot be aimed at nobody |
 
 At F2 Hard the Horn (12 HP) *"sounds every Clock and a fresh pack arrives wherever the Loong
@@ -319,9 +438,9 @@ option **struck through.** One object, two outcomes, *"only one reward may be se
 | **Destroy it** | The hunt ends. Clean, final, and you hold nothing |
 | **Take it** | The hunt ends **and you hold the thing that calls it.** You now own a weapon whose only function is to point a pack at something |
 
-🔒 **`REQUIRES Pinky Promise`** — *"Make a commitment out loud — to an ally, an enemy, or the
-camera — and then watch it immediately complicate things."* 🔴 **Sounding a horn is a public
-commitment by definition.** You cannot quietly own this.
+⚠️ **Ungated (trimmed).** The draft asked for `REQUIRES Pinky Promise`. Dropped — **sounding a
+horn is a public commitment whether or not a rule says so**, and the choice table above already
+carries the weight.
 
 **Band readings**
 
@@ -336,17 +455,25 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 
 ---
 
-## C-10 — 🔴 Open calls
+## C-10 — Open calls
+
+✅ **Two closed by the owner, 2026-08-25.**
+
+| # | Call | Status |
+|---|---|---|
+| ~~1~~ | Does `Charm 8` survive on Mistletoe alongside the C-2 predicate? | 🔒 **RULED — keep Charm 8, drop the predicate.** It was already doing the work and is already seeded |
+| ~~4~~ | How many predicates is too many? (7 of 9) | 🔒 **RULED — trimmed to 2** (C-6, C-8). *"There will be normal weapons too so its not that big of a deal."* Three concepts now **grant Marks** instead |
+
+🔴 **Still open — and the first three are all Marks (C-0b), which is now the load-bearing thread.**
 
 | # | Call | Why it needs you |
 |---|---|---|
-| **1** | **Does `Charm 8` survive on Mistletoe alongside the C-2 predicate?** The predicate is the truer gate, but the stat is **already seeded into Atlas** and removing it touches live data | Data change, not a design preference |
-| **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** Continuous is what makes the *fade* case work (a weapon lost when its tag fades — Freyr's sword as a live mechanic), but it means the GM tracks tag lifecycle per item | Decides how heavy R-2 is at the table |
-| **3** | **Does the C-6 killed-branch token stay inert forever, or can it be redeemed?** Inert-forever is the honest reading of *"a god at zero cannot be prayed back"* | Story weight vs. player mercy |
-| **4** | **How many predicates is too many?** Seven of nine concepts carry one. That may be right for a spine, or it may make Set 1 feel like a lock collection | Tune before Sets 2–3 inherit the pattern |
-| **5** | **Do concepts get one name across all three floors, or three names?** *Leak-Vial* at F1 and F3 are the same concept and arguably not the same object | Naming pass — affects seeding |
-
----
+| **6** | 🔴 **Is Marks IN?** It adds a lifecycle rule §18 does not have, and **v1 is FROZEN** — `REFUSES` at least rides §18.1.6, but this does not. Erratum, v1 extension, or v2-only? | Decides whether C-3/C-6/C-8's grants are real or placeholders |
+| **7** | **Do all three Mark states ship** (Open / Sealed / Broken), or just permanence? **Sealed is what makes `Regicide` land** — a Mark you cannot read for two floors — but it means tracking something the player is not told | Sealed is the expensive half and the whole point |
+| **8** | **What else grants Marks?** Items are the narrow case. If killing the girl grants `Regicide`, that is a **campaign** rule, not an item rule — most Marks will come from acts, not objects | Scopes it correctly before it is written as an item feature |
+| **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ **Marks narrows this a lot** — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (a §18 tag) still has the question | One item, not a system-wide rule |
+| **3** | **Does C-6's killed-branch token stay inert forever?** Partly answered — the branch now grants `Regicide`, so the *consequence* has a carrier either way | Story weight vs. player mercy |
+| **5** | **One name per concept across three floors, or three names?** *Leak-Vial* at F1 and F3 are the same concept and arguably not the same object | Naming pass — affects seeding |
 
 ## C-11 — What is NOT here
 
