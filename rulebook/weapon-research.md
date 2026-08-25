@@ -1,9 +1,11 @@
 # Weapon Research — the graded item corpus
 
-**Started 2026-08-25 · Status: ✅ ALL SIX QUEUE PASSES COMPLETE — 4 tranches**
+**Started 2026-08-25 · Status: ✅ RESEARCH COMPLETE + ✅ ALL THREE QUESTIONS RULED**
 Myth **W-4b** → averages **W-6** · games **W-4c** → distribution **W-7** ·
-cultivation/manhwa/sacred-sets **W-4d** → **convergence W-8**.
-🔴 **Two owner decisions are waiting: W-7 §3 (grid scope) and W-8 §1 (item consent).**
+cultivation/manhwa/sacred-sets **W-4d** → **convergence W-8** → 🔒 **rulings W-9**.
+🔒 **R-1** author ~27 concepts, the band owns the floor axis · **R-2** items may reject a
+contestant on a *written* BE/NOT-BE predicate, never arbitrarily · **R-3** weapons **birth**
+myths (forward accrual), they do not borrow them. **Start at W-9.**
 ⚠️ **W-1 is partly retracted — see the banner on it.**
 Purpose: build a corpus of weapons/artifacts from myth + the anime/manhwa/manhua/game
 canon, extracted into a schema that grades each one onto **GPT's own axes** so it can be
@@ -12,6 +14,11 @@ placed: which floor band, which route or idea it serves, and how a party gets it
 > **Why breadth, not a sample (owner, 2026-08-25):** the output has to fill a **9 floors ×
 > 3 routes × 3 acquisition classes** grid. A dozen archetypes cannot populate that. The
 > essence taxonomy is a *field* on each entry, not the deliverable.
+>
+> 🔒 **SUPERSEDED by W-9 R-1 (owner, same day):** *"the band already solves the floor axis —
+> go with ~27 concepts."* The floor axis collapses into the **set** axis, so the target is
+> **3 sets × 3 routes × 3 acquisition = 27 concepts** plus a small apex set. The breadth
+> argument stands; the number is 27, not 81.
 
 ---
 
@@ -111,7 +118,7 @@ Every entry carries these. Fields the source does not support are left blank, ne
 | `essence` | The power-concept. See W-3 |
 | `quantitative_or_categorical` | 🔴 **The load-bearing field.** Does it hit *harder*, or does it do a *thing numbers cannot*? L-14 ruled stats are the key and not the gun, so **only categorical powers can ride an apex item** |
 | `cost` | What it takes from the wielder. ⚠️ **Measured 2026-08-25: only 40% of myth weapons carry one** (W-6 §1) — the earlier "almost always" note was wrong. The reliable myth gate is `requirement_shape`, at 64% |
-| `requirement_shape` | What the wielder must *be* to use it — the §12.1 requirement, post-L-14. ⭐ **Five shapes are in evidence** (W-8 §1): a **stat** · a **rite or gear** · a **withheld technique** · an **identity** · and 🔴 **the item's own consent**, which GPT has no version of |
+| `requirement_shape` | What the wielder must *be* to use it — the §12.1 requirement, post-L-14. ⭐ **Five shapes are in evidence** (W-8 §1): a **stat** · a **rite or gear** · a **withheld technique** · an **identity** · and 🔒 **the item's own consent — RULED IN (W-9 R-2)**, as a written `REQUIRES <tag>` / `REFUSES <tag>` predicate. Never arbitrary |
 | `acquisition` | 🎯 **loot** (it drops) · **crafted** (you make it from a carve) · **story** (it only exists after a problem is solved) |
 | `band_read` | Which GPT floor its power level suggests, and why |
 | `route_fit` | Which route/idea it serves — Easy (the plague/Nullrot), Medium (demon politics/Bex), Hard (the Loong/the hunt), or shared |
@@ -813,7 +820,7 @@ and against loot games for the loot column** — the essence averages in W-6 are
 yardstick for *what a weapon is about*, and W-7 is the right yardstick for *how many and from
 where*. Do not use one where the other belongs.
 
-### 3. 🔴 The floor axis may already be solved — a scope finding for the owner
+### 3. ✅ RULED (W-9 R-1) — the floor axis IS already solved
 
 Monster Hunter reaches full breadth on **14 weapon types**, because breadth comes from
 *material × class*, not from catalog size. **GPT is built the same way** — §12.1 gives weapon
@@ -825,13 +832,16 @@ inflate."*
 not asking for 9× the weapons** — it is asking for 9 bands of the same weapons, which is a rule
 we shipped, not content we owe.
 
-🟡 **Unblessed proposal:** the corpus's real target is **~27 authored concepts (3 routes × 3
-acquisition classes), carried across floors by the band**, plus a small apex set at roughly
-Elden Ring's ratio. That is a tractable authoring job; 81 distinct weapons is not.
-🔴 **This contradicts the owner's framing note at the top of this file** ("the output has to
-fill a 9 floors × 3 routes × 3 acquisition classes grid"), so it is **flagged, not adopted.**
-The grid stands until the owner rules. **This is the one open question the sweep has produced
-that needs a decision rather than more research.**
+🔒 **RULED 2026-08-25 — see W-9 R-1.** The owner adopted it: *"the band already solves the
+floor axis — go with ~27 concepts."* The target is **~27 authored concepts plus a small apex
+set at roughly Elden Ring's ratio**, not 81 weapons.
+
+⚠️ **and the ruling corrected an arithmetic slip in this section.** The proposal read *"~27
+concepts (3 routes × 3 acquisition classes)"* — but **3 × 3 = 9, not 27.** The parenthetical
+was wrong and the 27 is right: it comes from **3 SETS × 3 routes × 3 acquisition classes**.
+The floor axis collapses into the **set** axis (F1–F3 · F4–F6 · F7–F9), not to nothing —
+because a campaign runs one set, and the M-bands already partition exactly that way (M-1/M-2/
+M-3 inside Set 1, M-4 for Set 2, M-5 apex). Full working in **W-9 R-1**.
 
 ### 4. Two mechanics to add to W-6 §6's steal list
 
@@ -856,7 +866,7 @@ fiction/game systems** across myth, cultivation manhua, progression manhwa, sacr
 and three loot-driven games. These are the findings that showed up **independently in sources
 that could not have copied each other** — which is the only kind of finding worth acting on.
 
-### 1. 🔴 The item's CONSENT is a fifth requirement shape, and GPT does not have it
+### 1. ✅ RULED (W-9 R-2) — the item's CONSENT is a fifth requirement shape
 
 Five independent sources gate an apex weapon on something the player **cannot farm**:
 
@@ -937,7 +947,7 @@ later *bought back in Camelot*. **An apex item with a resale market is a fundame
 different economy** from a finite set, and GPT should pick one deliberately rather than drift.
 🔴 GPT's Lootbox items are permanent player property with no sink at all — which is neither.
 
-### 5. 🔴 The consent gate can be WRONG — and that is the finding for a show about belief
+### 5. ✅ RULED (W-9 R-3) — reputation is load-bearing, but weapons BIRTH myths
 
 Sections 1 and 2 both assume the item is the authority: it refuses you, or its origin certifies
 it. **Frieren breaks both** (W-4d, pass #5). The Sword of the Hero *"can only be drawn by the
@@ -981,3 +991,141 @@ coerce.
 than page reads.** ⚙️ **The method note in W-0 was load-bearing and should stay:** summary-
 sourced findings in this corpus have a poor track record and every one of them needed
 correcting once the page was actually read.
+
+---
+
+## W-9 — ✅ THE RULINGS (owner, 2026-08-25)
+
+All three open questions from W-7/W-8 are **ruled**. This section is the record; the sections
+they answer now point here. **None of the three needs a new mechanic** — each lands on
+machinery the book already shipped.
+
+---
+
+### R-1 ✅ The band solves the floor axis — author ~27 concepts, not 81 weapons
+
+> **Owner:** *"the band already solves the floor axis — go with ~27 concepts."*
+
+The 9-floor axis of the grid is **a rule we already shipped**, not content we owe: §12.7's
+material band carries one weapon from F1 to F9 (×2 per floor, F1 ×2 → F9 ×512), and the
+materials catalog already states *"the sheet plays identically on every floor; only the
+numbers inflate."*
+
+⚠️ **Arithmetic correction to W-7 §3.** That section proposed *"~27 concepts (3 routes × 3
+acquisition classes)"* — but 3 × 3 = **9**, not 27. The parenthetical was wrong; the **27 is
+right**, and this is where it comes from:
+
+| Axis | Count | Why it survives |
+|---|---|---|
+| **Set** | **3** | F1–F3 · F4–F6 · F7–F9. A campaign runs **one set**, so each set needs its own spread — and the M-bands already partition this way (M-1/M-2/M-3 inside Set 1, M-4 for Set 2, M-5 apex) |
+| **Route** | **3** | Easy (plague/Nullrot) · Medium (demon politics/Bex) · Hard (the Loong/the hunt) |
+| **Acquisition** | **3** | 🎯 loot · crafted · story |
+| | **= 27** | **The floor axis collapses INTO the set axis, not to nothing** — within a set, the band still moves per floor, so one authored concept yields its F1/F2/F3 readings for free |
+
+⚙️ **What this means for the corpus:** the authoring target is **27 concepts + a small apex
+set** (W-7 §1 puts the genre's apex ratio near 3%, so roughly a handful, not 27 more). The
+grid framing at the top of this file is **superseded by this ruling.**
+
+---
+
+### R-2 ✅ An item CAN reject a contestant — but the reason must be WRITTEN, and never arbitrary
+
+> **Owner:** *"An item CAN reject a contestant, but we gotta write specifically why. A weapon
+> can require someone to BE something, or to NOT BE something. It cant require arbitrariness.
+> You're either Loyal or Not a coward. You cant ask for someone to be an undefinable quality."*
+
+🔴 **This ADOPTS the shape from W-8 §1 and REJECTS how every source implemented it.** That
+matters — the evidence supports the gate's *existence*, not its *arbitrariness*:
+
+| Source | Its gate | Verdict |
+|---|---|---|
+| Teigu | *"a user's **first impression** of it affects their compatibility"* | ❌ **undefinable — rejected** |
+| 13 Month Series | *"depending on its **temperament**, it may refuse to obey"* | ❌ **undefinable — rejected** |
+| Zulfiqar | *"no Hero but Ali"* — be a named person | ✅ decidable |
+| Gram | only Sigmund could draw it | ✅ decidable |
+
+**The rule.** A consent gate is a **predicate on the contestant, decidable by looking at the
+sheet.** Two legal shapes, and no third:
+
+| Shape | Form | Reads as |
+|---|---|---|
+| ✅ **BE** | `REQUIRES <tag>` | you must be the thing |
+| ✅ **NOT BE** | `REFUSES <tag>` | you must not be the thing |
+| ❌ | "the sword judges your worth" | undecidable — **not writable** |
+| ❌ | "the sword prefers the brave" | *brave* is an adjective, not a tag — **not writable** |
+
+🎯 **The mechanism already exists, in three separate places:**
+
+1. **§18.1 pattern 6 — Tag gates.** *"Items, skills, Directives, and unlocks may REQUIRE a tag
+   — authored per content piece."* **Item tag-gates are already a rule.** R-2 adds only the
+   negative form (`REFUSES`) and the instruction to use it for consent.
+2. 🔴 **§18 already solved definability.** *"Player-proposed tags must appear on TVTropes.org."*
+   That **is** the anti-arbitrariness rule, already shipped — the tag vocabulary is externally
+   anchored, so "undefinable quality" cannot enter through it. R-2 inherits that guarantee
+   wholesale rather than inventing a test.
+3. **§12.1 already has the failure path.** *"Requirements must be met or the Forced Action
+   applies (§6)."* A refused weapon behaves exactly like an unmet Physique requirement. **No
+   new consequence needed.**
+
+⭐ **Lifecycle is what makes the rejection feel earned rather than capricious.** §18.1 pattern
+4: Active → **Reinforced** (*"can only be lost by dramatically betraying it"*) → Faded → Lost.
+So:
+- A weapon requiring a **Reinforced** tag is asking for a *proven* identity, not a claimed one.
+- 🔴 **A weapon is lost when the tag fades** — the item does not reject you on a whim, it
+  rejects you **when you stop being the thing.** That is Freyr's sword (W-4b) as a live
+  mechanic: it costs nothing today and everything later.
+
+⭐ **The owner has already applied this ruling once, and used this exact word.** Mistletoe's
+seed carries `Charm 8` with the note *"Oathbreaker is a **CLAIM**, not an edge. It cuts what is
+warded because you are owed the cut, and **a contestant nobody would side with is holding a
+sprig**"*, and `set1-story-canon.md` records that *"The Mask's Oathbreaker gate **stops being
+arbitrary**."* **Charm 8 is a predicate wearing a stat's clothes** — "nobody would side with
+you" is a BE/NOT-BE condition expressed through the only lever §12.1 had. R-2 lets that be
+written directly, and Mistletoe is the natural first candidate to restate.
+
+---
+
+### R-3 ✅ Reputation is load-bearing — weapons BIRTH myths, they do not borrow them
+
+> **Owner:** *"An item's reputation CAN be load bearing, not in a 'replaces the original' way
+> necessarily. Weapons can birth myths."*
+
+🔴 **This picks the Kusanagi/Fate model and declines the Frieren one.** The direction is
+**forward accrual**, not substitution:
+
+| Model | Source | Ruling |
+|---|---|---|
+| A **replica** carries the legend and the original is beside the point | Frieren (W-4d pass #5) | ❌ **not adopted** — "not in a 'replaces the original' way" |
+| An object **becomes** legendary through what is done with it | Kusanagi: a carve from Orochi's corpse that became Imperial Regalia (W-4b) · Fate: *"impossible for myths and legends to start from nothing"* (W-4d) | ✅ **adopted** |
+
+⚙️ **This closes the gap W-6 §3 opened** — *"GPT has no way for an item's MEANING to
+appreciate."* R-3 says meaning appreciates **from deeds**, and the show is the engine: this is
+a broadcast where **Camera Call and Exposure already measure what the audience saw.**
+
+⭐ **The loop closes on itself, and that is the elegant part.** §18 says tags are gained via
+*"hidden condition fulfillment"* and *"corporate narrative shaping."* So:
+
+> **A weapon's deeds birth a tag → the tag then gates the weapon (R-2).**
+> *The weapon that made your myth is the weapon that requires you to keep living it.*
+
+An ordinary sword that did something the crowd will not forget earns the party a tag; that tag
+is then the `REQUIRES` predicate on the weapon's next mode. **Nothing about that needs a new
+subsystem** — it is §18's existing acquisition routes pointed at an object instead of a person.
+
+⚠️ **Scope guard.** R-3 makes reputation *load-bearing*, not *free*. A myth has to be earned on
+camera; it is not a label the GM assigns. And R-3 does **not** license the Frieren case — a
+counterfeit does not inherit an original's power just because the audience believes it. The
+owner left that door only *"necessarily"* ajar; treat it as closed until ruled otherwise.
+
+---
+
+### What the three rulings cost to implement
+
+| Ruling | New rules needed | Rides on |
+|---|---|---|
+| **R-1** | **none** | §12.7 material band; the existing Set/M-band partition |
+| **R-2** | **one** — the `REFUSES` (NOT BE) form | §18.1.6 tag gates · §18's TVTropes definability rule · §12.1 → §6 Forced Action |
+| **R-3** | **none** | §18 tag acquisition · Camera Call / Exposure |
+
+🎯 **One new authored form in total.** Everything else is existing machinery pointed somewhere
+new — which is what W-8 predicted when it noted the Box Log already keeps provenance records.
