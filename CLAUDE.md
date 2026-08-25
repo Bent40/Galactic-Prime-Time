@@ -500,8 +500,14 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - **Escalation rate rides the SOURCE** — haunted object +1/Moment, noble-class or
   divine +2/+3. That is the knob that keeps Dissolution lethal against a Mind
   farmed into the 20s; the victim's stat is not where difficulty is expressed.
-- Owner-approved; the campaign has not met the mechanic yet. **Not yet propagated**
-  to the game repo's `rules-addendum.md` or the Godot sim (4 files) — see backlog.
+- Owner-approved; the campaign has not met the mechanic yet. ✅ **PROPAGATED 2026-08-25**
+  to the game repo: `docs/rules-addendum.md` **R30** (and the three older places that
+  described the flat timer are amended), and **the Godot sim now implements it** —
+  `condition_engine.on_moment()` is the engine's first per-Moment condition hook,
+  `apply_condition` takes an `escalation` of 1/2/3, and §14's disclosure is an emitted
+  event (`dissolution_hold` with `unreachable`), not a UI concern. **583 sim tests pass,
+  0 fail**, on a Godot 4.7.1 fetched into the container. Still unbuilt there, correctly:
+  automatic cause-tracking — `freeze_dissolution()` is the API and nothing calls it yet.
 
 ## The level budget (PROPOSAL, added 2026-08-18) — **numbers go exponential**
 - **`rulebook/level-budget.md`** — upstream of every enemy statline. Owner direction:
