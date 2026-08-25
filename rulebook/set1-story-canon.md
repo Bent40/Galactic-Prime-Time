@@ -5,6 +5,14 @@ Sources: Compendium §4.1–4.4, owner rulings 2026-08-18, and the character/rel
 layer reconciled from [`../v2/floors/floors-1-3-arc.md`](../v2/floors/floors-1-3-arc.md)
 under the firewall in **S-0**.
 
+> ⚠️ **SUPERSEDED IN PART by [`set1-review-and-changelog.md`](set1-review-and-changelog.md)
+> (2026-08-24).** That document rules the **clan law**, the **fall of the clan**,
+> **Vermilia as the witness**, and the **verdict problem** — a deep layer beneath
+> everything below. This file has **not** yet been propagated onto those rulings; where
+> they disagree, the changelog is newer. Two items are flagged there as unresolved before
+> propagation: the firewall status of "the Corporation rules causality" (B.5.6) and
+> whether Vermilia has an actual bloodline (S-5's "mother to daughter, all of them her").
+
 ---
 
 ## S-0 — 🔒 The v1 / v2 firewall (read this first)
