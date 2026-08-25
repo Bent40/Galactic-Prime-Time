@@ -18,9 +18,9 @@ stay few. These nine are the backbone every route should reliably offer.
 predicates are **trimmed from 7 gates to 2** (C-6, C-8). Three concepts now **grant a Mark**
 instead of demanding a tag.
 
-🆕 **C-0b — MARKS** is an owner proposal for tags that never fade, and it is currently the most
-consequential open thread in this document. It **repairs a hole in C-6** that the first draft
-shipped.
+🔒 **C-0b — MARKS is RULED IN** as a **subgenre of §18 tags**: permanent, granted automatically
+by the deed, and **contextually active** rather than continuously on. It **repairs a hole in C-6**
+that the first draft shipped.
 
 🔴 **The rest is unruled.** Nine concepts, no stat blocks — numbers come after the shapes are
 blessed. Open calls are in **C-10**.
@@ -64,14 +64,24 @@ it creates consequences rather than closing doors.
 *neglect*: stop playing the tag, wait for it to lapse, pick the item up. That made the sharpest
 predicate in the set toothless, and a permanent Mark is what repairs it.
 
-### What a Mark is, and why it is a different thing
+### 🔒 RULED — a Mark is a SUBGENRE OF TAG, not a second system
 
-| | §18 **Tag** | 🆕 **Mark** |
+> **Owner:** *"Id say Marks are a subgenre of Tags, and yeah they are in."*
+
+**Marks are IN**, and they live inside §18 rather than beside it — inheriting its storage, its
+TVTropes definability rule, and its §18.1.6 item-gating. They differ from an ordinary tag in
+exactly three ways:
+
+| | §18 **Tag** | 🔒 **Mark** (a kind of tag) |
 |---|---|---|
 | **What it records** | a **performance** — who the Show says you are | a **deed** — what you actually did |
 | **Granted by** | table consensus · hidden condition · Goals · corporate shaping | 🔴 **automatic and non-negotiable.** Nobody votes on whether you killed a king |
 | **Lifecycle** | Active → Reinforced → Faded → Lost → reacquirable | 🔒 **permanent. It never fades and cannot be shed** |
+| **Effect** | continuous — crowd pull, Goal steering, patron draw | 🔒 **contextual — dormant until a scene makes it relevant** (below) |
 | **Answers** | *"are you still being that?"* | *"did you do it?"* — a **fact**, not a state |
+
+⚙️ **Subgenre is the cheapest correct answer.** It means no new storage, no parallel vocabulary,
+and no second place to look — a Mark is a tag with `fades: false` and a trigger condition.
 
 ⭐ **This makes Marks the *better* R-2 predicate, on the owner's own standard.** R-2 requires a
 gate to be BE / NOT-BE and never arbitrary. A Tag asks a **lifecycle** question that can drift;
@@ -96,19 +106,57 @@ about you because you got bored of performing it. **A deed cannot be un-done, so
 currently has **no carrier at all**. A Mark makes it a thing on the sheet from the moment it
 happens: unexplained, unremovable, and waiting.
 
-### 🔴 Marks can be secret, and that is the sharpest version
+### 🔒 RULED — always present, contextually ACTIVE. No secrecy states
 
-A Tag is *"your public identity as the Show sees you."* A Mark is not necessarily public — the
-cameras may not have caught it, and **Witness** in particular means *you saw, and possibly
-nobody knows you saw.*
+> **Owner:** *"Im not sure i want marks to be open, sealed, or broken. Maybe making them active
+> when certain scenarios or in the presence of certain things to show their relevance is what we
+> should do instead. But they are always there."*
 
-That gives three states worth distinguishing:
+🔴 **The Open / Sealed / Broken model is dropped, and the draft that proposed it had the design
+backwards.** It argued *"Sealed is what makes `Regicide` land"* — hiding the Mark from the
+player. **That hides the hook.** The whole payload is that the player **sees** it.
 
-| State | Meaning |
+**Two layers, and only two:**
+
+| Layer | Rule |
 |---|---|
-| **Open** | the broadcast caught it. Everyone plays against it |
-| **Sealed** | true, on the sheet, **but nobody in the fiction knows** — including, in the Regicide case, the player |
-| **Broken** | someone finds out. 🎯 **A Sealed Mark going Open is a scene, and the Corporation would pay for it** |
+| **Present** | 🔒 **Always.** The Mark is on the sheet from the moment of the deed, permanently, and **always counts for predicates** — C-6's `REFUSES Witness` bites whether or not the Mark is doing anything in the scene |
+| **Active** | The Mark **wakes when the scene makes it relevant** — a place, an entity, a piece of machinery it has something to do with. Dormant otherwise |
+
+⚙️ **Activation is not a new mechanic either.** §18.2's **flagship riders** are already
+per-tag bespoke triggers. A Mark is the same shape: a tag with a trigger condition, that never
+fades, and whose trigger is *presence of a thing* rather than an action you take.
+
+### ⭐ The name IS the hook — the authoring rule for Marks
+
+> **Owner:** *"itll be interesting as well for the players to kill the girl, think 'Oh well, the
+> demon's dead' only to receive the mark Regicide. That will surely get their gears turning."*
+
+🔴 **This is the design principle, and it should govern every future Mark.** The party kills a
+demon girl in a burning house. Nothing about the scene says *queen*. Then the sheet says:
+
+> **`Regicide`**
+
+They know a fact. They do not know its referent. **They will spend two floors trying to work out
+what they killed, and they will be right to.** That is a live question the players carry, not a
+GM secret the GM carries.
+
+⚙️ **So the authoring rule is: a Mark's name must provoke a question the player cannot yet
+answer.** `Regicide` is a question. `Killer` is not. `Dragon Slayer` is a question the F2 hunt
+answers painfully. **Name the deed by its weight, never by its action.**
+
+### Activation triggers for the three canon Marks
+
+| Mark | Dormant | 🔴 **ACTIVE in the presence of** |
+|---|---|---|
+| **Regicide** | most of F1–F2 | **Crowns, thrones, and the machinery of rule.** F3's capital is wall-to-wall this — and in the killed branch its crown is *human and frightened*. It reacts to you, and **the reason it reacts is the thing you still cannot explain** |
+| **Dragon Slayer** | ordinary rooms | **Demons** (every one of them wants Loong blood, and this says you have handled it) · **the Loong and its kin** (who know exactly what you did). This is what turns the F2/F3 hunt onto the party personally — C-8's written cost, now with a trigger |
+| **Witness** | ordinary rooms | **Vermilia** — canon has her as *the* witness, *"she saw the child's corruption and said nothing."* 🔴 **She recognises it in you**, and that is the one conversation in the campaign where the Mark is the entire scene · also **the mask and the host**, the thing you saw and did not stop |
+
+⚠️ **Branch interaction worth noting:** `Witness` activating near Vermilia requires her alive, so
+a party carrying both `Regicide` and `Witness` has **permanently disabled the better half of
+`Witness`** — they killed the only person who could recognise it. Nothing needs to say so; it
+simply never fires.
 
 ⚙️ **This is W-8 §2's provenance finding pointed at the CONTESTANT instead of the item.** The
 corpus said: at the top, grading stops being about power and starts being about where a thing
@@ -118,15 +166,18 @@ came from. **A Mark says the same about a person.**
 
 | Piece | Status |
 |---|---|
-| Definability | ✅ **inherited free.** §18 already requires player-proposed tags to appear on TVTropes.org — *Dragon Slayer* and *Regicide* are both tropes, so the anti-arbitrariness guarantee carries over untouched |
+| Definability | ✅ **inherited free.** §18 already requires player-proposed tags to appear on TVTropes.org — *Dragon Slayer* and *Regicide* are both tropes, so R-2's anti-arbitrariness guarantee carries over untouched |
 | Storage | ✅ tags already live on the character; a Mark is a tag with `fades: false` |
 | Predicate use | ✅ §18.1 pattern 6 already permits item tag-gates |
-| 🔴 **New** | the **permanence** flag, and the **Open / Sealed / Broken** state |
+| Contextual effect | ✅ §18.2 **flagship riders** are already per-tag bespoke triggers — same shape |
+| 🔴 **New** | **the permanence flag, and a presence-based trigger.** That is the whole build |
 
-⚠️ 🔒 **v1 is FROZEN, and this is new mechanics rather than an erratum.** `REFUSES` (R-2) at
-least rides §18.1.6, which already exists. **Marks does not** — it adds a lifecycle rule §18
-does not have. That is the owner's call to make, but it should be made deliberately rather than
-drifted into. **See C-10 #6.**
+⚙️ **Ruling this a *subgenre* is what made it cheap.** As a separate system it needed its own
+storage, vocabulary and definability rule; as a kind of tag it needs **one flag and one trigger
+type.** Dropping Open/Sealed/Broken removed the only expensive piece.
+
+⚠️ **v1 is FROZEN, and this is still an addition to §18** — small, but real. Worth a line in the
+§18 errata when Marks are written into the book proper, rather than living only here.
 
 ---
 
@@ -302,7 +353,7 @@ flawed.* Commission it politely and it is clean; lean on them and it carries a d
 | **essence** | 🔒 **investiture** — possession *is* the claim (W-4b: Mjölnir · Kusanagi · Zulfiqar) |
 | **quant/cat** | **categorical** |
 | **requirement_shape** | 🔒 **`REFUSES Witness`** — ⭐ **the Mark, not the §18 tag** (C-0b). **KEPT in the trim** |
-| 🆕 **grants** | 🔴 **Mark: `Regicide`** — on the killed branch |
+| 🔒 **grants** | 🔴 **Mark: `Regicide`** — killed branch, **granted visibly and immediately** |
 | **cost** | none — 🔴 **and that is the point.** Its value is entirely what the party did |
 
 **This is W-9 R-3 demonstrated in one object.** The party frees a girl from a burning house.
@@ -329,8 +380,15 @@ predicate in the document **defeatable by waiting**: let the tag lapse, pick the
 permanent **Mark**, it cannot be shed, and the judgment actually holds.
 
 🔴 **And the killed branch now has a carrier.** Kill her and you take the Mark **`Regicide`** —
-**Sealed** (C-0b), because nobody can tell you what you did. You committed regicide against the
-queen of the world in a burning house on the first floor, and **you find out at F3.**
+🔒 **visibly, immediately, the moment it happens.**
+
+⭐ **The owner's framing, and it is the better one:** the party kills a demon girl, thinks *"oh
+well, the demon's dead"* — and the sheet says **`Regicide`**. **They know a fact and not its
+referent.** They will carry that question for two floors and find the answer at F3, in a city
+that turns out to have been hers.
+
+⚠️ **The first draft proposed making this Sealed — hidden from the player.** That was wrong: it
+hides the hook. A secret the GM keeps is not a question the table plays with.
 
 **Band readings**
 
@@ -457,23 +515,25 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 
 ## C-10 — Open calls
 
-✅ **Two closed by the owner, 2026-08-25.**
+✅ **Four closed by the owner, 2026-08-25.**
 
 | # | Call | Status |
 |---|---|---|
-| ~~1~~ | Does `Charm 8` survive on Mistletoe alongside the C-2 predicate? | 🔒 **RULED — keep Charm 8, drop the predicate.** It was already doing the work and is already seeded |
-| ~~4~~ | How many predicates is too many? (7 of 9) | 🔒 **RULED — trimmed to 2** (C-6, C-8). *"There will be normal weapons too so its not that big of a deal."* Three concepts now **grant Marks** instead |
+| ~~1~~ | Does `Charm 8` survive alongside the C-2 predicate? | 🔒 **RULED — keep Charm 8, drop the predicate** |
+| ~~4~~ | How many predicates is too many? (7 of 9) | 🔒 **RULED — trimmed to 2** (C-6, C-8); three concepts grant Marks instead |
+| ~~6~~ | Is Marks in, given the v1 freeze? | 🔒 **RULED — IN, as a SUBGENRE of §18 tags.** No parallel system: a tag with `fades: false` and a presence trigger |
+| ~~7~~ | Do all three Mark states ship (Open / Sealed / Broken)? | 🔒 **RULED — no states.** Marks are **always present**; they **activate** when a scene makes them relevant. Sealed is dropped, and the draft that proposed it had it backwards |
 
-🔴 **Still open — and the first three are all Marks (C-0b), which is now the load-bearing thread.**
+🔴 **Still open.**
 
 | # | Call | Why it needs you |
 |---|---|---|
-| **6** | 🔴 **Is Marks IN?** It adds a lifecycle rule §18 does not have, and **v1 is FROZEN** — `REFUSES` at least rides §18.1.6, but this does not. Erratum, v1 extension, or v2-only? | Decides whether C-3/C-6/C-8's grants are real or placeholders |
-| **7** | **Do all three Mark states ship** (Open / Sealed / Broken), or just permanence? **Sealed is what makes `Regicide` land** — a Mark you cannot read for two floors — but it means tracking something the player is not told | Sealed is the expensive half and the whole point |
-| **8** | **What else grants Marks?** Items are the narrow case. If killing the girl grants `Regicide`, that is a **campaign** rule, not an item rule — most Marks will come from acts, not objects | Scopes it correctly before it is written as an item feature |
-| **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ **Marks narrows this a lot** — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (a §18 tag) still has the question | One item, not a system-wide rule |
-| **3** | **Does C-6's killed-branch token stay inert forever?** Partly answered — the branch now grants `Regicide`, so the *consequence* has a carrier either way | Story weight vs. player mercy |
-| **5** | **One name per concept across three floors, or three names?** *Leak-Vial* at F1 and F3 are the same concept and arguably not the same object | Naming pass — affects seeding |
+| **8** | **What else grants Marks?** Items are the narrow case — `Regicide` comes from an **act**, not an object, so most Marks are a campaign rule rather than an item feature. **Needs an authored list of Set 1 deeds that mark you** | Scopes it before it gets written as an item feature |
+| **9** | 🆕 **How loud is activation?** When `Regicide` wakes in F3's throne room, does the GM *say* it woke, or does the room simply behave differently and the players infer it? **Announcing is legible; inferring is better drama** | Sets the table-feel of the whole mechanic |
+| **10** | 🆕 **Can a Mark be reinforced?** §18 tags stack pull when Reinforced. A second regicide is presumably not *more* `Regicide` — or is it? | Decides whether Marks have any depth axis at all |
+| **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ Marks narrows this — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (an ordinary tag) still has the question | One item, not a system-wide rule |
+| **3** | **Does C-6's killed-branch token stay inert forever?** Partly answered — the branch grants `Regicide`, so the consequence has a carrier either way | Story weight vs. player mercy |
+| **5** | **One name per concept across three floors, or three names?** | Naming pass — affects seeding |
 
 ## C-11 — What is NOT here
 

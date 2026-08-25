@@ -601,17 +601,27 @@ Skills are granted to players by templateId. The player sheet joins template dat
   Planet`) — *"there will be normal weapons too so its not that big of a deal."*
 - ⭐ **What replaced them is better: three concepts now GRANT a Mark instead of refusing a tag.**
   An item that marks you creates consequences; an item that refuses you only closes a door.
-- 🆕 **C-0b — MARKS (owner proposal, unruled).** Tags that **never fade**, because a deed is not
-  a performance: **Witness · Dragon Slayer · Regicide**. Granted automatically and
-  non-negotiably, and *"might unlock new interactions, not necessarily good."*
-  🔴 **This repairs a hole the first draft shipped** — §18's lifecycle fades every tag, so
+- 🔒 **C-0b — MARKS: RULED IN (2026-08-25) as a SUBGENRE of §18 tags**, not a second system —
+  a tag with `fades: false` plus a presence trigger, inheriting §18's storage, its TVTropes
+  definability rule and its §18.1.6 item-gating. **Witness · Dragon Slayer · Regicide.**
+  Granted automatically by the deed; **permanent, never fades**; *"might unlock new
+  interactions, not necessarily good."*
+- 🔒 **No secrecy states.** Open/Sealed/Broken is **dropped**. A Mark is **always present** (and
+  always counts for predicates) and **ACTIVATES when a scene makes it relevant** — `Regicide`
+  near crowns and thrones, `Dragon Slayer` near demons and the Loong, `Witness` near Vermilia,
+  who recognises it. Activation reuses §18.2's flagship-rider shape, so the whole build is
+  **one flag and one trigger type**.
+- ⭐ **THE AUTHORING RULE — a Mark's name must provoke a question the player cannot yet answer.**
+  The party kills a demon girl, thinks *"oh well, the demon's dead"*, and the sheet says
+  **`Regicide`**. They know a fact and not its referent, and carry that question to F3. *"That
+  will surely get their gears turning."* **Name the deed by its weight, never by its action** —
+  `Regicide` is a question, `Killer` is not.
+- 🔴 **Marks repaired a hole the first draft shipped** — §18's lifecycle fades every tag, so
   C-6's original `REFUSES Witnessed` was defeatable by *neglect*. A Mark cannot be shed, so the
-  gate actually holds, and it closes R-3's loop (a myth born from a deed cannot lapse).
-  ⭐ **Regicide is the case that justifies it:** kill the girl at F1 and you have committed
-  regicide against the queen of the world — **Sealed**, because nobody can tell you, and you
-  find out at F3. The campaign's heaviest consequence currently has **no carrier at all**.
-  ⚠️ **v1 is FROZEN and this is new mechanics, not an erratum** — `REFUSES` rides §18.1.6,
-  Marks does not. **C-10 #6 is the call.**
+  gate holds, and R-3's loop closes (a myth born from a deed cannot lapse).
+- ⚠️ Branch interaction: `Witness` activates near Vermilia, so a party holding **both**
+  `Regicide` and `Witness` has permanently disabled the better half of `Witness` — they killed
+  the only person who could recognise it. Nothing needs to say so; it just never fires.
 - 🔴 **NO stat blocks** — numbers come after the shapes are blessed. **C-10** holds six open
   calls; the top three are all Marks (is it in · do Sealed states ship · what else grants them).
 
