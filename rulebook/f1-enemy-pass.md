@@ -710,6 +710,21 @@ without `--force` — owner edits win. Restore with
 
 ---
 
+## E-5b — ⚠️ Seed against Atlas
+
+Every `server/` script defaults to `mongodb://localhost:27017/galactic-prime-time` when
+`MONGODB_URI` is unset. **A runbook run without it seeds a local dev database and prints
+success.** Export the Atlas string for the shell, or prefix every command:
+
+```bash
+export MONGODB_URI="mongodb+srv://…/galactic-prime-time"   # once per shell
+```
+
+`docs/deploy-render-atlas.md` is the source: *"any `server/` script honors `MONGODB_URI` —
+run them from your machine with the Atlas string."*
+
+---
+
 ## E-7 — The signature-damage gate 🔴 **two entries need a ruling**
 
 `Enemy.signature` shipped 2026-08-25 — a structured `{ floor, damage, type, exception, note }`

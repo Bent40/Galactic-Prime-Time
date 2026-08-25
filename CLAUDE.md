@@ -145,6 +145,11 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - `ItemTemplate` carries pool metadata: `subtype`, `boxTiers[]`, `themes[]`, `source`
   (template-side bookkeeping; the give-snapshot copies only `subtype`). Vocabulary in
   `constants.js`: `BOX_TIERS` (Bronze→Godly, ≠ item tiers) + `ITEM_SUBTYPES`.
+- 🔴 **SEED AGAINST ATLAS, NOT LOCALHOST.** Every `server/` script falls back to
+  `mongodb://localhost:27017/galactic-prime-time` when `MONGODB_URI` is unset, so a runbook
+  run without it silently seeds a local dev DB and reports success. **Prefix every command
+  with the Atlas string** (`MONGODB_URI="mongodb+srv://…" node …`) or export it for the
+  shell — see `docs/deploy-render-atlas.md` "Future seeds/migrations against prod".
 - **Seeding runbook (from `server/`):** `node backup-db.js` → `node seed-items.js` (dry
   run) → `--apply`; `--force` to overwrite differing existing templates, `--file` for
   other batches. Batch data lives in `server/seeds/` (a: Lounge-unlock, b: standing
@@ -200,7 +205,8 @@ Skills are granted to players by templateId. The player sheet joins template dat
   because §7.3 resolves damage per part. **Mobs are ONE part at 5.** A mob that
   survives a hit gets a **gate** (surface immunity, damage-type immunity,
   untargetable-while-X), never a fatter number.
-- **Seeding runbook (from `server/`):** `node backup-db.js` →
+- **Seeding runbook (from `server/`, `MONGODB_URI` set to Atlas — see the red note in
+  Item Library above):** `node backup-db.js` →
   `node seed-enemies.js` (dry run) → `--apply`; `--force` overwrites differing
   existing docs, `--file` for other batches, `--floor N` rescales the doctrine
   gate. Data in `server/seeds/enemies-f1.js`.
