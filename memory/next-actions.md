@@ -6,8 +6,24 @@
 
 **Two live threads. The owner picks.**
 
-0. **THE F1 ENEMY PASS (v1, live campaign)** — still the highest-value work for
-   the table that is actually being played. Unchanged; see item 1 below.
+0. **THE F1 ENEMY PASS — DRAFTED 2026-08-18, awaiting owner rulings.**
+   `rulebook/f1-enemy-pass.md` (18 entries) + `server/seeds/enemies-f1.js` +
+   `server/seed-enemies.js`. **Blocked on the owner, not on Claude.** What is
+   needed, in order:
+   a. ~~E-0.1–E-0.4~~ · ~~Foreman Bex~~ · ~~the Girl~~ · ~~Infected T3~~ ·
+      ~~Nullrot~~ — **all ruled 2026-08-18.**
+   b. **THE LEVEL BUDGET is now the blocker** — `rulebook/level-budget.md`,
+      questions L-a..L-f. It is upstream of every statline: until the curve is
+      ruled, no enemy number can be checked against anything real.
+   c. Then run the E-5 runbook on the campaign DB: `node backup-db.js` →
+      `node seed-enemies.js` → `--apply`, and again with
+      `--file ./seeds/enemies-f2.js` for Floor 2.
+   d. **F1 AND F2 ROSTERS BOTH EXIST** (19 + 16 entries) plus the cross-floor frame
+      (`enemy-scaling.md`: damage bands per floor, horde counts ~12×2^(N−S), and an
+      authoring checklist). F3 is now a filling-in job, not a design one.
+   Then the follow-on content in E-4: encounter tables and room counts, §21.4
+   terrain blocks for the four F1 environments, Exposure values and §19.1/§17.6
+   payouts per rank.
 
 0b. **v2 CONTENT AUTHORING (v2, designed not built).** No structural design
    questions remain in any floor set. What is unwritten, in rough priority:
@@ -25,8 +41,8 @@
 no urgency); have the five app accounts set new passwords (their bcrypt hashes
 were removed from the working tree but remain in git history).
 
-1. **F1 ENEMY PASS — the next session's job (owner-chosen 2026-08-10).**
-   Everything needed to start:
+1. **F1 ENEMY PASS — original briefing (2026-08-10), kept for reference.**
+   Delivered as item 0 above. The briefing as it stood:
    - Goal: stat the Floor 1 (green forest) roster to the horde doctrine —
      mobs ~5 HP one-shot hordes (survival only via GATE effects like the
      Incineradile's surface immunity, never fat bars), elites ~60 HP with

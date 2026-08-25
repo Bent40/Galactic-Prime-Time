@@ -35,6 +35,18 @@ function norm(v) {
   return String(v);
 }
 
+
+/**
+ * The connection string with the password blanked out, for logging.
+ * A seed run gets pasted into chat, issues and commit messages routinely — the
+ * banner must never be the thing that leaks a live Atlas credential.
+ * (Learned the hard way 2026-08-25: a pasted runbook exposed the campaign
+ * password and it had to be rotated.)
+ */
+function redactUri(uri) {
+  return String(uri).replace(/(mongodb(?:\+srv)?:\/\/[^:@/]+:)[^@]*@/i, '$1****@');
+}
+
 async function run() {
   const seeds = require(seedFile.startsWith('.') ? path.join(__dirname, seedFile) : seedFile);
   if (!Array.isArray(seeds) || seeds.length === 0) throw new Error(`${seedFile} exported no items — refusing to run`);
@@ -43,7 +55,7 @@ async function run() {
 
   const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/galactic-prime-time';
   await mongoose.connect(uri);
-  console.log(`${apply ? '=== APPLY MODE ===' : '=== DRY RUN (pass --apply to write) ==='}  ${uri}`);
+  console.log(`${apply ? '=== APPLY MODE ===' : '=== DRY RUN (pass --apply to write) ==='}  ${redactUri(uri)}`);
   console.log(`Seed file: ${seedFile} — ${seeds.length} template(s)\n`);
 
   let created = 0, inSync = 0, diffed = 0, forced = 0;
