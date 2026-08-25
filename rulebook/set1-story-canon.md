@@ -347,6 +347,44 @@ Three things this does at once, and none of them needed inventing:
   death began everything, under a city built by the last survivor of what that death caused.
   *Every layer of the story is stacked vertically under the palace floor.*
 
+#### 🔒 The Loong is REQUIRED — in both editions
+
+**No version of the revival happens without bringing the Loong down there.** That is ruled.
+🟡 **The mechanism below is proposed.**
+
+**The prison has two locks, because Cinnabrus killed the dragon with the plague and the
+corpse is still full of it.**
+
+| Lock | What it is | Who answers it |
+|---|---|---|
+| **The corpse** | The dragon itself — Beelzebub's vault, and a body with a claim on it | **The Loong.** It lulls its own great-ancestor. Nothing else has standing |
+| **The crystal** | The plague that killed it, saturated through the ribs and grown over the seal | **Nullrot.** The halo opens it; he is the only antibody there has ever been |
+
+> **The prison is not a third objective. It is the cure, verified.** The two people who
+> have to be in the same room to make the mixture are the same two who can open the door.
+> **Bring both and there is no fight** — the corpse quiets, the crystal recedes, and the
+> scene becomes what the party says to a god.
+
+**Arrive incomplete and you fight the half you did not bring.**
+
+| Brought | What happens |
+|---|---|
+| **Both** | The prison opens. No combat. This is the win, and it is *earned*, not skipped |
+| **Loong only** | The corpse is quiet — and **you fight the crystal**, at reservoir scale, with no antibody |
+| **Nullrot only** | The crystal recedes — and **you fight the dragon**, while the Loong is not there to stop you desecrating its ancestor |
+| **Neither** | Both at once. Super-tier. The GM should say so out loud |
+
+⚠️ **The corpse is a bomb, not a boss.** It holds the largest single reservoir of the plague
+in the world, **under a city of two million.** A fight down there risks cracking it. That is
+why the incomplete branches are punishing and why nobody sane wants that combat — including
+Vermilia, who has been digging *very carefully* for two hundred years and has never once
+touched it.
+
+✅ **This also settles what the fight is FOR.** A diplomatic finale with nothing to swing at
+was the standing mechanical worry. There is a fight here — **it is simply the fight you get
+for arriving with half the answer.** Same reward shape as Mistletoe at F1 and answering the
+song at F2: the informed party skips what the ignorant party survives.
+
 ---
 
 ## S-6 — The path of least casualties ✅ owner
