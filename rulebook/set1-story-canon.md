@@ -190,11 +190,22 @@ door is open — but **birth odds ride clan strength, and her clan is one.** Two
 a near-zero chance is a woman who has almost certainly tried and has nothing to show for
 it. Not a moral failing. Arithmetic.
 
-**Which makes the revival her clan's only road.** A clan grows as the thing it embodies
-grows, so a wrath clan recovers only if wrath starts landing again — **and that needs a
-functioning god of it.** Reviving Cinnabrus is not merely a cure for her hunger and an
-answer to her question. **It is the only way her people can exist again.** She cannot
-outbreed the problem; she has to fix the world that caused it.
+### ⚠️ Keep her SMALL 🔒
+
+**She is not on a species-preservation quest and must never be played as one.** She feels
+**doomed.** She dug up a god to **ask him a question and get an answer before she goes.**
+That is the whole of it. Two centuries and a civilisation spent on closure.
+
+> **The clan's revival is a CONSEQUENCE THE PLAYERS CAN CAUSE — not her plan.** Revive
+> Cinnabrus *and* keep her alive, and wrath starts landing again, and a clan scaled to that
+> starts having odds again. **She never asked for it and would not have believed it was
+> available.** It is the largest good in the campaign and it is a side effect of two people
+> being kind to a woman who only wanted to know whether she was a coward.
+
+⚠️ **Authoring guard:** the grand version is available and it is worse. A woman restoring
+her species is a hero with a mission; **a woman who wants one answer before she stops is a
+person.** The setting is already carrying enough cosmology — she is the place it stays
+human-sized.
 
 > ⚙️ **And the show is the reason.** The Corporation suppresses consequence at scale →
 > karma lands less → the wrath clan starves → her birth odds collapse. **The broadcast that
@@ -321,6 +332,21 @@ why the two operations barely notice each other.
 **not** down there with him. Beelzebub buried it apart, in its own prison, and **two
 centuries of digging have found the god and never found the mouth.**
 
+### 🦴 The tongue's prison ✅ RULED 2026-08-25
+
+**Beneath the capital, deep underground, in the ribs of the corpse of a dragon.**
+
+The dragon Cinnabrus killed — *the deed that made his name* — is the vault Beelzebub chose.
+Three things this does at once, and none of them needed inventing:
+
+- **It closes S-e.** The prison is inside Set 1, on Floor 3, reachable in one campaign.
+- **It makes the seal's jurisdiction gap obvious.** Beelzebub's seal answers gods and
+  demons. **It has no reply to the descendant of the corpse it was built inside.** The
+  Loong is not a key the party carries down; **it is the only creature with standing.**
+- **It is where the whole chain started.** The god's mouth is locked inside the animal whose
+  death began everything, under a city built by the last survivor of what that death caused.
+  *Every layer of the story is stacked vertically under the palace floor.*
+
 ---
 
 ## S-6 — The path of least casualties ✅ owner
@@ -337,6 +363,23 @@ centuries of digging have found the god and never found the mouth.**
 > **Every antagonist in Set 1 wants something reasonable and is reaching for it the only
 > way they can see. The optimal ending is not mercy — it is introductions.**
 
+### ✅ RULED 2026-08-25 — FLOOR 3 IS THE CONVERGENCE
+
+**Everything is happening at once.** The capital is not a fourth route; it is the room the
+other three arrive in. Nullrot cures and infects in the street, the Loong hides from a hunt,
+Bex runs the alleys, and the crown digs — **same city, same days.** A party that ran one
+route for two floors can reach all of it here, so **the path above is achievable in a single
+campaign.** That is what makes it an ending instead of a thought experiment.
+
+⬇️ **Dissolves:** "the load-bearing facts all flow through the Easy column" is now a
+Floors 1–2 problem, not a campaign-long one. ⬆️ **Keeps:** the S-7 trade track still governs
+Floors 1–2, where the isolation is real and the pathos lives.
+
+> 🏆 **And the party keeps what they made.** After the three floors, **the capital attaches
+> to the Lounge as a persistent location** — the city they saved, ruined, or inherited
+> becomes theirs. *(v2: its survivors are also **congregation**.)* Every Floor 3 choice is a
+> choice about the place they are going to live in.
+
 ### 🗝 The revival, in two steps ✅ RULED 2026-08-20
 
 **The tongue is REQUIRED. There is no other route.** A god with no mouth cannot answer,
@@ -351,12 +394,13 @@ cannot be bargained with, and cannot be prayed back no matter how many followers
 > be blurred. v2 buys a god out of bankruptcy. **v1 digs him up.** Same tongue, same god,
 > completely different verb.
 
-**🟡 PROPOSED — what the v1 catalyst should be:** *the cure itself.* He was killed reaching
+**🟡 PROPOSED (S-f · 1) — what the v1 catalyst should be:** *the cure itself.* He was killed reaching
 for the mixture; finishing it is the one offering that means anything to him, and the party
-is already carrying it if they took S-6's path. And **🟡 PROPOSED — what opens the prison:**
+is already carrying it if they took S-6's path. And **🟡 PROPOSED (S-f · 2) — what opens the prison:**
 **the Loong.** Beelzebub's seal answers demons and gods; it does not answer the blood-claim
-of the dragon Cinnabrus killed. The descendant standing on it is a claim the seal has no
-reply to. *Both need owner blessing — they are the tidiest answers, not ruled ones.*
+of the dragon Cinnabrus killed — **and since 2026-08-25 the prison is literally built inside
+that dragon's ribs**, so the Loong is not a key the party carries down, it is the only
+creature in the world with standing. *Still unblessed, but S-e made it nearly self-evident.*
 
 **If both land, the three steps collapse into one act:** getting the Loong to the capital
 creates the cure, frees the Loong, **and opens the tongue.** Three routes, one room.
@@ -401,6 +445,4 @@ prices social play. ⚖ Betrayal is always on the table, and the crowd pays for 
 
 | # | Question |
 |---|---|
-| **S-e** | **Where is the tongue's prison, and does it sit inside Set 1 at all?** If it is on F3, the best ending is reachable in one campaign; if Beelzebub keeps it, revival is a Set 2 payoff. 🟡 Recommended: on F3, in a second vault the excavation could never open |
-| **S-f** | **Bless or reject the two S-6 proposals** — the mixture as the catalyst, and the Loong's blood-claim as what breaks the seal |
-| **S-g** | **Does the capital converge the routes?** §4.1 gives a party one route per campaign, but the path of least casualties needs knowledge from all three. S-7's trade track is the current answer; a real convergence at F3 is the alternative |
+| **S-f** | **Bless or reject the two S-6 proposals** — (1) the mixture as the v1 catalyst, (2) the Loong's blood-claim as what breaks the seal. ⬆️ S-e's ruling makes (2) nearly self-evident: the prison is *inside that dragon* |

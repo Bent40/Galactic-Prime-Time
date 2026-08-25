@@ -321,6 +321,25 @@ Skills are granted to players by templateId. The player sheet joins template dat
   structurally cannot pronounce. ⚖️ **He cannot judge his last follower without judging
   himself** (keep the rest off the limelight). 🔴 Loophole = probably the finale: **cure
   first → followers grow → judgment stops being suicide.**
+- ⚠️ **KEEP VERMILIA SMALL (ruled 2026-08-25).** Not a species-preservation quest — she feels
+  **doomed** and dug up a god to **get one answer before she goes.** The clan's revival is a
+  **consequence the PLAYERS can cause** (revive him *and* keep her alive), never her plan.
+  The grand version is available and it is worse.
+- ✅ **THE TONGUE'S PRISON (ruled 2026-08-25): deep under the capital, in the RIBS OF THE
+  DRAGON Cinnabrus killed.** Closes S-e — it is on F3, reachable in one campaign. And it
+  settles S-f·2 in all but name: Beelzebub's seal answers gods and demons and has **no reply
+  to the descendant of the corpse it was built inside**, so the Loong is not a key the party
+  carries down, it is the only creature with **standing**.
+- ✅ **FLOOR 3 IS THE CONVERGENCE (ruled 2026-08-25) — everything happens at once.** Not a
+  fourth route: Nullrot in the street, the Loong hiding, Bex in the alleys, the crown
+  digging, same city, same days. **The path of least casualties is achievable in one
+  campaign.** Dissolves the "facts only flow through the Easy column" problem down to
+  Floors 1–2; the S-7 trade track still governs those.
+- 🏆 **The capital attaches to the LOUNGE after F3** — the city they saved, ruined or
+  inherited becomes theirs (v2: its survivors are congregation too). Every F3 choice is a
+  choice about where they are going to live.
+- ⚙️ **Destroying the mask while she lives is the closest thing to a rescue there is** —
+  slim odds, but slim is the only thing on offer. (Corrects an earlier over-hedge.)
 - 🔒 **THE DYNASTY IS A RUSE.** No new queens, ever — **Vermilia is the entire line.** The
   **high court are other-clan demons she recruited**, who do not know what the secret is;
   they want a working city and to be paid. That is why the capital hunts the Loong while its
