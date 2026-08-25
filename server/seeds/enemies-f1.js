@@ -30,6 +30,7 @@ module.exports = [
   // ───────── Layer A — The Forest (shared, all routes) ─────────
 
   MOB('Bramblewretch', {
+    signature: { floor: 1, damage: 4, type: 'Bleed' },
     part: 'Bramble Body',
     color: '#4a7a3a',
     description: 'A bundle of thorn-scrub that stood up. Appears 4-8 at a time and moves in straight lines.',
@@ -41,6 +42,7 @@ module.exports = [
   }),
 
   MOB('Husk-Moth Cloud', {
+    signature: { floor: 1, damage: 2, type: 'Chill', exception: 'tick', note: 'per Moment in contact' },
     part: 'Cloud',
     color: '#8a8fa8',
     size: 'Large',
@@ -54,6 +56,7 @@ module.exports = [
   }),
 
   MOB('Rootjaw', {
+    signature: { floor: 1, damage: 4, type: 'Crush', note: 'to a LEG from below' },
     part: 'Rootjaw',
     color: '#6b4a2a',
     description: 'Buried ambusher. Never seen before it bites.',
@@ -66,6 +69,7 @@ module.exports = [
   }),
 
   MOB('Spore-Drunk Contestant', {
+    signature: { floor: 1, damage: 4, type: 'Crush' },
     part: 'Body',
     color: '#7a6b45',
     description: 'A previous season\'s leftover, mycelium through the lungs. Still wearing the lanyard. Same network as the tutorial\'s Incineradile.',
@@ -99,6 +103,7 @@ module.exports = [
   }),
 
   ELITE('The Rack', {
+    signature: { floor: 1, damage: 6, type: 'Bleed', note: 'gore to torso; the 1-Clock windup stomp is a second attack at 8 Crush' },
     color: '#8b5a2b',
     size: 'Large',
     description: 'Antler-crowned stag. The forest\'s landlord. It does not charge; it waits, and the wood closes.',
@@ -124,6 +129,7 @@ module.exports = [
   }),
 
   ELITE('Mycelium Bloomkeeper', {
+    signature: { floor: 1, damage: 6, type: 'Crush', note: 'Arm slam; the spore burst applies Infected T1 rather than damage' },
     color: '#a0616a',
     size: 'Large',
     description: 'The network\'s gardener. It does not move from its patch, and its patch grows.',
@@ -157,6 +163,7 @@ module.exports = [
   // ───────── Layer B — Easy Route: the grand staircase ─────────
 
   MOB('Stair-Wight', {
+    signature: { floor: 1, damage: 4, type: 'Bleed' },
     part: 'Body',
     color: '#5d6a7a',
     description: 'EASY ROUTE. The dungeon\'s previous visitors, still descending.',
@@ -169,6 +176,7 @@ module.exports = [
   }),
 
   ELITE('The Chainbearer', {
+    signature: { floor: 1, damage: 6, type: 'Crush', note: 'chain sweep, 2-hex line' },
     color: '#7a7a8c',
     size: 'Large',
     description: 'EASY ROUTE. It has held this chain since before the mural was painted. It will not give it up, and it cannot follow you out of the room.',
@@ -248,6 +256,7 @@ module.exports = [
   // ───────── Layer C — Medium Route: the haunted house ─────────
 
   MOB('Torchbearer', {
+    signature: { floor: 1, damage: 4, type: 'Burn', note: 'torch; or a tool for 4 Crush' },
     part: 'Body',
     color: '#c25b2a',
     description: 'MEDIUM ROUTE. Rank and file of the arsonist NPC party. Human. Frightened, and doing it anyway.',
@@ -259,6 +268,7 @@ module.exports = [
   }),
 
   ELITE('The Kindler', {
+    signature: { floor: 1, damage: 6, type: 'Burn', note: 'thrown fire, 2-space splash' },
     color: '#e07b2a',
     description: 'MEDIUM ROUTE. Carries the fuel. Enjoys the work.',
     bodyParts: [
@@ -284,6 +294,7 @@ module.exports = [
   }),
 
   BOSS('Foreman Bex', {
+    signature: { floor: 1, damage: 8, type: 'Crush', note: 'only once he stops directing and starts fighting' },
     color: '#a03a3a',
     description: 'MEDIUM ROUTE BOSS. The NPC party\'s leader. Reasonable, articulate, and burning a house with a child in it. NAME IS A PROPOSAL — it becomes canon at F3, where he runs the human farm.',
     bodyParts: [
@@ -428,6 +439,7 @@ module.exports = [
   // ───────── Layer D — Hard Route: the moving city ─────────
 
   MOB('Crystallized Citizen', {
+    signature: { floor: 1, damage: 4, type: 'Crush' },
     part: 'Body',
     color: '#9ad4e0',
     description: 'HARD ROUTE. They are still standing where they stopped. Some are mid-sentence, and all of them are facing the same way — toward wherever the mist was.',
@@ -495,6 +507,7 @@ module.exports = [
   }),
 
   ELITE('Step-Warden', {
+    signature: { floor: 1, damage: 10, type: 'Crush', exception: 'windup', note: '1-Clock windup, 2-space stomp — the punish window IS the payment' },
     color: '#7a8fa0',
     size: 'Huge',
     description: 'HARD ROUTE. An ambulatory section of staircase. The city built its own guards out of itself.',
@@ -518,6 +531,7 @@ module.exports = [
   }),
 
   SUPER('Loong Kin', {
+    signature: { floor: 1, damage: 12, type: 'Crush', note: 'Warden Form; Loong Form breath is 12 Chill' },
     color: '#2a8f7a',
     size: 'Huge',
     description: 'HARD ROUTE SUPER BOSS. Descendant of the dragon Cinnabrus killed. Two forms. WARDEN FORM: a woman, 2.5m, towering over everyone in the room. LOONG FORM: the size of buildings — hundreds of metres, and it does not obviously end. It has guarded a city that has been empty for a very long time. Nobody has told it. It is not stupid; it is loyal, which is worse.',

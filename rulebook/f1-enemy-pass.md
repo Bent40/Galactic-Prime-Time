@@ -682,10 +682,10 @@ is already a complete answer — the respirator only makes it *comfortable*.
 | ~~The Girl's F1 fightability~~ | **RULED 2026-08-18** — killable; the cost is the Beelzebub chain (C-4) |
 | **Level budget** | 🟡 now drafted at [`level-budget.md`](level-budget.md) — **still the calibration dependency for every number in this document.** L-6 checks the F1 ladder against it and the F1 numbers hold |
 | ~~Infected T3 = statue?~~ | **RULED 2026-08-18** — T3 kills normally; the statue idea is dropped, and the crystal needs no rules exception |
-| **The respirator template** | ⚖ the only genuinely new item E-6 asks for |
+| ~~The respirator template~~ | **DONE 2026-08-25** — `server/seeds/items-safety.js`: Cloth Filter Mask (Crude) · **Sealed Respirator** (Quality) · Reservoir Seal (Superior, the F3 answer) · Resin Coat. All four answer **inhalation only**; contact stays the player's problem |
 | ~~Nullrot's direction of causality~~ | **RULED 2026-08-18** — he is **both**. Open follow-on: the F1 timeline (does the mask carry it?) — see E-0.6 |
 | ~~Horde counts for later floors~~ | **DONE 2026-08-18** — [`enemy-scaling.md`](enemy-scaling.md) S-2: ~12 × 2^(N−S), and how to run a tide as one entity with a count |
-| **Requirements on F1 loot** | ⚖ new from L-14 — carves and boss drops should name a trait requirement, connecting F1 loot to the endgame |
+| ~~Requirements on F1 loot~~ | **DONE 2026-08-25** — every F1 material in `seeds/items-materials-f1.js` now names a requirement that rides into whatever it is crafted into. **Mistletoe asks Charm 8** — the first item in the game to break §12.1's old ceiling of 5, and the proof L-14 is real |
 | **F2/F3 rosters** | The *frame* now exists ([`enemy-scaling.md`](enemy-scaling.md) S-1/S-3 — damage bands and an authoring checklist); the rosters do not |
 | **Lotus Root has no enemy source** | Correct as written — M-1 lists it as a gather ingredient, not a carve. Noted so it is not mistaken for an omission |
 | **`legendary` → `superboss`** | The model enum disagrees with §21.1's vocabulary. App work, not content work |
@@ -707,3 +707,28 @@ node seed-enemies.js --file ./seeds/enemies-f2.js   # a later batch
 Matching is by **name, case-insensitive**. Existing enemies are never touched
 without `--force` — owner edits win. Restore with
 `node restore-db.js backups/backup-<ts> --apply`.
+
+---
+
+## E-7 — The signature-damage gate 🔴 **two entries need a ruling**
+
+`Enemy.signature` shipped 2026-08-25 — a structured `{ floor, damage, type, exception, note }`
+so `seed-enemies.js` gates DAMAGE the way it already gates HP. It is **optional by design**:
+an entry with no signature is skipped, so F2/F3 keep passing while they migrate.
+
+**F1 is migrated — 14 of 19 entries carry a signature and all pass.** The two named
+off-band shapes both have live examples now: the **Step-Warden's** telegraphed 10 (windup,
+capped at 2× band so "telegraphed" cannot mean "arbitrary") and the **Husk-Moth's** 2 per
+Moment (tick, floored at 0.2× band so it cannot be a rounding error).
+
+Five entries carry no signature. Three are correct — **Glass-Antler Doe**, **Camera Gnat**
+and **Crystal Spore Mist** deal no direct damage; the Mist applies a condition, which is the
+whole point of it. **Two want your call:**
+
+| Entry | Issue |
+|---|---|
+| **THE MASKED** (boss) | His backhand reads **6 Crush**; the F1 boss band is **8**. Off-band, and not one of the two exceptions. Either the number rises to 8, or — my read — **his signature is the Dissolution aura, not the backhand**, and a boss whose threat is a countdown legitimately punches below band. If so it wants a third exception word (`aura`?) rather than a silent pass |
+| **The Girl in the House — Vermilia** (boss) | She has **no damage number at all**, and I think that is correct: her threat is noble-class presence and the Dissolution escalation at +2/Moment. But it means a 140-budget boss can be authored with no attack and the gate will not notice |
+
+Both are the gate doing its job on its first run — it found two places where the roster and
+the band disagree, and neither is a typo. **Do not let me guess which way they go.**

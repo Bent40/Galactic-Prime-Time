@@ -4,7 +4,7 @@
  * Covers the two pieces that are NOT a copy of seed-affixes.js: the §21.2
  * doctrine gate, and the array-aware diff that decides what --force overwrites.
  */
-const { doctrineCheck, diffFields, partsSum, SIZES } = require('./seed-enemies');
+const { doctrineCheck, damageProblems, diffFields, partsSum, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
 const f2 = require('./seeds/enemies-f2.js');
 const f3 = require('./seeds/enemies-f3.js');
@@ -18,7 +18,16 @@ const ok = (name, cond, extra = '') => {
 console.log('doctrine gate');
 ok('the shipped F1 roster passes at F1', doctrineCheck(f1, 1).length === 0,
    JSON.stringify(doctrineCheck(f1, 1)));
-ok('the same roster fails at F3 (floor scaling is live)', doctrineCheck(f1, 3).length === f1.length);
+// Was `=== f1.length`, which quietly assumed one problem per entry. Once entries
+// carry a signature they ALSO complain about the floor mismatch, so the count moved.
+// Assert the intent instead: every entry's HP is wrong at F3, and the migrated ones
+// additionally say their signature was written for another floor.
+const atF3 = doctrineCheck(f1, 3);
+ok('the same roster fails at F3 (floor scaling is live)',
+   f1.every(e => atF3.some(p => p.startsWith(`${e.name}:`) && /part budget/.test(p))),
+   `${atF3.length} problems over ${f1.length} entries`);
+ok('a signature written for F1 is flagged when the roster is checked at F3',
+   atF3.filter(p => /checked at F3/.test(p)).length === f1.filter(e => e.signature).length);
 ok('an over-fat mob is caught',
    doctrineCheck([{ name: 'x', tier: 'mob', notes: '', bodyParts: [{ name: 'B', maxHp: 6 }] }], 1)
      .some(p => p.includes('part budget 6')));
@@ -167,6 +176,46 @@ ok('extra Mongoose subdoc bookkeeping is not a difference',
    diffFields({ ...clone(), bodyParts: [{ name: 'Bramble Body', maxHp: 5, _id: 'abc', $__: {} }] }, seed).length === 0);
 ok('a missing field on either side is not a false difference',
    diffFields({ ...clone(), color: undefined }, { ...seed, color: '' }).length === 0);
+
+console.log('signature damage gate (enemy-scaling S-1)');
+const sigMob = (sig, tier = 'mob') => ({ name: 'T', tier, size: 'Medium', bodyParts: [{ name: 'B', maxHp: 5 }], notes: 'x', signature: sig });
+ok('no signature at all is skipped — existing rosters keep passing',
+   damageProblems({ name: 'T', tier: 'mob' }, 1).length === 0);
+ok('signature.floor 0 is skipped (the unmigrated default)',
+   damageProblems(sigMob({ floor: 0, damage: 999, type: 'Crush' }), 1).length === 0);
+ok('an on-band F1 mob passes',
+   damageProblems(sigMob({ floor: 1, damage: 4, type: 'Crush' }), 1).length === 0);
+ok('an off-band F1 mob fails',
+   damageProblems(sigMob({ floor: 1, damage: 7, type: 'Crush' }), 1).length === 1);
+ok('an F1 elite is held to 6, not the mob 4',
+   damageProblems(sigMob({ floor: 1, damage: 4, type: 'Crush' }, 'elite'), 1).length === 1
+   && damageProblems(sigMob({ floor: 1, damage: 6, type: 'Crush' }, 'elite'), 1).length === 0);
+ok("the Step-Warden's telegraphed 10 passes as a windup, and would fail on-band",
+   damageProblems(sigMob({ floor: 1, damage: 10, type: 'Crush', exception: 'windup' }, 'elite'), 1).length === 0
+   && damageProblems(sigMob({ floor: 1, damage: 10, type: 'Crush' }, 'elite'), 1).length === 1);
+ok('a windup is still capped — 2x band is the ceiling, 13 is not "telegraphed"',
+   damageProblems(sigMob({ floor: 1, damage: 13, type: 'Crush', exception: 'windup' }, 'elite'), 1).length === 1);
+ok("the Husk-Moth's per-Moment 2 passes as a tick, and would fail on-band",
+   damageProblems(sigMob({ floor: 1, damage: 2, type: 'Infected', exception: 'tick' }), 1).length === 0
+   && damageProblems(sigMob({ floor: 1, damage: 2, type: 'Infected' }), 1).length === 1);
+ok('a tick has a floor too — 0.2x band, so it cannot be a rounding error',
+   damageProblems(sigMob({ floor: 1, damage: 0, type: 'Infected', exception: 'tick' }), 1).length > 0);
+ok('an unknown exception word is rejected',
+   damageProblems(sigMob({ floor: 1, damage: 4, type: 'Crush', exception: 'special' }), 1).length === 1);
+ok('a number with no damage type is rejected',
+   damageProblems(sigMob({ floor: 1, damage: 4, type: '' }), 1).length === 1);
+ok('a roster checked at the wrong floor is caught',
+   damageProblems(sigMob({ floor: 2, damage: 5, type: 'Crush' }), 1).some(p => /checked at F1/.test(p)));
+ok('signature.floor outside F1-F9 is rejected',
+   damageProblems(sigMob({ floor: 12, damage: 4, type: 'Crush' }), 1).length === 1);
+ok('damage RISES per floor while HP does not (the whole point of S-1)',
+   FLOOR_DAMAGE[1].mob === 4 && FLOOR_DAMAGE[9].mob === 19 && FLOOR_DAMAGE[3].legendary === 19);
+ok('doctrineCheck runs the damage gate too',
+   doctrineCheck([sigMob({ floor: 1, damage: 99, type: 'Crush' })], 1).some(p => /enemy-scaling S-1/.test(p)));
+ok('a signature difference is reported by diffFields',
+   diffFields({ ...clone(), signature: { floor: 1, damage: 4, type: 'Crush' } }, seed).join() === 'signature');
+ok('an absent signature on both sides is not a false difference',
+   diffFields(clone(), seed).length === 0);
 
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);
