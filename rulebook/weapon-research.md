@@ -22,7 +22,27 @@ still works.** So tranche 1 was harvested from search-result summaries, not page
 | **Fidelity** | Lower than a page read. Summaries give abilities and acquisition but rarely full stat blocks or the fine print |
 | **Throughput** | ~2 weapons per search → a 60–80 entry corpus is 30–40 searches |
 | **Provenance** | ⚠️ **Every entry names its source.** Fan wikis are user-authored and inconsistent; do not silently blend them with myth sources |
-| **Unblocked route** | Either an environment with open egress, or the owner pastes pages in. Neither is needed to keep going — search-only just costs fidelity |
+| **Unblocked route** | 🔴 **A FRESH SESSION.** See below |
+
+### The egress finding (2026-08-25, diagnosed)
+
+The proxy is an **allowlist**, not a blocklist — `github.com` fetches fine, `en.wikipedia.org`
+and every `*.fandom.com` return `EGRESS_BLOCKED`. Per `/root/.ccr/README.md`, a block means
+*"the destination host is not allowed by your organization's egress policy **for this
+session**"*, and the policy is chosen per environment and **bound at session start**.
+
+> 🔴 **So adding domains does not affect a session already running.** The owner added
+> `*.fandom.com`, `en.wikipedia.org`, `*.wiki.gg`, `*.wiki.fextralife.com`, `*.miraheze.org`,
+> `ja.wikipedia.org`, `static.wikia.nocookie.net`, `sportskeeda.com` and `myanimelist.net`
+> — and this session still enforces the policy it booted with. **Start a NEW session on the
+> same environment and re-probe.** Do not route around it.
+
+**Probe to run first thing in the new session** — if this returns content, the sweep is live:
+
+```
+WebFetch https://en.wikipedia.org/wiki/Mjölnir
+WebFetch https://nanatsu-no-taizai.fandom.com/wiki/Sacred_Treasure
+```
 
 **Nothing in this file is written from memory.** An entry with no source line is a bug.
 
