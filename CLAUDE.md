@@ -288,6 +288,60 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - **Rival contestant parties + a 0–3 trade track** per route (S-7): +1 per floor cleared,
   ±1 from interference. One party runs one route deeply and **trades** for the rest.
 
+### The clan layer (RULED 2026-08-24/25 — ruling record: `rulebook/set1-review-and-changelog.md`)
+- 🔒 **THE CLAN LAW.** Demons are a race born to enforce rules of nature; **each clan
+  embodies a thing, and grows as that thing grows.** (1) **A demon dies only when its CLAN
+  dies** — so Vermilia is killable in the body (her clan is a population of one; *her body
+  IS her clan*) while Bex's F2 body-death does not take. Same rule, both ways. (2) **Rebirth
+  runs through one clan parent**, but 🔒 **birth odds ride clan strength** — a clan of one has
+  almost no odds. Natural selection, not a prohibition. (3) **Nullrot is outside the cycle
+  while sealed**; destroying the mask returns him to it. (4) **Nullrot and Vermilia are
+  DIVINE WRATH clan** — they embody karma.
+- 🔒 **WHY THE WRATH CLAN IS SCARCE — and it stays inside the firewall.** The Corporation
+  **contaminates** consequence, it does not rule it: a production company that rigs
+  circumstances, prevents boring deaths and stages rescues is one that keeps *interrupting
+  endings*, so a clan scaled to how much karma actually LANDS starves. ⚙️ Consequence: **the
+  broadcast is sterilising the last wrath demon's clan without knowing it** — the weld
+  between the frame story and the deep story, with no cosmology required.
+- 🔒 **THE FALL OF THE CLAN — both waves were the weapon WORKING.** A clan child took
+  Beelzebub's enticement (small act; his full knowledge is **retrospective** — S-1's
+  "scavenger, not a nemesis" is ruled); the plague took him because **wrath does not exempt
+  its own**; the clan read it as their god killing a child for nothing; and **a god who
+  judges loyalty reads lost faith as betrayal**, so the plague took the doubters too.
+  Nothing malfunctioned. **The instrument punished the reaction to itself.** Surface truth
+  ("his weapon ate his congregation") is what the mural-writers believed and **what
+  Cinnabrus himself believes**.
+- 🔒 **VERMILIA IS THE WITNESS**, not the purest believer. She saw the child take the
+  enticement and helped him hide it — **first silence courage** (braced for her god's
+  wrath), **second silence earned fear** (speaking would expose her as accomplice). She
+  never made a new decision; she kept doing the brave thing past the point where it stopped
+  being brave. **Her silence killed the clan.** Her survival is a sentence she cannot
+  recognise, and **when the verdict would not come she spent two centuries excavating the
+  judge.** Her question is *"was I a coward?"* — about **intention**, asked of a judge who
+  structurally cannot pronounce. ⚖️ **He cannot judge his last follower without judging
+  himself** (keep the rest off the limelight). 🔴 Loophole = probably the finale: **cure
+  first → followers grow → judgment stops being suicide.**
+- 🔒 **THE DYNASTY IS A RUSE.** No new queens, ever — **Vermilia is the entire line.** The
+  **high court are other-clan demons she recruited**, who do not know what the secret is;
+  they want a working city and to be paid. That is why the capital hunts the Loong while its
+  crown digs for a god and neither operation notices the other.
+- 🔒 **THE DOORWARD IS A TRIGGER, NOT A TRAP.** Killing it is the **right move** — Nullrot
+  chained forever is stasis and no cure ever exists. It **warns them aloud and truthfully**
+  ("my hunger is sated here, feasting on this man"). Say **"deception," never "illusion"**
+  (an illusion mints a capability that owes players a resistance mechanic). **The truest
+  voice in the room is the lure**: the chained man is genuinely real, suffering and honest.
+  Only RECOGNITION was ever missing, and F3 supplies it.
+- ⚙️ **Nullrot cannot be permanently killed while the last believer lives** — mask intact
+  means someone wears him back. Destroying the mask while she lives is a **lottery ticket**;
+  after she dies it is an **execution**. Beelzebub sealed rather than broke it for exactly
+  this reason, and in the Vermilia-dead branch ends up passively preserving the champion he
+  removed. *Nobody chose that; it fell out of the rules.*
+- 🔒 **BEX'S FARM IS THE WHOLE CAPITAL.** No enclosure — he runs the back alleys, drugging
+  and harvesting people for blood and negative feeling. To citizens it is just crime in the
+  slums and the quarantine zone. **Register: tragedy disguised politely** — southern-sounding,
+  courteous, immovable; **apology without confession**. ⚠️ Never pair the word "farm" with
+  the accent in player-facing text.
+
 ## F3 Enemy Pass (PROPOSAL, added 2026-08-18) — **Set 1 is complete**
 - **`rulebook/f3-enemy-pass.md`** + `server/seeds/enemies-f3.js` — 16 entries, the grand
   capital, 170 years after F1. Damage mob 6 · elite 9 · boss 12 · super 19.

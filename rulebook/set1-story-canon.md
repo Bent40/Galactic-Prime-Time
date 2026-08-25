@@ -88,7 +88,8 @@ not individual.
 | Rule | Consequence |
 |---|---|
 | **A demon dies only when its clan dies** | Vermilia is killable in the body because **her clan is a population of one.** Her body *is* her clan. This is not an exception to "a demon is not killed by killing its body" — it is the rule proving how alone she is |
-| **Rebirth runs through clan bloodline** | A dead demon returns only to parents of its clan. A dead clan is unrecoverable |
+| **Rebirth runs through clan bloodline** | A dead demon returns only to a parent of its clan — **one parent suffices.** A dead clan is unrecoverable |
+| 🔒 **Birth odds ride clan strength** | **The stronger the clan, the likelier a birth.** A clan down to its last member has almost no odds of continuing. Nobody is forbidding anything; **it is natural selection.** The same rule that scales a clan to what it embodies is the rule that makes a dying clan unable to save itself |
 | **Nullrot sits outside the cycle** | Sealed in the mask. Wearing it is **possession, not birth** — while sealed he cannot be reborn and cannot sire clan. **Destroying the mask returns him to the cycle**, which is exactly what Beelzebub is preventing |
 | **Nullrot and Vermilia are DIVINE WRATH clan** | They embody karma: *the natural order will reward or punish you.* Closest of all clans to divine power, and large in the age of gods — which is why a newly risen Cinnabrus plausibly held a living congregation |
 
@@ -181,6 +182,25 @@ doubt, because she was the only one who knew.**
 
 **The tongue doubles.** She did not just dig up a god who cannot speak. She dug up **a judge
 who cannot pronounce sentence.** Two hundred years found the body and never the verdict.
+
+### Why she never rebuilt the clan 🔒
+
+**She is not refusing. She is losing a lottery.** One parent of the clan is enough — the
+door is open — but **birth odds ride clan strength, and her clan is one.** Two centuries of
+a near-zero chance is a woman who has almost certainly tried and has nothing to show for
+it. Not a moral failing. Arithmetic.
+
+**Which makes the revival her clan's only road.** A clan grows as the thing it embodies
+grows, so a wrath clan recovers only if wrath starts landing again — **and that needs a
+functioning god of it.** Reviving Cinnabrus is not merely a cure for her hunger and an
+answer to her question. **It is the only way her people can exist again.** She cannot
+outbreed the problem; she has to fix the world that caused it.
+
+> ⚙️ **And the show is the reason.** The Corporation suppresses consequence at scale →
+> karma lands less → the wrath clan starves → her birth odds collapse. **The broadcast that
+> abducted the contestants is, without knowing or intending it, sterilising the last wrath
+> demon's clan.** Nobody in v1 needs a god to explain that. It is a production company
+> being large for a long time.
 
 **Her question is not "did I do this."** It is ***"was I a coward?"*** — a question about
 **intention**, asked of a judge who structurally cannot answer it. That is the finale's
@@ -381,7 +401,6 @@ prices social play. ⚖ Betrayal is always on the table, and the crowd pays for 
 
 | # | Question |
 |---|---|
-| **S-h** | 🔒 **Clan inheritance — one parent or two?** The clan law says Vermilia *can* restore her line by continuing the bloodline. If clan needs two parents of the clan, she is last-of-clan and **the escape hatch does not exist** — her isolation is total and "why hasn't she just rebuilt?" never arises. If it follows one parent, the hatch is real and needs a reason she has not used it (recommended: rebuilding what she destroyed is claiming a pardon nobody has given her). **Recommend two.** This also decides whether the killable-queen stake fully holds past Floor 1 |
 | **S-e** | **Where is the tongue's prison, and does it sit inside Set 1 at all?** If it is on F3, the best ending is reachable in one campaign; if Beelzebub keeps it, revival is a Set 2 payoff. 🟡 Recommended: on F3, in a second vault the excavation could never open |
 | **S-f** | **Bless or reject the two S-6 proposals** — the mixture as the catalyst, and the Loong's blood-claim as what breaks the seal |
 | **S-g** | **Does the capital converge the routes?** §4.1 gives a party one route per campaign, but the path of least casualties needs knowledge from all three. S-7's trade track is the current answer; a real convergence at F3 is the alternative |
