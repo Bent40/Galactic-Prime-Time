@@ -579,6 +579,29 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - Still standing from the linear draft: **mobs and individual elites pay ZERO levels**;
   **bosses pay for being RESOLVED, not killed**; **all routes pay identical levels**.
 
+## Set 1 item concepts (PROPOSAL, added 2026-08-25)
+- **`rulebook/set1-item-concepts.md`** — the **first 9 of the ~27** authored by weapon-research
+  **W-9 R-1**. Set 1 = 3 routes × 3 acquisition classes; **there is no floor axis** because
+  §12.7's band carries each concept F1→F3 itself (M-1 ×2 → M-2 ×4 → M-3 ×8), so each is written
+  once and read three times.
+- **This is the SPINE, not the top shelf.** `items-batch-c.js` already holds the authored apex
+  pieces; W-7 §1 puts the genre apex ratio near 3%, so those stay few.
+- The grid: **Leak-Vial · Oathbreaker line ⭐ · The Name** (Easy) · **Clan-Token · Brand-Iron ·
+  The Debt ⭐** (Medium) · **Crystal Shard · Kin-Carve ⭐ · The Horn, taken** (Hard).
+- **Three exemplars carry the rulings.** ⭐ **C-2 Oathbreaker** restates Mistletoe's `Charm 8`
+  as R-2's `REQUIRES Vengeful` + `REFUSES Corporate Asset` — the seed already calls it *"a CLAIM,
+  not an edge"*, so the stat was a predicate in disguise. ⭐ **C-6 The Debt** is R-3 in one
+  object: a worthless token that becomes a queen's writ if she was spared and **stays inert
+  forever if she was killed** — and it `REFUSES Witnessed`, which is Vermilia's own *"was I a
+  coward?"* turned outward. ⭐ **C-8 Kin-Carve** is the Teigu rule: **overuse makes you kin**,
+  and a contestant becoming Loong-like is not carrying loot, they are becoming livestock.
+- **`REFUSES` is the one new authored form** (W-9 R-2). 7 of 9 concepts carry a predicate;
+  the loot column carries the fewest by design (W-7 §2 grades loot against games, which leave
+  56% of apex drops ungated).
+- 🔴 **Nothing is ruled and there are NO stat blocks** — numbers come after the shapes are
+  blessed. **C-10** holds five open calls, the load-bearing one being whether `Charm 8` survives
+  on Mistletoe alongside the predicate (it is already seeded into Atlas).
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.

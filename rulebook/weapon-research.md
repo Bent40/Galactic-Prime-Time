@@ -1022,6 +1022,9 @@ right**, and this is where it comes from:
 | **Acquisition** | **3** | 🎯 loot · crafted · story |
 | | **= 27** | **The floor axis collapses INTO the set axis, not to nothing** — within a set, the band still moves per floor, so one authored concept yields its F1/F2/F3 readings for free |
 
+✅ **Set 1's nine are AUTHORED (2026-08-25) — [`set1-item-concepts.md`](set1-item-concepts.md).**
+Sets 2–3 wait on F4–F6 existing (M-4 is names-only).
+
 ⚙️ **What this means for the corpus:** the authoring target is **27 concepts + a small apex
 set** (W-7 §1 puts the genre's apex ratio near 3%, so roughly a handful, not 27 more). The
 grid framing at the top of this file is **superseded by this ruling.**
