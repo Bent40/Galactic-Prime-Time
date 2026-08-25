@@ -619,6 +619,23 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - 🔴 **Marks repaired a hole the first draft shipped** — §18's lifecycle fades every tag, so
   C-6's original `REFUSES Witnessed` was defeatable by *neglect*. A Mark cannot be shed, so the
   gate holds, and R-3's loop closes (a myth born from a deed cannot lapse).
+- 🔒 **Marks are BRANDS ON THE BODY** — physical, and *"not necessarily in a place you can see."*
+  **Activation reads MOOD FIRST**: the room is wrong before anyone explains why, then a small
+  note of the brand lighting / light from somewhere on the body. The GM may state it outright;
+  what to avoid is announcing before the mood shifts. ⚙️ The light says *something here concerns
+  you*, never what — so the player keeps holding the question. 🎯 And a contestant lighting up in
+  a throne room is exactly the shot the Corporation wants.
+- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **26 deeds across F1–F3, only 3 from items**
+  — confirming Marks are a **campaign** rule, authored per floor beside the enemy passes, not an
+  item feature. Routes come out **balanced: Easy 7 · Medium 8 · Hard 8** (+1 shared, +2 at the
+  convergence).
+- ⭐ **The best names state an unwelcome fact:** `Unsealed` (killed the Doorward — it warned you
+  truthfully and it was still the right move) · `It Did Not Take` (killed Bex and he is not dead)
+  · `He Was Right` (killed Nullrot) · `Livestock` (handed the Loong to the hunters) ·
+  `Two Million` (FRACTURE 4 cracks the reservoir under the capital — **a number branded on your
+  body**, and the one Mark that should arguably never go dormant).
+- ⚠️ **Only two deeds in Set 1 are unambiguously good.** *"Not necessarily good"* is an
+  understatement — the campaign brands you for being right about as often as for being wrong.
 - ⚠️ Branch interaction: `Witness` activates near Vermilia, so a party holding **both**
   `Regicide` and `Witness` has permanently disabled the better half of `Witness` — they killed
   the only person who could recognise it. Nothing needs to say so; it just never fires.

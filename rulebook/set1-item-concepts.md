@@ -51,7 +51,7 @@ it creates consequences rather than closing doors.
 
 ---
 
-## C-0b — 🆕 **MARKS** — tags that do not fade (owner proposal, 2026-08-25)
+## C-0b — 🔒 **MARKS** — tags that do not fade (RULED IN, 2026-08-25)
 
 > **Owner:** *"Should some tags be a permanent mark on contestants? Something like being a
 > witness to a crime is not something that fades… you receive a tag you carry with yourself,
@@ -178,6 +178,117 @@ type.** Dropping Open/Sealed/Broken removed the only expensive piece.
 
 ⚠️ **v1 is FROZEN, and this is still an addition to §18** — small, but real. Worth a line in the
 §18 errata when Marks are written into the book proper, rather than living only here.
+
+---
+
+### 🔒 RULED — a Mark is a BRAND on the body, and activation is MOOD first
+
+> **Owner:** *"The GM CAN describe it as active, but the better one is to display a difference of
+> mood, along with a small note of the mark being lit up or there being light from a place in the
+> body. Speak of, marks, in cannon, should be like brands i feel. Marked on your body, not
+> necessarily in a place you can see."*
+
+🔒 **Marks are physical.** A deed burns itself into the contestant — **on the body, and not
+necessarily somewhere they can see it.** A contestant may carry a brand between their shoulder
+blades for three floors and only learn it is there when someone tells them.
+
+**Activation, in order of preference:**
+
+| | How it reads at the table |
+|---|---|
+| ⭐ **Best** | **The mood of the scene changes first.** The room is wrong before anyone explains why. Then a **small note**: the brand lights, or light comes from somewhere on the body |
+| ✅ **Allowed** | The GM simply says the Mark is active. Legible, and fine when the table needs it |
+| ❌ **Avoid** | Announcing it *before* the mood shifts. That spends the effect and leaves nothing to infer |
+
+⚙️ **The light is the tell, not the message.** It says *something here concerns you*; it never
+says what. That keeps the C-0b naming rule intact — the player is still holding a question.
+
+🎯 **And it is free on camera.** This is a broadcast: a contestant whose body lights up in a
+throne room is **exactly the shot the Corporation wants**, which is its own reason for the
+production to keep putting marked contestants in rooms that trigger them.
+
+⚠️ 🟡 **Resonance worth an owner call, not assumed.** *Brand* is already a loaded word here —
+Vermilia **grants the brand** on the F1 Medium route (and C-5 builds Brand-Iron from it), and
+🔒 canon has Vermilia and Nullrot as **DIVINE WRATH clan, who embody karma.** A permanent record
+of a deed, burned into the body, sits very close to that. **This is not proposed as canon** —
+S-0's firewall keeps v1 free of anything that needs a god running the show, and the Corporation
+*contaminates* consequence rather than ruling it. But if the owner wants Marks to mean something
+in-world rather than being pure Show apparatus, **that is the door.** See C-10 #11.
+
+---
+
+## C-0c — 🆕 The Set 1 deed sweep (C-10 #8)
+
+Every F1–F3 deed that should mark a contestant. **Marks come mostly from ACTS, not objects** —
+only three hang off items (C-3, C-6, C-8), and the rest are campaign rules.
+
+**Inclusion test.** A deed marks if it is **irreversible**, **consequential** (it changes the
+world or the story, not just a fight), and **nameable as a trope** (§18's definability rule).
+A hard fight is not a deed. *Choosing* something you cannot unchoose is.
+
+⚠️ **Names are provisional.** They follow C-0b's rule — *name the deed by its weight, never by
+its action* — but the naming pass is **C-10 #5**. Entries marked 🟡 are the ones I am least sure
+of. Entries marked ❓ need a **canon call** before they can be authored at all.
+
+### Floor 1 — the green forest
+
+| Deed | Route | Mark | Activates near | Note |
+|---|---|---|---|---|
+| 🔴 **Kill the girl in the house** | Medium | **`Regicide`** | crowns · thrones · F3's capital | ✅ established. The campaign's heaviest consequence, finally carried |
+| **Free her and let her live** | Medium | **`Kingmaker`** 🟡 | Vermilia · the F3 court | You made a queen and do not know it. The mirror of `Regicide` |
+| **Accept her brand** | Medium | **`Branded`** 🟡 | demons · the Choir (F2) | 🔴 A demon's mark on your body, which is now *literally* what a Mark is |
+| **Watch the house burn** | Medium | **`Witness`** | Vermilia · the mask · the host | ✅ established. Her exact position |
+| 🔴 **Kill the Loong Kin** | Hard | **`Dragon Slayer`** | demons · the Loong · the F3 hunt | ✅ established via C-8 |
+| 🔴 **Shatter a Crystallized Citizen** | Hard | **`Shoot the Dog`** 🟡 | the infected · Nullrot · the quarantine | Canon: *the only thing that works is the thing that shatters a person who is still in there.* Real TVTropes entry, so it passes §18 |
+| **Kill a Spore-Drunk Contestant** | shared | **`Bloodsport`** 🟡 | other contestants · rival parties · the crowd | A fellow abductee, not in control, on camera. **The show got what it wanted** |
+| **Unmask the host** | Easy | **`Unhurried`** 🟡 | the mask · Nullrot | Canon: unmasking kills him within a Clock, *neither grateful nor accusing.* ❓ available at F1, or F3 only? |
+| **Leave him chained** | Easy | **`Heeded the Mural`** 🟡 | the stair · the Doorward (F2) | Obeying a warning left by the dead. Stasis is a choice too |
+
+### Floor 2 — the great desert
+
+| Deed | Route | Mark | Activates near | Note |
+|---|---|---|---|---|
+| 🔴 **Kill the Doorward** | Easy | **`Unsealed`** | Nullrot · the capital · the plague | ⭐ **The best name in the sweep.** It warned you *aloud and truthfully* and you did it anyway — and it was **the right move**. A question the party carries into F3 |
+| **Spare the Doorward** | Easy | **`Left Him Chained`** 🟡 | the stair · the host | Stasis: no cure ever exists. Canon calls killing it correct, so this is the *wrong* right-feeling choice |
+| 🔴 **Assassinate Bex, and it does not take** | Medium | **`It Did Not Take`** | Bex · demons · the clan layer | ⭐ **A mark that is a question by construction.** You killed him. He is not dead. Nothing tells you why until the clan law surfaces |
+| **Answer the song** | Medium | **`Answered`** 🟡 | the Choir · Dissolution sources · patrons | Canon: answering beats destroying and pays more. A *performance* deed, which is what this show is for |
+| 🔴 **Hand the Loong to the hunters** | Hard | **`Livestock`** | the Loong · demons · the F3 hunt | 🔴 **The ugliest mark in Set 1 and it should be.** Canon: a captured Loong is not a murder, it is livestock, bled indefinitely. **You did that** |
+| **Take the Horn intact** | Hard | **`Houndcaller`** 🟡 | hunters · packs · the capital's hunt | C-9's deed. You ended the hunt and kept the instrument |
+| **Save the village** | Hard | **`The Village Stands`** 🟡 | its survivors · the F3 Lounge | Canon: the win is the village, not a corpse |
+
+### Floor 3 — the grand capital
+
+| Deed | Route | Mark | Activates near | Note |
+|---|---|---|---|---|
+| 🔴 **Kill Nullrot** | Easy | **`He Was Right`** | the infected · the cured · Cinnabrus | ⭐ Canon: *the win is the ARGUMENT, and he is right.* A mark that states the thing the party will least want to look at |
+| **Destroy the Reservoir alone** | Easy | **`Surgical`** 🟡 | the plague · the infected | Canon calls it surgical, and it ends him. Cleaner, and still an ending |
+| **Talk to the host** | Easy | **`Recognition`** 🟡 | the mask · the host | Canon: *only RECOGNITION was ever missing, and F3 supplies it.* Overlaps C-3's `Witness` grant — ❓ same mark or a second one? |
+| 🔴 **Give Bex his sacrifice** | Medium | **`The Price`** 🟡 | Bex · the farm · the slums | You handed over a person to end a demon's nature. He never lied about what he wanted |
+| **Offer a cure that scales** | Medium | **`Made It Unnecessary`** 🟡 | Bex · demons | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* The good ending of that thread |
+| 🔴 **Crack the reservoir — FRACTURE 4** | Hard | **`Two Million`** | ⭐ **everywhere, forever** | 🔴 **The largest deed in the campaign.** Canon: at 4, the reservoir cracks into a city of two million. **A number branded on your body.** If any Mark should never go dormant, it is this one |
+| **Destroy the Ribcage** | Hard | **`Broke the Cage`** 🟡 | the foundations · Cinnabrus | The part they must NOT destroy |
+| **Get the Loong out of the city** | Hard | **`Shepherd`** 🟡 | the Loong · demons · the hunt | The first leg of the path of least casualties |
+| 🔴 **Revive Cinnabrus** | convergence | **`Kingmaker`** ↑ *or its own* ❓ | the wrath clan · Vermilia · F3's survivors | ❓ Does reviving a god reuse `Kingmaker`, or does it deserve its own? **Owner call** |
+| **Open the prison with both** | convergence | **`No Fight`** 🟡 | the foundations · the tongue | Canon: bring both and there is no fight. **A mark for the thing that did not happen** |
+
+### What the sweep found
+
+- **26 deeds, and only 3 come from items.** C-10 #8's premise is confirmed: **Marks are
+  overwhelmingly a campaign rule.** They should be authored per floor alongside the enemy
+  passes, not per item.
+- ✅ **The routes are balanced — Easy 7 · Medium 8 · Hard 8** (+1 shared, +2 at the convergence).
+  No route is under-served, and no route needs padding. That was not designed for; it fell out
+  of the beats each route already has.
+- ⭐ **The strongest names are the ones that state an unwelcome fact** — `Unsealed`, `It Did Not
+  Take`, `He Was Right`, `Livestock`, `Two Million`. Each is a sentence the party would not say
+  about themselves, which is exactly why it belongs on their body.
+- 🔴 **Every route has a mark for the RIGHT choice that still costs.** `Unsealed` is correct and
+  releases a plague champion; `He Was Right` is a win over someone who was right; `Shoot the Dog`
+  is the only thing that works. **That is the campaign's whole thesis, and Marks are where it
+  finally lands mechanically.**
+- ⚠️ **Only two deeds are unambiguously good** — `Made It Unnecessary` and `No Fight`, and the
+  second is *a mark for the thing that did not happen*. The owner's *"not necessarily good"* is
+  an understatement: Set 1 brands you for being right roughly as often as for being wrong.
 
 ---
 
@@ -520,6 +631,8 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 | # | Call | Status |
 |---|---|---|
 | ~~1~~ | Does `Charm 8` survive alongside the C-2 predicate? | 🔒 **RULED — keep Charm 8, drop the predicate** |
+| ~~8~~ | What else grants Marks? | ✅ **SWEPT — see C-0c.** 28 Set 1 deeds, only 3 from items. Confirmed: Marks are a **campaign** rule, authored per floor |
+| ~~9~~ | How loud is activation? | 🔒 **RULED — mood first, then a small note of the brand lighting.** GM may state it outright; announcing before the mood shifts is the thing to avoid |
 | ~~4~~ | How many predicates is too many? (7 of 9) | 🔒 **RULED — trimmed to 2** (C-6, C-8); three concepts grant Marks instead |
 | ~~6~~ | Is Marks in, given the v1 freeze? | 🔒 **RULED — IN, as a SUBGENRE of §18 tags.** No parallel system: a tag with `fades: false` and a presence trigger |
 | ~~7~~ | Do all three Mark states ship (Open / Sealed / Broken)? | 🔒 **RULED — no states.** Marks are **always present**; they **activate** when a scene makes them relevant. Sealed is dropped, and the draft that proposed it had it backwards |
@@ -528,8 +641,8 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 
 | # | Call | Why it needs you |
 |---|---|---|
-| **8** | **What else grants Marks?** Items are the narrow case — `Regicide` comes from an **act**, not an object, so most Marks are a campaign rule rather than an item feature. **Needs an authored list of Set 1 deeds that mark you** | Scopes it before it gets written as an item feature |
-| **9** | 🆕 **How loud is activation?** When `Regicide` wakes in F3's throne room, does the GM *say* it woke, or does the room simply behave differently and the players infer it? **Announcing is legible; inferring is better drama** | Sets the table-feel of the whole mechanic |
+| **11** | 🆕 **Should Marks mean something IN-WORLD?** *Brand* is already Vermilia's word, and canon has her clan embodying **karma**. A deed burned into the body sits very close to that — but S-0's firewall keeps v1 free of anything needing a god. **Pure Show apparatus, or not?** | The one call that touches the firewall |
+| **12** | 🆕 **Do the ❓ entries in C-0c resolve?** Three need canon before authoring: is unmasking available at F1 · does `Recognition` duplicate `Witness` · does reviving Cinnabrus reuse `Kingmaker` | Blocks three deeds, not the mechanic |
 | **10** | 🆕 **Can a Mark be reinforced?** §18 tags stack pull when Reinforced. A second regicide is presumably not *more* `Regicide` — or is it? | Decides whether Marks have any depth axis at all |
 | **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ Marks narrows this — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (an ordinary tag) still has the question | One item, not a system-wide rule |
 | **3** | **Does C-6's killed-branch token stay inert forever?** Partly answered — the branch grants `Regicide`, so the consequence has a carrier either way | Story weight vs. player mercy |
