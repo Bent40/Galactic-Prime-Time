@@ -5,13 +5,11 @@ Sources: Compendium §4.1–4.4, owner rulings 2026-08-18, and the character/rel
 layer reconciled from [`../v2/floors/floors-1-3-arc.md`](../v2/floors/floors-1-3-arc.md)
 under the firewall in **S-0**.
 
-> ⚠️ **SUPERSEDED IN PART by [`set1-review-and-changelog.md`](set1-review-and-changelog.md)
-> (2026-08-24).** That document rules the **clan law**, the **fall of the clan**,
-> **Vermilia as the witness**, and the **verdict problem** — a deep layer beneath
-> everything below. This file has **not** yet been propagated onto those rulings; where
-> they disagree, the changelog is newer. Two items are flagged there as unresolved before
-> propagation: the firewall status of "the Corporation rules causality" (B.5.6) and
-> whether Vermilia has an actual bloodline (S-5's "mother to daughter, all of them her").
+> 📒 **The ruling record is [`set1-review-and-changelog.md`](set1-review-and-changelog.md)
+> (2026-08-24).** The deep layer it rules — the **clan law**, the **fall of the clan**,
+> **Vermilia as the witness**, the **verdict bind** — is propagated into this file as of
+> 2026-08-25 (**S-1b**, S-2, S-5). Where the two disagree, the changelog is the record of
+> what was decided and this file is the telling.
 
 ---
 
@@ -44,8 +42,15 @@ editions must not be conflated.** What crosses the line and what does not:
         │
  He KILLS A DRAGON with it ─────────────▶ the deed that makes his name.
         │
- The plague does not stop. It spreads.
- It kills EVERY ONE OF HIS OWN FOLLOWERS — except one.
+ A clan child takes BEELZEBUB'S enticement. The plague — which is
+ WRATH, and does not exempt its own — takes the child.
+        │
+ The clan reads it as their god killing a child for nothing.
+ FAITH FAILS. And to a god who judges loyalty, lost faith IS betrayal.
+ The plague takes every one of them — correctly, both times.
+        │
+ EXCEPT ONE: the child's accomplice, who never doubted,
+ because she was the only one who KNEW.
         │
  Desperate, he turns to DRAGON'S BLOOD, and finds a method.
         │
@@ -68,17 +73,73 @@ explanation — no villainy, no economy, just a god who was very good at one thi
 
 ---
 
+## S-1b — The clan law, and how the congregation actually died
+
+🔒 **Ruled 2026-08-24.** This sits underneath everything else and it is **deep-layer GM
+knowledge** — the surface truth ("his weapon ate his congregation") is what the mural
+writers believed, what most parties will find, and **what Cinnabrus himself believes.**
+
+### The law
+
+**Demons are a race born to enforce rules of nature.** Each clan embodies a thing that
+exists in reality, and **a clan grows as the thing it embodies grows** — at clan level,
+not individual.
+
+| Rule | Consequence |
+|---|---|
+| **A demon dies only when its clan dies** | Vermilia is killable in the body because **her clan is a population of one.** Her body *is* her clan. This is not an exception to "a demon is not killed by killing its body" — it is the rule proving how alone she is |
+| **Rebirth runs through clan bloodline** | A dead demon returns only to parents of its clan. A dead clan is unrecoverable |
+| **Nullrot sits outside the cycle** | Sealed in the mask. Wearing it is **possession, not birth** — while sealed he cannot be reborn and cannot sire clan. **Destroying the mask returns him to the cycle**, which is exactly what Beelzebub is preventing |
+| **Nullrot and Vermilia are DIVINE WRATH clan** | They embody karma: *the natural order will reward or punish you.* Closest of all clans to divine power, and large in the age of gods — which is why a newly risen Cinnabrus plausibly held a living congregation |
+
+### Why the wrath clan is scarce now
+
+**The Corporation interferes with consequence, at scale, for a hundred years or more.**
+It is a production company, not a law of nature — but a show that rigs circumstances,
+prevents boring deaths, and stages rescues is one that keeps **interrupting endings.** A
+clan scaled to how much karma actually *lands* starves in a world where somebody keeps
+cutting away before the verdict.
+
+> 🔒 **Firewall (S-0):** this is *production control*, not cosmology. In v1 the Corporation
+> does not rule causality — it **contaminates** it, the way any occupying power does, by
+> being able to intervene more often than anyone can account for. No table required.
+
+### The fall — the one non-coincidence in the story
+
+1. **A clan child is enticed by Beelzebub.** Routine corruption, a small act. ⚠️ Keep it
+   small and his full knowledge **retrospective** — the moment he *planned* this he is a
+   nemesis, and S-1's "scavenger, not a nemesis" is ruled. The most Beelzebub version: he
+   profited enormously from something he barely did, and **he is the only one who knows how
+   little he did.**
+2. **The plague takes the corrupted child.** This is karma functioning exactly as
+   specified. The only coincidence in Set 1 is the *intersection* — Beelzebub's poaching
+   happening to sit in the plague's path.
+3. **The clan reads it as their god killing a child for no reason.** Faith fails.
+4. 🔒 **And that is the second correct killing.** Cinnabrus judges **loyalty**; losing your
+   belief is a lack of loyalty, and a lack of loyalty is a betrayal of values. **The plague
+   took the doubters because doubting was itself the offence.** The instrument punished the
+   reaction to itself.
+
+> **Both waves were the weapon working.** Nothing malfunctioned. **What killed the wrath
+> clan is that justice, illegible from the outside, is indistinguishable from cruelty** —
+> and their god's answer to being misread was to punish the misreading.
+
+**Who knows what:** Beelzebub — the full picture. Cinnabrus — none of it; he may have died
+believing his own weapon betrayed him. Vermilia — see S-2.
+
+---
+
 ## S-2 — The cast, and what each one wants
 
 | Who | What they are | What they want |
 |---|---|---|
 | **Cinnabrus** | The buried plague god. Mute — Beelzebub took the tongue | To finish the cure he was interrupted making, and to be answerable again |
-| **Vermilia** | **The queen.** His first follower and **the only one who survived his plague** | To revive him — so she can be cured of the **hunger** |
+| **Vermilia** | **The queen.** His first follower, the last of the wrath clan, and 🔒 **the witness** — she saw the child's corruption and said nothing | To revive him — for the **hunger**, and for a verdict on herself that has never come |
 | **Nullrot** | **His champion** — an olden demon who owes Cinnabrus his life. Loyal to the god, not the regent | To complete the cure. He needs a body to do it, and **his own reliquary mask** is how he comes back |
 | **The host** | The man who put the mask on at the staircase. ✅ **He is still in there** | Nothing, particularly. **He co-pilots.** Not for, not against — 170 years of this makes a person *different*, not loyal |
 | **The Loong** | **Descendant of the dragon Cinnabrus killed.** A living blood-claim | To find the source of what took its city — and it has heard of the mask |
 | **Bex** | A rival demon, working through humans | ✅ **The hunger lifted off demonkind.** His own cure is the only version he can reach — he takes the reachable one and does what it costs |
-| **Beelzebub** | The scavenger who won | To keep what he took — and to keep his followers *needing* him |
+| **Beelzebub** | The scavenger who won — and **the only person alive who knows how little he did** | To keep what he took — and to keep his followers *needing* him |
 
 ### The two hungers, and the one cure
 
@@ -96,6 +157,61 @@ explanation — no villainy, no economy, just a god who was very good at one thi
 **That makes the optimal path a necessity, not a courtesy.** The cure does not exist
 until they meet.
 
+### 🕯 Vermilia, the witness ✅ RULED 2026-08-24
+
+She is not the purest believer who was spared. **She is the accomplice who could not
+doubt, because she was the only one who knew.**
+
+- **She watched the child take the enticement.** She knew why he sickened and what he had
+  done.
+- **The first silence was courage.** She helped him hide it — knowingly risking her god's
+  wrath to protect a living child. She braced for the blow.
+- **The second silence was fear, and it was earned.** The child was dead, the clan was dying
+  of the misreading, and speaking now would expose not only the truth but **her part in
+  hiding it.** She never made a new decision. She kept doing the brave thing past the point
+  where it stopped being brave.
+- **Every funeral made speaking costlier, which made more funerals.** She held the one fact
+  that would have kept the clan's faith intact. **Her silence is what killed them.**
+
+> **Her survival is her sentence, and she cannot recognise it.** The plague took everyone
+> who doubted and skipped the accomplice standing braced for the strike. Two hundred years
+> of flinching at a blow that never lands — **a karma demon denied her own verdict.** She is
+> not waiting for karma. She is *serving* it. And when the verdict would not come to her,
+> **she spent two centuries excavating the judge.**
+
+**The tongue doubles.** She did not just dig up a god who cannot speak. She dug up **a judge
+who cannot pronounce sentence.** Two hundred years found the body and never the verdict.
+
+**Her question is not "did I do this."** It is ***"was I a coward?"*** — a question about
+**intention**, asked of a judge who structurally cannot answer it. That is the finale's
+emotional shape.
+
+⚖️ **The bind (S-8):** Cinnabrus's followers number one. **He cannot judge his last
+follower without judging himself** — her sin is concealing what his own instrument did, so
+adjudicating her means adjudicating whether the wrath was just. And a god at zero is
+deleted. Mercy under duress of his own existence, which she can never trust was real, or
+honest justice, which is suicide. 🔒 **The god who killed all his people must choose his
+death to fulfil karma — which is itself a karma upon him.** Keep this *off* the limelight;
+the load-bearing half is simply that **he cannot judge her without judging himself.**
+
+**🔴 The loophole that is probably the finale:** the bind holds only while she is his
+**sole** follower. He died reaching for a cure that lifts the hunger from demons who ask —
+and demons who ask are, functionally, congregation. **Cure first → followers grow → judging
+her stops being suicide.** So the only way this god can afford wrath is to **first perform
+benevolence**, and the party controls the sequencing without knowing it.
+
+**Both F1 branches now complete a circuit.** She *is* the clan child in the fire — hidden
+corruption, bystanders who cannot read it. **Save her** and someone finally does for her
+what she failed to do for him. **Kill her** and karma arrives in the exact shape of her sin.
+The worst ending completes a circuit instead of merely deleting one.
+
+⚠️ **F1 performance — one wrong note.** She is an *incomplete* character searching for a
+karma that never comes, and the rescue must play it: gratitude that lands like
+disappointment, a child in a fire reading it as something **arriving** rather than something
+happening. Legible but insufficient. Plant at F1, detonate at F3.
+
+---
+
 ### 🎭 The mask ✅ RULED 2026-08-20
 
 **It is not a stray demon prince's toy reaching into the world. It is Nullrot's own.**
@@ -105,6 +221,7 @@ until they meet.
 | **Blessed by** | **Cinnabrus**, for his champion — *"if you are killed, you can be worn back."* A reliquary, not a weapon |
 | **Sealed by** | **Beelzebub**, when he removed Cinnabrus. He did not destroy it. He *shut* it — because a champion is a return ticket, and a scavenger closes doors rather than making enemies of them |
 | **Therefore** | Everything the mask does to a host is **a sealed door being forced from the inside.** That is why it takes a body apart and rebuilds it. That is why it leaks. That is why it takes **seventy years** |
+| **And it is a bypass** | 🔒 Cinnabrus blessed it **after** watching clan-death nearly delete everything he was. It is a return ticket **that does not depend on the clan surviving** — which is why Beelzebub seals rather than destroys. *Destroying the vessel frees the monster;* the phylactery tradition inverted |
 
 **Three things this fixes, and they were already written:**
 
@@ -164,8 +281,15 @@ and why demons are on all three routes.
 
 **Vermilia searched a hundred years, found the grave, and built a capital on top of it** —
 because a palace is the only building nobody digs under. **The capital is a two-century
-excavation disguised as a civilisation.** She has ruled as a succession of queens, mother
-to daughter, all of them her.
+excavation disguised as a civilisation.**
+
+🔒 **The dynasty is a ruse.** There are no new queens and there never were. **Vermilia is
+the entire line** — she has simply never stopped being the queen, and nobody knows. The
+**high court are demons of other clans she recruited** to keep the capital running and the
+secret kept, which means **her secret is guarded by people who do not know what it is.**
+They have no stake in Cinnabrus; they want a functioning city and whatever the capital pays
+them. That is why the city hunts the Loong for its blood while the crown digs for a god, and
+why the two operations barely notice each other.
 
 | Route | The beat | What is really happening |
 |---|---|---|
@@ -257,6 +381,7 @@ prices social play. ⚖ Betrayal is always on the table, and the crowd pays for 
 
 | # | Question |
 |---|---|
+| **S-h** | 🔒 **Clan inheritance — one parent or two?** The clan law says Vermilia *can* restore her line by continuing the bloodline. If clan needs two parents of the clan, she is last-of-clan and **the escape hatch does not exist** — her isolation is total and "why hasn't she just rebuilt?" never arises. If it follows one parent, the hatch is real and needs a reason she has not used it (recommended: rebuilding what she destroyed is claiming a pardon nobody has given her). **Recommend two.** This also decides whether the killable-queen stake fully holds past Floor 1 |
 | **S-e** | **Where is the tongue's prison, and does it sit inside Set 1 at all?** If it is on F3, the best ending is reachable in one campaign; if Beelzebub keeps it, revival is a Set 2 payoff. 🟡 Recommended: on F3, in a second vault the excavation could never open |
 | **S-f** | **Bless or reject the two S-6 proposals** — the mixture as the catalyst, and the Loong's blood-claim as what breaks the seal |
 | **S-g** | **Does the capital converge the routes?** §4.1 gives a party one route per campaign, but the path of least casualties needs knowledge from all three. S-7's trade track is the current answer; a real convergence at F3 is the alternative |
