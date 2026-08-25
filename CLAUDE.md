@@ -148,8 +148,11 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - **Seeding runbook (from `server/`):** `node backup-db.js` → `node seed-items.js` (dry
   run) → `--apply`; `--force` to overwrite differing existing templates, `--file` for
   other batches. Batch data lives in `server/seeds/` (a: Lounge-unlock, b: standing
-  catalog, c: top shelf, materials-f1: F1 material band, d-repairs: legacy metadata
-  stamps, needs `--force`). `node repair-affixes.js` applies the ruled affix edits.
+  catalog, c: top shelf, materials-f1: F1 material band, **safety: the crystal-plague
+  counterplay — Cloth Filter Mask · Sealed Respirator · Reservoir Seal · Resin Coat, all
+  answering INHALATION only**, d-repairs: legacy metadata stamps, needs `--force`).
+  **F1 materials carry trait requirements** (L-14, 2026-08-25) that ride into whatever they
+  are crafted into; **Mistletoe asks Charm 8**, the first item to break §12.1's old ceiling. `node repair-affixes.js` applies the ruled affix edits.
   The rulebook is at **v1.1** (Item Drafting update: §12.6 armor, §12.7 materials,
   §21.2 horde doctrine; file name stays gpt-system-v1.0.md for the Wiki import).
 - The Item Drafting content pass (rules + pools + batches) is governed by
@@ -204,9 +207,10 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - **The seeder refuses to run on data that misses the doctrine** — wrong budget,
   a multi-part mob, a non-mob with no weak system, an unknown tier. `--check`
   runs that gate alone and **needs no `node_modules` and no DB**.
-- `node test-seed-enemies.js` — 16 dependency-free checks over the doctrine gate
-  and the array-aware diff. The DB create/diff path is **not** covered (no mongod
-  in the dev container); it is a near-verbatim clone of the proven `seed-affixes.js`.
+- `node test-seed-enemies.js` — **74** dependency-free checks over the doctrine gate,
+  the signature-damage gate and the array-aware diff. The DB create/diff path is **not**
+  covered (no mongod in the dev container); it is a near-verbatim clone of the proven
+  `seed-affixes.js`.
 - **Enemies carry a `size`** (`Small|Medium|Large|Huge`, §7.1) — added 2026-08-18 to
   `models/Enemy.js`, `routes/enemies.js` (both POST and PUT whitelist it), and
   `admin/EnemiesSection.jsx`. It is not decoration: §13 makes **Large** grappleable
@@ -450,8 +454,15 @@ Skills are granted to players by templateId. The player sheet joins template dat
   for four contestants. **A horde is ONE entity with a count**, not N entities: an
   attack removes `floor(damage ÷ mob HP)`, area attacks multiply by spaces covered,
   and **gates still apply** (a Crystallized Citizen tide is still Crush-only).
-- ⚠️ Enemy damage lives in free-text `notes`, so the seeder cannot gate it the way it
-  gates HP. A `damage` field on the Enemy model would fix that — app work, not content.
+- ✅ **DONE 2026-08-25 — `Enemy.signature` gates damage the way the doctrine gate gates HP.**
+  Structured `{ floor, damage, type, exception, note }` on the model, whitelisted in both
+  `routes/enemies.js` verbs, edited in `admin/EnemiesSection.jsx` (band shown live, ⚠ badge
+  when off-band), and checked by `seed-enemies.js`. **Optional by design:** no signature (or
+  floor 0) is skipped, so un-migrated rosters keep passing. `exception` is `''` | `windup`
+  (≤2× band) | `tick` (≥0.2× band) — the two legitimate off-band shapes, both with live
+  examples. **F1 is migrated (14 of 19).** Two entries the gate flagged need an owner call —
+  `f1-enemy-pass.md` **E-7**: THE MASKED punches 6 against a boss band of 8, and Vermilia
+  has no attack number at all.
 
 ## The crystal plague (RULED 2026-08-18)
 - **The Hard route's crystal IS Nullrot's disease** — the same plague the Easy route's
