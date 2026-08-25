@@ -349,8 +349,8 @@ Three things this does at once, and none of them needed inventing:
 
 #### 🔒 The Loong is REQUIRED — in both editions
 
-**No version of the revival happens without bringing the Loong down there.** That is ruled.
-🟡 **The mechanism below is proposed.**
+**No version of the revival happens without bringing the Loong down there**, and the
+mechanism below is 🔒 **ruled as of 2026-08-25.**
 
 **The prison has two locks, because Cinnabrus killed the dragon with the plague and the
 corpse is still full of it.**
@@ -467,6 +467,35 @@ spend a floor on somebody else's story.
 **What trades:** knowledge (what the mask is, what the blood does, who the girl was),
 materials from bands they never visited, and favours. §17's Exposure economy already
 prices social play. ⚖ Betrayal is always on the table, and the crowd pays for it.
+
+### 🔒 What a rival may and may not resolve — RULED 2026-08-25
+
+**Two tiers. Rivals are not saints and they are not a safety net.**
+
+| Tier | What rivals may do |
+|---|---|
+| 🔴 **RESERVED** — the Girl at F1 · the Doorward at F2 · the Loong's capture | **Threaten, delay, complicate, and charge a price. Never RESOLVE offscreen.** These decisions *are* the campaign; they do not get made by people the table has never met |
+| 🟢 **Everything else** | Fair game. It happens, and the players hear about it **first** — via the rumor network — and if they do not act, that is theirs |
+
+**⭐ The reserved tier enforces itself in fiction: THE CORPORATION PROTECTS THE BRANCH
+POINTS, FOR RATINGS.** A rival about to settle the Girl gets cut away from. Gets an
+unfortunate production delay. Gets counter-programmed into a different segment. **The show
+would never let its best storyline resolve off-camera** — so the safety net exists, it is
+entirely in character, and *nobody has to write the rivals as competent or kind.*
+
+> This is the Corporation earning its keep from the direction nobody expects: **not opposing
+> the party, protecting the drama.** Which is worse, and funnier, and exactly what a network
+> does.
+
+**Announce, then let them fail.** The rule the whole design already runs on — the Doorward
+warns them, the mural is a note, Vermilia is legible-but-insufficient — now extends to
+rivals. *"The Hard-route party means to sell the Loong. They leave in two days."* Intervene,
+ignore, or buy it off them; whatever follows is the party's.
+
+⚙️ **Prep, not promise:** author what each rival party **would do by default**. That is
+what gives the announcement content. It is never a guarantee — a rival who always chooses
+correctly is the one group in Set 1 exempt from the law that everyone destroys what they
+need by failing to recognise it.
 
 ---
 

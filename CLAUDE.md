@@ -335,6 +335,25 @@ Skills are granted to players by templateId. The player sheet joins template dat
   digging, same city, same days. **The path of least casualties is achievable in one
   campaign.** Dissolves the "facts only flow through the Easy column" problem down to
   Floors 1–2; the S-7 trade track still governs those.
+- 🔒 **THE PRISON HAS TWO LOCKS (ruled 2026-08-25) — the Loong is REQUIRED in both editions.**
+  Cinnabrus killed the dragon *with the plague*, so the corpse is saturated: **the corpse
+  answers to its descendant, the crystal answers to the antibody.** So the prison is **the
+  cure, verified** — the same pair who must share a room to make the mixture are the pair who
+  open the door. **Bring both → no fight.** Loong only → fight the crystal with no antibody;
+  Nullrot only → fight the dragon with its descendant absent; neither → both, super-tier.
+  ⚠️ **The corpse is a BOMB, not a boss** (largest plague reservoir in the world, under two
+  million people) — which is why Vermilia has dug around it for two centuries. This is also
+  where the diplomatic finale gets its combat: **the fight you get for arriving with half the
+  answer**, same reward shape as Mistletoe (F1) and answering the song (F2). Collapses S-f·1
+  into the same act — the pair opens the door, the mixture they create is the catalyst.
+- 🔒 **RIVAL PARTIES — TWO TIERS (ruled 2026-08-25).** 🔴 **Reserved** (the F1 Girl, the F2
+  Doorward, the Loong's capture): rivals may threaten, delay, complicate and charge a price,
+  **never resolve offscreen.** 🟢 Everything else is fair game, **announced first via the
+  rumor network** — don't act and it's yours. ⭐ **The reserved tier enforces itself in
+  fiction: the Corporation protects the branch points FOR RATINGS** (a rival about to settle
+  the Girl gets cut away from, delayed, counter-programmed) — the network earning its keep by
+  **protecting the drama rather than opposing the party.** Author rival defaults as **prep,
+  never promise**: a rival who always chooses right is the one group exempt from Set 1's law.
 - 🏆 **The capital attaches to the LOUNGE after F3** — the city they saved, ruined or
   inherited becomes theirs (v2: its survivors are congregation too). Every F3 choice is a
   choice about where they are going to live.
