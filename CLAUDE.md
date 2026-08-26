@@ -619,6 +619,21 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - 🔴 **Marks repaired a hole the first draft shipped** — §18's lifecycle fades every tag, so
   C-6's original `REFUSES Witnessed` was defeatable by *neglect*. A Mark cannot be shed, so the
   gate holds, and R-3's loop closes (a myth born from a deed cannot lapse).
+- 🔒 **MARKS ARE REAL IN-WORLD — the Corporation's CAUSALITY LEDGER (ruled 2026-08-25).** Not a
+  metaphor and not a UI convention: the production **attributing consequence to a contestant**,
+  physically. ⭐ **The purpose is diagnostic** — *"a way for players to know if something they did
+  is the cause of their current circumstances."* That is also why activation is presence-based:
+  the Mark lights **where its consequence is**, which is the same thing as pointing at the cause.
+  🟡 Owner's open direction: maybe *gather causality* from them later.
+- ⚠️ **Branding is NOT Vermilia's alone** — she is only the one branding *so far*, and **more
+  high-tier entities will brand contestants.** A brand is a general capability of powerful
+  beings; the Corporation's Marks are one user of that form, not its owner. **A contestant may
+  carry brands from different hands, and whose brand it is will matter.**
+- 🔒 **A Mark cannot be REINFORCED — *"it just IS."*** No depth axis; a second regicide is not
+  more `Regicide`.
+- 🔒 **Reviving Cinnabrus gets its OWN mark, not `Kingmaker`** — *"the crescendo of the piece, a
+  **reapotheosis**… a god is revived, hope is given to the clan, and it is now incomplete."*
+  🟡 `Apotheosis` proposed.
 - 🔒 **Marks are BRANDS ON THE BODY** — physical, and *"not necessarily in a place you can see."*
   **Activation reads MOOD FIRST**: the room is wrong before anyone explains why, then a small
   note of the brand lighting / light from somewhere on the body. The GM may state it outright;
