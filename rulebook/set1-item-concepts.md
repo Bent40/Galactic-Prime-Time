@@ -222,9 +222,31 @@ in-world rather than being pure Show apparatus, **that is the door.** See C-10 #
 Every F1–F3 deed that should mark a contestant. **Marks come mostly from ACTS, not objects** —
 only three hang off items (C-3, C-6, C-8), and the rest are campaign rules.
 
-**Inclusion test.** A deed marks if it is **irreversible**, **consequential** (it changes the
-world or the story, not just a fight), and **nameable as a trope** (§18's definability rule).
-A hard fight is not a deed. *Choosing* something you cannot unchoose is.
+🔒 **THE INCLUSION TEST (owner, 2026-08-25)** — this replaces the first draft's
+*irreversible · consequential · nameable*, which was looser and let a non-event through.
+
+> *"A mark is something a story leaves on your soul to prove it was there. If someone would
+> hold a grudge, someone would feel gratitude, or the possibilities changed because of it,
+> that's a mark."*
+
+**A deed marks if at least one is true:**
+
+| | |
+|---|---|
+| 🩸 **Someone holds a grudge** | there is a party who will not forget you did it |
+| 🕯 **Someone feels gratitude** | there is a party who owes you for it |
+| 🚪 **The possibilities changed** | a road opened or closed and stays that way |
+
+⚠️ **It must also be nameable as a trope** (§18's definability rule carries over unchanged).
+
+🔴 **This test is stricter than it looks, and it cut three entries.** *"The mark should be for
+significant, story altering things, not random stuff."* **Killing Bex at F2 fails all three** —
+he returns by F3, so no grudge sticks, nobody is grateful, and no possibility closed.
+`It Did Not Take` was a good name attached to a non-event, which is exactly why the looser test
+let it through. **Destroying the Ribcage** and **answering the song** fail the same way: real
+choices inside a fight, but the world is unchanged the next morning. ⚙️ **A tactical decision is
+not a deed. A hard fight is not a deed.** ⭐ Bex at F2 may still deserve an **achievement** —
+just not a Mark.
 
 ⚠️ **Names are provisional.** They follow C-0b's rule — *name the deed by its weight, never by
 its action* — but the naming pass is **C-10 #5**. Entries marked 🟡 are the ones I am least sure
@@ -241,44 +263,44 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 | 🔴 **Kill the Loong Kin** | Hard | **`Dragon Slayer`** | demons · the Loong · the F3 hunt | ✅ established via C-8 |
 | 🔴 **Shatter a Crystallized Citizen** | Hard | **`Shoot the Dog`** 🟡 | the infected · Nullrot · the quarantine | Canon: *the only thing that works is the thing that shatters a person who is still in there.* Real TVTropes entry, so it passes §18 |
 | **Kill a Spore-Drunk Contestant** | shared | **`Bloodsport`** 🟡 | other contestants · rival parties · the crowd | A fellow abductee, not in control, on camera. **The show got what it wanted** |
-| **Unmask the host** | Easy | **`Unhurried`** 🟡 | the mask · Nullrot | Canon: unmasking kills him within a Clock, *neither grateful nor accusing.* ❓ available at F1, or F3 only? |
-| **Leave him chained** | Easy | **`Heeded the Mural`** 🟡 | the stair · the Doorward (F2) | Obeying a warning left by the dead. Stasis is a choice too |
+| **Unmask the host** | Easy | 🟡 **`Undertaker`** *(proposed)* | the mask · Nullrot · the host | `Unhurried` is dropped — it described **the host's** demeanour, not the party's deed. `Undertaker` is a role-name: you ended a man conscious for 170 years, and he was *neither grateful nor accusing.* ❓ still needs the F1-or-F3 call |
+| **Leave him chained** | Easy | 🔒 **`Historian`** | the stair · the Doorward (F2) | You read what the dead wrote and obeyed it. **A role-name, and it does not say what you obeyed** |
 
 ### Floor 2 — the great desert
 
 | Deed | Route | Mark | Activates near | Note |
 |---|---|---|---|---|
 | 🔴 **Kill the Doorward** | Easy | **`Unsealed`** | Nullrot · the capital · the plague | ⭐ **The best name in the sweep.** It warned you *aloud and truthfully* and you did it anyway — and it was **the right move**. A question the party carries into F3 |
-| **Spare the Doorward** | Easy | **`Left Him Chained`** 🟡 | the stair · the host | Stasis: no cure ever exists. Canon calls killing it correct, so this is the *wrong* right-feeling choice |
-| 🔴 **Assassinate Bex, and it does not take** | Medium | **`It Did Not Take`** | Bex · demons · the clan layer | ⭐ **A mark that is a question by construction.** You killed him. He is not dead. Nothing tells you why until the clan law surfaces |
-| **Answer the song** | Medium | **`Answered`** 🟡 | the Choir · Dissolution sources · patrons | Canon: answering beats destroying and pays more. A *performance* deed, which is what this show is for |
+| **Spare the Doorward** | Easy | 🔒 **`Torment`** | the stair · the host | ⭐ Names **what you caused**, not what you did — and leaves *whose* torment open. Stasis is a choice, and the man pays for it |
 | 🔴 **Hand the Loong to the hunters** | Hard | **`Livestock`** | the Loong · demons · the F3 hunt | 🔴 **The ugliest mark in Set 1 and it should be.** Canon: a captured Loong is not a murder, it is livestock, bled indefinitely. **You did that** |
 | **Take the Horn intact** | Hard | **`Houndcaller`** 🟡 | hunters · packs · the capital's hunt | C-9's deed. You ended the hunt and kept the instrument |
-| **Save the village** | Hard | **`The Village Stands`** 🟡 | its survivors · the F3 Lounge | Canon: the win is the village, not a corpse |
+| **Save the village** | Hard | 🟡 **`Unhunted`** *(proposed)* | the Loong · hunters · the F3 hunt | ⚠️ **Not under-designed — the name was hiding it.** Canon (f2-enemy-pass): escort the hurt, hunted Loong across the desert, *"the hunt breaks instantly and the village sees what arrived"*, and **it sheds a scale** — this is how M-5 **Loong-Scale** enters the game. `Unhunted` pairs structurally with `Unsealed` and is the exact inverse of `Livestock` |
 
 ### Floor 3 — the grand capital
 
 | Deed | Route | Mark | Activates near | Note |
 |---|---|---|---|---|
 | 🔴 **Kill Nullrot** | Easy | **`He Was Right`** | the infected · the cured · Cinnabrus | ⭐ Canon: *the win is the ARGUMENT, and he is right.* A mark that states the thing the party will least want to look at |
-| **Destroy the Reservoir alone** | Easy | **`Surgical`** 🟡 | the plague · the infected | Canon calls it surgical, and it ends him. Cleaner, and still an ending |
+| **Destroy the Reservoir alone** | Easy | 🔒 **`Crystal No More`** | the plague · the infected · Nullrot | Canon calls it surgical, and it ends him. ⚠️ **Note:** this names a *world-fact* and a good one, so it reads closer to a trophy than the rest of the set. `Two Million` is also a world-fact but it is **yours**; this one is not obviously a wound |
 | **Talk to the host** | Easy | **`Recognition`** 🟡 | the mask · the host | Canon: *only RECOGNITION was ever missing, and F3 supplies it.* Overlaps C-3's `Witness` grant — ❓ same mark or a second one? |
 | 🔴 **Give Bex his sacrifice** | Medium | **`The Price`** 🟡 | Bex · the farm · the slums | You handed over a person to end a demon's nature. He never lied about what he wanted |
-| **Offer a cure that scales** | Medium | **`Made It Unnecessary`** 🟡 | Bex · demons | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* The good ending of that thread |
+| **Offer a cure that scales** | Medium | 🔒 **`Doctor`** | Bex · demons · the infected | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* ⚠️ **`Saint` was the alternative — not recommended**, it imports a religious register S-0's firewall keeps out of v1. `Doctor` is a role-name, ironic on a game-show contestant, and ties to the campaign's cure thread |
 | 🔴 **Crack the reservoir — FRACTURE 4** | Hard | **`Two Million`** | ⭐ **everywhere, forever** | 🔴 **The largest deed in the campaign.** Canon: at 4, the reservoir cracks into a city of two million. **A number branded on your body.** If any Mark should never go dormant, it is this one |
-| **Destroy the Ribcage** | Hard | **`Broke the Cage`** 🟡 | the foundations · Cinnabrus | The part they must NOT destroy |
 | **Get the Loong out of the city** | Hard | **`Shepherd`** 🟡 | the Loong · demons · the hunt | The first leg of the path of least casualties |
 | 🔴 **Revive Cinnabrus** | convergence | **`Kingmaker`** ↑ *or its own* ❓ | the wrath clan · Vermilia · F3's survivors | ❓ Does reviving a god reuse `Kingmaker`, or does it deserve its own? **Owner call** |
-| **Open the prison with both** | convergence | **`No Fight`** 🟡 | the foundations · the tongue | Canon: bring both and there is no fight. **A mark for the thing that did not happen** |
+| **Open the prison with both** | convergence | 🔒 **`Fateful Meeting`** | the foundations · the tongue · Cinnabrus | Canon: *the cure does not exist until the two are in the same room* — and bring both, there is no fight. **A mark for the thing that did not happen.** 🟡 Alternative worth a look: **`Matchmaker`** — a role-name, ironic, and precisely what the party did |
 
 ### What the sweep found
 
-- **26 deeds, and only 3 come from items.** C-10 #8's premise is confirmed: **Marks are
-  overwhelmingly a campaign rule.** They should be authored per floor alongside the enemy
-  passes, not per item.
-- ✅ **The routes are balanced — Easy 7 · Medium 8 · Hard 8** (+1 shared, +2 at the convergence).
-  No route is under-served, and no route needs padding. That was not designed for; it fell out
-  of the beats each route already has.
+- **23 deeds** (26 swept, **3 cut** by the owner's test), **and only 3 come from items.**
+  C-10 #8's premise is confirmed: **Marks are overwhelmingly a campaign rule.** They should be
+  authored per floor alongside the enemy passes, not per item.
+- ✅ **The routes stay balanced after the cuts — Easy 7 · Medium 6 · Hard 7** (+1 shared,
+  +2 at the convergence). That was not designed for; it fell out of the beats each route has.
+- 🔴 **The three cuts were all the same failure.** `It Did Not Take` (kill Bex at F2),
+  `Broke the Cage`, `Answered` — each is a real decision **inside a fight**, and the world is
+  unchanged the next morning. ⚙️ **The looser first-draft test could not tell a tactical choice
+  from a deed.** The owner's grudge/gratitude/possibility test can, immediately.
 - ⭐ **The strongest names are the ones that state an unwelcome fact** — `Unsealed`, `It Did Not
   Take`, `He Was Right`, `Livestock`, `Two Million`. Each is a sentence the party would not say
   about themselves, which is exactly why it belongs on their body.

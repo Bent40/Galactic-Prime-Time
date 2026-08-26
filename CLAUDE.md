@@ -625,10 +625,22 @@ Skills are granted to players by templateId. The player sheet joins template dat
   what to avoid is announcing before the mood shifts. ⚙️ The light says *something here concerns
   you*, never what — so the player keeps holding the question. 🎯 And a contestant lighting up in
   a throne room is exactly the shot the Corporation wants.
-- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **26 deeds across F1–F3, only 3 from items**
-  — confirming Marks are a **campaign** rule, authored per floor beside the enemy passes, not an
-  item feature. Routes come out **balanced: Easy 7 · Medium 8 · Hard 8** (+1 shared, +2 at the
-  convergence).
+- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **23 deeds across F1–F3** (26 swept, 3 cut),
+  **only 3 from items** — confirming Marks are a **campaign** rule, authored per floor beside the
+  enemy passes, not an item feature. Routes stay balanced: **Easy 7 · Medium 6 · Hard 7**.
+- 🔒 **THE INCLUSION TEST (owner, 2026-08-25)** — *"a mark is something a story leaves on your
+  soul to prove it was there."* A deed marks if **someone holds a grudge · someone feels
+  gratitude · the possibilities changed.** This **replaced** the first draft's looser
+  *irreversible/consequential/nameable*, and immediately cut three entries — **killing Bex at F2**
+  (he returns by F3, so no grudge sticks and no road closes; *maybe an achievement, not a Mark*),
+  destroying the Ribcage, and answering the song. ⚙️ **All three were decisions inside a fight:
+  a tactical choice is not a deed.**
+- 🔒 **Naming pass (owner):** `Heeded the Mural`→**`Historian`** · `Left Him Chained`→**`Torment`**
+  · `Made It Unnecessary`→**`Doctor`** (⚠️ `Saint` declined — religious register S-0 keeps out) ·
+  `No Fight`→**`Fateful Meeting`** · `Surgical`→**`Crystal No More`**. Role-names and state-names
+  are ruled good as a class. 🟡 Proposed, pending: `Unhurried`→**`Undertaker`**,
+  `The Village Stands`→**`Unhunted`**.
+- 🔴 **F2 Medium and Hard quests need design work** before their rows are decisive (owner).
 - ⭐ **The best names state an unwelcome fact:** `Unsealed` (killed the Doorward — it warned you
   truthfully and it was still the right move) · `It Did Not Take` (killed Bex and he is not dead)
   · `He Was Right` (killed Nullrot) · `Livestock` (handed the Loong to the hunters) ·
