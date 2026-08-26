@@ -625,9 +625,27 @@ Skills are granted to players by templateId. The player sheet joins template dat
   what to avoid is announcing before the mood shifts. ⚙️ The light says *something here concerns
   you*, never what — so the player keeps holding the question. 🎯 And a contestant lighting up in
   a throne room is exactly the shot the Corporation wants.
-- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **23 deeds across F1–F3** (26 swept, 3 cut),
-  **only 3 from items** — confirming Marks are a **campaign** rule, authored per floor beside the
-  enemy passes, not an item feature. Routes stay balanced: **Easy 7 · Medium 6 · Hard 7**.
+- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **23 distinct deeds across F1–F3**, only 3
+  from items — confirming Marks are a **campaign** rule, authored per floor beside the enemy
+  passes, not an item feature. Routes: **Easy 7 · Medium 6 · Hard 8**.
+- ⚠️ **C-0d — THE FIREWALL DOES NOT BAR RELIGIOUS REGISTER (correction, 2026-08-25).** S-0's ⛔
+  column is the **economy**, never the vocabulary — its first ✅ entry is *"Cinnabrus, the buried
+  plague god."* 🔒 **A god in v1 is just a WORSHIPPED ENTITY** — *"could be simply a powerful
+  sorcerer revered by people to a status no different than a god"* — and **the Corporation is big
+  enough to use gods as NPCs.** So `Saint`, relics, blessings and worship are all available; only
+  **divinity-as-an-economy** is barred. A session wrongly rejected `Saint` on firewall grounds;
+  recorded in `set1-story-canon.md` S-0 so it is not repeated.
+- 🔴 **C-0e / S-6 — WHY THE LOONG AND NULLROT NEVER MEET (ruled 2026-08-25).** **Each believes
+  the OTHER is the sacrifice holding the cure**; the truth is *a little from both* and neither is
+  consumed. **Two creatures avoiding the only conversation that saves everyone, because each has
+  priced it as a death.** ⭐ **Without the party they never talk** — that is the party's real
+  contribution to the best ending, and it is why S-6 says *"the optimal ending is not mercy, it is
+  introductions."* ⚠️ **Supersedes** the older *"neither knows the other exists"* — by F2 the Loong
+  has *"heard of the mask"*; what they lack is an accurate price, not knowledge.
+- 🔴 **F3 Hard's ending is the MEETING, not getting the Loong out** (owner) — extraction is an
+  option and the lesser one. The F3 Hard and convergence rows were the same act and are **merged
+  into one `Fateful Meeting`**; `Shepherd` moved to **F2's desert escort**, which is the actual
+  shepherding act (**there is no village to save — the village is the destination**).
 - 🔒 **THE INCLUSION TEST (owner, 2026-08-25)** — *"a mark is something a story leaves on your
   soul to prove it was there."* A deed marks if **someone holds a grudge · someone feels
   gratitude · the possibilities changed.** This **replaced** the first draft's looser

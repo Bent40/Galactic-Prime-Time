@@ -263,7 +263,7 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 | 🔴 **Kill the Loong Kin** | Hard | **`Dragon Slayer`** | demons · the Loong · the F3 hunt | ✅ established via C-8 |
 | 🔴 **Shatter a Crystallized Citizen** | Hard | **`Shoot the Dog`** 🟡 | the infected · Nullrot · the quarantine | Canon: *the only thing that works is the thing that shatters a person who is still in there.* Real TVTropes entry, so it passes §18 |
 | **Kill a Spore-Drunk Contestant** | shared | **`Bloodsport`** 🟡 | other contestants · rival parties · the crowd | A fellow abductee, not in control, on camera. **The show got what it wanted** |
-| **Unmask the host** | Easy | 🟡 **`Undertaker`** *(proposed)* | the mask · Nullrot · the host | `Unhurried` is dropped — it described **the host's** demeanour, not the party's deed. `Undertaker` is a role-name: you ended a man conscious for 170 years, and he was *neither grateful nor accusing.* ❓ still needs the F1-or-F3 call |
+| **Unmask the host** | Easy | 🟡 **`Exorcism`** · `Laid to Rest` · `Psychopomp` | the mask · Nullrot · the host | `Unhurried` and `Undertaker` both dropped. Owner: *the word for releasing a spirit haunting the earth for long.* **`Exorcism`** is that and it is literally accurate — the mask *is* the possessing thing. **`Laid to Rest`** is the traditional English term (*to lay a ghost*) and names the man rather than the expulsion; **`Psychopomp`** is the role-name version. ❓ still needs the F1-or-F3 call |
 | **Leave him chained** | Easy | 🔒 **`Historian`** | the stair · the Doorward (F2) | You read what the dead wrote and obeyed it. **A role-name, and it does not say what you obeyed** |
 
 ### Floor 2 — the great desert
@@ -274,7 +274,7 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 | **Spare the Doorward** | Easy | 🔒 **`Torment`** | the stair · the host | ⭐ Names **what you caused**, not what you did — and leaves *whose* torment open. Stasis is a choice, and the man pays for it |
 | 🔴 **Hand the Loong to the hunters** | Hard | **`Livestock`** | the Loong · demons · the F3 hunt | 🔴 **The ugliest mark in Set 1 and it should be.** Canon: a captured Loong is not a murder, it is livestock, bled indefinitely. **You did that** |
 | **Take the Horn intact** | Hard | **`Houndcaller`** 🟡 | hunters · packs · the capital's hunt | C-9's deed. You ended the hunt and kept the instrument |
-| **Save the village** | Hard | 🟡 **`Unhunted`** *(proposed)* | the Loong · hunters · the F3 hunt | ⚠️ **Not under-designed — the name was hiding it.** Canon (f2-enemy-pass): escort the hurt, hunted Loong across the desert, *"the hunt breaks instantly and the village sees what arrived"*, and **it sheds a scale** — this is how M-5 **Loong-Scale** enters the game. `Unhunted` pairs structurally with `Unsealed` and is the exact inverse of `Livestock` |
+| **Bring the Loong to safe haven** | Hard | 🔒 **`Shepherd`** | the Loong · hunters · the F3 hunt | 🔴 **Reframed (owner): there is no village to save.** The village is the *destination*, not a victim — the deed is escorting a hurt, hunted creature across a desert to somewhere safe. Canon: the hunt breaks and **it sheds a scale**, which is how M-5 **Loong-Scale** enters the game at all. `Shepherd` moved here from F3 because *this* is the shepherding act. 🟡 A **hope**-word is the owner's alternative |
 
 ### Floor 3 — the grand capital
 
@@ -284,19 +284,22 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 | **Destroy the Reservoir alone** | Easy | 🔒 **`Crystal No More`** | the plague · the infected · Nullrot | Canon calls it surgical, and it ends him. ⚠️ **Note:** this names a *world-fact* and a good one, so it reads closer to a trophy than the rest of the set. `Two Million` is also a world-fact but it is **yours**; this one is not obviously a wound |
 | **Talk to the host** | Easy | **`Recognition`** 🟡 | the mask · the host | Canon: *only RECOGNITION was ever missing, and F3 supplies it.* Overlaps C-3's `Witness` grant — ❓ same mark or a second one? |
 | 🔴 **Give Bex his sacrifice** | Medium | **`The Price`** 🟡 | Bex · the farm · the slums | You handed over a person to end a demon's nature. He never lied about what he wanted |
-| **Offer a cure that scales** | Medium | 🔒 **`Doctor`** | Bex · demons · the infected | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* ⚠️ **`Saint` was the alternative — not recommended**, it imports a religious register S-0's firewall keeps out of v1. `Doctor` is a role-name, ironic on a game-show contestant, and ties to the campaign's cure thread |
+| **Offer a cure that scales** | Medium | 🔒 **`Doctor`** — 🟡 `Saint` also open | Bex · demons · the infected | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* ⚠️ **My objection to `Saint` was wrong and is withdrawn** (see C-0d) — S-0 bars the *economy*, never the vocabulary. `Doctor` is a role-name tied to the cure thread; **`Saint` names what you became to them**, which by the name-the-weight rule is arguably stronger. Owner's pick |
 | 🔴 **Crack the reservoir — FRACTURE 4** | Hard | **`Two Million`** | ⭐ **everywhere, forever** | 🔴 **The largest deed in the campaign.** Canon: at 4, the reservoir cracks into a city of two million. **A number branded on your body.** If any Mark should never go dormant, it is this one |
-| **Get the Loong out of the city** | Hard | **`Shepherd`** 🟡 | the Loong · demons · the hunt | The first leg of the path of least casualties |
+| 🔴 **Make the Loong and Nullrot TALK** | Hard | 🔒 **`Fateful Meeting`** | the two of them · the infected · Cinnabrus | 🔴 **This is the F3 Hard ending (owner correction), and it is the SAME EVENT as the convergence row below** — see C-0e. Each believes the other is the sacrifice; **without the party they never talk** |
+| **Get the Loong out of the city instead** | Hard | 🟡 **`Saved One`** *(proposed)* | the Loong · the infected · Nullrot | ⚠️ **An option, not the ending (owner).** You save the dragon and leave the city sick — the cure road closes. Possibilities changed, so it marks; it is simply the lesser outcome |
 | 🔴 **Revive Cinnabrus** | convergence | **`Kingmaker`** ↑ *or its own* ❓ | the wrath clan · Vermilia · F3's survivors | ❓ Does reviving a god reuse `Kingmaker`, or does it deserve its own? **Owner call** |
-| **Open the prison with both** | convergence | 🔒 **`Fateful Meeting`** | the foundations · the tongue · Cinnabrus | Canon: *the cure does not exist until the two are in the same room* — and bring both, there is no fight. **A mark for the thing that did not happen.** 🟡 Alternative worth a look: **`Matchmaker`** — a role-name, ironic, and precisely what the party did |
+| **Open the prison with both** | convergence | 🔒 **`Fateful Meeting`** ↑ *merged* | the foundations · the tongue · Cinnabrus | 🔴 **Same deed as the F3 Hard row above.** Two-lock canon: the pair who must share a room to make the mixture are the pair who open the door — **one act, one mark.** 🟡 `Matchmaker` remains an alternative name |
 
 ### What the sweep found
 
-- **23 deeds** (26 swept, **3 cut** by the owner's test), **and only 3 come from items.**
-  C-10 #8's premise is confirmed: **Marks are overwhelmingly a campaign rule.** They should be
-  authored per floor alongside the enemy passes, not per item.
-- ✅ **The routes stay balanced after the cuts — Easy 7 · Medium 6 · Hard 7** (+1 shared,
-  +2 at the convergence). That was not designed for; it fell out of the beats each route has.
+- **23 distinct deeds** across **24 rows** — 26 swept, **3 cut** by the owner's test, **1 added**
+  (the F3 Hard extraction as the lesser option), and **`Fateful Meeting` listed twice** because
+  the F3 Hard ending and the convergence row are one act (C-0e). **Only 3 come from items**, so
+  C-10 #8's premise holds: **Marks are a campaign rule**, authored per floor beside the enemy
+  passes.
+- ✅ **Routes: Easy 7 · Medium 6 · Hard 8** (+1 shared, +2 convergence). Still even enough that
+  no route needs padding, and it fell out of the beats rather than being designed for.
 - 🔴 **The three cuts were all the same failure.** `It Did Not Take` (kill Bex at F2),
   `Broke the Cage`, `Answered` — each is a real decision **inside a fight**, and the world is
   unchanged the next morning. ⚙️ **The looser first-draft test could not tell a tactical choice
@@ -311,6 +314,45 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 - ⚠️ **Only two deeds are unambiguously good** — `Made It Unnecessary` and `No Fight`, and the
   second is *a mark for the thing that did not happen*. The owner's *"not necessarily good"* is
   an understatement: Set 1 brands you for being right roughly as often as for being wrong.
+
+---
+
+## C-0d — ⚠️ The S-0 firewall does NOT bar religious register (correction)
+
+🔴 **A correction to this document's own reasoning.** The first naming pass rejected `Saint`
+on the grounds that it *"imports a religious register S-0's firewall keeps out of v1."*
+**That was a misreading and it is withdrawn.**
+
+S-0's ⛔ column is the **economy** — the Casino, the table, patrons bidding, divinity as
+currency. Its very first ✅ entry is *"Cinnabrus — the buried plague god."* **Gods cross.**
+
+> **Owner:** *"There CAN be gods in the book… The corpo is big. Very big. Big enough to use
+> gods as npcs, if he deems it useful. What are gods in the corporate setting anyway? Just
+> worshipped entities. Could be simply a powerful sorcerer revered by people to a status no
+> different than a god."*
+
+⚙️ **A god in v1 is a worshipped entity — nothing metaphysical is claimed.** So `Saint`,
+`Relic`, `Blessing` and the rest of that vocabulary are **available**, and only *divinity as
+an economy* is not. Full clarification recorded in **`set1-story-canon.md` S-0**.
+
+## C-0e — 🔴 F3 Hard's ending is the MEETING, not the extraction (owner correction)
+
+The sweep had F3 Hard's deed as *get the Loong out of the city.* **Wrong — that is an option,
+not the ending.**
+
+🔒 **The ending is that the Loong and Nullrot talk.** Each believes the other is the sacrifice
+holding the cure; the truth is *a little from both*, and **without the party they never meet.**
+Recorded in **`set1-story-canon.md` S-6**, which already framed it: *"the optimal ending is not
+mercy — it is introductions."*
+
+⚙️ **Consequence for the sweep: two rows were the same deed.** "Make the Loong and Nullrot
+talk" (F3 Hard) and "open the prison with both" (convergence) are **one act** under the
+two-lock ruling — the pair who must share a room to make the mixture are the pair who open the
+door. **Merged into a single `Fateful Meeting`.**
+
+⭐ **And `Shepherd` moved floors because of this.** It was on the F3 extraction; the actual
+shepherding act is **F2's desert escort**, taking a hurt, hunted creature to safe haven. There
+is no village to save — the village is the destination.
 
 ---
 
