@@ -226,6 +226,106 @@ unlike the Owner himself.
 
 ---
 
+---
+
+## F2-2 — Quest design for Medium and Hard (PROPOSAL, 2026-08-25)
+
+> **Owner:** *"We need to work on medium and hard's F2's quests."*
+
+⚠️ **Both layers are mechanically strong and that is not the problem.** C-2's Dodge Threshold,
+the Dissolution songs, D-2's infinite hounds and the Horn as a discoverable position are all
+good encounter design. **The gap is upstream of the fight: what the party is DOING, and whether
+it can matter.**
+
+🔴 **The diagnosis, from the Marks sweep.** Set 1's deed sweep (`set1-item-concepts.md` C-0c)
+graded every F1–F3 beat against *someone holds a grudge · someone feels gratitude · the
+possibilities changed.* **Layer C produced zero.** That is not a scoring quirk — it is the route
+telling us something.
+
+---
+
+### F2-2a — 🔴 Medium's real problem: the party cannot change the outcome
+
+Walk the route as written:
+
+| The party… | And then |
+|---|---|
+| is **sent** to assassinate a rival | they are an instrument, not an agent |
+| **succeeds** | *"It does not take."* He is at F3 regardless |
+| **fails or spares him** | He is at F3 regardless |
+| **answers the song** | They get Exposure. The world is unchanged |
+
+⚙️ **Every path converges.** Nobody holds a grudge that outlives the room, nobody owes them, and
+no road opens or closes. **That is why the sweep found nothing to brand** — correctly.
+
+⭐ **The fix is already written into the layer, one sentence from the end:**
+
+> *"…and what happens in this room decides **what he thinks of them when they arrive**."*
+
+🔴 **That is a promise the route does not currently cash.** Bex's F3 posture is the one thing
+this floor genuinely determines, and nothing mechanises it. Make that the quest.
+
+**Three candidate spines — these are proposals, and the owner picks (or rejects) one:**
+
+| | Spine | What becomes markable |
+|---|---|---|
+| **① The Petition begins here** | Canon has Bex at F3 *wanting to be human*, never lying, unable to defend his means. **Let him ask the party for something at F2** — small, deniable, and honest. They grant it or refuse. | 🩸 A refusal he remembers · 🕯 a favour he owes. **Either way F3's Bex is a different scene**, which is what the layer already promises |
+| **② Who hired you** | The killed-branch already has the party *"being hired by him and not told by whom"* — Beelzebub's man, unknowingly. **Let that be discoverable.** Finding out mid-route, and choosing to finish the job anyway or walk, is a decision the party owns | 🚪 Possibilities change: you either served Beelzebub knowingly or refused him to his face |
+| **③ What the crown is digging for** | Vermilia is two centuries into excavating a god, and 🔒 **the high court do not know what the secret is.** A party that freed her at F1 is the one group she might tell. **Learning it is not a deed — being asked to help, and answering, is** | 🕯 Gratitude from the only follower a dead god has left · 🚪 the F3 revival road opens early |
+
+⭐ **①+③ compose well.** Both antagonists ask the party for something on the same floor, both
+asks are honest, and **the party cannot satisfy both** — Bex wants the hunger lifted, Vermilia
+wants her god back, and S-6 says those are the same cure arriving by different roads. **That is
+demon politics as a *choice* rather than as a job.**
+
+⚠️ **② is the weakest alone** — it is a reveal, not a decision, unless refusing has a cost.
+
+---
+
+### F2-2b — Hard's real problem: the destination is undefined
+
+Layer D's mechanics are the strongest on the floor. But the **win condition is *"arrival"* at a
+village described only as somewhere the Loong *"finds purpose"*, and 🔴 the owner has already
+said that reads as nothing** — *"which village? the loong's? I dont think this is what i had in
+mind."*
+
+⚙️ **The route is currently a fetch quest with excellent combat.** `Shepherd` brands a party for
+delivering a creature somewhere, and the doc cannot say why there.
+
+🎯 **Proposed fix — the village is where the Loong's LEAD is.** Canon already supplies it:
+
+> S-4: *"Seventy years crossing the desert hunting the source — and **out here it heard of the
+> mask**."*
+
+**So the village is where it heard.** Someone there saw a masked man, or survived him, or
+carries the plague he left. **Arrival is not sanctuary — it is the Loong getting its next step**,
+and that step is the capital.
+
+**What this buys, at no cost to the existing encounter:**
+
+| | |
+|---|---|
+| ⭐ **`Shepherd` becomes causal** | You did not save a creature. **You put it on the road to the meeting that ends the campaign** (S-6) |
+| ⭐ **`Livestock` gets its full weight** | Handing it to the hunters does not just doom one dragon — **it kills the lead**, and with it the only path to the cure |
+| ⭐ **The floor connects** | F2 Hard now *causes* F3 Hard instead of preceding it |
+| ✅ **Nothing is rebuilt** | Hounds, Warden, Horn, the shed scale, the win-on-arrival rule all stand unchanged |
+
+🟡 **Open: who in the village knows?** A survivor · a plague-scarred child · a trader who sold
+the masked man passage. The last is the most useful — **it means the mask was moving with
+purpose seventy years ago**, and someone took money for it.
+
+---
+
+### F2-2c — What this proposal does NOT settle
+
+- 🔴 **Nothing here is ruled.** Three Medium spines and one Hard fix, all owner calls.
+- **No new statlines.** Every proposal above rides the existing C-1/C-2/C-3 and D-1/D-2/D-3
+  entries; the fights do not change.
+- **The Marks that would follow are unwritten** — deliberately. Author them *after* a spine is
+  picked, per C-0c's rule that Marks are authored per floor beside the enemy pass.
+
+---
+
 ## F2-1 — What this pass does NOT cover
 
 | Item | Note |

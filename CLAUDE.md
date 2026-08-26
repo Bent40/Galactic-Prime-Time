@@ -690,7 +690,19 @@ Skills are granted to players by templateId. The player sheet joins template dat
   are ruled good as a class. `Unhurried`→**`Laid To Rest`** (the traditional term — *to lay a ghost* — and it is the **F1**
   deed) · `The Village Stands`→**`Shepherd`**, reframed: **there is no village to save, the
   village is the destination.**
-- 🔴 **F2 Medium and Hard quests need design work** before their rows are decisive (owner).
+- 🔴 **F2 QUEST DESIGN (PROPOSAL, `f2-enemy-pass.md` F2-2).** Both layers are mechanically strong;
+  the gap is upstream. ⭐ **Medium's real problem: the party cannot change the outcome** — sent to
+  assassinate, the kill does not take, sparing changes nothing, answering the song pays Exposure.
+  **Every path converges**, which is why the deed sweep found zero marks there. The fix is a
+  sentence already in the layer — *"what happens in this room decides what he thinks of them when
+  they arrive"* — currently an uncashed promise. Three candidate spines: **① Bex's Petition begins
+  at F2** (he asks honestly; they grant or refuse) · **② who hired you** is discoverable · **③
+  Vermilia tells a party that freed her what the crown is digging for.** ⭐ ①+③ compose: both
+  antagonists ask on the same floor, both asks are honest, and **the party cannot satisfy both.**
+  ⭐ **Hard's problem: the destination is undefined.** Proposed — **the village is where the Loong
+  HEARD OF THE MASK** (S-4 already says so). Arrival is not sanctuary, it is the Loong getting its
+  next step, which makes `Shepherd` causal and `Livestock` kill the lead. Nothing is rebuilt.
+  🔴 **Nothing ruled; no new statlines.**
 - ⭐ **The best names state an unwelcome fact:** `Unsealed` (killed the Doorward — it warned you
   truthfully and it was still the right move) · **`Martyr`** (killed Nullrot) · `Left To Rot`
   (extracted the Loong and left the city sick — **names what you abandoned, not what you
