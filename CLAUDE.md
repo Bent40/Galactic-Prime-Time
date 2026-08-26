@@ -579,6 +579,132 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - Still standing from the linear draft: **mobs and individual elites pay ZERO levels**;
   **bosses pay for being RESOLVED, not killed**; **all routes pay identical levels**.
 
+## Set 1 item concepts (PROPOSAL, added 2026-08-25)
+- **`rulebook/set1-item-concepts.md`** — the **first 9 of the ~27** authored by weapon-research
+  **W-9 R-1**. Set 1 = 3 routes × 3 acquisition classes; **there is no floor axis** because
+  §12.7's band carries each concept F1→F3 itself (M-1 ×2 → M-2 ×4 → M-3 ×8), so each is written
+  once and read three times.
+- **This is the SPINE, not the top shelf.** `items-batch-c.js` already holds the authored apex
+  pieces; W-7 §1 puts the genre apex ratio near 3%, so those stay few.
+- The grid: **Leak-Vial · Oathbreaker line ⭐ · The Name** (Easy) · **Clan-Token · Brand-Iron ·
+  The Debt ⭐** (Medium) · **Crystal Shard · Kin-Carve ⭐ · The Horn, taken** (Hard).
+- **Three exemplars carry the rulings.** ⭐ **C-2 Oathbreaker** restates Mistletoe's `Charm 8`
+  as R-2's `REQUIRES Vengeful` + `REFUSES Corporate Asset` — the seed already calls it *"a CLAIM,
+  not an edge"*, so the stat was a predicate in disguise. ⭐ **C-6 The Debt** is R-3 in one
+  object: a worthless token that becomes a queen's writ if she was spared and **stays inert
+  forever if she was killed** — and it `REFUSES Witnessed`, which is Vermilia's own *"was I a
+  coward?"* turned outward. ⭐ **C-8 Kin-Carve** is the Teigu rule: **overuse makes you kin**,
+  and a contestant becoming Loong-like is not carrying loot, they are becoming livestock.
+- 🔒 **RULED 2026-08-25:** `Charm 8` **stays** on Mistletoe and carries C-2's gate alone (the
+  proposed predicate is dropped — it was already doing the work and is already seeded); and the
+  predicates are **trimmed from 7 gates to 2** (C-6 `REFUSES Witness`, C-8 `REFUSES Animal
+  Planet`) — *"there will be normal weapons too so its not that big of a deal."*
+- ⭐ **What replaced them is better: three concepts now GRANT a Mark instead of refusing a tag.**
+  An item that marks you creates consequences; an item that refuses you only closes a door.
+- 🔒 **C-0b — MARKS: RULED IN (2026-08-25) as a SUBGENRE of §18 tags**, not a second system —
+  a tag with `fades: false` plus a presence trigger, inheriting §18's storage, its TVTropes
+  definability rule and its §18.1.6 item-gating. **Witness · Dragon Slayer · Regicide.**
+  Granted automatically by the deed; **permanent, never fades**; *"might unlock new
+  interactions, not necessarily good."*
+- 🔒 **No secrecy states.** Open/Sealed/Broken is **dropped**. A Mark is **always present** (and
+  always counts for predicates) and **ACTIVATES when a scene makes it relevant** — `Regicide`
+  near crowns and thrones, `Dragon Slayer` near demons and the Loong, `Witness` near Vermilia,
+  who recognises it. Activation reuses §18.2's flagship-rider shape, so the whole build is
+  **one flag and one trigger type**.
+- ⭐ **THE AUTHORING RULE — a Mark's name must provoke a question the player cannot yet answer.**
+  The party kills a demon girl, thinks *"oh well, the demon's dead"*, and the sheet says
+  **`Regicide`**. They know a fact and not its referent, and carry that question to F3. *"That
+  will surely get their gears turning."* **Name the deed by its weight, never by its action** —
+  `Regicide` is a question, `Killer` is not.
+- 🔴 **Marks repaired a hole the first draft shipped** — §18's lifecycle fades every tag, so
+  C-6's original `REFUSES Witnessed` was defeatable by *neglect*. A Mark cannot be shed, so the
+  gate holds, and R-3's loop closes (a myth born from a deed cannot lapse).
+- 🔒 **MARKS ARE REAL IN-WORLD — the Corporation's CAUSALITY LEDGER (ruled 2026-08-25).** Not a
+  metaphor and not a UI convention: the production **attributing consequence to a contestant**,
+  physically. ⭐ **The purpose is diagnostic** — *"a way for players to know if something they did
+  is the cause of their current circumstances."* That is also why activation is presence-based:
+  the Mark lights **where its consequence is**, which is the same thing as pointing at the cause.
+  🟡 Owner's open direction: maybe *gather causality* from them later.
+- ⚠️ **Branding is NOT Vermilia's alone** — she is only the one branding *so far*, and **more
+  high-tier entities will brand contestants.** A brand is a general capability of powerful
+  beings; the Corporation's Marks are one user of that form, not its owner. **A contestant may
+  carry brands from different hands, and whose brand it is will matter.**
+- 🔒 **A Mark cannot be REINFORCED — *"it just IS."*** No depth axis; a second regicide is not
+  more `Regicide`.
+- 🔒 **`REFUSES` is checked CONTINUOUSLY, and a Mark-based refusal is PERMANENT (ruled 2026-08-25).**
+  *"The item has conditions, lets say 'never kill a man'. If you killed someone, you cant take it
+  back."* ⭐ **This is the payoff of ruling Marks permanent** — the two predicate sources now
+  behave differently: `REFUSES <§18 tag>` **lifts when the tag fades** (C-8's `Animal Planet` —
+  befriend the Loong and the weapon goes quiet, let it lapse and it answers again), while
+  `REFUSES <Mark>` is a **one-way door** (C-6's `Witness` — stand by once and the queen's token
+  is shut to you forever). ⚠️ Authoring rule: **a Mark-predicate locks behind you; a tag-predicate
+  swings. Do not reach for a Mark unless you mean forever.**
+- 🔒 **Reviving Cinnabrus gets its OWN mark, not `Kingmaker`** — *"the crescendo of the piece, a
+  **reapotheosis**… a god is revived, hope is given to the clan, and it is now incomplete."*
+  🔒 **`Apotheosis`** — and the *"now incomplete"* half is deliberate: a god is back, the clan has
+  hope, and the work is not finished.
+- 🔒 **Marks are BRANDS ON THE BODY** — physical, and *"not necessarily in a place you can see."*
+  **Activation reads MOOD FIRST**: the room is wrong before anyone explains why, then a small
+  note of the brand lighting / light from somewhere on the body. The GM may state it outright;
+  what to avoid is announcing before the mood shifts. ⚙️ The light says *something here concerns
+  you*, never what — so the player keeps holding the question. 🎯 And a contestant lighting up in
+  a throne room is exactly the shot the Corporation wants.
+- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **22 distinct deeds across F1–F3**, only 3
+  from items — confirming Marks are a **campaign** rule, authored per floor beside the enemy
+  passes, not an item feature. Routes: **Easy 6 · Medium 6 · Hard 8**.
+- ⚠️ **C-0d — THE FIREWALL DOES NOT BAR RELIGIOUS REGISTER (correction, 2026-08-25).** S-0's ⛔
+  column is the **economy**, never the vocabulary — its first ✅ entry is *"Cinnabrus, the buried
+  plague god."* 🔒 **A god in v1 is just a WORSHIPPED ENTITY** — *"could be simply a powerful
+  sorcerer revered by people to a status no different than a god"* — and **the Corporation is big
+  enough to use gods as NPCs.** So `Saint`, relics, blessings and worship are all available; only
+  **divinity-as-an-economy** is barred. A session wrongly rejected `Saint` on firewall grounds;
+  recorded in `set1-story-canon.md` S-0 so it is not repeated.
+- 🔴 **C-0e / S-6 — WHY THE LOONG AND NULLROT NEVER MEET (ruled 2026-08-25).** **Each believes
+  the OTHER is the sacrifice holding the cure**; the truth is *a little from both* and neither is
+  consumed. **Two creatures avoiding the only conversation that saves everyone, because each has
+  priced it as a death.** ⭐ **Without the party they never talk** — that is the party's real
+  contribution to the best ending, and it is why S-6 says *"the optimal ending is not mercy, it is
+  introductions."* ⚠️ **Supersedes** the older *"neither knows the other exists"* — by F2 the Loong
+  has *"heard of the mask"*; what they lack is an accurate price, not knowledge.
+- ⭐ **`MARTYR` — the only mark that names your VICTIM, not your deed (owner, 2026-08-25).**
+  Killing Nullrot is not framed around the killing: **his corpse still works as the cure
+  ingredient, but a finite one.** Alive he is renewable; dead he is a supply that runs out.
+  🔴 **So a party can enact S-6's misunderstanding instead of correcting it, and it functions** —
+  right about the mechanism, wrong about the necessity, and the road stays open *narrowed,
+  forever.* The brand on their body calls the man they killed a martyr. *(Retires `He Was
+  Right`.)* 🔒 The corpse-as-limited-ingredient rule is **BLESSED** (2026-08-25).
+- 🔴 **F3 Hard's ending is the MEETING, not getting the Loong out** (owner) — extraction is an
+  option and the lesser one. The F3 Hard and convergence rows were the same act and are **merged
+  into one `Fateful Meeting`**; `Shepherd` moved to **F2's desert escort**, which is the actual
+  shepherding act (**there is no village to save — the village is the destination**).
+- 🔒 **THE INCLUSION TEST (owner, 2026-08-25)** — *"a mark is something a story leaves on your
+  soul to prove it was there."* A deed marks if **someone holds a grudge · someone feels
+  gratitude · the possibilities changed.** This **replaced** the first draft's looser
+  *irreversible/consequential/nameable*, and immediately cut three entries — **killing Bex at F2**
+  (he returns by F3, so no grudge sticks and no road closes; *maybe an achievement, not a Mark*),
+  destroying the Ribcage, and answering the song. ⚙️ **All three were decisions inside a fight:
+  a tactical choice is not a deed.**
+- 🔒 **Naming pass (owner):** `Heeded the Mural`→**`Historian`** · `Left Him Chained`→**`Torment`**
+  · `Made It Unnecessary`→**`Saint`** ·
+  `No Fight`→**`Fateful Meeting`** · `Surgical`→**`Crystal No More`**. Role-names and state-names
+  are ruled good as a class. `Unhurried`→**`Laid To Rest`** (the traditional term — *to lay a ghost* — and it is the **F1**
+  deed) · `The Village Stands`→**`Shepherd`**, reframed: **there is no village to save, the
+  village is the destination.**
+- 🔴 **F2 Medium and Hard quests need design work** before their rows are decisive (owner).
+- ⭐ **The best names state an unwelcome fact:** `Unsealed` (killed the Doorward — it warned you
+  truthfully and it was still the right move) · **`Martyr`** (killed Nullrot) · `Left To Rot`
+  (extracted the Loong and left the city sick — **names what you abandoned, not what you
+  rescued**) · `Livestock` (handed the Loong to the hunters) ·
+  `Two Million` (FRACTURE 4 cracks the reservoir under the capital — **a number branded on your
+  body**, and the one Mark that should arguably never go dormant).
+- ⚠️ **Only two deeds in Set 1 are unambiguously good.** *"Not necessarily good"* is an
+  understatement — the campaign brands you for being right about as often as for being wrong.
+- ⚠️ Branch interaction: `Witness` activates near Vermilia, so a party holding **both**
+  `Regicide` and `Witness` has permanently disabled the better half of `Witness` — they killed
+  the only person who could recognise it. Nothing needs to say so; it just never fires.
+- 🔴 **NO stat blocks** — numbers come after the shapes are blessed. **C-10** holds six open
+  calls; the top three are all Marks (is it in · do Sealed states ship · what else grants them).
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
@@ -602,7 +728,7 @@ anything else.
 | **3** | **Naming and fix pass.** Deferred until there was a base to work with. There is now: 53 statted entries with working names | all three enemy passes |
 | **4** | **F1 follow-on content (E-4).** Encounter tables / room counts · §21.4 terrain blocks · Exposure and viewer values per enemy · token/loot payouts | `rulebook/f1-enemy-pass.md` E-4 |
 | **5** | **Migrate F2/F3 to `Enemy.signature`.** F1 is done (14 of 19); the gate is optional by design so the others still pass. Do it during the naming pass | `server/seeds/enemies-f2.js`, `-f3.js` |
-| **6** | 🔬 **The weapon research sweep.** Schema, tranche 1 and a 6-pass queue are written; the sweep needs a session whose egress allowlist includes `*.fandom.com` and `en.wikipedia.org` | `rulebook/weapon-research.md` |
+| **6** | ✅ **Weapon research COMPLETE + all three questions RULED (2026-08-25).** 6 passes, 4 tranches, 25 myth weapons + 14 fiction/game systems, every entry from a page actually read. 🔓 Fandom bypass: `/wiki/` is Cloudflare-403 but **`api.php` returns 200** (raw wikitext). 🔒 **R-1 — author ~27 concepts, NOT 81 weapons.** The §12.7 band owns the floor axis; the target is **3 sets × 3 routes × 3 acquisition classes** + a small apex set (genre apex ratio ≈3%). 🔒 **R-2 — an item MAY reject a contestant, on a WRITTEN predicate, never arbitrarily.** Legal shapes are `REQUIRES <tag>` (BE) and `REFUSES <tag>` (NOT BE); "the sword judges your worth" is not writable. Rides on **§18.1.6 tag gates** + **§18's TVTropes rule** (which is already the anti-arbitrariness guarantee) + **§12.1 → §6 Forced Action** for the failure path. ⭐ Mistletoe's `Charm 8` is this rule already in use as a stat proxy — *"a contestant nobody would side with is holding a sprig"* — and is the first candidate to restate. **A weapon is lost when its tag FADES**, which is Freyr's sword as a live mechanic. 🔒 **R-3 — weapons BIRTH myths, they do not borrow them.** Reputation accrues forward from deeds (Kusanagi/Fate model); the Frieren replica case is **not** adopted. Closes W-6 §3's "meaning cannot appreciate" gap — the loop is **deeds birth a tag → the tag gates the weapon**. ⚙️ **Total new machinery across all three rulings: one authored form (`REFUSES`).** ⚠️ W-1 is partly retracted — its 'genre-wide ladder' was one wiki table duplicated | `rulebook/weapon-research.md` **W-9** |
 | **7** | **Set 2 (F4–F6).** No floors designed — only band names in M-4. The level budget, the scaling frame and the horde rules all reach that far already | — |
 | **8** | Rival-resolution rule is RULED, but **rival party defaults are unwritten** — author what each would do by default, as prep and never as promise | `set1-story-canon.md` S-7 |
 | **9** | Game repo: **automatic Dissolution cause-tracking.** `freeze_dissolution()` is the API; nothing calls it, because the engine cannot yet tell that a contestant left an aura | `Galactic-Prime-Time-Game` R36 |

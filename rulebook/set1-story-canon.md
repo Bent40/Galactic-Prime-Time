@@ -28,6 +28,31 @@ editions must not be conflated.** What crosses the line and what does not:
 
 **In v1 the Corporation™ runs the show.** No god is running anything.
 
+### ✅ CLARIFIED 2026-08-25 — what the firewall does NOT bar
+
+> **Owner:** *"There CAN be gods in the book. They are not part of the corporate's settings,
+> is all. The corpo is big. Very big. Big enough to use gods as npcs, if he deems it useful.
+> What are gods in the corporate setting anyway? Just worshipped entities. Could be simply a
+> powerful sorcerer revered by people to a status no different than a god."*
+
+🔴 **The ⛔ column above is the ECONOMY, never the vocabulary.** Read the table again: the very
+first ✅ entry is *"Cinnabrus — the buried plague god."* Gods cross. What does not cross is
+**divinity as a currency** — the Casino, the table, patrons bidding, debts paid in reverence.
+
+| | |
+|---|---|
+| ✅ **Allowed** | Gods as entities · worship · temples · followers · saints · relics · blessings · a god as a Corporation NPC |
+| ⛔ **Barred** | Divinity as an **economy** · a god *running* the show · anything that needs a table to make sense |
+
+⚙️ **The deflationary definition is the whole trick.** A "god" in v1 is **a worshipped entity**
+— nothing metaphysical is claimed. A powerful sorcerer revered to that status is a god by the
+only definition v1 needs. That is why Cinnabrus's ruin *"needs no economy to land."*
+
+⚠️ **Known misreading, recorded so it is not repeated.** The operative test — *"any sentence
+that needs the word 'god' does not belong in the book"* — is about sentences that need
+**god-as-cosmology**. It is **not** a ban on religious register, and a 2026-08-25 session read
+it that way and wrongly rejected the Mark name `Saint` on firewall grounds.
+
 > **Cinnabrus is BACKGROUND.** He is what a thorough party can uncover across three
 > floors and a good run rewards. He is never the reason the cameras are on. Nothing in
 > the v1 rulebook should require a table to make sense — his ruin is simply that
@@ -400,6 +425,44 @@ song at F2: the informed party skips what the ignorant party survives.
 
 > **Every antagonist in Set 1 wants something reasonable and is reaching for it the only
 > way they can see. The optimal ending is not mercy — it is introductions.**
+
+### 🔴 WHY THEY NEVER MEET ✅ RULED 2026-08-25 — the symmetric misunderstanding
+
+> **Owner:** *"the goal of the Loong is to meet Nullrot to make a cure with him as an
+> ingredient. Nullrot thinks the other way around… They each think the other is the sacrifice
+> holding the cure, when its just a matter of giving a little from both."*
+
+🔒 **Both are right that the other is half the cure, and both are wrong about the price.**
+
+| | Believes |
+|---|---|
+| **The Loong** | Nullrot is **the ingredient** — the cure is made *out of him* |
+| **Nullrot** | The Loong is **the ingredient** — the cure is made *out of it* |
+| 🔴 **The truth** | **A little from each.** Neither is consumed. The mixture costs them almost nothing |
+
+⭐ **This is why they never talk on their own, and it is a far better reason than distance or
+ignorance.** Each is walking toward the other believing the meeting ends with one of them dead.
+**Two creatures avoiding the only conversation that saves everyone, because each has priced it
+as a sacrifice.** 🔴 **Without the party, it never happens.** That is the party's actual
+contribution to the best ending — not power, not mercy, just **the introduction.**
+
+⚠️ **Supersedes the older line** that *"neither knows the other exists."* They do know, at
+least by F2 — S-4's Hard beat already has the Loong *"out here it heard of the mask."* What
+they lack is not knowledge of each other; it is **an accurate quote on the price.**
+
+#### ✅ The counterfactual — killing one of them WORKS, and costs the road (RULED 2026-08-25)
+
+🔴 **A party can enact the misunderstanding instead of correcting it, and it will function.**
+Kill Nullrot and **his corpse still serves as the ingredient — but a finite one.** Alive he is
+renewable; dead he is a supply that runs out. There is enough for some, and then there is not.
+
+⭐ **That is the tragedy proved by the people who could have prevented it.** They were right
+about the mechanism and wrong about the necessity, and the road stays open **narrowed, forever.**
+This is what the Mark **`Martyr`** records (`set1-item-concepts.md` C-0f) — *the only mark in
+Set 1 that names the victim rather than the deed.*
+
+🔒 **BLESSED 2026-08-25.** Compatible with the ruling above as written: *alive* neither is
+consumed, *dead* one of them is spent and the supply is capped.
 
 ### ✅ RULED 2026-08-25 — FLOOR 3 IS THE CONVERGENCE
 
