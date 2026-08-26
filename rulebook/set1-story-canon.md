@@ -450,6 +450,20 @@ contribution to the best ending — not power, not mercy, just **the introductio
 least by F2 — S-4's Hard beat already has the Loong *"out here it heard of the mask."* What
 they lack is not knowledge of each other; it is **an accurate quote on the price.**
 
+#### 🟡 The counterfactual — killing one of them WORKS, and costs the road (proposed)
+
+🔴 **A party can enact the misunderstanding instead of correcting it, and it will function.**
+Kill Nullrot and **his corpse still serves as the ingredient — but a finite one.** Alive he is
+renewable; dead he is a supply that runs out. There is enough for some, and then there is not.
+
+⭐ **That is the tragedy proved by the people who could have prevented it.** They were right
+about the mechanism and wrong about the necessity, and the road stays open **narrowed, forever.**
+This is what the Mark **`Martyr`** records (`set1-item-concepts.md` C-0f) — *the only mark in
+Set 1 that names the victim rather than the deed.*
+
+⚠️ **Not ruled.** Compatible with the ruling above as written, but it changes what the Easy
+route's ending costs and should be blessed deliberately.
+
 ### ✅ RULED 2026-08-25 — FLOOR 3 IS THE CONVERGENCE
 
 **Everything is happening at once.** The capital is not a fourth route; it is the room the

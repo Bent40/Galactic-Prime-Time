@@ -280,14 +280,14 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 
 | Deed | Route | Mark | Activates near | Note |
 |---|---|---|---|---|
-| 🔴 **Kill Nullrot** | Easy | **`He Was Right`** | the infected · the cured · Cinnabrus | ⭐ Canon: *the win is the ARGUMENT, and he is right.* A mark that states the thing the party will least want to look at |
+| 🔴 **Kill Nullrot** | Easy | 🔒 **`Martyr`** | the infected · the cured · Cinnabrus · the Loong | ⭐ **The only mark in the set that names your VICTIM instead of your deed.** Owner: the focus is not the killing, it is that **the corpse still works as an ingredient — but a finite one.** He dies, it works, and it did not have to. 🔴 See C-0f: this proves S-6's tragedy correct by enacting it. *(Retires `He Was Right`, which said the same thing out loud; a martyr is someone who was right and died of it.)* |
 | **Destroy the Reservoir alone** | Easy | 🔒 **`Crystal No More`** | the plague · the infected · Nullrot | Canon calls it surgical, and it ends him. ⚠️ **Note:** this names a *world-fact* and a good one, so it reads closer to a trophy than the rest of the set. `Two Million` is also a world-fact but it is **yours**; this one is not obviously a wound |
 | **Talk to the host** | Easy | **`Recognition`** 🟡 | the mask · the host | Canon: *only RECOGNITION was ever missing, and F3 supplies it.* Overlaps C-3's `Witness` grant — ❓ same mark or a second one? |
 | 🔴 **Give Bex his sacrifice** | Medium | **`The Price`** 🟡 | Bex · the farm · the slums | You handed over a person to end a demon's nature. He never lied about what he wanted |
 | **Offer a cure that scales** | Medium | 🔒 **`Doctor`** — 🟡 `Saint` also open | Bex · demons · the infected | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* ⚠️ **My objection to `Saint` was wrong and is withdrawn** (see C-0d) — S-0 bars the *economy*, never the vocabulary. `Doctor` is a role-name tied to the cure thread; **`Saint` names what you became to them**, which by the name-the-weight rule is arguably stronger. Owner's pick |
 | 🔴 **Crack the reservoir — FRACTURE 4** | Hard | **`Two Million`** | ⭐ **everywhere, forever** | 🔴 **The largest deed in the campaign.** Canon: at 4, the reservoir cracks into a city of two million. **A number branded on your body.** If any Mark should never go dormant, it is this one |
 | 🔴 **Make the Loong and Nullrot TALK** | Hard | 🔒 **`Fateful Meeting`** | the two of them · the infected · Cinnabrus | 🔴 **This is the F3 Hard ending (owner correction), and it is the SAME EVENT as the convergence row below** — see C-0e. Each believes the other is the sacrifice; **without the party they never talk** |
-| **Get the Loong out of the city instead** | Hard | 🟡 **`Saved One`** *(proposed)* | the Loong · the infected · Nullrot | ⚠️ **An option, not the ending (owner).** You save the dragon and leave the city sick — the cure road closes. Possibilities changed, so it marks; it is simply the lesser outcome |
+| **Get the Loong out of the city instead** | Hard | 🔒 **`Left To Rot`** | the city · the infected · Nullrot | ⭐ **Names what you ABANDONED, not what you rescued.** The party thinks they performed a rescue; the brand disagrees. An option, not the ending — you save the dragon, the cure road closes, and the capital keeps the plague |
 | 🔴 **Revive Cinnabrus** | convergence | **`Kingmaker`** ↑ *or its own* ❓ | the wrath clan · Vermilia · F3's survivors | ❓ Does reviving a god reuse `Kingmaker`, or does it deserve its own? **Owner call** |
 | **Open the prison with both** | convergence | 🔒 **`Fateful Meeting`** ↑ *merged* | the foundations · the tongue · Cinnabrus | 🔴 **Same deed as the F3 Hard row above.** Two-lock canon: the pair who must share a room to make the mixture are the pair who open the door — **one act, one mark.** 🟡 `Matchmaker` remains an alternative name |
 
@@ -353,6 +353,37 @@ door. **Merged into a single `Fateful Meeting`.**
 ⭐ **And `Shepherd` moved floors because of this.** It was on the F3 extraction; the actual
 shepherding act is **F2's desert escort**, taking a hurt, hunted creature to safe haven. There
 is no village to save — the village is the destination.
+
+---
+
+## C-0f — 🔴 `Martyr`: killing Nullrot WORKS, and that is the point
+
+The `Martyr` naming (C-0c, F3 Easy) carries a story rule, not just a word.
+
+> **Owner:** *"maybe you can use its corpse still as an ingredient, but the ingredient is now
+> limited, which would make it Martyr."*
+
+🔒 **Alive, Nullrot is renewable. Dead, he is a supply that runs out.** Killing him does not
+destroy the cure — it **caps** it. There is enough for some, and then there is not.
+
+⭐ **This is the sharpest possible proof of S-6's tragedy, and it belongs to the players.**
+S-6 rules that the Loong and Nullrot each believe the other must be *consumed*, when the truth
+is *a little from both and neither is consumed.* `Martyr` is what happens when a party
+**enacts the belief instead of correcting it**:
+
+| | |
+|---|---|
+| 🩸 **They were right about the mechanism** | the corpse really is the ingredient |
+| 🕯 **They were wrong about the necessity** | it never had to cost him |
+| 🚪 **And it is now finite** | the road stays open, narrowed, forever |
+
+⚙️ **So the party can validate the misunderstanding by acting on it** — and the brand on their
+body calls the man they killed a martyr. **The mark names him, not them.** That is a shape
+nothing else in the sweep has, and it is worth keeping rare.
+
+🔴 **Needs a canon confirm (C-10 #14):** does the corpse-as-limited-ingredient hold? It is
+compatible with S-6 as written — *alive* neither is consumed, *dead* one of them is spent — but
+it has not been ruled, and it changes what the Easy route's ending actually costs.
 
 ---
 
@@ -706,6 +737,7 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 | # | Call | Why it needs you |
 |---|---|---|
 | **11** | 🆕 **Should Marks mean something IN-WORLD?** *Brand* is already Vermilia's word, and canon has her clan embodying **karma**. A deed burned into the body sits very close to that — but S-0's firewall keeps v1 free of anything needing a god. **Pure Show apparatus, or not?** | The one call that touches the firewall |
+| **14** | 🆕 **Does `Martyr`'s corpse-as-limited-ingredient hold?** (C-0f) Compatible with S-6 — alive neither is consumed, dead one is spent — but unruled, and it changes what the Easy ending costs | Story rule, not a name |
 | **12** | 🆕 **Do the ❓ entries in C-0c resolve?** Three need canon before authoring: is unmasking available at F1 · does `Recognition` duplicate `Witness` · does reviving Cinnabrus reuse `Kingmaker` | Blocks three deeds, not the mechanic |
 | **10** | 🆕 **Can a Mark be reinforced?** §18 tags stack pull when Reinforced. A second regicide is presumably not *more* `Regicide` — or is it? | Decides whether Marks have any depth axis at all |
 | **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ Marks narrows this — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (an ordinary tag) still has the question | One item, not a system-wide rule |

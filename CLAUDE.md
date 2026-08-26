@@ -642,6 +642,13 @@ Skills are granted to players by templateId. The player sheet joins template dat
   contribution to the best ending, and it is why S-6 says *"the optimal ending is not mercy, it is
   introductions."* ⚠️ **Supersedes** the older *"neither knows the other exists"* — by F2 the Loong
   has *"heard of the mask"*; what they lack is an accurate price, not knowledge.
+- ⭐ **`MARTYR` — the only mark that names your VICTIM, not your deed (owner, 2026-08-25).**
+  Killing Nullrot is not framed around the killing: **his corpse still works as the cure
+  ingredient, but a finite one.** Alive he is renewable; dead he is a supply that runs out.
+  🔴 **So a party can enact S-6's misunderstanding instead of correcting it, and it functions** —
+  right about the mechanism, wrong about the necessity, and the road stays open *narrowed,
+  forever.* The brand on their body calls the man they killed a martyr. *(Retires `He Was
+  Right`.)* ⚠️ The corpse-as-limited-ingredient rule is **proposed, not ruled** — C-10 #14.
 - 🔴 **F3 Hard's ending is the MEETING, not getting the Loong out** (owner) — extraction is an
   option and the lesser one. The F3 Hard and convergence rows were the same act and are **merged
   into one `Fateful Meeting`**; `Shepherd` moved to **F2's desert escort**, which is the actual
@@ -660,8 +667,9 @@ Skills are granted to players by templateId. The player sheet joins template dat
   `The Village Stands`→**`Unhunted`**.
 - 🔴 **F2 Medium and Hard quests need design work** before their rows are decisive (owner).
 - ⭐ **The best names state an unwelcome fact:** `Unsealed` (killed the Doorward — it warned you
-  truthfully and it was still the right move) · `It Did Not Take` (killed Bex and he is not dead)
-  · `He Was Right` (killed Nullrot) · `Livestock` (handed the Loong to the hunters) ·
+  truthfully and it was still the right move) · **`Martyr`** (killed Nullrot) · `Left To Rot`
+  (extracted the Loong and left the city sick — **names what you abandoned, not what you
+  rescued**) · `Livestock` (handed the Loong to the hunters) ·
   `Two Million` (FRACTURE 4 cracks the reservoir under the capital — **a number branded on your
   body**, and the one Mark that should arguably never go dormant).
 - ⚠️ **Only two deeds in Set 1 are unambiguously good.** *"Not necessarily good"* is an
