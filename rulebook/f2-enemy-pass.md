@@ -265,7 +265,8 @@ no road opens or closes. **That is why the sweep found nothing to brand** — co
 🔴 **That is a promise the route does not currently cash.** Bex's F3 posture is the one thing
 this floor genuinely determines, and nothing mechanises it. Make that the quest.
 
-**Three candidate spines — these are proposals, and the owner picks (or rejects) one:**
+🔒 **RULED 2026-08-25 — the owner selected ①+③.** Both are live; ② is dropped. The table below
+keeps all three for the reasoning, but **① and ③ are the spine.**
 
 | | Spine | What becomes markable |
 |---|---|---|
@@ -278,7 +279,7 @@ asks are honest, and **the party cannot satisfy both** — Bex wants the hunger 
 wants her god back, and S-6 says those are the same cure arriving by different roads. **That is
 demon politics as a *choice* rather than as a job.**
 
-⚠️ **② is the weakest alone** — it is a reveal, not a decision, unless refusing has a cost.
+⚠️ **② is dropped** — it is a reveal, not a decision, unless refusing has a cost.
 
 ---
 
@@ -292,7 +293,7 @@ mind."*
 ⚙️ **The route is currently a fetch quest with excellent combat.** `Shepherd` brands a party for
 delivering a creature somewhere, and the doc cannot say why there.
 
-🎯 **Proposed fix — the village is where the Loong's LEAD is.** Canon already supplies it:
+🔒 **RULED 2026-08-25 — the village is where the Loong HEARD OF THE MASK.** Canon already said so:
 
 > S-4: *"Seventy years crossing the desert hunting the source — and **out here it heard of the
 > mask**."*
@@ -318,7 +319,9 @@ purpose seventy years ago**, and someone took money for it.
 
 ### F2-2c — What this proposal does NOT settle
 
-- 🔴 **Nothing here is ruled.** Three Medium spines and one Hard fix, all owner calls.
+- ✅ **Ruled 2026-08-25:** Medium takes **①+③**; the Hard village **is where the Loong heard of
+  the mask**. ⚠️ **The owner notes this does not settle Hard's destination problem** — knowing
+  *why* the Loong is going there is not the same as knowing *what the place is*. Still open.
 - **No new statlines.** Every proposal above rides the existing C-1/C-2/C-3 and D-1/D-2/D-3
   entries; the fights do not change.
 - **The Marks that would follow are unwritten** — deliberately. Author them *after* a spine is
