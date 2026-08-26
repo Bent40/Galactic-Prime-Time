@@ -300,28 +300,28 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 |---|---|---|---|---|
 | 🔴 **Kill Nullrot** | Easy | 🔒 **`Martyr`** | the infected · the cured · Cinnabrus · the Loong | ⭐ **The only mark in the set that names your VICTIM instead of your deed.** Owner: the focus is not the killing, it is that **the corpse still works as an ingredient — but a finite one.** He dies, it works, and it did not have to. 🔴 See C-0f: this proves S-6's tragedy correct by enacting it. *(Retires `He Was Right`, which said the same thing out loud; a martyr is someone who was right and died of it.)* |
 | **Destroy the Reservoir alone** | Easy | 🔒 **`Crystal No More`** | the plague · the infected · Nullrot | Canon calls it surgical, and it ends him. ⚠️ **Note:** this names a *world-fact* and a good one, so it reads closer to a trophy than the rest of the set. `Two Million` is also a world-fact but it is **yours**; this one is not obviously a wound |
-| ~~Talk to the host~~ | Easy | 🔴 **`Recognition` — recommend CUT** | — | ⚠️ **It fails the inclusion test on inspection.** Talking to him changes nothing by itself: no grudge, no gratitude yet, no road opened. It is the **precondition** for `Laid To Rest`, not a deed — you must know who he is before laying him to rest means anything. And C-3's item already grants **`Witness`** for exactly this (*learned what is under there, and did not stop it*). **Two names for one moment.** Owner call |
 | 🔴 **Give Bex his sacrifice** | Medium | **`The Price`** 🟡 | Bex · the farm · the slums | You handed over a person to end a demon's nature. He never lied about what he wanted |
 | **Offer a cure that scales** | Medium | 🔒 **`Saint`** | Bex · demons · the infected | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* **Names what you became to them**, not what you did — and the religious register is fine, because S-0 bars the *economy*, never the vocabulary (C-0d). ⭐ One of only two unambiguously good deeds in Set 1 |
 | 🔴 **Crack the reservoir — FRACTURE 4** | Hard | **`Two Million`** | ⭐ **everywhere, forever** | 🔴 **The largest deed in the campaign.** Canon: at 4, the reservoir cracks into a city of two million. **A number branded on your body.** If any Mark should never go dormant, it is this one |
 | 🔴 **Make the Loong and Nullrot TALK** | Hard | 🔒 **`Fateful Meeting`** | the two of them · the infected · Cinnabrus | 🔴 **This is the F3 Hard ending (owner correction), and it is the SAME EVENT as the convergence row below** — see C-0e. Each believes the other is the sacrifice; **without the party they never talk** |
 | **Get the Loong out of the city instead** | Hard | 🔒 **`Left To Rot`** | the city · the infected · Nullrot | ⭐ **Names what you ABANDONED, not what you rescued.** The party thinks they performed a rescue; the brand disagrees. An option, not the ending — you save the dragon, the cure road closes, and the capital keeps the plague |
-| 🔴 **Revive Cinnabrus** | convergence | 🟡 **`Apotheosis`** *(proposed)* | the wrath clan · Vermilia · F3's survivors · every worshipper | 🔒 **RULED: its own mark, NOT `Kingmaker`.** Owner: *"the crescendo of the piece, a **reapotheosis** if you will… a god is revived, hope is given to the clan, and it is now incomplete."* `Apotheosis` is their coinage trimmed to one word and is a real trope. 🟡 Alternative: **`Reapotheosis`** as-said — more precise (a *re*-ascension), less familiar |
+| 🔴 **Revive Cinnabrus** | convergence | 🔒 **`Apotheosis`** | the wrath clan · Vermilia · F3's survivors · every worshipper | 🔒 **Its own mark, NOT `Kingmaker`.** Owner: *"the crescendo of the piece, a **reapotheosis** if you will… a god is revived, hope is given to the clan, and it is now incomplete."* ⭐ **The crescendo of Set 1** — and the *incomplete* half is deliberate: a god is back, the clan has hope, and the work is not finished |
 | **Open the prison with both** | convergence | 🔒 **`Fateful Meeting`** ↑ *merged* | the foundations · the tongue · Cinnabrus | 🔴 **Same deed as the F3 Hard row above.** Two-lock canon: the pair who must share a room to make the mixture are the pair who open the door — **one act, one mark.** 🟡 `Matchmaker` remains an alternative name |
 
 ### What the sweep found
 
-- **23 distinct deeds** across **24 rows** — 26 swept, **3 cut** by the owner's test, **1 added**
-  (the F3 Hard extraction as the lesser option), and **`Fateful Meeting` listed twice** because
-  the F3 Hard ending and the convergence row are one act (C-0e). **Only 3 come from items**, so
-  C-10 #8's premise holds: **Marks are a campaign rule**, authored per floor beside the enemy
-  passes.
-- ✅ **Routes: Easy 7 · Medium 6 · Hard 8** (+1 shared, +2 convergence). Still even enough that
-  no route needs padding, and it fell out of the beats rather than being designed for.
-- 🔴 **The three cuts were all the same failure.** `It Did Not Take` (kill Bex at F2),
-  `Broke the Cage`, `Answered` — each is a real decision **inside a fight**, and the world is
-  unchanged the next morning. ⚙️ **The looser first-draft test could not tell a tactical choice
-  from a deed.** The owner's grudge/gratitude/possibility test can, immediately.
+- **22 distinct deeds** across 23 rows — 26 swept, **4 cut** (`It Did Not Take`, `Broke the
+  Cage`, `Answered`, `Recognition`), **1 added** (the F3 Hard extraction as the lesser option),
+  and **`Fateful Meeting` listed twice** because the F3 Hard ending and the convergence row are
+  one act (C-0e). **Only 3 come from items**, so C-10 #8's premise holds: **Marks are a campaign
+  rule**, authored per floor beside the enemy passes.
+- ✅ **Routes: Easy 6 · Medium 6 · Hard 8** (+1 shared, +2 convergence). Even without padding,
+  and it fell out of the beats rather than being designed for.
+- 🔴 **All four cuts failed the same way.** `It Did Not Take` (kill Bex at F2), `Broke the Cage`
+  and `Answered` are each a real decision **inside a fight**, with the world unchanged the next
+  morning; `Recognition` was a **precondition** rather than a deed. ⚙️ **The looser first-draft
+  test could not tell a tactical choice — or a setup beat — from a deed.** The owner's
+  grudge/gratitude/possibility test can, immediately.
 - ⭐ **The strongest names are the ones that state an unwelcome fact** — `Unsealed`, `It Did Not
   Take`, `He Was Right`, `Livestock`, `Two Million`. Each is a sentence the party would not say
   about themselves, which is exactly why it belongs on their body.
@@ -585,8 +585,12 @@ She gives them something small — a token of thanks, worth nothing, no effect. 
 - **Spared branch:** F2 she is a queen. F3 she is *the entire dynasty*. **The same worthless
   token is now a writ from the crown of the world.** The object never changed. What was done
   with it did.
-- 🔴 **Killed branch:** it is a keepsake off a corpse and **stays inert forever** — a permanent,
-  silent record of the campaign's heaviest consequence, sitting in the party's inventory.
+- 🔴 **Killed branch:** it is a keepsake off a corpse and 🔒 **stays inert forever — RULED, no
+  redemption path.** A permanent, silent record of the campaign's heaviest consequence, sitting
+  in the party's inventory. ⚙️ **It is a memento, not a punishment** — the token was worthless to
+  begin with, so nothing is taken away; and *a god at zero cannot be prayed back*, so a
+  redemption path would contradict S-3 and undercut `Regicide`, which is the real carrier of
+  that branch.
 
 ⭐ *"Weapons can birth myths"* (R-3): this one births the myth **and then the myth outranks the
 weapon.** It closes W-6 §3's gap — *GPT has no way for an item's MEANING to appreciate* — with
@@ -738,7 +742,7 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 
 ## C-10 — Open calls
 
-✅ **Nine closed by the owner, 2026-08-25.**
+✅ **Twelve closed by the owner, 2026-08-25.**
 
 | # | Call | Status |
 |---|---|---|
@@ -751,16 +755,15 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 | ~~14~~ | Does `Martyr`'s corpse-as-limited-ingredient rule hold? | 🔒 **BLESSED** — alive Nullrot is renewable, dead he is a capped supply (C-0f, and S-6's counterfactual) |
 | ~~11~~ | Should Marks mean something in-world? | 🔒 **RULED — YES.** They are the **Corporation's mechanism for attributing consequence**, and their job is diagnostic: *"a way for players to know if something they did is the cause of their current circumstances."* ⚠️ Branding is **not** Vermilia's alone — more high-tier entities will brand |
 | ~~10~~ | Can a Mark be reinforced? | 🔒 **RULED — NO.** *"A mark cant be reinforced, it just IS."* No depth axis; a second regicide is not more `Regicide` |
+| ~~12~~ | Does `Recognition` duplicate `Witness`? | 🔒 **CUT.** It was a precondition for `Laid To Rest`, not a deed, and C-3's item already grants `Witness` for that moment |
+| ~~3~~ | Does C-6's killed-branch token stay inert? | 🔒 **RULED — inert forever, no redemption.** A memento, not a punishment: it was worthless to begin with, and *a god at zero cannot be prayed back* |
+| ~~5~~ | One name per concept, or three? | 🔒 **RULED — THREE names, one concept.** The F1 and F3 readings are not the same object (different material, different capability), and GPT items are snapshots. **One authoring unit, three seeded templates** |
 
 🔴 **Still open.**
 
 | # | Call | Why it needs you |
 |---|---|---|
-| **12** | 🔴 **Cut `Recognition`?** It duplicates C-3's `Witness` grant and is a precondition rather than a deed — my recommendation is cut. *(The other two ❓ are closed: unmasking is **F1**; the revival gets its **own** mark.)* | One row |
-| **16** | 🆕 **`Apotheosis` or `Reapotheosis`** for reviving Cinnabrus, and does the *"and it is now incomplete"* half want naming too? | Naming |
 | **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ Marks narrows this — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (an ordinary tag) still has the question | One item, not a system-wide rule |
-| **3** | **Does C-6's killed-branch token stay inert forever?** Partly answered — the branch grants `Regicide`, so the consequence has a carrier either way | Story weight vs. player mercy |
-| **5** | **One name per concept across three floors, or three names?** | Naming pass — affects seeding |
 
 ## C-11 — What is NOT here
 

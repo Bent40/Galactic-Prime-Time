@@ -633,16 +633,17 @@ Skills are granted to players by templateId. The player sheet joins template dat
   more `Regicide`.
 - 🔒 **Reviving Cinnabrus gets its OWN mark, not `Kingmaker`** — *"the crescendo of the piece, a
   **reapotheosis**… a god is revived, hope is given to the clan, and it is now incomplete."*
-  🟡 `Apotheosis` proposed.
+  🔒 **`Apotheosis`** — and the *"now incomplete"* half is deliberate: a god is back, the clan has
+  hope, and the work is not finished.
 - 🔒 **Marks are BRANDS ON THE BODY** — physical, and *"not necessarily in a place you can see."*
   **Activation reads MOOD FIRST**: the room is wrong before anyone explains why, then a small
   note of the brand lighting / light from somewhere on the body. The GM may state it outright;
   what to avoid is announcing before the mood shifts. ⚙️ The light says *something here concerns
   you*, never what — so the player keeps holding the question. 🎯 And a contestant lighting up in
   a throne room is exactly the shot the Corporation wants.
-- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **23 distinct deeds across F1–F3**, only 3
+- ✅ **C-0c — THE SET 1 DEED SWEEP (C-10 #8 done).** **22 distinct deeds across F1–F3**, only 3
   from items — confirming Marks are a **campaign** rule, authored per floor beside the enemy
-  passes, not an item feature. Routes: **Easy 7 · Medium 6 · Hard 8**.
+  passes, not an item feature. Routes: **Easy 6 · Medium 6 · Hard 8**.
 - ⚠️ **C-0d — THE FIREWALL DOES NOT BAR RELIGIOUS REGISTER (correction, 2026-08-25).** S-0's ⛔
   column is the **economy**, never the vocabulary — its first ✅ entry is *"Cinnabrus, the buried
   plague god."* 🔒 **A god in v1 is just a WORSHIPPED ENTITY** — *"could be simply a powerful
