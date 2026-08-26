@@ -631,6 +631,14 @@ Skills are granted to players by templateId. The player sheet joins template dat
   carry brands from different hands, and whose brand it is will matter.**
 - 🔒 **A Mark cannot be REINFORCED — *"it just IS."*** No depth axis; a second regicide is not
   more `Regicide`.
+- 🔒 **`REFUSES` is checked CONTINUOUSLY, and a Mark-based refusal is PERMANENT (ruled 2026-08-25).**
+  *"The item has conditions, lets say 'never kill a man'. If you killed someone, you cant take it
+  back."* ⭐ **This is the payoff of ruling Marks permanent** — the two predicate sources now
+  behave differently: `REFUSES <§18 tag>` **lifts when the tag fades** (C-8's `Animal Planet` —
+  befriend the Loong and the weapon goes quiet, let it lapse and it answers again), while
+  `REFUSES <Mark>` is a **one-way door** (C-6's `Witness` — stand by once and the queen's token
+  is shut to you forever). ⚠️ Authoring rule: **a Mark-predicate locks behind you; a tag-predicate
+  swings. Do not reach for a Mark unless you mean forever.**
 - 🔒 **Reviving Cinnabrus gets its OWN mark, not `Kingmaker`** — *"the crescendo of the piece, a
   **reapotheosis**… a god is revived, hope is given to the clan, and it is now incomplete."*
   🔒 **`Apotheosis`** — and the *"now incomplete"* half is deliberate: a god is back, the clan has

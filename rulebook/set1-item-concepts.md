@@ -404,6 +404,40 @@ neither is consumed; *dead*, one of them is spent and the supply is capped. C-10
 
 ---
 
+## C-0h — 🔒 `REFUSES` is checked CONTINUOUSLY, and a Mark-based refusal is a one-way door
+
+> **Owner:** *"refusal should also affect marks. Makes plenty of sense. The item has conditions,
+> lets say 'never kill a man'. If you killed someone, you cant take it back."*
+
+🔒 **Checked continuously, not at pickup.** An item's predicate is live for as long as you hold
+it — so an item can **stop working for you mid-campaign** because of something you did.
+
+⭐ **And because a Mark cannot be shed, the two predicate sources behave differently.** This is
+the whole payoff of ruling Marks permanent:
+
+| Predicate | Behaviour | Recoverable? |
+|---|---|---|
+| `REFUSES <§18 tag>` | Lifts when the tag **fades** (§18 lifecycle) | ✅ **Yes** — stop playing into it and the item works again |
+| 🔴 `REFUSES <Mark>` | **Permanent.** The deed happened | ❌ **Never.** *"You cant take it back"* |
+
+🔴 **So an item with a Mark-predicate can be lost forever by one act**, and the loss is not a
+penalty the GM assigns — it is the deed catching up. An item that says *never killed a man* is
+an item you are one moment away from never holding again.
+
+⚙️ **Both live cases in Set 1 are already the right shape:**
+- **C-6 `The Debt`** → `REFUSES Witness` (a **Mark**). Stand by once and the queen's token is
+  shut to you **for the rest of the campaign.** No recovery, which is exactly what makes it
+  Vermilia's judgment rather than a mood.
+- **C-8 `Kin-Carve`** → `REFUSES Animal Planet` (an ordinary **tag**). Befriend the Loong and
+  the weapon goes quiet; let the tag lapse and it answers again. **The fork is real but not
+  final** — which is right for a fight-or-befriend choice the party may keep re-making.
+
+⚠️ **Authoring rule that follows: choose the predicate source deliberately.** A Mark-predicate
+is a door that locks behind you; a tag-predicate is a door that swings. **Do not reach for a
+Mark unless you mean forever.**
+
+---
+
 ## C-1 — Easy × loot · **Leak-Vial**
 
 |||
@@ -742,7 +776,7 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 
 ## C-10 — Open calls
 
-✅ **Twelve closed by the owner, 2026-08-25.**
+✅ **All thirteen closed by the owner, 2026-08-25.**
 
 | # | Call | Status |
 |---|---|---|
@@ -758,12 +792,10 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 | ~~12~~ | Does `Recognition` duplicate `Witness`? | 🔒 **CUT.** It was a precondition for `Laid To Rest`, not a deed, and C-3's item already grants `Witness` for that moment |
 | ~~3~~ | Does C-6's killed-branch token stay inert? | 🔒 **RULED — inert forever, no redemption.** A memento, not a punishment: it was worthless to begin with, and *a god at zero cannot be prayed back* |
 | ~~5~~ | One name per concept, or three? | 🔒 **RULED — THREE names, one concept.** The F1 and F3 readings are not the same object (different material, different capability), and GPT items are snapshots. **One authoring unit, three seeded templates** |
+| ~~2~~ | When is `REFUSES` checked? | 🔒 **RULED — CONTINUOUSLY, and a Mark-based refusal is PERMANENT.** See C-0h |
 
-🔴 **Still open.**
-
-| # | Call | Why it needs you |
-|---|---|---|
-| **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ Marks narrows this — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (an ordinary tag) still has the question | One item, not a system-wide rule |
+✅ **Nothing is open.** The mechanic is settled; what remains is content — stat blocks for the
+nine concepts, and F2 Medium/Hard quest design before those rows are decisive.
 
 ## C-11 — What is NOT here
 
