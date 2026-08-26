@@ -263,7 +263,7 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 | 🔴 **Kill the Loong Kin** | Hard | **`Dragon Slayer`** | demons · the Loong · the F3 hunt | ✅ established via C-8 |
 | 🔴 **Shatter a Crystallized Citizen** | Hard | **`Shoot the Dog`** 🟡 | the infected · Nullrot · the quarantine | Canon: *the only thing that works is the thing that shatters a person who is still in there.* Real TVTropes entry, so it passes §18 |
 | **Kill a Spore-Drunk Contestant** | shared | **`Bloodsport`** 🟡 | other contestants · rival parties · the crowd | A fellow abductee, not in control, on camera. **The show got what it wanted** |
-| **Unmask the host** | Easy | 🟡 **`Exorcism`** · `Laid to Rest` · `Psychopomp` | the mask · Nullrot · the host | `Unhurried` and `Undertaker` both dropped. Owner: *the word for releasing a spirit haunting the earth for long.* **`Exorcism`** is that and it is literally accurate — the mask *is* the possessing thing. **`Laid to Rest`** is the traditional English term (*to lay a ghost*) and names the man rather than the expulsion; **`Psychopomp`** is the role-name version. ❓ still needs the F1-or-F3 call |
+| **Unmask the host** | Easy | 🔒 **`Laid To Rest`** | the mask · Nullrot · the host | 🔒 **Ruled, and it is the F1 deed** — the ❓ availability question is closed. The traditional English term for releasing a long-lingering spirit is *to lay a ghost*, and it **names the man rather than the expulsion**: he dies *unhurried, neither grateful nor accusing.* `Exorcism` and `Psychopomp` dropped |
 | **Leave him chained** | Easy | 🔒 **`Historian`** | the stair · the Doorward (F2) | You read what the dead wrote and obeyed it. **A role-name, and it does not say what you obeyed** |
 
 ### Floor 2 — the great desert
@@ -274,7 +274,7 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 | **Spare the Doorward** | Easy | 🔒 **`Torment`** | the stair · the host | ⭐ Names **what you caused**, not what you did — and leaves *whose* torment open. Stasis is a choice, and the man pays for it |
 | 🔴 **Hand the Loong to the hunters** | Hard | **`Livestock`** | the Loong · demons · the F3 hunt | 🔴 **The ugliest mark in Set 1 and it should be.** Canon: a captured Loong is not a murder, it is livestock, bled indefinitely. **You did that** |
 | **Take the Horn intact** | Hard | **`Houndcaller`** 🟡 | hunters · packs · the capital's hunt | C-9's deed. You ended the hunt and kept the instrument |
-| **Bring the Loong to safe haven** | Hard | 🔒 **`Shepherd`** | the Loong · hunters · the F3 hunt | 🔴 **Reframed (owner): there is no village to save.** The village is the *destination*, not a victim — the deed is escorting a hurt, hunted creature across a desert to somewhere safe. Canon: the hunt breaks and **it sheds a scale**, which is how M-5 **Loong-Scale** enters the game at all. `Shepherd` moved here from F3 because *this* is the shepherding act. 🟡 A **hope**-word is the owner's alternative |
+| **Bring the Loong to safe haven** | Hard | 🔒 **`Shepherd`** | the Loong · hunters · the F3 hunt | 🔴 **Reframed (owner): there is no village to save.** The village is the *destination*, not a victim — the deed is escorting a hurt, hunted creature across a desert to somewhere safe. Canon: the hunt breaks and **it sheds a scale**, which is how M-5 **Loong-Scale** enters the game at all. `Shepherd` moved here from F3 because *this* is the shepherding act — 🔒 **confirmed by the owner over the hope-word alternative** |
 
 ### Floor 3 — the grand capital
 
@@ -284,7 +284,7 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 | **Destroy the Reservoir alone** | Easy | 🔒 **`Crystal No More`** | the plague · the infected · Nullrot | Canon calls it surgical, and it ends him. ⚠️ **Note:** this names a *world-fact* and a good one, so it reads closer to a trophy than the rest of the set. `Two Million` is also a world-fact but it is **yours**; this one is not obviously a wound |
 | **Talk to the host** | Easy | **`Recognition`** 🟡 | the mask · the host | Canon: *only RECOGNITION was ever missing, and F3 supplies it.* Overlaps C-3's `Witness` grant — ❓ same mark or a second one? |
 | 🔴 **Give Bex his sacrifice** | Medium | **`The Price`** 🟡 | Bex · the farm · the slums | You handed over a person to end a demon's nature. He never lied about what he wanted |
-| **Offer a cure that scales** | Medium | 🔒 **`Doctor`** — 🟡 `Saint` also open | Bex · demons · the infected | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* ⚠️ **My objection to `Saint` was wrong and is withdrawn** (see C-0d) — S-0 bars the *economy*, never the vocabulary. `Doctor` is a role-name tied to the cure thread; **`Saint` names what you became to them**, which by the name-the-weight rule is arguably stronger. Owner's pick |
+| **Offer a cure that scales** | Medium | 🔒 **`Saint`** | Bex · demons · the infected | Canon test: *offer a cure that scales and he drops the sacrifice instantly.* **Names what you became to them**, not what you did — and the religious register is fine, because S-0 bars the *economy*, never the vocabulary (C-0d). ⭐ One of only two unambiguously good deeds in Set 1 |
 | 🔴 **Crack the reservoir — FRACTURE 4** | Hard | **`Two Million`** | ⭐ **everywhere, forever** | 🔴 **The largest deed in the campaign.** Canon: at 4, the reservoir cracks into a city of two million. **A number branded on your body.** If any Mark should never go dormant, it is this one |
 | 🔴 **Make the Loong and Nullrot TALK** | Hard | 🔒 **`Fateful Meeting`** | the two of them · the infected · Cinnabrus | 🔴 **This is the F3 Hard ending (owner correction), and it is the SAME EVENT as the convergence row below** — see C-0e. Each believes the other is the sacrifice; **without the party they never talk** |
 | **Get the Loong out of the city instead** | Hard | 🔒 **`Left To Rot`** | the city · the infected · Nullrot | ⭐ **Names what you ABANDONED, not what you rescued.** The party thinks they performed a rescue; the brand disagrees. An option, not the ending — you save the dragon, the cure road closes, and the capital keeps the plague |
@@ -381,9 +381,8 @@ is *a little from both and neither is consumed.* `Martyr` is what happens when a
 body calls the man they killed a martyr. **The mark names him, not them.** That is a shape
 nothing else in the sweep has, and it is worth keeping rare.
 
-🔴 **Needs a canon confirm (C-10 #14):** does the corpse-as-limited-ingredient hold? It is
-compatible with S-6 as written — *alive* neither is consumed, *dead* one of them is spent — but
-it has not been ruled, and it changes what the Easy route's ending actually costs.
+🔒 **BLESSED (owner, 2026-08-25).** The corpse-as-limited-ingredient rule is ruled in. *Alive*
+neither is consumed; *dead*, one of them is spent and the supply is capped. C-10 #14 closed.
 
 ---
 
@@ -721,24 +720,24 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 
 ## C-10 — Open calls
 
-✅ **Four closed by the owner, 2026-08-25.**
+✅ **Seven closed by the owner, 2026-08-25.**
 
 | # | Call | Status |
 |---|---|---|
 | ~~1~~ | Does `Charm 8` survive alongside the C-2 predicate? | 🔒 **RULED — keep Charm 8, drop the predicate** |
-| ~~8~~ | What else grants Marks? | ✅ **SWEPT — see C-0c.** 28 Set 1 deeds, only 3 from items. Confirmed: Marks are a **campaign** rule, authored per floor |
+| ~~8~~ | What else grants Marks? | ✅ **SWEPT — see C-0c.** 23 distinct Set 1 deeds, only 3 from items. Confirmed: Marks are a **campaign** rule, authored per floor |
 | ~~9~~ | How loud is activation? | 🔒 **RULED — mood first, then a small note of the brand lighting.** GM may state it outright; announcing before the mood shifts is the thing to avoid |
 | ~~4~~ | How many predicates is too many? (7 of 9) | 🔒 **RULED — trimmed to 2** (C-6, C-8); three concepts grant Marks instead |
 | ~~6~~ | Is Marks in, given the v1 freeze? | 🔒 **RULED — IN, as a SUBGENRE of §18 tags.** No parallel system: a tag with `fades: false` and a presence trigger |
 | ~~7~~ | Do all three Mark states ship (Open / Sealed / Broken)? | 🔒 **RULED — no states.** Marks are **always present**; they **activate** when a scene makes them relevant. Sealed is dropped, and the draft that proposed it had it backwards |
+| ~~14~~ | Does `Martyr`'s corpse-as-limited-ingredient rule hold? | 🔒 **BLESSED** — alive Nullrot is renewable, dead he is a capped supply (C-0f, and S-6's counterfactual) |
 
 🔴 **Still open.**
 
 | # | Call | Why it needs you |
 |---|---|---|
 | **11** | 🆕 **Should Marks mean something IN-WORLD?** *Brand* is already Vermilia's word, and canon has her clan embodying **karma**. A deed burned into the body sits very close to that — but S-0's firewall keeps v1 free of anything needing a god. **Pure Show apparatus, or not?** | The one call that touches the firewall |
-| **14** | 🆕 **Does `Martyr`'s corpse-as-limited-ingredient hold?** (C-0f) Compatible with S-6 — alive neither is consumed, dead one is spent — but unruled, and it changes what the Easy ending costs | Story rule, not a name |
-| **12** | 🆕 **Do the ❓ entries in C-0c resolve?** Three need canon before authoring: is unmasking available at F1 · does `Recognition` duplicate `Witness` · does reviving Cinnabrus reuse `Kingmaker` | Blocks three deeds, not the mechanic |
+| **12** | 🆕 **Two ❓ entries left in C-0c.** Does `Recognition` duplicate C-3's `Witness` grant · does reviving Cinnabrus reuse `Kingmaker` or earn its own. *(Unmasking's availability is closed: **F1**.)* | Blocks two deeds, not the mechanic |
 | **10** | 🆕 **Can a Mark be reinforced?** §18 tags stack pull when Reinforced. A second regicide is presumably not *more* `Regicide` — or is it? | Decides whether Marks have any depth axis at all |
 | **2** | **Is `REFUSES` checked at pickup, at use, or continuously?** ⚠️ Marks narrows this — a Mark never fades, so timing is moot for C-6. Only **C-8's `Animal Planet`** (an ordinary tag) still has the question | One item, not a system-wide rule |
 | **3** | **Does C-6's killed-branch token stay inert forever?** Partly answered — the branch grants `Regicide`, so the consequence has a carrier either way | Story weight vs. player mercy |

@@ -648,7 +648,7 @@ Skills are granted to players by templateId. The player sheet joins template dat
   🔴 **So a party can enact S-6's misunderstanding instead of correcting it, and it functions** —
   right about the mechanism, wrong about the necessity, and the road stays open *narrowed,
   forever.* The brand on their body calls the man they killed a martyr. *(Retires `He Was
-  Right`.)* ⚠️ The corpse-as-limited-ingredient rule is **proposed, not ruled** — C-10 #14.
+  Right`.)* 🔒 The corpse-as-limited-ingredient rule is **BLESSED** (2026-08-25).
 - 🔴 **F3 Hard's ending is the MEETING, not getting the Loong out** (owner) — extraction is an
   option and the lesser one. The F3 Hard and convergence rows were the same act and are **merged
   into one `Fateful Meeting`**; `Shepherd` moved to **F2's desert escort**, which is the actual
@@ -661,10 +661,11 @@ Skills are granted to players by templateId. The player sheet joins template dat
   destroying the Ribcage, and answering the song. ⚙️ **All three were decisions inside a fight:
   a tactical choice is not a deed.**
 - 🔒 **Naming pass (owner):** `Heeded the Mural`→**`Historian`** · `Left Him Chained`→**`Torment`**
-  · `Made It Unnecessary`→**`Doctor`** (⚠️ `Saint` declined — religious register S-0 keeps out) ·
+  · `Made It Unnecessary`→**`Saint`** ·
   `No Fight`→**`Fateful Meeting`** · `Surgical`→**`Crystal No More`**. Role-names and state-names
-  are ruled good as a class. 🟡 Proposed, pending: `Unhurried`→**`Undertaker`**,
-  `The Village Stands`→**`Unhunted`**.
+  are ruled good as a class. `Unhurried`→**`Laid To Rest`** (the traditional term — *to lay a ghost* — and it is the **F1**
+  deed) · `The Village Stands`→**`Shepherd`**, reframed: **there is no village to save, the
+  village is the destination.**
 - 🔴 **F2 Medium and Hard quests need design work** before their rows are decisive (owner).
 - ⭐ **The best names state an unwelcome fact:** `Unsealed` (killed the Doorward — it warned you
   truthfully and it was still the right move) · **`Martyr`** (killed Nullrot) · `Left To Rot`
