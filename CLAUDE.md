@@ -903,6 +903,19 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - ⚠️ Branch interaction: `Witness` activates near Vermilia, so a party holding **both**
   `Regicide` and `Witness` has permanently disabled the better half of `Witness` — they killed
   the only person who could recognise it. Nothing needs to say so; it just never fires.
+- ✅ **STAT BLOCKS WRITTEN 2026-09-01 — `server/seeds/items-set1-spine.js`, 26 templates**
+  (9 concepts × 3 floors, less C-9's F1). Validated against the `ItemTemplate` enums; seed with
+  `node seed-items.js --file ./seeds/items-set1-spine.js` → `--apply`. 🔒 **Written in BAND
+  UNITS (L-22)** — a damage number does **not** change F1→F3; the band cancels inside a floor,
+  so what moves across the three readings is **capability, never arithmetic.** ✅ **W-6 §2
+  honoured: 20 of 26 deal no damage at all** and none reads `+X damage`; only C-2 and C-8 are
+  weapons. 🔴 **Five inventions need an owner call (C-12):** ① **Vitrian**, a named court
+  brand-smith for C-5 (placeholder name; carries the coerced-craft defect rider) · ② the
+  **Kinship track** on C-8 (3 = a body part changes permanently, 6 = the hunts turn onto you —
+  thresholds are guesses) · ③ C-1's `Mind 6` read and C-2's cold-wielder punish (first-pass
+  numbers) · ④ 🔴 **Turquoise still has no source**, and C-2's F2 reading needs it · ⑤ Andvari's
+  Cut reads **3 on a Heavy Small** — legal under *an item may outpace its class inside its band*,
+  but the only place that permission was spent.
 - 🔴 **NO stat blocks** — numbers come after the shapes are blessed. **C-10** holds six open
   calls; the top three are all Marks (is it in · do Sealed states ship · what else grants them).
 

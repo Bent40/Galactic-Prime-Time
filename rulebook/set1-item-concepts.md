@@ -797,9 +797,48 @@ problem is solved"* — an empty F1 cell is the acquisition class working correc
 ✅ **Nothing is open.** The mechanic is settled; what remains is content — stat blocks for the
 nine concepts, and F2 Medium/Hard quest design before those rows are decisive.
 
+## C-12 — ✅ STAT BLOCKS WRITTEN (2026-09-01) — **26 templates**
+
+The shapes were blessed, so the numbers exist now. **`server/seeds/items-set1-spine.js`** —
+9 concepts × 3 floors, less C-9's F1 (the hunt has not started), validated against the
+`ItemTemplate` enums. Seed with
+`node seed-items.js --file ./seeds/items-set1-spine.js` (dry run) → `--apply`.
+
+🔒 **Written in BAND UNITS (L-22).** A damage number does **not** change from F1 to F3 — the
+band multiplies every native number on a floor equally, so it cancels inside the floor. What
+moves across the three readings is **capability**, never arithmetic. Do not "scale" these per
+floor; that is exactly the units error L-22 dissolved.
+
+✅ **W-6 §2 honoured: 20 of the 26 deal no damage at all**, and not one reads `+X damage`.
+Only C-2 and C-8 are weapons.
+
+| ID | Route × class | F1 ×2 Forest | F2 ×4 Desert | F3 ×8 Capital |
+|---|---|---|---|---|
+| **C-1** | Easy × loot | Seepage, Sealed | Seepage, Thinned | Seepage, Sorted |
+| **C-2** ⭐ | Easy × crafted | The Unsworn Sprig | The Sun's Dart | Andvari's Cut |
+| **C-3** | Easy × story | The Mural Fragment | The Doorward's Answer | The Name |
+| **C-4** | Medium × loot | Arsonist's Knuckle | The Death That Didn't Take | Jade Acknowledgment |
+| **C-5** | Medium × crafted | The Brand, as Given | The Portable Brand | The Brand, Set in Silver |
+| **C-6** ⭐ | Medium × story | A Cord, Given | The Queen's Token | The Debt |
+| **C-7** | Hard × loot | Seeded Edge | The Pilgrim's Shard | The Warded Vessel |
+| **C-8** ⭐ | Hard × crafted | Warden-Carve | Kin-Carve | Kin-Carve, Imperial |
+| **C-9** | Hard × story | — | The Horn, taken | The Horn, turned |
+
+### 🔴 Five things in the blocks are MINE, not ruled — they need a call
+
+| # | Invention | Note |
+|---|---|---|
+| **1** | 🟡 **Vitrian, the court's brand-smith** (C-5) | W-8 §6 says every crafter-gated source in the corpus names one maker and GPT's carve names none. A high-court demon who does not know the crown's secret. **Placeholder name — swap freely.** Carries the tranche-2 rider: commission politely → clean; coerce → the brand reads as *whose*, naming its granter to the wrong factions |
+| **2** | 🟡 **The Kinship track** (C-8) | 3 Kinship changes a body part permanently; 6 turns the hunts onto the bearer. Rides on `bodyParts`, which already exist, so nothing new is built — **but both thresholds are guesses** |
+| **3** | 🟡 **C-1's `Mind 6` read · C-2's cold-wielder punish** | Both are requirement-shaped gates in §12.1's existing sense. **The specific numbers are first-pass** |
+| **4** | 🔴 **Turquoise still has no source** | C-2's middle reading needs it and the F2 roster has no carve or gather for it. Either F2 gains one, or that reading moves to Sunglass **and loses the Burn** |
+| **5** | ⚠️ **Andvari's Cut reads 3 on a Heavy Small** (baseline 2) | Legal under *an item CAN outpace its class inside its band* — but it is **the one place that permission was spent**, and it should be spent deliberately |
+
+---
+
 ## C-11 — What is NOT here
 
-- **No stat blocks.** Damage, Moment cost and requirements come after the shapes are blessed.
+- ~~**No stat blocks.**~~ ✅ **Written 2026-09-01 — see C-12.** Original note: damage, Moment cost and requirements come after the shapes are blessed.
   W-6 §2 constrains them already: **88% of myth weapons are categorical and not one is a flat
   stat-bonus item**, so none of these nine should read as `+X damage`.
 - **No apex additions.** W-7 §1's ~3% ratio says the apex shelf stays roughly where it is;
