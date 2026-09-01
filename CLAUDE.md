@@ -427,6 +427,24 @@ Skills are granted to players by templateId. The player sheet joins template dat
   days old and certain it is the elder. 🔴 **And it defeats a truth-sense without lying** — a
   sincere doll passes, which is **the Doorward's trap restated: the truest voice in the room is
   the lure.**
+- 🚪 **THE ACCESS LADDER — who the party is actually talking to (ruled 2026-08-25).**
+  **F1 = the real Vermilia** (a child in a burning house, no court, nothing to hide behind — the
+  only floor she is unguarded) · **F2 = the DOUBLE** (the desert court is the doll; Vermilia does
+  not appear) · **F3 = the real one, but NOT immediately.** Gate: **carry her brand** and the
+  Double brings them to her (the brand is *hers*, and the doll honours it); **otherwise build a
+  reputation** with the crown first — reachable, and work. ⭐ **This makes accepting a demon's mark
+  at F1 the best investment on the route**, paying off two floors later. 🔴 And the party already
+  met her at the only moment she was reachable; most will not connect the child to the queen.
+- ⚰️ **THE MAUSOLEUM IS THE DIG SITE (ruled 2026-08-25)** — where Vermilia spends most of her time.
+  ⭐ **The dynasty's tombs are the cover for the hole:** a fabricated bloodline's mausoleum is full
+  of graves for people who never existed, and **nobody asks why the queen visits her ancestors or
+  why digging never stops under a house of the dead.** The ruse and the excavation are the same
+  building, each explaining the other. 🟡 Proposed: the "previous queens" tombs hold the
+  **discarded dolls**, so the current Double walks past her predecessors without knowing.
+- ⚠️ **F2 spine ③ needs amending** — it had Vermilia telling a branded party what the crown digs
+  for, but **F2's court is the Double.** 🟡 Proposed fix: **the Double relays what it does not
+  understand**, sincerely and without comprehension — a hook rather than an answer, preserving the
+  real explanation for F3. Owner call: ③ moves wholly to F3, or stays in this degraded form.
 - 🏺 **THE DOUBLE'S MIMICRY IS AN ITEM — a CLAY DOLL (ruled 2026-08-25).** Comes to life, acts on
   the user's wish, **striking resemblance to whatever they imagined**, and 🔒 **negligible combat
   power by design.** ⭐ An item solves "keep it small" better than a repertoire did — it has a

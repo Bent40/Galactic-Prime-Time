@@ -551,7 +551,46 @@ rather than himself, never lying, and **not defending his means.** An architect 
 defend his own architecture is exactly that man. ⭐ **And it makes the F3 Petition cost more:**
 the demon asking to be made human designed a city-sized engine for harvesting human misery, and
 will tell you so if you ask.
-| **4** | **Do the party ever meet the real one?** The default should probably be that a party which does nothing special meets only the double, and Vermilia is a *reward* for the routes that earn her |
+| ~~4~~ | 🔒 **RULED — see the access ladder below.** |
+
+### 🚪 The access ladder ✅ RULED 2026-08-25 — who the party is actually talking to
+
+| Floor | Who they meet | Why |
+|---|---|---|
+| **F1** | 🔒 **The real Vermilia** | She is a child in a burning house with no court and nothing to hide behind. **The only floor where she is unguarded** |
+| **F2** | 🔒 **The Double** | The queen's desert court is the doll. Vermilia does not appear |
+| **F3** | 🔒 **The real Vermilia — but NOT immediately** | Access is earned, and what earns it was decided on Floors 1 and 2 |
+
+**How F3 access is gated:**
+
+| The party… | Result |
+|---|---|
+| **Helped her and carries her brand** | 🔒 **The Double brings them to her.** The brand is the credential — it is *hers*, and the doll has been told to honour it |
+| **Anything else** | 🔒 **They must build a reputation** with the crown before they see the real story. It is reachable, and it is work |
+
+⭐ **This is the F1 Medium brand paying off two floors later, and it makes accepting a demon's
+mark retroactively into the best investment on the route.** A party that took it at F1 walks into
+F3 with a key. A party that refused has to earn one.
+
+🔴 **And it means the party has already met her, at the only moment she was reachable.** The
+child in the burning house is the same person as the queen in the dig — and most parties will not
+connect the two until F3, if at all.
+
+### ⚰️ The mausoleum IS the dig site ✅ RULED 2026-08-25
+
+**Vermilia spends most of her time in the mausoleum**, which is where the excavation actually is.
+
+⭐ **The dynasty's tombs are the cover for the hole.** A mausoleum is where a bloodline puts its
+dead — so a *fabricated* bloodline's mausoleum is a building full of graves for people who never
+existed, and **nobody questions why the queen visits her ancestors, or why the digging never
+stops under a house of the dead.** The ruse and the excavation are **the same building**, and
+each one explains the other.
+
+🟡 **Proposed, not ruled — what is actually in the tombs.** The Double is remade at every
+crowning (above), so there have been many. 🔴 **If the discarded dolls are what the "previous
+queens" tombs hold**, then the current Double walks past her own predecessors on the way to
+work, and does not know what she is looking at. ⚠️ Grim, follows directly from two ruled facts,
+and would need an owner call before it is canon.
 
 
 | Route | The beat | What is really happening |

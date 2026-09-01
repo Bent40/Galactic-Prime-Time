@@ -272,7 +272,7 @@ keeps all three for the reasoning, but **① and ③ are the spine.**
 |---|---|---|
 | **① The Petition begins here** | Canon has Bex at F3 *wanting to be human*, never lying, unable to defend his means. **Let him ask the party for something at F2** — small, deniable, and honest. They grant it or refuse. | 🩸 A refusal he remembers · 🕯 a favour he owes. **Either way F3's Bex is a different scene**, which is what the layer already promises |
 | **② Who hired you** | The killed-branch already has the party *"being hired by him and not told by whom"* — Beelzebub's man, unknowingly. **Let that be discoverable.** Finding out mid-route, and choosing to finish the job anyway or walk, is a decision the party owns | 🚪 Possibilities change: you either served Beelzebub knowingly or refused him to his face |
-| **③ What the crown is digging for** | Vermilia is two centuries into excavating a god, and 🔒 **the high court do not know what the secret is.** A party that freed her at F1 is the one group she might tell. **Learning it is not a deed — being asked to help, and answering, is** | 🕯 Gratitude from the only follower a dead god has left · 🚪 the F3 revival road opens early |
+| **③ What the crown is digging for** | Vermilia is two centuries into excavating a god, and 🔒 **the high court do not know what the secret is.** ⚠️ **Amended — see below: at F2 the court is the DOUBLE, so Vermilia is not here to tell them anything** | 🕯 Gratitude from the only follower a dead god has left · 🚪 the F3 revival road opens early |
 
 ⭐ **①+③ compose well.** Both antagonists ask the party for something on the same floor, both
 asks are honest, and **the party cannot satisfy both** — Bex wants the hunger lifted, Vermilia
@@ -280,6 +280,27 @@ wants her god back, and S-6 says those are the same cure arriving by different r
 demon politics as a *choice* rather than as a job.**
 
 ⚠️ **② is dropped** — it is a reveal, not a decision, unless refusing has a cost.
+
+#### ⚠️ Spine ③ needs amending — the F2 court is the DOUBLE
+
+🔒 **The access ladder (`set1-story-canon.md`) rules F2's queen to be the doll.** So ③ as written
+cannot happen: *"a party that freed her at F1 is the one group **she** might tell"* — **she is
+not here.**
+
+🟡 **Proposed fix, and it is better than the original: the Double relays what it does not
+understand.** It has been told to say certain things to anyone carrying the queen's brand. It
+says them **sincerely, and without comprehension**, because it does not know what it is or what
+the crown is digging for.
+
+⭐ **What that buys:**
+- A branded party still gets something at F2 — **a message that visibly means more than the
+  messenger knows.** That is a hook, not an answer.
+- 🔒 **It preserves the F3 payoff.** The real explanation is what the brand buys *at Floor 3*,
+  where Vermilia actually is.
+- 🔴 **And it is the doll's whole tragedy in one scene:** a person repeating words about a secret
+  she is part of and cannot read.
+
+⚠️ **Needs an owner call.** ③ either moves wholly to F3, or stays at F2 in this degraded form.
 
 ---
 
