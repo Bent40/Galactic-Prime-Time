@@ -441,6 +441,26 @@ Skills are granted to players by templateId. The player sheet joins template dat
   why digging never stops under a house of the dead.** The ruse and the excavation are the same
   building, each explaining the other. 🟡 Proposed: the "previous queens" tombs hold the
   **discarded dolls**, so the current Double walks past her predecessors without knowing.
+- 🤝 **F2 SPINE ① DESIGNED — THE PETITION (owner, 2026-08-25).** The party was sent to kill him
+  and he opens with ***"You again? How curious. You're still alive."*** 🔴 **Both F2 antagonists
+  open on the same beat** — Bex and Vermilia are equally startled the humans survived, and neither
+  knows the other is. That is what makes ①+③ compose rather than coexist.
+  **His diagnosis:** the new kingdom has **no aim, no will to live in peace with demons, and no
+  plan to sustain them.** 🔴 **He is describing a two-century excavation and cannot see it** — the
+  crown looks aimless because governing was never the point, and **he knows nothing of Cinnabrus
+  or the dig.** ⭐ Right about the symptom, wrong about the cause: Set 1's thesis on a third
+  character.
+  **The appeal:** *"I have a logical solution. I am the lesser of the evils. Better to rule with
+  aim and cause minor harm than to rule without aim and cause major harm."*
+  🔴 **He is not lying, and that is the trap.** By his metric the harm *is* minor — it is the
+  **"giblets from a crowd"** arithmetic. ⭐ **His F2 pitch is a plain description of the F3 farm,
+  offered honestly, and the party cannot yet decode it.** Nothing is concealed; they lack the
+  referent.
+  ⚙️ **The decision the route was missing:** the target asks them to switch sides mid-contract —
+  complete it (it does not take, and he remembers being killed by people he had just offered a
+  partnership), join him (betraying a crown that sent them via a Double that does not know why),
+  or walk. 🟡 Proposed marks: **`Shareholder`** (took the offer) · **`Answered In Kind`** (killed
+  him after it). 🔴 Three open calls in `f2-enemy-pass.md`.
 - 📓 **F2 SPINE ③ RESOLVED — THE JOURNAL (owner, 2026-08-25).** The Double receives a branded
   party, explains that *"her great-great-great-grandmother"* branded the people who saved her,
   and hands over the journal that ancestor wrote — **which she cannot read a word of, because she

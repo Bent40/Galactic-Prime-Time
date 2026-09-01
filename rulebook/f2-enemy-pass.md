@@ -287,6 +287,86 @@ demon politics as a *choice* rather than as a job.**
 cannot happen: *"a party that freed her at F1 is the one group **she** might tell"* — **she is
 not here.**
 
+### 🤝 THE PETITION — spine ① designed (owner, 2026-08-25)
+
+**The scene:** the party has been *sent to kill him.* He looks at them, and the first thing out
+of his mouth is not a threat.
+
+> **"You again? How curious. You're still alive."**
+
+🔴 **Both F2 antagonists open with the same beat, and neither knows the other did.** Bex is as
+startled as Vermilia that these humans are still standing — he led the arsonists at the house and
+wrote them off the same night. ⭐ **The floor's two honest asks are both triggered by the same
+disbelief**, which is what makes ①+③ compose rather than merely coexist.
+
+**And surprise turns into interest.** He does not want them dead. He wants them **with** him.
+
+#### His diagnosis — right about the symptom, wrong about the cause
+
+He tells them, plainly, what he thinks is wrong with the new kingdom:
+
+| | |
+|---|---|
+| **It has no aim** | It governs nothing; it merely persists |
+| **It has no will to live in peace with demons** | It tolerates them, it does not settle with them |
+| **It has no plan to sustain them** | Demons in its territory eat, and nobody has decided how |
+
+🔴 **He is describing a two-century excavation and cannot see it.** The crown looks aimless
+*because governing was never the point* — Vermilia is running a dig, not a state. 🔒 **Bex does
+not know about Cinnabrus, the grave, or the queen's identity, and nothing here tells him.**
+
+⭐ **So he is exactly right about the symptom and completely wrong about the cause** — which is
+Set 1's thesis restated for a third character. He looks at a rudderless kingdom and concludes it
+needs a ruler with a plan. What he is actually looking at is a woman who has no interest in
+ruling at all.
+
+#### The appeal
+
+> **"I have a logical solution. I am the lesser of the evils. Better to rule with aim and cause
+> minor harm than to rule without aim and cause major harm."**
+
+🔴 **He is not lying, and this is the trap.** Canon: he has never lied and the Petition does not
+permit him to. By his own metric the harm *is* minor — 🔒 it is the **"giblets from a crowd"**
+arithmetic already ruled: skim an entire population a little, forever, rather than butcher a few.
+
+⭐ **So his F2 pitch is a plain-language description of the F3 farm, offered honestly, and the
+party cannot yet decode it.** They will hear "minor harm, with aim" on Floor 2 and see what
+"minor harm" looks like at civic scale on Floor 3. **Nothing was concealed. They just did not
+have the referent.**
+
+#### The decision — and it is the one the route was missing
+
+The party was **hired to kill him.** He is asking them to change sides mid-contract.
+
+| Choice | Consequence |
+|---|---|
+| **Complete the contract** | It does not take (canon). 🔴 **And he remembers being killed by people he had just offered a partnership** |
+| **Refuse and join him** | They have betrayed their employer — a crown that sent them, via a Double that does not know why |
+| **Refuse both and walk** | The cleanest, and the one he respects least: they heard the argument and had no answer |
+
+⭐ **This is the shape the layer promised and never cashed:** *"what happens in this room decides
+what he thinks of them when they arrive."* Now it does.
+
+🟡 **Proposed marks — F2 Medium currently has none, and this is where they come from:**
+
+| Deed | Mark | Why it qualifies |
+|---|---|---|
+| **Take his offer** | 🟡 **`Shareholder`** | 🕯 gratitude, 🚪 possibilities changed. And the name is a question: *a share in what?* They find out at F3 |
+| **Kill him after the offer** | 🟡 **`Answered In Kind`** | 🩸 a grudge that survives a century, because the offer was sincere |
+
+⚠️ **Both branches marking may be one too many** — the owner's earlier trim favoured marking the
+costly side only. **Owner call.**
+
+#### 🔴 Open calls
+
+| # | Question |
+|---|---|
+| **1** | **What does "joining" cost them concretely at F2?** An oath, a favour banked, a piece of information handed over? It should be small — the Petition's weight is at F3 |
+| **2** | **Does he name the farm?** My read: **no.** He describes the *principle* honestly and never the practice, because he has not built it yet at F2 — and that keeps the F3 recognition intact |
+| **3** | **Do both branches mark, or only one?** See above |
+
+---
+
 ### 📓 THE JOURNAL — spine ③ resolved (owner, 2026-08-25)
 
 > **Owner:** *"she explains how her great, great (add a few greats) grandmother had branded people
