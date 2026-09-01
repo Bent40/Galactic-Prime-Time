@@ -1,8 +1,9 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.2** · 2026-09-01 — Marks (§18.4), tags that record a deed instead of
-a performance and never fade; and the bill of materials (§12.7), so that any item
-can be taken apart and its materials used for something else.
+**Version 1.3** · 2026-09-01 — **FORCE** (§7.3): one unit for every source of
+damage, replacing the material band's multiplication with addition. Universal
+resistance (§10.1). Area attacks do not divide (§7.3).
+*Previously —* **1.2**, Marks (§18.4) and the bill of materials (§12.7).
 *Previously —* **1.1** · 2026-08-04, the Item Drafting update: materials & parts
 (§12.7), armor rules (§12.6), polish & creation kits (§12.3), tomes (§4.4),
 box specificity (§17.6), the horde doctrine (§21.2). *(File name stays v1.0 —
@@ -429,12 +430,57 @@ Health is localized. Standard body:
   Helpless, or Overwhelmed** (ambush, execution, extreme speed disparity).
 - Torso, arms, legs: always targetable unless the fiction prevents it.
 
-### 7.3 Damage resolution
+### 7.3 Force, and how damage resolves
+
+#### Force — the unit everything is measured in
+
+**One Force is one basic punch.** Every source of damage in the game is counted
+in that same unit, so a weapon, the material it is made of, a lit torch and a
+dose of poison can be added together and held against the thing you are trying
+to kill.
+
+An attack's Force is the sum of:
+
+- its **weapon class** (§12.1);
+- **+1 for every material band step** it is built from (§12.7);
+- anything **added** to it — an element, a coating, an affix, a venom;
+- whatever your **preparation** contributed before the fight started (§21.5).
+
+Every part of that total carries a **damage type**, and the tags are what make
+preparation matter:
+
+- **A weakness doubles that type's contribution.** A torch adds 1 Force to
+  anything, and 2 to something that burns.
+- **Resistance subtracts from its own type only** — and never more than that type
+  dealt. Fire resistance 5 against 1 Force of fire eats the 1 and wastes the
+  other 4 (§10).
+
+**An enemy's HP is Force.** A mob is five punches. It does not matter whether the
+five arrive as a club, a fire, a poison or a fist — five is five.
+
+**Force is not a condition.** Force is what the attack does *now*; a condition is
+what it leaves *behind*. An effect may carry either or both, and it has to say
+which. Bleed, Crush and Burn carry Force and a tier together. Chill, Poison,
+Infection and Dissolution carry a tier and **no Force by default** — but an item
+or ability may grant them Force explicitly (a poisoned blade adding 1 Force of
+Poison), and that Force then answers to Poison resistance like any other type.
+
+#### The steps
 
 1. Choose a valid body part.
-2. Deal the attack's **listed damage** to that part, minus flat resistance
-   (floor 0).
-3. Apply the damage type's condition (§8.1).
+2. Total the attack's **Force** (below), keeping each part of it tagged with its
+   damage type.
+3. Subtract **typed resistance** — from its own type only, and never more than
+   that type actually dealt (§10).
+4. Subtract **universal resistance**, once, from whatever is left (§10.1).
+5. Deal the remainder to the part.
+6. Apply the damage type's condition (§8.1).
+
+**Area does not divide.** An attack covering more than one target deals its
+**full Force to each of them**, unless the attack says otherwise. Nine enemies in
+the arc take the whole number, nine times over, and each of them then applies its
+own resistances. This is why a sweep is how you answer a tide — and why §12.1's
+heavy weapons demand an adjacent empty radius. You cannot swing one in a press.
 
 Small HP pools are the design: parts fail fast; the real fight is about *which*
 parts and *which* conditions.
@@ -481,6 +527,24 @@ parts and *which* conditions.
   (bandage → Bleeding, antitoxin → Poison, clean air → Suffocation). Full
   resolution needs downtime, advanced tools, or explicit abilities.
 - Conditions stack freely across types; multiple lethal timers can run at once.
+
+**How a condition expresses Force.** Force and tiers are two layers and they are
+not the same thing: **Force is what an attack does now; a tier is what it leaves
+behind.** Every condition below states which it carries.
+
+| Type | Force | Tier |
+|---|---|---|
+| **Bleed · Crush · Burn** | yes — the attack's Force lands on the part | yes |
+| **Chill · Poison · Infection · Dissolution** | **none by default** | yes |
+
+An item or ability may grant an affliction type Force explicitly — a poisoned
+blade written as *+1 Force (Poison)* — and that Force then answers to Poison
+resistance exactly like any other type. What it may not do is arrive by
+accident: **if a condition deals Force, the entry says so in a number.**
+
+A condition that carries no Force is not weak. Infection advances everything else
+a tier, Dissolution removes a contestant outright, and neither is measured in
+punches.
 
 ### 8.2 Condition tiers
 
@@ -647,6 +711,30 @@ pool**:
 - Player affliction resistance (Chill/Poison/Infection tiers) has no automatic
   source: it is GM-awarded, explicitly, when earned.
 
+### 10.1 Universal resistance — a threshold, never a stat
+
+Some things reduce **every** type at once. A universal resistance of 6 means an
+attack needs **7 Force to do anything at all** — which is the same object as a
+threshold: *"it takes seven to break this grip."*
+
+- **It applies to the TOTAL, once — never per type.** Four Force of Physical and
+  four of Fire is eight Force, and eight beats a seven-threshold. Applied per
+  type it would not, and a threshold that rejects eight damage is not a
+  threshold.
+- **Typed resistance resolves first**; universal takes whatever survives it.
+- **A universal resistance is ALWAYS caused by something** — a structure, a
+  stance, a hold, an active effect. It is **never a creature's standing state.**
+  A golem carries universal 6 because of the shell it is made of, and chipping
+  the shell lowers it or strips it entirely. A grapple carries one because
+  someone is holding on, and it ends when they stop.
+- **So every universal resistance names two things: what causes it, and what
+  takes it away.** One without the other is not a legal entry. A number nobody
+  can answer is not difficulty; it is a wall.
+
+Where typed resistance asks *did you bring the right thing*, universal resistance
+asks *did you bring enough at once*. Four contestants hitting for 5 each do
+nothing to a universal 6; one contestant hitting for 8 does 2.
+
 ---
 
 ## 11. States Glossary
@@ -783,52 +871,44 @@ kit exists — the top of the ladder is polish-only.
 
 ### 12.7 Materials — what a thing is made of IS the power
 
-- **Tier is craftsmanship; MATERIAL is scale.** Baseline materials (Scrap,
-  wood, leather, iron) carry no multiplier; each floor introduces a **material
-  band** that **doubles** damage and resist numbers (F1 ×2 … F9 ×512 across
-  the ten-floor campaign — three sets of three story floors, then the Floor-10
-  finale, which adds no band: it is fought with what you built). The catalog
-  of record: `rulebook/item-drafting-materials.md`.
+- **Tier is craftsmanship; MATERIAL is scale.** Baseline materials (Scrap, wood,
+  leather, iron) add nothing. Each floor introduces a **material band**, and
+  **every band step a thing is made of adds +1 Force** (§7.3). A weapon reforged
+  from a Floor 1 material to a Floor 2 one hits for one more punch — not for
+  twice as much. Nine floors, nine steps, and the numbers stay small enough to
+  hold in your head at Floor 9. The Floor-10 finale adds no band: it is fought
+  with what you built. The catalog of record:
+  `rulebook/item-drafting-materials.md`.
 
-> **Errata 2026-08-18 — the band is FLOOR-RELATIVE, and sheets are written in
-> band units.**
+> **Errata 2026-09-01 — the band no longer multiplies. SUPERSEDED by Force (§7.3).**
 >
-> The band multiplies **everything native to a floor** equally — weapon damage,
-> enemy HP, enemy damage, part HP, resist numbers. Because it multiplies both
-> sides of every exchange, **it cancels inside a floor and never appears on a
-> character sheet.** A greatsword is written as **3**, a mob as **5**, and a
-> torso as **7** on Floor 1 and on Floor 9 alike.
+> The 2026-08-18 errata that stood here made the band a ×2-per-floor multiplier
+> on both sides of every exchange, so that it cancelled inside a floor and a
+> greatsword read as 3 on Floor 1 and Floor 9 alike. It is withdrawn. It had two
+> faults: it made every floor arithmetically identical to every other, so gear
+> upgrades showed up on a sheet as nothing at all; and it broke the moment a
+> weapon crossed a floor, where a Floor 1 sword read as 0.75.
 >
-> **The band's job is comparison ACROSS floors**, and that is the whole of it:
-> it is what makes last floor's sword a letter-opener, last floor's elite a mob,
-> and a Floor-9 contestant a god beside a Floor-1 human. In absolute terms that
-> contestant carries a **17,920 HP torso** and swings for **1,536** — and none
-> of those digits are ever written down, because on their sheet it reads 35 and 3.
+> **A material step is now +1 Force.** The band's job is unchanged — it is still
+> what separates the eras, and still what makes last floor's sword a
+> letter-opener — but it does that by addition, and the difference between an
+> average party and a prepared one is now larger than the difference between two
+> floors. Which is the point: **the axis of progression is the player, not the
+> floor.**
 >
-> This states as a rule what the catalog already asserts: *"the sheet plays
-> identically on every floor; only the numbers inflate,"* and an F9 mob at ~1.3k
-> HP *"still dies in one on-band swing."*
->
-> **Consequences.** §21.2's ladder — mob 5 · elite ~60 · boss ~125 · Super ~300 —
-> is read as **band units, true on every floor**, not as a number that doubles.
-> The doubling column in the materials catalog is the same ladder written
-> absolutely; both are correct. **Only the contestant's body moves within the
-> ladder**, growing with total trait points, which is why a floor-9 contestant
-> survives roughly five times the hits a floor-1 one does.
->
-> **An item may outpace its floor.** An Exceptional, apex-material or authored
-> weapon can read **above** its class baseline in band units — a 6 where the class
-> says 3 — and that is exactly where gear earns its place inside a floor. The
-> band sets the era; the item earns its rank within it.
+> **An item may still outpace its floor.** An Exceptional, apex-material or
+> authored weapon can read above its class baseline, and that is exactly where
+> gear earns its place inside a floor.
+
 - **Parts are material capacity.** A weapon's parts (a sword: blade, guard,
   hilt, pommel — 4) set how many materials it can socket. No per-part effects:
   the **striking part** sets the damage band; every socketed material
   contributes its inherent property. Premade single-material weapons are the
   default; part-crafting is opt-in.
-- **Modifiers ride the band.** Affix damage numerics multiply by the item's
-  material band, exactly like base damage (Serrated III on a Jade blade is
-  +24 Bleed). Condition and utility modifiers don't scale — a T2 Poison or a
-  saved Moment is band-proof by nature.
+- **Modifiers are Force too.** An affix that adds damage adds **Force**, of its
+  own type, and it is added like everything else (Serrated III is +3 Force of
+  Bleed whatever it is bolted to). Condition and utility modifiers add no Force
+  at all — a T2 Poison or a saved Moment was never a number.
 - **Ranged & tech — the part that touches the target carries the band.**
   Rounds, shells, bolts, and arrows are made from materials and set the band;
   the delivery part (barrel, bow limbs) caps what it can safely fire; energy

@@ -962,6 +962,75 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - 🔴 **NO stat blocks** — numbers come after the shapes are blessed. **C-10** holds six open
   calls; the top three are all Marks (is it in · do Sealed states ship · what else grants them).
 
+## ⚡ FORCE — the damage system (RULED + BUILT 2026-09-01, rulebook v1.3)
+
+🔒 **THE MULTIPLICATION IS GONE.** §12.7's ×2-per-floor material band (F1 ×2 … F9 ×512) is
+**withdrawn and superseded**, owner-approved. **A material band step is now +1 Force.**
+The 2026-08-18 band-units errata is tombstoned in the book with both of its faults recorded:
+it made every floor arithmetically identical (so a gear upgrade showed on a sheet as *nothing*),
+and it broke the moment gear crossed a floor (an F1 sword read **0.75** in F3 band units).
+⭐ **The axis of progression is the PLAYER, not the floor.**
+
+- 🔒 **§7.3 — FORCE. One Force is one basic punch**, and every damage source is counted in it:
+  weapon class + **+1 per material band step** + anything added (element, coating, affix, venom)
+  + preparation. Every part of the total carries a **damage type**. **An enemy's HP is Force** —
+  a mob is five punches, and it does not matter whether they arrive as a club, a fire or a fist.
+- 🔒 **A weakness DOUBLES that type's contribution.** A torch adds 1 Force normally, 2 against
+  something that burns. ⭐ **This is where intel cashes out** — knowing the weakness is what turns
+  the +1 into a +2, which gives scouting a payoff without inflating the band.
+- 🔒 **Typed resistance subtracts from its own type ONLY, and never more than that type dealt.**
+  Fire resist 5 against 1 Force of fire eats the 1 and **wastes the other 4**.
+  ⭐ **Consequence, verified in `force-model.js`:** against a boss with diverse resistance,
+  **spreading damage thin lands 0%** while **finding the unresisted type lands 100%**. That turns
+  "bosses need discoverable win conditions, not damage races" from an instruction to the GM into
+  **arithmetic**. Bosses get diverse resistances, not fatter bars.
+- 🔒 **§10.1 UNIVERSAL RESISTANCE — a threshold, never a stat.** Universal 6 = *"needs 7 Force to
+  do anything."* **Applies to the TOTAL, once — never per type** (4 Physical + 4 Fire is 8, and 8
+  beats a 7-threshold; per-type it would not, and a threshold that rejects 8 damage is not a
+  threshold). **Typed resolves first, universal takes the remainder** — any other order is
+  ill-defined on a mixed attack.
+  🔒 **AND IT IS ALWAYS CAUSED BY SOMETHING (owner) — a structure, a stance, a hold, an active
+  effect — NEVER a creature's standing state.** A golem has universal 6 because of its shell, and
+  chipping the shell lowers or strips it. ⭐ **Every entry must name its cause AND its removal;
+  one without the other is not legal.** *"A number nobody can answer is not difficulty, it is a
+  wall."* This replaced my proposed numeric cap and is strictly better — if it always has a cause,
+  it always has an answer. Same shape as E-0's gate rule and §21.3's boss rule.
+- 🔒 **§7.3 — AREA DOES NOT DIVIDE.** An attack covering multiple targets deals its **full Force to
+  each**, unless it says otherwise; each target then applies its own resistances. ⭐ **This is what
+  returns the horde fantasy that going additive cost** — a sweep over 9 spaces kills 9, so the
+  tide is cleared by **covering ground, not by a bigger number**. ⚙️ The balance worry answers
+  itself: §12.1 already requires heavy weapons to have an *adjacent empty radius*, so you cannot
+  swing one in a press of nine.
+- 🔒 **§8.1 — FORCE vs CONDITIONS are two layers.** *Force is what the attack does now; a tier is
+  what it leaves behind.* **Bleed/Crush/Burn carry both. Chill/Poison/Infection/Dissolution carry a
+  tier and NO Force by default** — an item may grant one Force explicitly (*+1 Force (Poison)*) and
+  it then answers to Poison resistance like any type. **If a condition deals Force, the entry says
+  so in a number.** This maps onto §10's existing flat-vs-tiered classification untouched.
+- **PREPARATION CATEGORIES (owner):** steps are budgeted per category so prep must be *diverse* —
+  you cannot buy it all at the Forge. **Gear 3** (band step · added type · affix/coating) ·
+  **Situation 2** (ambush · terrain) · **Party 1** (assist/grapple) · 🟡 **Sponsorship 1** (a patron
+  intervenes — mine, and the only category unique to this game). Ceiling 7 steps.
+  🟡 **Knowledge is NOT a step** — it is what doubles the weakness. 🟡 **Body is NEGATIVE** — your
+  own conditions subtract. (Both mine, unblessed.)
+- **Calibration:** mob Force = the AVERAGE contestant's Force. F1 mob **5** → F9 mob **13**, +1 per
+  floor. Under-prepared 2 hits · average 1 · prepared 1 with surplus to cleave. Two digits forever.
+- ⚙️ **Three calculators regenerate the tables instead of drifting:** `server/floor-bands.js`
+  (cross-floor) · `server/prep-bands.js` (within-floor) · `server/force-model.js` +
+  `server/force-resistance.js` (the unit, weakness doubling, resistance order, area).
+
+### 🔴 What this INVALIDATES — the migration list (nothing done yet)
+
+| # | What | Why |
+|---|---|---|
+| **1** | **53 enemy statlines** | Mob 5 survives unchanged as 5 Force. **Elite 60 / boss 125 / super 300 do NOT** — as Force those are 60 and 125 punches. Per the owner they come **down** hard and get **diverse resistances** instead |
+| **2** | `rulebook/item-drafting-materials.md` | The ×2/×4/×8 band table and the *"Greatsword 3 → Jade 24"* worked example are both dead |
+| **3** | `rulebook/enemy-scaling.md` + `server/floor-bands.js` | Built entirely on the doubling |
+| **4** | `rulebook/level-budget.md` **L-22** | The band-units ruling it rests on is withdrawn |
+| **5** | `server/seeds/items-set1-spine.js` | 26 templates written in band units |
+| **6** | `Enemy` model + `seed-enemies.js` | Needs a **universal resistance** field, and a gate that refuses any entry naming no cause and no removal — same shape as the `presence` positive claim |
+
+---
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
