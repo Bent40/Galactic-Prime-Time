@@ -1,6 +1,8 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.1** · 2026-08-04 — the Item Drafting update: materials & parts
+**Version 1.2** · 2026-09-01 — the Marks update: Marks (§18.4), tags that
+record a deed instead of a performance and never fade.
+*Previously —* **1.1** · 2026-08-04, the Item Drafting update: materials & parts
 (§12.7), armor rules (§12.6), polish & creation kits (§12.3), tomes (§4.4),
 box specificity (§17.6), the horde doctrine (§21.2). *(File name stays v1.0 —
 the Wiki imports it by path.)*
@@ -1031,6 +1033,8 @@ them:
   must appear on TVTropes.org.
 - **Lifecycle:** acquired → **Reinforced** (play into it; stack gear/skills) →
   **Faded** (neglected) → **Lost** → reacquirable.
+- **Except for Marks.** A **Mark** is a tag that records a deed rather than a
+  performance, and it never fades — §18.4.
 
 ### 18.1 What tags DO — the six patterns
 
@@ -1178,6 +1182,74 @@ playing it. Reading this chapter is allowed; that's what it's for.*
 - **The Recast** — Someone else's role. Your performance now. Step into a function, position, or narrative role that belonged to another party member.
 - **Blooper Reel** — Three failures. Four. We've lost count. Fail at least three times in sequence in the same scene. The crowd never changes the channel.
 - **Post-Credits Scene** — The encounter ended. You weren't done. Take a significant action after the formal resolution of a combat or scene.
+
+
+### 18.4 Marks — tags that record a deed
+
+*Marks are new in 1.2. A Mark is a kind of tag, not a second system: everything
+in §18 applies to one except where this section says otherwise.*
+
+- A tag records a **performance** — who the Show says you are. A Mark records a
+  **deed** — what you actually did. A tag asks *"are you still being that?"* A
+  Mark asks *"did you do it?"* That is a fact, not a state.
+- **Granted automatically.** Nobody votes on whether you killed a king. The deed
+  is the acquisition — there is no table consensus, no proposal, and no declining
+  one.
+- **Permanent.** A Mark is never Reinforced, never Faded, never Lost. §18's
+  lifecycle does not apply to it.
+- **No depth.** A second regicide is not more Regicide. It simply is.
+- **Marks are physical.** The brand is on your body, and not necessarily somewhere
+  you can see it. You may carry one for a long time before anything tells you it
+  is there.
+- **Who brands you.** The Corporation does, as a matter of course — Marks are how
+  the production attributes consequence, and how you find out that something you
+  did is the reason a room is behaving the way it is. It is not the only thing
+  that can brand you. Sufficiently powerful entities do it too, and whose brand
+  you carry matters.
+
+**Present and Active are different things.**
+
+| | Rule |
+|---|---|
+| **Present** | Always. The Mark is on you from the moment of the deed, and it always counts for gates — a gate that refuses your Mark refuses you whether or not the Mark is doing anything in the scene |
+| **Active** | The Mark wakes when a scene makes it relevant — a place, an entity, or a piece of machinery it has something to do with. Dormant otherwise |
+
+**How activation reads at the table.**
+
+| | |
+|---|---|
+| **Best** | The mood of the scene changes first. The room is wrong before anyone explains why. Then a small note — the brand lights, or light comes from somewhere on the body |
+| **Allowed** | The GM says the Mark is active. Legible, and fine when the table needs it |
+| **Avoid** | Announcing it before the mood shifts. That spends the effect and leaves nothing to infer |
+
+The light is the tell, not the message. It says *something here concerns you*; it
+never says what.
+
+**Marks as gates.** §18.1 pattern 6 lets items, skills, Directives and unlocks
+REQUIRE or REFUSE a tag. Because a Mark cannot fade, the two do not behave the
+same way, and it is worth knowing which one you are looking at:
+
+- **REFUSES *tag*** — swings. Neglect the tag, let it Fade, and the gate reopens.
+- **REFUSES *Mark*** — a one-way door. The deed is done; that item is shut to you
+  for good.
+
+Gates are checked **continuously**, not only when you pick something up. An item
+you are already carrying when you earn a disqualifying Mark rejects you on the
+spot, and §12.1's failure path — a Forced Action, §6 — resolves what that costs
+you.
+
+**The named Marks.**
+
+| Mark | Earned by | Active in the presence of |
+|---|---|---|
+| **Regicide** | Killing a reigning monarch. Whether you knew it or not | Crowns, thrones, and the machinery of rule |
+| **Dragon Slayer** | Killing a dragon, or one of its kin | Dragons and their kin — and anything that wants what they are made of |
+| **Witness** | Seeing a thing happen and not stopping it | Whoever else was there, and whoever recognises what you saw |
+
+**There is no Mark Compendium, and that is deliberate.** §18.3 publishes every
+tag because knowing a tag is how you play it. A Mark works the other way round:
+the name is handed to you and the referent is not. Expect Marks this book does
+not name, and expect a name to make sense long after you earned it.
 
 ---
 

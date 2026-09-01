@@ -135,7 +135,14 @@ export default function PlayerPanel({ player, token, showToast }) {
   async function addTag() {
     if (!tagForm.trim()) return;
     const master = tagLib.find(t => t.name.toLowerCase() === tagForm.trim().toLowerCase());
-    const newTags = [...(state.tags || []), { id: uid(), name: master?.name || tagForm.trim(), state: 'active', effect: master?.effect || '' }];
+    const isMark = master?.kind === 'mark';
+    const newTags = [...(state.tags || []), {
+      id: uid(),
+      name: master?.name || tagForm.trim(),
+      state: isMark ? 'dormant' : 'active',
+      effect: master?.effect || '',
+      ...(isMark ? { kind: 'mark', activeNear: master.activeNear || '' } : {}),
+    }];
     const d = await apiFetch(`/api/admin/players/${player.userId}/tags`, { method: 'PATCH', body: JSON.stringify({ tags: newTags }) }, token);
     if (d.ok) { showToast('Tag added'); setCharData(cd => ({ ...cd, state: { ...cd.state, tags: newTags } })); setTagForm(''); }
     else showToast(d.error, 'err');
@@ -432,7 +439,7 @@ export default function PlayerPanel({ player, token, showToast }) {
         <div className="row" style={{ flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
           {(state.tags || []).map(tag => (
             <span key={tag.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 20, background: 'rgba(0,212,255,.07)', border: '1px solid rgba(0,212,255,.25)', color: 'var(--cyan)', fontSize: 10 }}>
-              {tag.name} <span style={{ color: 'var(--muted)', fontSize: 8 }}>({tag.state})</span>
+              {tag.name} <span style={{ color: 'var(--muted)', fontSize: 8 }}>({tag.kind === 'mark' ? `mark · ${tag.state}` : tag.state})</span>
               <button style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer', fontSize: 10, padding: 0 }} onClick={() => rmTag(tag.id)}>✕</button>
             </span>
           ))}

@@ -524,6 +524,14 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .tag-chip-rm:hover { opacity: 1; }
 .tag-chip-effect { font-size: 9px; color: inherit; opacity: .7; padding: 3px 8px 5px; border-top: 1px solid rgba(255,255,255,.06); }
 
+/* Marks (rulebook 18.4) — a brand, not a badge. Dormant is scar tissue;
+   lit is the brand answering something in the room. */
+.tag-chip.mark { border-color: rgba(140,120,110,.45); background: rgba(30,22,20,.5); color: #b9a99f; }
+.tag-chip.mark .tag-chip-top { cursor: pointer; }
+.tag-chip.mark.lit { border-color: rgba(226,116,60,.85); background: rgba(90,38,14,.5); color: #ffb98a; box-shadow: 0 0 12px rgba(226,116,60,.35); }
+.tag-chip.mark.lit .tag-chip-name { text-shadow: 0 0 8px rgba(255,150,80,.6); }
+.tag-chip.mark .tag-state-lbl { letter-spacing: 1px; text-transform: uppercase; font-size: 8px; opacity: .75; }
+
 /* ---- CHAT (character & admin) ---- */
 .chat-feed { display: flex; flex-direction: column; gap: 8px; flex: 1; overflow-y: auto; padding: 12px; background: rgba(0,0,0,.25); border-radius: 4px; border: 1px solid var(--border); min-height: 0; }
 .chat-bubble { padding: 8px 12px; border-radius: 6px; max-width: 90%; }

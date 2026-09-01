@@ -15,13 +15,33 @@ export default function ExposureTab({ state, update, token }) {
 
   function patchExposure(k, v) { update(s => ({ ...s, exposure: { ...s.exposure, [k]: v } })); }
 
+  // Rulebook 18.4 — a Mark has no lifecycle. It is always present; clicking it
+  // toggles whether the current scene has woken it.
   function cycleTag(id) {
     const cycle = ['active', 'reinforced', 'faded'];
-    update(s => ({ ...s, tags: s.tags.map(t => t.id === id ? { ...t, state: cycle[(cycle.indexOf(t.state) + 1) % cycle.length] } : t) }));
+    update(s => ({
+      ...s,
+      tags: s.tags.map(t => {
+        if (t.id !== id) return t;
+        if (t.kind === 'mark') return { ...t, state: t.state === 'lit' ? 'dormant' : 'lit' };
+        return { ...t, state: cycle[(cycle.indexOf(t.state) + 1) % cycle.length] };
+      }),
+    }));
   }
-  function rmTag(id) { update(s => ({ ...s, tags: s.tags.filter(t => t.id !== id) })); }
+  // A Mark cannot be shed (18.4). The GM removes one from the admin panel if a
+  // data fix is ever needed.
+  function rmTag(id) {
+    update(s => ({ ...s, tags: s.tags.filter(t => !(t.id === id && t.kind !== 'mark')) }));
+  }
   function addTagFromMaster(master) {
-    update(s => ({ ...s, tags: [...(s.tags || []), { id: uid(), name: master.name, state: 'active', effect: master.effect || '' }] }));
+    const isMark = master.kind === 'mark';
+    update(s => ({ ...s, tags: [...(s.tags || []), {
+      id: uid(),
+      name: master.name,
+      state: isMark ? 'dormant' : 'active',
+      effect: master.effect || '',
+      ...(isMark ? { kind: 'mark', activeNear: master.activeNear || '' } : {}),
+    }] }));
     setTagSearch('');
     setTagPickerOpen(false);
   }
@@ -30,6 +50,8 @@ export default function ExposureTab({ state, update, token }) {
     const q = tagSearch.trim().toLowerCase();
     const owned = new Set((state.tags || []).map(t => t.name.toLowerCase()));
     return masterTags
+      // Marks are granted by the deed, never picked off a list (18.4).
+      .filter(t => t.kind !== 'mark')
       .filter(t => !owned.has(t.name.toLowerCase()))
       .filter(t => !q || t.name.toLowerCase().includes(q) || (t.effect || '').toLowerCase().includes(q) || (t.description || '').toLowerCase().includes(q));
   }, [tagSearch, state.tags, masterTags]);
@@ -123,7 +145,7 @@ export default function ExposureTab({ state, update, token }) {
       <div className="panel">
         <div className="panel-title">Tags</div>
         <div className="tags-wrap">
-          {(state.tags || []).map(tag => (
+          {(state.tags || []).filter(t => t.kind !== 'mark').map(tag => (
             <div key={tag.id} className={`tag-chip ${tag.state || 'active'}`} title={masterDesc[tag.name.toLowerCase()] || undefined}>
               <div className="tag-chip-top" onClick={() => cycleTag(tag.id)}>
                 <span className="tag-chip-name">{tag.name}</span>
@@ -133,7 +155,7 @@ export default function ExposureTab({ state, update, token }) {
               {tag.effect && <div className="tag-chip-effect">{tag.effect}</div>}
             </div>
           ))}
-          {(!state.tags || state.tags.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No tags.</span>}
+          {(state.tags || []).filter(t => t.kind !== 'mark').length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No tags.</span>}
         </div>
         <div style={{ marginTop: 8 }}>
           {!tagPickerOpen ? (
@@ -173,6 +195,34 @@ export default function ExposureTab({ state, update, token }) {
               </div>
             </div>
           )}
+        </div>
+      </div>
+
+
+      {/* Marks — rulebook 18.4 */}
+      <div className="panel">
+        <div className="panel-title">Marks</div>
+        <div className="tags-wrap">
+          {(state.tags || []).filter(t => t.kind === 'mark').map(mark => (
+            <div
+              key={mark.id}
+              className={`tag-chip mark ${mark.state === 'lit' ? 'lit' : 'dormant'}`}
+              title={masterDesc[mark.name.toLowerCase()] || undefined}
+            >
+              <div className="tag-chip-top" onClick={() => cycleTag(mark.id)}>
+                <span className="tag-chip-name">{mark.name}</span>
+                <span className="tag-state-lbl">{mark.state === 'lit' ? 'lit' : 'dormant'}</span>
+              </div>
+              {mark.activeNear && <div className="tag-chip-effect">Stirs near: {mark.activeNear}</div>}
+            </div>
+          ))}
+          {(state.tags || []).filter(t => t.kind === 'mark').length === 0 && (
+            <span style={{ color: 'var(--muted)', fontSize: 11 }}>Unmarked.</span>
+          )}
+        </div>
+        <div style={{ marginTop: 8, fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', lineHeight: 1.4 }}>
+          A Mark is burned into you by something you did. It does not fade and it cannot be
+          removed. Click one when a scene wakes it.
         </div>
       </div>
 

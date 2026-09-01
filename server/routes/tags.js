@@ -21,7 +21,7 @@ router.get('/', requireAuth, async (req, res) => {
 // ── POST /api/tags ───────────────────────────────────────────────────────────
 router.post('/', requireAdmin, async (req, res) => {
   try {
-    const { name, description, effect, conditions } = req.body;
+    const { name, description, effect, conditions, kind, activeNear } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
 
     const tag = await Tag.create({
@@ -29,6 +29,8 @@ router.post('/', requireAdmin, async (req, res) => {
       description: description || '',
       effect: effect || '',
       conditions: conditions || '',
+      kind: kind === 'mark' ? 'mark' : 'tag',
+      activeNear: activeNear || '',
     });
     logger.info(`TAG CREATE  "${name}"`);
     res.json(tag);
@@ -41,7 +43,7 @@ router.post('/', requireAdmin, async (req, res) => {
 // ── PATCH /api/tags/:id ──────────────────────────────────────────────────────
 router.patch('/:id', requireAdmin, async (req, res) => {
   try {
-    const { name, description, effect, conditions } = req.body;
+    const { name, description, effect, conditions, kind, activeNear } = req.body;
     const update = {};
     if (name !== undefined) {
       if (!name) return res.status(400).json({ error: 'name required' });
@@ -50,6 +52,8 @@ router.patch('/:id', requireAdmin, async (req, res) => {
     if (description !== undefined) update.description = description;
     if (effect !== undefined)      update.effect = effect;
     if (conditions !== undefined)  update.conditions = conditions;
+    if (kind !== undefined)        update.kind = kind === 'mark' ? 'mark' : 'tag';
+    if (activeNear !== undefined)  update.activeNear = activeNear;
 
     const tag = await Tag.findByIdAndUpdate(req.params.id, update, { new: true, runValidators: true });
     if (!tag) return res.status(404).json({ error: 'Tag not found' });

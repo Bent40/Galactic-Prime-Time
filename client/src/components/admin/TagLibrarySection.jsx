@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
 
-const BLANK = { name: '', description: '', effect: '', conditions: '' };
+const BLANK = { name: '', description: '', effect: '', conditions: '', kind: 'tag', activeNear: '' };
 
 function TagForm({ value, onChange }) {
   return (
@@ -26,6 +26,20 @@ function TagForm({ value, onChange }) {
         <input className="fi" value={value.conditions} onChange={e => onChange({ ...value, conditions: e.target.value })}
           placeholder="How is this tag earned? (optional)" />
       </div>
+      <div className="field-group" style={{ marginBottom: 8 }}>
+        <label className="field-label">Kind</label>
+        <select className="fi" value={value.kind || 'tag'} onChange={e => onChange({ ...value, kind: e.target.value })}>
+          <option value="tag">Tag — a performance. Cycles active / reinforced / faded</option>
+          <option value="mark">Mark — a deed. Never fades, cannot be shed (18.4)</option>
+        </select>
+      </div>
+      {value.kind === 'mark' && (
+        <div className="field-group" style={{ marginBottom: 8 }}>
+          <label className="field-label">Stirs near</label>
+          <input className="fi" value={value.activeNear || ''} onChange={e => onChange({ ...value, activeNear: e.target.value })}
+            placeholder="What wakes it — e.g. Crowns, thrones, and the machinery of rule" />
+        </div>
+      )}
     </>
   );
 }

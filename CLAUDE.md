@@ -747,6 +747,23 @@ Skills are granted to players by templateId. The player sheet joins template dat
   Planet`) — *"there will be normal weapons too so its not that big of a deal."*
 - ⭐ **What replaced them is better: three concepts now GRANT a Mark instead of refusing a tag.**
   An item that marks you creates consequences; an item that refuses you only closes a door.
+- ✅ **MARKS ARE BUILT AND IN THE BOOK (2026-09-01).** The mechanic no longer lives only in
+  proposal docs. **Rulebook → v1.2, new `§18.4 Marks`** (deed vs performance · granted
+  automatically · permanent, never Reinforced/Faded/Lost · no depth axis · physical brand,
+  not necessarily where you can see it · Present vs Active · mood-first activation ·
+  `REFUSES <tag>` swings / `REFUSES <Mark>` is a one-way door · gates checked continuously,
+  failure → §6 Forced Action). 🔒 **There is deliberately NO Mark Compendium** — §18.3
+  publishes tags because knowing one is how you play it; a Mark works the other way, so the
+  book names only the three generic tropes (`Regicide` · `Dragon Slayer` · `Witness`) at
+  trope level with **no campaign referents**. The 22-deed Set 1 roster stays GM material.
+  **App:** `Tag` model carries `kind: 'tag'|'mark'` + `activeNear`; both `routes/tags.js`
+  verbs whitelist them; `TagLibrarySection` authors marks; `PlayerPanel` grants them (the GM
+  grants — the player picker **filters marks out**, they are earned not chosen); the sheet
+  has its own **Marks panel** where a click toggles dormant ↔ lit instead of cycling a
+  lifecycle, and **the ✕ is absent because a Mark cannot be shed**. **Seeder:**
+  `node seed-marks.js` (dry run) → `--apply`, data in `server/seeds/marks.js`; `--check`
+  runs the §18.4 gate alone with **no `node_modules` and no DB** and exits 1 on a violation
+  (wrong `kind`, missing trigger, missing deed). ⚠️ **Not yet seeded to Atlas.**
 - 🔒 **C-0b — MARKS: RULED IN (2026-08-25) as a SUBGENRE of §18 tags**, not a second system —
   a tag with `fades: false` plus a presence trigger, inheriting §18's storage, its TVTropes
   definability rule and its §18.1.6 item-gating. **Witness · Dragon Slayer · Regicide.**
