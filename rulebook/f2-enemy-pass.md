@@ -287,20 +287,56 @@ demon politics as a *choice* rather than as a job.**
 cannot happen: *"a party that freed her at F1 is the one group **she** might tell"* — **she is
 not here.**
 
-🟡 **Proposed fix, and it is better than the original: the Double relays what it does not
-understand.** It has been told to say certain things to anyone carrying the queen's brand. It
-says them **sincerely, and without comprehension**, because it does not know what it is or what
-the crown is digging for.
+### 📓 THE JOURNAL — spine ③ resolved (owner, 2026-08-25)
 
-⭐ **What that buys:**
-- A branded party still gets something at F2 — **a message that visibly means more than the
-  messenger knows.** That is a hook, not an answer.
-- 🔒 **It preserves the F3 payoff.** The real explanation is what the brand buys *at Floor 3*,
-  where Vermilia actually is.
-- 🔴 **And it is the doll's whole tragedy in one scene:** a person repeating words about a secret
-  she is part of and cannot read.
+> **Owner:** *"she explains how her great, great (add a few greats) grandmother had branded people
+> who saved her, after which she wrote a journal of sorts, but the journal is gibberish for the
+> doll because its been told to not understand, and she passes that journal to our players, whose
+> system can auto translate it via the brand."*
 
-⚠️ **Needs an owner call.** ③ either moves wholly to F3, or stays at F2 in this degraded form.
+**The scene:** the Double receives a branded party, explains that *her great-great-great-
+grandmother* once branded the people who saved her life, produces the journal that ancestor
+wrote, and hands it over. **She cannot read a word of it.**
+
+🔴 **She is describing a woman standing in the next building.** The doll believes the lineage it
+was given. Every "great" is a lie she is telling sincerely, and the party — who met that girl on
+Floor 1 — are the only people in the room who could notice.
+
+⭐ **Why "told not to understand" is the right mechanism, not a hand-wave.** The doll is
+**Inscribed Clay**: *the writing is the strength.* A construct defined by what is written into it
+can have *"you do not understand this text"* written in. **The limit is the material's own
+logic.** ⚙️ And it is the cleanest possible security: an asset that cannot read the secret cannot
+leak it, however sincerely it is questioned.
+
+⭐ **The brand becomes a key twice, escalating.** At F2 it **decrypts a document**; at F3 it
+**opens a door to Vermilia.** The player learns the brand is valuable one floor before they learn
+it is how you get an audience.
+
+#### 🟡 Two refinements worth taking
+
+**1 · The CORPORATION does the translating.** *"Their system auto-translates it"* — make that the
+production, not the brand. **The show subtitles it, because the audience needs to follow the
+plot.** ⭐ On-theme, faintly sinister, and consistent with machinery already ruled: Marks are the
+Corporation's causality ledger and it protects branch points for ratings. **It helps when helping
+makes better television.**
+
+**2 · 🔴 The journal should be about THE PARTY, not about the dig.** If it explains the
+excavation, F3's reveal is spent a floor early. Instead let it be **the F1 night from Vermilia's
+side** — a girl in a burning house, the people who pulled her out, and what she decided she owed
+them.
+
+⭐ **Because then the party opens a two-hundred-year-old book and finds an account of
+themselves.** The reveal is not *"the crown is digging for a god."* It is ***"wait — this is
+us."*** 🎯 And that is what makes the F3 audience earned: they go to the mausoleum not because
+they learned a secret, but because they worked out **who they are to her.**
+
+#### ⚙️ Small notes
+
+- **How many "greats"?** ~170 years, so five to seven predecessors. 🔴 **Better: let the doll be
+  slightly unsure of the count.** She is days old and reciting a lineage she was handed. The
+  hesitation is the tell.
+- **Killed branch:** no Vermilia, no Double, no journal. The scene simply does not exist.
+- **Spared but unbranded:** no journal here. They take the reputation route at F3 instead.
 
 ---
 

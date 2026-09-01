@@ -441,10 +441,22 @@ Skills are granted to players by templateId. The player sheet joins template dat
   why digging never stops under a house of the dead.** The ruse and the excavation are the same
   building, each explaining the other. 🟡 Proposed: the "previous queens" tombs hold the
   **discarded dolls**, so the current Double walks past her predecessors without knowing.
-- ⚠️ **F2 spine ③ needs amending** — it had Vermilia telling a branded party what the crown digs
-  for, but **F2's court is the Double.** 🟡 Proposed fix: **the Double relays what it does not
-  understand**, sincerely and without comprehension — a hook rather than an answer, preserving the
-  real explanation for F3. Owner call: ③ moves wholly to F3, or stays in this degraded form.
+- 📓 **F2 SPINE ③ RESOLVED — THE JOURNAL (owner, 2026-08-25).** The Double receives a branded
+  party, explains that *"her great-great-great-grandmother"* branded the people who saved her,
+  and hands over the journal that ancestor wrote — **which she cannot read a word of, because she
+  has been told not to understand it.** 🔴 **She is describing a woman standing in the next
+  building**, and the party who met that girl at F1 are the only ones who could notice.
+  ⭐ *"Told not to understand"* is the doll's own material logic, not a hand-wave — it is
+  **Inscribed Clay**, *the writing is the strength*, so *"you do not understand this text"* can
+  simply be written in. **An asset that cannot read the secret cannot leak it.**
+  ⭐ **The brand becomes a key twice, escalating:** at F2 it decrypts a document, at F3 it opens a
+  door to Vermilia. 🟡 Two refinements offered: **the CORPORATION does the translating** (the show
+  subtitles it because the audience needs the plot — consistent with Marks as its causality
+  ledger and with it protecting branch points for ratings); and 🔴 **the journal should be about
+  THE PARTY, not the dig** — the F1 night from Vermilia's side, so the reveal is not *"the crown
+  digs for a god"* but ***"wait, this is us,"*** which is what makes the F3 audience earned.
+  ⚙️ Let the doll be **slightly unsure how many "greats"** — she is days old reciting a handed-down
+  lineage, and the hesitation is the tell.
 - 🏺 **THE DOUBLE'S MIMICRY IS AN ITEM — a CLAY DOLL (ruled 2026-08-25).** Comes to life, acts on
   the user's wish, **striking resemblance to whatever they imagined**, and 🔒 **negligible combat
   power by design.** ⭐ An item solves "keep it small" better than a repertoire did — it has a
