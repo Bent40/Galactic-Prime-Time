@@ -565,7 +565,7 @@ will tell you so if you ask.
 
 | The party… | Result |
 |---|---|
-| **Helped her and carries her brand** | 🔒 **The Double brings them to her.** The brand is the credential — it is *hers*, and the doll has been told to honour it |
+| **Helped her and carries her brand** | 🔒 **The Double brings them to her.** ⚠️ **Not a standing order** — the instruction is *written into the dolls after F2*, because the doll's report of the visit is how Vermilia learns the party is still alive. See `f2-enemy-pass.md` **The Journal**. The party causes its own access and does not know it |
 | **Anything else** | 🔒 **They must build a reputation** with the crown before they see the real story. It is reachable, and it is work |
 
 ⭐ **This is the F1 Medium brand paying off two floors later, and it makes accepting a demon's

@@ -456,7 +456,19 @@ Skills are granted to players by templateId. The player sheet joins template dat
   THE PARTY, not the dig** — the F1 night from Vermilia's side, so the reveal is not *"the crown
   digs for a god"* but ***"wait, this is us,"*** which is what makes the F3 audience earned.
   ⚙️ Let the doll be **slightly unsure how many "greats"** — she is days old reciting a handed-down
-  lineage, and the hesitation is the tell.
+  lineage, and the hesitation is the tell. ✅ **Both refinements accepted 2026-08-25.**
+- 🔗 **WHY THE JOURNAL IS READABLE, AND WHAT READING IT CAUSES (owner, 2026-08-25).** Vermilia keyed
+  it to **herself alone** — a private record, written on the assumption that the humans who saved
+  her had been dead for a century and a half. 🔴 **The brand is an accident of her own making:** it
+  carries *her permission*, so a branded party reads it with her authority. **And the doll reports
+  back** — people, carrying the queen's brand, who took the book. **That is when she learns they
+  are alive and can return.**
+  ⭐ **So the F3 audience is NOT a standing order — it is a new instruction added because of F2.**
+  She writes *"if those ones come back, bring them to me"* into the dolls. ⚙️ Between F2 and F3
+  there are further crownings and remakes, so **every doll made after that visit carries a line
+  about the party.** They edited the doll and will never know it.
+  🕯 **The asymmetry is the payload:** she believes she is seeing people who died of old age two
+  centuries ago. **From her side they are ghosts; from theirs it has been a few weeks.**
 - 🏺 **THE DOUBLE'S MIMICRY IS AN ITEM — a CLAY DOLL (ruled 2026-08-25).** Comes to life, acts on
   the user's wish, **striking resemblance to whatever they imagined**, and 🔒 **negligible combat
   power by design.** ⭐ An item solves "keep it small" better than a repertoire did — it has a

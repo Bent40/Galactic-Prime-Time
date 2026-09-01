@@ -330,6 +330,37 @@ themselves.** The reveal is not *"the crown is digging for a god."* It is ***"wa
 us."*** 🎯 And that is what makes the F3 audience earned: they go to the mausoleum not because
 they learned a secret, but because they worked out **who they are to her.**
 
+#### 🔗 Why the journal is readable, and what reading it CAUSES ✅ (owner, 2026-08-25)
+
+> **Owner:** *"vermillia doesnt think the party of humans was capable of living that long, but
+> made it so only she herself could read it, but the brand gives them the same permission as her,
+> and when the doll describe the party to her, thats when she realises that party can return,
+> which is when she adds the idea of guiding the party to her to the dolls."*
+
+🔒 **The journal was keyed to Vermilia alone.** It is a private record, written so *only she* can
+read it. She never wrote it for anyone — she assumed the humans who saved her had been dead for
+a century and a half. **They were mortals. She is not.**
+
+🔴 **The brand is an accident of her own making.** It carries **her permission**, so a party
+wearing it reads the book with her authority. She did not design that. She simply never
+considered that the people she branded would still be standing.
+
+**And the doll reports back.** It describes the visitors — *people, carrying the queen's brand,
+who took the book.* 🔴 **That is the moment Vermilia realises they are alive, and that they can
+come again.**
+
+⭐ **So the F3 audience is not a two-century standing order. It is a NEW instruction, added
+because of what the party did at F2.** She writes it into the dolls: *if those ones come back,
+bring them to me.*
+
+⚙️ **Which means the party edited the doll.** Between F2 and F3 there are further crownings and
+further remakes — and **every doll made after that visit carries a line about them.** They are in
+the doll's definition, and they will never know it.
+
+🕯 **The asymmetry is the best thing in this thread and should be played:** she thinks she is
+seeing people who died of old age two hundred years ago. **From her side they are ghosts. From
+theirs it has been a few weeks.**
+
 #### ⚙️ Small notes
 
 - **How many "greats"?** ~170 years, so five to seven predecessors. 🔴 **Better: let the doll be
