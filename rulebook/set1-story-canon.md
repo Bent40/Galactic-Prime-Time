@@ -401,10 +401,40 @@ perfect copy would be suspicious; a family resemblance is a lineage. She is not 
 Vermilia — **she is impersonating Vermilia's descendant**, which is a far easier and far more
 convincing job.
 
-⚠️ **Keep the capability SMALL, for the same reason the Doorward says "deception" and never
-"illusion."** An open-ended shapeshifter mints a capability that owes players a resistance
-mechanic. This one has **a repertoire, not a power**: a fixed set of worn faces, built over two
-centuries, each one a queen who officially lived and died.
+#### 🏺 The mimicry is an ITEM ✅ RULED 2026-08-25 — the clay doll
+
+> **Owner:** *"A clay doll that comes to life and acts according to the user's wish, with lacking
+> combat power but striking resemblence to whatever the user imagined."*
+
+⭐ **This solves the "keep it small" problem better than the repertoire did.** The concern was
+that an open-ended shapeshifter mints a capability owing players a resistance mechanic. **An item
+does not** — it has a location, an owner, a price and a failure mode. It can be found, stolen,
+copied or broken. **The Double is a demon with a tool, not a demon with a power**, and the tool
+can change hands.
+
+🔒 **It is Inscribed Clay** — already the **M-3 capital band** material: *"Golem/tablet — construct
+and ward material; **the writing is the strength**."* ⭐ **The doll works because something is
+written into it**, which gives the limit a mechanism rather than a rule: the writing carries
+**likeness, not strength.**
+
+| | |
+|---|---|
+| **What it does** | Comes to life and acts on the user's wish, wearing a striking resemblance to whatever they imagined |
+| **What it cannot do** | 🔒 **Fight.** Negligible combat power, by design |
+| 🔴 **The load-bearing limit** | **It renders an IMAGINATION, not a person.** A doll of someone you have studied for years is uncanny; a doll of someone you met once is *subtly, unplaceably wrong* |
+
+⭐ **That last line explains something already ruled.** The Double is supposed to look *slightly
+different* from Vermilia — and now we know why: **the imperfection is in the mechanism, not in
+the performance.** Two centuries of successions look like a family because clay renders memory,
+and memory drifts. **The dynasty is convincing precisely because the tool is imprecise.**
+
+⚙️ **Interactions worth knowing:**
+- 🔴 **The Loong reads truth at close range.** A doll should not survive that, which is a reason
+  the crown and the hunt keep away from each other.
+- 🔒 **Marks do not fire on a doll.** `Witness` activates near **Vermilia**; in front of a doll it
+  stays dark, which is the lie detector already noted.
+- 🎯 **The party can plausibly obtain one.** It is an object made of a known F3 material — which
+  turns a GM device into something players can hold, and that is usually the better version.
 
 🎯 **And it lands on a mechanic we already have.** Marks activate by *presence* —
 🔒 **`Witness` activates near Vermilia, because she recognises it.** So a party carrying that
@@ -423,7 +453,39 @@ stand.
 |---|---|
 | **1** | **Does the double know?** She wears a face that never ages — she must know *something.* That makes her either the most dangerous person in the capital or the loneliest, and the high court explicitly *do not* know |
 | **2** | **What clan is she?** The clan law says each clan embodies a thing. Faces? Names? Succession itself? A clan that embodies *inheritance* would be brutal here |
-| ~~3~~ | 🔒 **RULED — no Double in the killed branch.** The throne is human, but **the city knows demons rule from behind it**, because the demons are visibly doing whatever they want. ⭐ **Nothing is being hidden, so there is nothing to double.** This also explains the existing line rather than contradicting it: the crown is *"human and frightened"* **because** what stands behind it does not bother to pretend. Concealment is Vermilia's method and hers alone |
+| ~~3~~ | 🔒 **RULED — no Double in the killed branch.** The throne is human, but **the city knows demons rule from behind it**, because the demons are visibly doing whatever they want. ⭐ **Nothing is being hidden, so there is nothing to double.** Concealment is Vermilia's method and hers alone. See **the lightning rod** below for what the human crown is actually *for* |
+
+### ⚡ The human crown is a LIGHTNING ROD ✅ RULED 2026-08-25 *(killed branch)*
+
+> **Owner:** *"if you give them a figure with what seems to be power, blame goes to it as well.
+> The humans dont rebel directly against the demons, rather they put their anger at the human
+> ruler doing nothing against the demons, which is what bex and the human farm is looking for.
+> Its pure manipulation."*
+
+🔒 **The human monarch is not a compromise, a puppet or a mercy. It is apparatus.**
+
+Give a frightened population a figure who *appears* to hold power, and their rage finds the
+nearest available target. **They do not rise against the demons. They seethe at the human who
+will not.** The anger is real, constant, and pointed at something that cannot act.
+
+🔴 **And that is the crop.** Bex's farm harvests **blood and negative feeling.** A city
+structured to generate directed, impotent resentment — forever, at no cost — is **a renewable
+harvest with a throne on top of it.**
+
+⚙️ **Which reframes the whole killed-branch capital:** the political structure *is* the farm's
+infrastructure. The licensing (F3 C-1: *"the crown is human, frightened, and licensed the farm
+because Beelzebub's people asked"*) is not just a frightened man signing a paper — **the man
+signing it is himself part of the machine, and does not know it.**
+
+⭐ **The cruelty is that everyone in it is sincere.** The citizens' anger is genuine. The
+monarch's helplessness is genuine. **Only the shape is designed**, and nobody inside it can see
+the shape.
+
+🟡 **Open: who authored it?** Bex clearly *benefits* — but canon has him acting for demonkind
+rather than himself, never lying, and not defending his means. Whether he **built** this or
+merely **farms** what someone else built changes his register considerably. ⚠️ A Bex who
+engineered a political system to manufacture despair is a darker figure than the one currently
+written; a Bex who inherited it and uses it is the man canon describes.
 | **4** | **Do the party ever meet the real one?** The default should probably be that a party which does nothing special meets only the double, and Vermilia is a *reward* for the routes that earn her |
 
 

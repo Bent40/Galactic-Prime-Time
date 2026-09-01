@@ -390,7 +390,27 @@ Skills are granted to players by templateId. The player sheet joins template dat
   someone to speak for her for two centuries.** 🔒 **No Double in the killed branch** — the throne
   is human but **the city knows demons rule from behind it**, because they are visibly doing
   whatever they want. Nothing is hidden, so nothing needs doubling; **concealment is Vermilia's
-  method alone.** 🔴 Three open calls remain in `set1-story-canon.md`.
+  method alone.**
+- ⚡ **THE HUMAN CROWN IS A LIGHTNING ROD (ruled 2026-08-25, killed branch).** Not a compromise or
+  a puppet — **apparatus.** Give a frightened population a figure who *appears* to hold power and
+  their rage finds the nearest target: **they do not rise against the demons, they seethe at the
+  human who will not.** 🔴 **And that is the crop** — Bex's farm harvests blood and **negative
+  feeling**, so a city structured to manufacture directed, impotent resentment is **a renewable
+  harvest with a throne on top of it.** ⚙️ The killed-branch capital's politics *are* the farm's
+  infrastructure, and the frightened man who licensed it is himself part of the machine.
+  ⭐ **Everyone in it is sincere; only the shape is designed.** 🟡 Open: did Bex **build** this or
+  does he merely **farm** it — a Bex who engineered it is darker than the one canon describes.
+- 🏺 **THE DOUBLE'S MIMICRY IS AN ITEM — a CLAY DOLL (ruled 2026-08-25).** Comes to life, acts on
+  the user's wish, **striking resemblance to whatever they imagined**, and 🔒 **negligible combat
+  power by design.** ⭐ An item solves "keep it small" better than a repertoire did — it has a
+  location, an owner and a failure mode, and **the Double is a demon with a tool rather than a
+  demon with a power.** 🔒 It is **Inscribed Clay**, already the **M-3 capital material**
+  (*"Golem/tablet — the writing is the strength"*), so the limit has a mechanism: the writing
+  carries **likeness, not strength.** 🔴 **The load-bearing limit: it renders an IMAGINATION, not
+  a person** — which is *why* the successions look like daughters rather than duplicates.
+  **The dynasty is convincing precisely because the tool is imprecise.** ⚙️ Marks stay dark on a
+  doll, the Loong's truth-sense should see through one, and **the party can plausibly obtain one.**
+- 🔴 Three open calls remain in `set1-story-canon.md`.
 - 🔒 **F1 HARD — THE ENCOUNTER SHAPE, CORRECTED 2026-08-25.** ⚠️ The giant stairs are **the
   ENTRANCE only** and carry no part of the quest; the earlier *"carry a crystallized citizen up
   the stairs"* reading is **withdrawn**. The Loong **nests in the CITY HALL** and looms over the
