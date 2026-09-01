@@ -311,9 +311,53 @@ and that step is the capital.
 | ⭐ **The floor connects** | F2 Hard now *causes* F3 Hard instead of preceding it |
 | ✅ **Nothing is rebuilt** | Hounds, Warden, Horn, the shed scale, the win-on-arrival rule all stand unchanged |
 
-🟡 **Open: who in the village knows?** A survivor · a plague-scarred child · a trader who sold
-the masked man passage. The last is the most useful — **it means the mask was moving with
-purpose seventy years ago**, and someone took money for it.
+### 🔴 The destination problem, correctly stated (2026-08-25)
+
+The owner is right that "where it heard of the mask" does not solve it. **That answers why the
+Loong is travelling, not why the journey ENDS there.** A lead is a waypoint. A waypoint is not a
+floor ending.
+
+⭐ **The real question comes from Floor 1, and the F1 layer already asked it.** F1 Hard's win
+condition is **the conversation**: the party carries a crystallized citizen up the stairs and
+proves *"the city is abandoned, and its citizens are the crystal."* The Loong **cannot be lied
+to** — the honest argument is the only one that works.
+
+🔴 **So the party's F1 victory is the reason the Loong is in the desert at all.** They proved its
+post was pointless. It left. **The destination has to answer: what does a guardian do after you
+have proved to it that the thing it guards is gone?**
+
+### 🎯 Proposed answer — the village is the SURVIVORS of that city
+
+Some got out before the mist. Two or three generations on, they are a desert village that does
+not know what it is descended from, and the Loong does not know they exist.
+
+⭐ **This makes the party's F1 argument true and incomplete at the same time, which is the best
+thing about it.** They said *the city is abandoned and its citizens are the crystal.* **Both
+true.** Neither says *nobody survived.* The truth-sense verified an honest statement that was
+not the whole story — 🔴 **and Set 1's entire thesis is people being right about the mechanism
+and wrong about the completeness** (S-6; the `Martyr` counterfactual). The Loong learns that
+truth and completeness are different things, from the party that taught it the first one.
+
+**What it resolves, all at once:**
+
+| Problem | Resolved |
+|---|---|
+| *"Finds purpose" was vague* | **Literal.** A guardian with nothing to guard is handed its post back, in miniature |
+| *Why does the journey end here* | Because **this is the thing it lost.** Not a rest stop — the errand's actual object, arrived at by accident |
+| *Where the mask-lead lives* | 🔒 Already ruled and it fits without strain: **refugees from the plague are exactly the people with a story about a masked man.** They ran from him. The story came down three generations |
+| *Why it still goes to the capital at F3* | 🔴 **Stronger than before.** It no longer travels on an abstract errand — it has something to lose again, and the mask is what took it the first time |
+| *`Shepherd`* | You led it home, to a home it did not know it had |
+| *`Livestock`* | 🔴 **Much darker.** You sold it at the moment it found its people again |
+| *The shed scale* | A gift to the descendants of the people it failed. **That** is why the only M-5 Loong-Scale in the world comes from this room |
+
+⚠️ **Do not let the village know what it is.** They are farmers with an old story. The party and
+the Loong work it out; the villagers never do. The moment the village is *aware* it is a shrine,
+the scene becomes sentimental instead of quiet.
+
+🟡 **Still open: who carries the mask story?** A village elder repeating a great-grandparent ·
+a song nobody knows the meaning of any more · a trader who sold the masked man passage. **The
+song is the strongest** — it means the warning survived by being pretty rather than by being
+understood, which is the same trick the F1 mural pulled.
 
 ---
 
