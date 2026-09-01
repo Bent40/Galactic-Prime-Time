@@ -279,6 +279,41 @@ happening. Legible but insufficient. Plant at F1, detonate at F3.
 | **Therefore** | Everything the mask does to a host is **a sealed door being forced from the inside.** That is why it takes a body apart and rebuilds it. That is why it leaks. That is why it takes **seventy years** |
 | **And it is a bypass** | 🔒 Cinnabrus blessed it **after** watching clan-death nearly delete everything he was. It is a return ticket **that does not depend on the clan surviving** — which is why Beelzebub seals rather than destroys. *Destroying the vessel frees the monster;* the phylactery tradition inverted |
 
+#### 🎨 What it looks like ✅ RULED 2026-08-25
+
+**A beaked plague-doctor mask, pale bone-coloured ceramic, glass-lensed** — with **wooden horns
+growing from the temples**, and, once the conversion completes, **crystal flowers blooming along
+the horns.**
+
+⭐ **The silhouette is accidentally honest.** A plague doctor is someone who *treats* plague.
+Nullrot is patient zero **and** the antibody, and the tragedy is that nobody holds both facts at
+once. Everyone who sees the mask reads *disease*; it has been telling the whole truth the entire
+time. The mural-writers included.
+
+⭐ **The horns are the conversion, made visible.** They *grow* — bark-textured, slow, organic —
+because the mask is a sealed door being forced from the inside over seventy years. It is not
+worn. It is **rooting.**
+
+🔒 **The flowers are the plague's own vocabulary.** The F3 Reservoir's parts are already
+**First / Second / Third / Fourth Bloom**, **The Seed**, **The Throat**, with a phase called
+**Blooming** — the crystal has always been rendered botanically in the seed data. His horns
+flowering is that grammar applied to a body.
+
+**The three-stage read, at a glance:**
+
+| Floor | State | Why |
+|---|---|---|
+| **F1** | Bare mask; horns just **budding** at the temples | The taking. It has only just begun |
+| **F2** | Horns long and branching; flowers are **hard, closed buds that cannot open** | 🔴 **The Doorward is drinking the leak.** This is what *stalled* looks like |
+| **F3** | Horns in **full crystal bloom**, shedding glittering spores | Unsealed, embodied, finished |
+
+⚙️ **So killing the Doorward has a visual payoff: the buds open.** A player who saw him on F1
+can read exactly how far it has gone the moment he steps into frame on F3.
+
+⚠️ **The beak is deliberately foreign to the capital's jade-and-orichalcum register.** It should
+not match the local architecture — it is a relic of a buried god, older than the city and from
+somewhere else.
+
 **Three things this fixes, and they were already written:**
 
 - **The F1 mural is right, and someone sane wrote it.** *Chain him* is not a prophecy; it is
@@ -346,6 +381,51 @@ secret kept, which means **her secret is guarded by people who do not know what 
 They have no stake in Cinnabrus; they want a functioning city and whatever the capital pays
 them. That is why the city hunts the Loong for its blood while the crown digs for a god, and
 why the two operations barely notice each other.
+
+### 👥 The Double — how a ruse survives 170 years (PROPOSAL, 2026-08-25)
+
+> **Owner:** *"a sort of shapeshifter assisting the queen. Someone who works for her delegations,
+> looking slightly different from her, allowing the queen to hide her generations with a double."*
+
+🔴 **This plugs a hole the ruse ruling left open.** "Vermilia is the entire line" is a good
+secret, but a queen who visibly does not age across seventeen decades of public court is a
+secret that *cannot survive contact with a population.* The canon says nobody knows; it did not
+say **how.**
+
+**The double is how.** A shapeshifting demon in the queen's service performs the public
+successions — appearing each generation as a plausible **daughter**, not a duplicate. The city
+sees a dynasty. Vermilia is always the one behind it.
+
+⭐ **The constraint is what makes it work: the double is supposed to look SLIGHTLY WRONG.** A
+perfect copy would be suspicious; a family resemblance is a lineage. She is not impersonating
+Vermilia — **she is impersonating Vermilia's descendant**, which is a far easier and far more
+convincing job.
+
+⚠️ **Keep the capability SMALL, for the same reason the Doorward says "deception" and never
+"illusion."** An open-ended shapeshifter mints a capability that owes players a resistance
+mechanic. This one has **a repertoire, not a power**: a fixed set of worn faces, built over two
+centuries, each one a queen who officially lived and died.
+
+🎯 **And it lands on a mechanic we already have.** Marks activate by *presence* —
+🔒 **`Witness` activates near Vermilia, because she recognises it.** So a party carrying that
+brand can walk into a throne room, feel nothing, and know they are talking to the wrong queen.
+**The causality ledger becomes a lie detector without ever being designed as one**, which is
+exactly the diagnostic purpose Marks were ruled to have.
+
+⭐ **The thematic payload is the strongest part.** Vermilia is 🔒 **the witness** — the one who
+watched and did not speak. **A queen who has employed someone else to speak for her for two
+hundred years is that sin running as statecraft.** She is still not standing where she should
+stand.
+
+🔴 **Open calls:**
+
+| # | Question |
+|---|---|
+| **1** | **Does the double know?** She wears a face that never ages — she must know *something.* That makes her either the most dangerous person in the capital or the loneliest, and the high court explicitly *do not* know |
+| **2** | **What clan is she?** The clan law says each clan embodies a thing. Faces? Names? Succession itself? A clan that embodies *inheritance* would be brutal here |
+| **3** | **Does she exist in the killed branch?** If the F1 girl died there is no Vermilia to double. Either the double is gone too — or 🔴 **she is still running the crown, performing a dynasty for a queen who no longer exists**, which is a much bleaker capital |
+| **4** | **Do the party ever meet the real one?** The default should probably be that a party which does nothing special meets only the double, and Vermilia is a *reward* for the routes that earn her |
+
 
 | Route | The beat | What is really happening |
 |---|---|---|

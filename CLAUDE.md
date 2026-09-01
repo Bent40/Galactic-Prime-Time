@@ -369,6 +369,25 @@ Skills are granted to players by templateId. The player sheet joins template dat
   choice about where they are going to live.
 - ⚙️ **Destroying the mask while she lives is the closest thing to a rescue there is** —
   slim odds, but slim is the only thing on offer. (Corrects an earlier over-hedge.)
+- 🎨 **NULLROT'S MASK — visual design RULED 2026-08-25.** A **beaked plague-doctor mask** (pale
+  ceramic, glass-lensed) with **wooden horns growing from the temples**, and **crystal flowers
+  blooming along the horns** once the conversion completes. ⭐ The silhouette is accidentally
+  honest — a plague doctor *treats* plague, and he is patient zero **and** the antibody. 🔒 The
+  flowers are the plague's existing vocabulary: the F3 Reservoir's parts are already **First /
+  Second / Third / Fourth Bloom · The Seed · The Throat**, phase **Blooming**. Three-stage read:
+  **F1 budding · F2 hard closed buds that cannot open** (the Doorward is drinking the leak — this
+  is what *stalled* looks like, and **killing it makes the buds open**) **· F3 full bloom.**
+  ⚠️ The beak is deliberately foreign to the capital's jade register — it is older than the city.
+- 👥 **THE DOUBLE (PROPOSAL, 2026-08-25) — how the ruse survives 170 years.** A shapeshifting
+  demon performs the public successions, appearing each generation as a plausible **daughter,
+  not a duplicate**. 🔴 **This plugs a hole the ruse ruling left open** — a queen who visibly does
+  not age cannot stay secret in a populated city, and canon said *nobody knows* without saying
+  *how*. ⚠️ Keep the capability **small — a repertoire, not a power** (same reason the Doorward
+  says "deception," never "illusion"). 🎯 **It lands on Marks:** `Witness` activates near Vermilia
+  because she recognises it, so a party carrying that brand feels **nothing** in front of the
+  double — the causality ledger becomes a lie detector without being designed as one.
+  ⭐ Thematically it is her sin as statecraft: **the witness who would not speak has employed
+  someone to speak for her for two centuries.** 🔴 Four open calls in `set1-story-canon.md`.
 - 🔒 **THE DYNASTY IS A RUSE.** No new queens, ever — **Vermilia is the entire line.** The
   **high court are other-clan demons she recruited**, who do not know what the secret is;
   they want a working city and to be paid. That is why the capital hunts the Loong while its
