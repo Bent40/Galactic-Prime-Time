@@ -290,9 +290,23 @@ Nullrot is patient zero **and** the antibody, and the tragedy is that nobody hol
 once. Everyone who sees the mask reads *disease*; it has been telling the whole truth the entire
 time. The mural-writers included.
 
-⭐ **The horns are the conversion, made visible.** They *grow* — bark-textured, slow, organic —
-because the mask is a sealed door being forced from the inside over seventy years. It is not
-worn. It is **rooting.**
+⭐ **The horns are the conversion, made visible.** They *grow* — slow, organic — because the mask
+is a sealed door being forced from the inside over seventy years. It is not worn. It is
+**rooting.**
+
+🔒 **They look like LIGHTNING-STRUCK WOOD** (owner, 2026-08-25) — scorched, split along the
+grain, fissured black and pale where something catastrophic passed through and the wood **kept
+growing anyway.**
+
+⚠️ **This is a description, not a material, and it should stay one.** There is no *lightning-struck
+wood* in the M-band catalog (the wood entries are baseline **Wood** and M-1 **Oak Heartwood**),
+and the horns should not have a material at all — 🔴 **a material is what a thing is built from,
+and these are GROWN.** Nobody forged them.
+
+⭐ **And it unifies the whole design into one event.** Lightning splits wood; lightning fused
+into sand makes glass. **Scorched, split horns with crystal blooming out of the fissures reads as
+a single strike**, not two ideas stapled together. Something hit this man, and both the damage
+and the flowering are what came after.
 
 🔒 **The flowers are the plague's own vocabulary.** The F3 Reservoir's parts are already
 **First / Second / Third / Fourth Bloom**, **The Seed**, **The Throat**, with a phase called
@@ -428,6 +442,29 @@ different* from Vermilia — and now we know why: **the imperfection is in the m
 the performance.** Two centuries of successions look like a family because clay renders memory,
 and memory drifts. **The dynasty is convincing precisely because the tool is imprecise.**
 
+#### 🕯 What the doll believes ✅ RULED 2026-08-25
+
+> **Owner:** *"It THINKS its a demon. Specifically, the queens older sister. It thinks it has to
+> take on the burden of her sister, and its remade every time they crown a 'new' queen."*
+
+🔒 **It has no clan, because it is not a demon.** It believes it is one — specifically
+**Vermilia's elder sister**, carrying a burden that belongs to her younger sibling. 🔒 **And it
+does not know it is a doll.** The truth can be written in at creation; **it is deliberately
+not**, so an asset that cannot be broken cannot betray the secret.
+
+🔒 **It is remade at every crowning** — which means it is **reimagined** each time, and the drift
+between imaginations is exactly what makes the succession look like a bloodline (above).
+
+⭐ **The horror is quiet and it is Vermilia's own sin, manufactured as a servant.** Her failure
+is that she **did not speak for someone.** She has built a person who believes she **failed to
+protect a sister** — and rebuilds that person, with that belief, every generation. ⚠️ **Each one
+is days old and certain it is the elder.**
+
+🔴 **And it defeats a truth-sense, without lying.** A doll that sincerely believes it is the
+queen's sister **is telling the truth as it knows it** — so the Loong's truth-sense passes it.
+⭐ **That is the Doorward's trap restated:** *the truest voice in the room is the lure.* Nothing
+new needs inventing; the deception lives in what the speaker was told, not in what they say.
+
 ⚙️ **Interactions worth knowing:**
 - 🔴 **The Loong reads truth at close range.** A doll should not survive that, which is a reason
   the crown and the hunt keep away from each other.
@@ -478,14 +515,42 @@ because Beelzebub's people asked"*) is not just a frightened man signing a paper
 signing it is himself part of the machine, and does not know it.**
 
 ⭐ **The cruelty is that everyone in it is sincere.** The citizens' anger is genuine. The
-monarch's helplessness is genuine. **Only the shape is designed**, and nobody inside it can see
-the shape.
+monarch's helplessness is genuine. **Only the shape is designed.**
 
-🟡 **Open: who authored it?** Bex clearly *benefits* — but canon has him acting for demonkind
-rather than himself, never lying, and not defending his means. Whether he **built** this or
-merely **farms** what someone else built changes his register considerably. ⚠️ A Bex who
-engineered a political system to manufacture despair is a darker figure than the one currently
-written; a Bex who inherited it and uses it is the man canon describes.
+#### ⚖️ Why nobody sees it: controlled disillusionment ✅ RULED 2026-08-25
+
+> **Owner:** *"they are all experiencing a very controlled form of disillusionment. Its just
+> enough to enlargen the feelings without deleting the humans themselves."*
+
+🔒 **It is a calibrated dose, not a blindfold.** The population is not deceived about the facts —
+they can see the demons perfectly well. They are held at **a managed level of despair: enough to
+enlarge the feeling, never enough to break the person.** A broken population stops producing.
+
+🔒 **THE ECONOMICS, and they are the whole design:**
+
+> *"Harvesting giblets from a crowd is harder but more material efficient than just butchering
+> the entire human."*
+
+| Method | Yield |
+|---|---|
+| **Butcher one human** | Easy to set up. **One harvest, then nothing.** Wasteful |
+| 🔴 **Skim a whole city, forever** | Harder to build — it needs a political structure — but **vastly more material-efficient, and it never stops** |
+
+⚙️ **So the lightning rod is infrastructure for the efficient mode.** Keep them alive, keep them
+angry, keep the anger pointed at a man who cannot act. **The throne is a yield optimisation.**
+
+#### 🔒 Bex is the orchestrator ✅ RULED 2026-08-25
+
+The open question is closed: **he built it.** Not an opportunist working someone else's machine —
+**the architect.** 🔒 **Beelzebub plays with the odds in the background** to help him along; he
+tilts probabilities, he does not co-run the city. *(Consistent with S-1's scavenger reading: he
+nudges, he does not administer.)*
+
+⚠️ **This raises Bex's register, deliberately, and it holds.** Canon has him acting for demonkind
+rather than himself, never lying, and **not defending his means.** An architect who will not
+defend his own architecture is exactly that man. ⭐ **And it makes the F3 Petition cost more:**
+the demon asking to be made human designed a city-sized engine for harvesting human misery, and
+will tell you so if you ask.
 | **4** | **Do the party ever meet the real one?** The default should probably be that a party which does nothing special meets only the double, and Vermilia is a *reward* for the routes that earn her |
 
 

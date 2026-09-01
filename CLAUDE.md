@@ -378,6 +378,12 @@ Skills are granted to players by templateId. The player sheet joins template dat
   **F1 budding · F2 hard closed buds that cannot open** (the Doorward is drinking the leak — this
   is what *stalled* looks like, and **killing it makes the buds open**) **· F3 full bloom.**
   ⚠️ The beak is deliberately foreign to the capital's jade register — it is older than the city.
+  🔒 **The horns look like LIGHTNING-STRUCK WOOD** — scorched, split along the grain, something
+  catastrophic passed through and the wood **kept growing.** ⚠️ A description, **not a material**:
+  there is no lightning-struck wood in the M-bands, and the horns should have no material at all
+  because **they are grown, not forged.** ⭐ It unifies the design into one event — lightning
+  splits wood and fuses sand to glass, so split horns with crystal blooming from the fissures
+  read as **a single strike** rather than two ideas.
 - 👥 **THE DOUBLE (PROPOSAL, 2026-08-25) — how the ruse survives 170 years.** A shapeshifting
   demon performs the public successions, appearing each generation as a plausible **daughter,
   not a duplicate**. 🔴 **This plugs a hole the ruse ruling left open** — a queen who visibly does
@@ -398,8 +404,29 @@ Skills are granted to players by templateId. The player sheet joins template dat
   feeling**, so a city structured to manufacture directed, impotent resentment is **a renewable
   harvest with a throne on top of it.** ⚙️ The killed-branch capital's politics *are* the farm's
   infrastructure, and the frightened man who licensed it is himself part of the machine.
-  ⭐ **Everyone in it is sincere; only the shape is designed.** 🟡 Open: did Bex **build** this or
-  does he merely **farm** it — a Bex who engineered it is darker than the one canon describes.
+  ⭐ **Everyone in it is sincere; only the shape is designed.**
+- ⚖️ **CONTROLLED DISILLUSIONMENT + the economics (ruled 2026-08-25).** Nobody is blindfolded —
+  the population can see the demons fine. They are held at **a calibrated dose of despair: enough
+  to enlarge the feeling, never enough to break the person**, because a broken population stops
+  producing. 🔒 The logic: *"harvesting giblets from a crowd is harder but more material efficient
+  than just butchering the entire human."* Butchering yields once; **skimming a whole city yields
+  forever.** ⚙️ So the throne is a **yield optimisation.**
+- 🔒 **BEX IS THE ORCHESTRATOR (ruled 2026-08-25)** — the architect, not an opportunist working
+  someone else's machine. **Beelzebub plays with the odds in the background**, tilting
+  probabilities without co-running the city (consistent with S-1's scavenger reading).
+  ⚠️ It raises his register and holds: canon has him never lying and **not defending his means**,
+  and an architect who will not defend his own architecture is exactly that man. ⭐ **It makes the
+  F3 Petition cost more** — the demon asking to be made human built the engine, and will say so.
+- 🕯 **WHAT THE DOLL BELIEVES (ruled 2026-08-25).** No clan, because **it is not a demon — it
+  believes it is one**, specifically **Vermilia's ELDER SISTER**, carrying a burden that belongs
+  to her younger sibling. 🔒 **It does not know it is a doll** (the truth *can* be written in at
+  creation; deliberately is not, so an asset that cannot be broken cannot betray the secret), and
+  it is **remade — reimagined — at every crowning.** ⭐ The horror is Vermilia's own sin built as a
+  servant: her failure was **not speaking for someone**, and she has manufactured a person who
+  believes she **failed to protect a sister**, then rebuilds her every generation. ⚠️ Each one is
+  days old and certain it is the elder. 🔴 **And it defeats a truth-sense without lying** — a
+  sincere doll passes, which is **the Doorward's trap restated: the truest voice in the room is
+  the lure.**
 - 🏺 **THE DOUBLE'S MIMICRY IS AN ITEM — a CLAY DOLL (ruled 2026-08-25).** Comes to life, acts on
   the user's wish, **striking resemblance to whatever they imagined**, and 🔒 **negligible combat
   power by design.** ⭐ An item solves "keep it small" better than a repertoire did — it has a
