@@ -387,7 +387,25 @@ Skills are granted to players by templateId. The player sheet joins template dat
   because she recognises it, so a party carrying that brand feels **nothing** in front of the
   double — the causality ledger becomes a lie detector without being designed as one.
   ⭐ Thematically it is her sin as statecraft: **the witness who would not speak has employed
-  someone to speak for her for two centuries.** 🔴 Four open calls in `set1-story-canon.md`.
+  someone to speak for her for two centuries.** 🔒 **No Double in the killed branch** — the throne
+  is human but **the city knows demons rule from behind it**, because they are visibly doing
+  whatever they want. Nothing is hidden, so nothing needs doubling; **concealment is Vermilia's
+  method alone.** 🔴 Three open calls remain in `set1-story-canon.md`.
+- 🔒 **F1 HARD — THE ENCOUNTER SHAPE, CORRECTED 2026-08-25.** ⚠️ The giant stairs are **the
+  ENTRANCE only** and carry no part of the quest; the earlier *"carry a crystallized citizen up
+  the stairs"* reading is **withdrawn**. The Loong **nests in the CITY HALL** and looms over the
+  city; the party **runs the streets conversing with it while trying not to die**. 🔒 The argument
+  is **"staying here will lead to nothing"** — **futility, not a body count**, a claim about the
+  future rather than a census, which is why the truth-sense passes it.
+- 🔒 **F2 HARD — THE DESTINATION, RULED 2026-08-25.** The village is the **SURVIVORS of the F1
+  city** — a few adults and children who ran in time, now a small settlement two or three
+  generations deep that **does not know what it is descended from.** ⭐ It does not contradict F1:
+  the party said *staying leads to nothing* and **they were right** — what it should have been
+  guarding had already walked out. 🎭 **The village remembers it as a guardian deity "in the form
+  of a long snake or a tall woman"** — both forms, which is the hint — and ⭐ under S-0's
+  clarification *(a god is just a worshipped entity)* **the Loong has been a god for seventy years
+  without knowing.** ⚠️ The villagers must never work it out. 🧭 **A travelling trader carries the
+  MASK news** — the village gives it something to protect, the trader gives it somewhere to go.
 - 🔒 **THE DYNASTY IS A RUSE.** No new queens, ever — **Vermilia is the entire line.** The
   **high court are other-clan demons she recruited**, who do not know what the secret is;
   they want a working city and to be paid. That is why the capital hunts the Loong while its

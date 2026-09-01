@@ -498,10 +498,32 @@ loud.
 
 # Layer D — Hard Route: the moving city
 
-Beats (§4.4): a moving city atop giant stairs, guarded mindlessly by a **Loong
-Kin** → the party must persuade it that the city is abandoned and its citizens
-crystallized. It is escorted through the desert at F2 and hides in the capital
-at F3 — **it survives, and it must.**
+Beats (§4.4): a moving city atop giant stairs, guarded by a **Loong Kin** → the party must
+persuade it that **staying in the city will lead to nothing.** It is escorted through the desert
+at F2 and hides in the capital at F3 — **it survives, and it must.**
+
+### 🔒 The encounter shape ✅ RULED 2026-08-25 — *supersedes the earlier reading*
+
+⚠️ **The giant stairs are the ENTRANCE, nothing more.** They are how the party reaches the city
+and they carry no part of the quest. **Nobody carries anything up them.** An earlier draft of
+this layer described "a crystallized citizen carried up the stairs" as the argument; that is
+**withdrawn.**
+
+| | |
+|---|---|
+| **Where it is** | 🔒 **The Loong has taken the CITY HALL as its nest**, and looms over the city from it |
+| **What the party does** | 🔒 **Runs through the streets**, conversing with it as they go — the whole encounter is **traversal under threat** |
+| **The pressure** | It can kill them at any moment and they know it. **The conversation happens while they are trying not to die** |
+| **The argument** | 🔒 **"Staying here will lead to nothing."** A **futility** argument, not a body count |
+
+⭐ **The change of argument matters downstream.** The party is not proving *everyone is dead* —
+they are proving *there is nothing left here for you.* That is a claim about the **future**, not
+a census, and it is why the truth-sense lets it pass: **it is simply true.**
+
+⚙️ **And it means F2 does not contradict F1.** When the Loong reaches a village of survivors
+(F2-2b), the party was not wrong and was not incomplete. **They were right** — there was nothing
+left in the city for it. What it should have been guarding had already walked out, and the
+reward for being right is finding out where the duty went.
 
 ### D-1 · Crystallized Citizen — mob
 `#9ad4e0` · **Size: Medium** · They are still standing where they stopped. Some are
@@ -599,9 +621,11 @@ cheap window and no chip damage: hitting her is strictly worse than not.
 
 **THE WIN CONDITION IS THE CONVERSATION.** ⚖ The statline exists so "let's just
 fight it" is legible as a bad idea **from the numbers**. Per §21.3 the position
-that makes a killing hit possible is, here, a sentence: *the city is abandoned, and
-its citizens are the crystal.* Evidence beats rhetoric — a crystallized citizen
-carried up the stairs is the argument. Charm helps; **proof is what lands.**
+that makes a killing hit possible is, here, a sentence: 🔒 ***staying here will lead to
+nothing.*** ⚠️ **Corrected 2026-08-25** — the argument is **futility, not evidence**, and the
+earlier "carry a crystallized citizen up the stairs" version is withdrawn. The crystallised
+streets the party is running through **are** the evidence; nobody has to haul it anywhere.
+Charm helps; **being right is what lands.**
 
 **The truth-sense is the tell, and it runs in both forms** ⚖ — the Whiskers (10)
 are only where you can *see* it. It reads truth at close range. A party that

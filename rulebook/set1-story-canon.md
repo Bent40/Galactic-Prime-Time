@@ -423,7 +423,7 @@ stand.
 |---|---|
 | **1** | **Does the double know?** She wears a face that never ages — she must know *something.* That makes her either the most dangerous person in the capital or the loneliest, and the high court explicitly *do not* know |
 | **2** | **What clan is she?** The clan law says each clan embodies a thing. Faces? Names? Succession itself? A clan that embodies *inheritance* would be brutal here |
-| **3** | **Does she exist in the killed branch?** If the F1 girl died there is no Vermilia to double. Either the double is gone too — or 🔴 **she is still running the crown, performing a dynasty for a queen who no longer exists**, which is a much bleaker capital |
+| ~~3~~ | 🔒 **RULED — no Double in the killed branch.** The throne is human, but **the city knows demons rule from behind it**, because the demons are visibly doing whatever they want. ⭐ **Nothing is being hidden, so there is nothing to double.** This also explains the existing line rather than contradicting it: the crown is *"human and frightened"* **because** what stands behind it does not bother to pretend. Concealment is Vermilia's method and hers alone |
 | **4** | **Do the party ever meet the real one?** The default should probably be that a party which does nothing special meets only the double, and Vermilia is a *reward* for the routes that earn her |
 
 
