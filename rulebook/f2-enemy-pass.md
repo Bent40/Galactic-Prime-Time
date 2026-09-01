@@ -357,13 +357,80 @@ what he thinks of them when they arrive."* Now it does.
 ⚠️ **Both branches marking may be one too many** — the owner's earlier trim favoured marking the
 costly side only. **Owner call.**
 
-#### 🔴 Open calls
+#### ✅ ALL THREE CLOSED — RULED 2026-09-01
 
-| # | Question |
+> **Owner:** *"Joining the petition means joining bex, means killing the queen, making them
+> enemies of her. By the way, killing the double, not the original vermillia, meaning there's a
+> whole thing there to think about. Bex doesnt name the farm per se, but he can say he is
+> devising a way to take as little as possible from the humans, a 'humble sacrifice, for the
+> benefit of all', with a proof that they managed to keep a human alive, despite suffering,
+> after feeding off him."*
+
+**① The price of joining: they kill the queen.** Not an oath, not a favour banked — 🔴 **the
+whole thing, immediately.** My open call assumed the cost should be *small* because "the
+Petition's weight is at F3." That was wrong, and wrong in an interesting way: **making the
+cost enormous is what makes F3 land**, because they arrive having already paid.
+
+### 🔴 AND THEY DO NOT KILL THE QUEEN — THEY KILL THE DOUBLE
+
+🔒 **The party at F2 has never met Vermilia.** The access ladder is explicit: *F1 = the real
+one · **F2 = the DOUBLE** · F3 = the real one, but not immediately.* So the assassination Bex
+buys succeeds, the throne goes empty, the party collects, **and the queen is alive two floors
+later.**
+
+⭐ **This makes F2 the floor where BOTH antagonists survive being killed — for completely
+different reasons.**
+
+| | Why the kill does not take |
 |---|---|
-| **1** | **What does "joining" cost them concretely at F2?** An oath, a favour banked, a piece of information handed over? It should be small — the Petition's weight is at F3 |
-| **2** | **Does he name the farm?** My read: **no.** He describes the *principle* honestly and never the practice, because he has not built it yet at F2 — and that keeps the F3 recognition intact |
-| **3** | **Do both branches mark, or only one?** See above |
+| **Bex** | 🔒 **Clan law.** A demon dies only when its clan dies. His body drops; he does not |
+| **"The queen"** | 🔒 **It was never her.** A clay doll dropped, and Vermilia makes another at the next crowning |
+
+🔴 **The party can leave Floor 2 believing they resolved two things and having resolved
+neither** — and nothing in the fiction tells them. ⭐ That is the same lesson the route already
+teaches (*"the kill does not take"*), delivered twice by two mechanisms that look identical
+from the outside and share nothing.
+
+⚠️ **NO `Regicide`.** No monarch died. 🔴 **The absence is the tell** — a party that killed the
+girl at F1 got branded for it *instantly*; a party that kills a queen on a contract gets
+**nothing**, and the sharp ones will notice the sheet disagrees with the room. ⚙️ Consistent
+with Marks as the Corporation's **causality ledger**: the ledger records what happened, not
+what anyone believed happened.
+
+⭐ **The tell they already had and missed: Marks stay dark on a doll.** A party carrying
+`Witness` stands in front of the Double and feels **nothing**, in a room where the queen of the
+world is supposedly standing. The lie detector was on the whole time.
+
+**What it costs them for real:**
+
+| | |
+|---|---|
+| 🩸 **An enemy in the real Vermilia** | She is alive, she is the F3 crown, and someone just murdered the sister she rebuilds every generation |
+| ☠️ **The F3 access ladder is poisoned** | A branded party used *her own permission* to get close to her double and killed it. **The brand becomes the evidence** |
+| 🕯 **They killed a sincere person** | The doll believes it is Vermilia's **elder sister**, carrying a burden meant for her younger sibling. It does not know it is a doll. It dies believing it failed to protect her |
+
+**② Does he name the farm? No — and the ruling gives him something better than silence.**
+
+🔒 He describes the *principle* in plain words: he is devising a way to **take as little as
+possible** from humans — ***"a humble sacrifice, for the benefit of all."*** And 🔴 **he offers
+proof: a living human they fed on and kept alive.** Suffering. Alive.
+
+⭐ **The proof is real, and it is genuinely evidence of restraint by his own metric.** He is not
+lying and he is not hedging. The party is looking at the **"giblets from a crowd"** arithmetic
+in the flesh, offered as a demonstration of *mercy* — and they cannot decode it, because they
+have no idea it is meant to scale to a capital of two million. ⚙️ **They lack the referent, not
+the information.** At F3 they walk into the farm and understand that *"as little as possible"*
+multiplied by a city **is** the farm, and that he told them so, honestly, two floors earlier.
+
+**③ Do both branches mark?** ⚠️ Superseded — the question assumed the choice was *offer
+accepted / offer refused*. The deed is now the **Double's murder**, so:
+
+| Deed | Mark |
+|---|---|
+| **Joined Bex, killed the "queen"** | 🟡 **Proposed: `Effigy`** — names the truth (they destroyed an image, not the thing) without explaining it, and satisfies the inclusion test hard: a grudge that lasts, and a road closed. 🔴 **Not `Regicide`** |
+| **Refused** | ❌ **No mark.** A refusal is a decision inside a conversation, not a deed — the same reason killing Bex at F2 was cut |
+
+🔴 **`Effigy` is unblessed.** It is the one piece of this ruling I invented rather than received.
 
 ---
 

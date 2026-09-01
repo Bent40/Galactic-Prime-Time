@@ -200,6 +200,25 @@ ok("the Husk-Moth's per-Moment 2 passes as a tick, and would fail on-band",
    && damageProblems(sigMob({ floor: 1, damage: 2, type: 'Infected' }), 1).length === 1);
 ok('a tick has a floor too — 0.2x band, so it cannot be a rounding error',
    damageProblems(sigMob({ floor: 1, damage: 0, type: 'Infected', exception: 'tick' }), 1).length > 0);
+// E-7 ruled 2026-09-01 — two more legitimate shapes, both found by the gate's first run.
+ok("THE MASKED's 6 passes as an aura, and would fail on-band",
+   damageProblems(sigMob({ floor: 1, damage: 6, type: 'Crush', exception: 'aura' }, 'boss'), 1).length === 0
+   && damageProblems(sigMob({ floor: 1, damage: 6, type: 'Crush' }, 'boss'), 1).length === 1);
+ok('an aura has a floor — 0.5x band, so it cannot excuse a token number',
+   damageProblems(sigMob({ floor: 1, damage: 3, type: 'Crush', exception: 'aura' }, 'boss'), 1).length === 1);
+ok('an aura cannot go ABOVE band either — that is a windup, not an aura',
+   damageProblems(sigMob({ floor: 1, damage: 10, type: 'Crush', exception: 'aura' }, 'boss'), 1).length === 1);
+ok("Vermilia's no-attack passes as presence",
+   damageProblems(sigMob({ floor: 1, damage: 0, type: '', exception: 'presence',
+     note: 'noble-class presence; she never swings' }, 'boss'), 1).length === 0);
+ok('presence with a damage number is rejected — it is a claim of NO attack',
+   damageProblems(sigMob({ floor: 1, damage: 4, type: 'Crush', exception: 'presence',
+     note: 'x' }, 'boss'), 1).length === 1);
+ok('presence with no note is rejected — the threat has to be written down',
+   damageProblems(sigMob({ floor: 1, damage: 0, type: '', exception: 'presence' }, 'boss'), 1).length === 1);
+ok('presence is still floor-checked — an F1 claim fails at F3',
+   damageProblems(sigMob({ floor: 1, damage: 0, type: '', exception: 'presence',
+     note: 'x' }, 'boss'), 3).length === 1);
 ok('an unknown exception word is rejected',
    damageProblems(sigMob({ floor: 1, damage: 4, type: 'Crush', exception: 'special' }), 1).length === 1);
 ok('a number with no damage type is rejected',

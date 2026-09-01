@@ -25,12 +25,16 @@ const SIZES = ['Small', 'Medium', 'Large', 'Huge'];
 //               in a punish window). e.g. the Step-Warden's 10 against an F1 elite 6.
 //   'tick'    — a per-Moment tick sits BELOW band, because the tier ladder is what
 //               kills, not the number. e.g. the Husk-Moth's 2 against an F1 mob 4.
+//   'aura'    — the strike is not where the threat is, so it reads BELOW band (>=0.5x).
+//               e.g. THE MASKED's 6 against an F1 boss 8 — the countdown is the aura.
+//   'presence'— no attack at all. damage must be 0 and note must say what the threat
+//               is instead. e.g. Vermilia, whose threat is noble-class presence.
 // Anything else off-band is a bug, and --check says so.
 const DamageSchema = new mongoose.Schema({
   floor:     { type: Number, default: 0 },   // 0 = unset, gate skips it
   damage:    { type: Number, default: 0 },
   type:      { type: String, default: '' },  // Crush / Bleed / Burn / Infected / ...
-  exception: { type: String, default: '' },  // '' | 'windup' | 'tick'
+  exception: { type: String, default: '' },  // '' | 'windup' | 'tick' | 'aura' | 'presence'
   note:      { type: String, default: '' },
 }, { _id: false });
 

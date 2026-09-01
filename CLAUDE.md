@@ -499,6 +499,32 @@ Skills are granted to players by templateId. The player sheet joins template dat
   a person** — which is *why* the successions look like daughters rather than duplicates.
   **The dynasty is convincing precisely because the tool is imprecise.** ⚙️ Marks stay dark on a
   doll, the Loong's truth-sense should see through one, and **the party can plausibly obtain one.**
+- 🤝 **F2 PETITION — ALL THREE OPEN CALLS RULED 2026-09-01.** ① **The price of joining Bex is
+  killing the queen** — not a small favour. ⚠️ My open call assumed the cost should be small; the
+  opposite is right, because paying enormously at F2 is what makes F3 land. 🔴 **AND THEY KILL THE
+  DOUBLE, NOT VERMILIA** — the access ladder puts the real one out of reach at F2. ⭐ **So F2 is the
+  floor where BOTH antagonists survive being killed, by unrelated mechanisms that look identical
+  from outside**: Bex by clan law, the "queen" because it was never her. **The party can leave F2
+  believing they resolved two things and resolved neither.** ⚠️ **No `Regicide`** — no monarch died,
+  and **the absence is the tell** (the ledger records what happened, not what anyone believed).
+  ⭐ **The tell they already had: Marks stay dark on a doll**, so a `Witness` party feels nothing in
+  front of "the queen." Cost: a permanent enemy in the real Vermilia, a **poisoned F3 access
+  ladder** (they used her own brand to reach her double), and a sincere victim who died believing
+  she failed to protect her sister. 🟡 Proposed mark **`Effigy`** (unblessed — mine, not the
+  owner's); refusing marks nothing. ② **He does NOT name the farm** — he states the principle
+  honestly (*"take as little as possible… a humble sacrifice, for the benefit of all"*) and 🔴 **offers
+  proof: a living human they fed on and kept alive.** ⭐ Real evidence of restraint by his own
+  metric, and undecodable until F3 supplies the referent — **they lack the referent, not the
+  information.**
+- ⚖️ **THE DOUBLE CLAIMS DIVINE WRATH — Vermilia's own clan (ruled 2026-09-01).** She does not know
+  she is a doll and does not know the clan is written in; she believes it. ⭐ Plausible because the
+  queen *is* wrath clan and **nobody can check** — a population of one has no register. 🔴 **And the
+  lie is FUNCTIONALLY TRUE:** clan law says a demon dies only when its clan dies, and killing her
+  *does* bring her back — because Vermilia rebuilds her. **From outside the two are
+  indistinguishable, so her murder corroborates the ruse instead of exposing it**, handing anyone
+  who kills her a correct-sounding and completely wrong explanation. ⭐ **The irony is load-bearing:**
+  the wrath clan embodies karma, and the servant Vermilia built so she never has to be seen
+  sincerely believes she is made of judgment.
 - 🔴 Three open calls remain in `set1-story-canon.md`.
 - 🔒 **F1 HARD — THE ENCOUNTER SHAPE, CORRECTED 2026-08-25.** ⚠️ The giant stairs are **the
   ENTRANCE only** and carry no part of the quest; the earlier *"carry a crystallized citizen up
@@ -898,8 +924,8 @@ anything else.
 
 | # | Item | Where |
 |---|---|---|
-| **1** | 🔴 **E-7 — two entries the signature gate flagged.** THE MASKED punches **6** against a boss band of **8**; **Vermilia has no attack number at all**. My read: both are correct-as-designed (his threat is the Dissolution aura, hers is noble presence) and what is missing is a third `exception` word, not a number change. **Needs an owner call — do not guess.** | `rulebook/f1-enemy-pass.md` E-7 |
-| **2** | 🟡 **S-f·1 — the mixture as the v1 revival catalyst.** Effectively settled by the two-lock ruling (the pair opens the door, the mixture they create is the catalyst) but never formally closed | `rulebook/set1-story-canon.md` S-6, S-9 |
+| **1** | ✅ **E-7 CLOSED 2026-09-01 — both correct as designed, and they are TWO shapes, not one.** New gate words: **`aura`** (0.5–1.0× band — the strike is not where the threat is; THE MASKED's 6 vs boss 8) and **`presence`** (damage must be 0, note required — Vermilia never swings). 🔴 `presence` is the one exception treated as a **positive claim**, which closes E-7's real hole: a 140-budget boss with no attack no longer passes silently. **F1 now 16 of 19 migrated.** ⚖️ **Her aura is a CHOICE**: on at F1, **suppressed past F1** (so the F3 audience is a conversation, not a countdown), and she may still afflict a **branded** party — ⭐ **that affliction IS protection**, a human trailing noble Dissolution is visibly claimed and other demons keep off. Built + 7 new tests (**81 pass · 0 fail**) | `rulebook/f1-enemy-pass.md` E-7 |
+| **2** | ✅ **S-f CLOSED 2026-09-01 — both blessed.** The **mixture is the v1 catalyst**; the **Loong's blood-claim breaks the seal**. S-6's three steps are now **one act** | `rulebook/set1-story-canon.md` S-6, S-9 |
 | **3** | **Naming and fix pass.** Deferred until there was a base to work with. There is now: 53 statted entries with working names | all three enemy passes |
 | **4** | **F1 follow-on content (E-4).** Encounter tables / room counts · §21.4 terrain blocks · Exposure and viewer values per enemy · token/loot payouts | `rulebook/f1-enemy-pass.md` E-4 |
 | **5** | **Migrate F2/F3 to `Enemy.signature`.** F1 is done (14 of 19); the gate is optional by design so the others still pass. Do it during the naming pass | `server/seeds/enemies-f2.js`, `-f3.js` |

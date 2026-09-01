@@ -473,6 +473,39 @@ new needs inventing; the deception lives in what the speaker was told, not in wh
 - 🎯 **The party can plausibly obtain one.** It is an object made of a known F3 material — which
   turns a GM device into something players can hold, and that is usually the better version.
 
+#### ⚖️ What clan she claims ✅ RULED 2026-09-01 — **Vermilia's own. Divine Wrath.**
+
+> **Owner:** *"She does not know, and she claims to be the same clan of vermillia."*
+
+🔒 **She does not know she is a doll** (confirming the ruling above), and 🔒 **she claims
+DIVINE WRATH — Vermilia's clan, the karma clan.** She is not lying. It is written in, and she
+believes it the way she believes she is an elder sister.
+
+⭐ **It is the most plausible claim available, which is why it holds.** The queen is wrath clan;
+a sister of the queen would be. And **nobody can check** — the clan is a population of one, its
+members are famously scarce, and there is no register to consult. The lie survives on the same
+scarcity that makes Vermilia unique.
+
+🔴 **AND THE LIE IS FUNCTIONALLY TRUE, WHICH IS WHAT MAKES IT DANGEROUS.** Clan law says
+**a demon dies only when its clan dies.** Kill the Double and she comes back — not by clan law,
+but because Vermilia builds another one at the next crowning. ⚙️ **From the outside the two are
+indistinguishable.** So her murder does not expose the ruse; **it corroborates it.** Anyone
+watching sees a wrath demon die and return, exactly as the law says she should.
+
+⚠️ **Consequence for the F2 Petition branch** (`f2-enemy-pass.md`): a party that kills the
+"queen" for Bex and later hears she is alive has been handed a *correct-sounding* explanation
+that is completely wrong. **They will believe they understand, and stop asking.**
+
+⭐ **And the irony is load-bearing.** The wrath clan embodies **karma** — consequence landing on
+the deserving. Vermilia's whole existence is a two-century evasion of a verdict she cannot get
+pronounced. 🔴 **So the servant she built to stand in her place, so that she never has to be
+seen, sincerely believes she is made of judgment.** The instrument of the evasion claims to be
+the thing being evaded.
+
+🕯 **She would also be the only wrath demon anyone has met in generations**, and she has no idea
+that this is remarkable. A court demon who works it out has found the crown's biggest tell and
+the least believable one.
+
 🎯 **And it lands on a mechanic we already have.** Marks activate by *presence* —
 🔒 **`Witness` activates near Vermilia, because she recognises it.** So a party carrying that
 brand can walk into a throne room, feel nothing, and know they are talking to the wrong queen.
@@ -741,15 +774,19 @@ cannot be bargained with, and cannot be prayed back no matter how many followers
 > be blurred. v2 buys a god out of bankruptcy. **v1 digs him up.** Same tongue, same god,
 > completely different verb.
 
-**🟡 PROPOSED (S-f · 1) — what the v1 catalyst should be:** *the cure itself.* He was killed reaching
-for the mixture; finishing it is the one offering that means anything to him, and the party
-is already carrying it if they took S-6's path. And **🟡 PROPOSED (S-f · 2) — what opens the prison:**
-**the Loong.** Beelzebub's seal answers demons and gods; it does not answer the blood-claim
-of the dragon Cinnabrus killed — **and since 2026-08-25 the prison is literally built inside
-that dragon's ribs**, so the Loong is not a key the party carries down, it is the only
-creature in the world with standing. *Still unblessed, but S-e made it nearly self-evident.*
+**✅ RULED (S-f · 1) 2026-09-01 — the v1 catalyst is the CURE ITSELF.** He was killed reaching
+for the mixture; finishing it is the one offering that means anything to him, and the party is
+already carrying it if they took S-6's path. **✅ RULED (S-f · 2) — what opens the prison is the
+LOONG.** Beelzebub's seal answers demons and gods; it does not answer the blood-claim of the
+dragon Cinnabrus killed — **and the prison is literally built inside that dragon's ribs** (S-e),
+so the Loong is not a key the party carries down, it is the only creature in the world with
+standing.
 
-**If both land, the three steps collapse into one act:** getting the Loong to the capital
+⭐ **Both were effectively settled by the two-lock ruling and are now formally closed.** The
+pair who must share a room to make the mixture are the same pair who open the door, and the
+mixture they create is the catalyst. **S-6's three steps are one act.**
+
+**The three steps are one act:** getting the Loong to the capital
 creates the cure, frees the Loong, **and opens the tongue.** Three routes, one room.
 
 ---
@@ -821,4 +858,4 @@ need by failing to recognise it.
 
 | # | Question |
 |---|---|
-| **S-f** | **Bless or reject the two S-6 proposals** — (1) the mixture as the v1 catalyst, (2) the Loong's blood-claim as what breaks the seal. ⬆️ S-e's ruling makes (2) nearly self-evident: the prison is *inside that dragon* |
+| ~~**S-f**~~ | ✅ **CLOSED 2026-09-01** — both blessed. The mixture is the v1 catalyst; the Loong's blood-claim breaks the seal. Moved into S-6 |

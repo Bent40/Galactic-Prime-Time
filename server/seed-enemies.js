@@ -60,7 +60,15 @@ const FLOOR_DAMAGE = {
 //   windup — a telegraphed 1-Clock windup reads ABOVE band; the party is paid in a
 //            punish window. Capped so "telegraphed" cannot mean "arbitrary".
 //   tick   — a per-Moment tick sits BELOW band; the tier ladder is what kills.
-const DAMAGE_EXCEPTIONS = { '': [1.0, 1.0], windup: [1.0, 2.0], tick: [0.2, 1.0] };
+//   aura     — the strike is NOT where the threat is, so it legitimately reads BELOW
+//              band. Floored at 0.5x so "aura" cannot excuse a token number: a boss
+//              still has to hurt when it connects. e.g. THE MASKED's 6 against an F1
+//              boss band of 8 — his countdown is the Dissolution aura, not the backhand.
+//   presence — no attack AT ALL. Damage must be 0 and the note must say what the threat
+//              is instead. This is the one exception the gate treats as a positive
+//              claim rather than a tolerance: without it, a 125-budget boss authored
+//              with no attack passes silently, which is the hole E-7 found.
+const DAMAGE_EXCEPTIONS = { '': [1.0, 1.0], windup: [1.0, 2.0], tick: [0.2, 1.0], aura: [0.5, 1.0], presence: null };
 const floorIdx = process.argv.indexOf('--floor');
 const floor    = floorIdx !== -1 ? Number(process.argv[floorIdx + 1]) : 1;
 
@@ -130,7 +138,7 @@ function doctrineCheck(seeds, atFloor = floor) {
  * Signature-damage gate (enemy-scaling S-1). OPTIONAL BY DESIGN: an entry with no
  * `signature` (or floor 0) is skipped, so the existing rosters — whose damage still
  * lives in free-text notes — keep passing while they are migrated one at a time.
- * Once a signature IS present it is held to the band, with the two named exceptions.
+ * Once a signature IS present it is held to the band, with the four named exceptions.
  * Exported for testing without a DB.
  */
 function damageProblems(e, atFloor) {
@@ -142,6 +150,19 @@ function damageProblems(e, atFloor) {
   const want = band[e.tier];
   if (!want) return [`${e.name}: signature on unknown tier "${e.tier}"`];
   const exc = String(sig.exception || '');
+  if (exc === 'presence') {
+    // A positive claim: this thing has no attack, on purpose, and here is why.
+    if (Number(sig.damage || 0) !== 0) {
+      out.push(`${e.name}: signature.exception "presence" means no attack — damage must be 0, got ${sig.damage}`);
+    }
+    if (!String(sig.note || '').trim()) {
+      out.push(`${e.name}: signature.exception "presence" needs a note saying what the threat IS instead`);
+    }
+    if (Number(sig.floor) !== atFloor) {
+      out.push(`${e.name}: signature.floor F${sig.floor} but the roster is being checked at F${atFloor}`);
+    }
+    return out;
+  }
   const mult = DAMAGE_EXCEPTIONS[exc];
   if (!mult) {
     out.push(`${e.name}: signature.exception "${exc}" is not one of ` +

@@ -207,6 +207,11 @@ module.exports = [
   BOSS('THE MASKED', {
     color: '#b8a13a',
     description: 'EASY ROUTE BOSS. The man who found the treasure. He is still in there. That is the problem.',
+    // E-7 RULED 2026-09-01: he punches LOW on purpose. The F1 boss band is 8; his
+    // backhand is 6. The threat of this fight is the phase-2 Dissolution countdown,
+    // not the hit, so the strike is allowed to read under band (`aura`, >=0.5x).
+    signature: { floor: 1, damage: 6, type: 'Crush', exception: 'aura',
+      note: 'Backhand, phase 1. His real signature is the phase-2 Dissolution aura at +1/Moment — a boss whose win condition is a countdown does not need a boss-band punch.' },
     bodyParts: [
       { name: 'Mask',  maxHp: 15 },
       { name: 'Head',  maxHp: 14 },
@@ -359,6 +364,9 @@ module.exports = [
   BOSS('The Girl in the House — Vermilia', {
     color: '#6a2a6a',
     size: 'Small',
+    // E-7 RULED 2026-09-01: she does not attack. Not an omission — a design claim.
+    signature: { floor: 1, damage: 0, type: '', exception: 'presence',
+      note: 'She has no attack. Her threat is noble-class presence: an unbranded contestant who refuses her begins Dissolution at +2/Moment (§8.2). She does not swing, ever.' },
     description: 'MEDIUM ROUTE. She is what the NPCs were right about. She is also a child in a burning house, and both are true. Killable — and killing her deletes a god.',
     bodyParts: [
       { name: 'Head',    maxHp: 16 },
@@ -432,7 +440,20 @@ module.exports = [
       'to noble-class presence/Dissolution) plus faction points.',
       '',
       'PRESENCE: noble-class. An UNBRANDED contestant who refuses her begins Dissolution',
-      '(§8.2). ESCALATION +2 PER MOMENT. Tell them the number out loud.',
+      '(§8.2). ESCALATION +2 PER MOMENT. Tell them the number out loud. SHE NEVER ATTACKS.',
+      '',
+      '=== THE AURA IS A CHOICE, NOT A LEAK (ruled 2026-09-01) ===',
+      'AT F1 IT IS SIMPLY ON. She is a child in a burning house with nothing to hide behind',
+      'and no practice at holding it in; the Dissolution above is what standing near her does.',
+      'PAST F1 SHE SUPPRESSES IT. Two centuries and a court later she does not leak on people',
+      'she is talking to — which is why the F3 audience is a conversation and not a countdown.',
+      '',
+      'AND SHE MAY STILL CHOOSE TO AFFLICT IT — brand or no brand. The brand is her',
+      'permission, not a wall she cannot reach through. When she does it to a branded party',
+      'IT IS PROTECTION: a human trailing noble-class Dissolution is visibly claimed, and',
+      'other demons read exactly who claimed them and keep their distance. It will not feel',
+      'like a gift while it is happening. That is the point — the safest thing she can do for',
+      'them is indistinguishable from an attack, and she does not explain.',
     ].join('\n'),
   }),
 

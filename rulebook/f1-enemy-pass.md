@@ -749,7 +749,7 @@ run them from your machine with the Atlas string."*
 
 ---
 
-## E-7 — The signature-damage gate 🔴 **two entries need a ruling**
+## E-7 — The signature-damage gate ✅ **RULED 2026-09-01**
 
 `Enemy.signature` shipped 2026-08-25 — a structured `{ floor, damage, type, exception, note }`
 so `seed-enemies.js` gates DAMAGE the way it already gates HP. It is **optional by design**:
@@ -770,4 +770,53 @@ whole point of it. **Two want your call:**
 | **The Girl in the House — Vermilia** (boss) | She has **no damage number at all**, and I think that is correct: her threat is noble-class presence and the Dissolution escalation at +2/Moment. But it means a 140-budget boss can be authored with no attack and the gate will not notice |
 
 Both are the gate doing its job on its first run — it found two places where the roster and
-the band disagree, and neither is a typo. **Do not let me guess which way they go.**
+the band disagree, and neither is a typo.
+
+---
+
+### ✅ RULED 2026-09-01 — both are correct as designed, and they are DIFFERENT shapes
+
+> **Owner:** *"punches low, vermillia does not attack, she just supresses her disillusionment
+> if they are past f1, otherwise its just disillusionment on F1. I think we can have vermillia
+> still pick to afflict disillusionment on the players even with the brand if she so decides.
+> it protects them from others."*
+
+⚠️ **My E-7 read said "a third exception word." It is two** — *punches low* and *does not
+attack* are not the same claim and must not collapse into one tolerance.
+
+| New word | Range | What it asserts |
+|---|---|---|
+| **`aura`** | **0.5× – 1.0× band** | The strike is **not where the threat is**, so it legitimately reads under band. 🔒 **Floored at 0.5×** so `aura` can never excuse a token number — a boss still has to hurt when it connects. **THE MASKED: 6 against a boss band of 8** (0.75×) |
+| **`presence`** | **damage must be 0**, note **required** | **No attack at all.** 🔴 This is the one exception the gate treats as a **positive claim** rather than a tolerance, and it is what closes E-7's actual hole: without it, *"a 140-budget boss can be authored with no attack and the gate will not notice."* Now it notices, and it makes you say what the threat is instead |
+
+⭐ **The distinction earns its keep because the two floors encode different promises.** A
+`tick` is small because it repeats (0.2×). An `aura` strike does **not** repeat — it is simply
+not the danger — so it is held to a much higher floor. Same direction, different reason.
+
+**THE MASKED** — `{ floor: 1, damage: 6, type: 'Crush', exception: 'aura' }`. His phase-1
+backhand. The countdown is the phase-2 Dissolution aura at +1/Moment, and **a boss whose win
+condition is a timer does not need a boss-band punch.**
+
+**Vermilia** — `{ floor: 1, damage: 0, exception: 'presence' }`. **She never swings.**
+
+### ✅ RULED — her aura is a CHOICE, and afflicting a branded party is PROTECTION
+
+| When | What she does |
+|---|---|
+| **F1** | 🔒 **It is simply on.** A child in a burning house with nothing to hide behind and no practice at holding it in. An unbranded contestant who refuses her begins Dissolution at **+2/Moment**, exactly as written above |
+| **Past F1** | 🔒 **She suppresses it.** Two centuries and a court later she does not leak on people she is talking to — ⭐ **which is why the F3 audience is a conversation and not a countdown.** The scene the whole Medium route pays for cannot be a hazard |
+| **Either way** | 🔒 **She may still choose to afflict it — brand or no brand.** The brand is her *permission*, not a wall she cannot reach through |
+
+⭐ **And when she does it to a branded party it is PROTECTION.** A human trailing noble-class
+Dissolution is **visibly claimed**, and other demons read exactly whose claim it is and keep
+their distance. 🔴 **It will not feel like a gift while it is happening** — which is the point:
+the safest thing she can do for them is indistinguishable from an attack, and she does not
+explain. *(My reading of "it protects them from others" — the affliction is the protection, not
+the brand. If you meant the brand, say so and I will swap it; the brand's access role is
+already canon either way.)*
+
+⚙️ **Built the same day:** both words are in `models/Enemy.js`, gated in `seed-enemies.js`,
+selectable in `admin/EnemiesSection.jsx`, and covered by **7 new checks** in
+`test-seed-enemies.js` (81 pass · 0 fail). **F1 is now 16 of 19 migrated** — the three
+remaining carry no signature correctly (Glass-Antler Doe, Camera Gnat, Crystal Spore Mist deal
+no direct damage).
