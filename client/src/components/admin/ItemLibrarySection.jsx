@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
+import MaterialsEditor from '../shared/MaterialsEditor.jsx';
 import { ATK_TYPES, DMG_TYPES, ITEM_CATS, ITEM_TIERS, BOX_TIERS, ITEM_SUBTYPES } from '../../constants.js';
 import BoxBuilder from './BoxBuilder.jsx';
 
@@ -51,6 +52,8 @@ function ItemForm({ value, onChange }) {
       </div>
       <div className="modal-grid2" style={{ marginBottom: 8 }}>
         <div className="field-group"><label className="field-label">Special Effects</label><textarea className="fi" value={value.specialEffects} onChange={e => onChange({ ...value, specialEffects: e.target.value })} /></div>
+        <div className="field-group"><label className="field-label">Materials — §12.7 bill, returned on disassembly</label>
+          <MaterialsEditor value={value.materials} onChange={m => onChange({ ...value, materials: m })} /></div>
         <div className="field-group"><label className="field-label">Resistance Granted</label><textarea className="fi" value={value.resistance || ''} onChange={e => onChange({ ...value, resistance: e.target.value })} placeholder="e.g. Fire 2, Crush 1" /></div>
       </div>
       <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Requirements</label><input className="fi" value={value.requirements} onChange={e => onChange({ ...value, requirements: e.target.value })} /></div>
@@ -92,7 +95,7 @@ function ItemForm({ value, onChange }) {
   );
 }
 
-const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', rpm: null, magazine: null, damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null }, subtype: '', boxTiers: [], themes: [], source: '' };
+const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', rpm: null, magazine: null, damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null }, subtype: '', boxTiers: [], themes: [], source: '', materials: [] };
 
 const ITEM_TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 

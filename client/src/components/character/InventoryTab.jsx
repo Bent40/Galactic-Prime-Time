@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { uid, catIcon, itemDmgLabel, ATK_TYPES, DMG_TYPES, AFFIX_TIERS, ITEM_TIERS, ITEM_CATS } from '../../constants.js';
 import { apiFetch } from '../../api.js';
 import LootBoxes from './LootBoxes.jsx';
+import MaterialsEditor from '../shared/MaterialsEditor.jsx';
 
 const AFFIX_TIER_COLOR = {
   Lesser: 'var(--muted)', Normal: 'var(--text)', Higher: 'var(--cyan)',
@@ -223,6 +224,11 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
           </div>
         </div>
 
+        <div className="modal-section">
+          <div className="modal-section-label">Made of <span style={{ color: 'var(--muted)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>&mdash; taken apart at the Forge, these come back whole (&sect;12.7)</span></div>
+          <MaterialsEditor value={local.materials} onChange={m => patch('materials', m)} />
+        </div>
+
         <div className="modal-grid2" style={{ marginBottom: 8 }}>
           <div className="field-group">
             <label className="field-label">Special Effects</label>
@@ -418,6 +424,7 @@ export default function InventoryTab({ state, update, token }) {
       ...c, items: [...(c.items || []), {
         id: uid(), name: 'New Item', icon: '', qty: 1, attackTypes: [], range: '', damage: '',
         damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', category: 'Misc',
+        materials: [],
       }],
     } : c));
   }

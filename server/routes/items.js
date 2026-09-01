@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 // POST /api/items — create a new item template
 router.post('/', async (req, res) => {
   try {
-    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, subtype, boxTiers, themes, source, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, subtype, boxTiers, themes, source, type, effect, notes, materials } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (!CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
@@ -50,6 +50,7 @@ router.post('/', async (req, res) => {
       specialEffects: specialEffects || '',
       resistance: resistance || '',
       requirements: requirements || '',
+      materials: Array.isArray(materials) ? materials : [],
       description: description || '',
       qty: qty || 1,
       uses: normalizeUses(uses),
@@ -69,7 +70,7 @@ router.post('/', async (req, res) => {
 // PUT /api/items/:id — update an item template
 router.put('/:id', async (req, res) => {
   try {
-    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, subtype, boxTiers, themes, source, type, effect, notes } = req.body;
+    const { name, icon, category, tier, attackTypes, range, rpm, magazine, damage, damageType, specialEffects, resistance, requirements, description, qty, uses, subtype, boxTiers, themes, source, type, effect, notes, materials } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     if (category && !CATEGORIES.includes(category)) return res.status(400).json({ error: 'invalid category' });
 
@@ -86,6 +87,7 @@ router.put('/:id', async (req, res) => {
         specialEffects: specialEffects || '',
         resistance: resistance || '',
         requirements: requirements || '',
+        materials: Array.isArray(materials) ? materials : [],
         description: description || '',
         qty: qty || 1,
         uses: normalizeUses(uses),
@@ -175,6 +177,10 @@ router.post('/give', async (req, res) => {
           resistance:     template.resistance || '',
           requirements:   template.requirements || '',
           description:    template.description || '',
+          // §12.7 disassembly happens on the PLAYER's copy, so the instance
+          // carries its own bill of materials, not a backlink to the template.
+          materials:      (template.materials || []).map(m => ({
+            part: m.part || '', material: m.material || '', striking: !!m.striking })),
           uses:           { max: tplMax, current: tplMax },
           // legacy
           type:           template.type || '',

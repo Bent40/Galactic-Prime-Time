@@ -903,6 +903,49 @@ Skills are granted to players by templateId. The player sheet joins template dat
 - ⚠️ Branch interaction: `Witness` activates near Vermilia, so a party holding **both**
   `Regicide` and `Witness` has permanently disabled the better half of `Witness` — they killed
   the only person who could recognise it. Nothing needs to say so; it just never fires.
+- 🔴 **SECOND PASS — the first stat-block set was WRONG and is being rebuilt (owner, 2026-09-01).**
+  *"Most of these items are key items. Not loot the party can actually use in their daily life.
+  No armor, no weapon, and all tools are story specific."* ⚠️ **Correct, and the cause was the
+  class axis:** sorting by `loot / crafted / story` **guaranteed** a third of the spine would be
+  story props, and the loot column drifted the same way. ⚠️ I also over-read W-6 §2 — *88% of myth
+  weapons are categorical* is about **numeric vs categorical**, not about whether an item is
+  usable gear. **A categorical weapon is still a weapon you swing every session.**
+  🔒 **New axis: `weapon / armor / kit`.** Five concepts survive intact (Oathbreaker · Seepage ·
+  Brand-Iron · Kin-Carve · Crystal Shard); **four are new** — ⭐ **The Sealed Coat** (Easy armor;
+  by F3 the party is dressed as Nullrot, having independently arrived at a plague doctor's
+  answer) · ⭐ **The Sanction** (Medium weapon; *the same bar of iron for three floors — it starts
+  as the tool that burned a child's house down and ends as the instrument of the crown that child
+  became*) · **The Livery** (Medium armor; allegiance worn, Superior nullifies Dissolution T1) ·
+  **Citizen-Glass** (Hard armor; crystal resists everything but Crush — *the best protection
+  against the plague is the plague*). The four story objects (**The Name · Clan-Token · The Debt ·
+  The Horn**) **move OUT of the spine into a Key Items set**, which is what they always were.
+- 🔒 **ONE OBJECT, REBUILT — not three objects (owner, 2026-09-01).** *"merge some of these, with
+  understanding reshaping them, rather than them being a completely different item."* Every
+  concept now **keeps a material through all three readings** (the Sealed Coat's Tough Hide, the
+  Sanction's iron core, Kin-Carve's Beastbone edge), so the F1→F3 progression is a **Forge
+  rebuild**, not a new find. Names are `<Concept> — <State>`.
+- ✅ **§12.7 BILL OF MATERIALS + DISASSEMBLY — BUILT 2026-09-01 (rulebook v1.2).** *"any item you
+  have needs to have its materials written down, so if it is disassembled, the party can reuse it
+  for different things."* **Rulebook:** every item carries a bill (part → material, one marked
+  **striking**, which sets the band); **disassembly at the Forge destroys the item and returns
+  every material whole**; **upgrading is a choice, not a schedule** (reforge the striking part,
+  break it down for something else, or carry it and hit like the floor it came from); **what comes
+  off is materials, not parts** — a blade yields *Obsidian*, not *a blade*. **App:**
+  `ItemTemplate.materials[{part, material, striking}]`, whitelisted in both `routes/items.js`
+  verbs **and copied into the give-snapshot** (disassembly happens on the player's copy);
+  `shared/MaterialsEditor.jsx` edits it in the admin library and on the sheet.
+- 🔴 **THE DAMAGE-NUMBER CONFLICT — owner call needed.** Owner: *"the damage numbers, im assuming,
+  change by floor with the doubling."* ⚠️ **§12.7's blessed errata says the exact opposite** —
+  *"a greatsword is written as 3, a mob as 5, and a torso as 7 on Floor 1 and on Floor 9 alike."*
+  🔴 **And the errata has a real flaw the owner's instinct caught:** band units break the moment
+  gear crosses a floor, which is precisely what disassembly/optional-upgrading is for — an F1
+  sword read in F3 band units is **0.75**. ⚠️ **Whichever way it goes, BOTH SIDES must move
+  together:** the 53 enemy statlines are written flat (mob 5 on every floor), so absolute items
+  against flat enemies gives a 24-damage F3 sword vs a 5 HP mob and armor resists that outgrow
+  enemy damage entirely. **Options: A** band units everywhere (errata as-is, no migration, but
+  material upgrades are invisible) · **B** absolute everywhere (re-base 53 statlines + part HP +
+  the doctrine gate) · **C — recommended:** store band units, **have the sheet display absolute**
+  (it already knows the material). No migration, no fractions, and the Jade sword visibly reads 24.
 - ✅ **STAT BLOCKS WRITTEN 2026-09-01 — `server/seeds/items-set1-spine.js`, 26 templates**
   (9 concepts × 3 floors, less C-9's F1). Validated against the `ItemTemplate` enums; seed with
   `node seed-items.js --file ./seeds/items-set1-spine.js` → `--apply`. 🔒 **Written in BAND

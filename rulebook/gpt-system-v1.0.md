@@ -1,7 +1,8 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.2** · 2026-09-01 — the Marks update: Marks (§18.4), tags that
-record a deed instead of a performance and never fade.
+**Version 1.2** · 2026-09-01 — Marks (§18.4), tags that record a deed instead of
+a performance and never fade; and the bill of materials (§12.7), so that any item
+can be taken apart and its materials used for something else.
 *Previously —* **1.1** · 2026-08-04, the Item Drafting update: materials & parts
 (§12.7), armor rules (§12.6), polish & creation kits (§12.3), tomes (§4.4),
 box specificity (§17.6), the horde doctrine (§21.2). *(File name stays v1.0 —
@@ -836,6 +837,22 @@ kit exists — the top of the ladder is polish-only.
   its named material); floors are gathered; the Forge **reforges** any part
   into a better material — name, modifiers, and history survive. Consumables
   are *made from* materials but never have a material identity of their own.
+- **Every item carries a bill of materials.** What each part is made of is
+  written on the item, and the **striking part** is marked. An item with no bill
+  is baseline stock — scrap, wood, leather, iron — and carries no band.
+- **Disassembly.** At the Forge, any item can be **taken apart**: it is destroyed
+  and **every material on its bill comes back whole**. Nothing is lost but the
+  item. The cost is that it is a Forge action — you cannot do it in a corridor,
+  and you cannot do it to something you are about to need.
+- **Upgrading is a choice, not a schedule.** A weapon that entered the floor with
+  you keeps working; it does not expire when a new band appears. You may reforge
+  its striking part into the new band and keep the same weapon, take it apart and
+  build something else out of the pieces, or carry it exactly as it is and accept
+  that it hits like the floor it came from. All three are legitimate, and a party
+  that never upgrades has made a real decision rather than a mistake.
+- **What comes off a disassembly is materials, not parts.** A blade returned to
+  the Forge yields *Obsidian*, not *a blade* — so the same Obsidian may come back
+  as an arrowhead, a lining, or a socket in something that is not a weapon at all.
 
 ---
 

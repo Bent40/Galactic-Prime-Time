@@ -20,6 +20,15 @@ const itemTemplateSchema = new mongoose.Schema({
     max:     { type: Number, default: null },
     current: { type: Number, default: null },
   },
+  // §12.7 — the bill of materials. Parts are material capacity; the STRIKING part
+  // sets the damage band. Written down on every item so that DISASSEMBLY can hand
+  // the materials back and the party can build something else out of them. An item
+  // with no `materials` is baseline stock (Scrap/Wood/Leather/Iron, no band).
+  materials:      [{
+    part:     { type: String, default: '' },   // 'Blade', 'Haft', 'Lining', …
+    material: { type: String, default: '' },   // 'Obsidian', 'Sky-Iron', …
+    striking: { type: Boolean, default: false } // the part that sets the band
+  }],
   // pool/authoring metadata (Item Drafting pass, 2026-08-04) — template-side
   // bookkeeping only; instances snapshot `subtype` but not the pool fields
   subtype:        { type: String, default: '' },
