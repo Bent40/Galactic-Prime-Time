@@ -4,7 +4,7 @@
  * Covers the two pieces that are NOT a copy of seed-affixes.js: the §21.2
  * doctrine gate, and the array-aware diff that decides what --force overwrites.
  */
-const { doctrineCheck, damageProblems, diffFields, partsSum, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
+const { doctrineCheck, damageProblems, resistanceProblems, diffFields, partsSum, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
 const f2 = require('./seeds/enemies-f2.js');
 const f3 = require('./seeds/enemies-f3.js');
@@ -31,6 +31,47 @@ ok('a signature written for F1 is flagged when the roster is checked at F3',
 ok('an over-fat mob is caught',
    doctrineCheck([{ name: 'x', tier: 'mob', notes: '', bodyParts: [{ name: 'B', maxHp: 6 }] }], 1)
      .some(p => p.includes('part budget 6')));
+console.log('resistance gate (§10 / §10.1)');
+const R = (o) => ({ name: 'x', tier: 'mob', notes: 'n', bodyParts: [{ name: 'B', maxHp: 5 }], ...o });
+ok('no resistances at all is fine', resistanceProblems(R({})).length === 0);
+ok('a typed resistance passes', resistanceProblems(R({ resistances: [{ type: 'Fire', value: 2 }] })).length === 1,
+   'Fire is not a DMG_TYPE — Burn is');
+ok('a real typed resistance passes', resistanceProblems(R({ resistances: [{ type: 'Burn', value: 2 }] })).length === 0);
+ok('an unknown damage type is rejected', resistanceProblems(R({ resistances: [{ type: 'Sonic', value: 2 }] })).length === 1);
+ok('a duplicate type is rejected',
+   resistanceProblems(R({ resistances: [{ type: 'Burn', value: 2 }, { type: 'Burn', value: 1 }] })).length === 1);
+ok('a zero or negative typed value is rejected',
+   resistanceProblems(R({ resistances: [{ type: 'Burn', value: 0 }] })).length === 1
+   && resistanceProblems(R({ resistances: [{ type: 'Burn', value: -2 }] })).length === 1);
+// §10.1 — the owner's rule: universal resistance is always CAUSED, never a state.
+ok('universal with both cause and removal passes',
+   resistanceProblems(R({ universal: { value: 6, cause: 'stone shell', removal: 'chip the shell' } })).length === 0);
+ok('universal with NO CAUSE is refused',
+   resistanceProblems(R({ universal: { value: 6, removal: 'chip the shell' } })).some(p => /CAUSE/.test(p)));
+ok('universal with NO REMOVAL is refused',
+   resistanceProblems(R({ universal: { value: 6, cause: 'stone shell' } })).some(p => /REMOVAL/.test(p)));
+ok('universal with neither is refused twice',
+   resistanceProblems(R({ universal: { value: 6 } })).length === 2);
+ok('universal 0 needs nothing — the gate skips it',
+   resistanceProblems(R({ universal: { value: 0 } })).length === 0);
+ok('a negative universal is rejected',
+   resistanceProblems(R({ universal: { value: -1, cause: 'c', removal: 'r' } })).length === 1);
+// Owner, 2026-09-14: "a mob can have any resistance as well." NO tier check.
+ok('A MOB may carry typed AND universal resistance — no tier restriction',
+   resistanceProblems(R({ tier: 'mob',
+     resistances: [{ type: 'Bleed', value: 3 }, { type: 'Crush', value: 1 }],
+     universal: { value: 4, cause: 'crystal rind', removal: 'Crush shatters it' } })).length === 0);
+ok('the resistance gate runs inside doctrineCheck',
+   doctrineCheck([R({ universal: { value: 6 } })], 1).some(p => /CAUSE/.test(p)));
+ok('resistances show up in diffFields',
+   diffFields({ resistances: [{ type: 'Burn', value: 2 }] }, { resistances: [{ type: 'Burn', value: 3 }] }).includes('resistances'));
+ok('a reordered resistance list is NOT a diff',
+   !diffFields({ resistances: [{ type: 'Burn', value: 2 }, { type: 'Bleed', value: 1 }] },
+               { resistances: [{ type: 'Bleed', value: 1 }, { type: 'Burn', value: 2 }] }).includes('resistances'));
+ok('universal shows up in diffFields',
+   diffFields({ universal: { value: 6, cause: 'a', removal: 'b' } },
+              { universal: { value: 4, cause: 'a', removal: 'b' } }).includes('universal'));
+
 console.log('non-mob tolerance (owner ruling: only mobs are exact)');
 const elite = (hp) => [{ name: 'x', tier: 'elite', size: 'Medium', notes: 'n',
                          bodyParts: [{ name: 'H', maxHp: 1 }, { name: 'T', maxHp: hp - 1 }] }];

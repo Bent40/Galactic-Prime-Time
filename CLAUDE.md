@@ -1027,7 +1027,7 @@ and it broke the moment gear crossed a floor (an F1 sword read **0.75** in F3 ba
 | **3** | `rulebook/enemy-scaling.md` + `server/floor-bands.js` | Built entirely on the doubling |
 | **4** | `rulebook/level-budget.md` **L-22** | The band-units ruling it rests on is withdrawn |
 | **5** | `server/seeds/items-set1-spine.js` | 26 templates written in band units |
-| **6** | `Enemy` model + `seed-enemies.js` | Needs a **universal resistance** field, and a gate that refuses any entry naming no cause and no removal — same shape as the `presence` positive claim |
+| ~~**6**~~ | ✅ **DONE 2026-09-14** | `Enemy` carries `resistances[{type,value}]` + `universal{value,cause,removal}`, both whitelisted in both `routes/enemies.js` verbs and diffed by `--force`. **`resistanceProblems()` refuses a universal resistance that names no CAUSE or no REMOVAL** (§10.1), rejects unknown/duplicate/non-positive typed entries, and runs inside `doctrineCheck`. ⚠️ **NO TIER CHECK, deliberately — a MOB may carry any resistance** (owner, 2026-09-14): that is E-0's *"a mob that survives a hit gets a gate, never a fatter number"* working as intended, because a resistance IS that gate. The comment says so in both files so a later pass does not "helpfully" add one. Admin editor warns live when cause/removal is blank. **98 tests pass (+17).** Also fixed: the model's exported `DAMAGE_EXCEPTIONS` had gone stale, missing `aura` and `presence` |
 
 ---
 

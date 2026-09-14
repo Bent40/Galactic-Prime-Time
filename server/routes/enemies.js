@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, tier, size, color, description, notes, bodyParts, phases, signature } = req.body;
+    const { name, tier, size, color, description, notes, bodyParts, phases, signature, resistances, universal } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     const enemy = await Enemy.create({
       name, tier: tier || 'mob',
@@ -24,6 +24,8 @@ router.post('/', async (req, res) => {
       bodyParts: Array.isArray(bodyParts) ? bodyParts : [],
       phases:    Array.isArray(phases)    ? phases    : [],
       signature: signature && typeof signature === 'object' ? signature : {},
+      resistances: Array.isArray(resistances) ? resistances : [],
+      universal: universal && typeof universal === 'object' ? universal : {},
     });
     res.json(enemy);
   } catch { res.status(500).json({ error: 'Server error' }); }
@@ -31,7 +33,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const { name, tier, size, color, description, notes, bodyParts, phases, signature } = req.body;
+    const { name, tier, size, color, description, notes, bodyParts, phases, signature, resistances, universal } = req.body;
     if (!name) return res.status(400).json({ error: 'name required' });
     const enemy = await Enemy.findByIdAndUpdate(
       req.params.id,
@@ -40,6 +42,8 @@ router.put('/:id', async (req, res) => {
         bodyParts: Array.isArray(bodyParts) ? bodyParts : [],
         phases:    Array.isArray(phases)    ? phases    : [],
         signature: signature && typeof signature === 'object' ? signature : {},
+        resistances: Array.isArray(resistances) ? resistances : [],
+        universal: universal && typeof universal === 'object' ? universal : {},
       },
       { new: true }
     );

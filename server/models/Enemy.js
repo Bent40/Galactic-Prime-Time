@@ -38,6 +38,38 @@ const DamageSchema = new mongoose.Schema({
   note:      { type: String, default: '' },
 }, { _id: false });
 
+// §10 / §10.1 — resistances, in FORCE.
+//
+// TYPED resistance subtracts from its OWN type only, and never more than that
+// type actually dealt: Fire 5 against 1 Force of fire eats the 1 and wastes 4.
+// Resolved BEFORE universal.
+//
+// UNIVERSAL resistance reduces every type at once and is the same object as a
+// damage threshold — universal 6 means "needs 7 Force to do anything." It applies
+// to the TOTAL, once, never per type.
+//
+// 🔒 A universal resistance is ALWAYS CAUSED BY SOMETHING — a structure, a stance,
+// a hold, an active effect — and is NEVER a creature's standing state. So an entry
+// carrying one must name `cause` AND `removal`; one without the other is refused by
+// seed-enemies.js. A number nobody can answer is not difficulty, it is a wall.
+//
+// ⚠️ NO TIER RESTRICTION, deliberately: a MOB may carry any resistance, typed or
+// universal. That is E-0's rule working as intended — "a mob that survives a hit
+// gets a gate, never a fatter number," and a resistance IS that gate. Do not add a
+// tier check here.
+const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
+
+const ResistSchema = new mongoose.Schema({
+  type:  { type: String, default: '' },   // one of DMG_TYPES
+  value: { type: Number, default: 0 },    // Force subtracted from that type alone
+}, { _id: false });
+
+const UniversalSchema = new mongoose.Schema({
+  value:   { type: Number, default: 0 },  // 0 = none; the gate skips it
+  cause:   { type: String, default: '' },  // REQUIRED when value > 0
+  removal: { type: String, default: '' },  // REQUIRED when value > 0
+}, { _id: false });
+
 const EnemySchema = new mongoose.Schema({
   name:        { type: String, required: true },
   tier:        { type: String, default: 'mob' },
@@ -46,10 +78,13 @@ const EnemySchema = new mongoose.Schema({
   color:       { type: String, default: '#ff2255' },
   description: { type: String, default: '' },
   notes:       { type: String, default: '' },
+  resistances: { type: [ResistSchema],   default: [] },
+  universal:   { type: UniversalSchema,  default: () => ({}) },
   bodyParts:   { type: [BodyPartSchema], default: [] },
   phases:      { type: [PhaseSchema],    default: [] }, // boss/legendary only
 }, { timestamps: true });
 
 module.exports = mongoose.model('Enemy', EnemySchema);
 module.exports.SIZES = SIZES;
-module.exports.DAMAGE_EXCEPTIONS = ['', 'windup', 'tick'];
+module.exports.DAMAGE_EXCEPTIONS = ['', 'windup', 'tick', 'aura', 'presence'];
+module.exports.DMG_TYPES = DMG_TYPES;

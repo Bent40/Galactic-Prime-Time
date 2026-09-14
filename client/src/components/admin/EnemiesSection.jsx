@@ -3,7 +3,10 @@ import { apiFetch } from '../../api.js';
 
 const BLANK_BP    = { name: '', maxHp: 3 };
 const BLANK_PHASE = { name: 'Phase', description: '', hpThreshold: '' };
-const BLANK = { name: '', tier: 'mob', size: 'Medium', color: '#ff2255', description: '', notes: '', bodyParts: [], phases: [], signature: BLANK_SIG() };
+const BLANK = { name: '', tier: 'mob', size: 'Medium', color: '#ff2255', description: '', notes: '', bodyParts: [], phases: [], signature: BLANK_SIG(), resistances: [], universal: BLANK_UNI() };
+function BLANK_UNI() { return { value: 0, cause: '', removal: '' }; }
+// §10 — the seven damage types are also the seven resistance keys, 1:1.
+const RESIST_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
 
 // enemy-scaling S-1 — the signature hit, in BAND UNITS for the enemy's own floor.
 // Structured so seed-enemies.js can gate damage the way it gates HP. Floor 0 = unset.
@@ -166,6 +169,7 @@ function EnemyForm({ value, onChange }) {
         </div>
       </div>
       <SignatureRow value={value} onChange={onChange} />
+      <ResistanceRow value={value} onChange={onChange} />
       <div className="modal-grid2" style={{ marginBottom: 8 }}>
         <div className="field-group">
           <label className="field-label">Tracker Color</label>
@@ -204,6 +208,70 @@ function EnemyForm({ value, onChange }) {
  * floor is chosen the band is shown live, so an off-band number is visible here
  * before the seeder ever refuses it.
  */
+/**
+ * §10 typed resistance + §10.1 universal resistance.
+ *
+ * Typed subtracts from its own type only, and never more than that type dealt.
+ * Universal is the same object as a damage threshold and applies to the TOTAL,
+ * once — so it MUST name its cause and its removal, because a universal
+ * resistance is always the result of something and never a standing state.
+ * The seeder refuses an entry that leaves either blank; this warns live.
+ *
+ * No tier restriction: a MOB may carry any of this. A resistance IS E-0's gate.
+ */
+function ResistanceRow({ value, onChange }) {
+  const rows = Array.isArray(value.resistances) ? value.resistances : [];
+  const uni  = value.universal || BLANK_UNI();
+  const setU = (patch) => onChange({ ...value, universal: { ...BLANK_UNI(), ...uni, ...patch } });
+  const setR = (next) => onChange({ ...value, resistances: next });
+  const uv = Number(uni.value || 0);
+  const missing = uv > 0 && (!String(uni.cause || '').trim() || !String(uni.removal || '').trim());
+  const free = RESIST_TYPES.filter(ty => !rows.some(r => r.type === ty));
+
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <label className="field-label" style={{ display: 'block', marginBottom: 4 }}>
+        Resistances <span style={{ opacity: 0.6, fontWeight: 400 }}>&mdash; in Force. Typed eats its own type only, capped by what that type dealt.</span>
+      </label>
+      {rows.map((r, i) => (
+        <div className="row" key={i} style={{ gap: 5, marginBottom: 4 }}>
+          <select className="fi" style={{ width: 150 }} value={r.type || ''}
+            onChange={e => setR(rows.map((x, j) => j === i ? { ...x, type: e.target.value } : x))}>
+            <option value="">— type —</option>
+            {RESIST_TYPES.map(ty => <option key={ty} value={ty}>{ty}</option>)}
+          </select>
+          <input className="fi" type="number" min="1" style={{ width: 90 }} value={r.value ?? ''}
+            placeholder="Force"
+            onChange={e => setR(rows.map((x, j) => j === i ? { ...x, value: e.target.value === '' ? '' : Math.max(1, +e.target.value) } : x))} />
+          <button className="btn btn-muted btn-sm" onClick={() => setR(rows.filter((_, j) => j !== i))}>&#10005;</button>
+        </div>
+      ))}
+      {free.length > 0 && (
+        <button className="btn btn-cyan btn-sm" onClick={() => setR([...rows, { type: free[0], value: 1 }])}>+ Resistance</button>
+      )}
+
+      <div style={{ marginTop: 10, padding: '8px 10px', border: `1px solid ${missing ? 'var(--gold)' : 'var(--border)'}`, borderRadius: 4, background: 'rgba(0,0,0,.2)' }}>
+        <label className="field-label" style={{ display: 'block', marginBottom: 4 }}>
+          Universal <span style={{ opacity: 0.6, fontWeight: 400 }}>&mdash; a threshold. {uv > 0 ? `needs ${uv + 1} Force to do anything` : 'never a standing state'}</span>
+        </label>
+        <div className="row" style={{ gap: 5, marginBottom: 4 }}>
+          <input className="fi" type="number" min="0" style={{ width: 90 }} value={uni.value ?? 0}
+            onChange={e => setU({ value: e.target.value === '' ? 0 : Math.max(0, +e.target.value) })} />
+          <input className="fi" style={{ flex: 1 }} placeholder="Caused by… (required)" value={uni.cause || ''}
+            onChange={e => setU({ cause: e.target.value })} />
+          <input className="fi" style={{ flex: 1 }} placeholder="Removed by… (required)" value={uni.removal || ''}
+            onChange={e => setU({ removal: e.target.value })} />
+        </div>
+        {missing && (
+          <span style={{ color: 'var(--gold)', fontSize: 10 }}>
+            &#9888; A universal resistance must name its cause AND its removal (&sect;10.1). The seeder will refuse this.
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function SignatureRow({ value, onChange }) {
   const sig = value.signature || BLANK_SIG();
   const set = (patch) => onChange({ ...value, signature: { ...BLANK_SIG(), ...sig, ...patch } });

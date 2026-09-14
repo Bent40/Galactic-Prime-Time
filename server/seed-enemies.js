@@ -75,6 +75,12 @@ const floor    = floorIdx !== -1 ? Number(process.argv[floorIdx + 1]) : 1;
 const partsSum  = (e) => (e.bodyParts || []).reduce((a, p) => a + (p.maxHp || 0), 0);
 const normParts = (a) => JSON.stringify((a || []).map(p => ({ name: p.name, maxHp: p.maxHp })));
 const normPhase = (a) => JSON.stringify((a || []).map(p => ({ name: p.name, description: p.description, hpThreshold: p.hpThreshold })));
+// sorted, so a reordered resistance list is not a spurious --force diff
+const normRes   = (a) => JSON.stringify((a || []).map(r => ({ type: r.type, value: Number(r.value || 0) }))
+                                         .sort((x, y) => String(x.type).localeCompare(String(y.type))));
+const normUni   = (u) => JSON.stringify({ value: Number((u || {}).value || 0),
+                                          cause: String((u || {}).cause || ''),
+                                          removal: String((u || {}).removal || '') });
 const normSig   = (g) => JSON.stringify({
   floor: Number((g || {}).floor || 0), damage: Number((g || {}).damage || 0),
   type: String((g || {}).type || ''), exception: String((g || {}).exception || ''),
@@ -92,6 +98,8 @@ function diffFields(existing, seed) {
   if (normSig(existing.signature) !== normSig(seed.signature)) diffs.push('signature');
   if (normParts(existing.bodyParts) !== normParts(seed.bodyParts)) diffs.push('bodyParts');
   if (normPhase(existing.phases)    !== normPhase(seed.phases))    diffs.push('phases');
+  if (normRes(existing.resistances) !== normRes(seed.resistances)) diffs.push('resistances');
+  if (normUni(existing.universal)   !== normUni(seed.universal))   diffs.push('universal');
   return diffs;
 }
 
@@ -130,6 +138,7 @@ function doctrineCheck(seeds, atFloor = floor) {
       problems.push(`${e.name}: size "${e.size}" is not one of ${SIZES.join('|')} (§7.1)`);
     }
     problems.push(...damageProblems(e, atFloor));
+    problems.push(...resistanceProblems(e));
   }
   return problems;
 }
@@ -181,6 +190,56 @@ function damageProblems(e, atFloor) {
   }
   if (got > 0 && !String(sig.type || '').trim()) {
     out.push(`${e.name}: signature has a number but no damage type`);
+  }
+  return out;
+}
+
+
+const RESIST_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
+
+/**
+ * Resistance gate (§10 / §10.1). Resistances are in FORCE.
+ *
+ * TYPED resistance subtracts from its own type only. UNIVERSAL resistance is the
+ * same object as a damage threshold — universal 6 means "needs 7 Force to do
+ * anything" — and the owner's rule is that it is ALWAYS CAUSED BY SOMETHING and
+ * never a standing state. So this refuses any universal resistance that does not
+ * name BOTH what causes it and what takes it away. A number nobody can answer is
+ * not difficulty, it is a wall.
+ *
+ * ⚠️ NO TIER CHECK, deliberately. A MOB may carry any resistance, typed or
+ * universal — that is E-0's "a mob that survives a hit gets a gate, never a fatter
+ * number" working as intended, because a resistance IS that gate. Do not add one.
+ *
+ * Exported for testing without a DB.
+ */
+function resistanceProblems(e) {
+  const out = [];
+  const rs = Array.isArray(e.resistances) ? e.resistances : [];
+  const seen = new Set();
+  rs.forEach((r, i) => {
+    const at = `${e.name}: resistances[${i}]`;
+    const ty = String((r || {}).type || '');
+    if (!RESIST_TYPES.includes(ty)) {
+      out.push(`${at} type "${ty}" is not one of ${RESIST_TYPES.join('|')}`);
+      return;
+    }
+    if (seen.has(ty)) out.push(`${at} duplicates ${ty} — one entry per type`);
+    seen.add(ty);
+    const v = Number((r || {}).value);
+    if (!Number.isFinite(v) || v <= 0) out.push(`${at} (${ty}) value must be a positive number, got ${(r || {}).value}`);
+  });
+
+  const u = e.universal || {};
+  const uv = Number(u.value || 0);
+  if (uv < 0) out.push(`${e.name}: universal resistance cannot be negative (${uv})`);
+  if (uv > 0) {
+    if (!String(u.cause || '').trim()) {
+      out.push(`${e.name}: universal ${uv} names no CAUSE — §10.1, a universal resistance is always the result of something, never a standing state`);
+    }
+    if (!String(u.removal || '').trim()) {
+      out.push(`${e.name}: universal ${uv} names no REMOVAL — §10.1, every universal resistance must say what takes it away`);
+    }
   }
   return out;
 }
@@ -255,7 +314,7 @@ async function run() {
   await mongoose.disconnect();
 }
 
-module.exports = { doctrineCheck, damageProblems, diffFields, partsSum,
+module.exports = { doctrineCheck, damageProblems, resistanceProblems, diffFields, partsSum,
   FLOOR_MOB_HP, FLOOR_DAMAGE, RANK_RATIO, SIZES, TOLERANCE, DAMAGE_EXCEPTIONS };
 
 if (require.main === module) run().catch(e => { console.error(e); process.exit(1); });
