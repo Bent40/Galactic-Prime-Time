@@ -37,6 +37,8 @@ module.exports = [
     part: 'Body',
     color: '#5d6b7a',
     description: 'F3 SHARED. Masked, gloved, carrying fire. They seal districts that cough, and they do not open them again.',
+    signature: { floor: 3, damage: 6, type: 'Burn',
+      note: 'A hooked torch. They work in threes and they do not chase.' },
     notes: [
       '6 Burn from a hooked torch. They work in threes and they do not chase.',
       '',
@@ -56,6 +58,8 @@ module.exports = [
     part: 'Body',
     color: '#9ab08a',
     description: 'F3 SHARED. Not crystal yet. Coughing, frightened, and still entirely themselves — which is the problem.',
+    signature: { floor: 3, damage: 6, type: 'Crush',
+      note: 'With whatever is to hand. They fight because they are cornered.' },
     notes: [
       '6 Crush with whatever is to hand. They fight because they are cornered, not because',
       'they want to, and they will stop the moment they are given a way out.',
@@ -73,6 +77,8 @@ module.exports = [
     part: 'Body',
     color: '#8a2f5a',
     description: 'F3 SHARED. Leaderless, agenda-less, and in the city. It is not hunting anything. It is just here.',
+    signature: { floor: 3, damage: 6, type: 'Bleed',
+      note: 'Fast, and it does not retreat because nothing told it to.' },
     notes: [
       '6 Bleed, fast, and it does not retreat because nothing told it to.',
       '',
@@ -91,6 +97,8 @@ module.exports = [
     part: 'Body',
     color: '#6a6050',
     description: 'F3 SHARED. A quarantine is an economy. These are the people running it.',
+    signature: { floor: 3, damage: 6, type: 'Bleed',
+      note: 'A knife they know how to use. They rob; they do not murder.' },
     notes: [
       '6 Bleed with a knife they know how to use. They rob, they do not murder, and they',
       'will absolutely murder if it looks like the alternative.',
@@ -107,6 +115,8 @@ module.exports = [
     part: 'Cluster', size: 'Large',
     color: '#a9dbe8',
     description: 'F3 SHARED, dense on the Easy and Hard routes. It grows out of a wall, a cart, a person. It does not move and it does not want anything.',
+    signature: { floor: 3, damage: 0, type: '', exception: 'presence',
+      note: 'NO ATTACK — it is terrain until touched. The threat is the burst: any hit that is not Burn scatters a 2-space cloud, Infected T1, regrowing within a Clock.' },
     notes: [
       'NO ATTACK. It is terrain until touched.',
       '',
@@ -135,6 +145,8 @@ module.exports = [
       { name: 'Leg L',         maxHp: 5 },
       { name: 'Leg R',         maxHp: 4 },
     ],
+    signature: { floor: 3, damage: 9, type: 'Crush',
+      note: 'A shield-edge chop. It advances and does not pursue.' },
     notes: [
       'GATE — IT REFLECTS. Any ranged attack, thrown weapon, cone, line or skill effect that',
       'strikes it is turned back on the attacker at full value. Melee is unaffected.',
@@ -162,6 +174,8 @@ module.exports = [
       { name: 'Leg L',        maxHp: 5 },
       { name: 'Leg R',        maxHp: 5 },
     ],
+    signature: { floor: 3, damage: 9, type: 'Bleed',
+      note: 'A precise cut, aimed at a limb and never at a lethal part.' },
     notes: [
       'GATE — IT WILL NOT LET YOU DIE. Any contestant reduced to bleed-out (§7.5) in its',
       'reach is STABILISED, mid-fight, whether they want that or not — and it takes the part',
@@ -185,6 +199,8 @@ module.exports = [
     part: 'Body',
     color: '#7a8c5a',
     description: 'EASY ROUTE. He cured them. Some of them a hundred years ago. They have not left.',
+    signature: { floor: 3, damage: 6, type: 'Crush',
+      note: 'With whatever the street provided.' },
     notes: [
       '6 Crush, with whatever the street provided.',
       '',
@@ -208,6 +224,8 @@ module.exports = [
       { name: 'Leg L',            maxHp: 5 },
       { name: 'Leg R',            maxHp: 4 },
     ],
+    signature: { floor: 3, damage: 9, type: 'Crush',
+      note: 'Apologetic, and it pulls its blows.' },
     notes: [
       'GATE — THE CRYSTAL SHOULDER (9) IS NOT A WEAKNESS, IT IS THE PROOF. It has not grown',
       'in a century and it has not gone, which is how anyone knows the cure ARRESTS the',
@@ -255,6 +273,8 @@ module.exports = [
       { name: 'The Reservoir', maxHp: 40 },
       { name: 'Halo of Cures', maxHp: 34 },
     ],
+    signature: { floor: 3, damage: 19, type: 'Crush',
+      note: 'HE DOES NOT RETALIATE — the reservoir does. This lands from a body of crystal that blooms around him while he keeps working.' },
     notes: [
       'THE CANON BEAT (Compendium §4.2): he is simultaneously spreading and curing a disease',
       'in the capital, and the party chooses to fight or to help.',
@@ -354,6 +374,8 @@ module.exports = [
     part: 'Body',
     color: '#8a7a3a',
     description: 'MEDIUM ROUTE. The crown\'s soldiers. The farm is licensed, the paperwork is in order, and they have read it.',
+    signature: { floor: 3, damage: 6, type: 'Crush',
+      note: 'Disciplined, in formation, and they do not break when one of them falls.' },
     notes: [
       '6 Crush, disciplined, in formation, and they do not break when one of them falls.',
       '',
@@ -382,6 +404,8 @@ module.exports = [
       { name: 'Leg L', maxHp: 7 },
       { name: 'Leg R', maxHp: 6 },
     ],
+    signature: { floor: 3, damage: 9, type: 'Crush',
+      note: 'From a bodyguard he never looks at.' },
     notes: [
       'GATE — HE DOES NOT FIGHT, HE CALLS. Every Clock he is conscious and able to speak, a',
       'squad of Royal Guards arrives, lawfully, and the party is the one committing a crime.',
@@ -418,6 +442,8 @@ module.exports = [
       { name: 'Leg R',        maxHp: 17 },
       { name: 'The Petition', maxHp: 14 },
     ],
+    signature: { floor: 3, damage: 12, type: 'Bleed',
+      note: 'And he apologises for every one of them, in exactly the voice he used at the burning house.' },
     notes: [
       'THE CANON BEAT (Compendium §4.3), read as ONE PERSON: the surviving NPC party leader',
       'runs a human farm, and he — being a demon — wants a specific human sacrifice to cure',
@@ -506,6 +532,8 @@ module.exports = [
     part: 'Body',
     color: '#7a5a6a',
     description: 'HARD ROUTE. Demons in plague-doctor masks, going door to door. The city thinks they are help.',
+    signature: { floor: 3, damage: 6, type: 'Bleed',
+      note: 'They work in pairs so that one can always leave.' },
     notes: [
       '6 Bleed, and they work in pairs so one can always leave.',
       '',
@@ -531,6 +559,8 @@ module.exports = [
       { name: 'Leg L', maxHp: 6 },
       { name: 'Leg R', maxHp: 6 },
     ],
+    signature: { floor: 3, damage: 9, type: 'Bleed',
+      note: 'Defensive, purely to be left alone to work.' },
     notes: [
       'GATE — IT DOES NOT FIGHT AND DOES NOT NEED TO. Every Clock it survives it marks one',
       'more district clear. It is a TIMER wearing a person: let it work four Clocks and it',
@@ -564,6 +594,8 @@ module.exports = [
       { name: 'Leg R',       maxHp: 19 },
       { name: 'The Wanting', maxHp: 14 },
     ],
+    signature: { floor: 3, damage: 12, type: 'Crush',
+      note: 'And it steps over its own dead to keep moving.' },
     notes: [
       'THE CANON BEAT (Compendium §4.4): the Loong hides in the capital preventing the',
       'disease spreading; demons hunt it as a cure for their nature; the party helps it',
@@ -669,6 +701,8 @@ module.exports = [
       { name: 'Seal-Anchor III',maxHp: 19 },
       { name: 'Seal-Anchor IV', maxHp: 19 },
     ],
+    signature: { floor: 3, damage: 19, type: 'Crush',
+      note: 'A foreclaw sweep at anything within 3 spaces of an anchor. Dropping its own weight is a SECOND attack at 30 Crush in a line — the legitimate above-band windup.' },
     notes: [
       'IT DOES NOT WAKE FOR A PARTY THAT BROUGHT THE LOONG. Beelzebub\'s seal answers gods',
       'and demons; it has NO REPLY to the descendant of the corpse it was built inside. The',
@@ -742,6 +776,8 @@ module.exports = [
       { name: 'Fourth Bloom', maxHp: 40 },
       { name: 'The Seed',     maxHp: 42 },
     ],
+    signature: { floor: 3, damage: 19, type: 'Crush',
+      note: 'IT DOES NOT STRIKE. This is THE THROAT, once per Clock, to whatever is inside it — the only conventional damage in the encounter. The Blooms tick 4 Infected instead.' },
     notes: [
       'IT RECEDES FOR NULLROT AND FOR NOTHING ELSE. The Halo of Cures is the only antibody',
       'that has ever existed; with him in the chamber this statline never comes off the',

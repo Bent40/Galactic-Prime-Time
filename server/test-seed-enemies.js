@@ -203,6 +203,27 @@ ok('weaknesses show up in diffFields, and reordering is not a diff',
    && !diffFields({ weaknesses: [{ type: 'Burn' }, { type: 'Crush' }] },
                   { weaknesses: [{ type: 'Crush' }, { type: 'Burn' }] }).includes('weaknesses'));
 
+console.log('signature migration (enemy-scaling S-1) — F1/F2/F3 complete');
+const rosters = { 1: f1, 2: f2, 3: f3 };
+ok('ALL 53 entries carry a signature — the gate is no longer optional in practice',
+   Object.values(rosters).every(r => r.every(e => e.signature && Number(e.signature.floor))),
+   Object.entries(rosters).flatMap(([f, r]) =>
+     r.filter(e => !(e.signature && Number(e.signature.floor))).map(e => `F${f} ${e.name}`)).join(', '));
+ok('every signature is written for its OWN floor',
+   Object.entries(rosters).every(([f, r]) => r.every(e => Number(e.signature.floor) === Number(f))));
+ok('every roster passes its own floor\'s damage gate',
+   Object.entries(rosters).every(([f, r]) => r.every(e => damageProblems(e, Number(f)).length === 0)),
+   Object.entries(rosters).flatMap(([f, r]) =>
+     r.flatMap(e => damageProblems(e, Number(f)))).join(' | '));
+ok('the five no-attack entries declare it with `presence`, never by omission',
+   Object.values(rosters).flat().filter(e => e.signature.exception === 'presence').length === 5
+   && Object.values(rosters).flat().filter(e => e.signature.exception === 'presence')
+        .every(e => Number(e.signature.damage) === 0 && String(e.signature.note || '').trim()));
+ok('F2 damage sits on its own band — mob 5 · elite 8 · boss 10',
+   f2.every(e => !e.signature.damage || e.signature.damage === FLOOR_DAMAGE[2][e.tier === 'legendary' ? 'legendary' : e.tier]));
+ok('F3 damage sits on its own band — mob 6 · elite 9 · boss 12 · super 19',
+   f3.every(e => !e.signature.damage || e.signature.damage === FLOOR_DAMAGE[3][e.tier === 'legendary' ? 'legendary' : e.tier]));
+
 console.log('boss resistance sweep (§21.3) — every line carries its reason');
 const allRosters = [...f1, ...f2, ...f3];
 ok('every resistance across all 53 entries names WHY',

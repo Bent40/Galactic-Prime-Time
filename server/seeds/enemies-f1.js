@@ -85,6 +85,8 @@ module.exports = [
     part: 'Body',
     color: '#cfe3f0',
     description: 'Skittish, luminous, worth money. It does not attack — it flees.',
+    signature: { floor: 1, damage: 0, type: '', exception: 'presence',
+      note: 'No attack. It is bait: it moves, the room follows, and the room is the danger.' },
     notes: [
       'GATE: Dodge Threshold 5 (§14). A mob that costs ammo and Moments, not HP.',
       'CARVE: Beastbone + Tough Hide (named quarry — the E-0.4 exception).',
@@ -96,6 +98,8 @@ module.exports = [
     color: '#c0c0c8',
     size: 'Small',
     description: 'Corporation kit, not fauna. Hovers at head height and does not blink. No attack.',
+    signature: { floor: 1, damage: 0, type: '', exception: 'presence',
+      note: 'No attack. It films. What it costs you is Exposure, not HP.' },
     notes: [
       'GATE: social, not mechanical. Destroying one is trivial and costs Exposure',
       '(§17.1) — the crowd is watching through it. Free to kill, expensive to have killed.',
@@ -549,6 +553,8 @@ module.exports = [
     size: 'Large',
     color: '#bfe9f5',
     description: 'HARD ROUTE. A twinkling mist. It is genuinely beautiful, it drifts toward warmth, and it is the single most dangerous thing on Floor 1.',
+    signature: { floor: 1, damage: 0, type: '', exception: 'presence',
+      note: 'No attack — it TEMPTS. No roll; it simply looks like a find. Contact is Infected on the part; inhalation is Infected PLUS Suffocation (§8.2).' },
     notes: [
       'THE VECTOR. Statted and counted as ONE body, like the Husk-Moth Cloud — the forest',
       'layer already taught the party what to do with a cloud. This one is worse.',

@@ -32,6 +32,8 @@ module.exports = [
     part: 'Body', size: 'Small',
     color: '#cfe0e8',
     description: 'F2 SHARED. Wings of fused sand, thin enough to see the sun through. Appears 5-10.',
+    signature: { floor: 2, damage: 5, type: 'Bleed',
+      note: 'On contact. It flies, so cover and low walls do not stop it.' },
     notes: [
       'HORDE. 5 Bleed on contact. Flies, so cover and low walls do not stop it.',
       'GATE: none — F2\'s plain horde, the Bramblewretch of the desert.',
@@ -43,6 +45,8 @@ module.exports = [
     part: 'Salt Crust',
     color: '#e8e4d8',
     description: 'F2 SHARED. Something died in the flats and the salt kept the shape.',
+    signature: { floor: 2, damage: 5, type: 'Crush',
+      note: 'Slow, relentless, and it does not stop coming.' },
     notes: [
       '5 Crush, slow, relentless.',
       'GATE: IMMUNE IN DIRECT SUNLIGHT. The crust hardens to stone under the sun and',
@@ -56,6 +60,8 @@ module.exports = [
     part: 'Shell', size: 'Small',
     color: '#b08442',
     description: 'F2 SHARED. Finger-length, and it is not interested in fighting you.',
+    signature: { floor: 2, damage: 5, type: 'Bleed',
+      note: 'Hitting it means hitting yourself; removal costs 1 Moment and deals this to the part regardless.' },
     notes: [
       'GATE: IT BURROWS INTO WORN GEAR. Once attached it cannot be targeted by an',
       'ordinary attack — hitting it means hitting yourself. Removal costs 1 Moment and',
@@ -70,6 +76,8 @@ module.exports = [
     part: 'Body',
     color: '#d9b382',
     description: 'F2 SHARED. It walks toward you from three directions at once.',
+    signature: { floor: 2, damage: 5, type: 'Bleed',
+      note: 'Only when the real one reaches you.' },
     notes: [
       '5 Bleed when the real one reaches you.',
       'GATE: IT PRESENTS AS THREE. Two are light. Attacks on a false image do nothing',
@@ -83,6 +91,8 @@ module.exports = [
     part: 'Body',
     color: '#9aa8b0',
     description: 'F2 SHARED. They walked out here to get away from it. It came with them.',
+    signature: { floor: 2, damage: 5, type: 'Crush',
+      note: 'And they are still trying to speak. On death it puffs: 1-space cloud, Infected T1 on contact.' },
     notes: [
       '5 Crush, and they are still trying to speak.',
       'GATE: ON DEATH IT PUFFS — 1-space cloud, Infected T1 (contact). The same crystal',
@@ -107,6 +117,8 @@ module.exports = [
       { name: 'Leg L',        maxHp: 7 },
       { name: 'Leg R',        maxHp: 7 },
     ],
+    signature: { floor: 2, damage: 8, type: 'Crush',
+      note: 'A sweeping arm. The 1-Clock magnetic haul is a SECOND attack at 12 Crush — a legitimate windup, paid for in a punish window.' },
     notes: [
       'GATE — THE LATTICE CATCHES METAL. A metal weapon that strikes it is held: the',
       'wielder is disarmed unless they spend 1 Moment wrenching it free, and the',
@@ -137,6 +149,8 @@ module.exports = [
       { name: 'Leg L',       maxHp: 4 },
       { name: 'Leg R',       maxHp: 4 },
     ],
+    signature: { floor: 2, damage: 8, type: 'Bleed',
+      note: 'A glass shard. The 20 HP shell itself deals nothing; it removes.' },
     notes: [
       'GATE — THE GLASSING. A 2-Moment windup that fuses the sand around one target',
       'into a shell. On completion that contestant is ENCASED: Helpless (§11), and the',
@@ -162,6 +176,8 @@ module.exports = [
     part: 'Body',
     color: '#6a6a72',
     description: 'EASY ROUTE. The stairwell came down seventy years ago. They are still descending it.',
+    signature: { floor: 2, damage: 5, type: 'Bleed',
+      note: 'Moves through rubble as though it were open floor.' },
     notes: [
       '5 Bleed. Moves through rubble as though it were open floor.',
       'GATE: IT REFORMS from the rubble at the next Clock reset unless Burned, dissolved,',
@@ -184,6 +200,8 @@ module.exports = [
       { name: 'Manipulator R', maxHp: 7 },
       { name: 'Tread Unit',    maxHp: 11 },
     ],
+    signature: { floor: 2, damage: 8, type: 'Crush',
+      note: 'A two-handed press, between attempts to repair the staircase.' },
     notes: [
       'GATE — IT REPAIRS ITSELF. At every Clock reset it restores 6 HP to its most',
       'damaged part, drawn from the rubble it is standing in.',
@@ -226,6 +244,8 @@ module.exports = [
       { name: 'Leg L', maxHp: 14 },
       { name: 'Leg R', maxHp: 14 },
     ],
+    signature: { floor: 2, damage: 10, type: 'Crush',
+      note: 'A reaching arm. On any Clock where it holds something of yours it speaks with your voice, and the crowd loves it (§17).' },
     notes: [
       'THE CANON BEAT: a demon blocks the exit; defeat it; free the man (Compendium §4.2).',
       '',
@@ -296,6 +316,8 @@ module.exports = [
     part: 'Body',
     color: '#7a4a8a',
     description: 'MEDIUM ROUTE. Bound staff of a demonic court. Some are human. Nobody asks which.',
+    signature: { floor: 2, damage: 5, type: 'Bleed',
+      note: 'They fight badly and they know it.' },
     notes: [
       '5 Bleed, and they fight badly and know it.',
       'GATE: none mechanically — but they DO NOT FIGHT unless the court is threatened.',
@@ -315,6 +337,8 @@ module.exports = [
       { name: 'Leg L', maxHp: 7 },
       { name: 'Leg R', maxHp: 7 },
     ],
+    signature: { floor: 2, damage: 8, type: 'Bleed',
+      note: 'Two strikes a Clock. It targets whoever is speaking.' },
     notes: [
       'GATE — DODGE THRESHOLD 8 (§14). Not immunity: a threshold. Reflexes 8 auto-dodges',
       'it, Reflexes 10 auto-dodges and counters, below 8 is the 1d4 fallback. It is the',
@@ -349,6 +373,8 @@ module.exports = [
       { name: 'Leg R', maxHp: 15 },
       { name: 'Choir', maxHp: 17 },
     ],
+    signature: { floor: 2, damage: 10, type: 'Bleed',
+      note: 'Contemptuous and unhurried — it would rather talk. The Dissolution presence at +2/Moment is the real threat and is not counted here.' },
     notes: [
       'THE CANON BEAT (Compendium §4.3 + §3.5): the party is sent to assassinate a rival',
       'demon who helped humans and wants to overthrow the queen. This is the encounter',
@@ -423,6 +449,8 @@ module.exports = [
     part: 'Body',
     color: '#8a2f2f',
     description: 'HARD ROUTE. Demon-bred, desert-run, and there are always more behind.',
+    signature: { floor: 2, damage: 5, type: 'Bleed',
+      note: 'Runs down anything Slowed or Prone.' },
     notes: [
       '5 Bleed. Runs down anything Slowed or Prone.',
       'GATE: none — but they do not fight the party. THEY GO FOR THE LOONG, every time,',
@@ -442,6 +470,8 @@ module.exports = [
       { name: 'Leg L', maxHp: 7 },
       { name: 'Leg R', maxHp: 6 },
     ],
+    signature: { floor: 2, damage: 8, type: 'Bleed',
+      note: 'A lash that pulls a target 2 spaces.' },
     notes: [
       'GATE — WHILE IT LIVES, THE HOUNDS DO NOT STOP. Hunt-Hounds arrive 3 per Clock,',
       'indefinitely. Killing hounds is arithmetic the party cannot win.',
@@ -476,6 +506,8 @@ module.exports = [
       { name: 'Leg R', maxHp: 13 },
       { name: 'Horn',  maxHp: 12 },
     ],
+    signature: { floor: 2, damage: 10, type: 'Crush',
+      note: 'From a distance, on a mount it never dismounts. It does not engage; it herds.' },
     notes: [
       'THE CANON BEAT (Compendium §4.4): the Loong is hunted in the desert; escort it to',
       'a village where it finds purpose.',
