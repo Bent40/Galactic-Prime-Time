@@ -1,15 +1,21 @@
 # Enemy Scaling — damage per floor, and hordes across floors (PROPOSAL)
 
-**Date:** 2026-08-18 · **Status:** 🟡 PROPOSAL — the doctrine it rests on is ruled;
-these numbers are not. Governing canon: **§12.7 errata** (the material band is
-floor-relative; sheets are written in band units), **§21.2** (ranks and the horde
-doctrine), and `level-budget.md` **L-15** (old enemies become hordes) and **L-19**
-(the level curve).
+**Date:** 2026-08-18 · **Updated 2026-09-01 for Force** · **Status:** 🟡 PROPOSAL —
+the doctrine it rests on is ruled; these numbers are not. Governing canon:
+**§7.3 Force**, **§21.2** (ranks and the horde doctrine), and `level-budget.md`
+**L-15** (old enemies become hordes), **L-19** (the level curve) and **L-23**
+(the band adds).
 
-> **Everything here is in BAND UNITS.** The floor's material band multiplies every
-> number native to that floor equally, so it cancels and never reaches the page. A
-> greatsword is 3 on Floor 1 and on Floor 9. What changes is the **contestant's
-> body**, and these tables follow it.
+> **⚡ Everything here is in FORCE (§7.3), not band units.** One Force is one basic
+> punch, and a material band step is **+1 Force**. The 2026-08-18 errata that had
+> the band *multiplying* both sides and cancelling inside a floor is **withdrawn**
+> (L-23) — it made every floor arithmetically identical and produced fractions on
+> any weapon carried across a floor.
+>
+> **The damage ladder in S-1 is UNCHANGED by that**, because it never used the
+> band: it derives enemy damage from the contestant's growing body (total trait
+> points → part HP), which is linear and survives untouched. **Only S-2's horde
+> counts moved**, and they moved a long way down.
 
 **The numbers below are generated, not hand-written.** Regenerate with
 `node server/floor-bands.js` rather than editing them in place.
@@ -49,7 +55,7 @@ elite ~60 / boss ~125 / super ~300 are band units and hold on every floor
 The ratio is constant by construction, so **combat feels the same on every floor**
 and only the fiction inflates — which is the §12.7 errata working as intended.
 
-### Two legitimate reasons to leave the band
+### Four legitimate reasons to leave the band
 
 1. **Telegraphed windups hit harder.** A 1-Clock windup that leaves the attacker
    Exposed (§5.3) may run well above its rank's number — the Step-Warden's stomp is
@@ -57,27 +63,51 @@ and only the fiction inflates — which is the §12.7 errata working as intended
    in a punish window.
 2. **Per-Moment ticks hit softer.** Damage applied every Moment of contact sits
    below the band — the Husk-Moth Cloud's **2** Chill against a mob band of 4.
+3. 🆕 **`aura` — the strike is not where the threat is.** The entry reads below band
+   (floored at **0.5×**, so "aura" can never excuse a token number) because its real
+   threat is a condition or a countdown. THE MASKED's backhand is **6** against an
+   F1 boss band of 8; his fight is the Dissolution clock, not the punch.
+4. 🆕 **`presence` — no attack at all.** Damage must be **0** and the note must say
+   what the threat is instead. ⭐ This is the one exception the gate treats as a
+   **positive claim** rather than a tolerance, because without it a 140-budget boss
+   authored with no attack passes silently. Vermilia never swings.
 
-**Anything else outside the band is a bug.** The whole F1 roster was checked against
-this table and sits inside it, with exactly those two exceptions.
+**Anything else outside the band is a bug.** The whole F1 roster is checked against
+this table by `seed-enemies.js` and sits inside it, with exactly those four
+exceptions — 16 of 19 F1 entries carry a signature; the three that carry none
+(Glass-Antler Doe, Camera Gnat, Crystal Spore Mist) deal no direct damage.
 
 ---
 
 ## S-2 — Hordes: reusing old enemies (L-15)
 
-**Nothing is ever rescaled.** A Bramblewretch is 5 band units *of its own floor*
-forever. What changes is how many of them the floor sends.
+**Nothing is ever rescaled.** A Bramblewretch is **5 Force** forever. What changes
+is how many of them the floor sends.
 
-An F1 mob is 5 **F1-band** units. At floor N one band unit is worth `2^(N−1)` F1
-units, so an on-band swing that kills one Bramblewretch at F1 kills a great many at
-F5. The tide size follows directly:
+> ⚡ **REWRITTEN 2026-09-01 — the counts came down hard, and that is correct.**
+> The old table below ran to **3,000** at F9 because it rode the withdrawn ×2 band.
+> Under Force a contestant gains about **+1 Force per floor**, so raw kills-per-swing
+> grows *linearly* — an F9 contestant at 13 Force kills **two** 5-Force mobs a swing,
+> not nine hundred.
+>
+> ⭐ **What clears a tide now is AREA, not a bigger number** (§7.3 — area does not
+> divide, so a sweep lands its full Force on every target in the space). The count
+> is `floor(your Force ÷ the old mob's Force) × spaces swept × ~20 swings a Clock`.
 
-| An F1-band mob, met at | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9 |
+| An F1 mob (5 Force), met at | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9 |
 |---|---|---|---|---|---|---|---|---|
-| **Tide size** ⚖ | 25 | 50 | 95 | 200 | 400 | 750 | 1 500 | **3 000** |
+| **Tide size** ⚖ | 100 | 100 | 100 | 100 | 250 | 250 | 250 | **250** |
+| ~~old (×2 band)~~ | ~~25~~ | ~~50~~ | ~~95~~ | ~~200~~ | ~~400~~ | ~~750~~ | ~~1 500~~ | ~~3 000~~ |
 
-> **The general rule: a floor-S mob met at floor N arrives about `12 × 2^(N−S)`
-> strong.**
+> **The rule now:** kills per swing = `floor(your Force ÷ the old mob's Force)`,
+> multiplied by the spaces a sweep covers, multiplied by roughly 20 swings a Clock.
+> The steps in the table are where the integer division ticks over.
+
+⚠️ **This is a real change in feel and it needs an owner eye.** A tide of 250 is
+still a tide, and it is one a GM can actually run; a tide of 3,000 never was. But
+the *number* on the page is much smaller, and if the fantasy you wanted was the
+four-digit figure, say so — the fix would be to raise the spaces-swept assumption
+or the per-Clock swing rate in `floor-bands.js`, not to bring back the multiplier.
 
 Sized so a tide is roughly **one Clock of slaughter** for a four-contestant party
 (≈20 attacks in a 10-Moment Clock). Halve it for a beat rather than a set-piece;

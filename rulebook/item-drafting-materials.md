@@ -21,14 +21,24 @@ HP bar. **Elites, Bosses, and Super Bosses are the struggle** (Supers align
 with the §19.1 payout ladder's Super ranks). Mob fights are about the crowd:
 positioning, cones and lines, ammo burn — not attrition against bars.
 
-| Floor | Set | Band | Mult | Mob HP ≈ one on-band hit (⚖) |
-|---|---|---|---|---|
-| — | tutorial | Baseline (Scrap/Wood/Leather/Iron) | ×1 | hand-tuned (pre-doctrine) |
-| F1 | Set 1 | Forest | ×2 | ~5 |
-| F2 | Set 1 | Desert | ×4 | ~10 |
-| F3 | Set 1 | Capital | ×8 | ~20 |
-| F4–F6 | Set 2 | (floors undesigned) | ×16 / ×32 / ×64 | ~40 / 80 / 160 |
-| F7–F9 | Set 3 | (floors undesigned) | ×128 / ×256 / ×512 | ~320 / 640 / ~1.3k |
+> **⚡ SUPERSEDED 2026-09-01 — the band ADDS, it does not multiply.**
+> The ×2-per-floor column below is **withdrawn**. A material band step is worth
+> **+1 Force** (rulebook §7.3 / §12.7). Nine floors, nine steps. The old column is
+> kept struck through so the change is legible, not silently rewritten.
+>
+> Why it went: multiplying both sides of every exchange made every floor
+> arithmetically identical, so a gear upgrade showed up on a sheet as **nothing**;
+> and it broke the moment a weapon crossed a floor, where an F1 sword read 0.75 in
+> F3 units. Addition fixes both and keeps the numbers two-digit forever.
+
+| Floor | Set | Band | **Step (Force)** | ~~Old mult~~ | Mob HP (Force) |
+|---|---|---|---|---|---|
+| — | tutorial | Baseline (Scrap/Wood/Leather/Iron) | **+0** | ~~×1~~ | hand-tuned (pre-doctrine) |
+| F1 | Set 1 | Forest | **+1** | ~~×2~~ | **5** |
+| F2 | Set 1 | Desert | **+2** | ~~×4~~ | **6** |
+| F3 | Set 1 | Capital | **+3** | ~~×8~~ | **7** |
+| F4–F6 | Set 2 | (floors undesigned) | **+4 / +5 / +6** | ~~×16/×32/×64~~ | **8 / 9 / 10** |
+| F7–F9 | Set 3 | (floors undesigned) | **+7 / +8 / +9** | ~~×128/×256/×512~~ | **11 / 12 / 13** |
 | F10 | FFA | **no new band — the finale is fought with everything you built** | — | (each other) |
 
 **Struggle ranks ⚖ (of the floor's mob HP):** Elite ≈ ×12 · Boss ≈ ×25 ·
@@ -36,8 +46,10 @@ Super Boss ≈ ×60. F1: elite ~60, boss ~125, super ~300. F9: elite ~15k, boss
 ~32k, super ~77k. Note the convergence: an F9 MOB carries ~1.3k HP — "monsters
 with thousands of HP, even as a mob," exactly as called — and still dies in one
 on-band swing. The sheet plays identically on every floor; only the numbers
-inflate. Worked example: Greatsword 3 baseline → Jade (F3) 24 → a Set-3
-material 768–1536 a swing.
+inflate. ⚡ **The worked example that stood here is withdrawn** — it read
+*"Greatsword 3 baseline → Jade (F3) 24 → a Set-3 material 768–1536 a swing,"* which
+is the multiplication. Under Force a greatsword is **3 + the band step**: 4 at F1,
+6 at F3, 12 at F9. A Set-3 material is +9, not ×512.
 
 **Floor 10 is the exam, not a shop**: no new materials — the FFA is contested
 with the arsenals, artifacts, and choices accumulated across nine floors (and

@@ -336,7 +336,39 @@ materials carry the exponential, and the hit-count stays stable end to end.
 
 ---
 
-## L-22 — The fix: **the band is a RATIO, not a number on the sheet** ⭐
+## L-23 — ⚡ **L-22 IS WITHDRAWN. The band adds; it does not multiply.** (owner-approved 2026-09-01)
+
+L-22, below, ruled that the material band is a ratio that cancels inside a floor,
+so a greatsword reads **3** on Floor 1 and Floor 9 alike. **That is withdrawn**, and
+the replacement is **Force** (rulebook §7.3): one Force is one basic punch, and a
+material band step is **+1 Force**.
+
+**Why L-22 failed — two faults, and the second is the one that killed it:**
+
+1. **It made every floor arithmetically identical.** If both sides of an exchange
+   scale together, the ratio never moves, so no floor can feel different from any
+   other and **a gear upgrade shows up on a sheet as nothing at all.** Owner:
+   *"we basically redress the same item with a new colour while the same effect
+   happens."*
+2. 🔴 **It broke the moment gear crossed a floor.** An F1 sword read in F3 band
+   units is **0.75** — a fraction on a character sheet. And carrying gear across
+   floors is precisely what §12.7's disassembly-and-reforge rules are *for*, so the
+   flaw sat directly under the feature.
+
+**What replaces it.** The band still separates the eras — it is still what makes
+last floor's sword a letter-opener — but it does that by **addition**, and the real
+axis of difference moved: **the gap between an under-prepared party and a prepared
+one is now larger than the gap between two floors.** ⭐ *The axis of progression is
+the player, not the floor.*
+
+**What SURVIVES from L-22 untouched:** the body is still the variable (part HP
+7 → 35 on total trait points, L-19); §21.2's ladder is still read as a part budget;
+weapon classes still sit at 2–4; the F1 roster still stands. **Only the multiplier
+died.**
+
+---
+
+## L-22 — ~~The fix: the band is a RATIO, not a number on the sheet~~ ⚡ **WITHDRAWN — see L-23**
 
 **Owner ruled out armour-carrying-HP: the contestant's body should matter.** Good —
 because the real answer is smaller than either of my earlier proposals, and the
@@ -448,7 +480,8 @@ purely decorative.
 | ~~L-18~~ | ~~Non-Physique HP source~~ | **RULED: HP scales off TOTAL trait points** |
 | **L-19** ⚖ | **Confirm the per-floor level grants** (10/10/10 · 16/16/16 · 24/24/24 = 150) | Sets every number downstream. All anchors land as drafted |
 | ~~L-20~~ | ~~The band collision~~ | **Dissolved by L-22** — it was a units error, not a balance flaw. No band change needed; the ×512 per-floor ladder can stay |
-| **L-22** ⚖ | **Confirm: sheets are written in band units; the band is floor-relative and cancels within a floor** | Keeps stats manageable AND makes the body the only variable |
+| ~~**L-22**~~ | ~~Sheets are written in band units; the band cancels within a floor~~ | ⚡ **WITHDRAWN 2026-09-01 — see L-23.** It made every floor arithmetically identical and produced fractions on any weapon carried across a floor |
+| **L-23** ⭐ | **The band ADDS: a material step is +1 Force** (§7.3) | Upgrades become visible, no fractions, numbers stay two-digit, and the difference between a prepared and an unprepared party exceeds the difference between floors |
 | **L-h** | Is the trait band `÷5, doubling` the right curve, or gentler (÷5, doubling every ×4)? | Sets the whole ceiling |
 | **L-i** | 12 points per level at the tutorial, doubling per floor — right, or steeper? | The anchor fits; the tail is a choice |
 | **L-j** | Does the **creation** allocation rescale from 14, or stay? | 14 is now a rounding error by F1 |

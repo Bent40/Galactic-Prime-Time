@@ -1,7 +1,8 @@
 /**
- * Prints the per-floor authoring reference: party body, enemy damage bands, and
- * horde counts for reused older mobs. Everything in BAND UNITS (§12.7 errata
- * 2026-08-18 — the material band is floor-relative and cancels inside a floor).
+ * Prints the per-floor authoring reference: party body, enemy damage, and horde
+ * counts for reused older mobs. Everything in FORCE (§7.3) — one Force is one
+ * basic punch. A material band step is +1 Force (L-23), NOT a x2 multiplier: the
+ * 2026-08-18 band-units errata is withdrawn.
  *
  *   node floor-bands.js            → the whole ladder
  *   node floor-bands.js --floor 5  → one floor
@@ -23,8 +24,16 @@ const THREAT = { mob: 0.55, elite: 0.85, boss: 1.1, super: 1.7 };
 // A party gets roughly this many attacks into a horde per Clock (4 contestants,
 // ~1 attack every 2 Moments of a 10-Moment Clock) ⚖.
 const ATTACKS_PER_CLOCK = 20;
-const WEAPON = 3;        // §12.1 Heavy Large baseline, in band units
-const MOB_HP = 5;        // §21.2 mob, in band units — the same on every floor
+// §7.3 — a contestant's Force at floor N. Class 2 + one band step per floor, plus
+// the average party's one added damage type and one assist (the prep calibration).
+const forceAt = (f) => 4 + f;          // F1 = 5, F9 = 13
+// A mob native to floor S is worth that floor's Force as HP (F1 = 5, F9 = 13).
+const mobForceAt = (f) => 4 + f;
+// §7.3 — AREA DOES NOT DIVIDE. A sweep lands its full Force on every target in the
+// space, so a tide is cleared by covering ground rather than by a bigger number.
+// This is now the ONLY thing that makes an old horde meltable; under Force the
+// raw kills-per-swing grows linearly (and slowly), not exponentially.
+const SPACES_SWEPT = 6;  // ⚖ a heavy arc in open ground
 
 function floorState(f) {
   let cum = 0;
@@ -36,10 +45,18 @@ function floorState(f) {
   return { floor: f, level: 6 + cum, points, torso, dmg };
 }
 
-/** Tide size for a mob native to floor `from`, met at floor `at`. */
+/**
+ * Tide size for a mob native to floor `from`, met at floor `at` — sized as one
+ * Clock of slaughter for four contestants.
+ *
+ * ⚡ REWRITTEN 2026-09-01 for Force. The old formula was
+ * `(WEAPON * 2**(at-1)) / (MOB_HP * 2**(from-1))`, which rode the withdrawn x2
+ * band and produced tides of 3,000 by F9. Under Force, growth is linear, so the
+ * counts come down hard — and the clearing is done by AREA, not by a big number.
+ */
 function hordeSize(from, at) {
   if (at <= from) return null;
-  const killsPerSwing = (WEAPON * 2 ** (at - 1)) / (MOB_HP * 2 ** (from - 1));
+  const killsPerSwing = Math.floor(forceAt(at) / mobForceAt(from)) * SPACES_SWEPT;
   const raw = killsPerSwing * ATTACKS_PER_CLOCK;
   const mag = 10 ** Math.floor(Math.log10(raw));
   return Math.round(raw / (mag / 2)) * (mag / 2);   // round to a table-friendly figure
@@ -50,7 +67,7 @@ function report() {
   const only = idx !== -1 ? Number(process.argv[idx + 1]) : null;
   const floors = only ? [only] : [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  console.log('Band units — the material band cancels inside a floor (§12.7 errata).\n');
+  console.log('FORCE (§7.3) — one Force is one basic punch. A material band step is +1 (L-23).\n');
   console.log('floor  level  points  torso |  mob  elite   boss  super   <- signature hit');
   for (const f of floors) {
     const s = floorState(f);
@@ -61,11 +78,11 @@ function report() {
   }
 
   if (!only) {
-    console.log('\nHorde counts — an F1-band mob (5 HP) reused as a tide (L-15):');
+    console.log('\nHorde counts — an F1 mob (5 Force) reused as a tide (L-15):');
     console.log('met at floor:  ' + [2,3,4,5,6,7,8,9].map(n => `F${n}`.padStart(6)).join(''));
     console.log('tide size:     ' + [2,3,4,5,6,7,8,9].map(n => String(hordeSize(1, n)).padStart(6)).join(''));
-    console.log('\nGeneral rule: a floor-S mob met at floor N arrives ~12 x 2^(N-S) strong.');
-    console.log('Check:        ' + [2,3,4,5,6,7,8,9].map(n => String(12 * 2 ** (n - 1)).padStart(6)).join(''));
+    console.log('\nRule: kills/swing = floor(your Force ÷ the old mob\'s Force), times the spaces');
+    console.log('a sweep covers (§7.3 — area does not divide), times ~20 swings a Clock.');
   }
 }
 
