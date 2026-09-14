@@ -1156,6 +1156,73 @@ matched weakness, so scouting pays by multiplying what you brought.
 
 ---
 
+## Tutorial floor — REVIEWED 2026-09-14 (`rulebook/tutorial-floor-review.md`)
+
+**Where it lives:** NOT in this repo's `Enemy` collection. Four entries exist only in the
+**game repo's** `data/enemies.json` — `Roach-dog` (mob) · `Little Brother Roach` (elite) ·
+`Incinedile` (boss) · `War Hound` (elite, no design record) — plus Compendium **§3.1** and
+the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any resistance.**
+
+- ✅ **THE BOSS IS FINE, ON BOTH READINGS.** Incinedile parts sum to **exactly 125** =
+  §21.2's boss centre; and because pre-breach damage is cosmetic the *real* fight is the
+  **50-HP Network**, which is **25 × a tutorial mob of 2** — the boss centre for a floor
+  below F1. ⭐ The Compendium's *"single HP bar (total 50)"* and the sim's six-part 125 were
+  never in conflict: **one is the network, the other the puppet.** No re-statting.
+- ✅ **§10.1 UNIVERSAL RESISTANCE WAS INVENTED HERE, BEFORE THE RULE.** *"Breach Path B:
+  deal 7+ damage in a single hit"* **is** `universal: 6`, word for word — and it already
+  satisfies the ruled `cause`/`removal` requirement (cause: the mycelium holds the surface;
+  removals: **Bleed T2**, *or* 7+ Force in one hit). ⭐ **The tutorial boss is §10.1's
+  exemplar and predates it.**
+- 🔴 **§21.8 THE PRESS WAS ALREADY BUILT — FOR THESE ROACHES.**
+  `roach_dog.personality.pack_hunter`: *"when two ready roaches' draws AGREE on a victim,
+  the second **links its bite to the first (shared combo_id → one merged Force through one
+  Robustness gate**; **pairs only in v1**)"* + *"**Elites/bosses are NOT pack hunters.**"*
+  ⭐ That is ① arrived at independently **with the tutorial-safe dial already chosen**, and
+  *elites don't pack-hunt* composes exactly with ② — **the elite directs without joining the
+  merge.** 🔒 **Adopt the sim's cap as the tutorial setting: the press PAIRS, it does not
+  stack to three.**
+- 🔴 **THE REAL PROBLEM IS A NUMBER, NOT THE RULE.** A roach-dog bites for **`1 Bleed`**
+  (carapace 1 HP). §12.6 armor is a flat subtraction, so ⭐ **12 roach-dogs × 1 Bleed −
+  armor 1 = ZERO damage, all session** — *that is the playtest, confirmed against the
+  statline.* And **the Press does not rescue it at bite 1** (a pair deals `2 − 1 = 1`).
+  Doctrine wants `0.55 × torso` = **3**; ⚖ **recommend 2, with the press capped at pairs**
+  (lone roach 1 through · pair 3 · nothing one-shots a torso). **Bite 3 is the doctrine
+  number and too hot here** — at armor 0 a pair kills Sasha. ⚠️ **The two changes are one
+  change.**
+- ⚠️ **NEXT SESSION IS THE HARD CASE.** The **Little Brother Roach** is a **director that
+  manufactures its own pressers**: `Awaken Eggs` (1 Moment, **summons 4**) · `Drag Back`
+  (range 7, **pulls a contestant into the pack**) · Whip (range 7, 2 Bleed) · Seal Wound.
+  🔴 Under §21.8 that is the worst-case shape available. ⚠️ **And an interaction nobody
+  designed:** its `low_hp_bias: 3.0` (*"picks off the weak — wounded prey weighs up to 4×"*)
+  now meets **§12.6's conditioned parts resist less** — ⭐ **the AI hunts exactly the target
+  today's armor rule softened.** Keep it; know it is there.
+- 🔴 **Its part budget is 64** against a tutorial elite centre of **24** (F1's is 60) — **the
+  elite is F1-grade while its mobs are 1 HP**, sixty-four times its own mob. That is the
+  tutorial's one real internal inconsistency and why *"2 elites, struggled badly"* happened.
+  ⚖ Either the elite is right and the mobs are under-statted (my read), or it comes down to
+  ~24 — **not both.**
+- 🔴 **SASHA'S TORSO IS 3 where the book says 5**, and she is the forward damage dealer, so
+  **every lethality threshold fires one mob earlier for her.** ⭐ The owner already diagnosed
+  the general case in §3.1/§4.1 — *"hard to hurt without killing… considering boosting all
+  body-part HP"* — and **§21.8 + §12.6 both push on exactly that margin.** ⚖ Unruled: bring
+  her to 5 · spend the six unspent points (torso 6 for all) · or leave it and cap the press.
+- 🔴 **TWO GAPS IN WHAT WAS BUILT TODAY.** ① **`fire_heals` HAS NO FIELD.** §7.3 gives
+  `weaknesses` (doubles) and `resistances` (subtracts) — **healing from a type is a THIRD
+  thing, a negative weakness**, so the Incinedile's defining trait cannot be written into
+  `Enemy` at all. ⭐ And the sim already found the sub-case: **`fire_harms` on the Network
+  exempts that one part** (*mycelium burns*), so it must be **per-part overridable** — which
+  `BodyPartSchema` already supports structurally. Proposed: `weaknesses[].mode` =
+  `double` (default) | `heal`, keeping the required `why`. ② **The gate has no floor 0** —
+  `FLOOR_MOB_HP` runs 1–9, so `--check` on a tutorial roster is impossible. The tutorial's
+  own centres would be **mob 2 · elite 24 · boss 50 · super 120**, and ⭐ **the Network is
+  exactly 50.**
+- **Small:** §3.1's phase thresholds are off by one (P1 `50→36`, P3 `35→19`) · trash cans
+  (`Burn 5` → 2 Burn) are correctly the weaker original of F1's Fuel Can · **`War Hound`**
+  (budget 14) is in the sim roster with **no design record** · four Compendium `[OPEN]`
+  items sit in the tutorial's path — the **fantasy-item coupons are undistributed** and
+  **XQUEZ/T's tank kit is unfinalised**, ⭐ and *Iron Stance is the answer to the Press*, so
+  it wants finishing before the roaches.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
