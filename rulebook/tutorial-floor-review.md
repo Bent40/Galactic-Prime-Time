@@ -4,6 +4,22 @@
 three rules landed today that all touch it — §21.8 the Press, §12.6 armor (rides the band,
 degrades with the part), and §21.7 encounter sizing.
 
+> ⚠️ **CORRECTION, same day (owner).** This review read the **game repo's
+> `data/enemies.json`, which is a REDUCED PORT** — it collapses **four** roach
+> brothers into one "Little Brother Roach" elite and folds Big Bro's bow and Mid
+> Bro's axes into a whip plus a summon. **The designed tutorial is: roach-dogs ·
+> Little Bro · MID Bro · BIG Bro · Incinedile.** So **T-3's "budget 64 vs a centre
+> of 24" was measuring the wrong creature** and is withdrawn.
+> **What survives, and is now stronger because the owner confirmed the numbers
+> from the design side:** T-1.1 (the boss), T-1.2 (§10.1 was invented here),
+> T-1.3 (the Press was pre-built for these roaches), **T-2 (a roach-dog deals 1,
+> so a room of 10+ deals zero through armor)**, T-4 (Sasha's 3-HP torso) and T-5
+> (both build gaps). ⭐ And the two-elite number is no longer a model output:
+> **Mid + Big share a room, the party fought them together, and "struggled badly"
+> is §21.8's 83% confirmed at a real table.**
+> **The real roster is written up in the next pass; this file is kept for the
+> findings that held.**
+
 **Where the tutorial actually lives.** Not in this repo's `Enemy` collection. Four entries
 exist only in the **game repo's** `data/enemies.json` — `Roach-dog` (mob) · `Little Brother
 Roach` (elite) · `Incinedile` (boss) · `War Hound` (elite) — plus the design record at
