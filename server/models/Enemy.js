@@ -1,8 +1,28 @@
 const mongoose = require('mongoose');
 
+const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
+
+const ResistSchema = new mongoose.Schema({
+  type:  { type: String, default: '' },   // one of DMG_TYPES
+  value: { type: Number, default: 0 },    // Force subtracted from that type alone
+}, { _id: false });
+
+const UniversalSchema = new mongoose.Schema({
+  value:   { type: Number, default: 0 },  // 0 = none; the gate skips it
+  cause:   { type: String, default: '' },  // REQUIRED when value > 0
+  removal: { type: String, default: '' },  // REQUIRED when value > 0
+}, { _id: false });
+
 const BodyPartSchema = new mongoose.Schema({
   name:  { type: String, default: '' },
   maxHp: { type: Number, default: 3 },
+  // §7.3 resolves damage PER PART, and §12.6 already gives the contestant per-part
+  // resistance (armor covers parts). These close the same asymmetry on the enemy
+  // side: a part may be warded while the rest of the creature is not — which is
+  // exactly THE MASKED, whose Mask is sealed and whose body is just a body.
+  // Part resistance ADDS to the enemy-wide resistance; it does not replace it.
+  resistances: { type: [ResistSchema],  default: [] },
+  universal:   { type: UniversalSchema, default: () => ({}) },
 }, { _id: false });
 
 const PhaseSchema = new mongoose.Schema({
@@ -57,19 +77,6 @@ const DamageSchema = new mongoose.Schema({
 // universal. That is E-0's rule working as intended — "a mob that survives a hit
 // gets a gate, never a fatter number," and a resistance IS that gate. Do not add a
 // tier check here.
-const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
-
-const ResistSchema = new mongoose.Schema({
-  type:  { type: String, default: '' },   // one of DMG_TYPES
-  value: { type: Number, default: 0 },    // Force subtracted from that type alone
-}, { _id: false });
-
-const UniversalSchema = new mongoose.Schema({
-  value:   { type: Number, default: 0 },  // 0 = none; the gate skips it
-  cause:   { type: String, default: '' },  // REQUIRED when value > 0
-  removal: { type: String, default: '' },  // REQUIRED when value > 0
-}, { _id: false });
-
 const EnemySchema = new mongoose.Schema({
   name:        { type: String, required: true },
   tier:        { type: String, default: 'mob' },
@@ -80,6 +87,10 @@ const EnemySchema = new mongoose.Schema({
   notes:       { type: String, default: '' },
   resistances: { type: [ResistSchema],   default: [] },
   universal:   { type: UniversalSchema,  default: () => ({}) },
+  // §7.3 — "a weakness DOUBLES that type's contribution." A torch adds 1 Force to
+  // anything and 2 to something that burns. This is the field that rule needed and
+  // never had; without it the doubling could only live in prose.
+  weaknesses:  { type: [String],         default: [] },   // damage types, from DMG_TYPES
   bodyParts:   { type: [BodyPartSchema], default: [] },
   phases:      { type: [PhaseSchema],    default: [] }, // boss/legendary only
 }, { timestamps: true });

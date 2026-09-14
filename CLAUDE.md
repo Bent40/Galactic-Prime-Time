@@ -1031,6 +1031,48 @@ and it broke the moment gear crossed a floor (an F1 sword read **0.75** in F3 ba
 
 **102 enemy tests pass.** F1/F2/F3 all pass the gate at their own floors.
 
+### ⭐ THE MASKED — the resistance EXEMPLAR (2026-09-14)
+
+The first boss authored under §7.3 / §10.1, as a shape for the other 52. 🔒 **Its thesis
+was already one line in the entry — *"It is not the man that is durable."*** So the ward
+lives on the **Mask** and **the man is the hole.**
+
+| | |
+|---|---|
+| **Weak to** | **Burn** — the horns are wood, the mask is fired clay, and nothing in that silhouette has ever been on fire. Burn counts **double** |
+| **Resists** | Bleed 2 · Chill 2 · Infection 3. ⭐ **Cutting him is the intuitive move and the worst one** — the wounds close, which is the Mask's Clock-reset restoration showing up in the arithmetic. Infecting the plague's own reliquary is a category error and the number says so |
+| **The holes** | **Crush and Burn.** Nothing warded the man |
+| **Mask part** | 🔒 **universal 6** — needs 7 Force to touch. `cause:` Beelzebub's seal, a blessing held shut from outside. `removal:` **Oathbreaker (Mistletoe) ignores it entirely**; setting the chain ends the fight without touching it |
+
+⚙️ **Verified, not asserted** — all five builds at the same **5 Force**, differing only in
+what they brought:
+
+| build | torso (45) | **the Mask (15)** | Mask, with Oathbreaker |
+|---|---|---|---|
+| blade — 5 Bleed | 3/swing · **15 swings** | 0 · **impossible** | 3 · 5 swings |
+| hammer — 5 Crush | 5 · 9 swings | 0 · **impossible** | 5 · 3 swings |
+| blade + torch | 4 · 12 swings | 0 · **impossible** | 4 · 4 swings |
+| torch build — 3 Crush 2 Burn | 7 · 7 swings | 1 · 15 swings | 7 · 3 swings |
+| **prepared** — 5 Crush 3 Burn | **11 · 5 swings** | 5 · 3 swings | 11 · 2 swings |
+
+⭐ **A 3× spread on the torso at identical Force**, and the Mask is flatly impossible for
+three of five builds. ⚠️ **That is a gate, not a wall** — the `removal` field names two
+answers (the sprig, or the chain), and **the win condition was never the Mask anyway.**
+⚙️ Both answers are already on the floor: Mistletoe comes off the forest layer, and
+Torchbearers/the Kindler mean a party that fought the house is carrying fire.
+🎯 **GM: announce none of it. Let the first Bleed land for 1 and let them ask.**
+
+**Two model gaps this surfaced and closed:**
+- 🔴 **§7.3's "a weakness DOUBLES that type" had NO FIELD.** The rule could only live in
+  prose. `Enemy.weaknesses[]` now holds it, whitelisted and diffed; the gate rejects an
+  unknown type and refuses a type listed as **both** a weakness and a resistance.
+- 🔴 **Enemy resistance was whole-body only, while §12.6 already gives the CONTESTANT
+  per-part resistance** (armor covers parts). `BodyPartSchema` now carries `resistances`
+  + `universal` too, adding to the enemy-wide values — which is what lets the Mask be
+  sealed while the man is not. Part-level universals are gated identically.
+
+**110 tests pass** (+8).
+
 ### ✅ §21.6 PREPARATION — written, with both new categories designed (2026-09-14)
 
 🔒 **Owner blessed Sponsorship and Body**, on the condition they be *real designs, not

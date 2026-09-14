@@ -105,6 +105,8 @@ function diffFields(existing, seed) {
   if (normPhase(existing.phases)    !== normPhase(seed.phases))    diffs.push('phases');
   if (normRes(existing.resistances) !== normRes(seed.resistances)) diffs.push('resistances');
   if (normUni(existing.universal)   !== normUni(seed.universal))   diffs.push('universal');
+  if (JSON.stringify([...(existing.weaknesses || [])].sort()) !==
+      JSON.stringify([...(seed.weaknesses || [])].sort()))         diffs.push('weaknesses');
   return diffs;
 }
 
@@ -220,10 +222,34 @@ const RESIST_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 
  */
 function resistanceProblems(e) {
   const out = [];
-  const rs = Array.isArray(e.resistances) ? e.resistances : [];
+  checkResistSet(e, e, `${e.name}`, out);
+  // §7.3 resolves damage per part, so a PART may be warded while the body is not
+  // (THE MASKED's Mask is sealed; the man is just a man). Same rules, same gate.
+  (e.bodyParts || []).forEach((bp) => {
+    if ((bp.resistances && bp.resistances.length) || Number((bp.universal || {}).value || 0)) {
+      checkResistSet(bp, e, `${e.name} · part "${bp.name}"`, out);
+    }
+  });
+  // §7.3 — a weakness doubles its type, so the type has to be a real one.
+  const ws = Array.isArray(e.weaknesses) ? e.weaknesses : [];
+  const wseen = new Set();
+  ws.forEach((w) => {
+    if (!RESIST_TYPES.includes(String(w))) out.push(`${e.name}: weakness "${w}" is not one of ${RESIST_TYPES.join('|')}`);
+    if (wseen.has(w)) out.push(`${e.name}: weakness ${w} is listed twice`);
+    wseen.add(w);
+    if ((e.resistances || []).some(r => r.type === w)) {
+      out.push(`${e.name}: ${w} is listed as BOTH a weakness and a resistance — pick one`);
+    }
+  });
+  return out;
+}
+
+/** The resistance rules, applied to an enemy or to one of its parts. */
+function checkResistSet(holder, e, label, out) {
+  const rs = Array.isArray(holder.resistances) ? holder.resistances : [];
   const seen = new Set();
   rs.forEach((r, i) => {
-    const at = `${e.name}: resistances[${i}]`;
+    const at = `${label}: resistances[${i}]`;
     const ty = String((r || {}).type || '');
     if (!RESIST_TYPES.includes(ty)) {
       out.push(`${at} type "${ty}" is not one of ${RESIST_TYPES.join('|')}`);
@@ -235,18 +261,17 @@ function resistanceProblems(e) {
     if (!Number.isFinite(v) || v <= 0) out.push(`${at} (${ty}) value must be a positive number, got ${(r || {}).value}`);
   });
 
-  const u = e.universal || {};
+  const u = holder.universal || {};
   const uv = Number(u.value || 0);
-  if (uv < 0) out.push(`${e.name}: universal resistance cannot be negative (${uv})`);
+  if (uv < 0) out.push(`${label}: universal resistance cannot be negative (${uv})`);
   if (uv > 0) {
     if (!String(u.cause || '').trim()) {
-      out.push(`${e.name}: universal ${uv} names no CAUSE — §10.1, a universal resistance is always the result of something, never a standing state`);
+      out.push(`${label}: universal ${uv} names no CAUSE — §10.1, a universal resistance is always the result of something, never a standing state`);
     }
     if (!String(u.removal || '').trim()) {
-      out.push(`${e.name}: universal ${uv} names no REMOVAL — §10.1, every universal resistance must say what takes it away`);
+      out.push(`${label}: universal ${uv} names no REMOVAL — §10.1, every universal resistance must say what takes it away`);
     }
   }
-  return out;
 }
 
 

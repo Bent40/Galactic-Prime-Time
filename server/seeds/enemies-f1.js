@@ -212,8 +212,28 @@ module.exports = [
     // not the hit, so the strike is allowed to read under band (`aura`, >=0.5x).
     signature: { floor: 1, damage: 6, type: 'Crush', exception: 'aura',
       note: 'Backhand, phase 1. His real signature is the phase-2 Dissolution aura at +1/Moment — a boss whose win condition is a countdown does not need a boss-band punch.' },
+    // ═══ RESISTANCE EXEMPLAR (2026-09-14) — the first boss authored under §7.3/§10.1.
+    // The thesis is one line already in this entry: "It is not the man that is durable."
+    // So the WARD lives on the Mask and the MAN is the hole. A party that works that
+    // out fights a completely different fight from one that swings at whatever is
+    // nearest.
+    weaknesses: ['Burn'],
+    resistances: [
+      { type: 'Bleed',     value: 2 },   // the wounds close — this is the same restoration the Mask does at every Clock reset
+      { type: 'Chill',     value: 2 },   // the conversion runs hot; cold does not find purchase
+      { type: 'Infection', value: 3 },   // he IS the plague's reliquary. Infecting him is a category error
+    ],
     bodyParts: [
-      { name: 'Mask',  maxHp: 15 },
+      { name: 'Mask',  maxHp: 15,
+        // §10.1 — a universal resistance is always CAUSED and always REMOVABLE.
+        // Canon said "cannot be damaged by normal harm," which is a wall. A threshold
+        // is better and truer: normal harm barely scratches it, and the sprig ignores
+        // it outright. An average F1 contestant (5 Force) does NOTHING here; a fully
+        // prepared one (8) gets 2 through and needs eight swings; Oathbreaker skips
+        // the ward entirely and does it in three.
+        universal: { value: 6,
+          cause:   'Beelzebub\'s seal — a god\'s blessing held shut from the outside. The ward is the seal, not the ceramic.',
+          removal: 'OATHBREAKER (Mistletoe, M-1) ignores it entirely — a blessing under a seal is precisely what an oath-ignoring material is for. Setting the chain also ends the fight without ever touching it.' } },
       { name: 'Head',  maxHp: 14 },
       { name: 'Torso', maxHp: 45 },
       { name: 'Arm L', maxHp: 12 },
@@ -231,10 +251,26 @@ module.exports = [
       'and Floor 3, because he must be alive and chained at F2 and must become Nullrot',
       'at F3. DO NOT WARN THEM. The mural already did.',
       '',
-      'THE MASK\'S WEAK SYSTEM — Oathbreaker. The Mask (15) cannot be damaged by normal',
-      'harm. MISTLETOE ignores exactly that (M-1). A party that worked the forest layer',
-      '(The Rack) arrives holding the answer; a party that skipped it chains him the hard',
-      'way, which is the intended baseline.',
+      'THE MASK\'S WEAK SYSTEM — Oathbreaker. The Mask (15) carries UNIVERSAL 6: an',
+      'attack needs 7 Force to do anything to it at all. MISTLETOE ignores the ward',
+      'entirely (M-1). A party that worked the forest layer (The Rack) arrives holding',
+      'the answer; a party that skipped it chains him the hard way, the intended baseline.',
+      '',
+      '=== WHAT TO BRING, AND HOW THEY FIND OUT (§7.3 / §10.1) ===',
+      'WEAK TO BURN. The horns are wood and the mask is fired clay, and nothing in that',
+      'silhouette has ever been on fire. Burn counts DOUBLE against him. The Easy route',
+      'hands them the answer without saying so: Torchbearers and the Kindler are on this',
+      'floor, so a party that has fought through the house is already carrying fire.',
+      '',
+      'RESISTS Bleed 2 · Chill 2 · Infection 3. Cutting him is the intuitive move and the',
+      'worst one — the wounds close, which is the same restoration the Mask performs at',
+      'every Clock reset, showing up in the arithmetic. Infecting the plague\'s own',
+      'reliquary is a category error and the number says so.',
+      '',
+      'CRUSH AND BURN ARE THE HOLES. Nothing warded the man himself; only the Mask is',
+      'sealed. "It is not the man that is durable" is the whole fight in one line.',
+      'A blade party grinds. A party with a torch and a hammer walks through him.',
+      'GM: do not announce any of this. Let the first Bleed land for 1 and let them ask.',
       '',
       '=== WHAT THE MASK IS (ruled 2026-08-20 — GM knowledge, not player knowledge) ===',
       'It is NULLROT\'S OWN RELIQUARY. The buried god CINNABRUS blessed it for his champion:',

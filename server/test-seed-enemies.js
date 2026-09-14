@@ -157,6 +157,31 @@ for (const e of f1) {
 }
 ok('no authored F1 damage is wildly outside its band', outliers.length === 0, outliers.join(' · '));
 
+console.log('THE MASKED — the resistance exemplar (§7.3 / §10.1)');
+const masked = f1.find(e => e.name === 'THE MASKED');
+const maskPart = masked.bodyParts.find(p => p.name === 'Mask');
+ok('he is weak to Burn', (masked.weaknesses || []).includes('Burn'));
+ok('Burn is NOT also a resistance — the gate refuses that contradiction',
+   !(masked.resistances || []).some(r => r.type === 'Burn')
+   && resistanceProblems({ ...masked, resistances: [...masked.resistances, { type: 'Burn', value: 1 }] })
+        .some(p => /BOTH a weakness and a resistance/.test(p)));
+ok('the ward lives on the MASK, not on the man',
+   Number(maskPart.universal.value) === 6
+   && !Number((masked.universal || {}).value || 0));
+ok('the Mask\'s universal names both its cause and its removal (§10.1)',
+   maskPart.universal.cause.trim().length > 0 && maskPart.universal.removal.trim().length > 0);
+ok('a PART-level universal with no removal is refused',
+   resistanceProblems({ name: 'x', tier: 'boss',
+     bodyParts: [{ name: 'Shell', maxHp: 5, universal: { value: 4, cause: 'plating' } }] })
+     .some(p => /part "Shell".*REMOVAL/.test(p)));
+ok('a part with no resistances is not checked and not a problem',
+   resistanceProblems({ name: 'x', tier: 'mob', bodyParts: [{ name: 'Body', maxHp: 5 }] }).length === 0);
+ok('an unknown weakness type is rejected',
+   resistanceProblems({ name: 'x', tier: 'mob', weaknesses: ['Sonic'], bodyParts: [] }).length === 1);
+ok('weaknesses show up in diffFields',
+   diffFields({ weaknesses: ['Burn'] }, { weaknesses: ['Crush'] }).includes('weaknesses')
+   && !diffFields({ weaknesses: ['Burn', 'Crush'] }, { weaknesses: ['Crush', 'Burn'] }).includes('weaknesses'));
+
 console.log('F2 roster');
 ok('the F2 roster passes the doctrine gate AT F2', doctrineCheck(f2, 2).length === 0,
    JSON.stringify(doctrineCheck(f2, 2)));
