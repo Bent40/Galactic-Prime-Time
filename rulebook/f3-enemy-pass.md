@@ -42,7 +42,7 @@ answers a question the party created.
 | Cure | Held by | Wanted by |
 |---|---|---|
 | **The plague cure** | **Nullrot** — he is patient zero *and* the antibody | **the Loong**, which has been holding the plague back by standing in the city |
-| **Loong blood** — cures demonic tendencies | **the Loong** | **every demon on the floor** — Bex, the One Who Would Be Human, the hunt |
+| **Loong blood** — cures demonic tendencies | **the Loong** | **every demon on the floor** — Bex, the One Who Would Be Clean, the hunt |
 
 **Neither party knows the other exists.** Nullrot could free the Loong; the Loong's
 blood could end Bex's petition without a sacrifice and stop the hunts. Nobody in this
@@ -205,7 +205,7 @@ apologies — **if they never worked it out, the voice does it for them**) → *
 |---|---|---|---|
 | **D-1** | **Ashen Inquisitor** | 5 | killing one is fine — **letting one leave is not** |
 | **D-2** | **The Cartographer** | **51** | **a timer wearing a person** |
-| **D-3** | ☠ **The One Who Would Be Human** | **170** | it wants what Nullrot gives away free |
+| **D-3** | ☠ **The One Who Would Be Clean** | **170** | it wants what Nullrot gives away free |
 
 **D-2 doesn't fight and doesn't need to.** Four Clocks of survival and it finds the
 Loong regardless. **Burn the map, not the demon** — kill it and leave the map, and the
@@ -307,6 +307,6 @@ window — the F1 Crystal Spore Mist in the one place it has ever had a ceiling.
 | **Capital terrain blocks** | §21.4 — the sealed districts, the pens, the court |
 | **Exposure / token payouts** | Unassigned across all three floors |
 | **The Lounge attachment** | §4.1 makes the capital persistent afterwards; no rules for what that gives |
-| **Names** | ⚖ deferred by the owner to a naming pass once the base exists |
+| ~~Names~~ | **DONE 2026-09-14** — the naming pass ran over all 53. Two renames (*The One Who Would Be Human* → **The One Who Would Be Clean**; *Kennel-Warden* → **The Houndmaster**), three stale ⚖ markers cleared, and `renamedFrom` added to the seeder so a rename moves the Atlas document instead of orphaning it |
 | **Orichalcum** | Only a Royal Guard gather — no proper source |
 | **Set 2 (F4–F6)** | **No floors designed**, only band names. That is design work, not filling in |

@@ -4,7 +4,7 @@
  * Covers the two pieces that are NOT a copy of seed-affixes.js: the §21.2
  * doctrine gate, and the array-aware diff that decides what --force overwrites.
  */
-const { doctrineCheck, damageProblems, resistanceProblems, diffFields, partsSum, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
+const { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
 const f2 = require('./seeds/enemies-f2.js');
 const f3 = require('./seeds/enemies-f3.js');
@@ -385,6 +385,32 @@ ok('a signature difference is reported by diffFields',
    diffFields({ ...clone(), signature: { floor: 1, damage: 4, type: 'Crush' } }, seed).join() === 'signature');
 ok('an absent signature on both sides is not a false difference',
    diffFields(clone(), seed).length === 0);
+
+// ── rename gate (naming pass 2026-09-14) ─────────────────────────────────────
+// Matching is by NAME, so a naming pass without `renamedFrom` would orphan the
+// Atlas document and create a duplicate. These guard the migration key itself.
+console.log('\nrename gate');
+const RN = (name, renamedFrom) => (renamedFrom === undefined ? { name } : { name, renamedFrom });
+ok('a roster with no renames has nothing to say',
+   renameProblems([RN('A'), RN('B')]).length === 0);
+ok('a clean rename passes',
+   renameProblems([RN('New Name', 'Old Name'), RN('B')]).length === 0);
+ok('renamedFrom pointing at its own name is rejected',
+   renameProblems([RN('A', 'A')]).length === 1);
+ok('renamedFrom is case-insensitive about its own name',
+   renameProblems([RN('A', 'a')]).length === 1);
+ok('an empty renamedFrom is rejected — drop the key instead',
+   renameProblems([RN('A', '   ')]).length === 1);
+ok('renaming ONTO another live seed is rejected — both would claim one document',
+   renameProblems([RN('A'), RN('B', 'A')]).some(p => /another seed's live name/.test(p)));
+ok('two seeds claiming the same old document is rejected',
+   renameProblems([RN('A', 'Old'), RN('B', 'Old')]).some(p => /already claimed/.test(p)));
+ok('doctrineCheck runs the rename gate too',
+   doctrineCheck([{ ...seed, name: 'X', renamedFrom: 'X' }], 1).some(p => /nothing to migrate/.test(p)));
+ok('the two live renames are legal at their own floors',
+   renameProblems(f2).length === 0 && renameProblems(f3).length === 0);
+ok('renamedFrom is bookkeeping, never a content difference',
+   diffFields(clone(), { ...seed, renamedFrom: 'Anything At All' }).length === 0);
 
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);

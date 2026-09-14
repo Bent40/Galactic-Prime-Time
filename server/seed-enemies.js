@@ -12,6 +12,14 @@
  * Matching is by name, case-insensitive. Existing enemies are NEVER touched
  * without --force (owner edits win). Runbook: backup-db.js → dry run → --apply.
  *
+ * RENAMES. Because matching is by name, renaming an entry would orphan its Atlas
+ * document and create a second one. A seed may therefore carry
+ *   renamedFrom: 'Old Name'
+ * and the seeder will find the old document and RENAME IT IN PLACE, keeping its _id
+ * and any owner edits. The key is bookkeeping only — it is stripped before the
+ * document is written, and `renameProblems()` refuses a rename that would have two
+ * seeds claiming one document. Drop the key once the rename has been applied.
+ *
  * Before touching the DB this refuses to run unless every entry matches the
  * §21.2 part-budget doctrine for its rank (rulebook/f1-enemy-pass.md E-0.1/E-0.2):
  * a wrong number is a content bug, and it should never reach the campaign DB.
@@ -115,6 +123,38 @@ function diffFields(existing, seed) {
 function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
 /** Doctrine gate — runs before any connection. Returns the report lines. */
+/**
+ * Rename gate. A seed may carry `renamedFrom: 'Old Name'` so a naming pass MOVES the
+ * Atlas document instead of orphaning it — matching is by name (line ~336), so without
+ * this a rename silently creates a second doc and leaves the old roster behind.
+ * Cross-entry, so it runs once over the whole file rather than per entry.
+ */
+function renameProblems(seeds) {
+  const out = [];
+  const names = new Set(seeds.map(s => String(s.name || '').toLowerCase()));
+  const seen = new Map();
+  for (const e of seeds) {
+    if (!('renamedFrom' in e)) continue;
+    const from = String(e.renamedFrom || '').trim();
+    if (!from) { out.push(`${e.name}: renamedFrom is empty — drop the key or name the old entry`); continue; }
+    const key = from.toLowerCase();
+    if (key === String(e.name || '').toLowerCase()) {
+      // Report the specific fault only — a self-rename would otherwise also trip
+      // the "another seed's live name" check below and say the same thing twice.
+      out.push(`${e.name}: renamedFrom is its own name — nothing to migrate`);
+      continue;
+    }
+    if (names.has(key)) {
+      out.push(`${e.name}: renamedFrom "${from}" is another seed's live name — both would claim one document`);
+    }
+    if (seen.has(key)) {
+      out.push(`${e.name}: renamedFrom "${from}" is already claimed by ${seen.get(key)}`);
+    }
+    seen.set(key, e.name);
+  }
+  return out;
+}
+
 function doctrineCheck(seeds, atFloor = floor) {
   const mobHp = FLOOR_MOB_HP[atFloor];
   if (!mobHp) throw new Error(`--floor ${atFloor} has no mob-HP entry (F1–F9 only)`);
@@ -149,6 +189,7 @@ function doctrineCheck(seeds, atFloor = floor) {
     problems.push(...damageProblems(e, atFloor));
     problems.push(...resistanceProblems(e, atFloor));
   }
+  problems.push(...renameProblems(seeds));
   return problems;
 }
 
@@ -331,15 +372,26 @@ async function run() {
   console.log(`${apply ? '=== APPLY MODE ===' : '=== DRY RUN (pass --apply to write) ==='}  ${redactUri(uri)}`);
   console.log(`Seed file: ${seedFile} — ${seeds.length} enem(y/ies)\n`);
 
-  let created = 0, inSync = 0, diffed = 0, forced = 0;
+  let created = 0, inSync = 0, diffed = 0, forced = 0, renamed = 0;
   for (const seed of seeds) {
-    const existing = await Enemy.findOne({ name: new RegExp(`^${esc(seed.name)}$`, 'i') });
+    const { renamedFrom, ...doc } = seed;
+    let existing = await Enemy.findOne({ name: new RegExp(`^${esc(seed.name)}$`, 'i') });
+    let renaming = false;
+    if (!existing && renamedFrom) {
+      existing = await Enemy.findOne({ name: new RegExp(`^${esc(renamedFrom)}$`, 'i') });
+      renaming = !!existing;
+    }
     if (!existing) {
       created++;
       console.log(`+ CREATE  [${seed.tier}/${seed.size}]  ${seed.name} — ${partsSum(seed)} HP across ${seed.bodyParts.length} part(s)` +
                   `${seed.phases.length ? `, ${seed.phases.length} phase(s)` : ''}`);
-      if (apply) await Enemy.create(seed);
+      if (apply) await Enemy.create(doc);
       continue;
+    }
+    if (renaming) {
+      renamed++;
+      console.log(`> RENAME  ${renamedFrom}  ⇒  ${seed.name}  (same document, kept in place)`);
+      if (apply) { existing.name = seed.name; await existing.save(); }
     }
     const diffs = diffFields(existing, seed);
     if (diffs.length === 0) { inSync++; continue; }
@@ -352,12 +404,13 @@ async function run() {
       console.log(`! EXISTS  ${seed.name} — differs on ${diffs.join(', ')} (kept as-is; --force to overwrite)`);
     }
   }
-  console.log(`\n${created} ${apply ? 'created' : 'to create'} · ${inSync} in sync · ${forced} force-updated · ${diffed} left untouched`);
+  console.log(`\n${created} ${apply ? 'created' : 'to create'} · ${inSync} in sync · ${forced} force-updated · ${diffed} left untouched` +
+              `${renamed ? ` · ${renamed} ${apply ? 'renamed' : 'to rename'}` : ''}`);
   if (!apply) console.log('Dry run — nothing was written. Run backup-db.js first, then rerun with --apply.');
   await mongoose.disconnect();
 }
 
-module.exports = { doctrineCheck, damageProblems, resistanceProblems, diffFields, partsSum,
+module.exports = { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum,
   FLOOR_MOB_HP, FLOOR_DAMAGE, RANK_RATIO, SIZES, TOLERANCE, DAMAGE_EXCEPTIONS };
 
 if (require.main === module) run().catch(e => { console.error(e); process.exit(1); });

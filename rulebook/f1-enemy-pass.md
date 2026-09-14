@@ -415,11 +415,12 @@ does not have to out-damage him; they have to *light him*.
 **Carve:** **Forest Resin** ⚖ (what he thickened the fuel with).
 **Colour:** `#e07b2a`
 
-### C-3 · ☠ Foreman Bex — boss (125) ⚖ NAME IS A PROPOSAL
+### C-3 · ☠ Foreman Bex — boss (125) 🔒 NAME BLESSED 2026-08-18
 The NPC party's leader. Reasonable, articulate, and burning a house with a child
 in it. **He must survive this floor** — he is the F3 human-farm operator.
-*The name is mine, not the owner's; it needs blessing before it enters the
-library, because it becomes canon at F3.*
+*The name was mine and the owner blessed it on 2026-08-18 (E-4). It is canon at
+F3, where he runs the human farm. The ⚖ marker survived the blessing by three
+weeks and was cleared in the 2026-09-14 naming pass.*
 
 **Parts (110):** Head 12 · Torso 40 · Arm L 10 · Arm R 10 · Leg L 11 · Leg R 11 ·
 **Pack 16**.

@@ -221,7 +221,7 @@ module.exports = [
   BOSS('The Doorward', {
     size: 'Large',
     color: '#8a3f6d',
-    description: 'EASY ROUTE BOSS. A demon in the doorway. It has been there a very long time and it is not in a hurry. NAME IS A PROPOSAL.',
+    description: 'EASY ROUTE BOSS. A demon in the doorway. It has been there a very long time and it is not in a hurry. NAME KEPT 2026-09-14 — it wards a door AND it holds your things in ward, which is the whole encounter in one word.',
     // §21.3 — one line, and it is the most justified resistance in the roster.
     weaknesses: [],
     resistances: [
@@ -459,9 +459,10 @@ module.exports = [
     ].join('\n'),
   }),
 
-  ELITE('Kennel-Warden', {
+  ELITE('The Houndmaster', {
+    renamedFrom: 'Kennel-Warden',   // naming pass 2026-09-14 — drop once seeded
     color: '#a8503a',
-    description: 'HARD ROUTE. It does not hunt. It points.',
+    description: 'HARD ROUTE. It does not hunt. It points. Renamed 2026-09-14: "Warden" belongs to the built guardians (Step-Warden, Mirror-Bronze Warden) and this is a handler, not a construct. Owner pays · Houndmaster points · Hound dies — the hierarchy now reads off the three names.',
     bodyParts: [
       { name: 'Head',  maxHp: 9 },
       { name: 'Torso', maxHp: 22 },
@@ -490,7 +491,7 @@ module.exports = [
   BOSS("The Hunt's Owner", {
     size: 'Large',
     color: '#c2452f',
-    description: 'HARD ROUTE BOSS. It bought the hunt. It has never run one. NAME IS A PROPOSAL.',
+    description: 'HARD ROUTE BOSS. It bought the hunt. It has never run one. NAME KEPT 2026-09-14 — it states its own thesis flatly, and flat is right for a man who is never within reach.',
     // §21.3 — NOTHING. "It bought the hunt. It has never run one." Its protection is
     // distance, a mount it never dismounts, and money enough to buy more hounds —
     // all of which are already written as position and phases. A resistance would
@@ -515,7 +516,7 @@ module.exports = [
       'THE WIN CONDITION IS ARRIVAL, NOT A CORPSE (§21.3). The encounter ends the moment',
       'the Loong reaches the village. The Owner can be outrun, and outrunning it is a',
       'clean win that pays the same. It cannot be killed by a party that stops to fight —',
-      'the hounds are infinite until the Kennel-Warden falls, and the Owner will simply',
+      'the hounds are infinite until the Houndmaster falls, and the Owner will simply',
       'buy more.',
       '',
       'THE HORN (12) IS THE WHOLE FIGHT. It calls: every Clock it sounds, a fresh pack',
@@ -548,7 +549,7 @@ module.exports = [
     phases: [
       { name: 'The Herding', hpThreshold: 'the encounter opens here',
         description: 'It does not approach. Hounds arrive on the Horn every Clock, aimed at the Loong. The party is being steered toward open ground, and the village is the wrong way.' },
-      { name: 'Closing', hpThreshold: 'Kennel-Warden dead, or <=70 total',
+      { name: 'Closing', hpThreshold: 'Houndmaster dead, or <=70 total',
         description: 'With the pack thinning it commits, and the Horn sounds twice a Clock. 10 Crush, mounted, still refusing to be reached.' },
       { name: 'It Was Never Its Hunt', hpThreshold: 'Horn destroyed (12), or the Loong reaches the village',
         description: 'The hounds scatter within a Clock. The Owner leaves without ceremony — it bought this, it did not believe in it, and there is nothing here it is willing to die for. Pursuing it is possible and pays nothing.' },

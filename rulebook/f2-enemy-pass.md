@@ -100,7 +100,7 @@ repair stops; destroying the Tread Unit (11) reaches the same answer from the ot
 side. It will try to repair *the staircase* mid-fight, which is both an opening and a
 warning about the exit.
 
-### B-3 · ☠ The Doorward — boss (130) ⚖ name is a proposal
+### B-3 · ☠ The Doorward — boss (130) 🔒 name KEPT 2026-09-14
 
 **Parts:** **Mouth 18** · Head 14 · Torso 46 · Arms 12/12 · Legs 14/14 · **Large**
 
@@ -152,7 +152,7 @@ auto-dodges, 10 auto-dodges and counters, below is the 1d4 fallback. **And it ca
 dodge what it does not choose to** — areas, lines, cones, collateral and condition
 damage are never dodged (§14). The desert mobs spent the whole floor teaching that kit.
 
-### C-3 · ☠ The Rival Noble — boss (145) ⚖ name is a proposal
+### C-3 · ☠ Bex, the Rival Noble — boss (145) 🔒 name settled — he is Bex (blessed 2026-08-18)
 
 **Parts:** Head 18 · Torso 52 · Arms 14/14 · Legs 15/15 · **Choir 17** · **Large**
 
@@ -199,8 +199,8 @@ where it finds purpose.
 | # | Entry | HP | Note |
 |---|---|---|---|
 | **D-1** | **Hunt-Hound** | 5 | **goes for the Loong, never you** |
-| **D-2** | **Kennel-Warden** | **58** | while it lives, hounds arrive **3 per Clock, forever** |
-| **D-3** | ☠ **The Hunt's Owner** | **120** | it bought the hunt; it has never run one |
+| **D-2** | **The Houndmaster** | **58** | while it lives, hounds arrive **3 per Clock, forever** |
+| **D-3** | ☠ **The Hunt's Owner** | **120** | it bought the hunt; it has never run one 🔒 name kept 2026-09-14 |
 
 **The win condition is arrival, not a corpse.** The encounter ends when the Loong
 reaches the village. **The Owner can be outrun, and outrunning it pays the same.** A

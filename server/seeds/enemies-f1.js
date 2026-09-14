@@ -350,7 +350,7 @@ module.exports = [
   BOSS('Foreman Bex', {
     signature: { floor: 1, damage: 8, type: 'Crush', note: 'only once he stops directing and starts fighting' },
     color: '#a03a3a',
-    description: 'MEDIUM ROUTE BOSS. The NPC party\'s leader. Reasonable, articulate, and burning a house with a child in it. NAME IS A PROPOSAL — it becomes canon at F3, where he runs the human farm.',
+    description: 'MEDIUM ROUTE BOSS. The NPC party\'s leader. Reasonable, articulate, and burning a house with a child in it. Name BLESSED 2026-08-18; it is canon at F3, where he runs the human farm.',
     // §21.3 — NOTHING, and that is the design. Ask what he IS here: a courteous man
     // with a torch, and canon forbids the party learning otherwise on this floor.
     // ANY resistance is a tell. What keeps him alive is clan law, which is not a

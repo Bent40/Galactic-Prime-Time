@@ -576,10 +576,11 @@ module.exports = [
     ].join('\n'),
   }),
 
-  BOSS('The One Who Would Be Human', {
+  BOSS('The One Who Would Be Clean', {
+    renamedFrom: 'The One Who Would Be Human',   // naming pass 2026-09-14 — drop once seeded
     size: 'Large',
     color: '#a03a6a',
-    description: 'HARD ROUTE FINALE. It leads the hunt because the Loong is making a cure, and it wants to be cured more than anything has ever wanted anything. NAME IS A PROPOSAL.',
+    description: 'HARD ROUTE FINALE. It leads the hunt because the Loong is making a cure, and it wants to be cured more than anything has ever wanted anything. NAMED 2026-09-14: not "Human" — Bex owns that want and is titled for it (the Petitioner). This one wants the tendency WASHED OUT, which is the floor\'s own vocabulary: quarantine, antiseptic, plague.',
     // §21.3 — one line, from the one thing it is.
     weaknesses: [],
     resistances: [
