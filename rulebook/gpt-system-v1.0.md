@@ -866,6 +866,11 @@ kit exists — the top of the ladder is polish-only.
   body part(s) it covers**, and resists **stack across worn pieces** — the
   struck part's armor is what counts. Flat armor resists are **Bleed/Crush/Burn
   only**; afflictions are tiered territory.
+- 🔒 **Resistance = the piece's tier value + one per material band step** (§12.7,
+  ruled 2026-09-14) — the exact mirror of a weapon's *class + one per band step*.
+  A Quality vest of Floor 3 material resists **5**, not 2. **Armor upgrades on
+  the same schedule a weapon does, and for the same reason:** a flat number is a
+  shrinking percentage, so a resistance that never climbs stops being armor.
 - **Nullification lives at the top:** Superior armor may carry **T1
   nullification** of its theme type on the covered part; Exceptional reaches T2
   or full-type immunity on the part.
@@ -937,13 +942,26 @@ kit exists — the top of the ladder is polish-only.
   the Forge yields *Obsidian*, not *a blade* — so the same Obsidian may come back
   as an arrowhead, a lining, or a socket in something that is not a weapon at all.
 
-🔴 **OPEN — does a band step do anything for ARMOR?** A weapon gains **+1 Force
-per band step**; nothing here says what a step is worth to a worn piece. It
-matters, because §10 resistance is a **flat subtraction**: resist 3 is **75%**
-mitigation against a Floor 1 mob and **16%** against a Floor 9 one. If armor does
-not climb, mobs quietly stop being a horde around the middle of the campaign.
-**Recommended: +1 resistance per band step** — the symmetric reading, one
-sentence, and it keeps §21.2's promise true at Floor 9.
+🔒 **ARMOR RIDES THE BAND TOO (ruled 2026-09-14): +1 RESISTANCE per band step.**
+The symmetric reading. A weapon's Force is *class + one per band step of its
+striking part*; a worn piece's resistance is **its tier value + one per band step
+of its own striking material**, on the part it covers, stacking across pieces as
+§12.6 already says.
+
+⚙️ **Why it had to be ruled rather than left open.** §10 resistance is a **flat
+subtraction**, so a fixed number is a *shrinking percentage*: resist 3 eats
+**75%** of a Floor 1 mob's hit and **16%** of a Floor 9 one. Without this, armor
+silently stops working halfway up the tower and §21.2's horde promise inverts —
+the wall of bodies you were meant to wade through becomes the thing that kills
+you, for no authored reason. **Both sides of every exchange move together, or
+neither does.**
+
+⚠️ **And it has a consequence the book must own:** a party that keeps its armor
+current is **permanently immune to ordinary mob damage**, on every floor — the
+mitigation holds at roughly three quarters of a mob's hit from Floor 1 to Floor 9.
+That is the ruling working as intended, and it means **a mob's threat cannot be
+its damage.** What it is instead is an open design question
+(`rulebook/enemy-scaling.md` S-6).
 
 ---
 

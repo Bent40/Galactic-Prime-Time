@@ -101,8 +101,12 @@ const pressure = (width, count, sig) =>
 const ELITE_MULT   = 12;     // §21.2 — elite HP ~ x12 the floor's mob
 const ELITE_THREAT = 0.85;   // floor-bands.js THREAT.elite
 // §12.6 — armor is flat resistance on the covered part and STACKS across worn
-// pieces. Seeded values: Basic 1 · Quality 2 · Superior 3. A tutorial party in
-// starter gear is carrying 1-2 on a part; a kitted F1 party 2-3.
+// pieces. Tier values as seeded: Crude 0 · Basic 1 · Quality 2 · Superior 3.
+// 🔒 RULED 2026-09-14: resistance = tier + ONE PER BAND STEP (§12.7), the mirror
+// of a weapon's class + one per band step. So a party keeping its armor current
+// carries roughly `tier + floor` on a covered part.
+const TIER_RESIST = { Crude: 0, Basic: 1, Quality: 2, Superior: 3, Exceptional: 4 };
+const currentArmor = (f, tier = 'Quality') => TIER_RESIST[tier] + f;
 const DEFAULT_RESIST = 2;
 
 function roomCost(f, { mobs = 0, elites = 0, width = 2, resist = DEFAULT_RESIST } = {}) {
@@ -122,6 +126,26 @@ function roomCost(f, { mobs = 0, elites = 0, width = 2, resist = DEFAULT_RESIST 
            mobThrough: Math.max(0, s.mobSig - resist),
            eliteThrough: Math.max(0, eliteSig - resist),
            mobSig: s.mobSig, eliteSig, partyHp: s.partyHp };
+}
+
+
+/**
+ * ── THE PRESS (proposal, 2026-09-14) ────────────────────────────────────────
+ * Owner's idea 1: mobs coordinate, adding Force to each other like a party's
+ * combined attack. §5.7 ALREADY WRITES THIS RULE, for contestants:
+ *   "Combined attacks merge damage and count as ONE hit ... the party's designed
+ *    path to single-hit numbers no individual can reach."
+ * Nothing in the book restricts it to contestants. Pointing it at a horde needs
+ * no new machinery and no new number — the whole effect comes from resistance
+ * applying ONCE to the merged total instead of once per mob.
+ *
+ *   pressed(n) = max(0, n * mobSig - resist)      instead of  n * max(0, mobSig - resist)
+ */
+function press(f, n, resist) {
+  const s = floorState(f);
+  return { n, raw: n * s.mobSig, through: Math.max(0, n * s.mobSig - resist),
+           separate: n * Math.max(0, s.mobSig - resist),
+           torso: s.torso, kills: Math.max(0, n * s.mobSig - resist) >= s.torso };
 }
 
 function report(f) {
@@ -182,4 +206,4 @@ console.log('     so flat resistance never touches them. They are what still rea
 
 if (require.main === module) main();
 
-module.exports = { floorState, mobsFor, pressure, roomCost, SHAPES, ATTACKS_PER_CLOCK, PARTY };
+module.exports = { floorState, mobsFor, pressure, roomCost, press, currentArmor, TIER_RESIST, SHAPES, ATTACKS_PER_CLOCK, PARTY };

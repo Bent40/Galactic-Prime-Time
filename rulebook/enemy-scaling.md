@@ -239,3 +239,114 @@ touches them. **The mobs that still matter are the ones that deal no damage.**
 | **Tide sizes are ⚖ untested** | Sized by arithmetic, never played. The first F2 session is the real check |
 | **Area-attack multipliers** | "× the spaces covered" needs a worked example per skill shape (cone, line, burst) before it is table-ready |
 | **F2–F9 rosters** | This is the *frame*, not the content. Only F1 exists |
+
+---
+
+## S-6 — What a mob is FOR 🔴 **PROPOSAL, 2026-09-14 — nothing here is ruled**
+
+**The problem, stated honestly.** §12.7's armor ruling (2026-09-14) keeps
+resistance climbing with the party, which fixes the scaling inversion — and makes
+the other problem **permanent**: a party in current armor takes **1–8 points**
+from a mob's hit on every floor from 1 to 9, against a torso that is always
+roughly seven times that. Owner, from play: *"most mobs will not be able to deal
+damage to the players due to the most basic of resistances doing their job."*
+
+🔒 **So a mob's threat cannot be its damage.** The question is what it is instead.
+Three candidates, all the owner's, and ⭐ **they are not alternatives — they
+compose into one rule with one counterplay each.**
+
+### ① THE PRESS — mobs combine, and §5.7 already wrote it
+
+> **§5.7:** *"Combined attacks merge damage and count as **ONE hit** for anything
+> keyed to a single hit. This is the party's designed path to single-hit numbers
+> no individual can reach."*
+
+**Nothing in the book restricts that to contestants.** Point it at a horde and the
+entire effect falls out of one word — **resistance applies once to the merged
+total, instead of once per mob:**
+
+> pressed = **max(0, *n* × mob signature − resistance)**
+> instead of *n* × max(0, mob signature − resistance)
+
+**No new number. No new mechanic. One sentence.** And the curve it produces is
+**identical on every floor**, because both sides were calibrated together:
+
+| mobs on one contestant | F1 (mob 4, armor 3, torso 7) | F5 (9 / 7 / 17) | F9 (19 / 11 / 35) | |
+|---|---|---|---|---|
+| **1** | 1 | 2 | 8 | chaff — as it should be |
+| **2** | **5** | **11** | **27** | **hurts** |
+| **3** | **9** | **20** | **46** | 🔴 **torso destroyed** |
+| 4 | 13 | 29 | 65 | dead, with overflow |
+
+⭐ **A mob becomes a POSITIONING threat rather than a damage one.** One is
+nothing; three is a corpse. The counterplay is entirely in rules that already
+exist: **fight in a corridor** (§21.4 terrain — the width that made a room
+*easier* to author now makes it *safer* to stand in), **do not let anyone be
+surrounded**, and the **rooted-bulwark shape in §4** already retargets attacks on
+adjacent allies. ⚠️ And it inverts the tactic the playtest found: **spreading out
+one-per-mob is what stops being safe**, because a lone contestant is the one who
+gets pressed.
+
+### ② THE ELITE GOVERNS — and this is the governor ① needs
+
+🔴 **On its own, ① is too lethal.** Twelve mobs against four contestants is three
+each, which is a wipe in one Moment. It needs a condition, and the owner's second
+idea is exactly the right one:
+
+> **Leaderless mobs mill. Governed mobs coordinate.** A mob presses **only while
+> an elite (or better) is directing the room.**
+
+⭐ **This is the best piece of the three, because it solves three problems at once:**
+1. **It makes the playtest CORRECT rather than a bug.** Twelve mobs alone were
+   trivial — and they should be. Nobody was telling them what to do.
+2. 🔴 **It fills the hole S-4 found.** The ladder ran 28% (elite + mobs) → 83%
+   (two elites) with **nothing between**. A governed horde *is* the missing rung,
+   and it arrives without a second elite.
+3. ⭐ **It writes a target-priority decision into every mixed room.** Kill the
+   elite and the horde falls apart; clear the mobs and the elite keeps calling
+   more into line. That is a real choice and the room makes it legible.
+
+⚙️ **It also gives elites a reason to be standing in a room full of mobs**, which
+is what the F1 encounter tables assume and never justified.
+
+### ③ ARMOR DEGRADES — and the sheet already tracks it
+
+Owner: *"armor has durability, and over X attacks of Y strength, the resistance
+drops."* ⚠️ **Per-item hit counters are the wrong implementation** — that is a
+tally per worn piece per fight, at a table that already tracks per-part HP and
+per-part conditions. **But the effect is already measurable with something on the
+sheet:**
+
+> **Resistance on a part drops by the CONDITION TIER on that part.**
+> A Crushed T2 torso resists **2 less** there.
+
+⭐ **"X attacks of Y strength" is precisely what a condition tier already means** —
+a part gets Crushed *because* it took hits hard enough. The armor is caved in
+because the body under it is. **Zero new tracking.**
+
+⭐ And it is the exact mirror of **§21.6 Body**, which already subtracts Force
+from what a conditioned limb *deals*. One idea, both directions: **a condition
+costs you offence and defence on the same part.**
+
+⚙️ **Composed with ① it produces a death spiral with a visible, curable cause:**
+pressed → conditioned → resists less → the next press is worse. And because
+§21.6 already made healing a damage buff, this makes it a **defence** buff too —
+the same action answers both ends.
+
+### What this would cost to adopt
+
+| | new machinery |
+|---|---|
+| ① The Press | **none** — §5.7 exists and does not say "contestants only" |
+| ② Elite governs | **one condition on ①** |
+| ③ Armor degrades | **none** — condition tiers are already on the sheet |
+
+🔴 **Unruled. Nothing above is in the rulebook.** The recommendation is **all
+three, as one rule**: *mobs under a leader combine their Force into a single
+attack; resistance answers it once; and a conditioned part resists by that much
+less.*
+
+⚠️ **The one thing to watch in play:** ① makes a cornered contestant die fast.
+That is the point, and it is also the failure mode. If it lands too hard, the
+governor is ②'s reach — an elite directs only what it can see, or only a number
+of mobs, rather than the whole room.
