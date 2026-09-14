@@ -48,13 +48,21 @@ ok('a zero or negative typed value is rejected',
    && resistanceProblems(R({ resistances: [{ type: 'Burn', value: -2 }] })).length === 1);
 // §10.1 — the owner's rule: universal resistance is always CAUSED, never a state.
 ok('universal with both cause and removal passes',
-   resistanceProblems(R({ universal: { value: 6, cause: 'stone shell', removal: 'chip the shell' } })).length === 0);
+   resistanceProblems(R({ universal: { value: 4, cause: 'stone shell', removal: 'chip the shell' } })).length === 0);
+// §21.3 rule 3 — overwhelming force must SOMETIMES work, so a universal at or above
+// the floor's average Force is a wall and the gate refuses it.
+ok('a universal AT the floor average is refused — it closes the brute-force road',
+   resistanceProblems(R({ universal: { value: 5, cause: 'c', removal: 'r' } }), 1)
+     .some(p => /overwhelming force/.test(p)));
+ok('the ceiling follows the floor — 5 is legal at F2, where the average is 6',
+   resistanceProblems(R({ universal: { value: 5, cause: 'c', removal: 'r' } }), 2).length === 0);
 ok('universal with NO CAUSE is refused',
    resistanceProblems(R({ universal: { value: 6, removal: 'chip the shell' } })).some(p => /CAUSE/.test(p)));
 ok('universal with NO REMOVAL is refused',
    resistanceProblems(R({ universal: { value: 6, cause: 'stone shell' } })).some(p => /REMOVAL/.test(p)));
-ok('universal with neither is refused twice',
-   resistanceProblems(R({ universal: { value: 6 } })).length === 2);
+ok('universal with neither cause nor removal is refused for both',
+   (() => { const p = resistanceProblems(R({ universal: { value: 4 } }));
+            return p.length === 2 && p.some(x => /CAUSE/.test(x)) && p.some(x => /REMOVAL/.test(x)); })());
 ok('universal 0 needs nothing — the gate skips it',
    resistanceProblems(R({ universal: { value: 0 } })).length === 0);
 ok('a negative universal is rejected',
@@ -166,8 +174,16 @@ ok('Burn is NOT also a resistance — the gate refuses that contradiction',
    && resistanceProblems({ ...masked, resistances: [...masked.resistances, { type: 'Burn', value: 1 }] })
         .some(p => /BOTH a weakness and a resistance/.test(p)));
 ok('the ward lives on the MASK, not on the man',
-   Number(maskPart.universal.value) === 6
+   Number(maskPart.universal.value) === 3
    && !Number((masked.universal || {}).value || 0));
+// §21.3 rule 4 — do not over-express. One weakness, one or two resistances, at most
+// one universal. Retuned 2026-09-14 from three resistances and a universal of 6.
+ok('he is not over-expressed — one weakness, two resistances, one universal',
+   (masked.weaknesses || []).length === 1
+   && (masked.resistances || []).length <= 2
+   && masked.bodyParts.filter(p => Number((p.universal || {}).value || 0)).length === 1);
+ok('brute force still works on the Mask — a 5-Force unresisted hit gets through',
+   5 - Number(maskPart.universal.value) > 0);
 ok('the Mask\'s universal names both its cause and its removal (§10.1)',
    maskPart.universal.cause.trim().length > 0 && maskPart.universal.removal.trim().length > 0);
 ok('a PART-level universal with no removal is refused',

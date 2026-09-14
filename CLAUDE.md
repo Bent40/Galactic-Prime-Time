@@ -1031,47 +1031,65 @@ and it broke the moment gear crossed a floor (an F1 sword read **0.75** in F3 ba
 
 **102 enemy tests pass.** F1/F2/F3 all pass the gate at their own floors.
 
-### ⭐ THE MASKED — the resistance EXEMPLAR (2026-09-14)
+### 🔒 BOSS RESISTANCE DOCTRINE — RULED 2026-09-14 (rulebook §21.3)
 
-The first boss authored under §7.3 / §10.1, as a shape for the other 52. 🔒 **Its thesis
-was already one line in the entry — *"It is not the man that is durable."*** So the ward
-lives on the **Mask** and **the man is the hole.**
+Owner, correcting the first exemplar. **Four rules now govern all 53:**
+
+1. 🔒 **Story first.** *"Bosses with story purpose should follow story logic. It's fine
+   that the Mask is hard to kill, that's not his purpose."* If the win condition was
+   never the kill, being hard to kill is **not** a balance problem.
+2. 🔒 **The floor must contain a form of the solution — and the boss must NOT be
+   solvable only by it.** Put the answer on the floor, unlabelled; then make sure it is
+   *an* answer, not *the* answer.
+3. 🔒 **OVERWHELMING FORCE MUST SOMETIMES WORK.** ⚠️ **This is what my first exemplar got
+   wrong** — universal 6 against an F1 average of 5 Force made the Mask *arithmetically
+   impossible* for three of five builds. There was no brute road at all. A boss may be
+   **expensive** (ten swings where two would do) but never impossible.
+   ⚙️ **Machine-checked:** `resistanceProblems` now refuses any universal **at or above
+   the floor's average Force** (F1 ≤ 4, F2 ≤ 5 …), so an unresisted type always gets
+   something through. A badly-chosen damage type can still hit nothing — that is the
+   player's answer to find, not a wall the author built.
+4. 🔒 **DO NOT OVER-EXPRESS.** *"not so situational or conditional that they become
+   gimmicky."* **One weakness · one or two resistances · at most one universal**, on the
+   part that fictionally carries it. Past that a boss stops being a question and becomes
+   a checklist.
+
+### ⭐ THE MASKED — the exemplar, RETUNED to the doctrine
+
+🔒 Its thesis was already one line in the entry — ***"It is not the man that is
+durable."*** The ward lives on the **Mask**; **the man is the hole.**
 
 | | |
 |---|---|
-| **Weak to** | **Burn** — the horns are wood, the mask is fired clay, and nothing in that silhouette has ever been on fire. Burn counts **double** |
-| **Resists** | Bleed 2 · Chill 2 · Infection 3. ⭐ **Cutting him is the intuitive move and the worst one** — the wounds close, which is the Mask's Clock-reset restoration showing up in the arithmetic. Infecting the plague's own reliquary is a category error and the number says so |
-| **The holes** | **Crush and Burn.** Nothing warded the man |
-| **Mask part** | 🔒 **universal 6** — needs 7 Force to touch. `cause:` Beelzebub's seal, a blessing held shut from outside. `removal:` **Oathbreaker (Mistletoe) ignores it entirely**; setting the chain ends the fight without touching it |
+| **Weak to** | **Burn**, counting double — the horns are wood, the mask is fired clay, and nothing in that silhouette has ever been on fire |
+| **Resists** | **Bleed 2 · Infection 2** ⚠️ *(was Bleed 2 · Chill 2 · Infection 3 — **Chill was cut**: "the conversion runs hot" was the thinnest justification I wrote, and exactly the over-expression rule 4 warns about)* |
+| **Mask part** | 🔒 **universal 3** ⚠️ *(was 6)*. `cause:` Beelzebub's seal. `removal:` Oathbreaker ignores it entirely; the chain ends the fight without touching it |
 
-⚙️ **Verified, not asserted** — all five builds at the same **5 Force**, differing only in
-what they brought:
+⚙️ **Re-verified after the retune** — five builds, all at the same 5 Force:
 
-| build | torso (45) | **the Mask (15)** | Mask, with Oathbreaker |
+| build | torso (45) | **the Mask (15)** | + Oathbreaker |
 |---|---|---|---|
-| blade — 5 Bleed | 3/swing · **15 swings** | 0 · **impossible** | 3 · 5 swings |
-| hammer — 5 Crush | 5 · 9 swings | 0 · **impossible** | 5 · 3 swings |
-| blade + torch | 4 · 12 swings | 0 · **impossible** | 4 · 4 swings |
-| torch build — 3 Crush 2 Burn | 7 · 7 swings | 1 · 15 swings | 7 · 3 swings |
-| **prepared** — 5 Crush 3 Burn | **11 · 5 swings** | 5 · 3 swings | 11 · 2 swings |
+| blade — 5 Bleed | 3/swing · 15 sw | ✗ nothing | 3 · 5 sw |
+| hammer — 5 Crush | 5 · 9 sw | **2 · 8 sw** ✅ brute works | 5 · 3 sw |
+| blade + torch | 4 · 12 sw | **1 · 15 sw** ✅ slow, real | 4 · 4 sw |
+| torch build | 7 · 7 sw | **4 · 4 sw** | 7 · 3 sw |
+| **prepared** | **11 · 5 sw** | **8 · 2 sw** | 11 · 2 sw |
 
-⭐ **A 3× spread on the torso at identical Force**, and the Mask is flatly impossible for
-three of five builds. ⚠️ **That is a gate, not a wall** — the `removal` field names two
-answers (the sprig, or the chain), and **the win condition was never the Mask anyway.**
-⚙️ Both answers are already on the floor: Mistletoe comes off the forest layer, and
-Torchbearers/the Kindler mean a party that fought the house is carrying fire.
-🎯 **GM: announce none of it. Let the first Bleed land for 1 and let them ask.**
+⭐ **Four of five builds can now brute the Mask** — the inverse of the first attempt.
+The one that cannot is a pure-Bleed party using the worst tool against the most warded
+thing, which is **an answer to find, not a wall.** 🎯 GM: announce none of it. Let the
+first Bleed land for 1 and let them ask.
 
 **Two model gaps this surfaced and closed:**
-- 🔴 **§7.3's "a weakness DOUBLES that type" had NO FIELD.** The rule could only live in
-  prose. `Enemy.weaknesses[]` now holds it, whitelisted and diffed; the gate rejects an
-  unknown type and refuses a type listed as **both** a weakness and a resistance.
+- 🔴 **§7.3's "a weakness DOUBLES that type" had NO FIELD** — the rule could only live in
+  prose. `Enemy.weaknesses[]` holds it now; the gate rejects an unknown type and refuses
+  a type listed as **both** a weakness and a resistance.
 - 🔴 **Enemy resistance was whole-body only, while §12.6 already gives the CONTESTANT
-  per-part resistance** (armor covers parts). `BodyPartSchema` now carries `resistances`
-  + `universal` too, adding to the enemy-wide values — which is what lets the Mask be
+  per-part resistance** (armor covers parts). `BodyPartSchema` carries `resistances` +
+  `universal` too, adding to the enemy-wide values — which is what lets the Mask be
   sealed while the man is not. Part-level universals are gated identically.
 
-**110 tests pass** (+8).
+**114 tests pass.**
 
 ### ✅ §21.6 PREPARATION — written, with both new categories designed (2026-09-14)
 

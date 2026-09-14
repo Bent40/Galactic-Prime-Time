@@ -217,21 +217,25 @@ module.exports = [
     // So the WARD lives on the Mask and the MAN is the hole. A party that works that
     // out fights a completely different fight from one that swings at whatever is
     // nearest.
+    // ⚠️ RETUNED 2026-09-14 on the owner's boss doctrine (§21.3): trimmed from three
+    // resistances to two, and the Mask's universal from 6 to 3. Chill 2 was the one
+    // I invented on the thinnest justification ("the conversion runs hot") — exactly
+    // the over-expression the doctrine warns about.
     weaknesses: ['Burn'],
     resistances: [
-      { type: 'Bleed',     value: 2 },   // the wounds close — this is the same restoration the Mask does at every Clock reset
-      { type: 'Chill',     value: 2 },   // the conversion runs hot; cold does not find purchase
-      { type: 'Infection', value: 3 },   // he IS the plague's reliquary. Infecting him is a category error
+      { type: 'Bleed',     value: 2 },   // the wounds close — the same restoration the Mask does at every Clock reset, in the arithmetic
+      { type: 'Infection', value: 2 },   // he IS the plague's reliquary. Infecting him is a category error
     ],
     bodyParts: [
       { name: 'Mask',  maxHp: 15,
-        // §10.1 — a universal resistance is always CAUSED and always REMOVABLE.
-        // Canon said "cannot be damaged by normal harm," which is a wall. A threshold
-        // is better and truer: normal harm barely scratches it, and the sprig ignores
-        // it outright. An average F1 contestant (5 Force) does NOTHING here; a fully
-        // prepared one (8) gets 2 through and needs eight swings; Oathbreaker skips
-        // the ward entirely and does it in three.
-        universal: { value: 6,
+        // §10.1 — a universal resistance is always CAUSED and always REMOVABLE, and
+        // §21.3 says overwhelming force must SOMETIMES work. At 3 it does: a hammer
+        // party with no plan grinds it down in eight swings, a torch party in four,
+        // a prepared one in two. Only a pure-Bleed party gets nothing — the worst
+        // tool against the most warded thing, which is an answer to find, not a wall.
+        // Canon said "cannot be damaged by normal harm"; that was the wall. This is
+        // the same sentence with a way through it.
+        universal: { value: 3,
           cause:   'Beelzebub\'s seal — a god\'s blessing held shut from the outside. The ward is the seal, not the ceramic.',
           removal: 'OATHBREAKER (Mistletoe, M-1) ignores it entirely — a blessing under a seal is precisely what an oath-ignoring material is for. Setting the chain also ends the fight without ever touching it.' } },
       { name: 'Head',  maxHp: 14 },
@@ -251,8 +255,8 @@ module.exports = [
       'and Floor 3, because he must be alive and chained at F2 and must become Nullrot',
       'at F3. DO NOT WARN THEM. The mural already did.',
       '',
-      'THE MASK\'S WEAK SYSTEM — Oathbreaker. The Mask (15) carries UNIVERSAL 6: an',
-      'attack needs 7 Force to do anything to it at all. MISTLETOE ignores the ward',
+      'THE MASK\'S WEAK SYSTEM — Oathbreaker. The Mask (15) carries UNIVERSAL 3: an',
+      'attack needs 4 Force to do anything to it at all. MISTLETOE ignores the ward',
       'entirely (M-1). A party that worked the forest layer (The Rack) arrives holding',
       'the answer; a party that skipped it chains him the hard way, the intended baseline.',
       '',
@@ -262,7 +266,7 @@ module.exports = [
       'hands them the answer without saying so: Torchbearers and the Kindler are on this',
       'floor, so a party that has fought through the house is already carrying fire.',
       '',
-      'RESISTS Bleed 2 · Chill 2 · Infection 3. Cutting him is the intuitive move and the',
+      'RESISTS Bleed 2 · Infection 2. Cutting him is the intuitive move and the',
       'worst one — the wounds close, which is the same restoration the Mask performs at',
       'every Clock reset, showing up in the arithmetic. Infecting the plague\'s own',
       'reliquary is a category error and the number says so.',
@@ -270,6 +274,8 @@ module.exports = [
       'CRUSH AND BURN ARE THE HOLES. Nothing warded the man himself; only the Mask is',
       'sealed. "It is not the man that is durable" is the whole fight in one line.',
       'A blade party grinds. A party with a torch and a hammer walks through him.',
+      'AND BRUTE FORCE IS ALLOWED (§21.3): a hammer party with no plan still takes the',
+      'Mask down in eight swings. Slow, ugly, and a real road. The sprig is the fast one.',
       'GM: do not announce any of this. Let the first Bleed land for 1 and let them ask.',
       '',
       '=== WHAT THE MASK IS (ruled 2026-08-20 — GM knowledge, not player knowledge) ===',

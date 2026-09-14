@@ -1519,6 +1519,28 @@ Tokens**. The Lounge is where Upgrade Tokens go to die — happily.
   catastrophic player effects with phase changes, acceleration, repositioning,
   sacrifice.
 
+#### Authoring a boss's resistances (§7.3 / §10.1)
+
+Force gives a boss a defence that is a *question* rather than a bigger bar. Four
+rules keep that from turning into a gimmick.
+
+1. **Story first.** A boss with a purpose follows its own logic. If its win
+   condition was never the kill, **being hard to kill is fine** — that is not the
+   fight you wrote.
+2. **The floor must contain a form of the solution — and the boss must not be
+   solvable only by it.** Put the answer somewhere on the floor, unlabelled. Then
+   make sure it is *an* answer, not *the* answer.
+3. 🔒 **Overwhelming force must sometimes work.** No boss may be arithmetically
+   impossible for a party that brought nothing clever. It may be **expensive** —
+   ten swings where two would do — but the brute road stays open. **A universal
+   resistance therefore sits BELOW the floor's average Force**, so an unresisted
+   type always gets at least something through. *(A badly-chosen damage type can
+   still hit nothing; that is the player's answer to find, not a wall you built.)*
+4. ⚠️ **Do not over-express.** **One weakness, one or two resistances, and at most
+   one universal — on the part that fictionally carries it.** Past that a boss stops
+   being a question and becomes a checklist, and the table feels handled rather than
+   challenged.
+
 **Super Bosses** are large, **multi-stage, multi-area**
 encounters that demand understanding and preparation across multiple ways of
 fighting. The shape: a giant flower feeds on five different zones, each zone

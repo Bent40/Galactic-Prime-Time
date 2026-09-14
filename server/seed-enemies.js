@@ -145,7 +145,7 @@ function doctrineCheck(seeds, atFloor = floor) {
       problems.push(`${e.name}: size "${e.size}" is not one of ${SIZES.join('|')} (§7.1)`);
     }
     problems.push(...damageProblems(e, atFloor));
-    problems.push(...resistanceProblems(e));
+    problems.push(...resistanceProblems(e, atFloor));
   }
   return problems;
 }
@@ -220,14 +220,19 @@ const RESIST_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 
  *
  * Exported for testing without a DB.
  */
-function resistanceProblems(e) {
+function resistanceProblems(e, atFloor = floor) {
   const out = [];
-  checkResistSet(e, e, `${e.name}`, out);
+  // §21.3 rule 3 — OVERWHELMING FORCE MUST SOMETIMES WORK. A universal resistance
+  // at or above the floor's average Force closes the brute road entirely, which is
+  // a wall rather than a question. Below it, an unresisted type always gets at
+  // least something through, however slowly.
+  const avg = FLOOR_MOB_HP[atFloor];
+  checkResistSet(e, e, `${e.name}`, out, avg);
   // §7.3 resolves damage per part, so a PART may be warded while the body is not
   // (THE MASKED's Mask is sealed; the man is just a man). Same rules, same gate.
   (e.bodyParts || []).forEach((bp) => {
     if ((bp.resistances && bp.resistances.length) || Number((bp.universal || {}).value || 0)) {
-      checkResistSet(bp, e, `${e.name} · part "${bp.name}"`, out);
+      checkResistSet(bp, e, `${e.name} · part "${bp.name}"`, out, avg);
     }
   });
   // §7.3 — a weakness doubles its type, so the type has to be a real one.
@@ -245,7 +250,7 @@ function resistanceProblems(e) {
 }
 
 /** The resistance rules, applied to an enemy or to one of its parts. */
-function checkResistSet(holder, e, label, out) {
+function checkResistSet(holder, e, label, out, avgForce) {
   const rs = Array.isArray(holder.resistances) ? holder.resistances : [];
   const seen = new Set();
   rs.forEach((r, i) => {
@@ -270,6 +275,10 @@ function checkResistSet(holder, e, label, out) {
     }
     if (!String(u.removal || '').trim()) {
       out.push(`${label}: universal ${uv} names no REMOVAL — §10.1, every universal resistance must say what takes it away`);
+    }
+    if (avgForce && uv >= avgForce) {
+      out.push(`${label}: universal ${uv} is at or above this floor's average Force (${avgForce}) — ` +
+               `§21.3, overwhelming force must SOMETIMES work. Cap it at ${avgForce - 1}`);
     }
   }
 }
