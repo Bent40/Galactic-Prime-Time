@@ -567,7 +567,7 @@ An attack's Force is the sum of:
 - its **weapon class** (§12.1);
 - **+1 for every material band step** it is built from (§12.7);
 - anything **added** to it — an element, a coating, an affix, a venom;
-- whatever your **preparation** contributed before the fight started (§21.5).
+- whatever your **preparation** contributed before the fight started (§21.6).
 
 Every part of that total carries a **damage type**, and the tags are what make
 preparation matter:
@@ -1667,6 +1667,66 @@ Falls longer than **3 hexes** deal damage, scaling with height: roughly
 **1d4–5d4 across 3–8 m**, **2d6–6d6 across 9–14 m**, continuing the pattern
 upward. (A sketch — falling has barely come up in play; tune it when it
 matters.)
+
+---
+
+### 21.6 Preparation — how a fight is won before it starts
+
+Force (§7.3) is what an attack is worth. **Preparation is where most of it comes
+from**, and it is budgeted **per category**, so it cannot all be bought in one place.
+A party with three Forge upgrades and no plan is not a prepared party.
+
+| Category | Steps | What counts |
+|---|---|---|
+| **Gear** | up to **3** | a material band step · an added damage type · an affix or coating |
+| **Situation** | up to **2** | an ambush (§5.2) · terrain and positioning (§21.4) |
+| **Party** | **1** | an assist — the target is held, flanked or opened (§13) |
+| **Sponsorship** | **1** | a patron intervenes (below) |
+| **Body** | — | **negative only.** Your own condition tiers subtract (below) |
+
+**Ceiling: 7 positive steps.** Each step is **+1 Force** unless it says otherwise.
+
+**Knowledge is not a step.** Knowing what a thing is weak to is what makes a weakness
+*count* — it turns a matched damage type's +1 into **+2** (§7.3). Scouting pays by
+doubling what you already brought, never by adding a number of its own.
+
+#### Sponsorship — the step you cannot plan
+
+Every other step is bought before the fight. This one is **asked for during it**.
+
+- **Who.** Only a patron who has already adopted you (§17). No patron, no step.
+- **The ask.** Spend **1 Moment** on an appeal **on camera**, and it must be
+  **on-brand** — it plays to a tag you actually carry, because the patron is buying a
+  moment of the thing they adopted you for.
+- **The answer.** The GM prices it against your standing: a **Reinforced** tag in the
+  patron's own domain is an automatic yes; a **Faded** one is an automatic no;
+  everything between is a judgement the GM makes out loud.
+- **Granted:** **+1 Force of the patron's own damage type** for the rest of the Clock,
+  and a Viewer spike. **Their name is on it** — the crowd is told who paid.
+- **Refused:** you spent the Moment, and the refusal is broadcast too. The tag you
+  appealed on takes **one step toward Faded**: you asked in front of everyone and got
+  nothing.
+- **Once per patron, per combat.**
+
+*This is the one category a plan cannot contain, and the only one that makes an
+audience-facing build pay inside a fight.*
+
+#### Body — the category that only subtracts
+
+- **−1 Force per condition tier on the limb you are attacking with.** Bleeding T2 on
+  your sword arm is **−2**.
+- **Whole-body conditions apply to every attack** — Exhausted, Infected, Shock — at
+  the same 1 per tier.
+- **They stack.** Exhausted T1 plus a Crushed T1 arm is −2.
+- **An attack never falls below 1 Force.** You can always punch.
+- **Checked at the swing**, not at the Clock reset — so clearing a condition mid-fight
+  gives the Force back immediately.
+
+*Conditions already cost you actions and Moments; until now they never cost you
+damage, so a contestant with a shattered arm hit exactly as hard as a healthy one.
+This closes that, on tiers the sheet already tracks.* **And it makes healing a damage
+buff** — a party that patches up mid-fight is not only surviving longer, it is hitting
+harder. That is deliberate.
 `;function U0(i){return i.toLowerCase().replace(/[^a-z0-9\s-]/g,"").trim().replace(/\s+/g,"-")}function q0(i){return i.replace(/\*\*|\*|`|_/g,"").replace(/\\/g,"")}function G0(){const[i,r]=k.useState(""),c=k.useRef(null),{html:u,toc:d}=k.useMemo(()=>{const y=He.parse(H0,{gfm:!0,breaks:!1}),m=[],g={};return{html:y.replace(/<h([123])>([\s\S]*?)<\/h\1>/g,(S,N,M)=>{const A=M.replace(/<[^>]*>/g,"");let w=U0(A)||"section";return g[w]!=null?w=`${w}-${++g[w]}`:g[w]=0,N!=="1"&&m.push({id:w,text:q0(A),level:Number(N)}),`<h${N} id="${w}">${M}</h${N}>`}),toc:m}},[]),h=i?d.filter(y=>y.text.toLowerCase().includes(i.toLowerCase())):d;function p(y){var g;const m=(g=c.current)==null?void 0:g.querySelector(`#${CSS.escape(y)}`);m&&m.scrollIntoView({behavior:"smooth",block:"start"})}return l.jsxs("div",{className:"wiki-root",children:[l.jsx("style",{children:Y0}),l.jsxs("div",{className:"wiki-topbar",children:[l.jsxs("div",{className:"wiki-title",children:["📖 GPT RULEBOOK ",l.jsx("span",{className:"wiki-ver",children:"v1.0"})]}),l.jsx("a",{className:"wiki-back",href:"/",children:"← Back to sheet"})]}),l.jsxs("div",{className:"wiki-body",children:[l.jsxs("nav",{className:"wiki-toc",children:[l.jsx("input",{className:"wiki-search",placeholder:"Filter sections…",value:i,onChange:y=>r(y.target.value)}),h.map(y=>l.jsx("div",{className:`wiki-toc-item lvl${y.level}`,onClick:()=>p(y.id),children:y.text},y.id))]}),l.jsx("main",{className:"wiki-content",ref:c,children:l.jsx("div",{dangerouslySetInnerHTML:{__html:u}})})]})]})}const Y0=`
 .wiki-root { display:flex; flex-direction:column; height:100vh; background:#0d0d12; color:#e8e6e3; font-family: system-ui, sans-serif; }
 .wiki-topbar { display:flex; align-items:center; justify-content:space-between; padding:10px 18px; background:#15151d; border-bottom:2px solid #e33; flex:0 0 auto; }

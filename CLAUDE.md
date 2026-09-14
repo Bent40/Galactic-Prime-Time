@@ -1018,16 +1018,43 @@ and it broke the moment gear crossed a floor (an F1 sword read **0.75** in F3 ba
   (cross-floor) · `server/prep-bands.js` (within-floor) · `server/force-model.js` +
   `server/force-resistance.js` (the unit, weakness doubling, resistance order, area).
 
-### 🔴 What this INVALIDATES — the migration list (nothing done yet)
+### ✅ THE MIGRATION LIST — ALL SIX CLOSED (2026-09-14)
 
-| # | What | Why |
+| # | What | Outcome |
 |---|---|---|
-| **1** | **53 enemy statlines** | Mob 5 survives unchanged as 5 Force. **Elite 60 / boss 125 / super 300 do NOT** — as Force those are 60 and 125 punches. Per the owner they come **down** hard and get **diverse resistances** instead |
-| **2** | `rulebook/item-drafting-materials.md` | The ×2/×4/×8 band table and the *"Greatsword 3 → Jade 24"* worked example are both dead |
-| **3** | `rulebook/enemy-scaling.md` + `server/floor-bands.js` | Built entirely on the doubling |
-| **4** | `rulebook/level-budget.md` **L-22** | The band-units ruling it rests on is withdrawn |
-| **5** | `server/seeds/items-set1-spine.js` | 26 templates written in band units |
-| ~~**6**~~ | ✅ **DONE 2026-09-14** | `Enemy` carries `resistances[{type,value}]` + `universal{value,cause,removal}`, both whitelisted in both `routes/enemies.js` verbs and diffed by `--force`. **`resistanceProblems()` refuses a universal resistance that names no CAUSE or no REMOVAL** (§10.1), rejects unknown/duplicate/non-positive typed entries, and runs inside `doctrineCheck`. ⚠️ **NO TIER CHECK, deliberately — a MOB may carry any resistance** (owner, 2026-09-14): that is E-0's *"a mob that survives a hit gets a gate, never a fatter number"* working as intended, because a resistance IS that gate. The comment says so in both files so a later pass does not "helpfully" add one. Admin editor warns live when cause/removal is blank. **98 tests pass (+17).** Also fixed: the model's exported `DAMAGE_EXCEPTIONS` had gone stale, missing `aura` and `presence` |
+| **1** | 53 enemy statlines | ⚠️ **My note said elite/boss/super were absurd as Force and had to come down hard. That was WRONG.** A party of 4 at the average 5 Force, 3 swings each in a 10-Moment Clock, outputs **60 Force/Clock** — so elite 60 is a **one-Clock** fight, boss 125 is two, super 300 is five. A good ladder that needed nothing. 🔴 **The real fault was in the SEEDER:** `FLOOR_MOB_HP` still doubled (5/10/20…1280). It now tracks the calibration — **5/6/7…13**, a mob = the average contestant's Force for its floor. ⭐ **Consequence: only the 16 MOBS moved** (F2 5→6, F3 5→7, one line each in the file's `MOB` helper). **Every elite, boss and super passes its own floor as hand-tuned**, because the ±tolerance widens with the centre. `--floor` also stops being a no-op |
+| **2** | `item-drafting-materials.md` | Band table reads in **Force steps** (+0/+1…+9) with the old ×-column struck through beside it. The *"Greatsword 3 → Jade 24 → 768–1536"* worked example is withdrawn: a greatsword is **3 + the band step** — 4 at F1, 6 at F3, 12 at F9 |
+| **3** | `enemy-scaling.md` + `floor-bands.js` | ⭐ **Needed far less than expected** — the damage ladder derives enemy damage from **total trait points**, which is linear and never used the band, so it regenerates **identically**. Only the **horde formula** rode the doubling. Rewritten: kills/swing = `floor(your Force ÷ old mob Force) × spaces swept × ~20 swings`. ⚠️ **Tides fall from ~3,000 at F9 to 250** — flagged in the doc as a real change in feel wanting an owner eye. Also added the two missing exceptions (`aura`, `presence`) the doc never listed |
+| **4** | `level-budget.md` L-22 | **L-23 written, L-22 withdrawn**, with both faults recorded and the list of what survives untouched (body as the variable · the part-budget reading · classes 2–4 · the F1 roster) |
+| **5** | `items-set1-spine.js` | Damage is **Force = class + one per band step of the STRIKING part**. Unsworn Sprig 3 · Sun's Dart 4 · Andvari's Cut 6 · Warden-Carve 3 · **Kin-Carve 4** (the edge is still Beastbone even though the haft is Sky-Iron — the teaching case) · Imperial 6. All `(x2)/(x4)/(x8)` phrases gone |
+| **6** | `Enemy` model + gate | ✅ Done 2026-09-14 — see above |
+
+**102 enemy tests pass.** F1/F2/F3 all pass the gate at their own floors.
+
+### ✅ §21.6 PREPARATION — written, with both new categories designed (2026-09-14)
+
+🔒 **Owner blessed Sponsorship and Body**, on the condition they be *real designs, not
+concepts*. Written into the rulebook as **§21.6** (which also closes §7.3's dangling
+forward-reference — it pointed at §21.5, which is Falling).
+
+**Budget:** Gear 3 · Situation 2 · Party 1 · **Sponsorship 1** · **Body negative**.
+**Ceiling 7 positive steps.** 🔒 **Knowledge is NOT a step (owner)** — it *doubles* a
+matched weakness, so scouting pays by multiplying what you brought.
+
+- 🆕 **SPONSORSHIP — the step you cannot plan.** Only a patron who has **adopted** you.
+  **Spend 1 Moment on an on-brand appeal, on camera.** A **Reinforced** tag in the
+  patron's domain is an automatic yes; a **Faded** one an automatic no. Granted:
+  **+1 Force of the patron's own damage type for the Clock** + a Viewer spike, with
+  **their name on it**. Refused: you spent the Moment, the refusal is **broadcast**,
+  and the tag takes **one step toward Faded**. Once per patron per combat.
+  ⭐ It is the only step asked for *during* the fight, and the only one that makes an
+  audience-facing build pay in combat.
+- 🆕 **BODY — the only category that subtracts.** **−1 Force per condition tier on the
+  limb you are swinging with**; whole-body conditions (Exhausted · Infected · Shock)
+  hit every attack; they **stack**; **never below 1 Force**; **checked at the swing**,
+  not the Clock reset. ⭐ Closes a real hole — conditions cost actions and Moments but
+  never damage, so a shattered arm hit as hard as a healthy one. ⚠️ **It makes healing
+  a damage buff**, deliberately.
 
 ---
 
