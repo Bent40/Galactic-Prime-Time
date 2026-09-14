@@ -23,8 +23,11 @@ ok('the shipped F1 roster passes at F1', doctrineCheck(f1, 1).length === 0,
 // Assert the intent instead: every entry's HP is wrong at F3, and the migrated ones
 // additionally say their signature was written for another floor.
 const atF3 = doctrineCheck(f1, 3);
-ok('the same roster fails at F3 (floor scaling is live)',
-   f1.every(e => atF3.some(p => p.startsWith(`${e.name}:`) && /part budget/.test(p))),
+// ⚡ 2026-09-01: the ladder no longer doubles, so an F1 elite is INSIDE F3's wider
+// tolerance band. What must still fail is the mobs — they are exact on every floor.
+ok('F1 mobs fail at F3 (the mob is exact, and F3 wants 7 not 5)',
+   f1.filter(e => e.tier === 'mob')
+     .every(e => atF3.some(p => p.startsWith(`${e.name}:`) && /part budget/.test(p))),
    `${atF3.length} problems over ${f1.length} entries`);
 ok('a signature written for F1 is flagged when the roster is checked at F3',
    atF3.filter(p => /checked at F3/.test(p)).length === f1.filter(e => e.signature).length);
@@ -133,9 +136,14 @@ ok('F9 torso is 35 band units', floorState(9).torso === 35);
 ok('the ladder is monotonic in torso and damage',
    [1,2,3,4,5,6,7,8].every(f => floorState(f).torso < floorState(f + 1).torso &&
                                 floorState(f).dmg.mob <= floorState(f + 1).dmg.mob));
-ok('a horde of F1 mobs at F5 is ~200', Math.abs(hordeSize(1, 5) - 200) <= 50);
-ok('the 12 x 2^(N-S) rule tracks the computed tide',
-   [2,3,4,5,6,7,8,9].every(n => Math.abs(hordeSize(1, n) - 12 * 2 ** (n - 1)) / (12 * 2 ** (n - 1)) < 0.15));
+// ⚡ 2026-09-01: tides came down hard. Force grows +1/floor, so kills-per-swing
+// grows linearly; what clears a tide is AREA (§7.3, area does not divide), not a
+// bigger number. The old 12 x 2^(N-S) rule rode the withdrawn band.
+ok('a horde of F1 mobs at F5 is ~100', Math.abs(hordeSize(1, 5) - 100) <= 40);
+ok('tides grow, but only in steps — linear Force, integer kills per swing',
+   [2,3,4,5,6,7,8,9].every(n => hordeSize(1, n) >= hordeSize(1, n - 1 < 2 ? 2 : n - 1)));
+ok('a tide is no longer four digits — an F1 mob at F9 is hundreds, not thousands',
+   hordeSize(1, 9) > 50 && hordeSize(1, 9) < 1000);
 ok('hordeSize refuses a floor at or below the mob\'s own', hordeSize(3, 3) === null && hordeSize(3, 2) === null);
 
 // Every damage number authored into F1 notes/phases must sit in the F1 band, allowing
@@ -150,10 +158,14 @@ for (const e of f1) {
 ok('no authored F1 damage is wildly outside its band', outliers.length === 0, outliers.join(' · '));
 
 console.log('F2 roster');
-ok('the F2 roster passes the doctrine gate', doctrineCheck(f2, 1).length === 0,
-   JSON.stringify(doctrineCheck(f2, 1)));
-ok('F2 HP budgets are identical to F1 — band units are floor-invariant',
-   f2.filter(e => e.tier === 'mob').every(e => partsSum(e) === 5));
+ok('the F2 roster passes the doctrine gate AT F2', doctrineCheck(f2, 2).length === 0,
+   JSON.stringify(doctrineCheck(f2, 2)));
+// ⚡ 2026-09-01: budgets are no longer floor-invariant. A mob is the AVERAGE
+// contestant's Force for its floor, so F2 = 6 where F1 = 5.
+ok('F2 mobs are 6 Force, not F1\'s 5',
+   f2.filter(e => e.tier === 'mob').every(e => partsSum(e) === 6));
+ok('F2 elites and bosses were NOT rescaled — they sit inside F2 tolerance as authored',
+   doctrineCheck(f2.filter(e => e.tier !== 'mob'), 2).length === 0);
 ok('F2 varies its elites and bosses',
    new Set(f2.filter(e => e.tier === 'elite').map(partsSum)).size > 1 &&
    new Set(f2.filter(e => e.tier === 'boss').map(partsSum)).size > 1);
@@ -173,8 +185,11 @@ ok('no name collides between the F1 and F2 rosters',
 }
 
 console.log('F3 roster');
-ok('the F3 roster passes the doctrine gate', doctrineCheck(f3, 1).length === 0,
-   JSON.stringify(doctrineCheck(f3, 1)));
+ok('the F3 roster passes the doctrine gate AT F3', doctrineCheck(f3, 3).length === 0,
+   JSON.stringify(doctrineCheck(f3, 3)));
+ok('F3 mobs are 7 Force', f3.filter(e => e.tier === 'mob').every(e => partsSum(e) === 7));
+ok('F3 elites, bosses and supers were NOT rescaled — authored numbers still pass',
+   doctrineCheck(f3.filter(e => e.tier !== 'mob'), 3).length === 0);
 ok('F3 varies its elites', new Set(f3.filter(e => e.tier === 'elite').map(partsSum)).size > 1);
 ok('F3 has a super boss at 300 (Nullrot)',
    f3.some(e => e.tier === 'legendary' && partsSum(e) === 300));

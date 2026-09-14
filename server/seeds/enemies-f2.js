@@ -2,9 +2,12 @@
  * Floor 2 — the great desert, seventy years after Floor 1. PROPOSAL, per
  * rulebook/f2-enemy-pass.md. Seed via: node seed-enemies.js --file ./seeds/enemies-f2.js
  *
- * ALL NUMBERS ARE BAND UNITS (§12.7 errata) — the F2 Desert band (×4) multiplies
- * every native number equally and cancels, so HP budgets are IDENTICAL to F1:
- * mob 5 exact · elite ~60 ±tol · boss ~125 ±tol · super ~300.
+ * ALL NUMBERS ARE FORCE (§7.3) — one Force is one basic punch. ⚡ Updated
+ * 2026-09-01: the ×4 band no longer multiplies (L-23), and a mob is worth the
+ * AVERAGE contestant's Force for its floor, so an F2 mob is 6 rather than 5.
+ * mob 6 exact · elite ~72 ±tol · boss ~150 ±tol · super ~360.
+ * The elites and bosses below were hand-tuned at F1 numbers and ALL still sit
+ * inside the ±tolerance band at F2 — only the mob moved.
  * Only DAMAGE moves, tracking the contestant's body (enemy-scaling S-1):
  *   F2 torso 9 → mob 5 · elite 8 · boss 10 · super 15 (signature hits).
  * Windups may exceed the band; per-Moment ticks sit below it.
@@ -14,7 +17,7 @@
 
 const MOB = (name, { part = 'Body', ...o }) => ({
   tier: 'mob', name, size: 'Medium', phases: [],
-  bodyParts: [{ name: part, maxHp: 5 }],
+  bodyParts: [{ name: part, maxHp: 6 }],   // F2 mob = 6 Force (§7.3 calibration: a mob is one average swing)
   ...o,
 });
 const E = (tier) => (name, o) => ({ tier, name, size: 'Medium', phases: [], ...o });

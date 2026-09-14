@@ -26,12 +26,17 @@ const checkOnly = process.argv.includes('--check');
 const fileIdx   = process.argv.indexOf('--file');
 const seedFile  = fileIdx !== -1 ? process.argv[fileIdx + 1] : './seeds/enemies-f1.js';
 
-// §21.2 part budgets, in BAND UNITS (§12.7 errata 2026-08-18: the material band is
-// floor-relative and cancels inside a floor, so these numbers are the same on EVERY
-// floor — an F2 roster checks against the same 5/60/125/300 an F1 roster does).
-// --floor is only for reading a roster written in ABSOLUTE terms; leave it alone for
-// anything authored in band units, which is everything.
-const FLOOR_MOB_HP = { 1: 5, 2: 10, 3: 20, 4: 40, 5: 80, 6: 160, 7: 320, 8: 640, 9: 1280 };
+// §21.2 part budgets, in FORCE (§7.3). One Force is one basic punch.
+//
+// ⚡ REWRITTEN 2026-09-01. This used to double per floor (5/10/20/…/1280), which
+// rode the withdrawn ×2 material band (L-23). It now tracks the CALIBRATION:
+// a mob is worth the AVERAGE contestant's Force for its floor, so that a mob is
+// one swing on every floor — "one shot at an average rate of success, or slightly
+// below it." A contestant gains about +1 Force per floor, so the mob does too.
+//
+// --floor is now meaningful for every roster: an F2 roster checks against 6, an
+// F3 roster against 7. It is no longer a no-op you can leave alone.
+const FLOOR_MOB_HP = { 1: 5, 2: 6, 3: 7, 4: 8, 5: 9, 6: 10, 7: 11, 8: 12, 9: 13 };
 const RANK_RATIO   = { mob: 1, elite: 12, boss: 25, legendary: 60 };
 
 // ONLY MOBS ARE EXACT. Owner ruling 2026-08-18: "the only one we can decisively say
@@ -270,9 +275,7 @@ async function run() {
     process.exit(1);
   }
   const m = FLOOR_MOB_HP[floor];
-  const scale = floor === 1
-    ? 'BAND UNITS (floor-invariant — §12.7 errata)'
-    : `ABSOLUTE terms at floor ${floor}`;
+  const scale = `FORCE (§7.3) at floor ${floor} — a mob is one average swing`;
   console.log(`§21.2 doctrine check PASSED — ${seeds.length} entries, ${scale}: ` +
               `mob ${m} exact · elite ~${m * 12} · boss ~${m * 25} · super ~${m * 60}, ±tolerance.`);
   const spread = seeds.filter(e => e.tier !== 'mob').map(e => `${e.name} ${partsSum(e)}`).join(' · ');

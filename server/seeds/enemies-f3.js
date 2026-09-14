@@ -3,8 +3,13 @@
  * PROPOSAL, per rulebook/f3-enemy-pass.md. Set 1's finale; the capital then attaches
  * to the Lounge as a persistent location (Compendium §4.1).
  *
- * BAND UNITS (§12.7 errata). HP identical to F1/F2: mob 5 exact · elite ~60 ±tol ·
- * boss ~125 ±tol · super ~300. Damage: mob 6 · elite 9 · boss 12 · super 19.
+ * FORCE (§7.3) — one Force is one basic punch. ⚡ Updated 2026-09-01: the ×8 band
+ * no longer multiplies (L-23), and a mob is worth the AVERAGE contestant's Force
+ * for its floor, so an F3 mob is 7 rather than 5.
+ * mob 7 exact · elite ~84 ±tol · boss ~175 ±tol · super ~420.
+ * Damage: mob 6 · elite 9 · boss 12 · super 19.
+ * The elites, bosses and supers below were hand-tuned at F1 numbers and ALL still
+ * sit inside the ±tolerance band at F3 — only the mob moved.
  * Carves are M-3 Capital: Jade · Mirror-Bronze · Silver · Inscribed Clay ·
  * Orichalcum · Cursed Gold ⭐.
  *
@@ -16,7 +21,7 @@
 
 const MOB = (name, { part = 'Body', ...o }) => ({
   tier: 'mob', name, size: 'Medium', phases: [],
-  bodyParts: [{ name: part, maxHp: 5 }],
+  bodyParts: [{ name: part, maxHp: 7 }],   // F3 mob = 7 Force (§7.3 calibration: a mob is one average swing)
   ...o,
 });
 const E = (tier) => (name, o) => ({ tier, name, size: 'Medium', phases: [], ...o });
