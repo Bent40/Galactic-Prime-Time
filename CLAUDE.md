@@ -1033,63 +1033,66 @@ and it broke the moment gear crossed a floor (an F1 sword read **0.75** in F3 ba
 
 ### 🔒 BOSS RESISTANCE DOCTRINE — RULED 2026-09-14 (rulebook §21.3)
 
-Owner, correcting the first exemplar. **Four rules now govern all 53:**
+⚠️ **I got rules 3 and 4 wrong on the first pass and the owner corrected both.** Recorded
+with the corrections, because the wrong versions are the tempting ones.
 
 1. 🔒 **Story first.** *"Bosses with story purpose should follow story logic. It's fine
-   that the Mask is hard to kill, that's not his purpose."* If the win condition was
-   never the kill, being hard to kill is **not** a balance problem.
-2. 🔒 **The floor must contain a form of the solution — and the boss must NOT be
-   solvable only by it.** Put the answer on the floor, unlabelled; then make sure it is
-   *an* answer, not *the* answer.
-3. 🔒 **OVERWHELMING FORCE MUST SOMETIMES WORK.** ⚠️ **This is what my first exemplar got
-   wrong** — universal 6 against an F1 average of 5 Force made the Mask *arithmetically
-   impossible* for three of five builds. There was no brute road at all. A boss may be
-   **expensive** (ten swings where two would do) but never impossible.
-   ⚙️ **Machine-checked:** `resistanceProblems` now refuses any universal **at or above
-   the floor's average Force** (F1 ≤ 4, F2 ≤ 5 …), so an unresisted type always gets
-   something through. A badly-chosen damage type can still hit nothing — that is the
-   player's answer to find, not a wall the author built.
-4. 🔒 **DO NOT OVER-EXPRESS.** *"not so situational or conditional that they become
-   gimmicky."* **One weakness · one or two resistances · at most one universal**, on the
-   part that fictionally carries it. Past that a boss stops being a question and becomes
-   a checklist.
+   that the Mask is hard to kill, that's not his purpose."*
+2. 🔒 **The floor must contain a form of the solution — and the boss must not be solvable
+   only by it.**
+3. 🔒 **A PATH MUST EXIST. That is the whole requirement.** ⚠️ **I first wrote this as
+   "overwhelming force must sometimes work" and built a gate capping universal resistance
+   below the floor's average Force. BOTH ARE WITHDRAWN.** Owner: *"I don't mind it being
+   genuinely impossible for some builds. Not every fight can be solved by brute force,
+   the conditions must meet. It's just about making sure the path DOES exist."* A boss
+   **may be flatly impossible** for a party that brought the wrong things, and **may be
+   highly resistant to a great many things with every trick it needs to survive — that is
+   part of the fun.** ⚙️ §10.1's mandatory **`removal`** field already guarantees the path;
+   the second gate was redundant *and* enforcing a rule the owner does not hold.
+4. 🔒 **Over-expression is a failure of JUSTIFICATION, not of COUNT.** ⚠️ **I first wrote
+   this as a count limit** (one weakness, one or two resistances). Withdrawn. Owner:
+   *"where overexpression happens is exactly as you stated with the cold — there was no
+   justification, it was just to force them to use heat."* **Six resistances each tracing
+   to the fiction is well made; one invented to funnel a tactic is a gimmick.** ⭐ **The
+   test: *"can I say what in this creature's story makes it do that?"*** If the honest
+   answer is *"so they have to use fire"* — cut it.
 
-### ⭐ THE MASKED — the exemplar, RETUNED to the doctrine
+🔒 **HOW TO STAT ONE (owner's method).** Do not start from mechanics. Start from the
+creature: **what it is · how much it matters to the story · what it has done so far** —
+and derive abilities and resistances from that.
 
-🔒 Its thesis was already one line in the entry — ***"It is not the man that is
-durable."*** The ward lives on the **Mask**; **the man is the hole.**
+⚙️ **What replaced the bad gate — `why` is now REQUIRED on every resistance and weakness.**
+That is the machine-checkable form of rule 4: if the reason will not write, the line does
+not ship. `ResistSchema.why` + `WeaknessSchema{type, why}`; `resistanceProblems` refuses a
+blank one. **Count is never checked; justification always is.**
 
-| | |
-|---|---|
-| **Weak to** | **Burn**, counting double — the horns are wood, the mask is fired clay, and nothing in that silhouette has ever been on fire |
-| **Resists** | **Bleed 2 · Infection 2** ⚠️ *(was Bleed 2 · Chill 2 · Infection 3 — **Chill was cut**: "the conversion runs hot" was the thinnest justification I wrote, and exactly the over-expression rule 4 warns about)* |
-| **Mask part** | 🔒 **universal 3** ⚠️ *(was 6)*. `cause:` Beelzebub's seal. `removal:` Oathbreaker ignores it entirely; the chain ends the fight without touching it |
+### ⭐ THE MASKED — the exemplar, restored to the fiction
 
-⚙️ **Re-verified after the retune** — five builds, all at the same 5 Force:
+🔒 Its thesis was already one line in the entry — ***"It is not the man that is durable."***
+The ward is on the **Mask**; **the man is the hole.**
 
-| build | torso (45) | **the Mask (15)** | + Oathbreaker |
-|---|---|---|---|
-| blade — 5 Bleed | 3/swing · 15 sw | ✗ nothing | 3 · 5 sw |
-| hammer — 5 Crush | 5 · 9 sw | **2 · 8 sw** ✅ brute works | 5 · 3 sw |
-| blade + torch | 4 · 12 sw | **1 · 15 sw** ✅ slow, real | 4 · 4 sw |
-| torch build | 7 · 7 sw | **4 · 4 sw** | 7 · 3 sw |
-| **prepared** | **11 · 5 sw** | **8 · 2 sw** | 11 · 2 sw |
+| | value | why (required) |
+|---|---|---|
+| **Weak** | Burn (doubles) | The horns are wood and the mask is fired clay; nothing in that silhouette has ever been on fire |
+| **Resist** | Bleed 2 | The Mask restores a destroyed part every Clock reset — bleeding him *is* that restoration, one swing at a time |
+| **Resist** | Infection 3 | He is the plague's own reliquary. Infecting patient zero is a category error |
+| **Mask part** | universal **6** | `cause:` Beelzebub's seal · `removal:` Oathbreaker ignores it; the chain ends the fight without touching it |
+| ~~Chill 2~~ | **CUT** | ⚠️ traced to nothing — *"the conversion runs hot"* was invented to push the party toward fire. **The one genuine over-expression, and the owner named it** |
 
-⭐ **Four of five builds can now brute the Mask** — the inverse of the first attempt.
-The one that cannot is a pure-Bleed party using the worst tool against the most warded
-thing, which is **an answer to find, not a wall.** 🎯 GM: announce none of it. Let the
-first Bleed land for 1 and let them ask.
+⚠️ **Universal is back at 6, and an average F1 party does exactly nothing to the Mask.**
+**That is correct now** — canon says it *"cannot be damaged by normal harm,"* the win
+condition was never the Mask, and **three roads are written**: the chain (ends the fight
+without touching it), the sprig (ignores the ward), and a prepared party simply grinding
+it at 2 a swing. 🎯 GM: announce none of it.
 
 **Two model gaps this surfaced and closed:**
-- 🔴 **§7.3's "a weakness DOUBLES that type" had NO FIELD** — the rule could only live in
-  prose. `Enemy.weaknesses[]` holds it now; the gate rejects an unknown type and refuses
-  a type listed as **both** a weakness and a resistance.
+- 🔴 **§7.3's "a weakness DOUBLES that type" had NO FIELD** — `Enemy.weaknesses[{type, why}]`
+  holds it now; the gate refuses an unknown type and a type listed as **both**.
 - 🔴 **Enemy resistance was whole-body only, while §12.6 already gives the CONTESTANT
-  per-part resistance** (armor covers parts). `BodyPartSchema` carries `resistances` +
-  `universal` too, adding to the enemy-wide values — which is what lets the Mask be
-  sealed while the man is not. Part-level universals are gated identically.
+  per-part resistance.** `BodyPartSchema` carries `resistances` + `universal` too, which is
+  what lets the Mask be sealed while the man is not.
 
-**114 tests pass.**
+**115 tests pass.**
 
 ### ✅ §21.6 PREPARATION — written, with both new categories designed (2026-09-14)
 

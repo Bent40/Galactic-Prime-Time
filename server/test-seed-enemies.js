@@ -37,25 +37,23 @@ ok('an over-fat mob is caught',
 console.log('resistance gate (§10 / §10.1)');
 const R = (o) => ({ name: 'x', tier: 'mob', notes: 'n', bodyParts: [{ name: 'B', maxHp: 5 }], ...o });
 ok('no resistances at all is fine', resistanceProblems(R({})).length === 0);
-ok('a typed resistance passes', resistanceProblems(R({ resistances: [{ type: 'Fire', value: 2 }] })).length === 1,
+ok('a typed resistance passes', resistanceProblems(R({ resistances: [{ type: 'Fire', value: 2, why: 'w' }] })).length === 1,
    'Fire is not a DMG_TYPE — Burn is');
-ok('a real typed resistance passes', resistanceProblems(R({ resistances: [{ type: 'Burn', value: 2 }] })).length === 0);
-ok('an unknown damage type is rejected', resistanceProblems(R({ resistances: [{ type: 'Sonic', value: 2 }] })).length === 1);
+ok('a real typed resistance passes', resistanceProblems(R({ resistances: [{ type: 'Burn', value: 2, why: 'w' }] })).length === 0);
+ok('an unknown damage type is rejected', resistanceProblems(R({ resistances: [{ type: 'Sonic', value: 2, why: 'w' }] })).length === 1);
 ok('a duplicate type is rejected',
-   resistanceProblems(R({ resistances: [{ type: 'Burn', value: 2 }, { type: 'Burn', value: 1 }] })).length === 1);
+   resistanceProblems(R({ resistances: [{ type: 'Burn', value: 2, why: 'w' }, { type: 'Burn', value: 1, why: 'w' }] })).length === 1);
 ok('a zero or negative typed value is rejected',
-   resistanceProblems(R({ resistances: [{ type: 'Burn', value: 0 }] })).length === 1
-   && resistanceProblems(R({ resistances: [{ type: 'Burn', value: -2 }] })).length === 1);
+   resistanceProblems(R({ resistances: [{ type: 'Burn', value: 0, why: 'w' }] })).length === 1
+   && resistanceProblems(R({ resistances: [{ type: 'Burn', value: -2, why: 'w' }] })).length === 1);
 // §10.1 — the owner's rule: universal resistance is always CAUSED, never a state.
 ok('universal with both cause and removal passes',
    resistanceProblems(R({ universal: { value: 4, cause: 'stone shell', removal: 'chip the shell' } })).length === 0);
-// §21.3 rule 3 — overwhelming force must SOMETIMES work, so a universal at or above
-// the floor's average Force is a wall and the gate refuses it.
-ok('a universal AT the floor average is refused — it closes the brute-force road',
-   resistanceProblems(R({ universal: { value: 5, cause: 'c', removal: 'r' } }), 1)
-     .some(p => /overwhelming force/.test(p)));
-ok('the ceiling follows the floor — 5 is legal at F2, where the average is 6',
-   resistanceProblems(R({ universal: { value: 5, cause: 'c', removal: 'r' } }), 2).length === 0);
+// §21.3 rule 3, CORRECTED 2026-09-14 — there is NO ceiling. A boss may be genuinely
+// impossible for a build that brought the wrong things; the requirement is that a
+// path exists, and `removal` is where it is written.
+ok('a huge universal is legal so long as it names its cause and removal',
+   resistanceProblems(R({ universal: { value: 99, cause: 'a god\'s seal', removal: 'Oathbreaker ignores it' } })).length === 0);
 ok('universal with NO CAUSE is refused',
    resistanceProblems(R({ universal: { value: 6, removal: 'chip the shell' } })).some(p => /CAUSE/.test(p)));
 ok('universal with NO REMOVAL is refused',
@@ -70,15 +68,15 @@ ok('a negative universal is rejected',
 // Owner, 2026-09-14: "a mob can have any resistance as well." NO tier check.
 ok('A MOB may carry typed AND universal resistance — no tier restriction',
    resistanceProblems(R({ tier: 'mob',
-     resistances: [{ type: 'Bleed', value: 3 }, { type: 'Crush', value: 1 }],
+     resistances: [{ type: 'Bleed', value: 3, why: 'w' }, { type: 'Crush', value: 1, why: 'w' }],
      universal: { value: 4, cause: 'crystal rind', removal: 'Crush shatters it' } })).length === 0);
 ok('the resistance gate runs inside doctrineCheck',
    doctrineCheck([R({ universal: { value: 6 } })], 1).some(p => /CAUSE/.test(p)));
 ok('resistances show up in diffFields',
-   diffFields({ resistances: [{ type: 'Burn', value: 2 }] }, { resistances: [{ type: 'Burn', value: 3 }] }).includes('resistances'));
+   diffFields({ resistances: [{ type: 'Burn', value: 2, why: 'w' }] }, { resistances: [{ type: 'Burn', value: 3, why: 'w' }] }).includes('resistances'));
 ok('a reordered resistance list is NOT a diff',
-   !diffFields({ resistances: [{ type: 'Burn', value: 2 }, { type: 'Bleed', value: 1 }] },
-               { resistances: [{ type: 'Bleed', value: 1 }, { type: 'Burn', value: 2 }] }).includes('resistances'));
+   !diffFields({ resistances: [{ type: 'Burn', value: 2, why: 'w' }, { type: 'Bleed', value: 1, why: 'w' }] },
+               { resistances: [{ type: 'Bleed', value: 1, why: 'w' }, { type: 'Burn', value: 2, why: 'w' }] }).includes('resistances'));
 ok('universal shows up in diffFields',
    diffFields({ universal: { value: 6, cause: 'a', removal: 'b' } },
               { universal: { value: 4, cause: 'a', removal: 'b' } }).includes('universal'));
@@ -168,22 +166,28 @@ ok('no authored F1 damage is wildly outside its band', outliers.length === 0, ou
 console.log('THE MASKED — the resistance exemplar (§7.3 / §10.1)');
 const masked = f1.find(e => e.name === 'THE MASKED');
 const maskPart = masked.bodyParts.find(p => p.name === 'Mask');
-ok('he is weak to Burn', (masked.weaknesses || []).includes('Burn'));
+ok('he is weak to Burn', (masked.weaknesses || []).some(w => w.type === 'Burn'));
 ok('Burn is NOT also a resistance — the gate refuses that contradiction',
    !(masked.resistances || []).some(r => r.type === 'Burn')
-   && resistanceProblems({ ...masked, resistances: [...masked.resistances, { type: 'Burn', value: 1 }] })
+   && resistanceProblems({ ...masked, resistances: [...masked.resistances, { type: 'Burn', value: 1, why: 'w' }] })
         .some(p => /BOTH a weakness and a resistance/.test(p)));
 ok('the ward lives on the MASK, not on the man',
-   Number(maskPart.universal.value) === 3
+   Number(maskPart.universal.value) === 6
    && !Number((masked.universal || {}).value || 0));
-// §21.3 rule 4 — do not over-express. One weakness, one or two resistances, at most
-// one universal. Retuned 2026-09-14 from three resistances and a universal of 6.
-ok('he is not over-expressed — one weakness, two resistances, one universal',
-   (masked.weaknesses || []).length === 1
-   && (masked.resistances || []).length <= 2
-   && masked.bodyParts.filter(p => Number((p.universal || {}).value || 0)).length === 1);
-ok('brute force still works on the Mask — a 5-Force unresisted hit gets through',
-   5 - Number(maskPart.universal.value) > 0);
+// §21.3 rule 4, CORRECTED 2026-09-14 — over-expression is a JUSTIFICATION failure,
+// not a count. So the test is that every line carries its reason, not that there
+// are few lines.
+ok('every resistance and weakness names WHY',
+   (masked.resistances || []).every(r => String(r.why || '').trim())
+   && (masked.weaknesses || []).every(w => String(w.why || '').trim()));
+ok('a resistance with no WHY is refused — the gate against inventing one to force a tactic',
+   resistanceProblems({ name: 'x', tier: 'boss', bodyParts: [],
+     resistances: [{ type: 'Chill', value: 2 }] }).some(p => /names no WHY/.test(p)));
+ok('a weakness with no WHY is refused too',
+   resistanceProblems({ name: 'x', tier: 'boss', bodyParts: [],
+     weaknesses: [{ type: 'Burn' }] }).some(p => /names no WHY/.test(p)));
+ok('the Mask is allowed to be out of reach — 6 against an F1 average of 5',
+   Number(maskPart.universal.value) === 6 && 5 - 6 <= 0);
 ok('the Mask\'s universal names both its cause and its removal (§10.1)',
    maskPart.universal.cause.trim().length > 0 && maskPart.universal.removal.trim().length > 0);
 ok('a PART-level universal with no removal is refused',
@@ -193,10 +197,11 @@ ok('a PART-level universal with no removal is refused',
 ok('a part with no resistances is not checked and not a problem',
    resistanceProblems({ name: 'x', tier: 'mob', bodyParts: [{ name: 'Body', maxHp: 5 }] }).length === 0);
 ok('an unknown weakness type is rejected',
-   resistanceProblems({ name: 'x', tier: 'mob', weaknesses: ['Sonic'], bodyParts: [] }).length === 1);
-ok('weaknesses show up in diffFields',
-   diffFields({ weaknesses: ['Burn'] }, { weaknesses: ['Crush'] }).includes('weaknesses')
-   && !diffFields({ weaknesses: ['Burn', 'Crush'] }, { weaknesses: ['Crush', 'Burn'] }).includes('weaknesses'));
+   resistanceProblems({ name: 'x', tier: 'mob', weaknesses: [{ type: 'Sonic', why: 'w' }], bodyParts: [] }).length === 1);
+ok('weaknesses show up in diffFields, and reordering is not a diff',
+   diffFields({ weaknesses: [{ type: 'Burn' }] }, { weaknesses: [{ type: 'Crush' }] }).includes('weaknesses')
+   && !diffFields({ weaknesses: [{ type: 'Burn' }, { type: 'Crush' }] },
+                  { weaknesses: [{ type: 'Crush' }, { type: 'Burn' }] }).includes('weaknesses'));
 
 console.log('F2 roster');
 ok('the F2 roster passes the doctrine gate AT F2', doctrineCheck(f2, 2).length === 0,

@@ -86,6 +86,9 @@ const normRes   = (a) => JSON.stringify((a || []).map(r => ({ type: r.type, valu
 const normUni   = (u) => JSON.stringify({ value: Number((u || {}).value || 0),
                                           cause: String((u || {}).cause || ''),
                                           removal: String((u || {}).removal || '') });
+const normWeak  = (a) => JSON.stringify((a || []).map(w => (typeof w === 'string' ? { type: w, why: '' }
+                                          : { type: w.type, why: String(w.why || '') }))
+                                         .sort((x, y) => String(x.type).localeCompare(String(y.type))));
 const normSig   = (g) => JSON.stringify({
   floor: Number((g || {}).floor || 0), damage: Number((g || {}).damage || 0),
   type: String((g || {}).type || ''), exception: String((g || {}).exception || ''),
@@ -105,8 +108,7 @@ function diffFields(existing, seed) {
   if (normPhase(existing.phases)    !== normPhase(seed.phases))    diffs.push('phases');
   if (normRes(existing.resistances) !== normRes(seed.resistances)) diffs.push('resistances');
   if (normUni(existing.universal)   !== normUni(seed.universal))   diffs.push('universal');
-  if (JSON.stringify([...(existing.weaknesses || [])].sort()) !==
-      JSON.stringify([...(seed.weaknesses || [])].sort()))         diffs.push('weaknesses');
+  if (normWeak(existing.weaknesses) !== normWeak(seed.weaknesses))  diffs.push('weaknesses');
   return diffs;
 }
 
@@ -222,35 +224,38 @@ const RESIST_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 
  */
 function resistanceProblems(e, atFloor = floor) {
   const out = [];
-  // §21.3 rule 3 — OVERWHELMING FORCE MUST SOMETIMES WORK. A universal resistance
-  // at or above the floor's average Force closes the brute road entirely, which is
-  // a wall rather than a question. Below it, an unresisted type always gets at
-  // least something through, however slowly.
-  const avg = FLOOR_MOB_HP[atFloor];
-  checkResistSet(e, e, `${e.name}`, out, avg);
+  // §21.3 — there is deliberately NO ceiling on a universal resistance. A boss may be
+  // genuinely impossible for a build that brought the wrong things; the requirement is
+  // that A PATH EXISTS, not that brute force is one of them. §10.1's mandatory
+  // `removal` field is what guarantees the path, and it is enough.
+  checkResistSet(e, e, `${e.name}`, out);
   // §7.3 resolves damage per part, so a PART may be warded while the body is not
   // (THE MASKED's Mask is sealed; the man is just a man). Same rules, same gate.
   (e.bodyParts || []).forEach((bp) => {
     if ((bp.resistances && bp.resistances.length) || Number((bp.universal || {}).value || 0)) {
-      checkResistSet(bp, e, `${e.name} · part "${bp.name}"`, out, avg);
+      checkResistSet(bp, e, `${e.name} · part "${bp.name}"`, out);
     }
   });
   // §7.3 — a weakness doubles its type, so the type has to be a real one.
   const ws = Array.isArray(e.weaknesses) ? e.weaknesses : [];
   const wseen = new Set();
-  ws.forEach((w) => {
-    if (!RESIST_TYPES.includes(String(w))) out.push(`${e.name}: weakness "${w}" is not one of ${RESIST_TYPES.join('|')}`);
-    if (wseen.has(w)) out.push(`${e.name}: weakness ${w} is listed twice`);
-    wseen.add(w);
-    if ((e.resistances || []).some(r => r.type === w)) {
-      out.push(`${e.name}: ${w} is listed as BOTH a weakness and a resistance — pick one`);
+  ws.forEach((w, i) => {
+    const ty = typeof w === 'string' ? w : String((w || {}).type || '');
+    if (!RESIST_TYPES.includes(ty)) out.push(`${e.name}: weakness "${ty}" is not one of ${RESIST_TYPES.join('|')}`);
+    if (wseen.has(ty)) out.push(`${e.name}: weakness ${ty} is listed twice`);
+    wseen.add(ty);
+    if ((e.resistances || []).some(r => r.type === ty)) {
+      out.push(`${e.name}: ${ty} is listed as BOTH a weakness and a resistance — pick one`);
+    }
+    if (!String((w || {}).why || '').trim()) {
+      out.push(`${e.name}: weakness[${i}] (${ty}) names no WHY — §21.3, same rule as resistances`);
     }
   });
   return out;
 }
 
 /** The resistance rules, applied to an enemy or to one of its parts. */
-function checkResistSet(holder, e, label, out, avgForce) {
+function checkResistSet(holder, e, label, out) {
   const rs = Array.isArray(holder.resistances) ? holder.resistances : [];
   const seen = new Set();
   rs.forEach((r, i) => {
@@ -264,6 +269,10 @@ function checkResistSet(holder, e, label, out, avgForce) {
     seen.add(ty);
     const v = Number((r || {}).value);
     if (!Number.isFinite(v) || v <= 0) out.push(`${at} (${ty}) value must be a positive number, got ${(r || {}).value}`);
+    if (!String((r || {}).why || '').trim()) {
+      out.push(`${at} (${ty}) names no WHY — §21.3, a resistance must trace to what the creature IS or has DONE. ` +
+               `If you cannot write the reason, it is there to force a tactic and belongs cut.`);
+    }
   });
 
   const u = holder.universal || {};
@@ -276,10 +285,7 @@ function checkResistSet(holder, e, label, out, avgForce) {
     if (!String(u.removal || '').trim()) {
       out.push(`${label}: universal ${uv} names no REMOVAL — §10.1, every universal resistance must say what takes it away`);
     }
-    if (avgForce && uv >= avgForce) {
-      out.push(`${label}: universal ${uv} is at or above this floor's average Force (${avgForce}) — ` +
-               `§21.3, overwhelming force must SOMETIMES work. Cap it at ${avgForce - 1}`);
-    }
+
   }
 }
 

@@ -1521,25 +1521,38 @@ Tokens**. The Lounge is where Upgrade Tokens go to die — happily.
 
 #### Authoring a boss's resistances (§7.3 / §10.1)
 
-Force gives a boss a defence that is a *question* rather than a bigger bar. Four
-rules keep that from turning into a gimmick.
+Force lets a boss defend with a *question* instead of a bigger bar. Four rules keep
+that honest.
 
-1. **Story first.** A boss with a purpose follows its own logic. If its win
-   condition was never the kill, **being hard to kill is fine** — that is not the
-   fight you wrote.
-2. **The floor must contain a form of the solution — and the boss must not be
-   solvable only by it.** Put the answer somewhere on the floor, unlabelled. Then
-   make sure it is *an* answer, not *the* answer.
-3. 🔒 **Overwhelming force must sometimes work.** No boss may be arithmetically
-   impossible for a party that brought nothing clever. It may be **expensive** —
-   ten swings where two would do — but the brute road stays open. **A universal
-   resistance therefore sits BELOW the floor's average Force**, so an unresisted
-   type always gets at least something through. *(A badly-chosen damage type can
-   still hit nothing; that is the player's answer to find, not a wall you built.)*
-4. ⚠️ **Do not over-express.** **One weakness, one or two resistances, and at most
-   one universal — on the part that fictionally carries it.** Past that a boss stops
-   being a question and becomes a checklist, and the table feels handled rather than
-   challenged.
+1. **Story first.** A boss with a purpose follows its own logic. If its win condition
+   was never the kill, **being hard to kill is fine** — that is not the fight you wrote.
+2. **The floor must contain a form of the solution, and the boss must not be solvable
+   only by it.** Put an answer on the floor, unlabelled, and make sure it is *an*
+   answer rather than *the* answer.
+3. 🔒 **A path must exist. That is the whole requirement — not that brute force is one
+   of the paths.** Not every fight yields to force; the conditions genuinely may have
+   to be met, and a boss **may be flatly impossible for a party that brought the wrong
+   things**. A boss may be highly resistant to a great many things and carry every
+   trick it needs to survive. What it may never be is *unanswerable*. §10.1's mandatory
+   **`removal`** field is where the path is written down, and writing it is the check.
+4. 🔒 **Over-expression is a failure of JUSTIFICATION, not of count.** A boss with six
+   resistances, each tracing to something it is or has done, is well made. A boss with
+   one resistance invented to push the party toward a particular tactic is a gimmick.
+   **The test is a question you ask yourself about every line: *"can I say what in this
+   creature's story makes it do that?"*** If the answer is really *"so they have to use
+   fire"*, cut it.
+
+**How to stat one.** Do not start from the mechanics. Start from the creature:
+
+- **What is it?** What it is made of, what has been done to it, what it has become.
+- **How much does it matter?** A boss that carries a floor's argument earns a denser
+  sheet than one that guards a door.
+- **What has it done so far?** Everything it has survived, eaten, sealed or been sealed
+  by is a candidate line on the block.
+
+Then write the numbers from that, and **write the reason beside each one** — the
+resistance catalog requires it, and an entry whose reason will not write is an entry
+that should not ship.
 
 **Super Bosses** are large, **multi-stage, multi-area**
 encounters that demand understanding and preparation across multiple ways of

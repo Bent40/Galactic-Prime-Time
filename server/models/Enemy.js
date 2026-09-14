@@ -5,6 +5,17 @@ const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Di
 const ResistSchema = new mongoose.Schema({
   type:  { type: String, default: '' },   // one of DMG_TYPES
   value: { type: Number, default: 0 },    // Force subtracted from that type alone
+  // §21.3 — REQUIRED. What in this creature's story makes it resist this? A
+  // resistance must trace to what it IS or has DONE. If the reason cannot be
+  // written, the resistance exists to force a tactic and belongs cut. This field
+  // is the gate against that; the seeder refuses an entry that leaves it blank.
+  why:   { type: String, default: '' },
+}, { _id: false });
+
+// Weaknesses carry their reason for the same rule.
+const WeaknessSchema = new mongoose.Schema({
+  type: { type: String, default: '' },
+  why:  { type: String, default: '' },
 }, { _id: false });
 
 const UniversalSchema = new mongoose.Schema({
@@ -90,7 +101,7 @@ const EnemySchema = new mongoose.Schema({
   // §7.3 — "a weakness DOUBLES that type's contribution." A torch adds 1 Force to
   // anything and 2 to something that burns. This is the field that rule needed and
   // never had; without it the doubling could only live in prose.
-  weaknesses:  { type: [String],         default: [] },   // damage types, from DMG_TYPES
+  weaknesses:  { type: [WeaknessSchema], default: [] },
   bodyParts:   { type: [BodyPartSchema], default: [] },
   phases:      { type: [PhaseSchema],    default: [] }, // boss/legendary only
 }, { timestamps: true });
