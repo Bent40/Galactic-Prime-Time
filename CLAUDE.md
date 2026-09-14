@@ -1094,6 +1094,41 @@ it at 2 a swing. 🎯 GM: announce none of it.
 
 **115 tests pass.**
 
+### ✅ ALL 12 BOSSES AND SUPERS AUTHORED (2026-09-14) — §21.3 applied
+
+Every boss and super across F1–F3, statted by the owner's method: **what it IS · how
+much it matters · what it has DONE** — then the numbers, each carrying its reason.
+
+| Floor | Boss | Weak | Resists | Because |
+|---|---|---|---|---|
+| F1 | **THE MASKED** | Burn | Bleed 2 · Infection 3 · Mask **universal 6** | horns are wood; the Mask restores a part each Clock; he is the plague's reliquary |
+| F1 | **Foreman Bex** | — | — | ⭐ **blank by design.** Canon forbids the party learning he is not a man; **any resistance is a tell.** His survival is clan law, not a number |
+| F1 | **Vermilia** | — | — | ⭐ **blank on explicit canon** — *"no gate and no special weak system."* Her difficulty was never physical, and softening the kill would cost the encounter its whole weight |
+| F1 | **Loong Kin** | **Infection** | Bleed 4 | 🔴 **Cinnabrus killed its ancestor WITH THE PLAGUE** — crystal is the one thing that has ever killed this bloodline, and the Hard route walks the party through streets of it while they talk to the last of the line. Bleed: Loong-Scale is *shed, never taken* |
+| F2 | **The Doorward** | — | Infection 6 · Torso **universal 99** | **seventy years eating the plague out of the chained man.** The Torso number is the entry's own written gate made structural — *"while it holds anything of yours, damage to the Torso is cosmetic"* — with the Mouth (18, unwarded) as the removal |
+| F2 | **Bex, Rival Noble** | — | Dissolution 3 | the songs are **his instrument**; a man is not unmade by what he commands |
+| F2 | **The Hunt's Owner** | — | — | ⭐ **blank by design.** *"It bought the hunt. It has never run one."* Its protection is distance, a mount and money — **a resistance would contradict the character** |
+| F3 | **Nullrot** | **Crush** | Infection 8 · Poison 4 | ⭐ **the weakness MOVED.** At F1 the horns were bare wood and he burned; here they are in full bloom and **the blooms are crystal, and crystal shatters.** Not a trick — the creature visibly changed |
+| F3 | **Bex, Petitioner** | — | Dissolution 5 | **170 years harvesting despair as a crop.** It has nothing left to show him |
+| F3 | **The One Who Would Be Human** | — | Dissolution 6 | reduced to a **single want** — there is almost nothing left to come apart |
+| F3 | **Dragon in the Foundations** | — | Bleed 5 · Infection 8 | the seal **re-knits**; it is the largest plague reservoir in the world |
+| F3 | **The Reservoir** | **Burn** | Bleed 6 · Crush 6 | 🔒 **canon stated it outright** — *"Burn T2 clears infection outright and it is the one thing that works at scale."* It is a **volume, not an animal**: cutting frost opens nothing |
+
+⭐ **Three of twelve are deliberately blank, and that is the doctrine working.** Rule 4
+is about justification, never count — so where the fiction wants an ordinary creature,
+the right block is empty. A test pins all three so a later pass cannot "fill them in".
+
+⚙️ **Spot-checked, not asserted.** The Reservoir: blade and hammer land **1** against a
+40 HP bloom that regrows every Clock — the "attrition does not work" lesson as
+arithmetic — while a torch lands 6. The Doorward: **nothing** reaches the Torso from any
+build while it holds something, and the Mouth is wide open to everyone. Loong Kin: a
+blade lands 1 against the scale, a hammer 5, and ⭐ **a party carrying crystal shards
+lands 7 without ever knowing why** — they are holding the one substance that kills its
+line.
+
+**120 tests pass**, including a roster-wide sweep: every resistance and weakness across
+all 53 entries names its WHY, and every universal names cause and removal.
+
 ### ✅ §21.6 PREPARATION — written, with both new categories designed (2026-09-14)
 
 🔒 **Owner blessed Sponsorship and Body**, on the condition they be *real designs, not

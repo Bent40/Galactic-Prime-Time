@@ -204,10 +204,23 @@ module.exports = [
     size: 'Large',
     color: '#8a3f6d',
     description: 'EASY ROUTE BOSS. A demon in the doorway. It has been there a very long time and it is not in a hurry. NAME IS A PROPOSAL.',
+    // §21.3 — one line, and it is the most justified resistance in the roster.
+    weaknesses: [],
+    resistances: [
+      { type: 'Infection', value: 6, why: 'SEVENTY YEARS eating the plague out of the chained man. It has been digesting this disease since before anyone in the party was born; there is nothing left in it for the plague to take.' },
+    ],
     bodyParts: [
       { name: 'Mouth', maxHp: 18 },
       { name: 'Head',  maxHp: 14 },
-      { name: 'Torso', maxHp: 46 },
+      // §10.1 — this is the entry's own written gate, made structural rather than
+      // reworded: "WHILE IT HOLDS ANYTHING OF YOURS, damage to the Torso is
+      // cosmetic." Cosmetic means cosmetic, so the number is total — which §21.3
+      // permits, because the removal is written, cheap and reachable (the Mouth is
+      // 18 and carries no ward at all). A party that gave it nothing never meets this.
+      { name: 'Torso', maxHp: 46,
+        universal: { value: 99,
+          cause:   'It is holding something of yours — a name, a memory, a Tag, the use of a skill. The moment it took payment, the Torso closed.',
+          removal: 'Destroy the Mouth (18), where it keeps them. Everything it holds returns at once, to everyone, and the Torso opens. Giving it nothing in the first place skips the gate entirely.' } },
       { name: 'Arm L', maxHp: 12 },
       { name: 'Arm R', maxHp: 12 },
       { name: 'Leg L', maxHp: 14 },
@@ -321,6 +334,12 @@ module.exports = [
     size: 'Large',
     color: '#5a2a8a',
     description: 'MEDIUM ROUTE BOSS. The demon who helped humans and wants the throne for it — and the man who led the arsonists on Floor 1. The Dissolution-songs encounter.',
+    // §21.3 — he is still not a physical creature. His defence is that killing him
+    // does not take, and that is clan law rather than a number. One resistance.
+    weaknesses: [],
+    resistances: [
+      { type: 'Dissolution', value: 3, why: 'The Dissolution songs are HIS instrument — he brought the Choir and he set them singing. A man is not unmade by the thing he commands.' },
+    ],
     bodyParts: [
       { name: 'Head',  maxHp: 18 },
       { name: 'Torso', maxHp: 52 },
@@ -442,6 +461,12 @@ module.exports = [
     size: 'Large',
     color: '#c2452f',
     description: 'HARD ROUTE BOSS. It bought the hunt. It has never run one. NAME IS A PROPOSAL.',
+    // §21.3 — NOTHING. "It bought the hunt. It has never run one." Its protection is
+    // distance, a mount it never dismounts, and money enough to buy more hounds —
+    // all of which are already written as position and phases. A resistance would
+    // contradict the character: it is not tough, it is simply never within reach.
+    weaknesses: [],
+    resistances: [],
     bodyParts: [
       { name: 'Head',  maxHp: 14 },
       { name: 'Torso', maxHp: 44 },

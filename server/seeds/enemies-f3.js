@@ -232,6 +232,18 @@ module.exports = [
     size: 'Large',
     color: '#5f7a4a',
     description: 'EASY ROUTE FINALE. The champion of a buried god, wearing what is left of a man from a staircase. He spreads a disease and cures it in the same street, on the same day, and both are true.',
+    // §21.3 — the same creature as THE MASKED, one stage further, and ⭐ THE WEAKNESS
+    // HAS MOVED WITH HIM. At F1 the horns were bare wood and he burned. Here they are
+    // in full bloom and the blooms are crystal, so what breaks him is what breaks
+    // crystal. A party that met him at F1 and reaches for fire is not being tricked;
+    // they are looking at a creature that visibly changed.
+    weaknesses: [
+      { type: 'Crush', why: 'The horns carry crystal flowers now, full bloom. Crystal shatters — it is the same rule the Crystallized Citizens taught the party on the Hard route, pointed at the thing that made them.' },
+    ],
+    resistances: [
+      { type: 'Infection', value: 8, why: 'The Reservoir is a part of his body. He is not resistant to the plague, he is where it is KEPT — infecting him is pouring water into a lake.' },
+      { type: 'Poison',    value: 4, why: 'The Halo of Cures sheds an antibody continuously, and it works on him first. Whatever is introduced into him is being cured while it acts.' },
+    ],
     bodyParts: [
       { name: 'Mask',          maxHp: 30 },
       { name: 'Head',          maxHp: 26 },
@@ -391,6 +403,12 @@ module.exports = [
     size: 'Large',
     color: '#7a2a4a',
     description: 'MEDIUM ROUTE FINALE. The man from the burning house. The noble from the desert court. He has been a demon the entire time, and he is very tired of it.',
+    // §21.3 — the F2 line, deepened by what he has DONE in the hundred and seventy
+    // years since: not commanding despair, farming it.
+    weaknesses: [],
+    resistances: [
+      { type: 'Dissolution', value: 5, why: 'A hundred and seventy years harvesting blood and NEGATIVE FEELING out of a city. Despair is his crop; he has stood in it every day for six generations, and it has nothing left to show him.' },
+    ],
     bodyParts: [
       { name: 'Head',         maxHp: 20 },
       { name: 'Torso',        maxHp: 55 },
@@ -532,6 +550,11 @@ module.exports = [
     size: 'Large',
     color: '#a03a6a',
     description: 'HARD ROUTE FINALE. It leads the hunt because the Loong is making a cure, and it wants to be cured more than anything has ever wanted anything. NAME IS A PROPOSAL.',
+    // §21.3 — one line, from the one thing it is.
+    weaknesses: [],
+    resistances: [
+      { type: 'Dissolution', value: 6, why: 'It has been reduced to a single want, and Dissolution unmakes a self. There is almost nothing here left to come apart — the Wanting is the whole of it, and the Wanting is not a mind you can pull loose.' },
+    ],
     bodyParts: [
       { name: 'Head',        maxHp: 22 },
       { name: 'Torso',       maxHp: 60 },
@@ -629,6 +652,12 @@ module.exports = [
     size: 'Huge',
     color: '#6b5b7a',
     description: 'THE FIRST LOCK. The dragon Cinnabrus killed, dead two hundred years and still working — Beelzebub built the tongue\'s prison inside its ribs, and the seal is what moves it. It is not a monster. It is a security system with a skeleton.',
+    // §21.3 — it is a corpse, a container and a security system, in that order.
+    weaknesses: [],
+    resistances: [
+      { type: 'Bleed',     value: 5, why: 'Beelzebub\'s seal re-knits a destroyed part to 1 HP every second Clock. Opening it is work the seal simply undoes; the anchors are the fight, not the body.' },
+      { type: 'Infection', value: 8, why: 'Cinnabrus killed it WITH the plague and it has been setting for two hundred years. It is the largest plague reservoir in the world — there is no infecting it further.' },
+    ],
     bodyParts: [
       { name: 'Skull',          maxHp: 60 },
       { name: 'Spine',          maxHp: 70 },
@@ -695,6 +724,16 @@ module.exports = [
     size: 'Huge',
     color: '#8fd0dc',
     description: 'THE SECOND LOCK. Two hundred years of Cinnabrus\'s plague, poured into a dragon and left to set. It is not an animal and it is not undead. It is a volume, and it has grown over the seal like frost over a window.',
+    // §21.3 — canon states the answer outright, so the block only writes it down:
+    // "BURN T2 CLEARS INFECTION OUTRIGHT (§8.2) and it is the one thing that works
+    // at scale." The resistances come from what it IS — a volume, not an animal.
+    weaknesses: [
+      { type: 'Burn', why: 'Burn T2 clears infection outright (§8.2), and this is infection at the scale of a building. Fire is the only thing in the book that addresses what this actually is.' },
+    ],
+    resistances: [
+      { type: 'Bleed', value: 6, why: 'It is a VOLUME, not a creature. Cutting frost off a window opens nothing — there is no body plan here to sever, and the Blooms regrow whole at every Clock reset.' },
+      { type: 'Crush', value: 6, why: 'Same reason. Smashing a volume redistributes it. The party will try attrition first and the numbers are how the room tells them it does not work.' },
+    ],
     bodyParts: [
       { name: 'The Throat',   maxHp: 58 },
       { name: 'First Bloom',  maxHp: 40 },

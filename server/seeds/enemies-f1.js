@@ -347,6 +347,13 @@ module.exports = [
     signature: { floor: 1, damage: 8, type: 'Crush', note: 'only once he stops directing and starts fighting' },
     color: '#a03a3a',
     description: 'MEDIUM ROUTE BOSS. The NPC party\'s leader. Reasonable, articulate, and burning a house with a child in it. NAME IS A PROPOSAL — it becomes canon at F3, where he runs the human farm.',
+    // §21.3 — NOTHING, and that is the design. Ask what he IS here: a courteous man
+    // with a torch, and canon forbids the party learning otherwise on this floor.
+    // ANY resistance is a tell. What keeps him alive is clan law, which is not a
+    // number — his clan lives elsewhere, so killing this body does not take.
+    // A blank block is the correct block when the fiction wants him ordinary.
+    weaknesses: [],
+    resistances: [],
     bodyParts: [
       { name: 'Head',   maxHp: 12 },
       { name: 'Torso',  maxHp: 40 },
@@ -413,6 +420,12 @@ module.exports = [
     signature: { floor: 1, damage: 0, type: '', exception: 'presence',
       note: 'She has no attack. Her threat is noble-class presence: an unbranded contestant who refuses her begins Dissolution at +2/Moment (§8.2). She does not swing, ever.' },
     description: 'MEDIUM ROUTE. She is what the NPCs were right about. She is also a child in a burning house, and both are true. Killable — and killing her deletes a god.',
+    // §21.3 — NOTHING, on explicit canon: "there is no gate and no special weak
+    // system. She is a demon in a burning house and she can be put down." Her
+    // difficulty was never physical, and inventing a resistance would soften the
+    // one encounter whose whole weight is that killing her is EASY and final.
+    weaknesses: [],
+    resistances: [],
     bodyParts: [
       { name: 'Head',    maxHp: 16 },
       { name: 'Torso',   maxHp: 50 },
@@ -601,6 +614,13 @@ module.exports = [
     color: '#2a8f7a',
     size: 'Huge',
     description: 'HARD ROUTE SUPER BOSS. Descendant of the dragon Cinnabrus killed. Two forms. WARDEN FORM: a woman, 2.5m, towering over everyone in the room. LOONG FORM: the size of buildings — hundreds of metres, and it does not obviously end. It has guarded a city that has been empty for a very long time. Nobody has told it. It is not stupid; it is loyal, which is worse.',
+    // §21.3 — derived from what its bloodline HAS SURVIVED, and what it has not.
+    weaknesses: [
+      { type: 'Infection', why: 'Cinnabrus killed its ancestor WITH THE PLAGUE. The crystal is the one thing that has ever killed this bloodline, and the Hard route walks the party through streets full of it while they talk to the last of the line.' },
+    ],
+    resistances: [
+      { type: 'Bleed', value: 4, why: 'Loong-Scale is an apex material and canon has it SHED, never taken — it comes off when the creature is finished with it, not when someone cuts it. Blades find nothing to open.' },
+    ],
     bodyParts: [
       { name: 'Head',              maxHp: 30 },
       { name: 'Neck',              maxHp: 25 },

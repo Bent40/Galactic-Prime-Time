@@ -203,6 +203,33 @@ ok('weaknesses show up in diffFields, and reordering is not a diff',
    && !diffFields({ weaknesses: [{ type: 'Burn' }, { type: 'Crush' }] },
                   { weaknesses: [{ type: 'Crush' }, { type: 'Burn' }] }).includes('weaknesses'));
 
+console.log('boss resistance sweep (§21.3) — every line carries its reason');
+const allRosters = [...f1, ...f2, ...f3];
+ok('every resistance across all 53 entries names WHY',
+   allRosters.every(e => (e.resistances || []).every(r => String(r.why || '').trim())),
+   allRosters.filter(e => (e.resistances || []).some(r => !String(r.why || '').trim())).map(e => e.name).join(', '));
+ok('every weakness across all 53 entries names WHY',
+   allRosters.every(e => (e.weaknesses || []).every(w => String(w.why || '').trim())));
+ok('every universal — enemy or part — names cause AND removal',
+   allRosters.every(e => [e, ...(e.bodyParts || [])].every(h => {
+     const u = h.universal || {}; if (!Number(u.value || 0)) return true;
+     return String(u.cause || '').trim() && String(u.removal || '').trim(); })));
+// §21.3 rule 4 is about justification, never count — so a BLANK block is legal and
+// is the right answer where the fiction wants an ordinary creature. Three bosses
+// are deliberately blank; this pins that so a later pass does not "fill them in".
+const blankByDesign = ['Foreman Bex', 'The Girl in the House — Vermilia', "The Hunt's Owner"];
+ok('the three deliberately-blank bosses are still blank',
+   blankByDesign.every(n => {
+     const e = allRosters.find(x => x.name === n);
+     return e && !(e.resistances || []).length && !(e.weaknesses || []).length; }),
+   blankByDesign.filter(n => { const e = allRosters.find(x => x.name === n);
+     return e && ((e.resistances || []).length || (e.weaknesses || []).length); }).join(', '));
+ok('every boss and super has been considered — each is authored or deliberately blank',
+   allRosters.filter(e => e.tier === 'boss' || e.tier === 'legendary')
+     .every(e => (e.resistances || []).length || (e.weaknesses || []).length
+                 || blankByDesign.includes(e.name)
+                 || (e.bodyParts || []).some(p => Number((p.universal || {}).value || 0))));
+
 console.log('F2 roster');
 ok('the F2 roster passes the doctrine gate AT F2', doctrineCheck(f2, 2).length === 0,
    JSON.stringify(doctrineCheck(f2, 2)));
