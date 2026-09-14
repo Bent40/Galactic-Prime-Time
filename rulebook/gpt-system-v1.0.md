@@ -1,8 +1,10 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.4** · 2026-09-14 — **what a fight is WORTH**: encounter sizing
-(§21.7), spectacle payouts (§17.8) and the rank→reward join (§17.6, §19.1). Also
-tidies §21.2's last line of the withdrawn ×2 band.
+**Version 1.5** · 2026-09-14 — **what a MOB is for**: the Press (§21.8), armor
+rides the band and degrades with the part (§12.6). Corrects §21.7's danger model,
+which had left the defender's armor out of it entirely.
+*Previously —* **1.4** · 2026-09-14, **what a fight is WORTH**: encounter sizing
+(§21.7), spectacle payouts (§17.8) and the rank→reward join (§17.6, §19.1).
 *Previously —* **1.3** · 2026-09-01, **FORCE** (§7.3): one unit for every source of
 damage, replacing the material band's multiplication with addition. Universal
 resistance (§10.1). Area attacks do not divide (§7.3).
@@ -357,6 +359,8 @@ Contestants acting on the same Moment can act **together**:
 - **Combined attacks merge damage and count as ONE hit** for anything keyed to a
   single hit (breach thresholds, §21). This is the party's designed path to
   single-hit numbers no individual can reach.
+  ⚠️ **And it was never contestants-only.** A directed horde does exactly this —
+  see **§21.8**. Merging is the rule; who is doing it is not part of it.
 - Ally-targeted buffs/heals and item handoffs are legal combo members; handoffs
   ride the inventory economy (§5.5).
 - **Failure degrades, never vetoes:** if a linked actor's requirement fails or a
@@ -871,6 +875,16 @@ kit exists — the top of the ladder is polish-only.
   A Quality vest of Floor 3 material resists **5**, not 2. **Armor upgrades on
   the same schedule a weapon does, and for the same reason:** a flat number is a
   shrinking percentage, so a resistance that never climbs stops being armor.
+- 🔒 **ARMOR DEGRADES WITH THE PART IT COVERS (ruled 2026-09-14).** A part's
+  resistance drops by **the highest flat-resist condition tier on that part** —
+  a **Crushed T2** torso resists **2 less there, in every type**, because the
+  plate over it is caved in. Never below 0.
+  ⚙️ **Highest, not the sum** — and that is a deliberate difference from §21.6's
+  Body category, which *does* stack. A bleeding arm and a crushed arm each impair
+  a swing independently; **a breastplate is one object and only breaks once.**
+  ⭐ **It recovers the moment the condition is cleared, so no counter is tracked** —
+  the sheet already knows the tier. §21.6 made healing a damage buff; this makes
+  it a **defence** buff on the same action.
 - **Nullification lives at the top:** Superior armor may carry **T1
   nullification** of its theme type on the covered part; Exceptional reaches T2
   or full-type immunity on the part.
@@ -960,8 +974,7 @@ neither does.**
 current is **permanently immune to ordinary mob damage**, on every floor — the
 mitigation holds at roughly three quarters of a mob's hit from Floor 1 to Floor 9.
 That is the ruling working as intended, and it means **a mob's threat cannot be
-its damage.** What it is instead is an open design question
-(`rulebook/enemy-scaling.md` S-6).
+its damage.** 🔒 What it is instead is **§21.8 — the Press.**
 
 ---
 
@@ -1736,6 +1749,10 @@ This closes that, on tiers the sheet already tracks.* **And it makes healing a d
 buff** — a party that patches up mid-fight is not only surviving longer, it is hitting
 harder. That is deliberate.
 
+🔒 **And it runs both ways (§12.6, ruled 2026-09-14): a conditioned part also
+RESISTS less**, because the armor over it is broken. One condition, both ends —
+you hit softer and you are hit harder, until someone patches it.
+
 ---
 
 ### 21.7 Encounter sizing — how big is a room?
@@ -1811,12 +1828,93 @@ fight. An elite's clock is its own HP **plus** that delay.
 lever is **the second elite**, and it is a big step. Do not try to bridge it with
 mobs; they will not carry it.
 
-⭐ **So what is a mob room FOR?** Not damage. **Moments, position, and
-conditions.** And the last of those is the one that still reaches an armoured
-party: **§8.1's Chill, Poison, Infection and Dissolution carry a TIER and no
-Force, so flat resistance never touches them.** *The mobs that matter to a
+⭐ **So what is a mob room FOR?** Two answers, and both are rules.
+
+**§21.8 — the Press.** A directed horde combines into one attack and resistance
+answers it **once**, so three mobs on one contestant destroy a torso on any
+floor. **Mobs are a positioning threat, not a damage one**, and the numbers above
+are what an *undirected* horde is worth. Read them as the floor of the room, not
+its ceiling.
+
+**§8.1 conditions.** Chill, Poison, Infection and Dissolution carry a **tier and
+no Force**, so flat resistance never touches them. *The mobs that matter to a
 well-equipped party are the ones that do not deal damage at all.* Author mob
-rooms as gates and costs — surface immunity, area-only, untargetable-while-X,
-a cloud that infects — and let the damage be free.
+rooms as gates and costs — surface immunity, area-only, untargetable-while-X, a
+cloud that infects — and let the raw damage be free.
 
 *Regenerate the tables: `node server/encounter-bands.js`.*
+
+---
+
+### 21.8 The Press — what a mob is for
+
+🔒 **RULED 2026-09-14.** §12.6's band ruling keeps armor climbing with the party,
+which is correct and has a consequence the book owns: **a party in current armor
+is effectively immune to ordinary mob damage, on every floor.** So a mob's threat
+is not its damage. **It is the number of them that can reach you.**
+
+#### The rule
+
+> **Mobs that can reach the same target may combine into one attack.** Their Force
+> adds, and **resistance and any universal apply ONCE, to the merged total** —
+> not once per mob.
+
+This is **§5.7 unchanged**. Combining is how the party reaches single-hit numbers
+no individual can, and nothing in §5.7 made it a contestant privilege. Every
+detail of the press already lives there:
+
+- **Every linked actor pays its own cost.** Three mobs pressing spend three
+  attacks on one target, so ⭐ **the press CONCENTRATES, it does not multiply** —
+  everyone they are not pressing is untouched that Moment.
+- It **counts as ONE hit** for anything keyed to a single hit — including a
+  universal threshold (§10.1), which is the whole point.
+- **Failure degrades, never vetoes.** A mob that cannot reach still attacks alone.
+
+**And that one word — *once* — is the entire mechanic.** The numbers below are not
+new; they are the existing ones, resolved in the existing order.
+
+| mobs on one contestant | F1 (mob 4 · armor 3 · torso 7) | F5 (9 · 7 · 17) | F9 (19 · 11 · 35) | |
+|---|---|---|---|---|
+| **1** | 1 | 2 | 8 | chaff, as it should be |
+| **2** | **5** | **11** | **27** | **hurts** |
+| **3** | **9** | **20** | **46** | 🔴 **a destroyed torso** |
+| 4 | 13 | 29 | 65 | and overflow |
+
+⭐ **The same curve on every floor** — one is nothing, two hurt, three kill —
+because §7.3 calibrated both sides of the exchange together. *Regenerate:*
+`node server/encounter-bands.js`.
+
+#### The condition — a horde needs someone to direct it
+
+🔒 **Mobs press only while a directing elite (or better) is in the fight.**
+Leaderless mobs mill: they attack one at a time and an armoured party walks
+through them. That is not a flaw in the roster — **it is what a mob is.**
+
+- The director must be **alive, able to perceive the target, and not itself
+  Shocked or under a Forced Action** (§6).
+- **It directs what it can see.** ⚖ If that proves too hot at a given table, the
+  dial is the *reach* — cap it at a number of mobs rather than line of sight.
+- **Kill the director and the horde comes apart mid-fight**, back to attacking one
+  at a time. ⭐ That is a target-priority decision in every mixed room, and it is
+  legible without being explained.
+
+⚙️ This is also why an elite standing in a room full of mobs makes sense at all.
+It is not sharing a room with them; **it is the reason they are dangerous.**
+
+#### What answers it
+
+Nothing here is new machinery — every counter is a rule already in play:
+
+| | |
+|---|---|
+| **Do not be surrounded** | reach is the cap. A contestant nobody can flank cannot be pressed by more than the geometry allows |
+| **Terrain** | a corridor two abreast caps the press at two (§21.4). ⭐ The width that makes a room easier to *author* is what makes it safer to *stand in* |
+| **Area attacks** | §7.3 — **area does not divide.** One sweep lands full Force on the entire press, and a press is by definition bunched |
+| **Kill the director** | the condition above |
+| **The bulwark shapes** (§4) | retargeting attacks on adjacent allies is exactly the answer to concentration |
+
+⚠️ **Author's warning.** The press kills a cornered contestant fast — **that is
+the point, and it is also the failure mode.** A GM who concentrates six mobs on
+one person has killed them, and should know that before doing it. Announce the
+gathering; §21.4's terrain is the party's answer and they cannot use it if the
+turn is a surprise.

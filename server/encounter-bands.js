@@ -130,14 +130,18 @@ function roomCost(f, { mobs = 0, elites = 0, width = 2, resist = DEFAULT_RESIST 
 
 
 /**
- * ── THE PRESS (proposal, 2026-09-14) ────────────────────────────────────────
- * Owner's idea 1: mobs coordinate, adding Force to each other like a party's
- * combined attack. §5.7 ALREADY WRITES THIS RULE, for contestants:
+ * ── THE PRESS — §21.8, RULED 2026-09-14 ─────────────────────────────────────
+ * Mobs that can reach the same target combine into one attack; their Force adds
+ * and resistance answers it ONCE. They do it only while a directing elite is in
+ * the fight. §5.7 ALREADY WROTE THIS RULE, for contestants:
  *   "Combined attacks merge damage and count as ONE hit ... the party's designed
  *    path to single-hit numbers no individual can reach."
- * Nothing in the book restricts it to contestants. Pointing it at a horde needs
- * no new machinery and no new number — the whole effect comes from resistance
- * applying ONCE to the merged total instead of once per mob.
+ * Nothing in the book restricted it to contestants, and §5.7 now says so out
+ * loud. The whole effect is resistance applying ONCE to the merged total instead
+ * of once per mob — no new machinery, no new number.
+ *
+ * §12.6 also degrades a part's resistance by the HIGHEST flat-resist condition
+ * tier on it, which is modelled here by passing a lower `resist`.
  *
  *   pressed(n) = max(0, n * mobSig - resist)      instead of  n * max(0, mobSig - resist)
  */
@@ -166,42 +170,47 @@ function report(f) {
   const e1m = roomCost(f, { elites: 1, mobs: 4, width: 2, resist: 2 });
   const e2 = roomCost(f, { elites: 2, resist: 2 });
   console.log(`  ELITES at resist 2 —  one: ${e1.pct}%  ·  one + 4 mobs: ${e1m.pct}%  ·  TWO: ${e2.pct}%`);
-  console.log(`  ⚖ ~25% standard · ~50% hard · 100% is a set piece. Mobs at ${f === 1 ? 'F1' : `F${f}`} get ` +
-              `${roomCost(f, { mobs: 1, resist: 2 }).mobThrough} through resist 2; an elite gets ${e1.eliteThrough}.`);
+  console.log(`  ⚖ ~25% standard · ~50% hard · 100% is a set piece.`);
+  const cur = TIER_RESIST.Quality + f;
+  const cells = [1, 2, 3, 4].map(n => {
+    const pr = press(f, n, cur);
+    return `${n}:${String(pr.through).padStart(3)}${pr.kills ? '*' : ' '}`;
+  }).join('  ');
+  console.log(`  §21.8 THE PRESS at current armor ${cur} (torso ${s.torso}) — mobs on one target, merged:`);
+  console.log(`    ${cells}      (* = a destroyed torso)`);
 }
 
 function main() {
-if (only) report(only);
-else {
+  if (only) { report(only); return; }
   console.log('ENCOUNTER SIZING — mob counts are FLOOR-INVARIANT (a mob is one swing, by calibration).');
   console.log('Only the damage moves, and it moves with the body, so the PERCENTAGES stay put.');
   for (let f = 1; f <= 9; f++) report(f);
-  console.log('\nmobs = 20 x the Clock fraction · damage ceiling = width x mob signature x ceil(count / 2)');
-}
-// The dial the rulebook (§21.7) claims is floor-invariant. Printed so it is
-// checkable rather than asserted.
-console.log('\nTHE LADDER, at resist 2 — and the step that matters is the SECOND ELITE.');
-console.log('  floor   6 mobs   1 elite   1 elite + 4 mobs   TWO elites');
-for (let f = 1; f <= 9; f++) {
-  const c = roomCost(f, { mobs: 6, width: 2 });
-  const a = roomCost(f, { elites: 1 });
-  const b = roomCost(f, { elites: 1, mobs: 4, width: 2 });
-  const d = roomCost(f, { elites: 2 });
-  console.log(`   F${f}     ${String(c.pct).padStart(4)}%    ${String(a.pct).padStart(4)}%       ${String(b.pct).padStart(4)}%            ${String(d.pct).padStart(4)}%`);
-}
-console.log('  ⚠️ Mobs are nearly free and adding more barely moves the number.');
-console.log('  ⚠️ There is NOTHING between "one elite + mobs" and "two elites". That gap is real.');
+  console.log('\nmobs are sized in MOMENTS (bodies, not output) · damage ceiling = width x (sig - resist) x ceil(mobs / party)');
 
-console.log('\nTHE CLIFF — 12 mobs at F1, width 4, by the resistance on the struck part.');
-console.log('  §12.6 armor is FLAT and STACKS, so it does not scale a threat down, it SWITCHES IT OFF.');
-for (let r = 0; r <= 5; r++) {
-  const x = roomCost(1, { mobs: 12, width: 4, resist: r });
-  console.log(`   resist ${r}:  mob 4 - ${r} = ${x.mobThrough} through  ->  ${String(x.pct).padStart(3)}%` +
-              (x.mobThrough === 0 ? '   <- every F1 mob is now harmless, permanently' : ''));
-}
-console.log('  ⭐ At F1 the line between "cannot touch you" and "can" runs exactly between MOB and ELITE.');
-console.log('  ⭐ And §8.1 conditions (Chill/Poison/Infection/Dissolution) carry a TIER and no Force,');
-console.log('     so flat resistance never touches them. They are what still reaches an armoured party.');
+  // The dial the rulebook (§21.7) claims is floor-invariant. Printed so it is
+  // checkable rather than asserted.
+  console.log('\nTHE LADDER, at resist 2 — and the step that matters is the SECOND ELITE.');
+  console.log('  floor   6 mobs   1 elite   1 elite + 4 mobs   TWO elites');
+  for (let f = 1; f <= 9; f++) {
+    const c = roomCost(f, { mobs: 6, width: 2 });
+    const a = roomCost(f, { elites: 1 });
+    const b = roomCost(f, { elites: 1, mobs: 4, width: 2 });
+    const d = roomCost(f, { elites: 2 });
+    console.log(`   F${f}     ${String(c.pct).padStart(4)}%    ${String(a.pct).padStart(4)}%       ${String(b.pct).padStart(4)}%            ${String(d.pct).padStart(4)}%`);
+  }
+  console.log('  ⚠️ Mobs are nearly free and adding more barely moves the number.');
+  console.log('  ⚠️ There is NOTHING between "one elite + mobs" and "two elites". That gap is real.');
+
+  console.log('\nTHE CLIFF — 12 mobs at F1, width 4, by the resistance on the struck part.');
+  console.log('  §12.6 armor is FLAT and STACKS, so it does not scale a threat down, it SWITCHES IT OFF.');
+  for (let r = 0; r <= 5; r++) {
+    const x = roomCost(1, { mobs: 12, width: 4, resist: r });
+    console.log(`   resist ${r}:  mob 4 - ${r} = ${x.mobThrough} through  ->  ${String(x.pct).padStart(3)}%` +
+                (x.mobThrough === 0 ? '   <- every F1 mob is now harmless, permanently' : ''));
+  }
+  console.log('  ⭐ At F1 the line between "cannot touch you" and "can" runs exactly between MOB and ELITE.');
+  console.log('  ⭐ And §8.1 conditions (Chill/Poison/Infection/Dissolution) carry a TIER and no Force,');
+  console.log('     so flat resistance never touches them. They are what still reaches an armoured party.');
 }
 
 if (require.main === module) main();

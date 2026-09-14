@@ -242,7 +242,7 @@ touches them. **The mobs that still matter are the ones that deal no damage.**
 
 ---
 
-## S-6 — What a mob is FOR 🔴 **PROPOSAL, 2026-09-14 — nothing here is ruled**
+## S-6 — What a mob is FOR ✅ **ALL THREE RULED 2026-09-14 — now §21.8 + §12.6**
 
 **The problem, stated honestly.** §12.7's armor ruling (2026-09-14) keeps
 resistance climbing with the party, which fixes the scaling inversion — and makes
@@ -341,10 +341,14 @@ the same action answers both ends.
 | ② Elite governs | **one condition on ①** |
 | ③ Armor degrades | **none** — condition tiers are already on the sheet |
 
-🔴 **Unruled. Nothing above is in the rulebook.** The recommendation is **all
-three, as one rule**: *mobs under a leader combine their Force into a single
-attack; resistance answers it once; and a conditioned part resists by that much
-less.*
+✅ **RULED AND IN THE BOOK (owner: *"all three, put it in the book"*).**
+**①+② are `§21.8 The Press`** — mobs that can reach the same target combine into
+one attack, resistance answers it **once**, and they do it **only while a
+directing elite is in the fight**. **③ is in `§12.6`** — a part's resistance drops
+by the **highest** flat-resist condition tier on it (highest, not the sum: a
+breastplate is one object and only breaks once), recovering the moment the
+condition is cleared. **`§5.7` now says out loud that merging was never
+contestants-only**, and **`§21.6` Body carries the mirror.** Rulebook → **v1.5**.
 
 ⚠️ **The one thing to watch in play:** ① makes a cornered contestant die fast.
 That is the point, and it is also the failure mode. If it lands too hard, the
