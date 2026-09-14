@@ -937,6 +937,14 @@ kit exists — the top of the ladder is polish-only.
   the Forge yields *Obsidian*, not *a blade* — so the same Obsidian may come back
   as an arrowhead, a lining, or a socket in something that is not a weapon at all.
 
+🔴 **OPEN — does a band step do anything for ARMOR?** A weapon gains **+1 Force
+per band step**; nothing here says what a step is worth to a worn piece. It
+matters, because §10 resistance is a **flat subtraction**: resist 3 is **75%**
+mitigation against a Floor 1 mob and **16%** against a Floor 9 one. If armor does
+not climb, mobs quietly stop being a horde around the middle of the campaign.
+**Recommended: +1 resistance per band step** — the symmetric reading, one
+sentence, and it keeps §21.2's promise true at Floor 9.
+
 ---
 
 ## 13. Grappling
@@ -1113,19 +1121,27 @@ them:
 | Mythic | 1 authored meta-breaking artifact — revealed as a **pick one of three** |
 | Godly | **Never random.** One-of-a-kind, authored, fate-defying. The box knows who opened it |
 
-**Who drops one** — the join between §21.1's ranks and the tiers above. A box is
-paid for **clearing**, not for each body:
+**Who drops one.** 🔒 **A box follows the STORY, not the rank** — it is the GM's
+recognition system (above), so it recognises *something that happened*, never a
+body count. **Clearing rooms does not pay boxes.**
 
-| Rank | Drops |
+| Source | Drops |
 |---|---|
-| **Mob** | nothing on its own — *a single mob is not an event.* A **cleared room** pays **one Bronze box** and **one gather roll** for the room's materials |
-| **Elite** | **one Bronze**, plus its named carve — the elite *is* the material |
+| **A cleared room** | **no box.** One **gather roll** for the room's materials, and that is the whole payment |
+| **An ordinary elite** | **no box.** Its **named carve** — the elite *is* the material, and that is worth more than a Bronze |
+| **A STORY elite** — one that is a named beat of the route, not texture | **one Bronze**, plus its carve |
 | **Boss** | **one Silver** |
 | **Super Boss** | **one Gold** |
+| **An achievement, Directive, Goal, or completed quest** | **the main channel.** Tier by what was achieved — this is where Gold and above actually live |
 
-**Legendary, Mythic and Godly are never dropped by a rank.** They are authored —
-a Directive, a Goal, a Patron, an achievement, or a floor's own set piece. Nothing
-you can grind produces one, which is what keeps them meaning something.
+⚠️ **If a box would be paid by repetition, it is the wrong reward.** The routine
+channel is the **Bronze box shop** (§19.3) — you *buy* your necessities; you do
+not farm them.
+
+**Legendary, Mythic and Godly are never dropped by a rank at all.** They are
+authored — a Directive, a Goal, a Patron, an achievement, or a floor's own set
+piece. Nothing you can grind produces one, which is what keeps them meaning
+something.
 
 ### 17.7 Narrative Tokens
 
@@ -1706,62 +1722,83 @@ harder. That is deliberate.
 
 ### 21.7 Encounter sizing — how big is a room?
 
-Two dials, and only two. **SIZE is how long it takes. DANGER is how many can
-reach you.** Everything else is dressing.
+Two dials. **SIZE is how long it takes. DANGER is what gets through your armor** —
+and danger is the one that decides whether a room is a fight, so read it first.
 
 #### Size — and why it never changes
 
-A mob is calibrated as **one average swing** (§7.3), and a party of four gets
-about **20 attacks into a Clock**. So *mobs cleared per Clock is 20* — at Floor 1,
-at Floor 9, forever. Room size is therefore just the fraction of a Clock you want
-the room to cost, and **the counts are the same on every floor of the campaign.**
+A mob is calibrated as **one average swing** (§7.3), so **one contestant kills one
+mob per Moment** and a party clears them **in parallel** — four contestants take
+four mobs in a Moment. Room size is therefore just the number of Moments you want
+the room to cost, and **it is the same on every floor of the campaign**, because
+the calibration moves the mob's HP up in step with the swing.
 
 | Shape | Mobs | Costs | What it is for |
 |---|---|---|---|
-| **Brush** | **5** | ¼ Clock | travel noise. It teaches one gate and ends |
-| **Room** | **10** | ½ Clock | the default — one exchange, one decision |
-| **Held room** | **20** | 1 Clock | they were waiting for you |
-| **Tide** | **40+** | 2 Clocks | **run it as ONE horde with a count** (§21.2), never as forty entities |
+| **Brush** | **4** | 1 Moment | travel noise. It teaches one gate and ends |
+| **Room** | **12** | 3 Moments | the default — one exchange, one decision |
+| **Held room** | **20** | 5 Moments (½ Clock) | they were waiting for you |
+| **Tide** | **40+** | a full Clock | **run it as ONE horde with a count** (§21.2), never as forty entities |
 
-#### Danger — width, not count
+⚠️ **A mob wave is limited by BODIES; an elite is limited by OUTPUT.** Killing a
+mob costs one attack whatever the overkill, so the party spends four attacks in
+one Moment. An elite's bar has to absorb the party's whole Force and serialises
+it. That is why twelve mobs take three Moments and one elite takes six.
 
-Ten mobs in a doorway and ten mobs in a field are not the same fight. What a room
-costs the party is:
+#### Danger — resistance first, then width
 
-> **width × the mob's signature damage × ⌈count ÷ 2⌉**
+⚠️ **Corrected from play, 2026-09-14.** The first version of this section counted
+width and mob numbers and left out the term that turned out to dominate both:
+**what the party is wearing.**
 
-— the party kills about two mobs a Moment, so a room of *N* lasts roughly *N/2*
-Moments, and every Moment the engaged rank swings. **Width is geometry, not
-floor:** a corridor two abreast is two abreast in the forest and in the capital.
+**§10 resistance is a FLAT SUBTRACTION and §12.6 armor STACKS across worn pieces
+on the struck part.** Against a mob's small number that is most or all of the
+hit. Against an elite's larger one it is a shrug. So armor does not scale a
+threat down — **it sorts threats into "cannot touch you" and "can."**
 
-**This is a ceiling.** It holds the front rank full as the room dies, and assumes
-nobody moves, blocks or repositions — which no real room does. Author against the
-ceiling and let play come in under it.
+| the party's resistance on the struck part | an F1 mob (4) gets through | a room of 12 costs |
+|---|---|---|
+| 0 | 4 | 41% |
+| 1 | 3 | 31% |
+| 2 | 2 | 21% |
+| 3 | 1 | 10% |
+| **4** | **0** | **0% — every F1 mob is harmless to that part, permanently** |
 
-| Target | Ceiling as a share of the party's total body HP |
-|---|---|
-| a standard room | **~25%** |
-| a hard room | **~50%** |
-| a set piece | **100%** — and call it a set piece, not a room |
+⭐ **At Floor 1 that line runs exactly between mob and elite.** A mob deals 4 and
+a party can reach 4; an elite deals 6 and still gets 2 through at resist 4. *This
+is not a flaw — it is §21.2's horde promise arriving as arithmetic.* Mobs are
+meant to be waded through.
 
-#### A room with an elite in it
+> **damage ≈ *(mobs that can reach you)* × *(their signature − your resistance)* ×
+> *(Moments they last)* + *(each elite × its signature − your resistance × the
+> room's duration)***
 
-The formula above sizes a **mob** room. Put an elite in and the shape changes:
-the mobs die in the first Moments and **the elite is still there at the end**, so
-its damage multiplies by the whole room's duration rather than the mobs'.
+**Mobs are cleared in PARALLEL.** Four contestants spread and take one each, so a
+wave costs **⌈mobs ÷ party⌉ Moments** — twelve mobs is three Moments, not a
+fight. An elite's clock is its own HP **plus** that delay.
 
-> duration = ⌈total enemy HP ÷ the party's Force per Moment⌉
-> ceiling = *(mob term, over the mob window)* + *(each elite × its signature × the full duration)*
+**This is a ceiling.** Nobody moves, nothing repositions, the rank stays full.
 
-⭐ **What this produces is the real authoring dial, and it is the same on every
-floor: an elite ALONE is a standard room. An elite plus four mobs is a hard one.**
-Mobs are cheap; **what makes a room expensive is something still alive at the end
-of it.** Add a second elite before you add ten more mobs.
+#### What this means for authoring
 
-⚠️ **Floor 1 is the harshest floor by this measure, and it is the tutorial's
-neighbour.** Early parts are small (a 2 HP head, a 5 HP torso) and the per-part
-bonus has barely started, so the same shape that costs 25% at Floor 5 costs **34%
-at Floor 1**. A "Room" of 10 at width 4 is already **69%** there. On Floor 1,
-**5–10 mobs at width 2** is a standard room; anything wider is a hard one.
+| | at resist 2 | |
+|---|---|---|
+| 6 mobs | **7%** | free |
+| **any** number of mobs | barely moves | ⚠️ **adding mobs is not a difficulty dial** |
+| one elite | **21%** | standard |
+| one elite + 4 mobs | **28%** | standard-plus |
+| **two elites** | **83%** | **a set piece** |
+
+🔴 **There is nothing between 28% and 83%, and the gap is real.** The escalation
+lever is **the second elite**, and it is a big step. Do not try to bridge it with
+mobs; they will not carry it.
+
+⭐ **So what is a mob room FOR?** Not damage. **Moments, position, and
+conditions.** And the last of those is the one that still reaches an armoured
+party: **§8.1's Chill, Poison, Infection and Dissolution carry a TIER and no
+Force, so flat resistance never touches them.** *The mobs that matter to a
+well-equipped party are the ones that do not deal damage at all.* Author mob
+rooms as gates and costs — surface immunity, area-only, untargetable-while-X,
+a cloud that infects — and let the damage be free.
 
 *Regenerate the tables: `node server/encounter-bands.js`.*

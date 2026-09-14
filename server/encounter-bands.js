@@ -37,11 +37,14 @@ const KILLS_PER_MOMENT = ATTACKS_PER_CLOCK / 10;   // a Clock is 10 Moments (§6
 
 // The room shapes. Cost is a fraction of a Clock; because a mob is one swing,
 // the mob count is floor-invariant.
+// Sized in MOMENTS, not Clock fractions: a mob wave is limited by BODIES (one
+// contestant kills one mob per Moment, and they spread), while an elite is
+// limited by the party's total Force output. Corrected from play 2026-09-14.
 const SHAPES = [
-  { name: 'Brush',      clocks: 0.25, use: 'travel noise; teaches one gate and ends' },
-  { name: 'Room',       clocks: 0.5,  use: 'the default — one exchange, one decision' },
-  { name: 'Held room',  clocks: 1.0,  use: 'they were waiting; a full Clock of work' },
-  { name: 'Tide',       clocks: 2.0,  use: 'run it as ONE horde with a count (L-15), never as N entities' },
+  { name: 'Brush',      mobs:  4, use: 'travel noise; teaches one gate and ends' },
+  { name: 'Room',       mobs: 12, use: 'the default — one exchange, one decision' },
+  { name: 'Held room',  mobs: 20, use: 'they were waiting; half a Clock of work' },
+  { name: 'Tide',       mobs: 40, use: 'run it as ONE horde with a count (L-15), never as N entities' },
 ];
 
 function floorState(f) {
@@ -56,7 +59,7 @@ function floorState(f) {
            mobSig: Math.round(torso * MOB_THREAT) };
 }
 
-const mobsFor  = (clocks) => Math.round(ATTACKS_PER_CLOCK * clocks);
+const mobsFor  = (sh) => sh.mobs;
 // Width cannot exceed the mobs that exist — six abreast with five mobs is five.
 // Beyond that this stays a deliberate CEILING: it holds the rank full as the room
 // dies, which no real room does.
@@ -65,50 +68,82 @@ const pressure = (width, count, sig) =>
 
 
 /**
- * ── MIXED ROOMS ─────────────────────────────────────────────────────────────
- * The width formula above sizes a MOB room. A room with an elite in it has a
- * different shape: the mobs die in the first Moments and the elite is still
- * there at the end, so the elite's damage is multiplied by the WHOLE room's
- * duration, not the mobs'.
+ * ── THE MODEL, CORRECTED FROM PLAYTEST (2026-09-14) ──────────────────────────
+ * The owner ran it. Three observations, all of which the first model got wrong:
  *
- *   room duration  = ceil(total enemy HP / party Force per Moment)
- *   mob window     = ceil(total mob HP  / party Force per Moment)
- *   ceiling        = min(width, mobs) x mobSig x mobWindow
- *                  + (elites x eliteSig x duration)
+ *   1. "They clear a room with 12 mobs with 0 issues. Not even much of a
+ *       challenge."                      — predicted ~40%. Observed ~nothing.
+ *   2. "They fought 2 elites at the same time and struggled badly. I had to
+ *       have mercy on them multiple times, opting for non-torso shots."
+ *   3. "Most mobs will not be able to deal damage to the players due to the
+ *       most basic of resistances doing their job."
  *
- * Same caveat: a CEILING. Nobody moves, nothing repositions, the front rank
- * stays full. Author against it.
+ * (3) IS THE CAUSE, AND IT WAS SIMPLY ABSENT FROM THE FIRST MODEL. §7.3 makes
+ * typed resistance a FLAT SUBTRACTION, and §12.6 stacks armor across worn
+ * pieces on the struck part. Against a mob's small number that is most or all
+ * of the hit; against an elite's larger one it is a shrug. So resistance does
+ * not scale a threat down — IT SORTS THREATS INTO "CANNOT TOUCH YOU" AND
+ * "CAN", and the F1 line between those two sits between mob and elite.
+ *
+ * The second error is duration. The first model spent mobs at ~2 a Moment as
+ * though the party fought them as a queue. The owner: "1 Moment delay if they
+ * spread, each to take care of a mob, means the mobs are nothing but a slight
+ * delay." Four contestants clear four mobs in ONE Moment, in parallel — so a
+ * mob wave costs ceil(mobs / party) Moments, and an elite's clock is its own
+ * HP plus that delay.
+ *
+ *   mob damage    = min(width, mobs) x max(0, mobSig   - resist) x ceil(mobs / party)
+ *   elite damage  = elites          x max(0, eliteSig - resist) x duration
+ *   duration      = ceil(elite HP / party Force per Moment) + ceil(mobs / party)
+ *
+ * Still a ceiling — nobody moves, nothing repositions, the rank stays full.
  */
-const ELITE_MULT  = 12;     // §21.2 — elite HP ~ x12 the floor's mob
-const ELITE_THREAT = 0.85;  // floor-bands.js THREAT.elite
+const ELITE_MULT   = 12;     // §21.2 — elite HP ~ x12 the floor's mob
+const ELITE_THREAT = 0.85;   // floor-bands.js THREAT.elite
+// §12.6 — armor is flat resistance on the covered part and STACKS across worn
+// pieces. Seeded values: Basic 1 · Quality 2 · Superior 3. A tutorial party in
+// starter gear is carrying 1-2 on a part; a kitted F1 party 2-3.
+const DEFAULT_RESIST = 2;
 
-function roomCost(f, { mobs = 0, elites = 0, width = 2 }) {
-  const s = floorState(f);
-  const mobHp   = 4 + f;                                   // a mob is one swing
-  const forcePM = ATTACKS_PER_CLOCK * (4 + f) / 10;        // party Force per Moment
+function roomCost(f, { mobs = 0, elites = 0, width = 2, resist = DEFAULT_RESIST } = {}) {
+  const s        = floorState(f);
+  const mobHp    = 4 + f;                                // a mob is one swing
+  const forcePM  = ATTACKS_PER_CLOCK * (4 + f) / 10;     // party Force per Moment
   const eliteSig = Math.round(s.torso * ELITE_THREAT);
-  const totalHp  = mobs * mobHp + elites * mobHp * ELITE_MULT;
-  const duration = Math.max(1, Math.ceil(totalHp / forcePM));
-  const mobWin   = Math.max(mobs ? 1 : 0, Math.ceil(mobs * mobHp / forcePM));
-  const dmg = Math.min(width, mobs) * s.mobSig * mobWin + elites * eliteSig * duration;
-  return { dmg, pct: Math.round(dmg / s.partyHp * 100), duration, mobWin,
+  const mobMoments = mobs ? Math.ceil(mobs / PARTY) : 0;  // they SPREAD
+  const eliteHp    = elites * mobHp * ELITE_MULT;
+  const duration   = (eliteHp ? Math.ceil(eliteHp / forcePM) : 0) + mobMoments;
+
+  const mobDmg   = Math.min(width, mobs) * Math.max(0, s.mobSig - resist) * mobMoments;
+  const eliteDmg = elites * Math.max(0, eliteSig - resist) * duration;
+  const dmg = mobDmg + eliteDmg;
+  return { dmg, pct: Math.round(dmg / s.partyHp * 100), duration, mobMoments,
+           mobDmg, eliteDmg, resist,
+           mobThrough: Math.max(0, s.mobSig - resist),
+           eliteThrough: Math.max(0, eliteSig - resist),
            mobSig: s.mobSig, eliteSig, partyHp: s.partyHp };
 }
 
 function report(f) {
   const s = floorState(f);
   console.log(`\n═══ FLOOR ${f} ═══  contestant body ${s.bodyHp} (torso ${s.torso}) · ` +
-              `party of ${PARTY} = ${s.partyHp} HP · mob signature ${s.mobSig}`);
-  console.log('  shape        mobs   width 2      width 4      width 6      (worst-case damage to the party)');
+              `party of ${PARTY} = ${s.partyHp} HP · mob signature ${s.mobSig} · elite ${Math.round(s.torso * ELITE_THREAT)}`);
+  console.log(`  MOB ROOMS — worst case, at the party's resistance on the struck part`);
+  console.log(`  shape        mobs   resist 0     resist 2     resist 4`);
   for (const sh of SHAPES) {
-    const n = mobsFor(sh.clocks);
-    const cells = [2, 4, 6].map(w => {
-      const d = pressure(w, n, s.mobSig);
-      return `${String(d).padStart(4)} (${String(Math.round(d / s.partyHp * 100)).padStart(3)}%)`;
+    const n = sh.mobs;
+    const cells = [0, 2, 4].map(r => {
+      const x = roomCost(f, { mobs: n, width: 4, resist: r });
+      return `${String(x.dmg).padStart(4)} (${String(x.pct).padStart(3)}%)`;
     }).join('  ');
     console.log(`  ${sh.name.padEnd(11)} ${String(n).padStart(4)}   ${cells}`);
   }
-  console.log(`  ⚖ author to ~25% for a standard room · ~50% for a hard one · 100% is a set piece, not a room.`);
+  const e1 = roomCost(f, { elites: 1, resist: 2 });
+  const e1m = roomCost(f, { elites: 1, mobs: 4, width: 2, resist: 2 });
+  const e2 = roomCost(f, { elites: 2, resist: 2 });
+  console.log(`  ELITES at resist 2 —  one: ${e1.pct}%  ·  one + 4 mobs: ${e1m.pct}%  ·  TWO: ${e2.pct}%`);
+  console.log(`  ⚖ ~25% standard · ~50% hard · 100% is a set piece. Mobs at ${f === 1 ? 'F1' : `F${f}`} get ` +
+              `${roomCost(f, { mobs: 1, resist: 2 }).mobThrough} through resist 2; an elite gets ${e1.eliteThrough}.`);
 }
 
 function main() {
@@ -121,15 +156,28 @@ else {
 }
 // The dial the rulebook (§21.7) claims is floor-invariant. Printed so it is
 // checkable rather than asserted.
-console.log('\nTHE ELITE DIAL — an elite alone is a standard room; an elite plus four mobs is a hard one.');
-console.log('  floor   elite alone   elite + 4 mobs   6 mobs at width 2');
+console.log('\nTHE LADDER, at resist 2 — and the step that matters is the SECOND ELITE.');
+console.log('  floor   6 mobs   1 elite   1 elite + 4 mobs   TWO elites');
 for (let f = 1; f <= 9; f++) {
-  const a = roomCost(f, { elites: 1, width: 2 });
-  const b = roomCost(f, { elites: 1, mobs: 4, width: 2 });
   const c = roomCost(f, { mobs: 6, width: 2 });
-  console.log(`   F${f}      ${String(a.pct).padStart(4)}%          ${String(b.pct).padStart(4)}%            ${String(c.pct).padStart(4)}%`);
+  const a = roomCost(f, { elites: 1 });
+  const b = roomCost(f, { elites: 1, mobs: 4, width: 2 });
+  const d = roomCost(f, { elites: 2 });
+  console.log(`   F${f}     ${String(c.pct).padStart(4)}%    ${String(a.pct).padStart(4)}%       ${String(b.pct).padStart(4)}%            ${String(d.pct).padStart(4)}%`);
 }
-console.log('  ⚠️ F1 is the hot end (small parts); F3 onward converges to ~23% / ~41%.');
+console.log('  ⚠️ Mobs are nearly free and adding more barely moves the number.');
+console.log('  ⚠️ There is NOTHING between "one elite + mobs" and "two elites". That gap is real.');
+
+console.log('\nTHE CLIFF — 12 mobs at F1, width 4, by the resistance on the struck part.');
+console.log('  §12.6 armor is FLAT and STACKS, so it does not scale a threat down, it SWITCHES IT OFF.');
+for (let r = 0; r <= 5; r++) {
+  const x = roomCost(1, { mobs: 12, width: 4, resist: r });
+  console.log(`   resist ${r}:  mob 4 - ${r} = ${x.mobThrough} through  ->  ${String(x.pct).padStart(3)}%` +
+              (x.mobThrough === 0 ? '   <- every F1 mob is now harmless, permanently' : ''));
+}
+console.log('  ⭐ At F1 the line between "cannot touch you" and "can" runs exactly between MOB and ELITE.');
+console.log('  ⭐ And §8.1 conditions (Chill/Poison/Infection/Dissolution) carry a TIER and no Force,');
+console.log('     so flat resistance never touches them. They are what still reaches an armoured party.');
 }
 
 if (require.main === module) main();

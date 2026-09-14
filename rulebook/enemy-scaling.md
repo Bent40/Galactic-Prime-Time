@@ -177,38 +177,57 @@ every floor of the campaign**. Room size is the Clock fraction you want it to
 cost: **Brush 5 · Room 10 · Held room 20 · Tide 40+** (a Tide is run as one horde
 with a count, S-2, never as forty entities).
 
-**Danger is geometry.** `width × mob signature × ⌈count ÷ 2⌉` — a ceiling that
-holds the front rank full as the room dies, which no real room does. Author
-against it.
+**Danger is RESISTANCE, then geometry.** ⚠️ **Corrected from play 2026-09-14** —
+the first version of this section left out the term that dominates both.
 
-**With an elite in the room the shape changes**: the mobs die early and the elite
-is alive at the end, so its damage multiplies by the *room's* duration
-(`⌈total enemy HP ÷ party Force per Moment⌉`), not the mobs'.
+§10 resistance subtracts **flat** and §12.6 armor **stacks** across worn pieces on
+the struck part. Against a mob's small number that is most or all of the hit;
+against an elite's larger one it is a shrug. **Armor does not scale a threat
+down — it sorts threats into "cannot touch you" and "can."**
 
-### The elite dial — and it is nearly floor-invariant
+> damage ≈ *(mobs that can reach you)* × *(signature − resistance)* × *⌈mobs ÷ party⌉*
+> + *(elites × (signature − resistance) × the room's duration)*
 
-| floor | elite alone | elite + 4 mobs | 6 mobs at width 2 |
-|---|---|---|---|
-| **F1** | **31%** | **55%** | 21% |
-| F2 | 29% | 51% | 18% |
-| F3 | 25% | 45% | 17% |
-| F4 | 25% | 45% | 17% |
-| F5 | 24% | 42% | 15% |
-| F6 | 24% | 42% | 15% |
-| F7 | 23% | 41% | 15% |
-| F8 | 23% | 41% | 15% |
-| F9 | 23% | 40% | 14% |
+**Mobs are cleared in parallel** — four contestants take one each, so twelve mobs
+is three Moments. An elite's clock is its own HP plus that delay.
 
-⭐ **An elite alone is a standard room; an elite plus four mobs is a hard one —
-at every floor.** Mobs are cheap. **What makes a room expensive is something that
-is still alive at the end of it**, so add a second elite before you add ten more
-mobs.
+### The ladder, at resist 2 — and the step that matters is the second elite
 
-⚠️ **Floor 1 is the hot end, and it is the tutorial's neighbour.** Early parts are
-small (a 2 HP head, a 5 HP torso) and the per-part bonus has barely started, so
-the same shape costs **31% / 55%** there against **23% / 41%** from F7 on. The
-campaign gets *gentler* in relative terms as it climbs — the opposite of the
-intuition, and worth knowing before you size Floor 1.
+| floor | 6 mobs | 1 elite | 1 elite + 4 mobs | **two elites** |
+|---|---|---|---|---|
+| F1 | 7% | 21% | 28% | **83%** |
+| F3 | 8% | 20% | 27% | **79%** |
+| F5 | 8% | 20% | 28% | **81%** |
+| F7 | 9% | 21% | 29% | **83%** |
+| F9 | 9% | 21% | 29% | **85%** |
+
+⭐ **Mobs are nearly free and adding more barely moves the number. The escalation
+lever is the second elite, and there is nothing in between.** Author the step you
+actually want; do not try to reach it with numbers.
+
+### The cliff
+
+| resistance on the struck part | an F1 mob (4) gets through | 12 mobs cost |
+|---|---|---|
+| 0 | 4 | 41% |
+| 2 | 2 | 21% |
+| 3 | 1 | 10% |
+| **4** | **0** | **0% — permanently** |
+
+🔴 **A flat subtraction is a shrinking percentage.** Resist 3 is **75%** mitigation
+against an F1 mob and **16%** against an F9 one. So either armor keeps climbing
+with the party, or mobs quietly stop being a horde and start being a threat again
+around the middle of the campaign.
+
+🔴 **OPEN — does armor resistance ride the material band?** §12.7 gives a weapon
+**+1 Force per band step**; nothing says what a band step does for armor.
+**Recommended: +1 resistance per band step**, the symmetric reading — it keeps
+§21.2's "mobs are one-shot hordes" true at Floor 9 and it costs one sentence.
+Without it, resist stays tier-capped near 3–4 forever while mob damage runs to 19.
+
+⭐ **And what reaches an armoured party is CONDITIONS.** §8.1's Chill, Poison,
+Infection and Dissolution carry a **tier and no Force**, so flat resistance never
+touches them. **The mobs that still matter are the ones that deal no damage.**
 
 ---
 

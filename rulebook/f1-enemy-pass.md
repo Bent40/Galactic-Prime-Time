@@ -831,35 +831,67 @@ where, worth what.** Frames are in the book — **§21.7** (encounter sizing),
 **§21.4** (terrain), **§17.8** (spectacle), **§17.6 / §19.1** (payouts). This is
 Floor 1's instance of them.
 
-⚠️ **Floor 1 is the harshest floor in the campaign by §21.7's measure**, because
-the parts are still small. **A standard F1 room is 5–10 mobs at width 2.** A
-"Room" of 10 at width 4 already threatens **69%** of the party's body — that is a
-set piece, not a corridor. The numbers below all carry their ceiling.
+⚠️ **CORRECTED FROM PLAY, 2026-09-14.** The first version of this section called
+Floor 1 the campaign's harshest and sized rooms by mob count. **Both were wrong**,
+and the owner's tutorial sessions said so: *"they clear a room with 12 mobs with
+0 issues"* · *"they fought 2 elites at the same time and struggled badly"* ·
+*"most mobs will not be able to deal damage to the players due to the most basic
+of resistances doing their job."*
 
-*(Party of 4, F1: body **29** each · **116** total · mob signature **4**.
-Ceiling = width × 4 × ⌈count ÷ 2⌉. Regenerate: `node server/encounter-bands.js --floor 1`.)*
+🔒 **The missing term was ARMOR.** §10 resistance subtracts flat and §12.6 stacks
+it across worn pieces, so a mob's 4 is mostly or entirely eaten while an elite's
+6 is not. **Mobs are free; the difficulty lever is the second elite.** See §21.7.
+
+*(Party of 4, F1: body **29** each · **116** total · mob signature **4** · elite
+**6** · assumed resistance **2** on the struck part — a Quality vest, or two
+Basic pieces stacked. Regenerate: `node server/encounter-bands.js --floor 1`.)*
 
 ## E-8.1 — The encounter tables
 
 *Every ceiling below is generated — `node server/encounter-bands.js`. **M** is how
 many Moments the room runs.*
 
-⭐ **The F1 dial, and it fell out of the arithmetic rather than being chosen:**
-**an elite ALONE is a standard room (31%). An elite plus four mobs is a hard room
-(55%).** Mobs cost almost nothing on their own at this size; what makes a room
-expensive is **something that is still alive at the end of it.**
+🔴 **THE F1 LADDER, AND THE HOLE IN IT.** At resist 2:
+
+| | | |
+|---|---|---|
+| any mob room | **7–14%** | free — and **more mobs barely moves it** |
+| one elite | **21%** | standard |
+| one elite + 4 mobs | **28%** | standard-plus |
+| **two elites** | **83%** | **a set piece.** Observed: *"struggled badly, I had to have mercy on them multiple times"* |
+
+⚠️ **Nothing sits between 28% and 83%.** Floor 1 as authored has **no hard room** —
+every layer tops out at 28–29%. Three honest ways to add one, and **none of them
+is "more mobs"**:
+1. **A second elite** — accurate, and it lands at set-piece weight. A-vi and
+   A-vii run together *is* the two-elite room.
+2. **An elite whose gate denies the parallel split.** The mobs are free only
+   because four contestants take one each in a Moment; an elite that punishes
+   spreading stacks those Moments back onto its own clock. ⭐ The Rack already
+   half-does this — while the Crown stands, every other part regains.
+3. ⭐ **Condition mobs.** §8.1's Chill / Poison / Infection / Dissolution carry a
+   **tier and no Force**, so **flat resistance never touches them.** The
+   Spore-Drunk's death-puff and the Crystal Spore Mist are the only two enemies
+   on this floor an armoured party cannot shrug — **and neither deals damage.**
+
+🔴 **Unruled.** Pick one, or rule that Floor 1 is *meant* to have no hard room and
+that the Medium route's fire Clock carries the tension instead.
+
+⭐ **Read the ceilings below as what they are: almost every mob room on this floor
+is free, and that is correct.** Their job is **Moments, position and conditions**
+— the gates are the content.
 
 ### Layer A — the forest · every party · pick 3–4
 
 | # | Room | Contents | Width | Ceiling | M | What it teaches |
 |---|---|---|---|---|---|---|
-| **A-i** | **The tree line** | 6 × Bramblewretch | 2 | **24 · 21%** | 3 | the plain horde, and **cones**. The seed already says they come 4–8 |
-| **A-ii** | **The still air** | 1 × Husk-Moth Cloud + 4 × Bramblewretch | 2 | **24 · 21%** | 3 | **single-target does nothing.** The cloud is one body and a sword goes through it |
-| **A-iii** | **The soft ground** | 3 × Rootjaw (buried) + 4 × Bramblewretch | 2 | **32 · 28%** | 4 | **untargetable-while-X**, and that Burn flushes it |
-| **A-iv** | **The lanyard** | 5 × Spore-Drunk Contestant | 3 | **36 · 31%** | 3 | **killing has a cost.** The puff is the first Infected anyone takes |
+| **A-i** | **The tree line** | 6 × Bramblewretch | 2 | **8 · 7%** | 2 | the plain horde, and **cones**. The seed already says they come 4–8 |
+| **A-ii** | **The still air** | 1 × Husk-Moth Cloud + 4 × Bramblewretch | 2 | **8 · 7%** | 2 | **single-target does nothing.** The cloud is one body and a sword goes through it |
+| **A-iii** | **The soft ground** | 3 × Rootjaw (buried) + 4 × Bramblewretch | 2 | **8 · 7%** | 2 | **untargetable-while-X**, and that Burn flushes it |
+| **A-iv** | **The lanyard** | 5 × Spore-Drunk Contestant | 3 | **12 · 10%** | 2 | 🔴 **killing has a cost — and the puff is the ONLY thing here armor does not stop.** §8.1 Infected is a tier, not Force. This room is dangerous and its damage number is not why |
 | **A-v** | **The clearing** | 2 × Glass-Antler Doe + 2 × Camera Gnat | — | **0** | — | **not every enemy is a fight.** The Doe costs ammo and Moments; the Gnat costs Exposure to swat |
-| **A-vi** | **The landlord** ☠ | The Rack + 4 × Bramblewretch | 2 | **64 · 55%** | 8 | **weak systems** — the Crown, before it matters against a boss |
-| **A-vii** | **The patch** ☠ | Mycelium Bloomkeeper + 4 × Spore-Drunk | 3 | **72 · 62%** | 8 | **surface immunity, and a tether.** ⚠️ The hardest room on the shared layer — do not run it back-to-back with A-vi |
+| **A-vi** | **The landlord** ☠ | The Rack + 4 × Bramblewretch | 2 | **32 · 28%** | 7 | **weak systems** — the Crown, before it matters against a boss |
+| **A-vii** | **The patch** ☠ | Mycelium Bloomkeeper + 4 × Spore-Drunk | 3 | **34 · 29%** | 7 | **surface immunity, and a tether.** ⭐ **Run it back-to-back with A-vi and you have the two-elite set piece** — that is the floor's hard room, and it is the only one |
 
 *Run A-i before A-ii before A-iii. The forest's job is to hand them the whole
 vocabulary — horde, area-only, gate, cost-on-death, non-combatant, weak system —
@@ -869,16 +901,16 @@ before a route can punish them for not having it.*
 
 | # | Room | Contents | Width | Ceiling | M | Note |
 |---|---|---|---|---|---|---|
-| **B-i** | **The descent** | 8 × Stair-Wight | **2** (it is a staircase) | **32 · 28%** | 4 | **they reform.** A party with no Burn learns it the second time |
-| **B-ii** | **The mural chamber** | The Chainbearer, alone | — | **36 · 31%** | 6 | it **cannot leave the room**, and the mural is on the wall behind it |
+| **B-i** | **The descent** | 8 × Stair-Wight | **2** (it is a staircase) | **8 · 7%** | 2 | **they reform.** A party with no Burn learns it the second time |
+| **B-ii** | **The mural chamber** | The Chainbearer, alone | — | **24 · 21%** | 6 | it **cannot leave the room**, and the mural is on the wall behind it |
 | **B-iii** | ☠ **THE MASKED** | boss | — | — | — | §21.3. The chain is on the floor and Mistletoe is in the forest |
 
 ### Layer C — Medium · the burning house
 
 | # | Room | Contents | Width | Ceiling | M | Note |
 |---|---|---|---|---|---|---|
-| **C-i** | **The yard** | 6 × Torchbearer | 3 | **36 · 31%** | 3 | **they are people.** They die in one hit and the crowd watches you do it |
-| **C-ii** | **The doorway** | The Kindler + 4 × Torchbearer | **2** | **64 · 55%** | 8 | 🔴 **eight Moments is most of a Clock, and the fire takes a room every Clock.** The doorway is cheap in damage and expensive in *time*, which is the only currency this route charges |
+| **C-i** | **The yard** | 6 × Torchbearer | 3 | **12 · 10%** | 2 | **they are people.** They die in one hit and the crowd watches you do it |
+| **C-ii** | **The doorway** | The Kindler + 4 × Torchbearer | **2** | **32 · 28%** | 7 | 🔴 **seven Moments, and the fire takes a room every Clock.** Cheap in damage and expensive in *time* — ⭐ **and time is the only currency the resistance cliff cannot refund** |
 | **C-iii** | ☠ **Foreman Bex** | boss | — | — | — | the win condition is the house. All three endings are wins |
 | **C-iv** | **The Girl** | set piece | — | — | — | not a room. Whatever they do here, it is Floor 3's problem |
 
@@ -886,9 +918,9 @@ before a route can punish them for not having it.*
 
 | # | Room | Contents | Width | Ceiling | M | Note |
 |---|---|---|---|---|---|---|
-| **D-i** | **The stopped street** | 8 × Crystallized Citizen | **4** (open street) | **64 · 55%** | 4 | **CRUSH ONLY.** A blade party is in genuine trouble and should be. ⭐ The only room on the floor that is hard *because of width* rather than because something outlives the mobs |
-| **D-ii** | **The beautiful thing** | 1 × Crystal Spore Mist + 6 × Crystallized Citizen | 3 | **48 · 41%** | 4 | ⚠️ **the number lies.** The mist deals no signature damage — it deals **Infected, and Infected + Suffocation if inhaled.** The 41% is the part that shows up on a sheet |
-| **D-iii** | **The stairs that walk** ☠ | Step-Warden + 4 × Crystallized Citizen | 2 | **64 · 55%** | 8 | its 10-Crush windup is the punish window (§21.6 `windup`) — and it is **above** this ceiling, which assumes on-band hits |
+| **D-i** | **The stopped street** | 8 × Crystallized Citizen | **4** (open street) | **16 · 14%** | 2 | **CRUSH ONLY.** ⭐ **The gate is the entire encounter** — 14% says a blade party takes no damage worth counting, and it also says they cannot kill anything, for as long as they insist |
+| **D-ii** | **The beautiful thing** | 1 × Crystal Spore Mist + 6 × Crystallized Citizen | 3 | **12 · 10%** | 2 | 🔴 **the number lies, and now it lies louder.** 10% is the Citizens. The mist deals **no Force at all** — it deals **Infected, plus Suffocation if inhaled**, and §8.1 tiers are **not** reduced by armor. ⭐ **The most dangerous thing on Floor 1 reads as 0 damage** |
+| **D-iii** | **The stairs that walk** ☠ | Step-Warden + 4 × Crystallized Citizen | 2 | **32 · 28%** | 7 | its 10-Crush windup is the punish window (§21.6 `windup`) — and it is **above** this ceiling, which assumes on-band hits |
 | **D-iv** | ☠☠ **LOONG KIN** | super | — | — | — | **the streets, not the giant stairs** (the 2026-08-25 correction). They run and converse |
 
 ## E-8.2 — Terrain blocks (§21.4 — three answers each)
@@ -984,12 +1016,23 @@ grind. What follows is **the hook** — the one shot per entry the Corporation w
 
 **Floor 1 is Set 1** (§19.1), so:
 
+🔒 **A box follows the STORY, not the rank (owner, 2026-09-14).** Clearing rooms
+does not pay boxes, and **not every elite does either** — only one that is a named
+beat of the route. The main channel is achievements and completed quests.
+
 | | Rung | Upgrade Tokens | Box (§17.6) |
 |---|---|---|---|
-| **a cleared room** | — | — | **1 Bronze** + **1 gather roll** for the room (E-0.4) |
-| **elite** — The Rack · Bloomkeeper · Chainbearer · Kindler · Step-Warden | — | — | **1 Bronze** + **its named carve.** The elite *is* the material |
+| **a cleared room** | — | — | 🔴 **no box.** One **gather roll** (E-0.4), and that is the whole payment |
+| **ordinary elite** — The Rack · Mycelium Bloomkeeper · Step-Warden | — | — | **no box** — **its named carve**, which is worth more than a Bronze |
+| **story elite** — **The Chainbearer** (it is the mural scene) · **The Kindler** (he is the arson, and the Fuel Can is the lesson) | — | — | **1 Bronze** + its carve |
 | ☠ **boss** — THE MASKED · Foreman Bex | **Neighbourhood** | **5** | **1 Silver** |
 | ☠☠ **super** — LOONG KIN | **Precinct** | **50** | **1 Gold** |
+| **achievement / Directive / Goal / completed quest** | — | varies | ⭐ **the main channel** — tier by what was achieved |
+
+⚖ **The three ordinary/story calls above are mine, not ruled.** The test I used:
+*does the route stop being itself without this fight?* Drop the Chainbearer and
+the mural goes unread; drop the Kindler and the Fuel Can lesson never lands. Drop
+the Rack and the forest is one room shorter.
 
 ⚠️ **The Loong pays ten times the floor's boss.** That is §19.1's blessed ladder,
 not a Floor-1 decision — and it is right: a party that takes a Super at Floor 1
