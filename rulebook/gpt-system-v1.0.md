@@ -1,6 +1,9 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.3** · 2026-09-01 — **FORCE** (§7.3): one unit for every source of
+**Version 1.4** · 2026-09-14 — **what a fight is WORTH**: encounter sizing
+(§21.7), spectacle payouts (§17.8) and the rank→reward join (§17.6, §19.1). Also
+tidies §21.2's last line of the withdrawn ×2 band.
+*Previously —* **1.3** · 2026-09-01, **FORCE** (§7.3): one unit for every source of
 damage, replacing the material band's multiplication with addition. Universal
 resistance (§10.1). Area attacks do not divide (§7.3).
 *Previously —* **1.2**, Marks (§18.4) and the bill of materials (§12.7).
@@ -1110,6 +1113,20 @@ them:
 | Mythic | 1 authored meta-breaking artifact — revealed as a **pick one of three** |
 | Godly | **Never random.** One-of-a-kind, authored, fate-defying. The box knows who opened it |
 
+**Who drops one** — the join between §21.1's ranks and the tiers above. A box is
+paid for **clearing**, not for each body:
+
+| Rank | Drops |
+|---|---|
+| **Mob** | nothing on its own — *a single mob is not an event.* A **cleared room** pays **one Bronze box** and **one gather roll** for the room's materials |
+| **Elite** | **one Bronze**, plus its named carve — the elite *is* the material |
+| **Boss** | **one Silver** |
+| **Super Boss** | **one Gold** |
+
+**Legendary, Mythic and Godly are never dropped by a rank.** They are authored —
+a Directive, a Goal, a Patron, an achievement, or a floor's own set piece. Nothing
+you can grind produces one, which is what keeps them meaning something.
+
 ### 17.7 Narrative Tokens
 
 - Let players interfere with the script. Earned via crowd donations, corporate
@@ -1118,6 +1135,34 @@ them:
   discretion.
 - **Hard limits:** cannot raise the dead, change how someone feels about you,
   instantly kill, or mint more tokens. Alter events — never override core rules.
+
+### 17.8 Spectacle — what a kill is worth to the audience
+
+§17.1 leaves the session-to-session numbers in the GM's hands, so these are
+**swings on whatever baseline is running** rather than counts. They work at any
+scale, which is the point: a table playing with "twelve billion" and a table
+playing with "a lot" both use the same column.
+
+| Event | Viewers | Followers |
+|---|---|---|
+| a single mob | — | — |
+| **a room cleared** | **+1%** (+2% if it fell inside one Clock) | — |
+| **an elite** | **+5%** | +1 conversion tick |
+| **a boss** | **+25%** | +1 |
+| **a Super Boss** | **+100%** | +2, and it is replayed for the rest of the season |
+
+**Double the swing when the kill uses the thing they were shown.** The written
+weakness, the gate, the weak system (§21.3) — the crowd has been watching the
+party fail at it, and the moment it lands is the payoff it stayed for.
+
+**Halve the swing when the party grinds a bar down with no answer.** It worked;
+it was boring; §17.1 says viewer counts decay when you are boring, and this is
+where that rule is actually spent.
+
+⚙️ **Note what this does to Force.** §7.3 already makes finding the weakness the
+difference between landing 0% and 100% of your damage. §17.8 pays the *same*
+choice a second time, in the currency the show runs on — so preparation and
+scouting are rewarded twice from two directions, and never by the GM's goodwill.
 
 ---
 
@@ -1373,6 +1418,20 @@ not name, and expect a name to make sense long after you earned it.
 | Country (Super) | 100 |
 | Stage (Super) | 250 |
 
+**Which rung a floor sits on.** The six rungs map onto the campaign's three sets
+of three floors, bosses and Supers climbing together:
+
+| Set | Floors | Boss rung | Super rung |
+|---|---|---|---|
+| **Set 1** | F1–F3 | **Neighbourhood — 5** | **Precinct — 50** |
+| **Set 2** | F4–F6 | **District — 10** | **Country — 100** |
+| **Set 3** | F7–F9 | **City — 25** | **Stage — 250** |
+
+⚠️ **The Super pays ten times its floor's boss, deliberately.** A Super Boss is
+not the floor's content — it is the route that went looking. A party that takes
+the Loong Kin at F1 is paid as though it cleared a floor it had no business on,
+because it did.
+
 ### 19.2 Token exchange
 
 **25 Upgrade Tokens → 1 Patron Token**, one-way. The audience loop remains
@@ -1491,9 +1550,12 @@ Tokens**. The Lounge is where Upgrade Tokens go to die — happily.
 - **Asymmetric statting is by design.** Player parts run 2–5 HP; boss parts can
   run 6–50. Enemies don't obey creation budgets — stat the *character*, not the
   process. An old man may sit at 2s; the same man at war may run 10s.
-- **Mobs are hordes — nearly always one-shot** by a weapon of the floor's
-  material band (mob HP ≈ one on-band hit; ~5 at F1, doubling per floor to
-  ~1.3k at F9). A mob that survives a hit does it through a **special effect**
+- **Mobs are hordes — nearly always one-shot.** ⚡ **A mob's HP is the AVERAGE
+  CONTESTANT'S FORCE for its floor** — 5 at F1, **+1 per floor**, 13 at F9. One
+  average swing, on every floor, forever. *(This line used to read "doubling per
+  floor to ~1.3k at F9"; that was the ×2 material band, withdrawn in v1.3 — see
+  §12.7. The ladder itself never changed, only the arithmetic under it.)*
+  A mob that survives a hit does it through a **special effect**
   — a gate, like surface immunity — never a fat HP bar. Mob fights are about
   the crowd: cones, lines, positioning, ammo burn.
 - **Elites, Bosses, and Super Bosses are the struggle:** first-pass ratios of
@@ -1639,3 +1701,67 @@ damage, so a contestant with a shattered arm hit exactly as hard as a healthy on
 This closes that, on tiers the sheet already tracks.* **And it makes healing a damage
 buff** — a party that patches up mid-fight is not only surviving longer, it is hitting
 harder. That is deliberate.
+
+---
+
+### 21.7 Encounter sizing — how big is a room?
+
+Two dials, and only two. **SIZE is how long it takes. DANGER is how many can
+reach you.** Everything else is dressing.
+
+#### Size — and why it never changes
+
+A mob is calibrated as **one average swing** (§7.3), and a party of four gets
+about **20 attacks into a Clock**. So *mobs cleared per Clock is 20* — at Floor 1,
+at Floor 9, forever. Room size is therefore just the fraction of a Clock you want
+the room to cost, and **the counts are the same on every floor of the campaign.**
+
+| Shape | Mobs | Costs | What it is for |
+|---|---|---|---|
+| **Brush** | **5** | ¼ Clock | travel noise. It teaches one gate and ends |
+| **Room** | **10** | ½ Clock | the default — one exchange, one decision |
+| **Held room** | **20** | 1 Clock | they were waiting for you |
+| **Tide** | **40+** | 2 Clocks | **run it as ONE horde with a count** (§21.2), never as forty entities |
+
+#### Danger — width, not count
+
+Ten mobs in a doorway and ten mobs in a field are not the same fight. What a room
+costs the party is:
+
+> **width × the mob's signature damage × ⌈count ÷ 2⌉**
+
+— the party kills about two mobs a Moment, so a room of *N* lasts roughly *N/2*
+Moments, and every Moment the engaged rank swings. **Width is geometry, not
+floor:** a corridor two abreast is two abreast in the forest and in the capital.
+
+**This is a ceiling.** It holds the front rank full as the room dies, and assumes
+nobody moves, blocks or repositions — which no real room does. Author against the
+ceiling and let play come in under it.
+
+| Target | Ceiling as a share of the party's total body HP |
+|---|---|
+| a standard room | **~25%** |
+| a hard room | **~50%** |
+| a set piece | **100%** — and call it a set piece, not a room |
+
+#### A room with an elite in it
+
+The formula above sizes a **mob** room. Put an elite in and the shape changes:
+the mobs die in the first Moments and **the elite is still there at the end**, so
+its damage multiplies by the whole room's duration rather than the mobs'.
+
+> duration = ⌈total enemy HP ÷ the party's Force per Moment⌉
+> ceiling = *(mob term, over the mob window)* + *(each elite × its signature × the full duration)*
+
+⭐ **What this produces is the real authoring dial, and it is the same on every
+floor: an elite ALONE is a standard room. An elite plus four mobs is a hard one.**
+Mobs are cheap; **what makes a room expensive is something still alive at the end
+of it.** Add a second elite before you add ten more mobs.
+
+⚠️ **Floor 1 is the harshest floor by this measure, and it is the tutorial's
+neighbour.** Early parts are small (a 2 HP head, a 5 HP torso) and the per-part
+bonus has barely started, so the same shape that costs 25% at Floor 5 costs **34%
+at Floor 1**. A "Room" of 10 at width 4 is already **69%** there. On Floor 1,
+**5–10 mobs at width 2** is a standard room; anything wider is a hard one.
+
+*Regenerate the tables: `node server/encounter-bands.js`.*

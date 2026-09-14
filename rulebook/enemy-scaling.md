@@ -164,11 +164,59 @@ Two things, and neither is filler:
 
 ---
 
-## S-4 — What is still open
+## S-4 — Encounter sizing ✅ **NEW 2026-09-14**
+
+The frame is **§21.7**; this is the cross-floor note. `node server/encounter-bands.js`
+generates every number here and in `f1-enemy-pass.md` E-8.
+
+**Two dials: SIZE is how long, DANGER is how many can reach you.**
+
+**Size never changes.** A mob is calibrated as one average swing (§7.3) and a
+party of four gets ~20 attacks into a Clock, so **mobs cleared per Clock is 20 on
+every floor of the campaign**. Room size is the Clock fraction you want it to
+cost: **Brush 5 · Room 10 · Held room 20 · Tide 40+** (a Tide is run as one horde
+with a count, S-2, never as forty entities).
+
+**Danger is geometry.** `width × mob signature × ⌈count ÷ 2⌉` — a ceiling that
+holds the front rank full as the room dies, which no real room does. Author
+against it.
+
+**With an elite in the room the shape changes**: the mobs die early and the elite
+is alive at the end, so its damage multiplies by the *room's* duration
+(`⌈total enemy HP ÷ party Force per Moment⌉`), not the mobs'.
+
+### The elite dial — and it is nearly floor-invariant
+
+| floor | elite alone | elite + 4 mobs | 6 mobs at width 2 |
+|---|---|---|---|
+| **F1** | **31%** | **55%** | 21% |
+| F2 | 29% | 51% | 18% |
+| F3 | 25% | 45% | 17% |
+| F4 | 25% | 45% | 17% |
+| F5 | 24% | 42% | 15% |
+| F6 | 24% | 42% | 15% |
+| F7 | 23% | 41% | 15% |
+| F8 | 23% | 41% | 15% |
+| F9 | 23% | 40% | 14% |
+
+⭐ **An elite alone is a standard room; an elite plus four mobs is a hard one —
+at every floor.** Mobs are cheap. **What makes a room expensive is something that
+is still alive at the end of it**, so add a second elite before you add ten more
+mobs.
+
+⚠️ **Floor 1 is the hot end, and it is the tutorial's neighbour.** Early parts are
+small (a 2 HP head, a 5 HP torso) and the per-part bonus has barely started, so
+the same shape costs **31% / 55%** there against **23% / 41%** from F7 on. The
+campaign gets *gentler* in relative terms as it climbs — the opposite of the
+intuition, and worth knowing before you size Floor 1.
+
+---
+
+## S-5 — What is still open
 
 | Item | Note |
 |---|---|
-| **Enemy damage is free text** | It lives in the `notes` field, so the seeder cannot gate it the way it gates HP. A damage field on the `Enemy` model would fix that — app work, not content |
+| ~~Enemy damage is free text~~ | **DONE** — `Enemy.signature` is a structured field, gated by `seed-enemies.js` exactly the way HP is, and **all 53 entries are migrated** (2026-09-14) |
 | **Tide sizes are ⚖ untested** | Sized by arithmetic, never played. The first F2 session is the real check |
 | **Area-attack multipliers** | "× the spaces covered" needs a worked example per skill shape (cone, line, burst) before it is table-ready |
 | **F2–F9 rosters** | This is the *frame*, not the content. Only F1 exists |

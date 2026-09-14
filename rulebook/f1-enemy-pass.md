@@ -699,10 +699,10 @@ is already a complete answer — the respirator only makes it *comfortable*.
 
 | Item | Note |
 |---|---|
-| **Encounter tables / room counts** | This is a roster, not a dungeon. How many Bramblewretches per room, and how many rooms, is unwritten |
-| **F1 terrain blocks** | §21.4 wants three answers per terrain. The forest, the stairwell, the burning house and the moving city all need one; none is written |
-| **Exposure/viewer values per enemy** | §17 pays out for spectacle. No enemy below carries a viewer number |
-| **Token/loot payouts** | §19.1 currencies and §17.6 box drops per rank are not assigned |
+| ~~Encounter tables / room counts~~ | **DONE 2026-09-14** — §21.7 (the two dials) + **E-8.1** below |
+| ~~F1 terrain blocks~~ | **DONE 2026-09-14** — all four written, **E-8.2** below |
+| ~~Exposure/viewer values per enemy~~ | **DONE 2026-09-14** — §17.8 is the contract (swings, not counts, because §17.1 keeps the numbers with the GM); the per-enemy hooks are **E-8.3** |
+| ~~Token/loot payouts~~ | **DONE 2026-09-14** — §19.1 now says which rung a floor sits on and §17.6 says what each rank drops; the F1 numbers are **E-8.4** |
 | ~~Foreman Bex's name~~ | **BLESSED 2026-08-18** |
 | ~~The Girl's F1 fightability~~ | **RULED 2026-08-18** — killable; the cost is the Beelzebub chain (C-4) |
 | **Level budget** | 🟡 now drafted at [`level-budget.md`](level-budget.md) — **still the calibration dependency for every number in this document.** L-6 checks the F1 ladder against it and the F1 numbers hold |
@@ -821,3 +821,184 @@ selectable in `admin/EnemiesSection.jsx`, and covered by **7 new checks** in
 `test-seed-enemies.js` (81 pass · 0 fail). **F1 is now 16 of 19 migrated** — the three
 remaining carry no signature correctly (Glass-Antler Doe, Camera Gnat, Crystal Spore Mist deal
 no direct damage).
+
+---
+
+# E-8 — Running Floor 1 ✅ **NEW 2026-09-14** (closes four E-4 rows)
+
+The roster said *what is on this floor*. This says **how much of it, standing
+where, worth what.** Frames are in the book — **§21.7** (encounter sizing),
+**§21.4** (terrain), **§17.8** (spectacle), **§17.6 / §19.1** (payouts). This is
+Floor 1's instance of them.
+
+⚠️ **Floor 1 is the harshest floor in the campaign by §21.7's measure**, because
+the parts are still small. **A standard F1 room is 5–10 mobs at width 2.** A
+"Room" of 10 at width 4 already threatens **69%** of the party's body — that is a
+set piece, not a corridor. The numbers below all carry their ceiling.
+
+*(Party of 4, F1: body **29** each · **116** total · mob signature **4**.
+Ceiling = width × 4 × ⌈count ÷ 2⌉. Regenerate: `node server/encounter-bands.js --floor 1`.)*
+
+## E-8.1 — The encounter tables
+
+*Every ceiling below is generated — `node server/encounter-bands.js`. **M** is how
+many Moments the room runs.*
+
+⭐ **The F1 dial, and it fell out of the arithmetic rather than being chosen:**
+**an elite ALONE is a standard room (31%). An elite plus four mobs is a hard room
+(55%).** Mobs cost almost nothing on their own at this size; what makes a room
+expensive is **something that is still alive at the end of it.**
+
+### Layer A — the forest · every party · pick 3–4
+
+| # | Room | Contents | Width | Ceiling | M | What it teaches |
+|---|---|---|---|---|---|---|
+| **A-i** | **The tree line** | 6 × Bramblewretch | 2 | **24 · 21%** | 3 | the plain horde, and **cones**. The seed already says they come 4–8 |
+| **A-ii** | **The still air** | 1 × Husk-Moth Cloud + 4 × Bramblewretch | 2 | **24 · 21%** | 3 | **single-target does nothing.** The cloud is one body and a sword goes through it |
+| **A-iii** | **The soft ground** | 3 × Rootjaw (buried) + 4 × Bramblewretch | 2 | **32 · 28%** | 4 | **untargetable-while-X**, and that Burn flushes it |
+| **A-iv** | **The lanyard** | 5 × Spore-Drunk Contestant | 3 | **36 · 31%** | 3 | **killing has a cost.** The puff is the first Infected anyone takes |
+| **A-v** | **The clearing** | 2 × Glass-Antler Doe + 2 × Camera Gnat | — | **0** | — | **not every enemy is a fight.** The Doe costs ammo and Moments; the Gnat costs Exposure to swat |
+| **A-vi** | **The landlord** ☠ | The Rack + 4 × Bramblewretch | 2 | **64 · 55%** | 8 | **weak systems** — the Crown, before it matters against a boss |
+| **A-vii** | **The patch** ☠ | Mycelium Bloomkeeper + 4 × Spore-Drunk | 3 | **72 · 62%** | 8 | **surface immunity, and a tether.** ⚠️ The hardest room on the shared layer — do not run it back-to-back with A-vi |
+
+*Run A-i before A-ii before A-iii. The forest's job is to hand them the whole
+vocabulary — horde, area-only, gate, cost-on-death, non-combatant, weak system —
+before a route can punish them for not having it.*
+
+### Layer B — Easy · the grand staircase
+
+| # | Room | Contents | Width | Ceiling | M | Note |
+|---|---|---|---|---|---|---|
+| **B-i** | **The descent** | 8 × Stair-Wight | **2** (it is a staircase) | **32 · 28%** | 4 | **they reform.** A party with no Burn learns it the second time |
+| **B-ii** | **The mural chamber** | The Chainbearer, alone | — | **36 · 31%** | 6 | it **cannot leave the room**, and the mural is on the wall behind it |
+| **B-iii** | ☠ **THE MASKED** | boss | — | — | — | §21.3. The chain is on the floor and Mistletoe is in the forest |
+
+### Layer C — Medium · the burning house
+
+| # | Room | Contents | Width | Ceiling | M | Note |
+|---|---|---|---|---|---|---|
+| **C-i** | **The yard** | 6 × Torchbearer | 3 | **36 · 31%** | 3 | **they are people.** They die in one hit and the crowd watches you do it |
+| **C-ii** | **The doorway** | The Kindler + 4 × Torchbearer | **2** | **64 · 55%** | 8 | 🔴 **eight Moments is most of a Clock, and the fire takes a room every Clock.** The doorway is cheap in damage and expensive in *time*, which is the only currency this route charges |
+| **C-iii** | ☠ **Foreman Bex** | boss | — | — | — | the win condition is the house. All three endings are wins |
+| **C-iv** | **The Girl** | set piece | — | — | — | not a room. Whatever they do here, it is Floor 3's problem |
+
+### Layer D — Hard · the moving city
+
+| # | Room | Contents | Width | Ceiling | M | Note |
+|---|---|---|---|---|---|---|
+| **D-i** | **The stopped street** | 8 × Crystallized Citizen | **4** (open street) | **64 · 55%** | 4 | **CRUSH ONLY.** A blade party is in genuine trouble and should be. ⭐ The only room on the floor that is hard *because of width* rather than because something outlives the mobs |
+| **D-ii** | **The beautiful thing** | 1 × Crystal Spore Mist + 6 × Crystallized Citizen | 3 | **48 · 41%** | 4 | ⚠️ **the number lies.** The mist deals no signature damage — it deals **Infected, and Infected + Suffocation if inhaled.** The 41% is the part that shows up on a sheet |
+| **D-iii** | **The stairs that walk** ☠ | Step-Warden + 4 × Crystallized Citizen | 2 | **64 · 55%** | 8 | its 10-Crush windup is the punish window (§21.6 `windup`) — and it is **above** this ceiling, which assumes on-band hits |
+| **D-iv** | ☠☠ **LOONG KIN** | super | — | — | — | **the streets, not the giant stairs** (the 2026-08-25 correction). They run and converse |
+
+## E-8.2 — Terrain blocks (§21.4 — three answers each)
+
+### The Forest — shared, all routes
+
+1. **Hard to walk in?** Undergrowth is **difficult terrain** in marked squares,
+   and **§12.1's adjacent-empty-radius for heavy weapons is rarely available** —
+   a greatsword build is fighting the trees as well. **Game trails** are the only
+   clean lines, which is how you get width 2 in an open forest.
+2. **A hazard?** Not by itself. **Dry scrub is flammable** — and every Medium-route
+   party is walking in carrying the thing that lights it.
+3. **Otherwise?** **Vision stops at 4 spaces.** Sound carries badly — you will not
+   hear a Rootjaw and it will not hear you, which is why that room works.
+- 🎬 **Situation steps (§21.6, cap 2):** *ambush from the scrub* (+1) ·
+  *a game trail chokepoint* that pins the width to 2 (+1).
+
+### The Grand Staircase — Easy
+
+1. **Hard to walk in?** It is a staircase. **Width 2, permanently, everywhere.**
+   Climbing costs double. **Nothing flanks** — there is nowhere to flank from.
+2. **A hazard?** **The rail is gone in places (§21.5).** A Crush hit that would
+   destroy a leg instead **puts you down a flight** — same damage, worse position.
+3. **Otherwise?** **It echoes.** Nothing on this stair is ever a surprise, in
+   either direction: the Wights hear you coming and you hear them. And it is
+   **dark** — the only light is the one you brought, which is also the only thing
+   that stops a Wight reforming.
+- 🎬 **Situation steps:** *high ground* (+1). **No ambush is available here**, and
+  that is the trade: you get a guaranteed width and you give up surprise.
+
+### The Burning House — Medium
+
+1. **Hard to walk in?** Rooms and doorways: **width 2 at every threshold.** And
+   **the map shrinks** — a floor collapses each Clock and closes a route, so the
+   way you came in is not the way out.
+2. **A hazard?** **Flammable ground (§21.4's own example), on a Clock.** Burn T1
+   to anything standing in a lit square; the fire takes one more room per Clock.
+   🔴 **The Girl's room burns last.** That is not flavour — it is the encounter's
+   actual timer, and Bex knows it.
+3. **Otherwise?** **Smoke: vision 2 spaces, and Suffocation (§8.2) for anyone who
+   stays low to avoid it.** The Torchbearers can see you perfectly well, **by
+   your own fire.**
+- 🎬 **Situation steps:** *a doorway choke* (+1) · *turning a room's fire on the
+  arsonists* (+1). ⭐ The fire is the only F1 terrain that is a **Situation step
+  for both sides**.
+
+### The Moving City — Hard
+
+1. **Hard to walk in?** No — and that is worse. **The streets reconfigure between
+   Clocks.** Movement is never blocked; **a retreat can never be planned.** A
+   scouted route is gone by the time you need it.
+2. **A hazard?** **The Crystal Spore Mist drifts toward warmth.** This is terrain
+   that hunts: contact → Infected; **inhalation → Infected + Suffocation**, and it
+   looks like a find.
+3. **Otherwise?** **No cover is permanent.** The city is **silent**, so every sound
+   in it is one the party made. And **the citizens are all facing the same way** —
+   toward where the mist was.
+- 🎬 **Situation steps:** *wind or elevation* to move the mist (+1) · *a building
+  that still has a door* to deny it a path (+1).
+- ⚠️ **Reading the statues is NOT a step.** §21.6 is explicit: **knowledge is not
+  a step, it doubles a matched weakness.** Working out where the mist is going
+  does not add Force — it tells you what to bring, and *that* is what multiplies.
+
+## E-8.3 — Spectacle (§17.8): what the crowd is waiting for
+
+Swings are **§17.8's** (room +1% · elite +5% · boss +25% · super +100%), doubled
+when the kill uses the thing the audience watched them fail at, halved when they
+grind. What follows is **the hook** — the one shot per entry the Corporation wants.
+
+| Entry | The shot |
+|---|---|
+| **Bramblewretch** | a cone through six of them at once. The first time area does what area does |
+| **Husk-Moth Cloud** | somebody swinging a sword through it and nothing happening |
+| **Rootjaw** | the ground opening under whoever was talking |
+| **Spore-Drunk Contestant** | 🔴 **the lanyard.** The audience recognises last season's contestant before the party does |
+| **Glass-Antler Doe** | it getting away. The crowd likes the Doe |
+| **Camera Gnat** | swatting one. ⚠️ **Costs Exposure** — you just hit the camera |
+| **The Rack** | the Crown coming off, after they worked out why nothing was sticking |
+| **Mycelium Bloomkeeper** | the tether cut, and the whole patch going quiet at once |
+| **Stair-Wight** | one of them standing back up. Then burning |
+| **The Chainbearer** | it reaching the doorway and **stopping**, because it cannot follow |
+| ☠ **THE MASKED** | ⭐ the sprig. A party that gathered Mistletoe two rooms ago and did not know why |
+| **Torchbearer** | ⚠️ **a person begging, and the party deciding.** The show does not need a weakness here |
+| **The Kindler** | 🔥 the Fuel Can. He carried it in himself |
+| ☠ **Foreman Bex** | him **walking away, politely**, having lost nothing. The crowd will remember him |
+| **The Girl** | whatever they do. This is Floor 1's most-watched minute either way |
+| **Crystallized Citizen** | the moment they realise it is a **person**, and hit it anyway |
+| **Crystal Spore Mist** | ⭐ **somebody walking toward it.** It is beautiful and the audience knows what it is |
+| **Step-Warden** | the windup, and the party using the window instead of running |
+| ☠☠ **LOONG KIN** | 🔴 **the second form.** +100%, and it is the season's replay |
+
+## E-8.4 — Payouts
+
+**Floor 1 is Set 1** (§19.1), so:
+
+| | Rung | Upgrade Tokens | Box (§17.6) |
+|---|---|---|---|
+| **a cleared room** | — | — | **1 Bronze** + **1 gather roll** for the room (E-0.4) |
+| **elite** — The Rack · Bloomkeeper · Chainbearer · Kindler · Step-Warden | — | — | **1 Bronze** + **its named carve.** The elite *is* the material |
+| ☠ **boss** — THE MASKED · Foreman Bex | **Neighbourhood** | **5** | **1 Silver** |
+| ☠☠ **super** — LOONG KIN | **Precinct** | **50** | **1 Gold** |
+
+⚠️ **The Loong pays ten times the floor's boss.** That is §19.1's blessed ladder,
+not a Floor-1 decision — and it is right: a party that takes a Super at Floor 1
+is being paid for a floor it had no business on. **The Hard route is the money
+route, and it is the route that kills people.**
+
+🔴 **Vermilia pays nothing**, on either branch. There is no rung for her because
+**there is no version of that scene the Corporation wants to price.**
+
+📌 **Nothing on Floor 1 drops Legendary or above.** §17.6: those are authored —
+a Directive, a Goal, a Patron, an achievement. Mistletoe is not a box drop; it
+is **gathered from the forest**, which is the whole point of E-3.
