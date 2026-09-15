@@ -1,6 +1,9 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.5** · 2026-09-14 — **what a MOB is for**: the Press (§21.8), armor
+**Version 1.6** · 2026-09-15 — **everything killed pays** (§3.1): experience and
+levels from every kill, distributed as a share of the floor's grant, and loot on
+top. Replaces "there is no XP curve".
+*Previously —* **1.5** · 2026-09-14, **what a MOB is for**: the Press (§21.8), armor
 rides the band and degrades with the part (§12.6). Corrects §21.7's danger model,
 which had left the defender's armor out of it entirely.
 *Previously —* **1.4** · 2026-09-14, **what a fight is WORTH**: encounter sizing
@@ -120,8 +123,26 @@ Common mappings:
 
 ### 3.1 Levels and level points
 
-- **Levels are awarded by the GM at milestones** — bosses, floors, major
-  achievements. There is no XP curve. (An XP-based variant may arrive in a future edition.)
+🔒 **EVERYTHING KILLED PAYS (ruled 2026-09-15).** *"Everything killed pays
+experience and levels, as well as whatever loot there is."* The line this replaces
+said levels came only from milestones and that **"there is no XP curve"** — and
+its own parenthetical guessed the future correctly.
+
+- **Every kill pays experience**, and its loot on top — the body, the carve, the
+  materials. A mob pays. An elite pays. **Nothing is worth zero.**
+- **Resolving pays the same experience as killing** (§21.3, level-budget L-19).
+  What the kill adds is the **loot**; what the resolution adds is the **quest**
+  (§17.6). ⭐ **Neither path is the poor one — they pay in different currencies.**
+- **A FLOOR IS WORTH ITS FLOOR'S GRANT, distributed across its roster by part
+  budget.** Clear everything and you collect all of it. Clear half and you
+  collect about half, and arrive at the next floor under-levelled. **There is no
+  XP table to look up and no threshold to track:** a creature's share of the floor
+  is its share of the floor's total HP.
+- ⚙️ **Why it is framed as a share rather than a number.** A flat per-kill value
+  would hand the roster's author the power curve — write four elites instead of
+  two and the floor pays more. As a share, **the author sets the granularity and
+  the budget still sets the total.** And because **nothing respawns**, a floor's
+  experience is finite by construction: there is no farm.
 - Each level grants **1 level point** into a shared pool. A level point buys
   **+1 to any one trait** — any trait, either pillar.
 - Levels grant nothing else by default (no automatic HP). More HP comes from

@@ -540,16 +540,54 @@ is what keeps that character in danger.
 | **Set bonus** | **+1** (Set 2) / **+2** (Set 3) | The floors get bigger; so does the grant |
 | **Major achievement** (§17.6) | **+1** ⚖ | GM discretion, **never guaranteed**, and the only source that can push a party off-curve |
 
-**Two things pay ZERO levels, and both are deliberate:**
+## L-24 🔒 EVERYTHING KILLED PAYS — ruled 2026-09-15, and it withdraws the line below
 
-- **Mobs. Ever.** A cleared mob room pays materials and Exposure (§17), never
-  advancement. Otherwise grinding beats playing, and the horde doctrine (§21.2)
-  turns into an XP farm — which is exactly the thing §3.1 says this system does
-  not have.
-- **Elites, individually.** They roll up into *the floor's discovery* and *floor
-  cleared*. Otherwise a floor with four elites out-pays a floor with two, and
-  **the roster author accidentally controls the power curve.** I am that author;
-  I should not have that lever.
+> Owner: *"Everything killed pays experience and levels, as well as whatever loot
+> there is."*
+
+**~~Two things pay ZERO levels, and both are deliberate:~~ WITHDRAWN.** The table
+above still stands as the *milestone* half; what is gone is the claim that
+anything pays nothing.
+
+~~**Mobs. Ever.** A cleared mob room pays materials and Exposure (§17), never
+advancement.~~ · ~~**Elites, individually.** They roll up into the floor's
+discovery and floor cleared.~~
+
+⚠️ **Both had a reason, and the reasons are not equally answered — so record which
+survived and how.**
+
+| the old reason | status |
+|---|---|
+| *"Otherwise grinding beats playing, and the horde doctrine turns into an XP farm"* | ✅ **Answered by something already true: NOTHING RESPAWNS.** A floor's roster is finite, so its experience is finite. There is no farm to grind — only a floor to finish. ⭐ And §17.6 + §17.8 (2026-09-14) put the *other* rewards on the other behaviour: **levels come from bodies; boxes and audience come from deeds.** Grinding gets you statted and leaves you unequipped and unwatched |
+| *"A floor with four elites out-pays a floor with two, and the roster author accidentally controls the power curve. I am that author; I should not have that lever"* | 🔴 **STILL REAL, and a flat per-kill value would hand me exactly that lever.** ⭐ **So the payment is a SHARE, not a number:** a floor is worth its floor's grant (L-19: 10/10/10 · 16/16/16 · 24/24/24), **distributed across its roster by part budget.** The author sets how finely the floor is cut; **the budget still sets the total.** The lever stays where L-19 put it |
+
+### How it works at the table
+
+> **A creature's share of the floor's levels = its share of the floor's total part
+> budget.**
+
+**No XP table. No thresholds. No per-level cost curve.** The GM already knows every
+creature's budget — the doctrine gate checks it — so the arithmetic is a division
+the roster does for itself.
+
+| | |
+|---|---|
+| clear everything | the floor's **whole** grant |
+| clear half | about **half**, and you arrive at the next floor under-levelled |
+| resolve instead of kill | ⭐ **the same experience.** The kill adds **loot**; the resolution adds **the quest** (§17.6). L-19's *"resolved, not killed"* row was right and survives — what the owner withdrew is that **only** resolving pays |
+
+⚙️ **Worked, at Floor 1.** The roster a party actually meets runs to roughly **505**
+part budget (≈40 mobs at 5, three elites at ~60, one boss at 125) against F1's
+**10 levels** — so **≈50 budget to a level**: a mob is a tenth of one, an elite is
+a level and a bit, the boss is two and a half. ⭐ **A cleared room of ten mobs is
+about a level**, which is the rate the tutorial has been paying all along.
+
+⚠️ **The anchors are untouched.** A party that clears its floor lands exactly on
+L-19's curve — F1 exit at 24 points and a 7 HP torso, F5 main stat 48, F9 practical
+gods. **Skipping content is now the only thing that moves you off it**, which makes
+§4.1's one-route-per-campaign and S-7's trade track cost something real.
+
+---
 
 ---
 

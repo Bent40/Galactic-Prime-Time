@@ -748,8 +748,78 @@ Skills are granted to players by templateId. The player sheet joins template dat
   Exponentially, a Mind build at F9 has a 13 HP torso against thousands of damage —
   unplayable from F2 onward. Recommended fix: **part HP scales off TOTAL trait
   points**, Physique keeping a bonus. **Must be ruled before Set 2 is designed.**
-- Still standing from the linear draft: **mobs and individual elites pay ZERO levels**;
-  **bosses pay for being RESOLVED, not killed**; **all routes pay identical levels**.
+- 🔒 **L-24 — EVERYTHING KILLED PAYS (ruled 2026-09-15).** *"Everything killed pays
+  experience and levels, as well as whatever loot there is."* ⚠️ **This withdraws the
+  linear draft's "mobs and individual elites pay ZERO levels"** and rewrites **§3.1**,
+  which said levels came only from milestones and that **"there is no XP curve"** —
+  its own parenthetical had guessed the future correctly. **Rulebook → v1.6.**
+  ⚙️ **The old line had TWO reasons and they are not equally answered, so both are
+  recorded:** ① *"grinding beats playing"* → ✅ **answered by something already true —
+  NOTHING RESPAWNS**, so a floor's experience is finite by construction; and §17.6 +
+  §17.8 put the other rewards on the other behaviour (**levels from bodies, boxes and
+  audience from deeds**), so grinding gets you statted and leaves you unequipped and
+  unwatched. ② *"a floor with four elites out-pays a floor with two — the roster author
+  accidentally controls the power curve"* → 🔴 **still real**, and a flat per-kill number
+  would hand me exactly that lever. ⭐ **So payment is a SHARE, not a number: a floor is
+  worth its floor's grant (L-19: 10/10/10 · 16/16/16 · 24/24/24), distributed across its
+  roster by PART BUDGET.** No XP table, no thresholds, no cost curve — the doctrine gate
+  already knows every creature's budget, so the arithmetic is a division the roster does
+  for itself. **The author sets the granularity; the budget still sets the total.**
+  ⚙️ Worked at F1: ~**505** budget against 10 levels ≈ **50 budget to a level** — a mob is
+  a tenth, an elite a level and a bit, the boss two and a half, ⭐ **and a cleared room of
+  ten mobs is about a level**, the rate the tutorial has been paying all along.
+  ⭐ **Resolving pays the SAME experience as killing** — L-19's *"resolved, not killed"*
+  row was right and survives; what the owner withdrew is that **only** resolving pays.
+  **The kill adds LOOT; the resolution adds THE QUEST (§17.6). Neither path is the poor
+  one — they pay in different currencies.** ⚠️ **Anchors untouched:** clearing a floor
+  lands exactly on L-19's curve, and **skipping content is now the only thing that moves
+  you off it** — which finally makes §4.1's one-route-per-campaign and S-7's trade track
+  cost something.
+- Still standing: **all routes pay identical levels.**
+
+## Race & Class (PROPOSAL, 2026-09-15 — `rulebook/race-and-class.md`)
+- ⭐ **THE LOUNGE ALREADY HAS ALL THREE RUNGS — nothing needs building.** §20.3's
+  **Surgeon's Table (20 UT)** reads **L1** *"the canonical **race-change** service"* ·
+  **L2** *"**Animal-part grafts** (GM-statted from the beast you brought back)"* ·
+  **L3** *"**boss-part grafts** with their quirks."* 🔒 **The owner's "later, as updated,
+  race assimilation" is literally that module's own L2→L3 upgrade path**, written months
+  ago and already priced. ⚠️ **What is missing is not a system — it is what a GRAFT DOES**,
+  because both rows today say *"GM-statted"* and stop. **That is the entire scope.**
+- **Race change (L1):** race is already *"whatever you add to yourself"* in the data model
+  (`RACES` + freetext `identity.species`), so a race is **an identity line plus its racial
+  package** (Swim on a sea lion, claws on a cat). **A race change swaps the package** at
+  the level you held the old skills; one downtime action. ⚙️ Whole-body and **broadcast** —
+  a contestant walking out of the Lounge as something else is an episode.
+- **Assimilation (L2/L3):** *a graft replaces ONE body part and that part carries ONE
+  trait the donor actually had.* ⭐ **All four limits are rules that already exist:**
+  **you have six parts** (§3.2 — the cap enforces itself, and each graft costs the part you
+  had) · **the trait must be ON THE DONOR'S STATLINE**, the same anti-arbitrariness shape as
+  §21.3's required `why`, so **the bestiary IS the catalogue** and 53 entries are already
+  written with their reasons · **the trait lands on the PART**, where `BodyPartSchema`
+  already carries `resistances` + `universal` · and **boss grafts come with their quirks**,
+  so the downside is part of the object rather than a tax.
+- ⭐⭐ **It closes yesterday's model gap.** The Incinedile's **`fire_heals`** has no field,
+  and an **L3 arm graft that heals from fire** is exactly what boss-part assimilation
+  should be — **the field that boss needs and the field assimilation needs are the same
+  field.** Proposed: `weaknesses[].mode` = `double` (default) | `heal`, per-part
+  overridable, keeping the required `why`.
+- 🟡 **Open (mine):** does being modified grant a **Mark**? It fits §18.4 exactly — a deed
+  done *to* you, permanent, physical, *"not necessarily good."*
+- 🔴 **CLASS — the question that must be answered first: how is a Class different from a
+  Mark?** DCC-format classes are earned from what you did, absurdly specific, named for the
+  weight of the deed — **which is §18.4's authoring rule word for word.** Without an answer
+  we build a second system for a rule we already have. **Proposed: a Mark RECORDS, a Class
+  CAPACITATES** — the ledger says what you did, the class is what you did often enough to
+  **become**; so **a deed grants a Mark, and a Mark can unlock a Class.**
+- ⭐ **The cheap shape — a class RE-GOVERNS.** L-17 already ruled skills scale with their
+  governing trait, so a class changes **which trait governs** (a Brawler scales Charm skills
+  off Physique). One number, no new machinery, **identity-shaped rather than +X-shaped**.
+  ⚙️ **And it is the only shape that does not break L-19**: the 150-level curve was computed
+  without classes, so raw bonuses must be paid *out of* those levels or the anchors move —
+  **re-governing changes which trait powers a skill, never how much total power exists.**
+- ⚠️ **Scope:** race is **one ruling and one field**; **class is Set-2-sized** (it touches
+  L-17, L-19, §18.4, the skill model and the sheet). Recommend **race now, class after
+  Incinedile.**
 
 ## Set 1 item concepts (PROPOSAL, added 2026-08-25)
 - **`rulebook/set1-item-concepts.md`** — the **first 9 of the ~27** authored by weapon-research
