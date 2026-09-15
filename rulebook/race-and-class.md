@@ -186,11 +186,50 @@ which is exactly where it is worst.** By Floor 3 it is a rounding error.
    **armor 1 does not.** One worn piece is the whole difference — a real, teachable
    lesson in the room where it happens.
 
+### 🔒 R-4.1 RULED 2026-09-15 — size buys PASSAGE; the race carries the rest
+
+> Owner: *"What small buys depends on the animal. Any animal that's small can go
+> through a small entrance, but animals are basically the highly specialized race."*
+
+⚠️ **My framing was wrong.** I had size as a *trade* — Small buys mobility, Large
+buys reach. It is not a trade:
+
+| | |
+|---|---|
+| **Size buys ONE thing: passage** | a smaller body goes where a larger one cannot. §11 already gives gaps real dimensions; this makes **size alone** answer them, no skill required. Symmetric, unnumbered, GM-read |
+| **Everything else is a COST** | a smaller body is simply a smaller body |
+| **The compensation is the RACE** | and races are **not balanced against one another** |
+
+### 🔒 The race axis: how far a race specialises
+
+| race | shape |
+|---|---|
+| **Human** | ⭐ **the flat one.** No racial skill and nothing closed. Thematically exact — the show is about abducted humans, so Human is the unmarked default |
+| **Animal** | 🔒 **the specialist.** A tall, narrow spike and a real bill for it |
+| **Robot · AI** | 🔴 **unwritten.** ⚖ Mine, unblessed: the **modular** one — the race the Augmentation Hub (§20.3) speaks to natively, so its spike is *what it has bolted on* rather than what it was born as. XQUEZ/T is Physique 5 with **no weapons**, which is already a shape |
+
+⭐⭐ **An Animal's spike is CONDITIONAL, and that is the cost paying for itself.**
+A sea lion's Swim is enormous *in water* and nothing in a desert — so **the floor
+decides what a race is worth that week**, and Set 1 is forest, desert and city.
+**No balancing number is required; the campaign prices the roster by itself.**
+
+⚙️ **Specialisation is not only skills — it is the BODY.** §7.1 already shapes a
+non-standard layout (flippers, not arms; four legs, not two). **Size, parts and
+racial skills are one package.**
+
+⭐ **And that is why the Surgeon's Table exists.** §20.3's add · remove · change
+is the one place the package can be edited, so **a specialist stranded on the
+wrong floor is not trapped — they are one downtime action from a graft.** Race,
+size and the Lounge close into a loop.
+
+⚠️ **A SMALL ANIMAL is therefore the highest-variance start in the game** — the
+smallest body (11 against a Medium's 17) **and** the narrowest spike. Correct, and
+it is why `Nightlurking` reads the way it does.
+
 ### What the table still needs
 
 | | |
 |---|---|
-| **Per-size base part HP** | Small / Medium / Large. Medium is canon; the others are unwritten |
-| 🔴 **What Small BUYS** | ⚠️ Less HP with nothing in return is strictly worse. Small should pay in **mobility and access** — ⭐ and Sasha's **Nightlurking** (*"fits through cat-plausible spaces without Forced Action"*) is already that trade, written before the rule existed |
-| **What Large buys and costs** | HP and reach, against places it does not fit — and §13 already makes **Large grappleable by a Medium** while Huge is not, so size already carries weight |
-| **The racial package per race** | A race is an identity line plus one or two skills (Swim · claws). The list is unwritten and is what a *common* race choice picks from |
+| ~~What Small buys~~ | ✅ **RULED — passage**, and the race carries the rest |
+| **The racial package per race** | 🔴 Still unwritten, and now the *only* remaining piece: **what each Animal's one spike is.** A race is an identity line plus its package, and this is what a *common* race choice picks from |
+| **Robot · AI's shape** | 🔴 Open — the one race with no stated frame |

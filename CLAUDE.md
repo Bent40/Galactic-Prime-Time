@@ -1386,11 +1386,32 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
 
   ⛔ **The head never drops below 2 at any size** — it is a lethal part, so a 1 HP head
   means *any* hit kills, including one mob's. ⭐ **Not an arbitrary floor: it is the line
-  under which a part stops being a part and becomes a coin flip.** ⚙️ Read as **starting
-  conditions, not tiers** — growth is flat so the totals converge. 🔴 **Still open (R-4):
-  what each size BUYS** — Small in movement/access (Sasha's `Nightlurking` already is that
-  trade), Large in reach/carry against the places it does not fit; §13 already makes Large
-  grappleable by a Medium and Huge not.
+  under which a part stops being a part and becomes a coin flip.**
+- 🔒 **WHAT SIZE BUYS — RULED 2026-09-15: PASSAGE, and that is all (v1.9).** *"What small
+  buys depends on the animal. Any animal that's small can go through a small entrance, but
+  animals are basically the highly specialized race."* ⚠️ **My framing was wrong** — I had
+  size as a *trade* (Small buys mobility, Large buys reach). **It is not a trade.** **Size
+  buys ONE thing — a smaller body goes where a larger one cannot** (§11 already gives gaps
+  real dimensions; this makes **size alone** answer them, no skill required — symmetric,
+  unnumbered, GM-read). **Everything else about a smaller body is simply a COST**, and
+  ⭐ **the compensation lives in the RACE, which is not balanced against other races.**
+- 🔒 **ANIMALS ARE THE SPECIALISED RACE.** **Human = the flat one** (no racial skill,
+  nothing closed — thematically exact, since the show is about abducted humans, so Human is
+  the unmarked default) · **Animal = a tall, narrow spike with a real bill** · 🔴 **Robot ·
+  AI is unwritten** (⚖ mine: the *modular* one, the race §20.3's Augmentation Hub speaks to
+  natively — XQUEZ/T is Physique 5 with **no weapons**, which is already a shape).
+  ⭐⭐ **An Animal's spike is CONDITIONAL, and that is the cost paying for itself:** a sea
+  lion's Swim is enormous *in water* and nothing in a desert, so **the FLOOR decides what a
+  race is worth that week** — and Set 1 is forest, desert, city. **No balancing number is
+  needed; the campaign prices the roster by itself.** ⚙️ And specialisation is **not only
+  skills — it is the BODY**: §7.1 already shapes non-standard layouts (flippers, not arms),
+  so **size, parts and racial skills are one package.** ⭐ **Which is why the Surgeon's
+  Table exists** — §20.3's add·remove·change is the one place that package can be edited,
+  so **a specialist stranded on the wrong floor is one downtime action from a graft.**
+  Race, size and the Lounge close into a loop. ⚠️ **A SMALL ANIMAL is the highest-variance
+  start in the game** — smallest body (11 vs a Medium's 17) **and** narrowest spike. Correct,
+  and it is why `Nightlurking` reads the way it does. 🔴 **Only two pieces left (R-4): the
+  racial package per race — what each Animal's one spike is — and Robot·AI's shape.**
 - ⚠️ **MY MISCOUNT, CORRECTED: there are THREE roach brothers — Big, Mid, Little.** The
   tutorial review said *four*; I had counted the **dog-roach** as a sibling and it is the
   **mob**. Fixed in `tutorial-floor-review.md` with the error recorded.

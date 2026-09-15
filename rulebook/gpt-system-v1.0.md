@@ -1,6 +1,8 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.8** · 2026-09-15 — a weakness may **HEAL** instead of doubling (§7.3),
+**Version 1.9** · 2026-09-15 — **what size buys is passage**, and the compensation
+lives in the race, not the size: **Animals are the specialised race** (§7.1).
+*Previously —* **1.8** · 2026-09-15, a weakness may **HEAL** instead of doubling (§7.3),
 and the **per-size base part tables** (§7.1).
 *Previously —* **1.7** · 2026-09-15, **the press caps at three** (§21.8), **size sets base
 part HP** (§7.1), and the **Surgeon's Table adds, removes or changes parts** (§20.3).
@@ -478,18 +480,43 @@ is **armor now**, not a permanent correction. **The per-size bases:**
 head means *any* hit kills — including one mob's. That floor is not arbitrary: it
 is the line under which a part stops being a part and becomes a coin flip.
 
-⚙️ **Read these as starting conditions, not as tiers** — growth is flat, so the
-totals converge, and a smaller body is meant to **buy** something back.
-🔴 **What each size buys is not written yet** (`rulebook/race-and-class.md` R-4):
-Small should pay in movement and access (Sasha's `Nightlurking` is already that
-trade), Large in reach and carry against the places it does not fit — and §13
-already makes **Large grappleable by a Medium while Huge is not.**
+🔒 **WHAT SIZE BUYS — one thing, and it is PASSAGE (ruled 2026-09-15).**
+
+> **A smaller body goes where a larger one cannot.** *"Any animal that's small can
+> go through a small entrance."*
+
+That is the whole of it. §11 already says gaps and holes have real dimensions;
+this makes **size alone** answer them, with no skill required. A Small contestant
+fits a vent, a drain, a collapsed gap; a Large one does not fit the doorway, and
+a Huge one is outdoors. **Symmetric and unnumbered** — the GM reads the opening.
+
+⚠️ **Size is otherwise a COST, not a trade.** A smaller body is simply a smaller
+body. **The compensation does not live in the size — it lives in the RACE**, and
+races are not balanced against one another:
+
+🔒 **ANIMALS ARE THE HIGHLY SPECIALISED RACE.** A tall, narrow spike and a real
+bill for it. A **Human** is the flat one — no racial skill, and nothing closed.
+⭐ **And an Animal's spike is CONDITIONAL, which is the cost paying itself:** a sea
+lion's Swim is enormous *in water* and nothing in a desert, so **the floor decides
+what a race is worth that week.** No balancing number is needed; Floors 1–3 are
+forest, desert and city, and they price the roster by themselves.
+
+⚙️ **Specialisation is not only skills — it is the BODY.** §7.1 already shapes a
+non-standard layout (flippers, not arms; four legs, not two). **Size, parts and
+racial skills are one package**, and §20.3's Surgeon's Table is the one place it
+can be edited — ⭐ **which is why that module exists.** A specialist stranded on
+the wrong floor is not trapped; they are one downtime action from a graft.
+
+⚠️ **So a SMALL ANIMAL is the highest-variance start in the game** — the smallest
+body (11 against a Medium's 17) *and* the narrowest spike. That is correct, and
+it is why `Nightlurking` reads the way it does.
 
 - HP is structural integrity; **0 HP = the part fails**.
 - Non-standard bodies (Animals, machines) get GM-shaped part layouts with the same
   logic; every body needs a head-equivalent and torso-equivalent (lethal parts).
 - Every combatant has a **size**: Small / Medium / Large / Huge. Humans are
-  Medium. Effects referencing size read this field.
+  Medium. Effects referencing size read this field — **base part HP (above),
+  passage through an opening (above), and grapple (§13).**
 - A part's max HP can be raised by **race, class, achievements, skills, and
   stats** (Physique is the systematic source — §3.2).
 
