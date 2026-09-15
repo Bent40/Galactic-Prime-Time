@@ -1,6 +1,8 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.7** · 2026-09-15 — **the press caps at three** (§21.8), **size sets base
+**Version 1.8** · 2026-09-15 — a weakness may **HEAL** instead of doubling (§7.3),
+and the **per-size base part tables** (§7.1).
+*Previously —* **1.7** · 2026-09-15, **the press caps at three** (§21.8), **size sets base
 part HP** (§7.1), and the **Surgeon's Table adds, removes or changes parts** (§20.3).
 *Previously —* **1.6** · 2026-09-15, **everything killed pays** (§3.1): experience and
 levels from every kill, distributed as a share of the floor's grant, and loot on
@@ -462,9 +464,26 @@ and 94% by Floor 9**:
 
 ⚠️ **So size is an EARLY-GAME fact.** It bites hardest in the tutorial and on
 Floor 1 and is nearly gone by the end — which is why a Small contestant's answer
-is **armor now**, not a permanent correction. 🔴 **The per-size base tables are not
-written yet** (`rulebook/race-and-class.md` R-4); only Medium above and the ruling
-that size determines it are settled.
+is **armor now**, not a permanent correction. **The per-size bases:**
+
+| Part | **Small** | **Medium** *(the table above)* | **Large** | **Huge** |
+|---|---|---|---|---|
+| **Head** (lethal) | **2** | **2** | 3 | 4 |
+| **Torso** (lethal) | **3** | **5** | 8 | 12 |
+| Each arm | 1 | 2 | 3 | 5 |
+| Each leg | 2 | 3 | 4 | 6 |
+| **body total** | **11** | **17** | **25** | **38** |
+
+⛔ **The head never goes below 2, at any size.** It is a lethal part, so a 1 HP
+head means *any* hit kills — including one mob's. That floor is not arbitrary: it
+is the line under which a part stops being a part and becomes a coin flip.
+
+⚙️ **Read these as starting conditions, not as tiers** — growth is flat, so the
+totals converge, and a smaller body is meant to **buy** something back.
+🔴 **What each size buys is not written yet** (`rulebook/race-and-class.md` R-4):
+Small should pay in movement and access (Sasha's `Nightlurking` is already that
+trade), Large in reach and carry against the places it does not fit — and §13
+already makes **Large grappleable by a Medium while Huge is not.**
 
 - HP is structural integrity; **0 HP = the part fails**.
 - Non-standard bodies (Animals, machines) get GM-shaped part layouts with the same
@@ -501,9 +520,17 @@ preparation matter:
 
 - **A weakness doubles that type's contribution.** A torch adds 1 Force to
   anything, and 2 to something that burns.
+- 🔒 **A weakness may instead HEAL (ruled 2026-09-15).** Some creatures are *fed*
+  by a type: **that type restores the part instead of damaging it.** A weakness
+  therefore reads in one of two modes — **doubles** (the default) or **heals** —
+  and both name their reason, like every resistance (§21.3).
+  ⚠️ **A part OVERRIDES the body for its own type**, because "doubles" and "heals"
+  cannot both be true of one part. ⭐ The tutorial boss is the case the rule was
+  written for: **fire heals the whole puppet and *harms* its Network**, because the
+  network is mycelium and mycelium burns. Nothing could express that before.
 - **Resistance subtracts from its own type only** — and never more than that type
   dealt. Fire resistance 5 against 1 Force of fire eats the 1 and wastes the
-  other 4 (§10).
+  other 4 (§10). ⚙️ **Resistance ADDS between body and part; a weakness REPLACES.**
 
 **An enemy's HP is Force.** A mob is five punches. It does not matter whether the
 five arrive as a club, a fire, a poison or a fist — five is five.

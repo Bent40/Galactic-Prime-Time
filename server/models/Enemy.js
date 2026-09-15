@@ -13,8 +13,17 @@ const ResistSchema = new mongoose.Schema({
 }, { _id: false });
 
 // Weaknesses carry their reason for the same rule.
+// §7.3 gives an enemy two answers to a damage type — `weaknesses` DOUBLES it and
+// `resistances` SUBTRACTS from it. Healing from a type is a THIRD thing: a negative
+// weakness. The Incinedile's defining trait ("all fire damage and Burn received heals
+// the boss") could not be written at all until `mode` existed, and neither could an
+// L3 boss-part graft that carries it (§20.3).
+const WEAKNESS_MODES = ['double', 'heal'];
 const WeaknessSchema = new mongoose.Schema({
   type: { type: String, default: '' },
+  // 'double' (default) — that type's contribution counts twice.
+  // 'heal'            — that type RESTORES the part instead of damaging it.
+  mode: { type: String, default: 'double', enum: WEAKNESS_MODES },
   why:  { type: String, default: '' },
 }, { _id: false });
 
@@ -34,6 +43,11 @@ const BodyPartSchema = new mongoose.Schema({
   // Part resistance ADDS to the enemy-wide resistance; it does not replace it.
   resistances: { type: [ResistSchema],  default: [] },
   universal:   { type: UniversalSchema, default: () => ({}) },
+  // A part OVERRIDES the enemy-wide weakness for its own type — which is the whole
+  // reason this exists: fire heals the Incinedile and fire HARMS its Network, because
+  // mycelium burns. Resistance adds; a weakness REPLACES, because "doubles" and
+  // "heals" cannot both be true of one part.
+  weaknesses:  { type: [WeaknessSchema], default: [] },
 }, { _id: false });
 
 const PhaseSchema = new mongoose.Schema({
@@ -110,3 +124,4 @@ module.exports = mongoose.model('Enemy', EnemySchema);
 module.exports.SIZES = SIZES;
 module.exports.DAMAGE_EXCEPTIONS = ['', 'windup', 'tick', 'aura', 'presence'];
 module.exports.DMG_TYPES = DMG_TYPES;
+module.exports.WEAKNESS_MODES = WEAKNESS_MODES;

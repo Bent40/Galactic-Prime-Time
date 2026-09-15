@@ -81,12 +81,14 @@ const FLOOR_DAMAGE = {
 //              is instead. This is the one exception the gate treats as a positive
 //              claim rather than a tolerance: without it, a 125-budget boss authored
 //              with no attack passes silently, which is the hole E-7 found.
+// Mirrors models/Enemy.js. Defined here so --check runs with no node_modules.
+const WEAKNESS_MODES = ['double', 'heal'];
 const DAMAGE_EXCEPTIONS = { '': [1.0, 1.0], windup: [1.0, 2.0], tick: [0.2, 1.0], aura: [0.5, 1.0], presence: null };
 const floorIdx = process.argv.indexOf('--floor');
 const floor    = floorIdx !== -1 ? Number(process.argv[floorIdx + 1]) : 1;
 
 const partsSum  = (e) => (e.bodyParts || []).reduce((a, p) => a + (p.maxHp || 0), 0);
-const normParts = (a) => JSON.stringify((a || []).map(p => ({ name: p.name, maxHp: p.maxHp })));
+
 const normPhase = (a) => JSON.stringify((a || []).map(p => ({ name: p.name, description: p.description, hpThreshold: p.hpThreshold })));
 // sorted, so a reordered resistance list is not a spurious --force diff
 const normRes   = (a) => JSON.stringify((a || []).map(r => ({ type: r.type, value: Number(r.value || 0) }))
@@ -94,9 +96,18 @@ const normRes   = (a) => JSON.stringify((a || []).map(r => ({ type: r.type, valu
 const normUni   = (u) => JSON.stringify({ value: Number((u || {}).value || 0),
                                           cause: String((u || {}).cause || ''),
                                           removal: String((u || {}).removal || '') });
-const normWeak  = (a) => JSON.stringify((a || []).map(w => (typeof w === 'string' ? { type: w, why: '' }
-                                          : { type: w.type, why: String(w.why || '') }))
+const normWeak  = (a) => JSON.stringify((a || []).map(w => (typeof w === 'string' ? { type: w, mode: 'double', why: '' }
+                                          : { type: w.type, mode: String(w.mode || 'double'), why: String(w.why || '') }))
                                          .sort((x, y) => String(x.type).localeCompare(String(y.type))));
+// 🔴 Was { name, maxHp } only, which meant the per-part `resistances`/`universal`
+// added 2026-09-14 were INVISIBLE to the diff — editing THE MASKED's Mask universal
+// or the Doorward's Torso gate produced no `bodyParts` difference and --force would
+// not have written it. Fixed 2026-09-15 along with part-level weaknesses.
+const normParts = (a) => JSON.stringify((a || []).map(p => ({
+  name: p.name, maxHp: p.maxHp,
+  resistances: normRes(p.resistances), universal: normUni(p.universal),
+  weaknesses: normWeak(p.weaknesses),
+})));
 const normSig   = (g) => JSON.stringify({
   floor: Number((g || {}).floor || 0), damage: Number((g || {}).damage || 0),
   type: String((g || {}).type || ''), exception: String((g || {}).exception || ''),
@@ -277,22 +288,43 @@ function resistanceProblems(e, atFloor = floor) {
       checkResistSet(bp, e, `${e.name} · part "${bp.name}"`, out);
     }
   });
-  // §7.3 — a weakness doubles its type, so the type has to be a real one.
-  const ws = Array.isArray(e.weaknesses) ? e.weaknesses : [];
-  const wseen = new Set();
-  ws.forEach((w, i) => {
-    const ty = typeof w === 'string' ? w : String((w || {}).type || '');
-    if (!RESIST_TYPES.includes(ty)) out.push(`${e.name}: weakness "${ty}" is not one of ${RESIST_TYPES.join('|')}`);
-    if (wseen.has(ty)) out.push(`${e.name}: weakness ${ty} is listed twice`);
-    wseen.add(ty);
-    if ((e.resistances || []).some(r => r.type === ty)) {
-      out.push(`${e.name}: ${ty} is listed as BOTH a weakness and a resistance — pick one`);
-    }
-    if (!String((w || {}).why || '').trim()) {
-      out.push(`${e.name}: weakness[${i}] (${ty}) names no WHY — §21.3, same rule as resistances`);
+  // §7.3 — a weakness answers a real damage type, and says how.
+  checkWeaknessSet(e, e, `${e.name}`, out);
+  (e.bodyParts || []).forEach((bp) => {
+    if (bp.weaknesses && bp.weaknesses.length) {
+      checkWeaknessSet(bp, e, `${e.name} · part "${bp.name}"`, out);
     }
   });
   return out;
+}
+
+/**
+ * The weakness rules, applied to an enemy or to one of its parts.
+ * `mode` is the field the Incinedile needed: 'double' is §7.3's rule, 'heal' is the
+ * negative weakness (fire heals the boss). A PART overrides the body for its type —
+ * fire heals the Incinedile and HARMS its Network, because mycelium burns — so a
+ * part's weakness is checked against the PART's resistances, not the body's.
+ */
+function checkWeaknessSet(holder, e, label, out) {
+  const ws = Array.isArray(holder.weaknesses) ? holder.weaknesses : [];
+  const seen = new Set();
+  ws.forEach((w, i) => {
+    const ty = typeof w === 'string' ? w : String((w || {}).type || '');
+    const mode = String((w || {}).mode || 'double');
+    if (!RESIST_TYPES.includes(ty)) out.push(`${label}: weakness "${ty}" is not one of ${RESIST_TYPES.join('|')}`);
+    if (seen.has(ty)) out.push(`${label}: weakness ${ty} is listed twice`);
+    seen.add(ty);
+    if (!WEAKNESS_MODES.includes(mode)) {
+      out.push(`${label}: weakness[${i}] (${ty}) mode "${mode}" is not one of ${WEAKNESS_MODES.join('|')}`);
+    }
+    // A type cannot both be reduced and be doubled/healed by the SAME holder.
+    if ((holder.resistances || []).some(r => r.type === ty)) {
+      out.push(`${label}: ${ty} is listed as BOTH a weakness and a resistance — pick one`);
+    }
+    if (!String((w || {}).why || '').trim()) {
+      out.push(`${label}: weakness[${i}] (${ty}) names no WHY — §21.3, same rule as resistances`);
+    }
+  });
 }
 
 /** The resistance rules, applied to an enemy or to one of its parts. */
@@ -410,7 +442,7 @@ async function run() {
   await mongoose.disconnect();
 }
 
-module.exports = { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum,
+module.exports = { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum, WEAKNESS_MODES,
   FLOOR_MOB_HP, FLOOR_DAMAGE, RANK_RATIO, SIZES, TOLERANCE, DAMAGE_EXCEPTIONS };
 
 if (require.main === module) run().catch(e => { console.error(e); process.exit(1); });

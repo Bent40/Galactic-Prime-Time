@@ -3,7 +3,7 @@ import { apiFetch } from '../../api.js';
 
 const BLANK_BP    = { name: '', maxHp: 3 };
 const BLANK_PHASE = { name: 'Phase', description: '', hpThreshold: '' };
-const BLANK = { name: '', tier: 'mob', size: 'Medium', color: '#ff2255', description: '', notes: '', bodyParts: [], phases: [], signature: BLANK_SIG(), resistances: [], universal: BLANK_UNI() };
+const BLANK = { name: '', tier: 'mob', size: 'Medium', color: '#ff2255', description: '', notes: '', bodyParts: [], phases: [], signature: BLANK_SIG(), resistances: [], universal: BLANK_UNI(), weaknesses: [] };
 function BLANK_UNI() { return { value: 0, cause: '', removal: '' }; }
 // §10 — the seven damage types are also the seven resistance keys, 1:1.
 const RESIST_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
@@ -170,6 +170,7 @@ function EnemyForm({ value, onChange }) {
       </div>
       <SignatureRow value={value} onChange={onChange} />
       <ResistanceRow value={value} onChange={onChange} />
+          <WeaknessRow value={value} onChange={onChange} />
       <div className="modal-grid2" style={{ marginBottom: 8 }}>
         <div className="field-group">
           <label className="field-label">Tracker Color</label>
@@ -268,6 +269,65 @@ function ResistanceRow({ value, onChange }) {
           </span>
         )}
       </div>
+    </div>
+  );
+}
+
+/**
+ * §7.3 weaknesses — and the MODE is the field the Incinedile needed.
+ *
+ *   double — that type's contribution counts TWICE. §7.3's rule, and the default.
+ *   heal   — that type RESTORES instead of damaging. A negative weakness; there
+ *            was no way to write "all fire received heals the boss" before this.
+ *
+ * Every entry names its WHY (§21.3, the same rule as resistances) and a type may
+ * never be both a weakness and a resistance on the same holder — the seeder
+ * refuses both, so they warn live here.
+ */
+function WeaknessRow({ value, onChange }) {
+  const rows = Array.isArray(value.weaknesses) ? value.weaknesses : [];
+  const set  = (next) => onChange({ ...value, weaknesses: next });
+  const resisted = new Set((value.resistances || []).map(r => r.type));
+  const free = RESIST_TYPES.filter(ty => !rows.some(w => w.type === ty));
+
+  return (
+    <div style={{ marginBottom: 8 }}>
+      <label className="field-label" style={{ display: 'block', marginBottom: 4 }}>
+        Weaknesses <span style={{ opacity: 0.6, fontWeight: 400 }}>&mdash; doubles that type, or heals from it. Each needs a reason (&sect;21.3).</span>
+      </label>
+      {rows.map((w, i) => {
+        const clash = resisted.has(w.type);
+        const noWhy = !String(w.why || '').trim();
+        const upd = (patch) => set(rows.map((x, j) => j === i ? { ...x, ...patch } : x));
+        return (
+          <div key={i} style={{ marginBottom: 6 }}>
+            <div className="row" style={{ gap: 5 }}>
+              <select className="fi" style={{ width: 150 }} value={w.type || ''}
+                onChange={e => upd({ type: e.target.value })}>
+                <option value="">&mdash; type &mdash;</option>
+                {RESIST_TYPES.map(ty => <option key={ty} value={ty}>{ty}</option>)}
+              </select>
+              <select className="fi" style={{ width: 110 }} value={w.mode || 'double'}
+                onChange={e => upd({ mode: e.target.value })}>
+                <option value="double">doubles</option>
+                <option value="heal">HEALS</option>
+              </select>
+              <input className="fi" style={{ flex: 1 }} placeholder="Why… (required)" value={w.why || ''}
+                onChange={e => upd({ why: e.target.value })} />
+              <button className="btn btn-muted btn-sm" onClick={() => set(rows.filter((_, j) => j !== i))}>&#10005;</button>
+            </div>
+            {(clash || noWhy) && (
+              <span style={{ color: 'var(--gold)', fontSize: 10 }}>
+                &#9888; {clash ? `${w.type} is also a resistance — pick one. ` : ''}
+                {noWhy ? 'Names no reason; the seeder will refuse it.' : ''}
+              </span>
+            )}
+          </div>
+        );
+      })}
+      {free.length > 0 && (
+        <button className="btn btn-cyan btn-sm" onClick={() => set([...rows, { type: free[0], mode: 'double', why: '' }])}>+ Weakness</button>
+      )}
     </div>
   );
 }

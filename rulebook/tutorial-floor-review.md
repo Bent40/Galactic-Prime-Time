@@ -5,9 +5,9 @@ three rules landed today that all touch it — §21.8 the Press, §12.6 armor (r
 degrades with the part), and §21.7 encounter sizing.
 
 > ⚠️ **CORRECTION, same day (owner).** This review read the **game repo's
-> `data/enemies.json`, which is a REDUCED PORT** — it collapses **four** roach
-> brothers into one "Little Brother Roach" elite and folds Big Bro's bow and Mid
-> Bro's axes into a whip plus a summon. **The designed tutorial is: roach-dogs ·
+> `data/enemies.json`, which is a REDUCED PORT** — it collapses **THREE** roach
+> brothers — Big, Mid and Little — into one "Little Brother Roach" elite and folds Big Bro's bow and Mid
+> Bro's axes into a whip plus a summon. ⚠️ *(An earlier draft of this note said FOUR brothers. That was my miscount — I counted the dog-roach as a sibling. It is the mob.)* **The designed tutorial is: roach-dogs ·
 > Little Bro · MID Bro · BIG Bro · Incinedile.** So **T-3's "budget 64 vs a centre
 > of 24" was measuring the wrong creature** and is withdrawn.
 > **What survives, and is now stronger because the owner confirmed the numbers

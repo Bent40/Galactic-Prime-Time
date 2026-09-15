@@ -1352,6 +1352,49 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
   levels under L-24.** *The fastest route through the tutorial's last room is also the poorest,
   and neither rule knew about the other.*
 
+## ✅ BUILT 2026-09-15 — the heal field, the size tables, and two live bugs (v1.8)
+
+- ✅ **`weaknesses[].mode` = `double` | `heal` — BUILT.** §7.3 had two answers to a damage
+  type (double, subtract); ⭐ **healing from one is a THIRD — a negative weakness** — and
+  the Incinedile's defining trait could not be written at all until now. **Model:**
+  `WeaknessSchema.mode` (enum, defaults `double`) + **`BodyPartSchema.weaknesses[]`**, and
+  ⭐ **a part OVERRIDES the body for its own type** because *doubles* and *heals* cannot
+  both be true of one part — which is exactly **fire heals the puppet and HARMS the
+  Network, because mycelium burns.** **Gate:** `checkWeaknessSet()` factored out and run
+  over the body *and* every part; rejects an unknown mode, keeps the required `why` on
+  every mode, and checks a part's weakness against **that part's** resistances rather than
+  the body's. ⚙️ `WEAKNESS_MODES` is duplicated in the seeder so `--check` still needs no
+  `node_modules`. **Rulebook §7.3** carries the rule + *"resistance ADDS between body and
+  part; a weakness REPLACES."* **UI:** a `WeaknessRow` editor with a doubles/HEALS selector
+  and live warnings. **151 tests pass** (+15); F1/F2/F3 all still pass their own floors.
+- 🔴 **TWO LIVE BUGS FOUND WHILE WIRING IT, both from 2026-09-14's work:**
+  ① **`normParts` compared `{name, maxHp}` ONLY**, so the per-part `resistances` and
+  `universal` added that day were **invisible to the diff** — editing THE MASKED's Mask
+  universal or the Doorward's Torso gate produced **no `bodyParts` difference and `--force`
+  would not have written it.** Fixed, with three regression tests pinning each sub-field.
+  ② **The admin UI never got `weaknesses` at all.** My note that day claimed they were
+  *"edited in `admin/EnemiesSection.jsx`"* — **resistances and universal landed; weaknesses
+  did not.** Now built. ⚠️ Client build verified (`vite build`, 72 modules, exit 0).
+- ✅ **THE PER-SIZE BASE TABLES — written into §7.1.**
+
+  | Part | **Small** | **Medium** *(canon)* | **Large** | **Huge** |
+  |---|---|---|---|---|
+  | **Head** (lethal) | **2** | **2** | 3 | 4 |
+  | **Torso** (lethal) | **3** | **5** | 8 | 12 |
+  | arm · leg | 1 · 2 | 2 · 3 | 3 · 4 | 5 · 6 |
+  | **body total** | **11** | **17** | **25** | **38** |
+
+  ⛔ **The head never drops below 2 at any size** — it is a lethal part, so a 1 HP head
+  means *any* hit kills, including one mob's. ⭐ **Not an arbitrary floor: it is the line
+  under which a part stops being a part and becomes a coin flip.** ⚙️ Read as **starting
+  conditions, not tiers** — growth is flat so the totals converge. 🔴 **Still open (R-4):
+  what each size BUYS** — Small in movement/access (Sasha's `Nightlurking` already is that
+  trade), Large in reach/carry against the places it does not fit; §13 already makes Large
+  grappleable by a Medium and Huge not.
+- ⚠️ **MY MISCOUNT, CORRECTED: there are THREE roach brothers — Big, Mid, Little.** The
+  tutorial review said *four*; I had counted the **dog-roach** as a sibling and it is the
+  **mob**. Fixed in `tutorial-floor-review.md` with the error recorded.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.

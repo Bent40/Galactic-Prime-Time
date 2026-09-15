@@ -4,7 +4,7 @@
  * Covers the two pieces that are NOT a copy of seed-affixes.js: the §21.2
  * doctrine gate, and the array-aware diff that decides what --force overwrites.
  */
-const { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
+const { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum, WEAKNESS_MODES, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
 const f2 = require('./seeds/enemies-f2.js');
 const f3 = require('./seeds/enemies-f3.js');
@@ -411,6 +411,72 @@ ok('the two live renames are legal at their own floors',
    renameProblems(f2).length === 0 && renameProblems(f3).length === 0);
 ok('renamedFrom is bookkeeping, never a content difference',
    diffFields(clone(), { ...seed, renamedFrom: 'Anything At All' }).length === 0);
+
+// ── weakness MODE + per-part weaknesses (§7.3 / §20.3, built 2026-09-15) ─────
+// `heal` is the negative weakness the Incinedile needed: "all fire damage and Burn
+// received heals the boss". A PART overrides the body, which is why its Network —
+// mycelium, which burns — can take fire while the puppet is healed by it.
+console.log('\nweakness modes');
+const WK = (o) => ({ tier: 'elite', name: 'W', size: 'Medium', notes: 'n',
+  bodyParts: [{ name: 'A', maxHp: 30 }, { name: 'B', maxHp: 30 }], ...o });
+ok('the two modes are double and heal',
+   WEAKNESS_MODES.join(',') === 'double,heal');
+ok('a heal weakness passes when it names its why',
+   resistanceProblems(WK({ weaknesses: [{ type: 'Burn', mode: 'heal', why: 'fire feeds it' }] }), 1).length === 0);
+ok('an unknown mode is rejected',
+   resistanceProblems(WK({ weaknesses: [{ type: 'Burn', mode: 'absorb', why: 'x' }] }), 1)
+     .some(p => /mode "absorb"/.test(p)));
+ok('a heal weakness still needs a WHY — §21.3 applies to every mode',
+   resistanceProblems(WK({ weaknesses: [{ type: 'Burn', mode: 'heal', why: '' }] }), 1)
+     .some(p => /names no WHY/.test(p)));
+ok('mode defaults to double when omitted, and still passes',
+   resistanceProblems(WK({ weaknesses: [{ type: 'Burn', why: 'wood' }] }), 1).length === 0);
+ok('a PART may carry its own weakness',
+   resistanceProblems(WK({ bodyParts: [
+     { name: 'Network', maxHp: 30, weaknesses: [{ type: 'Burn', mode: 'double', why: 'mycelium burns' }] },
+     { name: 'B', maxHp: 30 }] }), 1).length === 0);
+ok('⭐ the Incinedile shape: fire HEALS the body and HARMS one part',
+   resistanceProblems(WK({
+     weaknesses: [{ type: 'Burn', mode: 'heal', why: 'all fire received heals the puppet' }],
+     bodyParts: [
+       { name: 'Network', maxHp: 30, weaknesses: [{ type: 'Burn', mode: 'double', why: 'mycelium burns' }] },
+       { name: 'B', maxHp: 30 }] }), 1).length === 0);
+ok('a part weakness is checked against the PART\'s resistances, not the body\'s',
+   resistanceProblems(WK({
+     resistances: [{ type: 'Burn', value: 2, why: 'hide' }],
+     bodyParts: [
+       { name: 'Network', maxHp: 30, weaknesses: [{ type: 'Burn', mode: 'double', why: 'mycelium burns' }] },
+       { name: 'B', maxHp: 30 }] }), 1).length === 0);
+ok('but a part that both resists and is weak to one type is still rejected',
+   resistanceProblems(WK({ bodyParts: [
+     { name: 'Network', maxHp: 30,
+       resistances: [{ type: 'Burn', value: 2, why: 'r' }],
+       weaknesses:  [{ type: 'Burn', mode: 'double', why: 'w' }] },
+     { name: 'B', maxHp: 30 }] }), 1).some(p => /BOTH a weakness and a resistance/.test(p)));
+ok('an unknown type is rejected on a part too',
+   resistanceProblems(WK({ bodyParts: [
+     { name: 'N', maxHp: 30, weaknesses: [{ type: 'Rust', mode: 'heal', why: 'x' }] },
+     { name: 'B', maxHp: 30 }] }), 1).some(p => /is not one of/.test(p)));
+
+// 🔴 normParts used to compare { name, maxHp } ONLY, so the per-part resistances and
+// universals added 2026-09-14 never showed up as a difference and --force would not
+// have written them. These pin the fix.
+console.log('\npart-level diff (regression)');
+const PB = () => ({ tier: 'boss', size: 'Large', color: '', description: '', notes: 'x',
+  bodyParts: [{ name: 'Mask', maxHp: 15, resistances: [], universal: { value: 6, cause: 'a', removal: 'b' }, weaknesses: [] }],
+  phases: [], resistances: [], universal: {}, weaknesses: [] });
+const mut = (f) => { const c = JSON.parse(JSON.stringify(PB())); f(c); return c; };
+ok('a changed PART universal is a bodyParts difference',
+   diffFields(PB(), mut(c => { c.bodyParts[0].universal.value = 0; })).includes('bodyParts'));
+ok('a changed PART resistance is a bodyParts difference',
+   diffFields(PB(), mut(c => { c.bodyParts[0].resistances = [{ type: 'Bleed', value: 2, why: 'w' }]; })).includes('bodyParts'));
+ok('a changed PART weakness is a bodyParts difference',
+   diffFields(PB(), mut(c => { c.bodyParts[0].weaknesses = [{ type: 'Burn', mode: 'heal', why: 'w' }]; })).includes('bodyParts'));
+ok('a changed weakness MODE is a weaknesses difference',
+   diffFields(mut(c => { c.weaknesses = [{ type: 'Burn', mode: 'heal', why: 'w' }]; }),
+              mut(c => { c.weaknesses = [{ type: 'Burn', mode: 'double', why: 'w' }]; })).includes('weaknesses'));
+ok('identical parts are still not a difference',
+   diffFields(PB(), PB()).length === 0);
 
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);
