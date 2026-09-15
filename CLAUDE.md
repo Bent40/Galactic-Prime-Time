@@ -1416,6 +1416,96 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
   tutorial review said *four*; I had counted the **dog-roach** as a sibling and it is the
   **mob**. Fixed in `tutorial-floor-review.md` with the error recorded.
 
+## ✅ THE THREE BROTHERS — STATTED 2026-09-15 (`rulebook/tutorial-enemy-pass.md`)
+
+- ✅ **FLOOR 0 IS A REAL FLOOR NOW.** `FLOOR_MOB_HP` ran 1–9, so a tutorial roster could
+  not be gated at all. Built into `floor-bands.js` + `seed-enemies.js`: **mob 2 · elite 24
+  · boss 50 · super 120**, damage band **mob 3 · elite 4 · boss 6 · super 9** (torso 5,
+  level 6). 🔒 **One special case, and it is the definition rather than a fudge:**
+  `forceAt(f) = 4 + f` bakes in two §21.6 prep steps — one added damage type, one assist —
+  that a tutorial party has not bought (no Forge, no coatings, no drilled assists, no band
+  step). Strip those and a floor-0 contestant is weapon class 2 and nothing else: **2
+  Force**. ⭐ **The tutorial is the floor where you have no preparation. That is what a
+  tutorial IS.** ⭐⭐ **Two confirmations that fell out rather than being arranged:**
+  `floorState(0)` returns **level 6**, exactly where the live party is standing; and the
+  **Incinedile's Network of 50 is exactly 25 × 2**, the §21.2 boss centre for floor 0 — so
+  the Compendium's *"single HP bar (total 50)"* and the sim's six-part 125 were never in
+  conflict, **one is the network and the other the puppet.** ⚠️ **Contract change:**
+  `signature.floor: 0` used to mean *unset, skip me*; the sentinel moved to
+  absent/null/`''` (model, seeder and admin dropdown all match).
+- ⭐⭐ **THE BUDGETS TELL THE STORY BY THEMSELVES — 32 · 24 · 20.** Big to little, and **the
+  runt is UNDER the elite line.** That is why he was thrown out, written into the one number
+  the doctrine gate actually checks.
+- ⭐⭐ **THE CURRICULUM NOBODY DESIGNED: all three brothers are answers to ARMOR.** The
+  owner's playtest note is that basic resistance stops mob damage cold (§12.6 subtracts
+  flat, so against a mob's small number it is most or all of the hit). Each brother breaks
+  it a different way and **none of it was designed to — it fell out of what they already
+  are**: **BIG**'s charged shot **PIERCES** (ignores typed resistance outright) · **MID**'s
+  leap is **CRUSH** where his axes are **Bleed** (one resistance answers half of him) ·
+  **LITTLE**'s **PRESS** merges three bites into ONE hit, so resistance subtracts **once**
+  instead of three times — 3×1 Bleed through armor 1 is **2**, three separate bites are
+  **0**. ⭐ **The press is the only reason a roach-dog can hurt anybody, and the press only
+  exists while he is alive.**
+- **ROACH-DOG** (mob · Small · **2**) — signature **1 Bleed `tick`**, ruled unchanged. Below
+  the mob band of 3 legitimately: **the number is chaff and the Bleed TIER is the work**,
+  and its band-sized hit exists — **it is the press**. Teaches three things in order:
+  armor SORTS · a Bleed tier **drops that part's resistance** (§12.6) so twelve bites take
+  your armor apart · then §21.8. ⚖ **HP 1→2 recommended, not ruled** — **invisible at the
+  table** (a tutorial swing is 2 either way); all it stops is a **bare fist** one-shotting
+  a roach.
+- **BIG BROTHER ROACH** (elite · Medium · **24**, dead centre — ⭐ *the disciplined one is
+  exactly to spec*). Thorax 8 **resists Bleed 2** (per-part — the suit; head, arms and legs
+  are bare shell). **Weak to Burn** — *the suit is cloth and he will not take it off, ever,
+  for any reason; it is the only thing anyone ever made for him.* ⭐ **The mannered one's
+  dignity is his weakness.** Signature **4 Bleed**; charged shot is a **windup 8**, PIN
+  (Crushed T1) or **PIERCE** (ignores typed resistance). 🔒 **WEAK SYSTEM — the dodge, and
+  the fact that it is ONE:** free, automatic, once per Moment, against one attack of his
+  choosing. ⭐ **This is the tutorial's trap for its own lesson** — §5.7 combined attacks
+  merge and *"count as ONE hit"*, which is exactly what he negates: **the biggest hit is not
+  the best hit against something that can refuse one hit.** Removals: spend it (attack
+  twice) · area (§7.3 — he cannot dodge the room) · ⭐ **the charged shot is the tell** —
+  **his biggest attack and his punish window are the same Moment.** Drops the **bow**
+  (class 3, plain — ⭐ *you inherit his weapon, not his number*) and **the suit**, which is
+  Little Bro's work.
+- **MID BROTHER ROACH** (elite · **Large** · **32**). Thorax 10, **two Axe Arms at 5**, Grip
+  Arms 4. **Resists Crush 2** (*scar on scar on scar, and he is proud of it*). **Weak to
+  Poison** — *four arms and one appetite* — ⭐ **and the meal is on the table when they
+  arrive**: poison it before you are seen and you fight a poisoned Mid Bro. **A discoverable
+  win condition that exists only because the owner put a meal in the room.** Signature **4
+  Bleed**; **the leap** is a **windup 8 CRUSH** and §7.3 says **area does not divide**, so
+  everyone in the landing space takes the full 8. 🔒 **WEAK SYSTEM — THE ARMS:** his damage
+  is **in the arms, not in him** (§21.6 Body). **The win condition is dismemberment, not a
+  damage race.** ⭐ He is **Large**, so §13 lets a Medium contestant grapple him — **the
+  tutorial teaches grappling on the one enemy that grapples back.** **The doll** rides in a
+  Grip Arm: threaten it and he covers it, the Grip Arms' action spent, every time. Drops
+  **two axes** and **THE DOLL** — ⭐ **not loot, the key to the hatchery**: proof the
+  brothers kept his gift. **A party that killed Mid Bro can carry it to the brother who made
+  it, and they will not know it is a door.**
+- **LITTLE BROTHER ROACH** (elite · Small · **20**, under the line). 🔒 **Resistances NONE,
+  weaknesses NONE — blank by design** (§21.3 rule 4), **for the loudest reason in the
+  tutorial: he was thrown out for being weak.** A resistance contradicts it, a weakness
+  softens it. ⭐ **He has no mechanical edge whatsoever and he is the hardest fight on the
+  floor, because of what he BUILT.** Same shape as Foreman Bex and The Hunt's Owner.
+  Signature **2 Bleed `tick`** (whip, range 7) — under band because **he is not the damage**.
+  🔴 **DRAG BACK (range 7) deals NOTHING and is the deadliest ability in the tutorial** —
+  ⭐ **he does not attack you, he moves you to where the attack is**, which is §21.8's whole
+  thesis as one ability. 🔒 **WEAK SYSTEM — THE BROOD, NOT THE BODY:** Awaken Eggs (summons
+  4) · **he DIRECTS**, the only reason the press exists · Seal Wound (eats a roach and
+  heals) — **the brood is ammunition AND medkit**. ⭐ **The BROOD-SLING (4 HP) decides the
+  fight** — the newest clutch strapped to him *because he was thrown out once and will not
+  leave them anywhere*; destroy it and both the summon reserve and the emergency ration go.
+  **It is also the part they will not want to hit** — **the same gesture as Mid Bro covering
+  the doll, two brothers, one of them already dead.** ⚠️ His **low-HP bias 3.0** now meets
+  §12.6's *conditioned parts resist less* — **the AI hunts exactly the target today's armor
+  rule softened.** Drops the **whip**.
+- ⚙️ **The room's decision cashes out L-24:** rushing him before the window closes means
+  fewer roaches, which means **fewer levels**. ⭐ **The fastest route through the tutorial's
+  last room is also the poorest**, and neither rule knew about the other.
+- **162 enemy tests pass** (+11); F1/F2/F3 all still pass at their own floors; client build
+  verified. 🔴 **Open:** roach-dog HP 1→2 (recommended, not ruled) · `War Hound` still has
+  no design record · **the Incinedile is next session's work** (build on **puppet 125 /
+  Network 50**, the Doorward's shape) · the peaceful-resolution shop coupon is unpriced.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.

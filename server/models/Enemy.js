@@ -76,7 +76,9 @@ const SIZES = ['Small', 'Medium', 'Large', 'Huge'];
 //               is instead. e.g. Vermilia, whose threat is noble-class presence.
 // Anything else off-band is a bug, and --check says so.
 const DamageSchema = new mongoose.Schema({
-  floor:     { type: Number, default: 0 },   // 0 = unset, gate skips it
+  // ⚠️ `null` = unset (the gate skips it). This WAS 0, but floor 0 is the TUTORIAL
+  // as of 2026-09-15, so the sentinel had to move off a real floor number.
+  floor:     { type: Number, default: null },  // null = unset, gate skips it; 0 = tutorial
   damage:    { type: Number, default: 0 },
   type:      { type: String, default: '' },  // Crush / Bleed / Burn / Infected / ...
   exception: { type: String, default: '' },  // '' | 'windup' | 'tick' | 'aura' | 'presence'

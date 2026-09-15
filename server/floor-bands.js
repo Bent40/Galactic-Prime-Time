@@ -26,9 +26,16 @@ const THREAT = { mob: 0.55, elite: 0.85, boss: 1.1, super: 1.7 };
 const ATTACKS_PER_CLOCK = 20;
 // §7.3 — a contestant's Force at floor N. Class 2 + one band step per floor, plus
 // the average party's one added damage type and one assist (the prep calibration).
-const forceAt = (f) => 4 + f;          // F1 = 5, F9 = 13
-// A mob native to floor S is worth that floor's Force as HP (F1 = 5, F9 = 13).
-const mobForceAt = (f) => 4 + f;
+//
+// ⭐ FLOOR 0 — THE TUTORIAL, added 2026-09-15. The formula bakes in two §21.6 prep
+// steps (one added damage type, one assist) that a tutorial party has not bought
+// yet: no Forge, no coatings, no drilled assists, no band step. Strip those and a
+// floor-0 contestant is weapon class 2 and nothing else — 2 Force. So the tutorial's
+// mob is 2, not 4, and that is what a tutorial IS: the floor where you have no
+// preparation. The rest of the ladder is untouched.
+const forceAt = (f) => (f === 0 ? 2 : 4 + f);          // F0 = 2, F1 = 5, F9 = 13
+// A mob native to floor S is worth that floor's Force as HP (F0 = 2, F1 = 5, F9 = 13).
+const mobForceAt = (f) => (f === 0 ? 2 : 4 + f);
 // §7.3 — AREA DOES NOT DIVIDE. A sweep lands its full Force on every target in the
 // space, so a tide is cleared by covering ground rather than by a bigger number.
 // This is now the ONLY thing that makes an old horde meltable; under Force the
@@ -64,8 +71,8 @@ function hordeSize(from, at) {
 
 function report() {
   const idx = process.argv.indexOf('--floor');
-  const only = idx !== -1 ? Number(process.argv[idx + 1]) : null;
-  const floors = only ? [only] : [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const only = idx !== -1 ? Number(process.argv[idx + 1]) : null;   // 0 is a real floor
+  const floors = only != null ? [only] : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   console.log('FORCE (§7.3) — one Force is one basic punch. A material band step is +1 (L-23).\n');
   console.log('floor  level  points  torso |  mob  elite   boss  super   <- signature hit');
@@ -77,7 +84,7 @@ function report() {
       `${String(s.dmg.boss).padStart(7)}${String(s.dmg.super).padStart(7)}`);
   }
 
-  if (!only) {
+  if (only == null) {
     console.log('\nHorde counts — an F1 mob (5 Force) reused as a tide (L-15):');
     console.log('met at floor:  ' + [2,3,4,5,6,7,8,9].map(n => `F${n}`.padStart(6)).join(''));
     console.log('tide size:     ' + [2,3,4,5,6,7,8,9].map(n => String(hordeSize(1, n)).padStart(6)).join(''));

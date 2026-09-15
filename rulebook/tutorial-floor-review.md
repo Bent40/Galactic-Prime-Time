@@ -195,10 +195,17 @@ carries `resistances` and `universal`.
 
 ### T-5.2 The doctrine gate cannot check a tutorial roster at all
 
-`FLOOR_MOB_HP` runs **1–9**. There is no floor 0, so `seed-enemies.js --floor 0` throws and
-`--check` on a tutorial file is impossible. ⚖ The tutorial's own calibration is **mob 2**
-(weapon class 2, band 0), which would make its centres **mob 2 · elite 24 · boss 50 · super
-120** — and note that **the Incinedile's Network is exactly 50.**
+✅ **CLOSED 2026-09-15 — floor 0 is a real floor now.** `FLOOR_MOB_HP` ran **1–9**, so
+`seed-enemies.js --floor 0` threw and `--check` on a tutorial file was impossible. Built in
+`floor-bands.js` and `seed-enemies.js`: **mob 2 · elite 24 · boss 50 · super 120**, damage
+band **mob 3 · elite 4 · boss 6 · super 9**, from a torso of 5 at level 6. The one special
+case is `forceAt(0) = 2` — the formula bakes in two §21.6 prep steps a tutorial party has
+not bought, and ⭐ **the tutorial is the floor where you have no preparation, which is what
+a tutorial IS.** ⭐ `floorState(0)` returns **level 6**, exactly where the live party is
+standing, and **the Incinedile's Network is exactly 50** — both fell out rather than being
+arranged. ⚠️ Contract change: `signature.floor: 0` no longer means *unset*; the sentinel
+moved to absent/null/`''`. Roster: **`rulebook/tutorial-enemy-pass.md`** +
+`server/seeds/enemies-tutorial.js`.
 
 ---
 
@@ -226,7 +233,7 @@ carries `resistances` and `universal`.
 | 🔒 **The Press is already half-built** | in the sim, for these roaches, **capped at pairs** — adopt that cap |
 | ⚠️ **Next session is the hard case** | a director that **summons its own pressers and drags you into them**, whose AI hunts the wounded that §12.6 just softened |
 | 🔴 **Sasha's 3-HP torso** | moves every threshold one mob earlier. The owner's own *"hard to hurt without killing"* note, now with two new rules pushing on it |
-| 🔴 **Two build gaps** | `fire_heals` has no field · the gate has no floor 0 |
+| ✅ **Two build gaps — BOTH CLOSED 2026-09-15** | `weaknesses[].mode` = `double`\|`heal` is built (per-part overridable) · the gate has floor 0, and the three brothers are statted in `tutorial-enemy-pass.md` |
 
 ---
 

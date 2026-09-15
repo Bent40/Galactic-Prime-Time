@@ -327,12 +327,48 @@ ok('extra Mongoose subdoc bookkeeping is not a difference',
 ok('a missing field on either side is not a false difference',
    diffFields({ ...clone(), color: undefined }, { ...seed, color: '' }).length === 0);
 
+console.log('floor 0 — the tutorial (2026-09-15)');
+const tut = require('./seeds/enemies-tutorial.js');
+ok('the tutorial roster passes at F0', doctrineCheck(tut, 0).length === 0,
+   JSON.stringify(doctrineCheck(tut, 0)));
+ok('the tutorial roster FAILS at F1 — floor 0 is a real, distinct floor',
+   doctrineCheck(tut, 1).length > 0);
+ok('F0 mob HP is 2 exactly — a tutorial contestant swings for 2 (no prep steps)',
+   doctrineCheck([{ name: 'x', tier: 'mob', size: 'Medium', notes: '', bodyParts: [{ name: 'B', maxHp: 2 }] }], 0).length === 0
+   && doctrineCheck([{ name: 'x', tier: 'mob', size: 'Medium', notes: '', bodyParts: [{ name: 'B', maxHp: 1 }] }], 0)
+        .some(p => p.includes('part budget 1')));
+ok('the F0 damage band is mob 3 · elite 4 · boss 6 · super 9',
+   FLOOR_DAMAGE[0].mob === 3 && FLOOR_DAMAGE[0].elite === 4
+   && FLOOR_DAMAGE[0].boss === 6 && FLOOR_DAMAGE[0].legendary === 9);
+ok('the Incinedile Network (50) is exactly the F0 boss centre',
+   doctrineCheck([{ name: 'Network', tier: 'boss', size: 'Large', notes: 'n',
+                    bodyParts: [{ name: 'A', maxHp: 25 }, { name: 'B', maxHp: 25 }] }], 0).length === 0);
+// ⭐ the budgets tell the story: 32 · 24 · 20, and the runt is under the elite line.
+const budget = (n) => partsSum(tut.find(e => e.name === n));
+ok('Mid 32 > Big 24 > Little 20, and Little is UNDER the elite centre of 24',
+   budget('Mid Brother Roach') === 32 && budget('Big Brother Roach') === 24
+   && budget('Little Brother Roach') === 20 && budget('Little Brother Roach') < 24);
+ok('the roach-dog bite of 1 is legal as a tick against the F0 mob band of 3',
+   damageProblems(tut.find(e => e.name === 'Roach-dog'), 0).length === 0);
+ok('Little Bro is blank by design — no resistances, no weaknesses (§21.3 rule 4)',
+   (tut.find(e => e.name === 'Little Brother Roach').resistances || []).length === 0
+   && (tut.find(e => e.name === 'Little Brother Roach').weaknesses || []).length === 0);
+ok('every brother is an elite, MULTI-part, with a named weak system',
+   tut.filter(e => e.tier === 'elite').length === 3
+   && tut.filter(e => e.tier === 'elite').every(e => e.bodyParts.length >= 2 && /WEAK SYSTEM/.test(e.notes)));
+
 console.log('signature damage gate (enemy-scaling S-1)');
 const sigMob = (sig, tier = 'mob') => ({ name: 'T', tier, size: 'Medium', bodyParts: [{ name: 'B', maxHp: 5 }], notes: 'x', signature: sig });
 ok('no signature at all is skipped — existing rosters keep passing',
    damageProblems({ name: 'T', tier: 'mob' }, 1).length === 0);
-ok('signature.floor 0 is skipped (the unmigrated default)',
-   damageProblems(sigMob({ floor: 0, damage: 999, type: 'Crush' }), 1).length === 0);
+// ⚠️ CONTRACT CHANGE 2026-09-15: `floor: 0` used to mean "unset, skip me". Floor 0
+// is the TUTORIAL now, so the unset sentinel moved off a real floor number.
+ok('signature.floor null is skipped (the unmigrated default)',
+   damageProblems(sigMob({ floor: null, damage: 999, type: 'Crush' }), 1).length === 0);
+ok("signature.floor '' is skipped too",
+   damageProblems(sigMob({ floor: '', damage: 999, type: 'Crush' }), 1).length === 0);
+ok('signature.floor 0 is NO LONGER skipped — it is the tutorial, and it is gated',
+   damageProblems(sigMob({ floor: 0, damage: 999, type: 'Crush' }), 0).length === 1);
 ok('an on-band F1 mob passes',
    damageProblems(sigMob({ floor: 1, damage: 4, type: 'Crush' }), 1).length === 0);
 ok('an off-band F1 mob fails',
