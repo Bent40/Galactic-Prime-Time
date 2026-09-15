@@ -69,34 +69,72 @@ needs and the field assimilation needs are the same field.* Proposed:
 `weaknesses[].mode` = `double` (default) | `heal`, per-part overridable, keeping the
 required `why`.
 
-🟡 **Open, mine not the owner's:** does being modified grant a **Mark**? It fits
-§18.4 exactly — a deed done *to* you, permanent, physical, *"not necessarily good"* —
-and a contestant who bought a body from the production is something the causality
-ledger would record. But it is a real cost and it should be the owner's call.
+🔒 **RULED 2026-09-15 — three verbs, not one: ADD · REMOVE · CHANGE.** My draft
+said a graft *replaces* a part. It does more than that, and the extra verbs
+matter:
+
+| | |
+|---|---|
+| **CHANGE** | swap a part for another creature's. What I had proposed |
+| **ADD** | a fifth limb, a tail, a second set of arms |
+| **REMOVE** | delete a part entirely — ⛔ **except the lethal ones.** Every body needs a head-equivalent and a torso-equivalent (§7.1) |
+
+⚠️ **ADD broke my limiter and needed a new one.** I had said *"you have six parts,
+so the cap enforces itself."* You don't, if you can add. ⭐ **But no cap is needed,
+because every part you add is a part you must armor, heal and defend:** §12.6 buys
+resistance **per part**, §12.6 *also* drops that resistance by the part's condition
+tier, and §21.6's Body category subtracts Force per tier **on the limb you swing
+with**. **Four arms is four things to break, four pieces of armor to buy, and four
+ways to lose Force.** The rate is capped by downtime (§20.1, two actions) and the
+menu by the module's level.
+
+🔒 **RULED: modification does NOT grant a Mark.** My proposal is dropped, and the
+reason is better than the proposal: ⭐ **the Corporation sells it, so the
+Corporation does not brand you for it.** A Mark is what the ledger records about a
+**deed**; a purchase is not a deed. **Deeds earn keys; money buys bodies.** The two
+systems stay clean.
 
 ---
 
-## C-1 Class — the question that has to be answered first
+## C-1 🔒 RULED 2026-09-15 — a Mark unlocks a SET OF CHOICES
 
-DCC-format classes are **earned from what you did**, absurdly specific, and named
-for the weight of the deed. 🔴 **That is §18.4's authoring rule word for word.** So
-the real question is not how classes work:
+> Owner: *"We can have race types and class types unlocked via mark, which will
+> hold a few choices. We can have common classes to choose in general, and rarer
+> classes/races unlocked via mark. That would mean delaying your class or race
+> choice is valid."*
 
-> **How is a Class different from a Mark?**
+⭐ **This answers "how is a Class different from a Mark" better than my proposal
+did.** I had said *a Mark unlocks a Class*, one to one. The ruling is sharper:
 
-Both are granted by deed, permanent, in-world real, and named to provoke. Without
-an answer we would be building a second system for a rule we already have.
+> **A Mark is a KEY, and it opens a CABINET — a few choices, not one.**
+> **And there is a common pool that needs no key at all.**
 
-**Proposed answer: a Mark RECORDS, a Class CAPACITATES.**
-
-| | Mark | Class |
+| | needs | |
 |---|---|---|
-| what it is | the Corporation's **causality ledger** — what the world remembers you did | what you got **good at** |
-| when it acts | **presence-activated** — it lights where its consequence is | **always on** |
-| what it does | points at a cause; gates items; *"not necessarily good"* | multiplies what you already do |
+| **Common** classes and races | nothing | choosable generally, the standing menu |
+| **Rare** classes and races | **a Mark** | each Mark holds a few options; the Mark says which cabinet |
 
-> ⭐ **A deed grants a Mark. A Mark can unlock a Class.** The ledger says what you
-> did; the class is what you did often enough to **become**.
+⭐⭐ **And the real design win is the third sentence: DELAYING YOUR CHOICE IS
+VALID.** The pick becomes a **held resource**, not a creation-time lock — you can
+sit on it because a deed two floors from now might open something better. That is
+exactly DCC's feel (classes are *offered* as you go, not chosen at the start), and
+it costs one rule: **an unspent choice keeps.**
+
+### ⭐ What this fixes that nothing else was fixing
+
+**Only two deeds in all of Set 1 are unambiguously good.** The campaign brands you
+for being right about as often as for being wrong — `Regicide` for killing a child
+who was a god's last follower, `Martyr` for killing the man who was the cure,
+`Two Million` for a number you caused. Every one of those was **pure cost**.
+
+🔒 **Now every Mark pays.** ⭐ **`Regicide` is socially catastrophic AND it is a
+key.** The consequence is not softened by one point — the grudges still hold, the
+doors still shut, `Witness` still never fires near a queen you killed — but the
+brand on your body **opens a cabinet nobody without it can open.**
+
+⚙️ **That is the shape the system wanted all along:** §18.4 already says a Mark
+*"might unlock new interactions, not necessarily good."* This is that sentence
+with a mechanism behind it.
 
 ### C-2 ⭐ The cheap shape: a class RE-GOVERNS
 
@@ -113,7 +151,46 @@ off Physique.
   the anchors move. **Re-governing changes which trait powers a skill, never how much
   total power exists** — so it is orthogonal and free.
 
-⚠️ **Scope warning.** Race is **one ruling and one field** — the module, the ladder
-and the price already exist. **Class is a Set-2-sized project**: it touches L-17,
-L-19, §18.4, the skill model and the sheet. Recommend **race now, class scoped after
-Incinedile.**
+🔴 **Still open:** whether a re-govern is the *whole* of a class or just its spine,
+and what a *common* class looks like next to a Mark-gated one. Scope after Incinedile.
+
+---
+
+## R-4 🔴 THE SIZE / RACE STAT PASS — the task the Sasha ruling opens
+
+> Owner: *"Sasha is fine with 3-hp torso. She's a small animal. That's why she has
+> less hp. We need to sort the basic races' stats with sizes and that considered."*
+
+🔒 **Ruled: size sets base part HP** (now §7.1). Medium is the book's standing
+table (Head 2 · Torso 5 · Arms 2 · Legs 3); Sasha is Small at Torso 3.
+
+### ⭐ The finding that should shape the table: the gap closes by itself
+
+§3.2's growth is **flat** — +1 per part per 5 total trait points, the same for
+everyone. So a Small body is not permanently 60% of a Medium one:
+
+| | creation | F1 | F3 | F5 | F9 |
+|---|---|---|---|---|---|
+| Medium torso | 5 | 7 | 11 | 17 | 35 |
+| Small torso | 3 | 5 | 9 | 15 | 33 |
+| **Small as a share** | **60%** | 71% | 82% | 88% | **94%** |
+
+⚠️ **So size is an EARLY-GAME fact and it is biting right now, in the tutorial,
+which is exactly where it is worst.** By Floor 3 it is a rounding error.
+
+⭐ **Two consequences for the table:**
+1. **Bases only. Never multipliers.** A multiplier would make Small permanently
+   worse; a base makes it a starting condition the campaign heals.
+2. **The early-game answer is ARMOR, not a correction.** At the tutorial's press
+   of three roaches, a Small contestant at **armor 0 loses the torso** and at
+   **armor 1 does not.** One worn piece is the whole difference — a real, teachable
+   lesson in the room where it happens.
+
+### What the table still needs
+
+| | |
+|---|---|
+| **Per-size base part HP** | Small / Medium / Large. Medium is canon; the others are unwritten |
+| 🔴 **What Small BUYS** | ⚠️ Less HP with nothing in return is strictly worse. Small should pay in **mobility and access** — ⭐ and Sasha's **Nightlurking** (*"fits through cat-plausible spaces without Forced Action"*) is already that trade, written before the rule existed |
+| **What Large buys and costs** | HP and reach, against places it does not fit — and §13 already makes **Large grappleable by a Medium** while Huge is not, so size already carries weight |
+| **The racial package per race** | A race is an identity line plus one or two skills (Swim · claws). The list is unwritten and is what a *common* race choice picks from |

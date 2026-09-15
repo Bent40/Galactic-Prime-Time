@@ -1,6 +1,8 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.6** · 2026-09-15 — **everything killed pays** (§3.1): experience and
+**Version 1.7** · 2026-09-15 — **the press caps at three** (§21.8), **size sets base
+part HP** (§7.1), and the **Surgeon's Table adds, removes or changes parts** (§20.3).
+*Previously —* **1.6** · 2026-09-15, **everything killed pays** (§3.1): experience and
 levels from every kill, distributed as a share of the floor's grant, and loot on
 top. Replaces "there is no XP curve".
 *Previously —* **1.5** · 2026-09-14, **what a MOB is for**: the Press (§21.8), armor
@@ -443,6 +445,26 @@ Health is localized. Standard body:
 | Torso | 5 | **Yes** |
 | Each arm | 2 | No |
 | Each leg | 3 | No |
+
+🔒 **THAT TABLE IS THE MEDIUM BODY. SIZE SETS BASE PART HP (ruled 2026-09-15).**
+A Small contestant has less of it — *"she's a small animal, that's why she has
+less HP"* — and a Large one more. **This is a base, never a multiplier.**
+
+⭐ **Which means the gap closes by itself.** §3.2's growth is **flat** (+1 per part
+per 5 total trait points), so a Small torso runs **60% of a Medium one at creation
+and 94% by Floor 9**:
+
+| | creation | F1 | F3 | F5 | F9 |
+|---|---|---|---|---|---|
+| Medium torso | 5 | 7 | 11 | 17 | 35 |
+| Small torso | 3 | 5 | 9 | 15 | 33 |
+| Small as a share | **60%** | 71% | 82% | 88% | **94%** |
+
+⚠️ **So size is an EARLY-GAME fact.** It bites hardest in the tutorial and on
+Floor 1 and is nearly gone by the end — which is why a Small contestant's answer
+is **armor now**, not a permanent correction. 🔴 **The per-size base tables are not
+written yet** (`rulebook/race-and-class.md` R-4); only Medium above and the ruling
+that size determines it are settled.
 
 - HP is structural integrity; **0 HP = the part fails**.
 - Non-standard bodies (Animals, machines) get GM-shaped part layouts with the same
@@ -1590,6 +1612,23 @@ Tokens**. The Lounge is where Upgrade Tokens go to die — happily.
 | Skill Gemstone (5 UT) | Merges/mutations of compatible skills (§4.5 keywords) + **respec**: unlearn a skill, refund its recorded spend minus one point per level, +2 UT fee | Mutation preview: the outcome is revealed before you commit | Master facet: once per campaign a merge spares the consumed skill at level 0; a regretted merge may be undone within the same downtime |
 | Tattoo Artist (25 UT) | One tattoo — choose: +1 flat physical resistance (Bleed/Crush/Burn) · +1 space of free movement · +1 Camera Call stack per session | Second tattoo slot; **threshold dice d4→d6 = 5 UT** (§14) | The masterpiece: third slot, free swaps each downtime, **d6→d8 = 40 UT**, and the ink makes you recognizable (standing Patron draw) |
 | Surgeon's Table (20 UT) | Reattach severed parts · prosthetic fitting · the canonical **race-change** service | **Animal-part grafts** (GM-statted from the beast you brought back) | Re-genesis: **boss-part grafts** with their quirks; restore one destroyed part permanently per floor |
+
+🔒 **THE SURGEON'S TABLE DOES THREE THINGS, NOT ONE (ruled 2026-09-15):**
+**you may ADD a part, REMOVE a part, or CHANGE a part.**
+
+- A **grafted part carries one trait the donor actually had** — so the bestiary is
+  the catalogue, and you can only take what the creature was written with (§21.3's
+  required `why` is what makes that list honest).
+- ⛔ **The lethal parts cannot be removed.** Every body needs a head-equivalent and
+  a torso-equivalent (§7.1). Everything else is negotiable.
+- ⚙️ **Adding parts needs no cap, because every part you add is a part you must
+  armor, heal and defend.** §12.6 buys resistance per part; §12.6 also drops that
+  resistance by the part's condition tier; §21.6's Body category subtracts Force
+  per tier on the limb you swing with. **Four arms is four things to break.**
+  The *rate* is capped by downtime (§20.1: two actions) and *what* you may take by
+  the module's own level.
+- 🔒 **Modification does NOT grant a Mark** (ruled). It is a purchase, not a deed.
+  **The Corporation sells it, so the Corporation does not brand you for it.**
 | Augmentation Hub (20 UT) | Mechanical prosthetics + utility implants (built-in thin tool, storage compartment) | Weaponized prosthetics (count as a Light Small weapon, cannot be disarmed) | The exo-suite: subdermal plating (+1 flat resistance), integrated auto-loader, fabricator dock — refill ammo once per deployment in the field |
 
 **Garage & the door**
@@ -1901,6 +1940,15 @@ new; they are the existing ones, resolved in the existing order.
 | **3** | **9** | **20** | **46** | 🔴 **a destroyed torso** |
 | 4 | 13 | 29 | 65 | and overflow |
 
+🔒 **THE PRESS CAPS AT THREE (ruled 2026-09-15).** No more than three mobs may
+merge into one attack, whatever the geometry allows.
+
+⭐ **And that cap is exactly right, because the maximum press is exactly one
+destroyed torso — on every single floor.** F1 9 against a 7 torso · F5 20 against
+17 · F9 46 against 35. **The rule is bounded at lethal-once and cannot reach
+past it.** A crowd of six cannot delete a contestant in a Moment; three can end
+one part, and that is the ceiling the mechanic was always supposed to have.
+
 ⭐ **The same curve on every floor** — one is nothing, two hurt, three kill —
 because §7.3 calibrated both sides of the exchange together. *Regenerate:*
 `node server/encounter-bands.js`.
@@ -1934,8 +1982,9 @@ Nothing here is new machinery — every counter is a rule already in play:
 | **Kill the director** | the condition above |
 | **The bulwark shapes** (§4) | retargeting attacks on adjacent allies is exactly the answer to concentration |
 
-⚠️ **Author's warning.** The press kills a cornered contestant fast — **that is
-the point, and it is also the failure mode.** A GM who concentrates six mobs on
-one person has killed them, and should know that before doing it. Announce the
-gathering; §21.4's terrain is the party's answer and they cannot use it if the
-turn is a surprise.
+⚠️ **Author's warning.** The press ends a cornered contestant's part fast — **that
+is the point.** ✅ *(The worse version of this warning is gone: the cap of three
+means no amount of crowding reaches past one destroyed part, so the six-mob
+instant kill is not a thing a GM can do by accident.)* Still **announce the
+gathering** — §21.4's terrain is the party's answer and they cannot reach for it
+if the Moment is a surprise.

@@ -227,3 +227,77 @@ carries `resistances` and `universal`.
 | ⚠️ **Next session is the hard case** | a director that **summons its own pressers and drags you into them**, whose AI hunts the wounded that §12.6 just softened |
 | 🔴 **Sasha's 3-HP torso** | moves every threshold one mob earlier. The owner's own *"hard to hurt without killing"* note, now with two new rules pushing on it |
 | 🔴 **Two build gaps** | `fire_heals` has no field · the gate has no floor 0 |
+
+---
+
+# T-8 THE HATCHERY — the goop room, designed (owner, 2026-09-15)
+
+> *"Safe spots they have to hop in between, and get sunk by middle brother as they
+> go, and the goop can be moved through but much more slowly, so they can try and
+> reach little bro roach quickly if they want, but that window closes eventually."*
+
+⭐ **This fixes the thing T-2's follow-up flagged as broken.** Goop plus a very long
+whip removes the party's ability to choose its geometry — which is §21.8's *only*
+counterplay to the press. **The safe spots give it back: an island is a corridor
+made of terrain.** And island size is the press dial — a platform that holds you
+and three adjacent roaches is exactly the capped press (§21.8, three).
+
+## T-8.1 §21.4 — the three answers
+
+1. **Hard to walk in?** **Yes, and two ways at once.** The **goop is passable but
+   much slower** (hard terrain, full cost). The **safe spots are islands** —
+   normal movement, but only if you can make the hop. ⭐ **So the room has a fast
+   lane and a safe lane and they are not the same lane.**
+2. **A hazard?** **The islands sink.** Not the goop — the *ground you were
+   counting on.* The room gets worse in the one place the party chose to stand.
+3. **Otherwise?** Little Bro's reach covers the whole room, so **there is no
+   "out of range"** — only "hard to get to." Egg clusters are cover and are also
+   his larder.
+
+🎬 **§21.6 Situation steps (cap 2):** *holding an island* (+1 — it caps the press
+and denies flanking) · *a hop that lands behind him* (+1 — the goop's slowness
+cuts both ways once you are past it).
+
+## T-8.2 ⭐ THE SINKER — and it branches on what they already did
+
+The role is **whoever destroys the safe spots**, and the tutorial has two answers
+depending on a choice the party has already made:
+
+| branch | the sinker | what it costs |
+|---|---|---|
+| **Mid Bro alive** | ⭐ **He does it.** *"Can leap distances"* — a four-armed musclehead who leaps is a platform-breaker by design, and it finally gives him a job in a room that is not his | Nothing. He is having a good time |
+| **Mid Bro dead** *(this party)* | 🔴 **Little Bro does it himself, by throwing a roach at the platform** — *"he throws the roaches"* is already his verb | ⭐⭐ **A thrown roach is a roach he did not press with and did not eat.** Sinking competes directly with the press **and** with his healing |
+
+⭐⭐ **So killing Mid Bro made this room easier in one way and harder in another,
+and nobody announces either.** The party removed a dedicated sinker; what replaced
+it is the boss spending his own ammunition. **That is the consequence of a floor-1
+choice arriving as a different fight**, which is the shape this campaign uses
+everywhere else.
+
+## T-8.3 The decision the room is actually asking
+
+> **Rush him before the window closes — or hold an island and grind the brood.**
+
+| | what you get | what it costs |
+|---|---|---|
+| **RUSH** | you reach Little Bro while the platforms still connect; fewer roaches on the board; the press never assembles | 🔴 **Fewer kills — and under L-24 (ruled today) that is fewer LEVELS.** The fast path is a real experience cut, and nobody will mention it |
+| **HOLD** | every roach is XP; the island caps the press at three; you fight him at full strength with a cleared floor | he eats and calls; **the platform you are standing on is the one he is aiming at** |
+
+⚙️ **That trade came out of a different ruling by accident.** *Everything killed
+pays* (§3.1) was decided for the whole campaign this morning; it lands here as
+*the fastest route through the tutorial's last room is also the poorest.* Neither
+rule knew about the other.
+
+## T-8.4 Numbers, at the ruled settings
+
+**Roach-dog damage stays 1** (owner: not buffed). **The press caps at 3.**
+
+| the party's armor on the struck part | 1 roach | 2 | **3 (max press)** | |
+|---|---|---|---|---|
+| **0** | 1 | 2 | **3** | 🔴 **a Small torso (3) is destroyed** · a Medium (5) survives |
+| **1** | 0 | 1 | **2** | nothing's torso falls |
+| **2** | 0 | 0 | **1** | the brood is decoration |
+
+⭐ **One worn piece of armor is the entire difference for Sasha**, in the room
+where it happens. That is the teachable version of §12.6 and it needs no speech —
+just a hop she makes in a vest and a hop she makes without one.

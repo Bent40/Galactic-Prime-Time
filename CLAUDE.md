@@ -1293,6 +1293,65 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
   **XQUEZ/T's tank kit is unfinalised**, ⭐ and *Iron Stance is the answer to the Press*, so
   it wants finishing before the roaches.
 
+## 🔒 TUTORIAL + RACE/CLASS RULINGS (owner, 2026-09-15) — rulebook → v1.7
+
+- 🔒 **THE PRESS CAPS AT THREE.** *"Roach-dog damage won't be buffed. And the press is
+  buffed to 3."* ⚠️ My recommendation (bite 2, press capped at pairs) is **dropped** —
+  and the owner's version is **better**. ⭐⭐ **Because the maximum press is then EXACTLY
+  one destroyed torso, on every floor**: F1 **9** vs a 7 torso · F5 **20** vs 17 · F9 **46**
+  vs 35. **The rule is bounded at lethal-once and cannot reach past it** — so the six-mob
+  instant kill my own author's warning had to warn about **is not a thing a GM can do by
+  accident any more.** The warning is rewritten accordingly. At the tutorial (bite 1,
+  unbuffed): armor 0 → **3 through, a Small torso falls** · armor 1 → 2 → **nothing's torso
+  falls**. ⭐ **One worn piece is the whole difference**, in the room where it happens.
+- 🔒 **SIZE SETS BASE PART HP (§7.1).** *"Sasha is fine with 3-hp torso. She's a small
+  animal."* ⚠️ My "Sasha's torso is wrong" finding is **withdrawn — it was never a bug.**
+  **A base, never a multiplier.** ⭐⭐ **And the gap closes by itself**, because §3.2's growth
+  is flat: a Small torso is **60% of a Medium at creation and 94% by F9** (3/5 → 33/35).
+  ⚠️ **So size is an EARLY-GAME fact that bites hardest exactly where the party is standing**
+  and is a rounding error by F3 — which is why the answer is **armor now**, not a permanent
+  correction. 🔴 **The per-size tables are the open task** (`race-and-class.md` R-4), and its
+  hardest question is **what Small BUYS** — ⭐ Sasha's `Nightlurking` (*"fits through
+  cat-plausible spaces"*) is already that trade, written before the rule existed.
+- 🔒 **THE SURGEON'S TABLE DOES THREE VERBS: ADD · REMOVE · CHANGE (§20.3).** ⚠️ My draft
+  said a graft *replaces* a part, and **ADD broke my limiter** — *"you have six parts so the
+  cap enforces itself"* is false if you can add. ⭐ **No cap is needed:** every part you add
+  is a part you must **armor, heal and defend** — §12.6 buys resistance per part, §12.6 also
+  drops it by that part's condition tier, and §21.6 Body subtracts Force per tier on the limb
+  you swing with. **Four arms is four things to break.** Rate capped by downtime (§20.1),
+  menu by module level. ⛔ **The lethal parts cannot be removed** (§7.1 — every body needs a
+  head- and torso-equivalent).
+- 🔒 **MODIFICATION DOES NOT GRANT A MARK.** My proposal dropped, and the reason is better
+  than the proposal: ⭐ **the Corporation sells it, so the Corporation does not brand you for
+  it.** **Deeds earn keys; money buys bodies.**
+- 🔒 **A MARK UNLOCKS A SET OF CHOICES (the class/race answer).** *"Race types and class types
+  unlocked via mark, which will hold a few choices… common classes to choose in general, and
+  rarer classes/races unlocked via mark. That would mean delaying your class or race choice is
+  valid."* ⭐ Sharper than my one-Mark-one-Class proposal: **a Mark is a KEY and it opens a
+  CABINET**, and there is a **common pool that needs no key.** ⭐⭐ **The design win is the
+  third sentence — DELAYING IS VALID**, which makes the pick a **held resource** rather than a
+  creation-time lock, and is exactly DCC's feel (classes are *offered* as you go). Costs one
+  rule: an unspent choice keeps.
+- ⭐⭐ **AND IT FIXES SOMETHING NOTHING ELSE WAS FIXING.** Only two Set 1 deeds are
+  unambiguously good — `Regicide`, `Martyr`, `Two Million` were **pure cost**. 🔒 **Now every
+  Mark pays.** The consequences are not softened by one point (the grudges hold, `Witness`
+  still never fires near a queen you killed) but **the brand opens a cabinet nobody without
+  it can open.** ⚙️ §18.4 already said a Mark *"might unlock new interactions, not necessarily
+  good"* — this is that sentence with a mechanism behind it.
+- ⭐ **THE HATCHERY IS DESIGNED** (`tutorial-floor-review.md` **T-8**). Safe spots to hop
+  between · goop passable but much slower · **the islands sink** · a rush window that closes.
+  ⭐ **It fixes what I flagged as broken** — goop plus a long whip removes the party's ability
+  to choose geometry, which is §21.8's only counterplay; **the safe spots give it back, because
+  an island is a corridor made of terrain**, and island size is the press dial. ⭐⭐ **THE
+  SINKER BRANCHES ON F1'S CHOICE:** Mid Bro alive → *he* leaps and smashes platforms (finally a
+  job in a room that is not his); **Mid Bro dead (this party) → Little Bro throws a roach at the
+  platform**, and **a thrown roach is one he did not press with and did not eat** — sinking
+  competes with the press AND with his healing. **Killing Mid Bro made the room easier one way
+  and harder another, and nothing announces either.** ⚙️ **And the room's decision cashes out a
+  ruling made the same morning:** rush him before the window closes = fewer roaches = 🔴 **fewer
+  levels under L-24.** *The fastest route through the tutorial's last room is also the poorest,
+  and neither rule knew about the other.*
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
