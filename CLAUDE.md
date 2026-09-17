@@ -1502,9 +1502,19 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
   fewer roaches, which means **fewer levels**. ⭐ **The fastest route through the tutorial's
   last room is also the poorest**, and neither rule knew about the other.
 - **162 enemy tests pass** (+11); F1/F2/F3 all still pass at their own floors; client build
-  verified. 🔴 **Open:** roach-dog HP 1→2 (recommended, not ruled) · `War Hound` still has
-  no design record · **the Incinedile is next session's work** (build on **puppet 125 /
-  Network 50**, the Doorward's shape) · the peaceful-resolution shop coupon is unpriced.
+  verified.
+- ✅ **BOTH TUTORIAL OPEN CALLS CLOSED 2026-09-17.** 🔒 **Roach-dog HP is 2** — ruled;
+  ⭐ **the bite stays at 1**, so the HP change touches how it dies and never what it does.
+  ✅ **`War Hound` is NOT tutorial content** — owner: *"War Hound is your invention. Good
+  for F2 i think, irrelevant for tutorial or now in general."* ⚠️ **My note had the
+  polarity backwards:** I called it *"in the sim roster with no design record"* as though a
+  record were missing — **there is no design record because nobody designed it.** It is
+  agent-authored sim scaffolding (live in the game repo's `data/enemies.json` and the demo
+  run's kennel-gauntlet branch), now **parked for F2** and out of the tutorial.
+- 🔴 **The Incinedile is a NEW SESSION** (owner). Task list is live — see the todo list;
+  task #3 carries the full brief (puppet 125 / Network 50 · the Doorward's shape · the
+  `heal` mode now exists for `fire_heals`/`fire_harms` · §3.1's off-by-one phase
+  thresholds · XQUEZ/T's tank kit and Iron Stance before the roaches).
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

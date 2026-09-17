@@ -104,10 +104,11 @@ work. Its band-sized hit exists; it is the press.
 nothing's torso falls. ⭐ **One worn piece is the whole difference, in the room where
 it happens.**
 
-⚖ **HP: recommended, not ruled.** The live sim roster has this at **1 HP**; doctrine
-at floor 0 is **2**, and 2 is what the seed carries. The change is **invisible at the
-table** — a tutorial contestant swings for 2 and kills it in one either way. All it
-stops is a **bare fist** one-shotting a roach.
+🔒 **HP 2 — RULED 2026-09-17.** The live sim roster had this at **1 HP**; doctrine at
+floor 0 is **2**. The change is **invisible at the table** — a tutorial contestant swings
+for 2 and kills it in one either way. All it stops is a **bare fist** one-shotting a
+roach. ⭐ **The bite stays at 1**, so the roach-dog's whole threat remains the Bleed tier
+and the press — the HP change touches how it dies, never what it does.
 
 ---
 
@@ -316,8 +317,8 @@ floor and his room is the hardest on it.
 
 | # | Call |
 |---|---|
-| **1** | ⚖ **Roach-dog HP 1 → 2.** Doctrine says 2; the live sim says 1. Invisible at the table (a tutorial swing is 2 either way); it only stops a bare fist one-shotting a roach. **Recommended, not ruled.** |
-| **2** | **Sim/app parity.** These four entries live in this repo's `Enemy` collection; `Galactic-Prime-Time-Game/data/enemies.json` carries a reduced port (roach-dog, Little Brother, Incinedile, War Hound). Mid and Big Bro exist in neither until now. |
-| **3** | **`War Hound`** (budget 14) is in the sim roster with **no design record**. Not statted here. |
+| **1** | ✅ **CLOSED 2026-09-17 — roach-dog HP is 2, ruled.** |
+| **2** | **Sim/app parity.** These four entries live in this repo's `Enemy` collection; `Galactic-Prime-Time-Game/data/enemies.json` carries a reduced port (roach-dog, Little Brother, Incinedile). Mid and Big Bro exist in neither until now. |
+| **3** | ✅ **CLOSED 2026-09-17 — `War Hound` is NOT tutorial content.** Owner: *"War Hound is your invention. Good for F2 i think, irrelevant for tutorial or now in general."* ⚠️ **It is an agent-authored template, not owner canon** — my note calling it *"in the sim roster with no design record"* had the polarity backwards: there is no design record **because nobody designed it**. It is live in the game repo (`data/enemies.json` + the demo run's kennel-gauntlet branch) as sim scaffolding. **Parked for F2** (a desert pack-hunter with a real herder AI is a good fit) and **out of the tutorial**. |
 | **4** | **The Incinedile** is next session's work. Its numbers are in `tutorial-floor-review.md`; the reading to build on is **puppet 125 / Network 50**, with the puppet's parts warded until the Breach — structurally the Doorward's shape. |
 | **5** | **Loot handoff.** Owner considered giving the brothers' weapons free plus an extra shop coupon on a peaceful resolution. Drops are written per-entry above; the coupon is unpriced. |
