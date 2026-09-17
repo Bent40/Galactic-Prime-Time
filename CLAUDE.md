@@ -1516,6 +1516,114 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
   `heal` mode now exists for `fire_heals`/`fire_harms` · §3.1's off-by-one phase
   thresholds · XQUEZ/T's tank kit and Iron Stance before the roaches).
 
+## 🌱 GROWTH ITEMS + THE FIVE PARASITES — DESIGNED 2026-09-17 (`rulebook/growth-items-and-parasites.md`)
+
+- ⭐⭐ **THE CATEGORY ALREADY EXISTED AND WAS NEARLY EMPTY.** `ITEM_SUBTYPES` has
+  **`Growth`**, and `items-batch-c.js` carries the convention in a comment on its C-4
+  block: **"growth items — story-granted; PUBLIC READS ONLY"** — whose three entries have
+  **no `specialEffects` field at all** (*"A woven bracelet. It's warm."*). **The card shows
+  only what anyone could see by looking at it; the mechanics live with the GM.** ⭐ That is
+  the owner's *"super good without my players knowing they're good"*, written months ago
+  and never filled in — the whole category held **four** items. ⭐ And his own older
+  campaign ran it at the table: the uploaded item cards are name + rarity + art with an
+  **empty description banner.**
+- 🔒 **THE SEED RULE — BLOODY ARTILLERY, TRANSLATED (owner supplied the mechanism).** His
+  old legendary: *"summon (health lost during current combat / 2) artillery once per
+  combat."* **Stripped of its system it converts damage TAKEN into damage DEALT.** In v1:
+  planted in an open wound (part must be at tier ≥1); **that part carries a standing
+  condition tier 1 permanently**; once per combat, 1 Moment, it deals **(Force taken this
+  combat ÷ 2) as Bleed to everything in its radius** (§7.3 — area does not divide, allies
+  included), after swelling visibly for one Moment. **What GROWS is the RADIUS**, driven by
+  the seeded part's max HP: **1 → 2 at max HP 10 → 3 at 20**, plus 🟡 a proposed harvest.
+- ⭐⭐ **IT DISSOLVED THE L-11 CONFLICT INSTEAD OF WORKING AROUND IT.** My draft converted
+  part max HP into Force, which crosses L-11/L-14's *stats are the KEY, not the gun*, and I
+  proposed a fiction dodge (*"the Force is the seed's, not yours"*) to survive it.
+  **Bloody Artillery needs no dodge:** the damage is keyed to **damage taken** (no trait
+  feeds it) and the growth is keyed to **radius** (positioning power, which the game already
+  gives away free in terrain and spacing). ⭐ **Neither axis is a stat — and the owner's
+  original seed idea survives intact**, because part max HP is still the growth curve, it
+  just drives ground covered instead of numbers.
+- ⭐⭐ **THE PRICE AND THE PAYLOAD ARE THE SAME ORGAN.** §12.6 makes a conditioned part
+  **resist less**, so the permanent tier 1 makes that part take **more** damage — **which is
+  the seed's ammunition. The cost feeds the gun.** Not a tax bolted on; the item's own
+  logic: *the seed wants the wound open.* §21.6 Body then takes −1 Force off every swing
+  made with that limb, so the price is paid every Moment rather than once.
+- 🔒 **WHICH PART IS THE DECISION, not which item.** Torso (base 5) reaches the radius
+  thresholds first and is the part whose resistance you least want down — **highest ceiling,
+  highest price**; a leg is the cheap answer; an arm costs your swing forever.
+  ⭐ **The currency is the BODY, not the UT.**
+- ⚙️ **Calibration checked, not asserted.** Eruption vs that floor's mob HP: tutorial
+  **5** vs 2 · F1 **6** vs 5 · F5 **25** vs 9 · F9 **50** vs 13 — *about one good swing
+  delivered as an area, once per fight, paid for in blood*, on every floor. ⭐ **Floor-
+  invariant by construction** (§7.3 calibrated both sides together) so it never needs
+  re-basing, and **the owner's ÷2 survives translation unchanged** — the number was already
+  right for a system it was never written for. ⚠️ Self-harm is already priced by §12.6 +
+  §21.6 and the once-per-combat cap; ⭐ the real tension is **hold it for a bigger blast and
+  you might die holding it**, which is superb television (§17.8).
+- 🔒 **THE PARASITES ARE LOOT THEY CANNOT ESCAPE (owner)** — no save, no roll: after the
+  hatchery **something crawls into skin or roboparts** (XQUEZ/T's goes into the machine,
+  which is worse). 🔒 **Little Bro made them**, the way he made the suit and the doll —
+  thrown out for being weak, he answered by **making more family**, and the party inherits
+  his children. That makes them his §17.6 carve and costs nothing to invent.
+- 🔒 **THE DESIGN RULE — A PARASITE MEASURES WHAT IT EATS.** A quantity with an attitude
+  and no interpretation; it never decides or advises. ⭐ **The gauge and the appetite are the
+  same organ**, which is why it measures (it is looking for dinner), why it is delighted at a
+  high reading (it is hungry), and why **the name can honestly hint the gauge** — the
+  owner's constraint.
+- ⭐ **ALREADY PRICED BY EXISTING RULES, so zero new machinery:** §21.6 *knowledge is NOT a
+  prep step* (it doubles a weakness, adds no Force) · §21.7 already computes DANGER · **R18**
+  rules parasocial pull lives in the AUDIENCE systems and never in Charm, so **a parasite is
+  an audience system made flesh** · and **`Parasocial` is tag #79**, already defined as
+  *"They don't know you. They feel like they do"* — **the tag turned inward.**
+- 🔒 **ALL FIVE ARE SEEDS** — identical mechanism, identical Bleed eruption, identical
+  radius curve. **The gauge is the entire difference.** ⭐ And **no gauge is strictly best
+  because the FLOOR decides** (the same logic that prices an Animal's racial spike):
+  sincerity is gold on F1 and starving on Hard; Gravemoss is the reverse. **The party cannot
+  know which floor they will draw.**
+- 🔒 **ALLOCATION: the system prompts, the party chooses, no duplicates.** Getting to
+  choose *is* the bonus — ⭐ and it is a Corporation move, because **five contestants arguing
+  about who gets the lie-detector is a scene.** 🔴 On a party of four the **fifth specimen
+  stays sealed and alive in the bag** — a scene of its own and a slot for a fifth contestant.
+- **THE FIVE** (`server/seeds/items-parasites.js`, 5 templates, all PUBLIC READS ONLY):
+  - 👁 **Dread-Eye — DANGER.** Close your eyes; it opens its own. **The number of eyes is
+    how much danger is in the scene**, and **a boss makes it SMILE**. ⭐ It reads §21.7's own
+    dial. **It adores you and wants you in danger — it is the audience, living in you**; safe
+    too long and it goes listless. 🎯 GM: never say a number.
+  - 🌿 **Falsewort — SINCERITY.** Sits under the tongue and **curls by how much the speaker
+    does not believe what they are saying.** ⚠️ **It measures BELIEF, NOT TRUTH.** ⭐⭐ **Set 1
+    is built on sincere liars, so it confirms the thesis instead of breaking it** — it lies
+    flat in front of the Doorward, the Double and Bex, and the player concludes *"honest, so
+    safe."* **It is a starving parasite, and a contestant who notices their lie-detector is
+    starving has learned the most important thing in Set 1.**
+  - 🕱 **The Beggar — WANT.** Strains toward anyone who wants something, by how badly —
+    never *what*. ⭐⭐ **It reads every Set 1 antagonist, because they are all appetite** — and
+    **the Doorward comes back SLACK**, its hunger sated, which it also says out loud.
+  - 🪱 **Ringworm — AGE.** Count its rings; one per year, honest. ⭐ The name is the
+    instruction, and it is a real parasite — exactly the register a reality show names things
+    in. ⭐⭐ **Set 1 is made of time and nothing else reads it:** seventy years of feeding,
+    two centuries of digging, a beak older than the capital — and 🔴 **the Double is three
+    days old.**
+  - 🍂 **Gravemoss — DEATH.** Thickens by how much has died *where you are standing*.
+    ⭐ **It reads the Hard route before the Hard route explains itself** — a crystallised city
+    comes back *fruiting* and the party learns those are people with nobody telling them; it
+    is quiet in the hatchery, because nothing has died there yet. ⚠️ **It is the only one of
+    the five that is kind** — a mourner, grateful to be taken somewhere terrible — and the
+    players should have to work out which one that is.
+- 🔴 **Open:** the harvest is mine and unblessed · friendly fire on the eruption needs a
+  confirm · `Ringworm` vs `Yearworm` · **the BOUGHT half of the shelf is not authored yet**
+  (price at or under Basic 3 UT so price is not the tell; §19.3 closes the store when the
+  Lounge unlocks, so it is a one-time offer the book already declares) · **the fantasy item
+  coupons still retire undistributed.**
+- 📦 **The old-campaign upload is NOT yet mined** (task #8) — 8 crafting metals that exist
+  in no M-band, 5 more legendaries, priced bounty missions, and 15 item-card PNGs.
+  🔴 **Look at GOD'S IRE first:** *a metal that forms in FLOWERS in mines; seeing them means
+  abandon the mine; contact drops you and you bleed out mumbling* — that is **the crystal
+  plague's exact vocabulary** (crystal flowers on Nullrot's horns, the Reservoir's First /
+  Second / Third / Fourth **Bloom**, Infected + Suffocation). Either it IS the plague under
+  another name, or it must be kept well away from it. ⚠️ **Gravitas** is L-14's gravity axe
+  already written; **Divinium** raises a person's maximum capabilities and needs care against
+  L-19's curve.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
