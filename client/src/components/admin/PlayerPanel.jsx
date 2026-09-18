@@ -23,6 +23,7 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [objSaving, setObjSaving] = useState(false);
   const [newSubtaskText, setNewSubtaskText] = useState({}); // { [objId]: text } per-objective input buffer
   const [resetting, setResetting] = useState(false);
+  const [levelBusy, setLevelBusy] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -46,6 +47,44 @@ export default function PlayerPanel({ player, token, showToast }) {
   function traitTotal(t) {
     const tr = state.traits?.[t] || {};
     return (tr.base || 0) + (tr.bonus || 0) + (tr.levelBonus || 0);
+  }
+
+  // LEVEL — grant or revoke a level. §3.1: 1 level = 1 point, so identity.level and
+  // levelPoints.pool move together and the player decides where the point lands.
+  //
+  // Revoking a level whose point is already SPENT drives the pool negative on purpose:
+  // that is a debt, shown on their sheet as points owed, and they hand one back from a
+  // trait of their choosing. Picking the trait for them is exactly what this replaces.
+  async function adjustLevel(delta) {
+    setLevelBusy(true);
+    const d = await apiFetch(`/api/admin/players/${player.userId}/levelup`, {
+      method: 'POST', body: JSON.stringify({ delta }),
+    }, token).catch(() => ({ error: 'Connection error.' }));
+    if (d?.ok) {
+      setCharData(cd => ({
+        ...cd,
+        state: { ...cd.state, identity: { ...(cd.state?.identity || {}), level: d.level }, levelPoints: d.levelPoints },
+      }));
+      if (d.applied === 0) showToast('Already at Lv 1');
+      else {
+        const p = d.levelPoints?.pool || 0;
+        showToast(`Lv ${d.level} · ${p > 0 ? `${p} to spend` : p < 0 ? `${-p} owed` : 'nothing unspent'}`);
+      }
+    } else showToast(d?.error || 'Failed', 'err');
+    setLevelBusy(false);
+  }
+
+  // Spend or refund ONE level point on the player's behalf — the same move as their
+  // own "+ Spend" / "− Refund", for the player who is not at the table. Pool and
+  // trait move in opposite directions, so the ledger cannot drift.
+  async function spendLevel(trait, delta) {
+    const d = await apiFetch(`/api/admin/players/${player.userId}/level-spend`, {
+      method: 'PATCH', body: JSON.stringify({ trait, delta }),
+    }, token).catch(() => ({ error: 'Connection error.' }));
+    if (d?.ok) {
+      setCharData(cd => ({ ...cd, state: { ...cd.state, traits: d.traits, levelPoints: d.levelPoints } }));
+      showToast(delta > 0 ? 'Spent' : 'Refunded');
+    } else showToast(d?.error || 'Failed', 'err');
   }
 
   // subField: 'bonus' or 'levelBonus'
@@ -296,6 +335,15 @@ export default function PlayerPanel({ player, token, showToast }) {
 
   const filteredLib = skillLib.filter(s => s.name.toLowerCase().includes(libSearch.toLowerCase()));
 
+  // The level ledger: every level past the first is one point, either unspent in the
+  // pool or invested in a trait. A non-zero difference means the sheet predates this
+  // control (the old grant bumped the pool without the level) — worth showing, never
+  // worth silently "fixing", since only the GM knows which number is the true one.
+  const lvlPool = state.levelPoints?.pool ?? 0;
+  const lvlSpent = ['physique', 'reflexes', 'mind', 'charm']
+    .reduce((n, t) => n + (state.traits?.[t]?.levelBonus || 0), 0);
+  const ledgerOff = (lvlSpent + lvlPool) - ((id.level || 1) - 1);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       {/* Header */}
@@ -309,6 +357,18 @@ export default function PlayerPanel({ player, token, showToast }) {
             <div className="pp-sub">Player: {player.username} · Updated {charData.updatedAt ? new Date(charData.updatedAt).toLocaleDateString() : '—'}</div>
             <div className="pp-tags">
               <span className="pp-tag lvl">Lv {id.level || 1}</span>
+              <button className="btn btn-muted btn-xs" onClick={() => adjustLevel(-1)}
+                      disabled={levelBusy || (id.level || 1) <= 1} title="Take a level back">−Lv</button>
+              <button className="btn btn-gold btn-xs" onClick={() => adjustLevel(1)}
+                      disabled={levelBusy} title="Grant a level — they choose where the point goes">+Lv</button>
+              {lvlPool > 0 && <span className="pp-tag lvl" title="Unspent — the player distributes these on their own sheet">▲ {lvlPool} to spend</span>}
+              {lvlPool < 0 && <span className="pp-tag owed" title="A level was taken back after its point was spent. The player refunds one from a trait of their choosing.">▼ {-lvlPool} owed</span>}
+              {ledgerOff !== 0 && (
+                <span className="pp-tag owed"
+                      title={`Ledger: Lv ${id.level || 1} should account for ${(id.level || 1) - 1} point(s); ${lvlSpent} spent + ${lvlPool} unspent = ${lvlSpent + lvlPool}. Older sheets predate this control — adjust with ±Lv or ±L to reconcile.`}>
+                  ⚠ ledger {ledgerOff > 0 ? `+${ledgerOff}` : ledgerOff}
+                </span>
+              )}
               {id.race && <span className="pp-tag race">{id.race}</span>}
               {player.isAdmin && <span className="pp-tag admin-flag">Admin</span>}
             </div>
@@ -333,8 +393,8 @@ export default function PlayerPanel({ player, token, showToast }) {
                 <div style={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
                   <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'bonus', -1)} disabled={bonus <= 0} title="Remove bonus pt">−B</button>
                   <button className="btn btn-cyan btn-xs" onClick={() => adjustTrait(t, 'bonus', 1)} title="Add bonus pt">+B</button>
-                  <button className="btn btn-muted btn-xs" onClick={() => adjustTrait(t, 'levelBonus', -1)} disabled={lvBonus <= 0} title="Remove level pt">−L</button>
-                  <button className="btn btn-gold btn-xs" onClick={() => adjustTrait(t, 'levelBonus', 1)} title="Add level pt">+L</button>
+                  <button className="btn btn-muted btn-xs" onClick={() => spendLevel(t, -1)} disabled={lvBonus <= 0} title="Refund this trait's level point back to their pool">−L</button>
+                  <button className="btn btn-gold btn-xs" onClick={() => spendLevel(t, 1)} disabled={lvlPool <= 0} title="Spend one of their unspent level points here (on their behalf)">+L</button>
                 </div>
               </div>
             );

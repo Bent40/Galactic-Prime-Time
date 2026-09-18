@@ -87,6 +87,17 @@ export default function BodyTab({ state, update }) {
       levelPoints: { ...s.levelPoints, pool: Math.max(0, (s.levelPoints?.pool || 0) - 1) },
     }));
   }
+  // The other direction. The pool goes NEGATIVE when the GM takes back a level whose
+  // point is already spent — a debt — and this is how you clear it: hand one back from
+  // whichever trait you choose. Same move as spending, in reverse.
+  function refundLevel(t) {
+    if ((state.traits?.[t]?.levelBonus || 0) <= 0) return;
+    update(s => ({
+      ...s,
+      traits: { ...s.traits, [t]: { ...(s.traits[t] || {}), levelBonus: (s.traits[t]?.levelBonus || 0) - 1 } },
+      levelPoints: { ...s.levelPoints, pool: (s.levelPoints?.pool || 0) + 1 },
+    }));
+  }
 
   function setShockTier(tier) {
     const current = state.shock?.tier ?? 0;
@@ -174,7 +185,8 @@ export default function BodyTab({ state, update }) {
           <div className="row gap-sm" style={{ fontWeight: 'normal' }}>
             {isLevelOne && <span className={`pts-badge${bodyPts === 0 ? ' empty' : bodyPts <= 2 ? ' warn' : ''}`}>BODY {bodyPts} pts</span>}
             {isLevelOne && <span className={`pts-badge${corePts === 0 ? ' empty' : corePts <= 2 ? ' warn' : ''}`}>CORE {corePts} pts</span>}
-            {lvlPool > 0 && <span className="pts-badge warn">▲ {lvlPool} Lv pts to spend</span>}
+            {lvlPool > 0 && <span className="pts-badge warn">▲ {lvlPool} Lv pt{lvlPool === 1 ? '' : 's'} to spend</span>}
+            {lvlPool < 0 && <span className="pts-badge empty" title="A level was taken back. Refund a level point from any trait to clear it.">▼ {-lvlPool} Lv pt{lvlPool === -1 ? '' : 's'} owed — refund one</span>}
           </div>
         </div>
         <div className="traits-grid">
@@ -206,6 +218,11 @@ export default function BodyTab({ state, update }) {
                 {lvlAv > 0 && (
                   <div className="trait-sp">
                     <button className="btn btn-gold btn-xs" onClick={() => investLevel(t)}>+ Spend</button>
+                  </div>
+                )}
+                {lvlAv < 0 && lbonus > 0 && (
+                  <div className="trait-sp">
+                    <button className="btn btn-danger btn-xs" onClick={() => refundLevel(t)} title="Hand this trait's level point back">− Refund</button>
                   </div>
                 )}
               </div>

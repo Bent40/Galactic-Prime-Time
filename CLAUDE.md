@@ -77,9 +77,31 @@ Single unified pool — any trait can be leveled from it regardless of Body/Core
 ```js
 levelPoints: { pool: 0 }
 ```
-Admin grants via `POST /api/admin/players/:userId/levelup` which increments `pool`.
-Player spends via `investLevel(t)` in BodyTab which decrements `pool` and increments `traits[t].levelBonus`.
+Admin grants/revokes via `POST /api/admin/players/:userId/levelup` with `{ delta }`
+(default `+1`), which moves **`identity.level` and `levelPoints.pool` together** —
+§3.1, 1 level = 1 point. Player spends via `investLevel(t)` in BodyTab which decrements
+`pool` and increments `traits[t].levelBonus`.
 **Level is read-only on the player sheet** — only admin can change it.
+
+🔒 **THE POOL MAY GO NEGATIVE — that is a DEBT, and it is deliberate (2026-09-18).**
+Revoking a level whose point is already spent leaves the point inside some trait, and
+choosing *which* trait gives it up is the player's decision, not the GM's. So the pool
+drops to −1, the sheet shows **"1 Lv pt owed — refund one"**, and `refundLevel(t)` in
+BodyTab clears it from whichever trait they pick. **The admin moves levels; the player
+moves points; in both directions.** Level itself never drops below 1, so the route
+returns `applied` (what happened) alongside `delta` (what was asked), and the pool only
+ever moves by `applied`.
+
+⚙️ **The invariant, and it is checkable:** `level − 1 === pool + Σ levelBonus`.
+`PlayerPanel` prints a **⚠ ledger ±N** badge when a sheet breaks it — which older sheets
+do, because the pre-2026-09-18 grant bumped the pool without touching the level and the
+old `−L` button destroyed a point outright. **Shown, never silently "fixed"**: only the
+GM knows which of the two numbers is the true one. `PATCH /players/:userId/level-spend`
+`{ trait, delta: ±1 }` is the GM's spend/refund on the player's behalf (the `+L`/`−L`
+buttons), and it moves pool and trait in opposite directions so it *cannot* drift.
+⚠️ Consequence: **`+L` is now disabled unless the player has an unspent point** — grant
+the level first. **53 tests:** `node server/test-admin-levels.js` (no DB, no mongod —
+the model and admin-auth are stubbed out of the require cache).
 
 ### Skill Points
 Skill points per trait = `traitTotal(t) - 1`, minimum 0. First point in any trait earns nothing.
@@ -117,7 +139,9 @@ shock: { tier: 0 }  // 0 = none, 1-4 = Shout/Stutter/Faint/Helpless
 ## Routes
 - `GET/POST /api/character` — load/save character state
 - `GET /api/character/skills` — returns enriched skills (template fields joined)
-- `POST /api/admin/players/:userId/levelup` — grant 1 level point to pool
+- `POST /api/admin/players/:userId/levelup` — `{ delta }` (default +1): move level and pool together
+- `PATCH /api/admin/players/:userId/level-spend` — `{ trait, delta: ±1 }`: spend/refund one point
+- `DELETE /api/admin/players/:userId/character` — reset (deletes the doc, so creation re-runs)
 - `PATCH /api/admin/players/:userId/traits` — set trait values
 - `POST /api/admin/players/:userId/skills/grant` — grant skill by templateId
 

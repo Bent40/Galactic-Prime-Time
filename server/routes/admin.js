@@ -10,6 +10,9 @@ const { enrichSkills } = require('../utils/skillUtils');
 
 const router = express.Router();
 
+// The four traits a level point may be spent on (§3.1 — one unified pool).
+const LEVEL_TRAITS = ['physique', 'reflexes', 'mind', 'charm'];
+
 // All routes require admin
 router.use(requireAdmin);
 
@@ -413,18 +416,81 @@ router.delete('/players/:userId/achievements/:achievementId', async (req, res) =
   }
 });
 
-// POST /api/admin/players/:userId/levelup — grant one level-up point to the shared pool
+// POST /api/admin/players/:userId/levelup — move LEVEL and the unspent POOL together.
+//
+// §3.1: 1 level = 1 point. Body `{ delta }`, defaulting to +1 — so the old bodyless
+// call still means "grant one level" and nothing that used it changes meaning.
+//
+// Taking a level BACK when the pool is empty is the case worth reading twice: that
+// point is already inside some trait's levelBonus, and choosing WHICH trait gives it
+// up is exactly the decision that belongs to the player, not the GM. So the pool is
+// allowed to go NEGATIVE — it is a DEBT, shown on their sheet as points owed, and
+// they hand one back from a trait of their choosing. The admin moves levels; the
+// player moves points; in both directions.
+//
+// Level itself never drops below 1, so `applied` (what actually happened) can differ
+// from `delta` (what was asked) and the pool only ever moves by `applied`.
 router.post('/players/:userId/levelup', async (req, res) => {
   try {
+    const raw = req.body?.delta;
+    // Number(), not parseInt() — parseInt('1.5') is 1, and silently granting one
+    // level for a request that asked for one and a half is not a thing to do quietly.
+    const delta = raw === undefined || raw === null || raw === '' ? 1 : Number(raw);
+    if (!Number.isInteger(delta) || delta === 0) {
+      return res.status(400).json({ error: 'delta must be a non-zero integer' });
+    }
+
+    const character = await Character.findOne({ userId: req.params.userId });
+    if (!character) return res.status(404).json({ error: 'Character not found' });
+
+    const state = character.state || {};
+    if (!state.identity) state.identity = {};
+    if (!state.levelPoints) state.levelPoints = { pool: 0 };
+
+    const from = Math.max(1, parseInt(state.identity.level, 10) || 1);
+    const to = Math.max(1, from + delta);
+    const applied = to - from;
+
+    state.identity.level = to;
+    state.levelPoints.pool = (state.levelPoints.pool || 0) + applied;
+
+    await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
+    res.json({ ok: true, level: to, applied, levelPoints: state.levelPoints });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// PATCH /api/admin/players/:userId/level-spend — spend or refund ONE level point on
+// the player's behalf: traits[trait].levelBonus and levelPoints.pool move in opposite
+// directions, so the ledger stays true. This is the identical move to BodyTab's
+// "+ Spend" / "− Refund"; the GM gets it for the player who is not at the table.
+// Body: { trait, delta } — delta +1 spends, -1 refunds.
+router.patch('/players/:userId/level-spend', async (req, res) => {
+  try {
+    const { trait } = req.body || {};
+    const delta = Number(req.body?.delta);
+    if (!LEVEL_TRAITS.includes(trait)) return res.status(400).json({ error: 'Unknown trait' });
+    if (delta !== 1 && delta !== -1) return res.status(400).json({ error: 'delta must be +1 or -1' });
+
     const character = await Character.findOne({ userId: req.params.userId });
     if (!character) return res.status(404).json({ error: 'Character not found' });
 
     const state = character.state || {};
     if (!state.levelPoints) state.levelPoints = { pool: 0 };
-    state.levelPoints.pool = (state.levelPoints.pool || 0) + 1;
+    if (!state.traits) state.traits = {};
+    if (!state.traits[trait]) state.traits[trait] = { base: 0, bonus: 0, levelBonus: 0 };
+
+    const pool = state.levelPoints.pool || 0;
+    const invested = state.traits[trait].levelBonus || 0;
+    if (delta === 1 && pool <= 0) return res.status(400).json({ error: 'No unspent level points' });
+    if (delta === -1 && invested <= 0) return res.status(400).json({ error: `Nothing invested in ${trait}` });
+
+    state.traits[trait].levelBonus = invested + delta;
+    state.levelPoints.pool = pool - delta;
 
     await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
-    res.json({ ok: true, levelPoints: state.levelPoints });
+    res.json({ ok: true, traits: state.traits, levelPoints: state.levelPoints });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
