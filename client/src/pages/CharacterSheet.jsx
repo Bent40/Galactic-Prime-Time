@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../api.js';
 import { DEFAULT_STATE, TABS, ALL_TRAITS } from '../constants.js';
+import { NO_CHARACTER, shouldPoll, pollOutcome, syncMessage } from '../syncGate.js';
 import CharacterCreation from '../components/shared/CharacterCreation.jsx';
 import LoginOverlay from '../components/shared/LoginOverlay.jsx';
 import Toast, { useToast } from '../components/shared/Toast.jsx';
@@ -14,6 +15,27 @@ import ObjectivesTab from '../components/character/ObjectivesTab.jsx';
 import CombatModeTab from '../components/character/CombatModeTab.jsx';
 import NotesTab from '../components/character/NotesTab.jsx';
 import CommsTab from '../components/character/CommsTab.jsx';
+
+// Merge a server state onto DEFAULT_STATE. Hoisted out of the component because
+// BOTH the initial load and the 12s poll use it — two copies of this merge is
+// exactly the kind of thing that drifts and then loses a field on one path only.
+function mergeLoadedState(state) {
+  const loadedTraits = state.traits || {};
+  const mergedTraits = ALL_TRAITS.reduce((acc, t) => ({
+    ...acc, [t]: { ...DEFAULT_STATE.traits[t], ...(loadedTraits[t] || {}) },
+  }), {});
+  return {
+    ...DEFAULT_STATE, ...state,
+    identity: { ...DEFAULT_STATE.identity, ...(state.identity || {}) },
+    traits: mergedTraits,
+    bonusPoints: { ...DEFAULT_STATE.bonusPoints, ...(state.bonusPoints || {}) },
+    levelPoints: { ...DEFAULT_STATE.levelPoints, ...(state.levelPoints || {}) },
+    tokens: { ...DEFAULT_STATE.tokens, ...(state.tokens || {}) },
+    exposure: { ...DEFAULT_STATE.exposure, ...(state.exposure || {}) },
+    skillPointsSpent: { ...DEFAULT_STATE.skillPointsSpent, ...(state.skillPointsSpent || {}) },
+    cameraCallUsed: state.cameraCallUsed ?? 0,
+  };
+}
 
 export default function CharacterSheet() {
   const [auth, setAuth] = useState(() => {
@@ -32,31 +54,41 @@ export default function CharacterSheet() {
   // null = not known yet; true = registered with no character, so run creation.
   const [needsCreation, setNeedsCreation] = useState(null);
 
+  // ── GM-grant sync ───────────────────────────────────────────────────────────
+  // The sheet used to load once and never look again, so a level the GM granted
+  // mid-session was invisible until the player reloaded the page. It now re-reads
+  // the character on the same 12s tick as the tracker — but a naive poll would
+  // race the 1500ms autosave and clobber whatever the player just typed, so it
+  // applies a server version ONLY when the local copy is clean.
+  //
+  // localGen counts local edits; syncedGen is the one the server has. Equal means
+  // clean, and clean means the server is authoritative. serverVersion is the
+  // document's updatedAt (already returned by both GET and POST), so an unchanged
+  // document costs a fetch and nothing else.
+  const localGen = useRef(0);
+  const syncedGen = useRef(0);
+  const serverVersion = useRef(null);
+  const needsCreationRef = useRef(null);
+  needsCreationRef.current = needsCreation;
+  const poolRef = useRef(0);
+  poolRef.current = charState.levelPoints?.pool ?? 0;
+
   useEffect(() => {
     if (!auth) return;
     apiFetch('/api/character', {}, auth.token).then(d => {
       if (d.state) {
-        const loadedTraits = d.state.traits || {};
-        const mergedTraits = ALL_TRAITS.reduce((acc, t) => ({
-          ...acc, [t]: { ...DEFAULT_STATE.traits[t], ...(loadedTraits[t] || {}) },
-        }), {});
-        const merged = {
-          ...DEFAULT_STATE, ...d.state,
-          identity: { ...DEFAULT_STATE.identity, ...(d.state.identity || {}) },
-          traits: mergedTraits,
-          bonusPoints: { ...DEFAULT_STATE.bonusPoints, ...(d.state.bonusPoints || {}) },
-          levelPoints: { ...DEFAULT_STATE.levelPoints, ...(d.state.levelPoints || {}) },
-          tokens: { ...DEFAULT_STATE.tokens, ...(d.state.tokens || {}) },
-          exposure: { ...DEFAULT_STATE.exposure, ...(d.state.exposure || {}) },
-          skillPointsSpent: { ...DEFAULT_STATE.skillPointsSpent, ...(d.state.skillPointsSpent || {}) },
-          cameraCallUsed: d.state.cameraCallUsed ?? 0,
-        };
-        setCharState(merged);
+        setCharState(mergeLoadedState(d.state));
+        serverVersion.current = d.updatedAt || null;
         setNeedsCreation(false);
-      } else {
+      } else if (d.error === NO_CHARACTER) {
         // GET /api/character 404s for a user who registered and has no character
         // document yet. That used to fall through to a blank DEFAULT_STATE sheet.
         setNeedsCreation(true);
+      } else {
+        // A different error (the 503 DB guard, a dropped request). They may well
+        // have a character; do NOT send them into creation. Leave it unknown and
+        // let the next poll settle it.
+        showToast(d?.error || 'Could not load your sheet', 'err');
       }
       isLoaded.current = true;
     }).catch(() => { isLoaded.current = true; });
@@ -64,8 +96,39 @@ export default function CharacterSheet() {
     const pollTracker = () => {
       apiFetch('/api/tracker', {}, auth.token).then(d => { if (!d.error) setTracker(d); });
     };
+
+    // Re-read the character so a GM grant lands without a page reload. Every
+    // decision here lives in syncGate.js so it can be tested without a DOM.
+    const pollCharacter = () => {
+      if (!shouldPoll({
+        loaded: isLoaded.current, creating: needsCreationRef.current,
+        localGen: localGen.current, syncedGen: syncedGen.current,
+      })) return;
+      const gen = localGen.current;
+      apiFetch('/api/character', {}, auth.token).then(d => {
+        const outcome = pollOutcome({
+          genAtRequest: gen, localGen: localGen.current,
+          reply: d, serverVersion: serverVersion.current,
+        });
+        if (outcome === 'reset') {
+          // The GM reset the sheet out from under them. Same path as a new player.
+          setNeedsCreation(true);
+          serverVersion.current = null;
+          return;
+        }
+        if (outcome !== 'apply') return;
+        serverVersion.current = d.updatedAt || null;
+        const next = mergeLoadedState(d.state);
+        // Read the old pool through a ref, not inside the setCharState updater —
+        // an updater must stay pure, and StrictMode calls it twice.
+        const { msg, type } = syncMessage(poolRef.current, next.levelPoints?.pool ?? 0);
+        setCharState(next);
+        showToast(msg, type);
+      }).catch(() => {});
+    };
+
     pollTracker();
-    const iv = setInterval(pollTracker, 12000);
+    const iv = setInterval(() => { pollTracker(); pollCharacter(); }, 12000);
     return () => clearInterval(iv);
   }, [auth]);
 
@@ -74,11 +137,24 @@ export default function CharacterSheet() {
       const next = typeof updater === 'function' ? updater(prev) : updater;
       if (!isLoaded.current) return next;
       setSaveStatus('saving');
+      // Mark the sheet dirty BEFORE the debounce. The poll reads this, so the
+      // window between a keystroke and the save has to count as dirty too —
+      // otherwise a poll landing inside those 1500ms would discard the edit.
+      localGen.current += 1;
+      const gen = localGen.current;
       clearTimeout(saveTimer.current);
       saveTimer.current = setTimeout(() => {
         apiFetch('/api/character', { method: 'POST', body: JSON.stringify({ state: next }) }, auth?.token)
-          .then(() => setSaveStatus('saved'))
-          .catch(() => setSaveStatus('saved'));
+          .then(d => {
+            setSaveStatus('saved');
+            if (gen > syncedGen.current) syncedGen.current = gen;
+            if (d?.updatedAt) serverVersion.current = d.updatedAt;
+          })
+          // A failed save used to report 'SAVED'. It must not: the edit is still
+          // only in this browser, and the GM-grant poll deliberately refuses to
+          // sync a dirty sheet, so a silent failure would also stop grants
+          // arriving. Say so, and let the next edit retry.
+          .catch(() => setSaveStatus('error'));
       }, 1500);
       return next;
     });
@@ -91,6 +167,9 @@ export default function CharacterSheet() {
     setAuth(null);
     setCharState(DEFAULT_STATE);
     isLoaded.current = false;
+    localGen.current = 0;
+    syncedGen.current = 0;
+    serverVersion.current = null;
     setNeedsCreation(null);
   }
 
@@ -106,6 +185,7 @@ export default function CharacterSheet() {
       .catch(() => ({ error: 'Connection error.' }));
     if (!d?.ok) return d?.error || 'Could not save. Try again.';
     setCharState(state);
+    if (d.updatedAt) serverVersion.current = d.updatedAt;
     setNeedsCreation(false);
     showToast('Welcome to the arena');
     return null;
@@ -129,7 +209,10 @@ export default function CharacterSheet() {
         <div className="topbar-live"><div className="live-dot" />LIVE</div>
         <div className="topbar-title">GALACTIC PRIME TIME</div>
         <div className="topbar-right">
-          <span className={`save-pill ${saveStatus}`}>{saveStatus === 'saving' ? 'SAVING…' : 'SAVED'}</span>
+          <span className={`save-pill ${saveStatus}`}
+                title={saveStatus === 'error' ? 'The last save did not reach the server. Your changes are only in this browser — make another edit to retry.' : undefined}>
+            {saveStatus === 'saving' ? 'SAVING…' : saveStatus === 'error' ? 'NOT SAVED' : 'SAVED'}
+          </span>
           <span style={{ letterSpacing: 1 }}>{auth.username?.toUpperCase()}</span>
           <button className="btn btn-wiki" onClick={() => window.open('/wiki', '_blank')} title="Open the rulebook">📖 Wiki</button>
           <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>

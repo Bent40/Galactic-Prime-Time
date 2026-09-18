@@ -155,9 +155,34 @@ autosave-contract change), timed to a campaign break. Don't re-litigate Mongo
 vs SQL in future sessions; the position is settled as "Atlas now, designed v2
 maybe later."
 
-## Autosave
+## Autosave + GM-grant sync (the poll, 2026-09-18)
 `update()` in CharacterSheet triggers a 1500ms debounced save to `/api/character`.
 Do not add additional direct `apiFetch` saves on top of this — use `update()` only to avoid race conditions.
+
+✅ **The sheet now RE-READS the character every 12s** (the existing tracker tick), so a
+level — or a skill, item, tag or mark — the GM grants mid-session lands **without a page
+reload**. It used to load once and never look again.
+
+🔒 **The rule that makes it safe: a DIRTY sheet is never overwritten.** `localGen` counts
+local edits, `syncedGen` is the highest the server has acknowledged; equal = clean, and
+only a clean sheet may be replaced. The generation is also captured *before* the request
+and re-checked on the reply, so an edit made while the fetch is in flight discards the
+reply instead of the edit. `serverVersion` holds the document's `updatedAt` (already
+returned by **both** GET and POST), so an unchanged document costs one fetch and no
+re-render. ⭐ **All of it is in `client/src/syncGate.js` as pure functions** —
+`shouldPoll` / `pollOutcome` / `syncMessage`, no React — because "silently discards the
+player's unsaved sheet" is the one failure this must not have. **27 tests:**
+`node --experimental-detect-module client/src/syncGate.test.mjs`.
+
+⚙️ **A GM RESET is handled by the same path** — the poll sees the 404 and flips
+`needsCreation`, so a player whose sheet was reset mid-session is walked through creation
+without reloading. ⚠️ The 404 is matched on the **exact** body `'No character found'`,
+because the 503 DB guard is also error-shaped and must NOT read as "no character" —
+that would push a player who has one into creation during an outage. **Two live bugs
+fixed by that:** the same over-broad check was on the initial load, and **a failed save
+used to report `SAVED`** (the pill now reads **`NOT SAVED`** in red). The second matters
+here: a failed save leaves the sheet permanently dirty, and a dirty sheet stops syncing,
+so a silent failure would also silently stop grants arriving.
 
 ## Skill Library
 Admin manages skill templates via SkillLibrarySection. Templates stored in `skilltemplates` collection.
