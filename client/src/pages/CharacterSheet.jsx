@@ -97,12 +97,18 @@ export default function CharacterSheet() {
   // Write the created character ONCE, synchronously — not through update()'s
   // 1500ms debounce, because the overlay closes immediately after and a pending
   // timer would be the only thing holding the new state.
+  // Returns true only if the character actually reached the database. The
+  // overlay must NOT close on a failed write: it is the only place the created
+  // state exists, so closing would silently lose the whole thing — and a 503
+  // from the DB guard is exactly the case that made this matter.
   async function finishCreation(state) {
+    const d = await apiFetch('/api/character', { method: 'POST', body: JSON.stringify({ state }) }, auth?.token)
+      .catch(() => ({ error: 'Connection error.' }));
+    if (!d?.ok) return d?.error || 'Could not save. Try again.';
     setCharState(state);
-    await apiFetch('/api/character', { method: 'POST', body: JSON.stringify({ state }) }, auth?.token)
-      .catch(() => {});
     setNeedsCreation(false);
     showToast('Welcome to the arena');
+    return null;
   }
 
   if (!auth) return <LoginOverlay onLogin={setAuth} />;

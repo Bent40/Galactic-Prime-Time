@@ -1690,6 +1690,20 @@ were.** Every one of those had to be fixed by hand.
   container and the agent proxy blocks `fastdl.mongodb.org`, so `mongodb-memory-server`
   cannot fetch a binary. The rules logic and the build are tested; **register → creation →
   save wants one manual pass against Atlas.**
+- ✅ **THE TRIGGER CHAIN IS CONFIRMED BY READING (2026-09-18).** Register → creation works
+  because **`apiFetch` returns `r.json()` WITHOUT throwing on a non-2xx** — so the 404 arrives
+  as `{error: 'No character found'}`, `d.state` is undefined, and `needsCreation` flips. ⚠️ If
+  `apiFetch` is ever changed to throw on non-2xx, **the `.catch()` swallows it and a new player
+  silently lands on the blank sheet again.** The load-bearing dependency is written here on
+  purpose.
+- 🔴 **A FLAW I SHIPPED AND FIXED THE SAME DAY:** `finishCreation` closed the overlay
+  **whether or not the POST succeeded**, so a 503 from the new DB guard would have **silently
+  discarded the whole character** — the overlay is the only place that state exists. It now
+  returns an error string, the overlay **stays open** and shows it, and `saving` resets so the
+  button is not stuck. ⭐ The very guard added that morning is what made this reachable.
+- ✅ **`client/dist` is now gitignored** (owner, 2026-09-18) and untracked. Render rebuilds it
+  on every deploy, so a committed copy was only diff noise — and a chance to ship something
+  stale.
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

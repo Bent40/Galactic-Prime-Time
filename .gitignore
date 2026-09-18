@@ -8,3 +8,7 @@ client/.env
 wiki-check.png
 
 bestiary.html
+
+# Vite build output — Render rebuilds it on every deploy (`npm run build`),
+# so a committed copy is only diff noise and a chance to ship something stale.
+client/dist/

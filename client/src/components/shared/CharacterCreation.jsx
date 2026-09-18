@@ -34,6 +34,7 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
   // Spent counts, not remaining — easier to reason about and to render.
   const [spent, setSpent] = useState({ physique: 0, reflexes: 0, mind: 0, charm: 0 });
   const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState('');
 
   const BODY_MAX = DEFAULT_STATE.bonusPoints.bodyMax ?? 5;
   const CORE_MAX = DEFAULT_STATE.bonusPoints.coreMax ?? 5;
@@ -57,10 +58,13 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
 
   async function finish() {
     setSaving(true);
+    setErr('');
     const traits = Object.fromEntries(
       Object.keys(DEFAULT_STATE.traits).map(t => [t, { base: 1 + spent[t], bonus: 0, levelBonus: 0 }])
     );
-    await onDone({
+    // onDone returns an error string, or null on a confirmed save. Stay open on
+    // failure — this overlay holds the only copy of what they just built.
+    const problem = await onDone({
       ...DEFAULT_STATE,
       identity: { ...identity, name: identity.name.trim() || username || 'Unnamed Contestant' },
       traits,
@@ -68,6 +72,7 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
       bonusPoints: { ...DEFAULT_STATE.bonusPoints, body: bodyLeft, core: coreLeft },
       bodyParts: bodyPartsForSize(identity.size),
     });
+    if (problem) { setErr(problem); setSaving(false); }
   }
 
   const hp = SIZE_BASE_HP[identity.size] || SIZE_BASE_HP.Medium;
@@ -192,6 +197,8 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
             </div>
           </div>
         )}
+
+        {err && <div className="login-err">{err}</div>}
 
         <div className="login-toggle" onClick={onSkip}>
           Skip — I'll fill the sheet in myself
