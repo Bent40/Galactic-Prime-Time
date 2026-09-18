@@ -20,6 +20,36 @@ export const TRAIT_LABELS = { physique: 'Physique', reflexes: 'Reflexes', mind: 
 // class; an item is a legal "explicit source"). Legacy values (Psy/Toxic/Shock,
 // sci-fi races) are migrated by server/migrate-rules-vocab.js.
 export const RACES = ['Human', 'Animal', 'Robot / AI'];
+// Rulebook §7.1 — SIZE SETS BASE PART HP (ruled 2026-09-15, v1.8). A base, never
+// a multiplier: §3.2's growth is flat, so a Small torso is 60% of a Medium's at
+// creation and 94% by F9. The head never drops below 2 at any size — it is a
+// lethal part, so a 1 HP head makes any hit a coin flip.
+export const SIZES = ['Small', 'Medium', 'Large', 'Huge'];
+export const SIZE_BASE_HP = {
+  Small:  { Head: 2, Torso: 3,  Arm: 1, Leg: 2 },
+  Medium: { Head: 2, Torso: 5,  Arm: 2, Leg: 3 },   // canon / the human default
+  Large:  { Head: 3, Torso: 8,  Arm: 3, Leg: 4 },
+  Huge:   { Head: 4, Torso: 12, Arm: 5, Leg: 6 },
+};
+
+/**
+ * The six standard parts at a given size, as DEFAULT_STATE.bodyParts entries.
+ * §7.1 also allows non-standard layouts (flippers, not arms) — those are a GM
+ * edit on the sheet afterwards; this is the starting frame.
+ */
+export function bodyPartsForSize(size = 'Medium') {
+  const hp = SIZE_BASE_HP[size] || SIZE_BASE_HP.Medium;
+  const part = (id, name, base, lethal = false) =>
+    ({ id, name, baseHp: base, maxHp: base, currentHp: base, lethal, conditions: [] });
+  return [
+    part(1, 'Head',      hp.Head,  true),
+    part(2, 'Torso',     hp.Torso, true),
+    part(3, 'Left Arm',  hp.Arm),
+    part(4, 'Right Arm', hp.Arm),
+    part(5, 'Left Leg',  hp.Leg),
+    part(6, 'Right Leg', hp.Leg),
+  ];
+}
 export const ATK_TYPES = ['Single Target', 'Line', 'Arc', 'Cone', 'Burst', 'Self', 'Thrown', 'All'];
 export const DMG_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'];
 export const CANON_CONDITIONS = ['Bleeding', 'Crushed', 'Burn', 'Chilled', 'Poison', 'Infected', 'Suffocation', 'Dissolution', 'Exhausted'];
@@ -42,7 +72,7 @@ export const CAT_ICONS = {
 };
 
 export const DEFAULT_STATE = {
-  identity: { name: '', player: '', race: 'Human', species: '', level: 1, background: '', portrait: '', contestantNumber: '' },
+  identity: { name: '', player: '', race: 'Human', species: '', size: 'Medium', level: 1, background: '', portrait: '', contestantNumber: '' },
   traits: {
     physique: { base: 1, bonus: 0, levelBonus: 0 },
     reflexes: { base: 1, bonus: 0, levelBonus: 0 },

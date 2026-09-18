@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../api.js';
 import { DEFAULT_STATE, TABS, ALL_TRAITS } from '../constants.js';
+import CharacterCreation from '../components/shared/CharacterCreation.jsx';
 import LoginOverlay from '../components/shared/LoginOverlay.jsx';
 import Toast, { useToast } from '../components/shared/Toast.jsx';
 import TrackerBar from '../components/shared/TrackerBar.jsx';
@@ -28,6 +29,8 @@ export default function CharacterSheet() {
   const [toast, showToast] = useToast();
   const saveTimer = useRef(null);
   const isLoaded = useRef(false);
+  // null = not known yet; true = registered with no character, so run creation.
+  const [needsCreation, setNeedsCreation] = useState(null);
 
   useEffect(() => {
     if (!auth) return;
@@ -49,6 +52,11 @@ export default function CharacterSheet() {
           cameraCallUsed: d.state.cameraCallUsed ?? 0,
         };
         setCharState(merged);
+        setNeedsCreation(false);
+      } else {
+        // GET /api/character 404s for a user who registered and has no character
+        // document yet. That used to fall through to a blank DEFAULT_STATE sheet.
+        setNeedsCreation(true);
       }
       isLoaded.current = true;
     }).catch(() => { isLoaded.current = true; });
@@ -83,9 +91,30 @@ export default function CharacterSheet() {
     setAuth(null);
     setCharState(DEFAULT_STATE);
     isLoaded.current = false;
+    setNeedsCreation(null);
+  }
+
+  // Write the created character ONCE, synchronously — not through update()'s
+  // 1500ms debounce, because the overlay closes immediately after and a pending
+  // timer would be the only thing holding the new state.
+  async function finishCreation(state) {
+    setCharState(state);
+    await apiFetch('/api/character', { method: 'POST', body: JSON.stringify({ state }) }, auth?.token)
+      .catch(() => {});
+    setNeedsCreation(false);
+    showToast('Welcome to the arena');
   }
 
   if (!auth) return <LoginOverlay onLogin={setAuth} />;
+  if (needsCreation) {
+    return (
+      <CharacterCreation
+        username={auth.username}
+        onDone={finishCreation}
+        onSkip={() => setNeedsCreation(false)}
+      />
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>

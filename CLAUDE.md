@@ -1624,6 +1624,73 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
   already written; **Divinium** raises a person's maximum capabilities and needs care against
   L-19's curve.
 
+## 🔧 TWO LIVE FIXES — 2026-09-18 (Render boot + character creation)
+
+### ✅ THE RENDER BOOT FAILURE — FOUND AND FIXED
+🔴 **`server.js` called `app.listen()` only INSIDE `mongoose.connect().then()`, and
+`process.exit(1)` in the `.catch()`.** So **any** unreachable Atlas meant the process died
+**having never opened a port** — and a service that opens no port is exactly what Render
+reports as a boot failure. ⚙️ **Reproduced locally with no mongod: exit code 1, ~30s hang,
+no port.**
+- **`app.listen()` now runs immediately**; Mongo connects in the background with capped
+  exponential backoff (2s→60s) and **never exits the process**.
+  `serverSelectionTimeoutMS: 8000` so a failure is visible fast instead of hanging boot.
+- **`/api/health` always answers 200** once the process is up and reports `db` +
+  `dbError` + `uptime`. ⭐ A paused Atlas is now a **legible degraded service** rather than
+  a restart loop — and the health endpoint tells you which of the causes it is.
+- **A 503 guard on `/api`** names the cause instead of letting requests queue on mongoose's
+  command buffer and time out as 500s. ⚠️ **Ordered BEFORE the route mounts** — behind them
+  it was dead code, because `requireAuth` answered 401 first (caught in testing).
+- `SIGTERM`/`SIGINT` close the server and the connection cleanly (Render sends SIGTERM).
+- **dotenv now reads `server/.env` explicitly** — the start command runs from the repo root
+  (`node server/server.js`), so a bare `config()` looked for `./.env` at the root and found
+  nothing. Every seed script already did it the explicit way.
+- **`logger.js` hardened:** file transports are **skipped on Render** (`RENDER=true`;
+  the disk is ephemeral and stdout is what Render captures) and **the mkdir can no longer be
+  fatal** — a read-only or full filesystem used to throw inside `require()`, before any
+  handler existed to report it.
+- ✅ **Verified with no database reachable:** health **200** with the cause named, `/api`
+  **503**, client **200**, and the process stays up and retries.
+- 🔴 **THE CODE FIX MAKES THE SERVICE BOOT; IT DOES NOT RECONNECT THE DATABASE.** Three
+  causes to check in the dashboards, in order: ① **an Atlas M0 free cluster PAUSES after 60
+  days idle** — resume it; ② **Atlas Network Access must allow `0.0.0.0/0`**, because Render
+  free has **no static egress IP**; ③ `MONGODB_URI` / `JWT_SECRET` / `ADMIN_SECRET` are
+  `sync: false` in `render.yaml`, so they live only in the dashboard and a rotated Atlas
+  password silently breaks boot. **`/api/health` now tells you which.**
+
+### ✅ CHARACTER CREATION — BUILT (`client/src/components/shared/CharacterCreation.jsx`)
+🔴 **Registering created a `User` and no `Character`.** `GET /api/character` 404s, and the
+client just kept `DEFAULT_STATE` — so a new player landed on a **blank nine-tab sheet**: no
+name, every trait at 1, ten unspent bonus points, and **a Medium body whatever they actually
+were.** Every one of those had to be fixed by hand.
+- **Three steps, each one a rule that already exists:** ① **Identity** (§2.1) ·
+  ② **Body** — race, freetext species, and **SIZE**, with the resulting body shown live ·
+  ③ **Allocation** — the ten bonus points, 5 Body (Physique·Reflexes) + 5 Core (Mind·Charm)
+  on top of 1 in each trait. Writes the state **once** on finish, then never appears again;
+  everything stays editable on the sheet. **A "skip" link is always there.**
+- ⭐⭐ **Step 2 is the one that could not be skipped, and it cashes out the 2026-09-15
+  ruling.** §7.1 says size sets base part HP — but `DEFAULT_STATE` **hardcodes the Medium
+  frame**, so a Small contestant started with a **17 HP body instead of 11** and the GM
+  corrected it manually. **That is exactly Sasha's case**, and it is now impossible to
+  create wrong.
+- ⚙️ **New shared helpers in `constants.js`** (per the standing rule — import, never
+  re-derive): `SIZES` · `SIZE_BASE_HP` (the §7.1 table) · **`bodyPartsForSize(size)`** which
+  builds the six parts, and **`identity.size`** on `DEFAULT_STATE`, a field nothing carried
+  before. `state` is a Mixed blob so **no migration is needed.**
+- ⚙️ `CharacterSheet` sets `needsCreation` on the 404 (and clears it on logout, or the next
+  login reuses a stale answer). The created state is posted **synchronously**, not through
+  `update()`'s 1500ms debounce — the overlay closes immediately after, and a pending timer
+  would be the only thing holding it.
+- ✅ **19 new dependency-free tests** (`client/src/constants.test.mjs`, run with
+  `node --experimental-detect-module`): all four size totals (11/17/25/38), the head-never-
+  below-2 floor, **`DEFAULT_STATE.bodyParts` pinned to equal the Medium frame so the two
+  cannot drift**, the two lethal parts, and ⭐ **that 4 base + 10 allocated = 14, the same
+  `CREATION_POINTS` `floor-bands.js` assumes.** Client build verified.
+- ⚠️ **Honest limit: the HTTP round-trip is NOT verified.** There is no mongod in this
+  container and the agent proxy blocks `fastdl.mongodb.org`, so `mongodb-memory-server`
+  cannot fetch a binary. The rules logic and the build are tested; **register → creation →
+  save wants one manual pass against Atlas.**
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
