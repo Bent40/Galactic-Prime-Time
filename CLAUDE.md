@@ -574,7 +574,11 @@ Skills are granted to players by templateId. The player sheet joins template dat
   who kills her a correct-sounding and completely wrong explanation. ⭐ **The irony is load-bearing:**
   the wrath clan embodies karma, and the servant Vermilia built so she never has to be seen
   sincerely believes she is made of judgment.
-- 🔴 Three open calls remain in `set1-story-canon.md`.
+- ✅ **NOTHING IS OPEN in `set1-story-canon.md`** (swept 2026-09-18). The three that were
+  still marked 🔴 had all been ruled — the Double's knowledge (2026-08-25), her clan
+  (2026-09-01) and the rival-resolution tier (2026-08-25). ⚠️ **Stale markers are this
+  repo's recurring failure** (the 2026-09-14 naming pass found the same thing):
+  **a ruling is not recorded until the question it answers is struck.**
 - 🔒 **F1 HARD — THE ENCOUNTER SHAPE, CORRECTED 2026-08-25.** ⚠️ The giant stairs are **the
   ENTRANCE only** and carry no part of the quest; the earlier *"carry a crystallized citizen up
   the stairs"* reading is **withdrawn**. The Loong **nests in the CITY HALL** and looms over the

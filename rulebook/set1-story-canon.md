@@ -521,8 +521,8 @@ stand.
 
 | # | Question |
 |---|---|
-| **1** | **Does the double know?** She wears a face that never ages — she must know *something.* That makes her either the most dangerous person in the capital or the loneliest, and the high court explicitly *do not* know |
-| **2** | **What clan is she?** The clan law says each clan embodies a thing. Faces? Names? Succession itself? A clan that embodies *inheritance* would be brutal here |
+| ~~1~~ | 🔒 **RULED 2026-08-25 — she does NOT know.** She is not a demon; she believes she is one, specifically **Vermilia's elder sister**, carrying a burden that belongs to her younger sibling. The truth *can* be written in at creation and deliberately is not — **an asset that cannot be broken cannot betray the secret** — and she is remade at every crowning. ⭐ She defeats a truth-sense **without lying**: the Doorward's trap restated |
+| ~~2~~ | 🔒 **RULED 2026-09-01 — she claims DIVINE WRATH, Vermilia's own clan**, and believes it. Plausible because the queen *is* wrath clan and **nobody can check** — a population of one has no register. 🔴 And the lie is **functionally true**: clan law says a demon dies only when its clan dies, and killing her *does* bring her back, because Vermilia rebuilds her. **Her murder corroborates the ruse instead of exposing it** |
 | ~~3~~ | 🔒 **RULED — no Double in the killed branch.** The throne is human, but **the city knows demons rule from behind it**, because the demons are visibly doing whatever they want. ⭐ **Nothing is being hidden, so there is nothing to double.** Concealment is Vermilia's method and hers alone. See **the lightning rod** below for what the human crown is actually *for* |
 
 ### ⚡ The human crown is a LIGHTNING ROD ✅ RULED 2026-08-25 *(killed branch)*
@@ -854,7 +854,14 @@ need by failing to recognise it.
 | **S-c** | Bex's fate on the spared branch | ✅ **He was never in it for himself alone.** He does what is necessary **for demonkind**; the means are ugly and he knows it. A working cure is a win he will take from anyone's hand |
 | **S-d** | Is the tongue required for the revival? | ✅ **Required.** Find it → interaction unlocks → then settle (v1 catalyst / v2 debt). See S-6 |
 
-## S-9 — 🔴 Still open
+## S-9 — ✅ NOTHING IS OPEN (swept 2026-09-18)
+
+Every story call in this document is ruled. The sweep re-checked all of them against the
+rulings and struck three that were closed but still carrying 🔴 — the Double's knowledge and
+her clan (S-7's table) and the rival-resolution tier. ⚠️ **Stale markers are the recurring
+failure in this repo** — the 2026-09-14 naming pass found the same thing (*Foreman Bex* carried
+`NAME IS A PROPOSAL` for three weeks after being blessed). **A ruling is not recorded until the
+question it answers is struck.**
 
 | # | Question |
 |---|---|

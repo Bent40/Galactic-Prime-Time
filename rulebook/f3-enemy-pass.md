@@ -60,9 +60,15 @@ help the queen revive her god.**
 - A revived god gives the demons a patron and direction again, so **the rogue demons
   stop being rogue**.
 
-🔴 **This requires knowledge from all three routes**, and §4.1 says a party runs *one*
-route per campaign. Whether the capital is where the routes converge — or whether the
-optimal ending is deliberately out of any single party's reach — is an open call.
+✅ **CLOSED 2026-08-25 — RULED: FLOOR 3 IS THE CONVERGENCE.** Everything happens at
+once, and it is not a fourth route: Nullrot in the street, the Loong hiding, Bex in the
+alleys, the crown digging — same city, same days. **The path of least casualties is
+achievable in one campaign.** That dissolves the "facts only flow through the Easy
+column" problem down to Floors 1–2, where S-7's trade track still governs.
+
+*Original question, for the record —* this requires knowledge from all three routes, and
+§4.1 says a party runs *one* route per campaign; whether the capital is where the routes
+converge, or the optimal ending is deliberately out of any single party's reach, was open.
 
 ### The quarantine is a place, not an obstacle
 

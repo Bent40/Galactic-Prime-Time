@@ -188,11 +188,17 @@ died; a masked murderer in the slums.
 
 Rivals don't just trade information; they can race the party to decision points.
 
-- 🔴 **OPEN — must be ruled:** can rivals resolve *campaign-defining* branch points
-  (the queen, the Doorward) offscreen? Two defensible games: (a) rivals may **threaten**
-  such branch points but resolution stays within player reach, or (b) offscreen
-  resolutions are allowed but must always be **discoverable and answerable**. Undecided,
-  the design will drift between them.
+- ✅ **CLOSED 2026-08-25 — RULED (a), as TWO TIERS.** 🔴 **Reserved** (the F1 Girl, the
+  F2 Doorward, the Loong's capture): rivals may threaten, delay, complicate and charge a
+  price, **never resolve offscreen.** 🟢 Everything else is fair game, **announced first
+  via the rumor network** — don't act and it is yours. ⭐ And the reserved tier enforces
+  itself *in fiction*: **the Corporation protects the branch points FOR RATINGS** — a
+  rival about to settle the Girl gets cut away from, delayed, counter-programmed. The
+  network earns its keep by protecting the drama rather than opposing the party.
+
+  *Original question, for the record —* can rivals resolve campaign-defining branch points
+  offscreen? (a) threaten only, resolution stays in player reach · (b) allowed but always
+  discoverable and answerable.
 
 ## B.3 🔒 The Doorward speaks — [owner]
 
@@ -220,10 +226,16 @@ own you chose wrong. And it is by no fault of your own that your downfall happen
 - ⚙️ This is **apology without confession** — he expresses condolence and never explains
   necessity, which satisfies the §A.4 guard natively. A demon who volunteers his reasons
   is asking for absolution; this one only offers condolences.
-- 🔴 **OPEN — decide deliberately:** a genteel, unfailingly polite southern-accented man
-  who owns a farm of human beings summons a specific historical image. Players will hear
-  it either way. As deliberate resonance (perfect civility wrapped around ownership) it is
-  potent and fits him; as an accident it will read as one.
+- ✅ **DECIDED — deliberate, with a handling rule.** Bex's register is **tragedy disguised
+  politely**: southern-sounding, courteous, immovable — **apology without confession.** The
+  resonance is taken on purpose (perfect civility wrapped around ownership) rather than
+  stumbled into. ⚠️ **The handling rule: never pair the word "farm" with the accent in
+  player-facing text.** The register carries it; naming it makes the table hear a
+  different story than the one being told.
+
+  *Original question, for the record —* a genteel, unfailingly polite southern-accented man
+  who owns a farm of human beings summons a specific historical image, and players will hear
+  it either way; as deliberate resonance it is potent, as an accident it will read as one.
 
 ## B.5 🔒 The clan law — [owner]
 

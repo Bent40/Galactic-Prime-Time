@@ -219,11 +219,19 @@ against an F1 mob and **16%** against an F9 one. So either armor keeps climbing
 with the party, or mobs quietly stop being a horde and start being a threat again
 around the middle of the campaign.
 
-🔴 **OPEN — does armor resistance ride the material band?** §12.7 gives a weapon
-**+1 Force per band step**; nothing says what a band step does for armor.
-**Recommended: +1 resistance per band step**, the symmetric reading — it keeps
-§21.2's "mobs are one-shot hordes" true at Floor 9 and it costs one sentence.
-Without it, resist stays tier-capped near 3–4 forever while mob damage runs to 19.
+✅ **CLOSED 2026-09-14 — RULED: armor rides the band, +1 resistance per band step.**
+The recommendation below was taken verbatim and written into **§12.7** (with the
+reasoning) and **§12.6** (the operative sentence, where a GM looks): a worn piece's
+resistance = its tier value + one per band step of its material. A Quality vest of F3
+material resists **5**, not 2. ✅ Verified across the ladder — a party keeping armor
+current takes **1→8** from a mob F1→F9 and two elites stay at **62%→58%**, flat, no
+inversion. ⚠️ And it makes the other problem permanent, which §12.7 now owns: a
+current-armour party is **immune to ordinary mob damage on every floor**, so a mob's
+threat cannot be its damage (→ §21.8 The Press).
+
+*Original question, for the record —* **does armor resistance ride the material band?**
+§12.7 gives a weapon **+1 Force per band step**; nothing said what a band step did for
+armor. Without it, resist stays tier-capped near 3–4 forever while mob damage runs to 19.
 
 ⭐ **And what reaches an armoured party is CONDITIONS.** §8.1's Chill, Poison,
 Infection and Dissolution carry a **tier and no Force**, so flat resistance never
