@@ -1776,76 +1776,98 @@ wholesale and has no UI for a blank.
   so the emptied panel renders without a guard. Button lives in the player header.
   Client build verified.
 
-## 🦠 INFECTION CULTIVATION (PROPOSAL, 2026-09-18 — `rulebook/infection-cultivation.md`)
+## 🔒 AFFIX SLOTS ARE TIER-BLIND (ruled 2026-09-18 — rulebook v1.10)
 
-Owner's architecture: *"infections can be cultivated with other found infections to add or
-change their effects. The current effects of infection would be the basics… the type of
-infection add damage or effects, like poison, and strains give them modifiers. So prion
-would be damaging, fungus would be psychic, virus would be resilient."* **Nothing ruled.**
+*"Items with affix slots can carry any affix of the slot type, regardless of the tier of
+item. A basic item can have a Godly prefix."* **§12.3's "modifier tiers accessible" column
+is WITHDRAWN.** Item tier now buys **how MANY** modifiers an object holds and **never which
+ones** — Crude 0/0 · Basic 1/0 · Quality 1/1 · Superior 2/1 · Exceptional 2/2, and that is
+the entire table.
 
-- ⭐⭐ **THE CULTIVATION RULES ARE ALREADY WRITTEN, ON THE WRONG NOUN.** §20.3's **Melding
-  Station (10 UT)** reads *"Merge 2 same-type items → 1: better base + ONE modifier from the
-  sacrifice"* · L2 *"keep two"* · L3 *"once per floor the meld bumps the result one item
-  tier."* **That is the owner's system verbatim, ceiling included.** And the **Farm (10 UT)**
-  is already the biology module (*"ingredient supply… antitoxin crafting stock"*).
-  **Farm holds the cultures, Melding merges them, the Altar extracts.** No new module,
-  no new rules page — `base + type + strain` is **§12.3's `base + prefix + suffix`**.
-- 🔴 **THE DISCOVERY THAT SHAPED THE TYPES: NOTHING IN §8.2 DEALS RECURRING DAMAGE.** Every
-  tier of every condition is a **state** — a disability, a destroyed part, a death timer;
-  Burn's "HP damage" is on application. ⚠️ **So "prion = damaging" must not become the book's
-  first DoT** — a flat per-Clock number walks into §12.7's 4d trap (3/Clock is half an F1
-  torso and nothing at F9). ⭐ **The system's own way of saying "damaging" is TIER ESCALATION
-  toward a destroyed part**, which is floor-invariant by construction — and Infection already
-  has that verb at T2.
-- **FIVE TYPES, FIVE VERBS, ZERO NEW NUMBERS:** 🦠 **Prion — it DESTROYS** (applies **Crushed**
-  to the part it sits on and advances *that*, instead of advancing other conditions) ·
-  🍄 **Fungus — it TAKES OVER** (a **Dissolution source at +1/Moment** at T2+; the 2026-08-18
-  errata's source-rate knob was built for exactly this) · 🧬 **Virus — it PERSISTS** (attacks
-  the **cure list**: Burn T2 drops it a tier instead of clearing it, time never cures it) ·
-  🧫 **Bacterium ⚖ — it SPREADS** (contact passes T1; the reason a quarantine is a *place*) ·
-  🪱 **Parasite ⚖ — it FEEDS** (eats a tier of another condition to advance itself — the one
-  infection that helps, right up until T3).
-- 🔒 **THE LOAD-BEARING CALL: a type REPLACES the base's T2, it does not stack.** The owner's
-  own wording was *"add or **change**"*, and change is the half that survives the balance —
-  **Infection is already the strongest condition per tier** (§8.1: *"a condition that carries
-  no Force is not weak; Infection advances everything else"*), so stacking makes it the only
-  condition that matters. ⭐ **Replacing makes the type a CHOICE OF THREAT, not an addition**
-  — you steer the disease rather than power it up, and you can steer it wrong. T1 and T3 are
-  untouched in every type, so §8.2's calibration stands.
-- **STRAINS ⚖** (one slot, Lesser-sized): *Dormant* · *Aggressive* (faster, but gains a cure) ·
-  *Blood-borne / Airborne / Chill-borne* (the vector — §8.2's Poison entry already does this) ·
-  *Symbiotic* (a small gift at T1 only) · **`Hardy`** ⭐ the important one, because §10 makes
-  Infection resistance **binary immunity** and Hardy is the only lever that threatens a party
-  who has been awarded it.
-- ⚠️ **The vessel is the only variable, and both already exist:** your own body (horror) or
-  **C-1 Leak-Vial / Seepage**, the Easy-route spine kit already authored to hold a disease
-  (a §21.6 Gear step). 🔴 **Widest-blast-radius open call: can a cultivated vial be THROWN?**
-  That makes Infection an offensive tool and §8.1's *"no Force by default"* has to be re-read
-  against a party who can inflict tiers at will.
-- 🔴 **Five open calls** (I-5), and #5 blocks the rest — see the tier ladder below.
+- ⭐ **It dissolved the 5-against-6 ladder instead of patching it.** The old column mapped
+  five item tiers onto six modifier tiers, so **Mythic and Godly reached no item at all**
+  while §19.1 was paying Mythic and Godly boxes. With access gone they were never orphaned
+  — **access was simply the wrong gate.**
+- ⭐ **Access is a CRAFTING limit, never an ITEM limit.** What a Goldsmith makes, what a
+  Creation Kit assembles, what the Wizard's Tower crafts — those stand exactly as written.
+  Nothing limits what an object can *hold*. The Creation Kit line now says so out loud.
+- ⭐⭐ **The real gate was always EXTRACTION, and it was already written:** Higher+ drops the
+  weapon a tier, **Legendary+ destroys it.** So a Godly prefix goes onto a Basic knife
+  happily and **never comes off again**. *You may put anything anywhere; getting it back out
+  is the cost.*
+- ✅ **No app change needed — the app was already tier-blind.** `ITEM_TIERS` and
+  `AFFIX_TIERS` are independent dropdowns and nothing ever cross-checked them
+  (`InventoryTab`, `AffixLibrarySection`, `models/Affix.js`). **The ruling makes the book
+  agree with the app**, not the other way round.
 
-## 🔴 THE TIER LADDER IS 5 AGAINST 6 (owner flagged 2026-09-18, unruled)
+## 🦠 INFECTION CULTIVATION (owner rulings 2026-09-18 — `rulebook/infection-cultivation.md`)
 
-Owner: *"some of the things we have that should probably be basic, have a 6th level."*
-**Found it, and it is a rules-table gap, not a data bug.** §12.3's access table maps **five**
-item tiers onto **six** modifier tiers:
+Owner's architecture: base + type + traits, cultivated by melding found diseases.
+**Six rulings, all folded in.** Mechanisms marked ⚖ are mine and still open.
 
-| Item tier | Modifier access |
-|---|---|
-| Crude · **Basic** · Quality · Superior · Exceptional | — · Lesser · Normal · Higher · **Legendary** |
-| *(nothing)* | **Mythic · Godly** — orphaned |
-
-`ITEM_TIERS` = **5**, `AFFIX_TIERS` and `BOX_TIERS` = **6** (both …Legendary · Mythic · Godly).
-§19.1 pays **Mythic** and **Godly** boxes and §19.3 says they are *"never for sale, only
-earned"* — **so the prizes exist and no item tier can legally carry their modifiers.**
-✅ The live library is clean (all 135 seeded templates sit on the five legal rungs: Basic 44 ·
-Quality 41 · Crude 23 · Superior 18 · Exceptional 9) and the `ItemTemplate` enum enforces it.
-🔴 **Three ways out, unruled:** Exceptional reaches Mythic and Godly too · a sixth item tier
-exists above Exceptional · ⭐ **Mythic and Godly are affix-only**, carried exclusively by
-authored named items outside the tier table — the cheapest, and it matches how the book
-already treats them (*"never random, one-of-a-kind, authored"*).
-⚠️ **This blocks the infection type/strain access table**, which needs to know how many rungs
-the ladder has before it can be written.
+- ⭐⭐ **CULTIVATION IS ALREADY WRITTEN, ON THE WRONG NOUN.** §20.3's **Melding Station
+  (10 UT)**: *"Merge 2 same-type items → 1: better base + ONE modifier from the sacrifice"*
+  · L2 *"keep two"* · L3 *"once per floor bumps a tier."* **That is the meld verbatim,
+  ceiling included** — and 🔒 **cultivation is 100% downtime, no field cultivation**, which
+  falls out for free because Melding is a Lounge module. The **Farm (10 UT)** is already the
+  biology module (*"ingredient supply… antitoxin crafting stock"*) and holds the cultures.
+  **No new module, no new rules page.**
+- 🔴 **NOTHING IN §8.2 DEALS RECURRING DAMAGE** — every tier of every condition is a
+  **state**, never a tick; Burn's "HP damage" is on application. ⚠️ So *"prion = damaging"*
+  must not become the book's first DoT: a flat per-Clock number is §12.7's 4d trap again
+  (3/Clock is half an F1 torso and nothing at F9). ⭐ **The system's own way of saying
+  "damaging" is TIER ESCALATION toward a destroyed part**, which is floor-invariant.
+- 🔒 **EVERY TYPE'S T2 IS A VERB ON YOUR OTHER CONDITIONS** (owner), *"and one of the types
+  advances everything, which makes it one build option."* **T1 and T3 never change**, so
+  §8.2's calibration stands and only T2 is typed. Six types, six verbs, **zero new numbers**:
+  🦠 **Opportunistic — COMPOUNDS** (the old base T2, now a choice; ⭐ medically exact, an
+  opportunistic pathogen only hurts you because you are already compromised, **so the build
+  wants you covered in conditions**) · 🧬 **Prion — DESTROYS** (applies **Crushed** to its
+  part and advances *that*) · 🍄 **Fungus — TAKES OVER** (a **Dissolution source at
+  +1/Moment**; the 2026-08-18 errata's *escalation rides the source* knob was built for
+  this) · 🧫 **Virus — PERSISTS** (extends T1: no other condition may be cured by its
+  ordinary cure; on itself, Burn T2 drops it a tier instead of clearing, and time never
+  cures it) · 🦟 **Bacterium — CARRIES** (contact passes itself *and every other condition
+  you have* at T1) · 🪱 **Parasite — FEEDS** (eats a tier of another condition to advance
+  itself — the one that helps, until T3).
+- 🔒 **DISEASES MUST BE RESEARCHED (owner)** — explicit traits, commoner and rarer, found
+  and melded. **The loop is FIND → RESEARCH → CULTIVATE → DEPLOY.** ⭐ **An unresearched
+  disease is UNKNOWN** — you know you are Infected, not what it is — which is the
+  **`PUBLIC READS ONLY`** convention the codebase already runs on (`items-batch-c.js` C-4,
+  no `specialEffects` field at all). **Third noun, same convention.** ⚙️ Trait rarities
+  reuse the modifier words, **which the tier-blind ruling above made free to reuse.**
+  ⚖ Eleven drafted (Dormant · Blood-borne · Slow · **Airborne** · Aggressive · Symbiotic ·
+  Hardy · **Selective** · Latent · Chimeric), Godly deliberately empty.
+- 🔒 **A CULTIVATED VIAL CAN BE THROWN (owner)** — an **Airborne** disease fogging a live
+  room is viable, and §7.3's *area does not divide* means a nine-space fog infects nine at
+  full tier. ⭐⭐ **And it breaks nothing, for a reason already written: §8.1 gives Infection
+  NO Force**, so a disease grenade deals **zero damage** — it only sets up. That is exactly
+  the 2026-09-14 playtest hole from the *player's* side (*"the mobs that still matter to an
+  armoured party are the ones that deal no damage at all"*) — **the party's version of the
+  Spore-Drunk's puff.** ⭐ **The boss check passes unplanned:** §21.3 gave Nullrot
+  **Infection 8**, the Dragon **8**, the Doorward **6**, THE MASKED **3** — *every boss
+  whose story is the plague already shrugs it off*, written before the weapon existed.
+  ⚠️ The real cost is friendly fire; **`Selective` is the trait that answers it**, and it is
+  why traits had to exist at all — **the research loop is what makes the weapon usable.**
+- 🔒 **INFECTION RESISTANCE COMES FROM THE SAME SOURCE AS POISON — the body's own fight
+  mechanics, probably PHYSIQUE (owner):** *"We need to think of a better way to allow that."*
+  🔴 **The hole is visible in §3.2's own table: Reflexes buys Physical, Mind buys Psychic,
+  and NOTHING buys Affliction** (Chill · Poison · Infection) — §10 says outright it *"has no
+  automatic source: it is GM-awarded."* ⭐ **Physique is the trait with no resistance row and
+  Affliction is the group with no trait; they are each other's missing half.**
+  ⚠️ **But the current rule cannot simply hang on Physique** — §10 makes tiered resistance
+  **immunity**, immunity has 3–4 rungs, and Physique reaches **110 by F9** (L-19).
+  **A binary ladder cannot ride an infinite stat.** ⭐ **The fix is already in the book, on
+  the other half of the problem:** §10 converted *Mind's* psychic resistance from immunity to
+  **+1 Clock of grace** — *"it buys time, never immunity."* ⚖ **Proposed: Physique every 12
+  past 10 → +1 affliction resistance, each point delaying the next advancement of any Chill,
+  Poison or Infection by one Clock.** ⭐ **Immunity is a vaccine; delay is an immune system.**
+  ⚙️ Checked on L-19's curve: F1 **0** (correct — the crystal should be terrifying there) ·
+  F5 **3** · F9 **8**, and the floor answers with `Aggressive`/`Hardy`/a faster source.
+  ⚠️ **Drift noticed while §3.2 was open, flagged not touched:** its Physique row still reads
+  *"+1 max HP to every body part"*, but **L-18 ruled part HP scales off TOTAL trait points.**
+- 🔴 **Five open (I-7):** the resistance mechanism · the trait catalog · research costs ·
+  the extraction ladder · whether a type changes what resistance answers (⚖ recommend no).
 
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

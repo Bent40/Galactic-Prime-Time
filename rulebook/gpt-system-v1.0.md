@@ -1,6 +1,10 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.9** · 2026-09-15 — **what size buys is passage**, and the compensation
+**Version 1.10** · 2026-09-18 — **a slot takes any modifier of its kind, at any
+tier** (§12.3): item tier buys how MANY modifiers an object holds, never which
+ones, and the old access column is withdrawn. *A Basic knife may carry a Godly
+prefix; getting it back out is what costs.*
+*Previously —* **1.9** · 2026-09-15, **what size buys is passage**, and the compensation
 lives in the race, not the size: **Animals are the specialised race** (§7.1).
 *Previously —* **1.8** · 2026-09-15, a weakness may **HEAL** instead of doubling (§7.3),
 and the **per-size base part tables** (§7.1).
@@ -891,19 +895,39 @@ Requirements must be met or the Forced Action applies (§6). Base classes
 
 ### 12.3 Weapon tiers & modifiers
 
-**Tier = modifier slots + access:**
+**Tier = modifier SLOTS. That is all it is.**
 
-| Tier | Prefix / Suffix slots | Modifier tiers accessible |
-|---|---|---|
-| Crude | 0 / 0 | — |
-| Basic | 1 / 0 | Lesser only |
-| Quality | 1 / 1 | up to Normal |
-| Superior | 2 / 1 | up to Higher |
-| Exceptional | 2 / 2 | up to Legendary |
+| Tier | Prefix / Suffix slots |
+|---|---|
+| Crude | 0 / 0 |
+| Basic | 1 / 0 |
+| Quality | 1 / 1 |
+| Superior | 2 / 1 |
+| Exceptional | 2 / 2 |
 
-Progression = **access**, not just slots. Modifier tiers: Lesser, Normal, Higher,
-Legendary, Mythic, Godly. **Lesser and Normal are designed — the live app
-modifier catalog is the source of truth**; the working list below is historical.
+> 🔒 **A SLOT TAKES ANY MODIFIER OF ITS KIND, AT ANY TIER** (ruled 2026-09-18).
+> *"Items with affix slots can carry any affix of the slot type, regardless of the
+> tier of item. A basic item can have a Godly prefix."* **The old "modifier tiers
+> accessible" column is WITHDRAWN** — an item's tier buys how MANY modifiers it
+> holds and never which ones.
+>
+> ⚠️ **What the old column was doing wrong:** it mapped five item tiers onto six
+> modifier tiers, so **Mythic and Godly reached no item at all** while §19.1 was
+> paying Mythic and Godly boxes. The ladder was one rung short at the top and the
+> shortfall had nowhere to go.
+>
+> ⭐ **Access is a CRAFTING limit, never an ITEM limit.** What a Goldsmith can make,
+> what a Creation Kit assembles, what the Wizard's Tower crafts — those are limits
+> on the *station*, and they stand exactly as written. Nothing limits what an object
+> can *hold*.
+>
+> ⭐ **And the real gate was always extraction, below**: a Godly prefix goes onto a
+> Basic knife happily, and it never comes off again — Legendary+ extraction destroys
+> the item. **You may put anything anywhere. Getting it back out is the cost.**
+
+Modifier tiers: Lesser, Normal, Higher, Legendary, Mythic, Godly. **Lesser and
+Normal are designed — the live app modifier catalog is the source of truth**; the
+working list below is historical.
 
 **Tiers apply to ALL items** — weapons, armor, tools, consumables alike. Naming
 follows the tier: plain functional names through Basic, solid-but-generic at
@@ -922,8 +946,8 @@ destroy the modifier (odds improved by Lounge upgrades/skills). Higher+ —
 extraction drops the weapon one tier. Legendary+ — extraction destroys the weapon.
 
 **Pre-affixed drops**: dropped and looted gear of Quality
-and above arrives **pre-affixed about 1-in-3**, always within the tier's
-access rules. The Altar *moves* modifiers — it was never their only source.
+and above arrives **pre-affixed about 1-in-3**, within the tier's **slots** (the
+access column is gone — a drop may carry anything its slots hold). The Altar *moves* modifiers — it was never their only source.
 
 **Reaching Exceptional — polish, not drops.** Exceptional gear is never found;
 it is reached. **Polish Kits** are a downtime Forge action, one d6 per kit:
@@ -934,8 +958,10 @@ sold. A fail consumes the kit, never the item; polishing an item up a tier
 includes re-naming it. Authored **growth items** are the other road up.
 
 **Creation Kits** let a player assemble a weapon of the kit's tier: any base of
-choice + modifier(s) of choice within the tier's slots and access (Basic kit =
-base + 1 Lesser; Quality kit = base + prefix + suffix ≤Normal). No Exceptional
+choice + modifier(s) of choice within the tier's slots, and within **what the kit
+itself can make** (Basic kit = base + 1 Lesser; Quality kit = base + prefix +
+suffix ≤Normal). ⭐ **That ceiling is the KIT's, not the item's** — the finished
+Basic weapon may later be given a Godly prefix by any other means. No Exceptional
 kit exists — the top of the ladder is polish-only.
 
 ### 12.4 Equipment slots
