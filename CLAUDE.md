@@ -1776,6 +1776,77 @@ wholesale and has no UI for a blank.
   so the emptied panel renders without a guard. Button lives in the player header.
   Client build verified.
 
+## 🦠 INFECTION CULTIVATION (PROPOSAL, 2026-09-18 — `rulebook/infection-cultivation.md`)
+
+Owner's architecture: *"infections can be cultivated with other found infections to add or
+change their effects. The current effects of infection would be the basics… the type of
+infection add damage or effects, like poison, and strains give them modifiers. So prion
+would be damaging, fungus would be psychic, virus would be resilient."* **Nothing ruled.**
+
+- ⭐⭐ **THE CULTIVATION RULES ARE ALREADY WRITTEN, ON THE WRONG NOUN.** §20.3's **Melding
+  Station (10 UT)** reads *"Merge 2 same-type items → 1: better base + ONE modifier from the
+  sacrifice"* · L2 *"keep two"* · L3 *"once per floor the meld bumps the result one item
+  tier."* **That is the owner's system verbatim, ceiling included.** And the **Farm (10 UT)**
+  is already the biology module (*"ingredient supply… antitoxin crafting stock"*).
+  **Farm holds the cultures, Melding merges them, the Altar extracts.** No new module,
+  no new rules page — `base + type + strain` is **§12.3's `base + prefix + suffix`**.
+- 🔴 **THE DISCOVERY THAT SHAPED THE TYPES: NOTHING IN §8.2 DEALS RECURRING DAMAGE.** Every
+  tier of every condition is a **state** — a disability, a destroyed part, a death timer;
+  Burn's "HP damage" is on application. ⚠️ **So "prion = damaging" must not become the book's
+  first DoT** — a flat per-Clock number walks into §12.7's 4d trap (3/Clock is half an F1
+  torso and nothing at F9). ⭐ **The system's own way of saying "damaging" is TIER ESCALATION
+  toward a destroyed part**, which is floor-invariant by construction — and Infection already
+  has that verb at T2.
+- **FIVE TYPES, FIVE VERBS, ZERO NEW NUMBERS:** 🦠 **Prion — it DESTROYS** (applies **Crushed**
+  to the part it sits on and advances *that*, instead of advancing other conditions) ·
+  🍄 **Fungus — it TAKES OVER** (a **Dissolution source at +1/Moment** at T2+; the 2026-08-18
+  errata's source-rate knob was built for exactly this) · 🧬 **Virus — it PERSISTS** (attacks
+  the **cure list**: Burn T2 drops it a tier instead of clearing it, time never cures it) ·
+  🧫 **Bacterium ⚖ — it SPREADS** (contact passes T1; the reason a quarantine is a *place*) ·
+  🪱 **Parasite ⚖ — it FEEDS** (eats a tier of another condition to advance itself — the one
+  infection that helps, right up until T3).
+- 🔒 **THE LOAD-BEARING CALL: a type REPLACES the base's T2, it does not stack.** The owner's
+  own wording was *"add or **change**"*, and change is the half that survives the balance —
+  **Infection is already the strongest condition per tier** (§8.1: *"a condition that carries
+  no Force is not weak; Infection advances everything else"*), so stacking makes it the only
+  condition that matters. ⭐ **Replacing makes the type a CHOICE OF THREAT, not an addition**
+  — you steer the disease rather than power it up, and you can steer it wrong. T1 and T3 are
+  untouched in every type, so §8.2's calibration stands.
+- **STRAINS ⚖** (one slot, Lesser-sized): *Dormant* · *Aggressive* (faster, but gains a cure) ·
+  *Blood-borne / Airborne / Chill-borne* (the vector — §8.2's Poison entry already does this) ·
+  *Symbiotic* (a small gift at T1 only) · **`Hardy`** ⭐ the important one, because §10 makes
+  Infection resistance **binary immunity** and Hardy is the only lever that threatens a party
+  who has been awarded it.
+- ⚠️ **The vessel is the only variable, and both already exist:** your own body (horror) or
+  **C-1 Leak-Vial / Seepage**, the Easy-route spine kit already authored to hold a disease
+  (a §21.6 Gear step). 🔴 **Widest-blast-radius open call: can a cultivated vial be THROWN?**
+  That makes Infection an offensive tool and §8.1's *"no Force by default"* has to be re-read
+  against a party who can inflict tiers at will.
+- 🔴 **Five open calls** (I-5), and #5 blocks the rest — see the tier ladder below.
+
+## 🔴 THE TIER LADDER IS 5 AGAINST 6 (owner flagged 2026-09-18, unruled)
+
+Owner: *"some of the things we have that should probably be basic, have a 6th level."*
+**Found it, and it is a rules-table gap, not a data bug.** §12.3's access table maps **five**
+item tiers onto **six** modifier tiers:
+
+| Item tier | Modifier access |
+|---|---|
+| Crude · **Basic** · Quality · Superior · Exceptional | — · Lesser · Normal · Higher · **Legendary** |
+| *(nothing)* | **Mythic · Godly** — orphaned |
+
+`ITEM_TIERS` = **5**, `AFFIX_TIERS` and `BOX_TIERS` = **6** (both …Legendary · Mythic · Godly).
+§19.1 pays **Mythic** and **Godly** boxes and §19.3 says they are *"never for sale, only
+earned"* — **so the prizes exist and no item tier can legally carry their modifiers.**
+✅ The live library is clean (all 135 seeded templates sit on the five legal rungs: Basic 44 ·
+Quality 41 · Crude 23 · Superior 18 · Exceptional 9) and the `ItemTemplate` enum enforces it.
+🔴 **Three ways out, unruled:** Exceptional reaches Mythic and Godly too · a sixth item tier
+exists above Exceptional · ⭐ **Mythic and Godly are affix-only**, carried exclusively by
+authored named items outside the tier table — the cheapest, and it matches how the book
+already treats them (*"never random, one-of-a-kind, authored"*).
+⚠️ **This blocks the infection type/strain access table**, which needs to know how many rungs
+the ladder has before it can be written.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
