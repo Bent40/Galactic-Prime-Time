@@ -75,6 +75,26 @@ router.put('/players/:userId/state', async (req, res) => {
   }
 });
 
+// DELETE /api/admin/players/:userId/character — RESET a character.
+//
+// Deletes the Character document outright rather than writing a blank state.
+// That is deliberate: GET /api/character then 404s, which is exactly what the
+// client's creation flow triggers on — so a reset walks the player back through
+// identity, size and their ten bonus points instead of dumping them on an empty
+// sheet. The reset and the first-time flow are the same code path.
+//
+// The USER survives (login and password are untouched); only the sheet goes.
+// Irreversible — there is no snapshot. `node backup-db.js` first if it matters.
+router.delete('/players/:userId/character', async (req, res) => {
+  try {
+    const result = await Character.deleteOne({ userId: req.params.userId });
+    logger.warn(`CHARACTER RESET  userId=${req.params.userId}  deleted=${result.deletedCount}`);
+    res.json({ ok: true, deleted: result.deletedCount });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // PATCH /api/admin/players/bulk/followers — set followers for multiple players
 // NOTE: must come before /:userId routes to avoid param collision
 router.patch('/players/bulk/followers', async (req, res) => {

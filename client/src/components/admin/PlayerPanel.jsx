@@ -22,6 +22,7 @@ export default function PlayerPanel({ player, token, showToast }) {
   const [objectives, setObjectives] = useState(null); // local objectives state for editing
   const [objSaving, setObjSaving] = useState(false);
   const [newSubtaskText, setNewSubtaskText] = useState({}); // { [objId]: text } per-objective input buffer
+  const [resetting, setResetting] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -262,6 +263,37 @@ export default function PlayerPanel({ player, token, showToast }) {
     setInvSaving(false);
   }
 
+  // RESET — deletes the character document, so the player's next load 404s and
+  // the creation flow runs again (identity, size, bonus points). The login
+  // survives; only the sheet goes. Irreversible, hence the typed confirmation.
+  async function resetCharacter() {
+    const label = id.name || player.username;
+    if (!confirm(
+      `RESET ${label}'s character?\n\n` +
+      'The sheet is DELETED — traits, skills, items, tags, achievements, everything. ' +
+      'Their login is untouched, and they are walked through character creation again ' +
+      'the next time they open the app.\n\nThis cannot be undone.'
+    )) return;
+    if (prompt(`Type RESET to confirm deleting ${label}'s sheet:`) !== 'RESET') {
+      showToast('Reset cancelled');
+      return;
+    }
+    setResetting(true);
+    const d = await apiFetch(`/api/admin/players/${player.userId}/character`, { method: 'DELETE' }, token)
+      .catch(() => ({ error: 'Connection error.' }));
+    if (d?.ok) {
+      showToast(d.deleted ? 'Character reset — creation runs on their next load' : 'No character to reset');
+      setCharData({ state: {}, updatedAt: null });
+      // ⚠️ These are local EDITING BUFFERS loaded once from charData, and their
+      // save handlers PUT the whole state back with upsert:true. Left alone they
+      // would still hold the deleted sheet's inventory and objectives, and one
+      // later "Save" would silently re-create the character we just deleted.
+      setInvCats([]);
+      setObjectives({ main: [], directives: [], goals: [] });
+    } else showToast(d?.error || 'Reset failed', 'err');
+    setResetting(false);
+  }
+
   const filteredLib = skillLib.filter(s => s.name.toLowerCase().includes(libSearch.toLowerCase()));
 
   return (
@@ -281,6 +313,10 @@ export default function PlayerPanel({ player, token, showToast }) {
               {player.isAdmin && <span className="pp-tag admin-flag">Admin</span>}
             </div>
           </div>
+          <button className="btn btn-danger btn-xs" onClick={resetCharacter} disabled={resetting}
+                  title="Delete this character sheet. The login survives; they are walked through creation again on their next load.">
+            {resetting ? 'Resetting…' : '⟲ Reset character'}
+          </button>
         </div>
         <div className="stats-grid">
           {['physique', 'reflexes', 'mind', 'charm'].map(t => {

@@ -1705,6 +1705,28 @@ were.** Every one of those had to be fixed by hand.
   on every deploy, so a committed copy was only diff noise — and a chance to ship something
   stale.
 
+### ✅ RESET A CHARACTER — BUILT (owner asked 2026-09-18; there was no way to do it)
+The admin panel had **no reset and no delete** — 30 routes that edit a character, none that
+clears one. The closest thing was `PUT /players/:userId/state`, which overwrites the blob
+wholesale and has no UI for a blank.
+- ⭐⭐ **`DELETE /api/admin/players/:userId/character` DELETES THE DOCUMENT rather than
+  writing a blank state — and that is the whole design.** `GET /api/character` then 404s,
+  which is exactly what the creation flow triggers on, so **a reset walks the player back
+  through identity, size and their ten bonus points instead of dumping them on an empty
+  sheet. The reset and the first-time flow are the same code path**, and the second feature
+  cost almost nothing because the first one existed.
+- **The USER survives** — login and password untouched; only the sheet goes. **Irreversible**
+  (no snapshot), so the button confirms twice: a dialog naming what dies, then a typed
+  `RESET`. Logged as `CHARACTER RESET userId=…` at warn level.
+- 🔴 **A footgun caught while wiring it:** `invCats` and `objectives` are local editing
+  buffers loaded once from `charData`, and their save handlers `PUT` the whole state back
+  with `upsert: true`. Left alone after a delete they still held the **deleted sheet's**
+  inventory and objectives — **one later "Save" would have silently re-created the character
+  that was just reset.** Both are cleared in the reset handler.
+- ⚙️ `PlayerPanel`'s `state`/`id` derivations are already null-safe (`charData.state || {}`),
+  so the emptied panel renders without a guard. Button lives in the player header.
+  Client build verified.
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
