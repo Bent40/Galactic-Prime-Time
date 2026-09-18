@@ -5,7 +5,19 @@ const { combine, colorize, timestamp, printf, errors, json } = winston.format;
 
 // ── Ensure logs/ directory exists ────────────────────────────────────────────
 const LOG_DIR = path.join(__dirname, 'logs');
-if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
+// File logging is for local dev. On Render the disk is ephemeral, so the files
+// are written only to be thrown away — and a read-only or full filesystem would
+// make winston throw during require() and take the whole boot with it. So:
+// opt out on Render (it sets RENDER=true), and never let the mkdir be fatal.
+let FILE_LOGS = !process.env.RENDER && process.env.LOG_TO_FILE !== 'false';
+if (FILE_LOGS) {
+  try {
+    if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
+  } catch (err) {
+    console.warn(`[logger] cannot write to ${LOG_DIR} (${err.message}) — console only`);
+    FILE_LOGS = false;
+  }
+}
 
 // ── Custom colour palette ────────────────────────────────────────────────────
 winston.addColors({
@@ -54,11 +66,14 @@ const errorFileFormat = combine(
 
 // ── Transports ────────────────────────────────────────────────────────────────
 const transports = [
-  // Console — coloured, http-level and above
+  // Console — coloured, http-level and above. On a deploy this is the ONLY
+  // transport, and it is the right one: Render captures stdout as the live log.
   new winston.transports.Console({
     format: consoleFormat,
   }),
+];
 
+if (FILE_LOGS) transports.push(
   // combined.log — all messages (http and above), plain text, rotates at 5 MB, keeps 5 files
   new winston.transports.File({
     filename:  path.join(LOG_DIR, 'combined.log'),
@@ -77,26 +92,29 @@ const transports = [
     maxFiles:  10,
     tailable:  true,
   }),
-];
+);
 
 // ── Logger instance ───────────────────────────────────────────────────────────
 const logger = winston.createLogger({
   levels: LEVELS,
   level:  process.env.LOG_LEVEL || 'http',
   transports,
-  // Catch unhandled exceptions / rejections into the error log
-  exceptionHandlers: [
-    new winston.transports.File({
-      filename: path.join(LOG_DIR, 'exceptions.log'),
-      format:   errorFileFormat,
-    }),
-  ],
-  rejectionHandlers: [
-    new winston.transports.File({
-      filename: path.join(LOG_DIR, 'exceptions.log'),
-      format:   errorFileFormat,
-    }),
-  ],
+  // Catch unhandled exceptions / rejections into the error log (local only —
+  // on a deploy they go to stdout with everything else).
+  ...(FILE_LOGS ? {
+    exceptionHandlers: [
+      new winston.transports.File({
+        filename: path.join(LOG_DIR, 'exceptions.log'),
+        format:   errorFileFormat,
+      }),
+    ],
+    rejectionHandlers: [
+      new winston.transports.File({
+        filename: path.join(LOG_DIR, 'exceptions.log'),
+        format:   errorFileFormat,
+      }),
+    ],
+  } : {}),
 });
 
 module.exports = logger;
