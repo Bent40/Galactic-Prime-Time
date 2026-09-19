@@ -9,6 +9,7 @@ import { SIZES, SIZE_BASE_HP, bodyPartsForSize, DEFAULT_STATE, BODY_TRAITS, CORE
   startingSkillPool, startingSkillPools, rebasePartsForSize,
   traitTotal, capBonus, totalTraitPoints, partHpBonus, pointsToNextHp,
   effectiveMaxHp, CREATION_POINTS, HP_PER_POINT,
+  itemDmgLabel, materialBand, strikingMaterial, MATERIAL_BANDS,
 } from './constants.js';
 
 let pass = 0, fail = 0;
@@ -235,6 +236,47 @@ eq('whitespace is not a name', startingSkillPool({ name: 'Y', exclusiveTo: '   '
   eq('the picker sees one general and one animal out of five', 
      [pools.general.length, pools.animal.length], [1, 1]);
 }
+
+
+// ── §7.3 — the damage number is FORCE, and §12.7's bands are Force steps ─────
+console.log('\n§7.3 — item damage reads in Force');
+eq('a bare number gets the unit', itemDmgLabel({ damage: '2', damageType: ['Bleed'] }), '2 Force Bleed');
+eq('...and so does a numeric-typed one', itemDmgLabel({ damage: 6 }), '6 Force');
+eq('free text is left exactly alone — it is not a Force number',
+   itemDmgLabel({ damage: '2 per hit' }), '2 per hit');
+eq('armor still reads as resistance', itemDmgLabel({ resistance: '3 Crush' }), '🛡 3 Crush');
+eq('an item with neither reads as nothing', itemDmgLabel({ name: 'Rope' }), '');
+eq('no item at all is safe', itemDmgLabel(null), '');
+
+console.log('\n§12.7 / L-23 — a band step is +1 Force');
+eq('baseline stock is +0', materialBand('Iron'), 0);
+eq('F1 forest is +1', materialBand('Beastbone'), 1);
+eq('F2 desert is +2', materialBand('Sky-Iron'), 2);
+eq('F3 capital is +3', materialBand('Cursed Gold'), 3);
+eq('the lookup ignores case and padding', materialBand('  jade  '), 3);
+ok('⚠️ an unwritten material is NULL, never 0 — a Set 2/3 material nobody has named '
+   + 'yet must not quietly read as baseline', materialBand('Unobtainium') === null);
+eq('and neither an empty name nor no name throws',
+   [materialBand(''), materialBand()], [null, null]);
+eq('every band in the table is named by its floor and its band step is its key',
+   Object.entries(MATERIAL_BANDS).every(([k, b]) => b.floor && b.name && b.materials.length
+     && b.materials.every(m => materialBand(m) === Number(k))), true);
+eq('no material appears in two bands',
+   Object.values(MATERIAL_BANDS).flatMap(b => b.materials).length,
+   new Set(Object.values(MATERIAL_BANDS).flatMap(b => b.materials.map(m => m.toLowerCase()))).size);
+
+console.log('\n§12.7 — the STRIKING part is the one that sets it');
+eq('the striking part wins over the others',
+   strikingMaterial({ materials: [{ part: 'haft', material: 'Sky-Iron' },
+                                  { part: 'edge', material: 'Beastbone', striking: true }] }), 'Beastbone');
+eq('⭐ which is Kin-Carve exactly — a Sky-Iron haft on a Beastbone edge reads +1, not +2',
+   materialBand(strikingMaterial({ materials: [{ part: 'haft', material: 'Sky-Iron' },
+                                               { part: 'edge', material: 'Beastbone', striking: true }] })), 1);
+eq('no striking part means no material', strikingMaterial({ materials: [{ part: 'haft', material: 'Wood' }] }), '');
+eq('no bill at all is safe', [strikingMaterial({}), strikingMaterial(null)], ['', '']);
+ok('🔒 the band is NOT folded into the damage label — that is an open owner call, '
+   + 'and folding it would double-count the Force-written spine',
+   itemDmgLabel({ damage: '3', materials: [{ part: 'edge', material: 'Jade', striking: true }] }) === '3 Force');
 
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);

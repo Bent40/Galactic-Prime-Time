@@ -287,10 +287,62 @@ export function catIcon(name) {
   return CAT_ICONS[name] || CAT_ICONS.default;
 }
 
+/**
+ * §12.7 / L-23 — the MATERIAL BANDS, in FORCE STEPS. A band step is +1 Force; the
+ * 2026-08-18 x2-per-floor multiplier is withdrawn. M-0 and M-1 are ruled; M-2 and
+ * M-3 are named sketches in item-drafting-materials.md; M-4 upward have no names
+ * yet because those floors are undesigned.
+ *
+ * Reference data only. It is NOT added to an item's damage — see itemDmgLabel().
+ */
+export const MATERIAL_BANDS = {
+  0: { floor: '—',  name: 'Baseline', materials: ['Scrap', 'Wood', 'Leather', 'Iron'] },
+  1: { floor: 'F1', name: 'Forest',   materials: ['Oak Heartwood', 'Beastbone', 'Sinew Cord', 'Tough Hide', 'Resin', 'Mistletoe', 'Obsidian'] },
+  2: { floor: 'F2', name: 'Desert',   materials: ['Sky-Iron', 'Flint', 'Sunglass', 'Scorpion Chitin', 'Turquoise'] },
+  3: { floor: 'F3', name: 'Capital',  materials: ['Jade', 'Mirror-Bronze', 'Silver', 'Inscribed Clay', 'Orichalcum', 'Cursed Gold'] },
+};
+
+const MATERIAL_STEP = (() => {
+  const m = {};
+  for (const [step, band] of Object.entries(MATERIAL_BANDS))
+    for (const name of band.materials) m[name.toLowerCase()] = Number(step);
+  return m;
+})();
+
+/**
+ * The Force step a named material is worth, or null if the name is not in a
+ * written band. NULL IS NOT ZERO — an unknown material may be a Set 2/3 material
+ * nobody has named yet, and quietly calling it baseline would understate it.
+ */
+export function materialBand(name) {
+  const k = String(name || '').trim().toLowerCase();
+  return k in MATERIAL_STEP ? MATERIAL_STEP[k] : null;
+}
+
+/** The striking part of an item's §12.7 bill of materials — it sets the band. */
+export function strikingMaterial(item) {
+  const bill = item?.materials;
+  if (!Array.isArray(bill)) return '';
+  const hit = bill.find(m => m && m.striking) || null;
+  return hit ? String(hit.material || '') : '';
+}
+
+/**
+ * §7.3 — one Force is one basic punch, and an item's damage number is counted in
+ * it. Every seeded item's number is already its Force: batches a/b/c are written
+ * as the bare §12.1 weapon class and carry NO material bill, and a class with no
+ * band step IS the Force.
+ *
+ * ⚠️ The band is deliberately NOT added here. Whether `damage` stores the final
+ * Force (band baked in, as items-set1-spine.js writes it) or the raw class (band
+ * added at display) is an OPEN owner call; adding it would double-count the spine
+ * the day it is seeded. The band is surfaced beside the number, never inside it.
+ */
 export function itemDmgLabel(item) {
   if (!item) return '';
   if (item.damage) {
-    const parts = [item.damage];
+    const n = String(item.damage).trim();
+    const parts = [/^\d+$/.test(n) ? `${n} Force` : n];
     if (item.damageType && item.damageType.length) parts.push(item.damageType.join('/'));
     return parts.join(' ');
   }

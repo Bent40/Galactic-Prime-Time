@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { materialBand, MATERIAL_BANDS } from '../../constants.js';
 
 /**
  * Bill of materials (rulebook §12.7). Parts are material capacity; the STRIKING
@@ -11,6 +12,13 @@ import { useMemo } from 'react';
 export default function MaterialsEditor({ value, onChange, readOnly = false }) {
   const rows = Array.isArray(value) ? value : [];
   const striking = useMemo(() => rows.find(r => r.striking), [rows]);
+  // §12.7 — the striking part sets the band, and a band step is +1 Force (L-23).
+  // Shown BESIDE the number, never folded into it: whether `damage` already
+  // carries the step is an open owner call.
+  const step = striking ? materialBand(striking.material) : null;
+  const bandLabel = step === null
+    ? null
+    : `${MATERIAL_BANDS[step].floor} ${MATERIAL_BANDS[step].name} — band step +${step} Force`;
 
   function set(i, patch) {
     onChange(rows.map((r, j) => (j === i ? { ...r, ...patch } : r)));
@@ -26,9 +34,9 @@ export default function MaterialsEditor({ value, onChange, readOnly = false }) {
   }
 
   if (readOnly) {
-    if (!rows.length) return <span style={{ color: 'var(--muted)', fontSize: 11 }}>Baseline stock — no band.</span>;
+    if (!rows.length) return <span style={{ color: 'var(--muted)', fontSize: 11 }}>Baseline stock — band step +0.</span>;
     return (
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, alignItems: 'center' }}>
         {rows.map((r, i) => (
           <span key={i} title={r.striking ? 'Striking part — sets the band' : undefined}
             style={{
@@ -40,6 +48,7 @@ export default function MaterialsEditor({ value, onChange, readOnly = false }) {
             {r.striking && '★ '}{r.part}: <strong>{r.material}</strong>
           </span>
         ))}
+        {bandLabel && <span style={{ fontSize: 10, color: 'var(--cyan)' }}>{bandLabel}</span>}
       </div>
     );
   }
@@ -62,6 +71,14 @@ export default function MaterialsEditor({ value, onChange, readOnly = false }) {
       {rows.length > 0 && !striking && (
         <span style={{ color: 'var(--gold)', fontSize: 10, marginLeft: 8 }}>
           No striking part — the band is undefined.
+        </span>
+      )}
+      {striking && (
+        <span style={{ fontSize: 10, marginLeft: 8, color: step === null ? 'var(--gold)' : 'var(--cyan)' }}
+              title="§12.7 — the striking part sets the band, and a band step is +1 Force. Reference only: it is not added to the damage number.">
+          {step === null
+            ? `"${striking.material || '—'}" is in no written band — check item-drafting-materials.md`
+            : bandLabel}
         </span>
       )}
     </div>

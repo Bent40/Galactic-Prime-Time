@@ -62,13 +62,13 @@ feels hot: one band per SET (×2/×8/×32) — say the word and the table reflow
 
 ---
 
-## M-0 — Baseline band ×1 (RULED ID-0.27b) — no multiplier
+## M-0 — Baseline band, step **+0** ~~×1~~ (RULED ID-0.27b)
 
 **Scrap · Wood · Leather · Iron** (commodity steel ⚖ included). Everything in
 Batches A–C is built from these unless named otherwise. No inherent effects —
 that's the point.
 
-## M-1 — F1 FOREST band ×2 ⚖ — "what the green floor gives"
+## M-1 — F1 FOREST band, step **+1** ~~×2~~ ⚖ — "what the green floor gives"
 
 | Material | Story root | Inherent effect (⚖ one per socket) |
 |---|---|---|
@@ -85,7 +85,7 @@ identity on results):* forest venoms (antitoxin stock), **Lotus Root** (Nezha's
 rebuilt body — limb-restoration consumables ⚖), peach flesh (healing), resin
 (smoke/trap consumables).
 
-## M-2 — F2 DESERT band ×4 ⚖ — sketch (fill when play approaches)
+## M-2 — F2 DESERT band, step **+2** ~~×4~~ ⚖ — sketch (fill when play approaches)
 
 **Sky-Iron** (Egyptian *bja* — meteoric; the good metal) · **Flint** (oracle
 stone + the blade-rain) · **Sunglass** (fused desert glass) · **Scorpion
@@ -93,7 +93,7 @@ Chitin** (light: −1 Phy requirement) · **Turquoise** ⭐rare (Xiuhcoatl, the
 sun's dart — Burn affinity, punishes a cold wielder). *Ingredients:* Red Ochre
 (the Sekhmet trick — blood-fake consumables), maguey.
 
-## M-3 — F3 CAPITAL band ×8 ⚖ — sketch
+## M-3 — F3 CAPITAL band, step **+3** ~~×8~~ ⚖ — sketch
 
 **Jade** (the imperial stone) · **Mirror-Bronze** (Perseus's shield — reflection
 properties) · **Silver** (Nuada's arm — the prosthetic metal: body-part
@@ -102,13 +102,13 @@ material; the writing is the strength) · **Orichalcum** (Atlantean city-metal)
 · **Cursed Gold** ⭐rare (Andvari's hoard — highest numbers in band, and it
 *wants things* ⚖ GM rider).
 
-## M-4 — SET 2 (F4–F6) bands ×16/×32/×64 ⚖ — names only (floors undesigned)
+## M-4 — SET 2 (F4–F6) bands, steps **+4 / +5 / +6** ~~×16/×32/×64~~ ⚖ — names only (floors undesigned)
 
 **Adamant** (Kronos's sickle, the chains) · **Dragonbone / Dragon Tendon**
 (Nezha's harvest) · **Petrified Aura** (Humbaba's seven — armor as stackable
 shed layers). Assigned to floors when Set 2's stories exist.
 
-## M-4b — SET 3 (F7–F9) bands ×128/×256/×512 ⚖ — reserved
+## M-4b — SET 3 (F7–F9) bands, steps **+7 / +8 / +9** ~~×128/×256/×512~~ ⚖ — reserved
 
 Unnamed until Set 3 design. The mythology library's divine shelf (M-9) is the
 mining vein.
@@ -196,3 +196,43 @@ parts tables (M-6), the ammo rule (M-7), and carve/reforge (M-8). F2/F3 fill in
 when play approaches; F4–6 wait on floor design. On bless, materials enter the
 app as pool metadata (`material` field ⚖) and the F1 band ships to the library
 as gatherable material items.*
+
+---
+
+## M-10 — What the APP knows, and the one open call (2026-09-19)
+
+**`MATERIAL_BANDS` is built** in `client/src/constants.js` — M-0 through M-3 by name,
+with `materialBand(name)` and `strikingMaterial(item)`. The item sheet now prints
+**"2 Force"** where it used to print a bare `2`, and `MaterialsEditor` shows the
+striking part's band beside the bill (*"F1 Forest — band step +1 Force"*).
+
+⚠️ **An unwritten material returns `null`, never `0`.** A Set 2/3 material nobody has
+named yet must not quietly read as baseline; the editor says so in gold instead.
+
+### 🔴 THE OPEN CALL — does `damage` store the CLASS or the FORCE?
+
+Both readings are alive in the seed files right now, and the app therefore folds the
+band into **nothing**:
+
+- **A — `damage` IS the final Force** (band already baked in). This is how
+  `items-set1-spine.js` writes it: *Kin-Carve 4* = class 3 + Beastbone's +1.
+- **B — `damage` is the raw §12.1 class**, and the band is added at display from the
+  bill. This is how batches **a/b/c** read: Camp Knife **2**, Dagger **2**, Sling **1**,
+  Queensfang **3** — bare class numbers.
+
+⭐ **And the two readings AGREE on every item that is actually in the database**, which
+is why nothing needs re-basing: **not one of the 145 seeded items carries a materials
+bill**, so every one of them is at band step +0 — and at +0, the class *is* the Force.
+The owner's read (*"I think everything's pre force"*) is exactly right for the live
+library, and the only Force-written batch, the 26-item spine, **has never been applied.**
+
+⚖ **Recommend A**, and it costs nothing: the number on the card stays the number the
+GM reads out, `MATERIAL_BANDS` stays a *crafting* reference the Forge uses to compute a
+new number when a striking part is reforged, and the band is never added twice. **B is
+the purer model** — the bill would drive the number — but it needs a bill written onto
+all 145 items before a single band could show, and the spine's six damage values would
+have to come down (Andvari's Cut 6 → 3, Kin-Carve, Imperial 6 → 3).
+
+🔴 **Whichever way it goes, the real gap is the same: no item records its striking
+material.** §12.7's bill exists as a model field and an editor and is empty everywhere.
+Until it is filled, disassembly has nothing to return and no item can ever show a band.
