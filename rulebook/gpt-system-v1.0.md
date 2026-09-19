@@ -1,9 +1,12 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.11** · 2026-09-19 — **part HP scales off TOTAL trait points, not
-Physique alone** (§3.2, §7.1): every build's body grows at the same rate, the
-caster chasm is closed, and the live app now computes it. *Physique buys what it
-can lift, not how much of it there is.*
+**Version 1.12** · 2026-09-19 — **an item's written damage number IS its Force**
+(§12.7), band already counted: a card that reads 4 hits for 4, and a reforge
+rewrites the card. *The band is in the smith's hands, never the player's
+arithmetic.*
+*Previously —* **1.11** · 2026-09-19, **part HP scales off TOTAL trait points, not
+Physique alone** (§3.2, §7.1): every build's body grows at the same rate and the
+caster chasm is closed.
 *Previously —* **1.10** · 2026-09-18, **a slot takes any modifier of its kind, at any
 tier** (§12.3): item tier buys how MANY modifiers an object holds, never which
 ones, and the old access column is withdrawn.
@@ -1067,6 +1070,13 @@ kit exists — the top of the ladder is polish-only.
   hold in your head at Floor 9. The Floor-10 finale adds no band: it is fought
   with what you built. The catalog of record:
   `rulebook/item-drafting-materials.md`.
+- 🔒 **AN ITEM'S WRITTEN DAMAGE NUMBER IS ITS FORCE, band already counted** (ruled
+  2026-09-19). A card that reads **4** hits for 4 — you do not add its material on
+  top. The band is what *set* that number when the thing was made or reforged, not
+  a modifier applied at the table. ⭐ So a reforge is a rewrite: take the striking
+  part up a band and the number on the card goes up by one, permanently, and
+  everyone reads the new number. *The band is in the smith's hands, never the
+  player's arithmetic.*
 
 > **Errata 2026-09-01 — the band no longer multiplies. SUPERSEDED by Force (§7.3).**
 >

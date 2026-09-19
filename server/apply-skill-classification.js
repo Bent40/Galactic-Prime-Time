@@ -49,6 +49,8 @@ function check(rows) {
     if (r.exclusiveTo === undefined) errs.push(`${at}: exclusiveTo must be present ('' for none)`);
     if (!r.why) errs.push(`${at}: every row states WHY — an unexplained lock is not reviewable`);
     if (!['evidenced', 'proposed'].includes(r.status)) errs.push(`${at}: status must be evidenced | proposed`);
+    if ('requirementsFix' in r && !String(r.requirementsFix || '').trim())
+      errs.push(`${at}: requirementsFix is present but empty — omit the field instead`);
     // A compound skill nobody can reach is fine; an animal-only compound is not
     // — an Animal's two racial slots cannot be spent on something unpickable.
     if (r.origin === 'compound' && r.animalOnly) errs.push(`${at}: animalOnly + compound — an Animal's racial slot could never be filled with it`);
@@ -113,6 +115,10 @@ async function run() {
   if (!hasExclusive) console.log('⚠️  SkillTemplate has no `exclusiveTo` field yet — those values are REPORTED, never written.\n');
 
   const fields = ['origin', 'animalOnly', ...(hasExclusive ? ['exclusiveTo'] : [])];
+  // A content repair, not a classification — kept separate so it is obvious in the
+  // diff that this call is rewriting a template's prose, and only where a row says to.
+  const fixes = rows.filter(r => r.requirementsFix);
+  if (fixes.length) console.log(`⚠️  ${fixes.length} row(s) also CORRECT the \`requirements\` string: ${fixes.map(r => r.name).join(', ')}\n`);
   let changed = 0, inSync = 0, missing = 0;
   const matched = new Set();
   for (const r of rows) {
@@ -120,10 +126,17 @@ async function run() {
     if (!t) { missing++; console.log(`? NO SUCH TEMPLATE  ${r.name} — in the file, not in the library`); continue; }
     matched.add(String(t.name).toLowerCase());
     const diffs = fields.filter(k => String(t[k] ?? '') !== String(r[k] ?? ''));
-    if (!diffs.length) { inSync++; continue; }
+    const fixReq = r.requirementsFix && String(t.requirements || '') !== r.requirementsFix;
+    if (!diffs.length && !fixReq) { inSync++; continue; }
     changed++;
-    console.log(`~ ${r.name}  ${diffs.map(k => `${k}: ${JSON.stringify(t[k] ?? '')} → ${JSON.stringify(r[k])}`).join(' · ')}`);
-    if (apply) { diffs.forEach(k => { t[k] = r[k]; }); await t.save(); }
+    const parts = diffs.map(k => `${k}: ${JSON.stringify(t[k] ?? '')} → ${JSON.stringify(r[k])}`);
+    if (fixReq) parts.push(`requirements: ${JSON.stringify(t.requirements || '')} → ${JSON.stringify(r.requirementsFix)}`);
+    console.log(`~ ${r.name}  ${parts.join(' · ')}`);
+    if (apply) {
+      diffs.forEach(k => { t[k] = r[k]; });
+      if (fixReq) t.requirements = r.requirementsFix;
+      await t.save();
+    }
   }
 
   // The permissive default is the dangerous one, so name every template the file

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../api.js';
-import { DEFAULT_STATE, TABS, ALL_TRAITS } from '../constants.js';
+import { DEFAULT_STATE, TABS, ALL_TRAITS, reconcilePartHp } from '../constants.js';
 import { NO_CHARACTER, shouldPoll, pollOutcome, syncMessage } from '../syncGate.js';
 import CharacterCreation from '../components/shared/CharacterCreation.jsx';
 import LoginOverlay from '../components/shared/LoginOverlay.jsx';
@@ -24,7 +24,7 @@ function mergeLoadedState(state) {
   const mergedTraits = ALL_TRAITS.reduce((acc, t) => ({
     ...acc, [t]: { ...DEFAULT_STATE.traits[t], ...(loadedTraits[t] || {}) },
   }), {});
-  return {
+  const merged = {
     ...DEFAULT_STATE, ...state,
     identity: { ...DEFAULT_STATE.identity, ...(state.identity || {}) },
     traits: mergedTraits,
@@ -35,6 +35,12 @@ function mergeLoadedState(state) {
     skillPointsSpent: { ...DEFAULT_STATE.skillPointsSpent, ...(state.skillPointsSpent || {}) },
     cameraCallUsed: state.cameraCallUsed ?? 0,
   };
+  // L-18 — a level the GM granted and the player spent raises every part's max, and
+  // current HP has to come with it or the sheet reports an injury nobody took. Done
+  // on the way IN as well as in update(), because a trait the GM changed arrives
+  // through the poll and never touches update(). Idempotent, so an unsaved sheet
+  // reconciles to the same numbers on every load.
+  return reconcilePartHp(merged);
 }
 
 export default function CharacterSheet() {
@@ -134,7 +140,9 @@ export default function CharacterSheet() {
 
   function update(updater) {
     setCharState(prev => {
-      const next = typeof updater === 'function' ? updater(prev) : updater;
+      // Every local edit goes through here, so this is the one place a trait change
+      // made on the sheet can carry current HP along with the max it just raised.
+      const next = reconcilePartHp(typeof updater === 'function' ? updater(prev) : updater);
       if (!isLoaded.current) return next;
       setSaveStatus('saving');
       // Mark the sheet dirty BEFORE the debounce. The poll reads this, so the

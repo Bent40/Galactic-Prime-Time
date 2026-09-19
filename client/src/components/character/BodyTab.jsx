@@ -287,9 +287,17 @@ export default function BodyTab({ state, update }) {
                 <div className="hp-row">
                   <span className="hp-label">HP</span>
                   <input className="hp-max-input" type="number" min="0" value={baseHp}
-                    title={hpBonus > 0 ? `Base ${baseHp} + ${hpBonus} from ${traitPoints} trait points = ${effectiveMax}` : undefined}
+                    title={hpBonus > 0
+                      ? `Base ${baseHp} (size, §7.1) + ${hpBonus} from ${traitPoints} trait points (L-18) = ${effectiveMax}`
+                      : `Base ${baseHp} — set by size (§7.1). It grows automatically every ${HP_PER_POINT} trait points.`}
                     onChange={e => setBaseHp(bp.id, +e.target.value)} />
-                  {hpBonus > 0 && <span style={{ fontSize: 9, color: 'var(--cyan)', marginLeft: 2 }}>+{hpBonus}</span>}
+                  {/* L-18 — the max ADVANCES on its own, so show the number it advanced to. */}
+                  {hpBonus > 0 && (
+                    <span style={{ fontSize: 10, color: 'var(--cyan)', marginLeft: 2, whiteSpace: 'nowrap' }}
+                          title={`+${hpBonus} to every part from ${traitPoints} trait points`}>
+                      +{hpBonus} = <b style={{ fontSize: 12 }}>{effectiveMax}</b>
+                    </span>
+                  )}
                   <div className="hp-boxes">
                     {boxes.map((isDmg, i) => (
                       <div key={i} className={`hp-box${isDmg ? ' dmg' : ''}`}

@@ -29,7 +29,12 @@
  *               race that is no longer offered at creation. '' for none.
  *               ⚖ The FIELD is proposed in skills-passover G7 and does not exist
  *               on the model yet; these values are the argument for building it.
- *   status      'evidenced' — the live data already says so (a RACE family tag,
+ *   requirementsFix  OPTIONAL. A corrected `requirements` string, written only when
+*               the live one is wrong. Used for exactly two rows: Frost Wall and
+*               Fire Wall carry a skill-prereq the passover table records and their
+*               live strings never did. A row WITHOUT this field never touches
+*               `requirements` — classification does not rewrite content.
+*   status      'evidenced' — the live data already says so (a RACE family tag,
  *                             a consume/prereq clause in `requirements`).
  *               'proposed'  — mine. The owner's call.
  */
@@ -50,9 +55,9 @@ module.exports = [
   { name: 'Poison Ball',  origin: 'basic',    animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'the entry point to the toxin line' },
   { name: 'Poison Wall',  origin: 'compound', animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'PREREQ — requirements: "Mind 3. Poison Ball Lv 3."' },
   { name: 'Frost Ball',   origin: 'basic',    animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'the entry point to the cold line' },
-  { name: 'Frost Wall',   origin: 'compound', animalOnly: false, exclusiveTo: '', status: 'proposed',  why: 'PREREQ by symmetry — skills-passover lists a skill-prereq but the live requirements string says only "Mind 3." See the DRIFT note below' },
+  { name: 'Frost Wall',   origin: 'compound', animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'PREREQ — AGREED 2026-09-19. The live requirements string says only "Mind 3."; it should read "Mind 3. Frost Ball Lv 3." like Poison Wall. Fixed by requirementsFix', requirementsFix: 'Mind 3. Frost Ball Lv 3.' },
   { name: 'Fire Ball',    origin: 'basic',    animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'the entry point to the fire line' },
-  { name: 'Fire Wall',    origin: 'compound', animalOnly: false, exclusiveTo: '', status: 'proposed',  why: 'PREREQ by symmetry — same drift as Frost Wall' },
+  { name: 'Fire Wall',    origin: 'compound', animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'PREREQ — AGREED 2026-09-19. Same drift as Frost Wall; should read "Mind 3. Fire Ball Lv 3."', requirementsFix: 'Mind 3. Fire Ball Lv 3.' },
   { name: 'Elemental Confluence', origin: 'compound', animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'MERGE — "Consume Poison Ball Lv 5, Frost Ball Lv 5, and Fire Ball Lv 5 at the Skill Gemstone. No other method."' },
   { name: 'Telekinesis',  origin: 'basic',    animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'no prereq; its sustain cost is its own price' },
   { name: 'Telepathy',    origin: 'basic',    animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'the entry point to the psychic line' },
@@ -73,7 +78,7 @@ module.exports = [
   { name: 'Aura Reading',  origin: 'basic', animalOnly: false, exclusiveTo: '', status: 'evidenced', why: "Filipe's. Mind, passive, no RACE tag — and its requirement is about the TARGET (\"must be visible or adjacent\"), not about your body" },
   { name: 'Swim',          origin: 'basic', animalOnly: true,  exclusiveTo: '', status: 'evidenced', why: '🐾 RACE+FIELDCRAFT, and the Compendium calls it "Swim (racial)" outright. Filipe #1' },
   { name: 'Vibe Control',  origin: 'basic', animalOnly: false, exclusiveTo: '', status: 'evidenced', why: "Filipe's. Charm, no RACE tag; requirement is about the target again (\"must be able to perceive you\")" },
-  { name: 'Juggling',      origin: 'basic', animalOnly: true,  exclusiveTo: '', status: 'proposed',  why: '🐾 MY PICK for Filipe #2. Not RACE-tagged — but it is the only one of his four whose requirement is about HIS OWN BODY ("must be able to physically handle the item\'s weight"), and its own errata is "range reconcile + disarm gate". A sea lion balancing and tossing on nose and flippers is the species image. OWNER CALL' },
+  { name: 'Juggling',      origin: 'basic', animalOnly: true,  exclusiveTo: '', status: 'evidenced', why: '🐾 RULED ANIMAL 2026-09-19. Filipe #2 — the one of his four whose requirement is about HIS OWN BODY ("must be able to physically handle the item\'s weight") rather than the target. A sea lion balancing and tossing on nose and flippers' },
   { name: 'Dance',         origin: 'basic', animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'STAGECRAFT+FOOTWORK, no RACE tag' },
   { name: 'Voicebox',                   origin: 'basic', animalOnly: false, exclusiveTo: 'XQUEZ/T', status: 'proposed', why: '⚠️ RACE-tagged but ROBOT, not animal. With Robot/AI hidden from creation it belongs to no pool — lock it to the contestant rather than mislabel it animal' },
   { name: 'Generate Visual Media',      origin: 'basic', animalOnly: false, exclusiveTo: 'XQUEZ/T', status: 'proposed', why: '⚠️ same — a projector is hardware' },
@@ -87,7 +92,7 @@ module.exports = [
   { name: 'Lockpicking',    origin: 'basic', animalOnly: false, exclusiveTo: '',      status: 'evidenced', why: 'tool-gated, not body-gated' },
   { name: 'Acrobatics',     origin: 'basic', animalOnly: false, exclusiveTo: '',      status: 'evidenced', why: 'no RACE tag' },
   { name: "Slice n' Dice",  origin: 'basic', animalOnly: true,  exclusiveTo: '',      status: 'evidenced', why: '🐾 BLADES+RACE, and its own passover errata is "math rewrite + FOREPAWS". Sasha #2' },
-  { name: 'Camouflage',     origin: 'basic', animalOnly: false, exclusiveTo: '',      status: 'proposed',  why: '⚖ RACE-tagged with NO owner in the party, and its requirement is fully general ("look like or be concealed in the environment"). A human in a ghillie suit qualifies, so I read the tag as aspirational. OWNER CALL' },
+  { name: 'Camouflage',     origin: 'basic', animalOnly: false, exclusiveTo: '',      status: 'evidenced', why: 'RULED GENERAL 2026-09-19. RACE-tagged but its requirement is fully general ("look like or be concealed in the environment") — a human in a ghillie suit qualifies' },
 
   // ── the five G6 skills seeded 2026-07-25 — the library is 49, not 44 ───────
   { name: 'Intercept',         origin: 'basic',    animalOnly: false, exclusiveTo: '', status: 'evidenced', why: 'merge PARENT of Iron Stance' },

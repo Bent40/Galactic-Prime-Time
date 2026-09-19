@@ -10,6 +10,14 @@ export const TABS = [
   { id: 'comms', label: 'Comms' },
 ];
 
+// §2.2 — a contestant is created with 14 trait points: 1 base in each of the four
+// traits, plus the 10 bonus points (5 Body + 5 Core). This is the same
+// CREATION_POINTS that server/floor-bands.js and server/encounter-bands.js use to
+// derive every enemy statline, so the three must never drift.
+export const CREATION_POINTS = 14;
+// L-19 — +1 HP to every part per 5 total trait points past creation.
+export const HP_PER_POINT = 5;
+
 export const BODY_TRAITS = ['physique', 'reflexes'];
 export const CORE_TRAITS = ['mind', 'charm'];
 export const ALL_TRAITS = ['physique', 'reflexes', 'mind', 'charm'];
@@ -147,7 +155,9 @@ export const CAT_ICONS = {
 };
 
 export const DEFAULT_STATE = {
-  identity: { name: '', player: '', race: 'Human', species: '', size: 'Medium', level: 1, background: '', portrait: '', contestantNumber: '' },
+  // hpBasis — the total trait points the bodyParts' currentHp figures were written
+  // against. reconcilePartHp() below uses it to carry current HP with a growing max.
+  identity: { name: '', player: '', race: 'Human', species: '', size: 'Medium', level: 1, background: '', portrait: '', contestantNumber: '', hpBasis: CREATION_POINTS },
   traits: {
     physique: { base: 1, bonus: 0, levelBonus: 0 },
     reflexes: { base: 1, bonus: 0, levelBonus: 0 },
@@ -230,14 +240,6 @@ export function capBonus(state, t) {
   return Math.floor(Math.max(0, traitTotal(state, t) - 10) / CAP_DIVISORS[t]);
 }
 
-// §2.2 — a contestant is created with 14 trait points: 1 base in each of the four
-// traits, plus the 10 bonus points (5 Body + 5 Core). This is the same
-// CREATION_POINTS that server/floor-bands.js and server/encounter-bands.js use to
-// derive every enemy statline, so the three must never drift.
-export const CREATION_POINTS = 14;
-// L-19 — +1 HP to every part per 5 total trait points past creation.
-export const HP_PER_POINT = 5;
-
 // The sum of all four traits (base + bonus + levelBonus). UNSPENT level points do
 // not count: a point in the pool has not grown anything yet.
 export function totalTraitPoints(state) {
@@ -270,6 +272,59 @@ export function pointsToNextHp(state) {
 // the whole-body trait-point bonus.
 export function effectiveMaxHp(bp, state) {
   return (bp.baseHp ?? bp.maxHp ?? 0) + partHpBonus(state);
+}
+
+// The bonus a given trait-point total pays. partHpBonus() reads it off a sheet;
+// this reads it off a bare number, which is what reconciling needs.
+export function partHpBonusFor(points) {
+  return Math.floor(Math.max(0, (points || 0) - CREATION_POINTS) / HP_PER_POINT);
+}
+
+/**
+ * Carry current HP with a growing max, so spending a level point never reads as
+ * an injury.
+ *
+ * 🔴 Without this the sheet is wrong the moment L-18 pays out: the HP boxes are
+ * drawn from the EFFECTIVE max and damage is `max − currentHp`, so a max that
+ * grows by 2 while currentHp stands still turns a healthy contestant into a
+ * wounded one. The invariant that must hold across a trait change is DAMAGE
+ * TAKEN, not current HP.
+ *
+ * `identity.hpBasis` records the trait-point total the current HP figures were
+ * written against. When the live total differs, every part moves by the change in
+ * bonus and the basis is stamped forward. Pure, idempotent, and safe to run on
+ * every load: re-running it against an unsaved sheet produces the same answer.
+ *
+ * ⛔ A DESTROYED PART STAYS DESTROYED. §7.1 makes 0 HP a failed part; growing a
+ * body does not grow back an arm you lost, so a part at 0 is never raised. It can
+ * still fall, because losing points has to be able to take a part down.
+ *
+ * ⚠️ A sheet with no basis (every sheet written before today) ADOPTS the current
+ * total without moving anything — there is no way to know what its numbers were
+ * written against, and inventing one would hand out or take away HP at random.
+ */
+export function reconcilePartHp(state) {
+  if (!state) return state;
+  const points = totalTraitPoints(state);
+  const basis = state.identity?.hpBasis;
+  const stamp = (parts) => ({
+    ...state,
+    ...(parts ? { bodyParts: parts } : null),
+    identity: { ...(state.identity || {}), hpBasis: points },
+  });
+  if (basis === points) return state;
+  if (typeof basis !== 'number' || !Number.isFinite(basis)) return stamp(null);
+
+  const delta = partHpBonusFor(points) - partHpBonusFor(basis);
+  if (delta === 0) return stamp(null);
+
+  const parts = (state.bodyParts || []).map(bp => {
+    if (typeof bp.currentHp !== 'number') return bp;
+    if (delta > 0 && bp.currentHp <= 0) return bp;        // a destroyed part stays destroyed
+    const max = (bp.baseHp ?? bp.maxHp ?? 0) + partHpBonusFor(points);
+    return { ...bp, currentHp: Math.max(0, Math.min(max, bp.currentHp + delta)) };
+  });
+  return stamp(parts);
 }
 
 export function dmgClass(current, max) {
@@ -333,10 +388,11 @@ export function strikingMaterial(item) {
  * as the bare §12.1 weapon class and carry NO material bill, and a class with no
  * band step IS the Force.
  *
- * ⚠️ The band is deliberately NOT added here. Whether `damage` stores the final
- * Force (band baked in, as items-set1-spine.js writes it) or the raw class (band
- * added at display) is an OPEN owner call; adding it would double-count the spine
- * the day it is seeded. The band is surfaced beside the number, never inside it.
+ * 🔒 RULED 2026-09-19 — `damage` stores the FINAL FORCE, band already counted. So the
+ * band is never added here: MATERIAL_BANDS is a CRAFTING reference the Forge uses to
+ * compute a NEW number when a striking part is reforged, and a reforge rewrites the
+ * card. Adding it at display would double-count every item. The band is surfaced
+ * BESIDE the number (MaterialsEditor), never folded into it.
  */
 export function itemDmgLabel(item) {
   if (!item) return '';

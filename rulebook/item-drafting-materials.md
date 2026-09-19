@@ -209,7 +209,7 @@ striking part's band beside the bill (*"F1 Forest — band step +1 Force"*).
 ⚠️ **An unwritten material returns `null`, never `0`.** A Set 2/3 material nobody has
 named yet must not quietly read as baseline; the editor says so in gold instead.
 
-### 🔴 THE OPEN CALL — does `damage` store the CLASS or the FORCE?
+### ✅ RULED 2026-09-19 — `damage` stores the FINAL FORCE
 
 Both readings are alive in the seed files right now, and the app therefore folds the
 band into **nothing**:
@@ -226,13 +226,18 @@ bill**, so every one of them is at band step +0 — and at +0, the class *is* th
 The owner's read (*"I think everything's pre force"*) is exactly right for the live
 library, and the only Force-written batch, the 26-item spine, **has never been applied.**
 
-⚖ **Recommend A**, and it costs nothing: the number on the card stays the number the
-GM reads out, `MATERIAL_BANDS` stays a *crafting* reference the Forge uses to compute a
-new number when a striking part is reforged, and the band is never added twice. **B is
-the purer model** — the bill would drive the number — but it needs a bill written onto
-all 145 items before a single band could show, and the spine's six damage values would
-have to come down (Andvari's Cut 6 → 3, Kin-Carve, Imperial 6 → 3).
+🔒 **A is RULED.** *"damage stores the final force."* The number on the card is the number
+the GM reads out; **`MATERIAL_BANDS` is a CRAFTING reference**, used by the Forge to compute
+a *new* number when a striking part is reforged, and **never added at the table.** Written
+into the book as **§12.7** — *an item's written damage number is its Force, band already
+counted.* ⭐ **A reforge is a rewrite:** take the striking part up a band and the number on
+the card goes up by one, permanently, and everyone reads the new number. **The band is in
+the smith's hands, never the player's arithmetic.**
 
-🔴 **Whichever way it goes, the real gap is the same: no item records its striking
-material.** §12.7's bill exists as a model field and an editor and is empty everywhere.
+⚙️ **What that settles, at no cost:** nothing migrates · the app labels every seeded number
+**"N Force"** truthfully · the spine's six values (Unsworn Sprig 3 · Sun's Dart 4 ·
+Andvari's Cut 6 · Warden-Carve 3 · Kin-Carve 4 · Imperial 6) stand exactly as written ·
+and batches a/b/c stay correct because a class with no band step **is** its Force.
+
+🔴 **The real gap is unchanged by the ruling: no item records its striking material.** §12.7's bill exists as a model field and an editor and is empty everywhere.
 Until it is filled, disassembly has nothing to return and no item can ever show a band.

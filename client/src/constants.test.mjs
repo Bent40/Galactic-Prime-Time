@@ -10,6 +10,7 @@ import { SIZES, SIZE_BASE_HP, bodyPartsForSize, DEFAULT_STATE, BODY_TRAITS, CORE
   traitTotal, capBonus, totalTraitPoints, partHpBonus, pointsToNextHp,
   effectiveMaxHp, CREATION_POINTS, HP_PER_POINT,
   itemDmgLabel, materialBand, strikingMaterial, MATERIAL_BANDS,
+  reconcilePartHp, partHpBonusFor,
 } from './constants.js';
 
 let pass = 0, fail = 0;
@@ -274,9 +275,73 @@ eq('⭐ which is Kin-Carve exactly — a Sky-Iron haft on a Beastbone edge reads
                                                { part: 'edge', material: 'Beastbone', striking: true }] })), 1);
 eq('no striking part means no material', strikingMaterial({ materials: [{ part: 'haft', material: 'Wood' }] }), '');
 eq('no bill at all is safe', [strikingMaterial({}), strikingMaterial(null)], ['', '']);
-ok('🔒 the band is NOT folded into the damage label — that is an open owner call, '
-   + 'and folding it would double-count the Force-written spine',
+ok('🔒 RULED — `damage` IS the final Force, so the band is never folded in at display; '
+   + 'MATERIAL_BANDS is a crafting reference and a reforge rewrites the card',
    itemDmgLabel({ damage: '3', materials: [{ part: 'edge', material: 'Jade', striking: true }] }) === '3 Force');
+
+
+// ── L-18 — the max ADVANCES, and current HP comes with it ───────────────────
+console.log('\nreconcilePartHp — a level point is not an injury');
+const sheet2 = (points, parts, basis) => ({
+  identity: { hpBasis: basis },
+  traits: { physique: { base: points - 3 }, reflexes: { base: 1 }, mind: { base: 1 }, charm: { base: 1 } },
+  bodyParts: parts,
+});
+eq('partHpBonusFor reads the bonus off a bare total', [14, 18, 19, 24, 164].map(partHpBonusFor), [0, 0, 1, 2, 30]);
+eq('...and never goes negative', [0, 13, undefined].map(partHpBonusFor), [0, 0, 0]);
+
+{
+  const before = sheet2(14, [{ name: 'Torso', baseHp: 5, currentHp: 5 }], 14);
+  ok('an unchanged sheet is returned UNTOUCHED — the same object, so React does not re-render',
+     reconcilePartHp(before) === before);
+}
+{
+  // 14 → 24 points: the bonus goes 0 → +2.
+  const grown = sheet2(24, [
+    { name: 'Torso',    baseHp: 5, currentHp: 5 },   // healthy
+    { name: 'Head',     baseHp: 2, currentHp: 1 },   // 1 damage
+    { name: 'Left Arm', baseHp: 2, currentHp: 0 },   // destroyed
+  ], 14);
+  const after = reconcilePartHp(grown);
+  eq('⭐ a HEALTHY part stays healthy — 5/5 becomes 7/7, not 5/7',
+     [after.bodyParts[0].currentHp, effectiveMaxHp(after.bodyParts[0], after)], [7, 7]);
+  eq('⭐ a WOUNDED part keeps its damage — 1 taken before, 1 taken after',
+     [after.bodyParts[1].currentHp, effectiveMaxHp(after.bodyParts[1], after)], [3, 4]);
+  eq('⛔ a DESTROYED part stays destroyed — growing a body does not grow back an arm',
+     after.bodyParts[2].currentHp, 0);
+  eq('the basis is stamped forward', after.identity.hpBasis, 24);
+  ok('and running it again changes nothing', reconcilePartHp(after) === after);
+}
+{
+  // Losing points (a level revoked, a trait corrected down) must be able to take
+  // a part DOWN, including to 0.
+  const shrunk = sheet2(14, [{ name: 'Torso', baseHp: 5, currentHp: 7 }, { name: 'Head', baseHp: 2, currentHp: 1 }], 24);
+  const after = reconcilePartHp(shrunk);
+  eq('a full torso shrinks with its max, 7/7 → 5/5', after.bodyParts[0].currentHp, 5);
+  eq('and a part at 1 can be taken to 0 — losing points has to be able to cost a part',
+     after.bodyParts[1].currentHp, 0);
+}
+{
+  // Points move but not across a 5-point step: nothing should change but the basis.
+  const nudged = sheet2(16, [{ name: 'Torso', baseHp: 5, currentHp: 5 }], 14);
+  const after = reconcilePartHp(nudged);
+  eq('two points is not a step, so no HP moves', after.bodyParts[0].currentHp, 5);
+  eq('but the basis still advances, so the next three points land correctly',
+     after.identity.hpBasis, 16);
+}
+{
+  const legacy = { identity: {}, traits: { physique: { base: 40 } }, bodyParts: [{ name: 'Torso', baseHp: 5, currentHp: 5 }] };
+  const after = reconcilePartHp(legacy);
+  eq('⚠️ a sheet with NO basis adopts today\'s total and moves nothing — there is no way '
+     + 'to know what its numbers were written against', after.bodyParts[0].currentHp, 5);
+  eq('...and is now tracked', after.identity.hpBasis, 40);
+}
+eq('DEFAULT_STATE starts life at the creation basis, so a new sheet needs no repair',
+   DEFAULT_STATE.identity.hpBasis, CREATION_POINTS);
+eq('a part with no currentHp at all is left alone',
+   reconcilePartHp(sheet2(24, [{ name: 'Graft', baseHp: 3 }], 14)).bodyParts[0], { name: 'Graft', baseHp: 3 });
+eq('no state, no crash', reconcilePartHp(null), null);
+eq('no body and no traits, no crash', reconcilePartHp({ identity: { hpBasis: 14 }, traits: {} }).identity.hpBasis, 0);
 
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);

@@ -295,6 +295,18 @@ export function searchIndex(index, query, limit = 60) {
   const terms = q.split(' ').filter(t => t.length > 0);
   const out = [];
 
+  // 🔴 WEIGHT EACH TERM BY HOW RARE IT IS. Without this a common word carries the
+  // same weight as the word that actually identifies the rule, so "the press" was
+  // decided by which section says "the" most often — and a long chapter beat §21.8,
+  // which is named for it. A term in nearly every section now contributes almost
+  // nothing; a term in one section contributes everything.
+  const n = index.length || 1;
+  const weights = terms.map(t => {
+    const df = index.reduce((c, row) => c + (countHits(row.lowerText, t).total
+      || countHits(row.lowerTitle, t).total ? 1 : 0), 0);
+    return Math.max(0.05, Math.log(1 + n / (1 + df)) / Math.log(1 + n));
+  });
+
   for (const row of index) {
     let score = 0;
     let ok = true;
@@ -302,12 +314,13 @@ export function searchIndex(index, query, limit = 60) {
     let anchor = terms[0];        // and anchors the snippet
     let anchorSeen = Infinity;
 
-    for (const t of terms) {
+    for (let i = 0; i < terms.length; i++) {
+      const t = terms[i], w = weights[i];
       const title = countHits(row.lowerTitle, t);
       const body = countHits(row.lowerText, t);
       if (!title.total && !body.total) { ok = false; break; }
-      score += title.word * 60 + (title.total - title.word) * 8;
-      score += body.word * 4 + (body.total - body.word) * 1;
+      score += (title.word * 60 + (title.total - title.word) * 8) * w;
+      score += (body.word * 4 + (body.total - body.word) * 1) * w;
       const here = title.total + body.total;
       if (here < limiting) limiting = here;
       if (body.total > 0 && body.total < anchorSeen) { anchorSeen = body.total; anchor = t; }

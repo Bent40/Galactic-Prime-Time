@@ -30,7 +30,7 @@ export default function CombatModeTab({ state, update, tracker }) {
                   </div>
                   <div className="combat-hp-big">{bp.currentHp}</div>
                   <div className="combat-hp-sep">/</div>
-                  <div className="combat-hp-max" title={hpBonus > 0 ? `Base ${bp.baseHp ?? bp.maxHp} + ${hpBonus} from trait points` : undefined}>{effMax}</div>
+                  <div className="combat-hp-max" title={hpBonus > 0 ? `Base ${bp.baseHp ?? bp.maxHp} + ${hpBonus} from trait points (L-18)` : undefined}>{effMax}</div>
                 </div>
                 {(bp.conditions || []).length > 0 && (
                   <div className="cond-list">
