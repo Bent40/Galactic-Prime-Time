@@ -95,6 +95,43 @@ const floor    = floorIdx !== -1 ? Number(process.argv[floorIdx + 1]) : 1;   // 
 
 const partsSum  = (e) => (e.bodyParts || []).reduce((a, p) => a + (p.maxHp || 0), 0);
 
+/**
+ * ⭐ THE REACHABLE BUDGET — what §21.2 is actually asking.
+ *
+ * The budget answers "how much must be destroyed for the kill". A part warded
+ * ABOVE the floor's own Force is not that: an average contestant's swing does
+ * literally nothing there. FLOOR_MOB_HP IS the average contestant's Force for
+ * that floor — that is the whole calibration — so `universal >= floorForce` is
+ * exactly "this floor cannot reach this part", computed from two numbers the
+ * gate already has. No new field, nothing for an author to declare.
+ *
+ * ⚠️ This is a CALIBRATION check, so it asks about the AVERAGE party. §10.1's
+ * mandatory `removal` still guarantees a prepared party has a path INTO the
+ * warded part — THE MASKED's Mask is 15 HP that Oathbreaker chews through. The
+ * gate is sizing the floor, not denying the path.
+ *
+ * It changes no existing verdict: THE MASKED 125 -> 110 (F1 band 62–250) and
+ * The Doorward 130 -> 84 (F2 band 75–300) both still pass. What it fixes is the
+ * Incinedile, whose puppet is 125 (a normal floor's boss centre) behind a ward
+ * an F0 party cannot scratch, and whose reachable NETWORK is exactly 50 — the
+ * boss centre for a floor below F1. Both readings were always true; this is the
+ * first time the gate can see it.
+ */
+function reachableBudget(e, floorForce) {
+  const parts = e.bodyParts || [];
+  const total = parts.reduce((a, p) => a + (p.maxHp || 0), 0);
+  const open  = parts.filter(p => Number((p.universal || {}).value || 0) < floorForce);
+  // Every part warded is not a small budget, it is NO PATH (§21.3 rule 3). Fall
+  // back to the full sum and let the caller say so, rather than reporting 0.
+  if (!open.length) return { got: total, total, warded: parts, sealed: true };
+  return {
+    got: open.reduce((a, p) => a + (p.maxHp || 0), 0),
+    total,
+    warded: parts.filter(p => Number((p.universal || {}).value || 0) >= floorForce),
+    sealed: false,
+  };
+}
+
 const normPhase = (a) => JSON.stringify((a || []).map(p => ({ name: p.name, description: p.description, hpThreshold: p.hpThreshold })));
 // sorted, so a reordered resistance list is not a spurious --force diff
 const normRes   = (a) => JSON.stringify((a || []).map(r => ({ type: r.type, value: Number(r.value || 0) }))
@@ -179,16 +216,24 @@ function doctrineCheck(seeds, atFloor = floor) {
   for (const e of seeds) {
     const ratio = RANK_RATIO[e.tier];
     if (!ratio) { problems.push(`${e.name}: unknown tier "${e.tier}" (mob|elite|boss|legendary)`); continue; }
-    const want = mobHp * ratio, got = partsSum(e);
+    const want = mobHp * ratio;
+    const { got, total, warded, sealed } = reachableBudget(e, mobHp);
+    const wardNote = warded.length && !sealed
+      ? ` — ${total} less ${total - got} behind a ward above F${atFloor}'s Force ${mobHp} (${warded.map(p => p.name).join(', ')})`
+      : '';
+    if (sealed) {
+      problems.push(`${e.name}: EVERY part is warded at or above F${atFloor}'s Force ${mobHp} — there is no reachable part, ` +
+                    `so there is no path (§21.3 rule 3). A boss may be impossible for the wrong build; it may not be impossible for every build.`);
+    }
     const tol = TOLERANCE[e.tier];
     if (!tol) {
       // Mobs are exact: one meaningful hit, every time, on every floor.
-      if (got !== want) problems.push(`${e.name}: mob part budget ${got}, doctrine wants exactly ${want} (F${atFloor})`);
+      if (got !== want) problems.push(`${e.name}: mob part budget ${got}, doctrine wants exactly ${want} (F${atFloor})${wardNote}`);
     } else {
       const [lo, hi] = [Math.round(want * tol[0]), Math.round(want * tol[1])];
       if (got < lo || got > hi) {
         problems.push(`${e.name}: ${e.tier} part budget ${got} is outside ${lo}–${hi} ` +
-                      `(§21.2 centre ${want} ±tolerance, F${atFloor})`);
+                      `(§21.2 centre ${want} ±tolerance, F${atFloor})${wardNote}`);
       }
     }
     if (e.tier === 'mob' && (e.bodyParts || []).length !== 1) {
@@ -400,7 +445,11 @@ async function run() {
   const scale = `FORCE (§7.3) at floor ${floor} — a mob is one average swing`;
   console.log(`§21.2 doctrine check PASSED — ${seeds.length} entries, ${scale}: ` +
               `mob ${m} exact · elite ~${m * 12} · boss ~${m * 25} · super ~${m * 60}, ±tolerance.`);
-  const spread = seeds.filter(e => e.tier !== 'mob').map(e => `${e.name} ${partsSum(e)}`).join(' · ');
+  const spread = seeds.filter(e => e.tier !== 'mob').map((e) => {
+    const { got, total } = reachableBudget(e, m);
+    // Never let a ward shrink a budget invisibly — if the two numbers differ, print both.
+    return got === total ? `${e.name} ${got}` : `${e.name} ${got} (of ${total}, rest warded)`;
+  }).join(' · ');
   if (spread) console.log(`Non-mob spread: ${spread}`);
   if (checkOnly) { console.log('--check: doctrine only, no DB touched.'); return; }
 
@@ -452,6 +501,6 @@ async function run() {
 }
 
 module.exports = { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum, WEAKNESS_MODES,
-  FLOOR_MOB_HP, FLOOR_DAMAGE, RANK_RATIO, SIZES, TOLERANCE, DAMAGE_EXCEPTIONS };
+  FLOOR_MOB_HP, FLOOR_DAMAGE, RANK_RATIO, SIZES, TOLERANCE, DAMAGE_EXCEPTIONS, reachableBudget };
 
 if (require.main === module) run().catch(e => { console.error(e); process.exit(1); });

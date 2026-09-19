@@ -1,7 +1,8 @@
 # Tutorial (Floor 0) — Enemy Pass
 
 **Status: PROPOSAL.** Written 2026-09-15 at the owner's instruction ("stat the three
-brothers"). Data: `server/seeds/enemies-tutorial.js`. Gate:
+brothers"); the **Incinedile added 2026-09-19** (T-9). Data:
+`server/seeds/enemies-tutorial.js`. Gate:
 `node seed-enemies.js --file ./seeds/enemies-tutorial.js --floor 0 --check`.
 
 Companion to `tutorial-floor-review.md` (the review that found the gaps). This is the
@@ -48,8 +49,7 @@ entries still skip; a tutorial entry is gated like any other.
 
 ## T-1 — The roster
 
-Four entries. The Incinedile is deliberately **not** in this file: it is the next
-session's work and `tutorial-floor-review.md` already carries its numbers.
+Five entries — the house, and the thing at the end of it.
 
 | Entry | Tier | Size | Budget | Signature |
 |---|---|---|---|---|
@@ -57,6 +57,7 @@ session's work and `tutorial-floor-review.md` already carries its numbers.
 | **Big Brother Roach** | elite | Medium | **24** (centre) | 4 Bleed · on-band |
 | **Mid Brother Roach** | elite | Large | **32** | 4 Bleed · on-band |
 | **Little Brother Roach** | elite | Small | **20** | 2 Bleed · `tick` |
+| **Incinedile** | boss | Huge | **50** reachable (125 puppet) | 6 Crush · on-band |
 
 ⭐ **The budgets tell the story by themselves: 32 · 24 · 20.** Big to little, and
 **the runt is under the elite line.** That is why he was thrown out, written into the
@@ -318,7 +319,149 @@ floor and his room is the hardest on it.
 | # | Call |
 |---|---|
 | **1** | ✅ **CLOSED 2026-09-17 — roach-dog HP is 2, ruled.** |
-| **2** | **Sim/app parity.** These four entries live in this repo's `Enemy` collection; `Galactic-Prime-Time-Game/data/enemies.json` carries a reduced port (roach-dog, Little Brother, Incinedile). Mid and Big Bro exist in neither until now. |
+| **2** | **Sim/app parity.** All five entries now live in this repo's `Enemy` collection; `Galactic-Prime-Time-Game/data/enemies.json` carries its own port (roach-dog, Little Brother, Incinedile) with sim-only fields — AI weights, hex geometry, ability pacing — that have no v1 equivalent and should stay there. Mid and Big Bro exist only here. ⚠️ The sim's Incinedile and this one are the **same creature in two vocabularies**; the sim's `fire_heals` / `fire_harms` pair is this entry's `mode: heal` body weakness and `mode: double` Network weakness. |
 | **3** | ✅ **CLOSED 2026-09-17 — `War Hound` is NOT tutorial content.** Owner: *"War Hound is your invention. Good for F2 i think, irrelevant for tutorial or now in general."* ⚠️ **It is an agent-authored template, not owner canon** — my note calling it *"in the sim roster with no design record"* had the polarity backwards: there is no design record **because nobody designed it**. It is live in the game repo (`data/enemies.json` + the demo run's kennel-gauntlet branch) as sim scaffolding. **Parked for F2** (a desert pack-hunter with a real herder AI is a good fit) and **out of the tutorial**. |
-| **4** | **The Incinedile** is next session's work. Its numbers are in `tutorial-floor-review.md`; the reading to build on is **puppet 125 / Network 50**, with the puppet's parts warded until the Breach — structurally the Doorward's shape. |
+| **4** | ✅ **CLOSED 2026-09-19 — the Incinedile is statted (T-9).** Puppet 125 / Network 50, the puppet warded at universal 6, fire healing the body and doubling on the Network. 🔴 **One structural call came with it and it is the owner's to keep or drop:** the doctrine gate now excludes a part warded above its floor's own Force from the part budget. It changed no existing verdict (THE MASKED 125→110, The Doorward 130→84, both still in band) and it is what lets a 125 puppet be a legal floor-0 boss. **Reversible in one function.** |
 | **5** | **Loot handoff.** Owner considered giving the brothers' weapons free plus an extra shop coupon on a peaceful resolution. Drops are written per-entry above; the coupon is unpriced. |
+
+---
+
+## T-9 — Incinedile (boss · Huge · **50** reachable, 125 puppet)
+
+> **Statted 2026-09-19.** §21.3's method, in its order: **what it IS · how much it
+> matters · what it has DONE** — and then the numbers, each carrying its reason.
+
+**What it IS.** Not a reptile. A mycelium network that lives inside a reptile-shaped
+puppet and wears it — reattaches its limbs, drives it, and vents pressure by
+exploding. **Two organisms, one silhouette**, and the whole fight is the party
+working out that the thing they are hitting is not the thing that is alive.
+
+**How much it matters.** It is the graduation exam. It is not plot — nothing in Set 1
+depends on it — but it is the gate on the **Lounge**, which is the entire economy.
+It is also the first opponent in the campaign that **cannot be solved by hitting it.**
+
+**What it has DONE.** It is the arena's reigning attraction and it has been for a
+while. Everything about the room is built around it: the caged band, the trash cans,
+the 41×60 floor.
+
+### The parts
+
+| Part | HP | |
+|---|---|---|
+| **Network** | **50** | ⭐ **the hole** — the only unwarded part |
+| Head | 7 | warded |
+| Right Hand | 8 | warded |
+| Left Hand (Flamethrower Arm) | 30 | warded — **the tactical objective** |
+| Right Leg · Left Leg | 15 · 15 | warded |
+| **puppet total** | **125** | §21.2's boss centre for a *normal* floor |
+| **reachable at F0** | **50** | §21.2's boss centre for a floor below F1 |
+
+### ⭐⭐ §10.1 was invented here, before §10.1 existed
+
+> Compendium §3.1: *"**Breach Path B:** deal **7+ damage in a single hit**."*
+
+That **is** `universal: 6` — *"needs 7 Force to do anything"* — word for word. And the
+rule §10.1 now enforces, that a universal resistance must name its **cause** and its
+**removal**, was already satisfied by a document written months earlier:
+
+- **cause** — the network holds the puppet's surface; damage to flesh it is not
+  wearing reduces nothing. *"All damage pre-breach = zero HP loss, cosmetic only."*
+- **removal A** — **Bleed T2** on any part opens a wound onto the network. This is why
+  the puppet carries **no Bleed resistance anywhere**: the cheap path must stay open.
+- **removal B** — **7+ Force in a single hit** punches through at that location.
+  ⭐ §5.7's combined attacks *"merge and count as ONE hit"*, so **the party is the
+  answer to a threshold.**
+- **Both reset at every Pressure Valve.** The network retreats deeper and they start
+  the discovery over — with less time.
+
+⚠️ **A floor-0 contestant is 2 Force. An average party does literally nothing to the
+puppet**, and is meant to find that out by trying. Same shape as an F1 party against
+THE MASKED's Mask, and it is correct for the same reason.
+
+### ⭐⭐ Fire is the whole puzzle in one object
+
+| | |
+|---|---|
+| **Burn on the body** | **HEALS.** It is a fungus that vents pressure by exploding, and fire is pressure. The burning trash cans are its **supply line** — that is why they are in the room |
+| **Burn on the Network** | **DOUBLES.** Mycelium burns |
+
+🔒 **The same torch feeds the monster and kills the thing inside it. The only
+difference is what you are pointing it at.** A party that concludes *"fire is bad
+here"* has learned the wrong half of the lesson — and that is the intended first
+conclusion. This is the exact case `weaknesses[].mode` was built for (a part
+**overrides** the body for its own type; resistance adds, a weakness replaces).
+
+### The rest of the block
+
+- **Dissolution 4** on the body — *there is nobody home to unmake.* Mind 1: driven,
+  not inhabited. It is also why mockery and Feint build nothing against it.
+- **Bleed 99** on the Network — *a separate organism with no blood.* The puppet's
+  flesh bleeds; that is breach path A. Bleeding the network is bleeding a mushroom.
+- 🔒 **The Network takes FORCE but never TIERS** (§8.1, stated for a creature). No
+  blood to bleed, no bones to crush, no lungs to suffocate, no mind to dissolve —
+  **you cannot give a fungus a broken arm.** One sentence replaces seven immunity
+  entries, and crushing **Force** still finishes it, which is what canon asks for.
+- **Signature 6 Crush, on band** (F0 boss band is 6) — the **dash**, a line charge
+  that knocks the target aside. 6 Force ends a fresh Medium torso of 5, which is what
+  makes it a boss. The other two attacks ride as notes on it, the F1 Rack pattern:
+  the **flamethrower** is a 10-hex cone for **3 Burn** (below band because the Burn
+  *tier* is the work — and §7.3 means **area does not divide**, so it is 3 to every
+  contestant in the arc), and the **Death Spin** is a three-beat windup ending in
+  **11 Crush**, inside the windup cap of 2× band.
+- **Crushed T2 on a part disables it**, both ways. ⭐ Disabling the **Left Hand
+  permanently removes the flamethrower** — the one tactical objective in the room,
+  and 30 HP of warded part to reach it.
+- **Huge**, so §13 forbids a Medium contestant grappling back. The Death Spin
+  grapples you and you cannot answer in kind; the escape is **Physique 6** in one
+  Moment, or two Moments under it, which is too slow past the chew.
+
+### The phase ladder — and the §3.1 off-by-one, fixed
+
+| Phase | Network | |
+|---|---|---|
+| 1 · **Ignition** | **50–36** | flamethrower · dash · death spin |
+| 2 · **Pressure Valve I** | **reaches 35** | 5-space radius · 2-Moment window · instant KO · **undodgable** · steam telegraph. **Breach resets** |
+| 3 · **Frenzy** | **34–19** | cans pop on touch · dash bounces twice · grab range +1 |
+| 4 · **Pressure Valve II** | **reaches 18** | 7-space radius · instant KO. **Network fully exposed** — no breach needed after this |
+| 5 · **Rupture** | **17–0** | flamethrower tracks · dash bends once · spin merges to 2 Moments |
+| 6 · **Pressure Valve III** | **reaches 0 — death** | **19-space radius · 5-Moment window · instant KILL** |
+
+⚠️ **§3.1 listed Phase 1 as `50→36` and Phase 3 as `35→19`, so 35 sat in a band and
+in a valve trigger at once.** Fixed here by writing the bands contiguously (36 / 35 /
+19 / 18 / 0). Harmless at the table; it is now impossible to write it wrong, because
+a test pins the six strings.
+
+⭐ **Winning starts a footrace.** The death valve is undodgable with a 5-Moment
+window — those five Moments are the reward for killing it fast enough to still have
+legs.
+
+### 🔴 The one structural call this needed
+
+§21.2's budget asks **how much must be destroyed for the kill**. A part warded above
+the floor's own Force is not that — an average contestant's swing does nothing there.
+`FLOOR_MOB_HP` **is** the average contestant's Force for a floor (that is the whole
+calibration), so the gate now excludes a part whose `universal ≥ that Force` from the
+budget, and **prints both numbers** so a ward can never shrink a budget invisibly.
+
+- Derived from two numbers the gate already had — **no new field**, nothing for an
+  author to declare, and nothing to remember.
+- ⚠️ It is a **calibration** check, so it asks about the *average* party. §10.1's
+  mandatory `removal` still guarantees a prepared party has a path in — THE MASKED's
+  Mask is 15 HP that Oathbreaker chews through. **The gate sizes the floor; it does
+  not deny the path.**
+- **It moved no existing verdict.** THE MASKED 125 → 110 (F1 band 62–250) · The
+  Doorward 130 → 84 (F2 band 75–300). Both still pass.
+- ⭐ **New check that fell out of it:** a creature whose parts are *all* warded above
+  the floor's Force is now refused outright — that is not a small budget, it is **no
+  path** (§21.3 rule 3: a boss may be impossible for the wrong build, never for every
+  build).
+
+### What it pays
+
+**1 Silver box** (§17.6), its carve, and the **Lounge** — which is the real payment
+and the end of the tutorial. **Spectacle** (§17.8): +25% on the swing, **doubled if
+the killing blow is fire on the Network** after the party has spent the fight
+watching fire heal it.
+
+🎯 **GM: announce none of it.** Not the ward, not the two breach paths, and above all
+not which half of the creature fire belongs to.

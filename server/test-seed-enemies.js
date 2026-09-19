@@ -4,7 +4,7 @@
  * Covers the two pieces that are NOT a copy of seed-affixes.js: the §21.2
  * doctrine gate, and the array-aware diff that decides what --force overwrites.
  */
-const { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum, WEAKNESS_MODES, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
+const { doctrineCheck, damageProblems, resistanceProblems, renameProblems, diffFields, partsSum, reachableBudget, WEAKNESS_MODES, SIZES, FLOOR_DAMAGE } = require('./seed-enemies');
 const f1 = require('./seeds/enemies-f1.js');
 const f2 = require('./seeds/enemies-f2.js');
 const f3 = require('./seeds/enemies-f3.js');
@@ -513,6 +513,98 @@ ok('a changed weakness MODE is a weaknesses difference',
               mut(c => { c.weaknesses = [{ type: 'Burn', mode: 'double', why: 'w' }]; })).includes('weaknesses'));
 ok('identical parts are still not a difference',
    diffFields(PB(), PB()).length === 0);
+
+
+// ─────────────────────────────────────────────────────────────────────────────
+// THE REACHABLE BUDGET — a part warded above its floor's own Force is not part
+// of the kill, so it is not part of the budget. Added 2026-09-19 for the
+// Incinedile, whose puppet is 125 (a normal floor's boss centre) behind a ward
+// an F0 party cannot scratch, and whose reachable Network is exactly 50.
+// ─────────────────────────────────────────────────────────────────────────────
+console.log('\nreachable budget (wards and §21.2)');
+
+const RB = (parts) => ({ name: 'R', tier: 'boss', size: 'Huge', notes: 'n', bodyParts: parts });
+const openPart = (n, hp) => ({ name: n, maxHp: hp });
+const wardPart = (n, hp, u) => ({ name: n, maxHp: hp, universal: { value: u, cause: 'c', removal: 'r' } });
+
+ok('an unwarded creature reports its full sum',
+   reachableBudget(RB([openPart('A', 10), openPart('B', 5)]), 2).got === 15);
+ok('a part warded ABOVE the floor Force is excluded',
+   reachableBudget(RB([openPart('Core', 50), wardPart('Shell', 75, 6)]), 2).got === 50);
+ok('a part warded BELOW the floor Force still counts (the floor can reach it)',
+   reachableBudget(RB([openPart('Core', 50), wardPart('Shell', 75, 1)]), 2).got === 125);
+ok('warded exactly AT the floor Force is excluded — the swing does nothing',
+   reachableBudget(RB([openPart('Core', 50), wardPart('Shell', 75, 2)]), 2).got === 50);
+ok('the total is reported alongside, so a ward never shrinks a budget invisibly',
+   reachableBudget(RB([openPart('Core', 50), wardPart('Shell', 75, 6)]), 2).total === 125);
+ok('a fully warded creature falls back to the full sum rather than reporting 0',
+   reachableBudget(RB([wardPart('A', 10, 9), wardPart('B', 5, 9)]), 2).got === 15);
+ok('...and is flagged sealed',
+   reachableBudget(RB([wardPart('A', 10, 9), wardPart('B', 5, 9)]), 2).sealed === true);
+
+// §21.3 rule 3: a boss may be impossible for the WRONG BUILD; it may not be
+// impossible for every build. A creature with no reachable part has no path.
+ok('EVERY part warded is refused — there is no path (§21.3 rule 3)',
+   doctrineCheck([{ name: 'Sealed', tier: 'boss', size: 'Huge', notes: 'n', phases: [],
+                    bodyParts: [wardPart('A', 25, 9), wardPart('B', 25, 9)] }], 0)
+     .some(p => /no reachable part/.test(p)));
+
+// The real entries, pinned. These are the two numbers the rule was checked against
+// before it shipped: neither existing verdict moved.
+const f1masked = f1.find(e => e.name === 'THE MASKED');
+const f2door   = f2.find(e => e.name === 'The Doorward');
+ok('THE MASKED: 125 total, 110 reachable at F1 (the Mask is universal 6 vs Force 5)',
+   reachableBudget(f1masked, 5).total === 125 && reachableBudget(f1masked, 5).got === 110);
+ok('...and 110 is still inside F1\'s boss band, so no verdict moved',
+   doctrineCheck([f1masked], 1).length === 0);
+ok('The Doorward: 130 total, 84 reachable at F2 (the Torso is universal 99)',
+   reachableBudget(f2door, 6).total === 130 && reachableBudget(f2door, 6).got === 84);
+ok('...and 84 is still inside F2\'s boss band, so no verdict moved',
+   doctrineCheck([f2door], 2).length === 0);
+
+// ─────────────────────────────────────────────────────────────────────────────
+// THE INCINEDILE — the tutorial boss, statted 2026-09-19.
+// ─────────────────────────────────────────────────────────────────────────────
+console.log('\nthe Incinedile');
+
+const inc = tut.find(e => e.name === 'Incinedile');
+ok('the Incinedile is in the tutorial roster', !!inc);
+ok('⭐ the puppet is 125 — §21.2\'s boss centre for a normal floor',
+   partsSum(inc) === 125);
+ok('⭐⭐ ...and the reachable budget at F0 is the NETWORK\'S 50, the boss centre for a floor below F1',
+   reachableBudget(inc, 2).got === 50);
+ok('the whole tutorial roster passes at floor 0',
+   doctrineCheck(tut, 0).length === 0, JSON.stringify(doctrineCheck(tut, 0)));
+
+const net = inc.bodyParts.find(p => p.name === 'Network');
+ok('the Network is the HOLE — it carries no universal',
+   !Number((net.universal || {}).value || 0));
+ok('every OTHER part is warded at universal 6 — which IS breach path B ("7+ in a single hit")',
+   inc.bodyParts.filter(p => p.name !== 'Network').every(p => p.universal.value === 6));
+ok('every ward names its cause AND its removal (§10.1)',
+   inc.bodyParts.filter(p => p.name !== 'Network')
+      .every(p => p.universal.cause.trim() && p.universal.removal.trim()));
+ok('both breach paths are written into the removal',
+   inc.bodyParts.filter(p => p.name !== 'Network')
+      .every(p => /Bleed T2/.test(p.universal.removal) && /7\+ Force/.test(p.universal.removal)));
+
+ok('⭐⭐ fire HEALS the body',
+   inc.weaknesses.some(w => w.type === 'Burn' && w.mode === 'heal'));
+ok('⭐⭐ ...and DOUBLES on the Network, because mycelium burns',
+   net.weaknesses.some(w => w.type === 'Burn' && w.mode === 'double'));
+ok('the Network cannot be bled — it is a separate organism with no blood',
+   net.resistances.some(r => r.type === 'Bleed' && r.value >= 99));
+ok('the signature is on band (boss 6 at F0) with no exception claimed',
+   inc.signature.floor === 0 && inc.signature.damage === FLOOR_DAMAGE[0].boss && !inc.signature.exception);
+ok('it is Huge, so §13 forbids a Medium contestant grappling it back',
+   inc.size === 'Huge');
+ok('six phases — fight, valve, fight, valve, fight, valve (RULED canon)',
+   inc.phases.length === 6);
+ok('⭐ the phase bands are contiguous with no HP in two of them (the §3.1 off-by-one, fixed)',
+   inc.phases.map(p => p.hpThreshold).join(' | ') ===
+   'Network 50–36 | Network reaches 35 | Network 34–19 | Network reaches 18 | Network 17–0 | Network reaches 0 — death');
+ok('it renames the Compendium\'s spelling in place rather than creating a second document',
+   inc.renamedFrom === 'Incineradile');
 
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);

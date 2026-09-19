@@ -176,9 +176,16 @@ unspent points** (torso 6 for everyone) · **leave it and cap the press at pairs
 
 ---
 
-## T-5 🔴 Two gaps the tutorial exposes in what was built today
+## T-5 ✅ Two gaps the tutorial exposed in what was built that day — BOTH CLOSED
 
 ### T-5.1 `fire_heals` has NO FIELD — healing from a type is a third thing
+
+✅ **CLOSED 2026-09-15 — `weaknesses[].mode` = `double` | `heal` is built**, per-part
+overridable, with the required `why` on every mode. ✅ **And SPENT 2026-09-19** — the
+Incinedile is statted (`tutorial-enemy-pass.md` T-9) with Burn `heal` on the body and
+Burn `double` on the Network, which is the sim's `fire_heals` / `fire_harms` pair in v1
+vocabulary. ⭐ It turns out to be the best thing in the fight: **the same torch feeds the
+monster and kills the thing inside it.** The finding as originally written follows.
 
 The Incinedile's defining trait is *"all fire damage and Burn received **heals** the boss."*
 §7.3 gives an enemy **`weaknesses`** (doubles a type) and **`resistances`** (subtracts from
@@ -211,12 +218,15 @@ moved to absent/null/`''`. Roster: **`rulebook/tutorial-enemy-pass.md`** +
 
 ## T-6 Small things
 
-- **Phase thresholds are off by one** (§3.1): Phase 1 is `HP 50→36`, Phase 3 is `HP 35→19`.
-  Harmless at the table; fix when the entry is written up.
+- ✅ **Phase thresholds — FIXED 2026-09-19.** §3.1 read Phase 1 `HP 50→36` and Phase 3
+  `HP 35→19`, so **35 sat in a band and in a valve trigger at once**. The written-up
+  entry (`tutorial-enemy-pass.md` T-9) runs the bands contiguously — **50–36 / 35 /
+  34–19 / 18 / 17–0 / 0** — and a test pins the six strings, so it cannot drift back.
 - **Trash cans** pop at `Burn 5` for `2 Burn` in 3 spaces. F1's Fuel Can (the Kindler) is
   `Burn 10` for `4 Burn` — the tutorial's is deliberately the weaker original. Correct.
-- **`War Hound`** (elite, budget **14**) is in the sim roster with no design record in §3.1.
-  Either it is a tutorial encounter nobody wrote down, or it belongs to another floor.
+- ✅ **`War Hound` — CLOSED 2026-09-17.** Owner: *"War Hound is your invention."* ⚠️ My
+  note had the polarity backwards — there is no design record **because nobody designed
+  it**. Agent-authored sim scaffolding, **parked for F2**, out of the tutorial.
 - **Four Compendium `[OPEN]` items still sit in the tutorial's path**: the fantasy-item
   coupons (Basic weapon + one Lesser modifier each) are **undistributed**, XQUEZ/T's tank kit
   (Intercept / Iron Stance) is **unfinalised** — ⭐ and *Iron Stance is the answer to the
@@ -228,12 +238,12 @@ moved to absent/null/`''`. Roster: **`rulebook/tutorial-enemy-pass.md`** +
 
 | | |
 |---|---|
-| ✅ **The boss is fine.** | 125 parts = the boss centre; the 50-HP Network is the tutorial-scale fight; its breach paths are §10.1 before §10.1 existed |
+| ✅ **The boss is fine — and is now STATTED** (T-9, 2026-09-19) | 125 parts = the boss centre; the 50-HP Network is the tutorial-scale fight; its breach paths are §10.1 before §10.1 existed. **No number was changed**; what the write-up added was the ward, the fire split, and a gate that can see both readings at once |
 | 🔴 **The mob is not.** | `1 Bleed` against flat armor is **zero**, which is the whole of *"12 mobs, no issues."* Recommend **2**, not the doctrine's 3 |
 | 🔒 **The Press is already half-built** | in the sim, for these roaches, **capped at pairs** — adopt that cap |
 | ⚠️ **Next session is the hard case** | a director that **summons its own pressers and drags you into them**, whose AI hunts the wounded that §12.6 just softened |
 | 🔴 **Sasha's 3-HP torso** | moves every threshold one mob earlier. The owner's own *"hard to hurt without killing"* note, now with two new rules pushing on it |
-| ✅ **Two build gaps — BOTH CLOSED 2026-09-15** | `weaknesses[].mode` = `double`\|`heal` is built (per-part overridable) · the gate has floor 0, and the three brothers are statted in `tutorial-enemy-pass.md` |
+| ✅ **Two build gaps — BOTH CLOSED 2026-09-15** | `weaknesses[].mode` = `double`\|`heal` is built (per-part overridable) · the gate has floor 0. **All five entries are statted** in `tutorial-enemy-pass.md` |
 
 ---
 

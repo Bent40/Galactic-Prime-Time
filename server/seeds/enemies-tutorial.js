@@ -36,6 +36,24 @@ const MOB = (name, { part = 'Body', ...o }) => ({
 });
 const E = (tier) => (name, o) => ({ tier, name, size: 'Medium', phases: [], ...o });
 const ELITE = E('elite');
+const BOSS  = E('boss');
+
+/**
+ * §10.1 SURFACE IMMUNITY — the Incinedile's puppet, and the ward is per PART.
+ * The Compendium wrote this rule before §10.1 existed: "Breach Path B: deal 7+
+ * damage in a single hit" IS "universal 6 = needs 7 Force to do anything", word
+ * for word. Both of its breach paths are the `removal` §10.1 now demands, and
+ * both were already written. Same shape as THE MASKED (the ward is on the Mask,
+ * the man is the hole) and the F2 Doorward (Torso sealed, Mouth wide open).
+ */
+const WARD = (part) => ({
+  ...part,
+  universal: {
+    value: 6,
+    cause: 'A mycelium network inside holds the puppet\'s surface. Damage to flesh the network is not wearing at that moment reduces nothing — the Compendium\'s "all damage pre-breach = zero HP loss, cosmetic only". ⚠️ A floor-0 contestant is 2 Force, so an average party does LITERALLY NOTHING to the puppet, and is meant to find that out itself.',
+    removal: 'BREACH PATH A — reach Bleed T2 on any part: the wound opens onto the network. BREACH PATH B — land 7+ Force in a SINGLE hit on one part: it punches through and the network takes the damage at that location. Both RESET when a Pressure Valve fires and the network retreats deeper.',
+  },
+});
 
 module.exports = [
 
@@ -252,6 +270,112 @@ module.exports = [
       'or the suit, has physical evidence his brothers kept what he made them.',
       '',
       'DROPS: the WHIP (class 3, plain, range 7).',
+    ].join('\n'),
+  }),
+
+  // ───────── The boss ─────────
+
+  BOSS('Incinedile', {
+    size: 'Huge',
+    color: '#d2521f',
+    renamedFrom: 'Incineradile',
+    signature: { floor: 0, damage: 6, type: 'Crush',
+      note: 'THE DASH — a straight-line charge that knocks the target aside and lands on the torso. On band (boss 6 at F0), and it is the number that matters: 6 Force ends a fresh Medium torso of 5, which is what makes it a boss. It also lands Crushed T1, and Crushed T2 on a part DISABLES that part. TWO OTHER ATTACKS, recorded here rather than given lines of their own (the F1 Rack pattern): the FLAMETHROWER is a 10-hex cone for 3 Burn — below band because it is per-touch area pressure and the Burn TIER is the work, and §7.3 means AREA DOES NOT DIVIDE, so it is 3 Burn to every contestant in the arc; the DEATH SPIN is a three-beat windup ending in 11 Crush, inside the windup cap of 2x band.' },
+    resistances: [
+      { type: 'Dissolution', value: 4, why: 'There is nobody home to unmake. It is Mind 1 — driven, not inhabited — and an attack on the self needs a self to reach. This is also why mockery and Feint build nothing against it.' },
+    ],
+    weaknesses: [
+      { type: 'Burn', mode: 'heal', why: 'Canon, and its defining trait: all fire damage and Burn received HEALS it. It is a fungus that vents pressure by exploding, and fire is pressure. ⭐ The burning trash cans in the arena are its supply line, which is why they are in the room at all.' },
+    ],
+    bodyParts: [
+      // ⭐ THE HOLE. Every other part is warded; this one is not.
+      { name: 'Network', maxHp: 50,
+        resistances: [
+          { type: 'Bleed', value: 99, why: 'It is a separate organism and it has no blood. The puppet\'s flesh bleeds — that is breach path A — but bleeding the network is bleeding a mushroom, and systemic bleed-out never drains it.' },
+        ],
+        weaknesses: [
+          { type: 'Burn', mode: 'double', why: 'MYCELIUM BURNS. ⭐ The same torch that feeds the puppet kills the thing inside it; the only difference is what you are pointing it at. A part OVERRIDES the body for its own type, and this is the exact case that field was built for.' },
+        ],
+      },
+      WARD({ name: 'Head',                         maxHp: 7  }),
+      WARD({ name: 'Right Hand',                   maxHp: 8  }),
+      WARD({ name: 'Left Hand (Flamethrower Arm)', maxHp: 30 }),
+      WARD({ name: 'Right Leg',                    maxHp: 15 }),
+      WARD({ name: 'Left Leg',                     maxHp: 15 }),
+    ],
+    phases: [
+      { name: 'Ignition',            hpThreshold: 'Network 50–36',
+        description: 'Flamethrower (10-hex cone, 3 Burn, applies Burn T1) · Dash (line charge, 6 Crush torso, knocks aside) · Death Spin (3 beats: grab — a single hit netting 5+ forces the release; chew, 2 Crush to both arms; spin-and-kill, 11 Crush and the victim is flung).' },
+      { name: 'Pressure Valve I',    hpThreshold: 'Network reaches 35',
+        description: 'Explosion, 5-space radius, 2-Moment escape window, instant KO inside it. Visible steam telegraphs one Moment before. UNDODGABLE — no dodge-shaped escape works; leaving the radius is the counterplay, and it is the only one. Afterwards the network retreats deeper and BOTH BREACH PATHS RESET.' },
+      { name: 'Frenzy',              hpThreshold: 'Network 34–19',
+        description: 'All of Ignition, plus: the flamethrower pops trash cans on first touch · the dash bounces off arena walls up to twice · Death Spin grab range +1.' },
+      { name: 'Pressure Valve II',   hpThreshold: 'Network reaches 18',
+        description: 'Explosion, 7-space radius, 2-Moment window, instant KO, undodgable. Afterwards the network is FULLY EXPOSED — no breach condition is needed for the rest of the fight.' },
+      { name: 'Rupture',             hpThreshold: 'Network 17–0',
+        description: 'All of Frenzy, plus: the flamethrower tracks the closest target · the dash may bend once mid-run · Death Spin merges chew and spin into one beat (2 Moments instead of 3 — one less Moment of counterplay).' },
+      { name: 'Pressure Valve III',  hpThreshold: 'Network reaches 0 — death',
+        description: 'The last vent, and it is not survivable by standing still: 19-space radius, 5-Moment escape window, instant KILL, undodgable. ⭐ Winning the fight starts a footrace. The 5 Moments are the reward for killing it fast enough to still have legs.' },
+    ],
+    description: 'A giant reptile with a flamethrower for a left hand — except it is not a reptile. A mycelium network lives inside it and wears it, reattaches its limbs, and vents pressure by exploding. The tutorial\'s graduation exam, the thing that unlocks the Lounge, and the first opponent that cannot be solved by hitting it.',
+    notes: [
+      'WEAK SYSTEM — THE NETWORK, AND FINDING IT IS THE FIGHT. Every part but one is',
+      'warded (§10.1, universal 6). A floor-0 contestant is 2 Force, so an average',
+      'party does LITERALLY NOTHING to the puppet — and is meant to discover that',
+      'itself. ⭐ The Compendium wrote §10.1 before §10.1 existed: "deal 7+ damage in',
+      'a single hit" IS "universal 6 needs 7 Force to do anything", word for word.',
+      '',
+      'TWO BREACH PATHS, and they are the §10.1 `removal`:',
+      '  A. Bleed T2 on ANY part — the wound opens onto the network. This is the cheap',
+      '     one, and it is why the puppet has no Bleed resistance anywhere.',
+      '  B. 7+ Force in a SINGLE hit on one part — punches through; the network takes',
+      '     it at that location. ⭐ §5.7 combined attacks merge and count as ONE hit,',
+      '     so the party\'s answer to a threshold is the party.',
+      '  BOTH RESET at every Pressure Valve. The network retreats and they start again.',
+      '',
+      '⭐⭐ FIRE IS THE WHOLE PUZZLE IN ONE OBJECT. Burn HEALS the body — canon, and the',
+      'burning trash cans are its supply line. Burn DOUBLES on the Network, because',
+      'mycelium burns. The same torch feeds the monster and kills the thing inside it,',
+      'and the only difference is what you are pointing it at. A party that works out',
+      '"fire is bad here" has learned the wrong half of the lesson.',
+      '',
+      'THE NETWORK TAKES FORCE BUT NOT TIERS (§8.1, stated for a creature). It has no',
+      'blood to bleed, no bones to crush, no lungs to suffocate and no mind to',
+      'dissolve — you cannot give a fungus a broken arm. Conditions never land on it.',
+      'You can only take it apart, which is why Bleed reads 99 there and crushing',
+      'FORCE still finishes it.',
+      '',
+      'CRUSHED T2 ON A PART DISABLES THAT PART, both ways. It is how the boss maims',
+      'the party, and ⭐ disabling the LEFT HAND permanently removes the flamethrower —',
+      'the one tactical objective in the room, worth 30 HP of warded part to reach.',
+      '',
+      'TRASH CANS pop at Burn 5 for 2 Burn in 3 spaces. Environmental, no killer, and',
+      'a liability to both sides: they feed the boss and they clear the floor. F1\'s',
+      'Fuel Can (the Kindler) is Burn 10 for 4 Burn — this is deliberately the weaker',
+      'original.',
+      '',
+      'THE DODGE LADDER (the dash is the dodgeable one). Reflexes 7+ auto-dodges and',
+      'sidesteps one space off the charge lane; Reflexes 9+ also counterattacks; below',
+      '7, add the Reflexes threshold die. Never while Exposed, Helpless or Prone.',
+      '',
+      '⚠️ SIZE IS HUGE, so §13 forbids a Medium contestant grappling it — the Death',
+      'Spin grapples you and you cannot answer in kind. The escape is Physique 6 in',
+      'one Moment, or two Moments if you are under it, which is too slow past the chew.',
+      '',
+      '⚙️ BUDGET. Puppet 125 total, which is §21.2\'s boss centre for a normal floor —',
+      'but the reachable budget at F0 is the NETWORK\'S 50, exactly the boss centre for',
+      'a floor below F1. Both readings land, and they always did: the Compendium\'s',
+      '"single HP bar (total 50)" and the sim\'s six-part 125 were never in conflict.',
+      'ONE IS THE NETWORK AND THE OTHER IS THE PUPPET.',
+      '',
+      'SPECTACLE (§17.8). Gates close, everything freezes, "Party vs Boss" announced,',
+      'spotlight onto a caged band above the arena, the band plays, spotlight out,',
+      'music continues, unfreeze. Boss music: God Shattering Star. The arena is 41x60.',
+      'It is worth +25% on the swing, doubled if the kill uses fire on the Network',
+      'after the party has spent the fight watching fire heal it.',
+      '',
+      'PAYS (§17.6/§19.1): 1 Silver box. Clearing it unlocks the LOUNGE, which is the',
+      'real payment and the end of the tutorial.',
     ].join('\n'),
   }),
 

@@ -1564,10 +1564,85 @@ the party snapshot **§5**. **No doctrine gate, no `signature`, no `why` on any 
   record were missing — **there is no design record because nobody designed it.** It is
   agent-authored sim scaffolding (live in the game repo's `data/enemies.json` and the demo
   run's kennel-gauntlet branch), now **parked for F2** and out of the tutorial.
-- 🔴 **The Incinedile is a NEW SESSION** (owner). Task list is live — see the todo list;
-  task #3 carries the full brief (puppet 125 / Network 50 · the Doorward's shape · the
-  `heal` mode now exists for `fire_heals`/`fire_harms` · §3.1's off-by-one phase
-  thresholds · XQUEZ/T's tank kit and Iron Stance before the roaches).
+- ✅ **THE INCINEDILE IS STATTED (2026-09-19)** — see the next section.
+
+## 🔥 THE INCINEDILE — STATTED 2026-09-19 (`rulebook/tutorial-enemy-pass.md` T-9)
+
+The tutorial boss, by §21.3's method (**what it IS · how much it matters · what it has
+DONE**, then the numbers, each carrying its reason). ⭐ **Not one number changed** — the
+Compendium's statline and the sim's were already right and already agreed. What the
+write-up added was the ward, the fire split, and a gate that can see both readings at once.
+
+- ⭐⭐ **§10.1 WAS INVENTED HERE, BEFORE §10.1 EXISTED.** Compendium §3.1's *"Breach Path
+  B: deal 7+ damage in a single hit"* **is** `universal: 6` — *"needs 7 Force to do
+  anything"* — word for word, and it already satisfied the `cause`/`removal` §10.1 now
+  demands. **cause:** the network holds the puppet's surface, so damage to flesh it is not
+  wearing reduces nothing. **removal A:** Bleed T2 on any part opens a wound onto it —
+  which is why the puppet carries **no Bleed resistance anywhere**, the cheap path has to
+  stay open. **removal B:** 7+ Force in one hit punches through; ⭐ §5.7's combined attacks
+  *"merge and count as ONE hit"*, so **the party is the answer to a threshold.** Both
+  **reset at every valve**. ⚠️ A floor-0 contestant is **2 Force**, so an average party
+  does *literally nothing* to the puppet and is meant to find that out by trying — the
+  same shape as an F1 party against THE MASKED's Mask, correct for the same reason.
+- ⭐⭐ **FIRE IS THE WHOLE PUZZLE IN ONE OBJECT.** Burn on the body **HEALS** (canon — it
+  vents pressure by exploding, and the burning trash cans are its *supply line*, which is
+  why they are in the room). Burn on the **Network DOUBLES**, because **mycelium burns.**
+  🔒 **The same torch feeds the monster and kills the thing inside it; the only difference
+  is what you are pointing it at.** A party that concludes *"fire is bad here"* has learned
+  the wrong half of the lesson, and that is the intended first conclusion. ⭐ This is the
+  exact case `weaknesses[].mode` was built for on 2026-09-15 — **and T-5.1 had never been
+  struck, which is the repo's recurring failure; it is struck now.**
+- 🔒 **THE NETWORK TAKES FORCE BUT NEVER TIERS** (§8.1, stated for a creature). No blood to
+  bleed, no bones to crush, no lungs to suffocate, no mind to dissolve — ⭐ *you cannot give
+  a fungus a broken arm.* **One sentence replaces seven immunity entries**, and crushing
+  **Force** still finishes it, which is what canon asks for. Mechanically: **Bleed 99** on
+  the Network (*a separate organism with no blood*) and nothing else. Body: **Dissolution 4**
+  — *there is nobody home to unmake*, Mind 1, which is also why Feint and mockery build
+  nothing against it.
+- **Signature 6 Crush, on band** — the dash. 6 Force ends a fresh Medium torso of 5, which
+  is what makes it a boss. The other two ride as notes (the F1 Rack pattern): the
+  **flamethrower** is a 10-hex cone for **3 Burn** — below band because the *tier* is the
+  work, and §7.3's **area does not divide**, so it is 3 to everyone in the arc — and the
+  **Death Spin** is a three-beat windup ending in **11 Crush**, inside the 2× windup cap.
+  **Crushed T2 disables a part** both ways; ⭐ disabling the **Left Hand permanently removes
+  the flamethrower**, the one tactical objective in the room and 30 HP of warded part to
+  reach. **Huge**, so §13 forbids a Medium contestant grappling back.
+- ✅ **§3.1'S OFF-BY-ONE, FIXED.** Phase 1 read `50→36` and Phase 3 `35→19`, so **HP 35 sat
+  in a band and in Valve I's trigger at once.** The ladder is contiguous now — **50–36 ·
+  35 · 34–19 · 18 · 17–0 · 0** — a test pins the six strings, and the game repo's
+  Compendium carries the correction beside the original.
+- 🔴 **ONE STRUCTURAL CALL CAME WITH IT — THE REACHABLE BUDGET.** §21.2 asks *how much must
+  be destroyed for the kill*; a part warded **above the floor's own Force** is not that.
+  `FLOOR_MOB_HP` **is** the average contestant's Force for a floor (that is the whole
+  calibration), so the gate now excludes a part whose `universal ≥ that Force` — and
+  **prints both numbers**, so a ward can never shrink a budget invisibly. ⭐ Derived from
+  two numbers the gate already had: **no new field**, nothing for an author to declare.
+  ⚠️ It is a **calibration** check, about the *average* party — §10.1's mandatory `removal`
+  still guarantees a prepared party a path in (THE MASKED's Mask is 15 HP Oathbreaker chews
+  through). **The gate sizes the floor; it does not deny the path.** ✅ **It moved no
+  existing verdict:** THE MASKED 125→110 (F1 band 62–250), The Doorward 130→84 (F2 band
+  75–300). ⭐ **And a new check fell out of it:** a creature whose parts are *all* warded
+  above the floor's Force is refused outright — that is not a small budget, it is **no
+  path** (§21.3 rule 3). **Reversible in one function** if the owner would rather seed the
+  boss at `--floor 1`.
+- ⚙️ **Budget: puppet 125 · reachable 50.** Both readings land and always did — 125 is
+  §21.2's boss centre for a normal floor, 50 is the centre for a floor below F1. The
+  Compendium's *"single HP bar (total 50)"* and the sim's six-part 125 were never in
+  conflict; **one is the network and the other is the puppet.** This is the first time the
+  gate can see it.
+- **Pays** 1 Silver box, its carve, and **the Lounge** — the real payment and the end of the
+  tutorial. **Spectacle** +25%, **doubled if the killing blow is fire on the Network** after
+  a fight spent watching fire heal it. 🎯 **GM: announce none of it.**
+- **190 enemy tests pass** (+28); F1/F2/F3 still pass at their own floors; **574 across all
+  six suites**; client build clean. Seed:
+  `node seed-enemies.js --file ./seeds/enemies-tutorial.js --floor 0` → `--apply`.
+  ⚠️ `renamedFrom: 'Incineradile'` renames the Compendium's spelling **in place** rather
+  than creating a second document.
+- 🔴 **Still open from the tutorial's `[OPEN]` list, and both are now in the party's path:**
+  **XQUEZ/T's tank kit** (Intercept / Iron Stance — ⭐ *Iron Stance is the answer to the
+  Press*) and the **undistributed fantasy-item coupons** (§19.3 closes the store when the
+  Lounge unlocks, so an unspent coupon is gone — and the Incinedile IS the Lounge unlock).
+
 
 ## 🌱 GROWTH ITEMS + THE FIVE PARASITES — DESIGNED 2026-09-17 (`rulebook/growth-items-and-parasites.md`)
 
