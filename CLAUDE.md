@@ -1873,6 +1873,64 @@ Owner's architecture: base + type + traits, cultivated by melding found diseases
 - 🔴 **Five open (I-7):** the resistance mechanism · the trait catalog · research costs ·
   the extraction ladder · whether a type changes what resistance answers (⚖ recommend no).
 
+## 🎓 STARTING SKILLS + THE SIZE GAP — BUILT 2026-09-19
+
+🔒 **Owner ruling:** *"a human gets to choose 4 skills that arent locked to an animal when
+first made. an animal chooses 2 skills and 2 animal skills. robots are probably gonna be
+discontinued. skills can be from our list, and can be any basic skill, not compound skills.
+they can also suggest a skill if they believe non fit what they know to do. our current
+players dont 100% fit to this."*
+
+- 🔴 **THE MODEL HAD NO FIELD FOR EITHER AXIS**, so none of it could be expressed or
+  enforced. **Two added to `SkillTemplate`:** `origin` (`basic` | `compound`) and
+  `animalOnly`. ⭐ **A compound skill is a Gemstone MERGE product** (§4.5 — *Intercept Lv5 +
+  Brace Lv3 = Iron Stance*), so *"basic, not compound"* already had a precise referent in
+  the book: **you cannot start with the thing you fuse INTO.** Whitelisted in the create,
+  update **and bulk-import** routes, and added to the player-facing projection.
+- **`SkillLibrarySection` authors both** — quick-add row and edit modal — and the cards show
+  a **🐾 Animal** and **⚗ Compound** badge, so which pool a skill sits in is visible at a
+  glance. ⚠️ **Until the GM marks them, every existing template is `basic` + general**, so
+  an Animal contestant's two animal slots have nothing to pick from and will use the
+  suggestion box. That is the intended degrade, not a bug — but the library wants a pass.
+- **`CharacterCreation` gains step 4.** Two pools with live quota counters, a filter, and a
+  **suggestion box that writes into `notes`**, never into `skills` — ⭐ a suggestion is a
+  *request the GM approves*, so it must not enter the array as a fake template.
+- 🔒 **Starting skills arrive at LEVEL 1 with an EMPTY `traitCosts`.** ⭐ That is the design,
+  not an omission: §4's refund path already states *"a level with no spend history refunds
+  nothing"*, so a free starting level **costs no skill points and returns none.**
+  **It is your background, not your training budget** — and the case was already supported.
+- ⚠️ **Robot / AI is hidden from creation (`CREATION_RACES`) but deliberately NOT removed
+  from `RACES`** — a live character is that race and dropping the value would break their
+  sheet. **Two tests pin both halves.** Reversible in one constant if the owner changes his
+  mind. 🔴 R-4's *"Robot·AI is unwritten"* row is now effectively *"and probably won't be."*
+- ✅ **No migration** — the ruling is creation-time only, which is what *"our current players
+  dont 100% fit to this"* asks for.
+
+### 🔴 THE GAP THE RULINGS LEFT — `identity.size` was write-once
+
+**Set at creation and then editable NOWHERE** — while §20.3's Surgeon's Table does
+**race change**, and §7.1 makes size **the base of every body part.** So a race change had
+no way to move the body, and a GM had no way to fix a wrong pick.
+
+- **`BodyTab` gets a Size selector** (legacy values still render), and **`rebasePartsForSize`**
+  moves **only `baseHp`**: current HP is **clamped**, conditions survive, and ⭐ **an ADDED
+  part — a graft, a flipper, §20.3's fourth arm — is left completely alone**, because §7.1's
+  table is *a base, never a multiplier*. `maxHp` is kept in step for parts written before
+  `baseHp` existed.
+- **51 constants tests** (+32) · 53 admin-level · 162 enemy. Client build clean.
+
+### 🔴 REVIEW FINDING — FORCE IS INVISIBLE IN THE APP
+
+§7.3 FORCE has been the damage system since **v1.3** and the word appears **nowhere in the
+client.** `itemDmgLabel()` renders `item.damage` (a free-text String) with no unit; there is
+**no material→band table** in `constants.js`; and `MaterialsEditor` stores material names as
+free text while knowing only that *"the striking part sets the band"*. ⚠️ **`items-set1-spine.js`
+already stores Force in `damage`** (Unsworn Sprig 3 · Kin-Carve 4 · Imperial 6) — but
+**batches a/b/c predate the FORCE ruling**, so labelling every damage value "Force" would
+mislabel the older library. 🔴 **Needs an owner answer first:** were batches a/b/c re-based?
+Then `MATERIAL_BANDS` (M-0 **+0** and M-1 **+1** are ruled; M-2/M-3 are named sketches) and a
+Force readout. **Task #14.**
+
 ## Rulebook & Wiki (added 2026-07-23)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
