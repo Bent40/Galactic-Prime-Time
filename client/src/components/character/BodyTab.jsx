@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES, CANON_CONDITIONS } from '../../constants.js';
+import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES, SIZES, CANON_CONDITIONS, rebasePartsForSize } from '../../constants.js';
 import { uid, dmgClass, traitTotal as traitTotalOf, capBonus, effectiveMaxHp } from '../../constants.js';
 
 function CondAddForm({ onAdd, onCancel }) {
@@ -26,6 +26,18 @@ export default function BodyTab({ state, update }) {
   const id = state.identity;
 
   function patchId(k, v) { update(s => ({ ...s, identity: { ...s.identity, [k]: v } })); }
+
+  // Size is not decoration: §7.1 makes it the BASE of every part. A race change at
+  // the Surgeon's Table (§20.3) changes it, so it has to be editable after creation
+  // — and changing it has to re-base the body, or the label and the numbers drift.
+  // Only baseHp moves; current HP, conditions and any added part are untouched.
+  function setSize(size) {
+    update(s => ({
+      ...s,
+      identity: { ...s.identity, size },
+      bodyParts: rebasePartsForSize(s.bodyParts || [], size),
+    }));
+  }
 
   function patchBP(bpId, k, v) {
     update(s => ({ ...s, bodyParts: s.bodyParts.map(b => b.id === bpId ? { ...b, [k]: v } : b) }));
@@ -161,6 +173,15 @@ export default function BodyTab({ state, update }) {
             <div className="field-group">
               <label className="field-label">Species / Model</label>
               <input className="fi" value={id.species || ''} onChange={e => patchId('species', e.target.value)} placeholder="e.g. Sea Lion" />
+            </div>
+            <div className="field-group">
+              <label className="field-label" title="§7.1 — size sets the base HP of every body part. Changing it re-bases your body; current HP, conditions and any added part are kept.">
+                Size <span style={{ opacity: .6 }}>— re-bases your body</span>
+              </label>
+              <select className="fi" value={id.size || 'Medium'} onChange={e => setSize(e.target.value)}>
+                {id.size && !SIZES.includes(id.size) && <option value={id.size}>{id.size} (legacy)</option>}
+                {SIZES.map(sz => <option key={sz}>{sz}</option>)}
+              </select>
             </div>
             <div className="field-group">
               <label className="field-label">Level</label>

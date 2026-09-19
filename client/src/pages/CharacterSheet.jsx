@@ -196,6 +196,7 @@ export default function CharacterSheet() {
     return (
       <CharacterCreation
         username={auth.username}
+        token={auth.token}
         onDone={finishCreation}
         onSkip={() => setNeedsCreation(false)}
       />

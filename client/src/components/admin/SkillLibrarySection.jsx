@@ -7,6 +7,8 @@ const BLANK_FORM = {
   name: '', momentCost: '', stats: '', passive: false, capacity: 5,
   requirements: '', range: '', target: '', effect: '', description: '',
   achievementUnlock: '', keywords: '', levelEffects: {},
+  // Starting-skill eligibility (owner ruling 2026-09-19) — see models/SkillTemplate.js.
+  origin: 'basic', animalOnly: false,
 };
 
 function LevelEffectsEditor({ value, onChange }) {
@@ -106,6 +108,8 @@ export default function SkillLibrarySection({ token, showToast }) {
                 {t.momentCost && <span className="badge badge-cyan">{t.momentCost}</span>}
                 {(t.stats || []).map(s => <span key={s} className="badge badge-muted">{s}</span>)}
                 {(t.keywords || []).map(k => <span key={k} className="badge badge-purple" title="Gemstone compatibility keyword">◈ {k}</span>)}
+                {t.animalOnly && <span className="badge badge-cyan" title="Animal-only: an Animal contestant may take this as one of its 2 animal starting skills">🐾 Animal</span>}
+                {t.origin === 'compound' && <span className="badge badge-muted" title="A Gemstone merge product (§4.5) — never pickable at character creation">⚗ Compound</span>}
                 {t.achievementUnlock && <span className="badge badge-gold">🔒 {t.achievementUnlock}</span>}
                 {t.levelEffects && Object.keys(t.levelEffects).filter(k => t.levelEffects[k]).length > 0 && (
                   <span className="badge badge-muted">
@@ -127,6 +131,19 @@ export default function SkillLibrarySection({ token, showToast }) {
           <div className="field-group" style={{ flex: 2 }}><label className="field-label">Stats</label><input className="fi" value={form.stats} onChange={e => setForm(f => ({ ...f, stats: e.target.value }))} placeholder="Mind, Reflexes" /></div>
           <div className="field-group" style={{ flex: 1 }}><label className="field-label">Unlock</label><input className="fi" value={form.achievementUnlock} onChange={e => setForm(f => ({ ...f, achievementUnlock: e.target.value }))} /></div>
           <div className="field-group" style={{ flex: 3 }}><label className="field-label">Effect</label><input className="fi" value={form.effect} onChange={e => setForm(f => ({ ...f, effect: e.target.value }))} /></div>
+          <div className="field-group"><label className="field-label" title="A compound skill is a Gemstone merge product (§4.5) and is never pickable at creation">Origin</label>
+            <select className="fi" style={{ width: 110 }} value={form.origin}
+                    onChange={e => setForm(f => ({ ...f, origin: e.target.value }))}>
+              <option value="basic">Basic</option>
+              <option value="compound">Compound</option>
+            </select>
+          </div>
+          <div className="field-group"><label className="field-label" title="An Animal contestant takes 2 of these at creation; a Human takes none">🐾 Animal</label>
+            <button className={`btn btn-xs ${form.animalOnly ? 'btn-cyan' : ''}`} style={{ width: 70 }}
+                    onClick={() => setForm(f => ({ ...f, animalOnly: !f.animalOnly }))}>
+              {form.animalOnly ? 'Yes' : 'No'}
+            </button>
+          </div>
           <button className="btn btn-purple btn-sm" onClick={create} style={{ alignSelf: 'flex-end' }}>+ Create</button>
         </div>
       </div>
@@ -143,6 +160,22 @@ export default function SkillLibrarySection({ token, showToast }) {
               <div className="field-group"><label className="field-label">Target</label><input className="fi" value={editModal.target || ''} onChange={e => setEditModal(m => ({ ...m, target: e.target.value }))} /></div>
               <div className="field-group"><label className="field-label">Achievement Unlock</label><input className="fi" value={editModal.achievementUnlock || ''} onChange={e => setEditModal(m => ({ ...m, achievementUnlock: e.target.value }))} /></div>
               <div className="field-group"><label className="field-label">Keywords (comma-sep, Gemstone compat)</label><input className="fi" value={editModal.keywords || ''} onChange={e => setEditModal(m => ({ ...m, keywords: e.target.value }))} placeholder="magic, fire" /></div>
+              <div className="field-group">
+                <label className="field-label" title="Compound = a Gemstone merge product (§4.5). Never pickable at creation.">Origin</label>
+                <select className="fi" value={editModal.origin || 'basic'}
+                        onChange={e => setEditModal(m => ({ ...m, origin: e.target.value }))}>
+                  <option value="basic">Basic — pickable at creation</option>
+                  <option value="compound">Compound — merge product, never at creation</option>
+                </select>
+              </div>
+              <div className="field-group">
+                <label className="field-label" title="An Animal contestant takes 2 animal skills at creation; a Human takes 4 general ones and none of these.">Starting pool</label>
+                <select className="fi" value={editModal.animalOnly ? 'animal' : 'general'}
+                        onChange={e => setEditModal(m => ({ ...m, animalOnly: e.target.value === 'animal' }))}>
+                  <option value="general">General — any contestant</option>
+                  <option value="animal">🐾 Animal only</option>
+                </select>
+              </div>
             </div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Requirements</label><input className="fi" value={editModal.requirements || ''} onChange={e => setEditModal(m => ({ ...m, requirements: e.target.value }))} /></div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Base Effect (Tier 1)</label><textarea className="fi" value={editModal.effect || ''} onChange={e => setEditModal(m => ({ ...m, effect: e.target.value }))} /></div>

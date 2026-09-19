@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
-  RACES, SIZES, SIZE_BASE_HP, bodyPartsForSize,
+  CREATION_RACES, SIZES, SIZE_BASE_HP, bodyPartsForSize,
   DEFAULT_STATE, BODY_TRAITS, CORE_TRAITS, TRAIT_LABELS,
+  startingSkillQuota, startingSkillPools, uid,
 } from '../../constants.js';
+import { apiFetch } from '../../api.js';
 
 /**
  * Character creation — shown once, when a registered user has no character yet.
@@ -20,11 +22,18 @@ import {
  *   3. ALLOCATION — §2.2, the ten bonus points: 5 Body (Physique/Reflexes) and
  *                   5 Core (Mind/Charm), on top of 1 in each trait. Four base
  *                   plus ten is the 14 creation points the level budget assumes.
+ *   4. SKILLS     — owner ruling 2026-09-19. A Human picks 4 skills not locked to
+ *                   an animal; an Animal picks 2 of those plus 2 animal skills.
+ *                   BASIC skills only — a compound is a Gemstone merge product
+ *                   (§4.5), and you cannot start with the thing you fuse INTO.
+ *                   Nothing fits? Suggest one; the GM approves it.
  *
  * It writes the state ONCE on finish and then never appears again. Everything it
  * sets stays editable on the sheet — this is a guided start, not a lock.
  */
-export default function CharacterCreation({ username, onDone, onSkip }) {
+const STEPS = 4;
+
+export default function CharacterCreation({ username, token, onDone, onSkip }) {
   const [step, setStep] = useState(1);
   const [identity, setIdentity] = useState({
     ...DEFAULT_STATE.identity,
@@ -35,6 +44,59 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
   const [spent, setSpent] = useState({ physique: 0, reflexes: 0, mind: 0, charm: 0 });
   const [saving, setSaving] = useState(false);
   const [err, setErr] = useState('');
+  // The skill library. null = not fetched yet; [] = fetched and empty.
+  const [library, setLibrary] = useState(null);
+  const [libErr, setLibErr] = useState('');
+  const [picked, setPicked] = useState([]);        // template _ids, in pick order
+  const [suggestions, setSuggestions] = useState([]); // free-text, GM approves
+  const [suggestDraft, setSuggestDraft] = useState('');
+  const [skillFilter, setSkillFilter] = useState('');
+
+  // Fetch once, when they first reach the skill step — the first three steps
+  // should not wait on a request they may never need.
+  useEffect(() => {
+    if (step !== 4 || library !== null) return;
+    apiFetch('/api/character/skills', {}, token)
+      .then(d => {
+        if (Array.isArray(d)) setLibrary(d);
+        else { setLibrary([]); setLibErr(d?.error || 'Could not load the skill library.'); }
+      })
+      .catch(() => { setLibrary([]); setLibErr('Could not load the skill library.'); });
+  }, [step, library, token]);
+
+  const quota = startingSkillQuota(identity.race);
+  const pools = useMemo(() => startingSkillPools(library || []), [library]);
+  const byId = useMemo(() => {
+    const m = {};
+    for (const t of library || []) m[t._id] = t;
+    return m;
+  }, [library]);
+
+  const pickedIn = (pool) => picked.filter(id => {
+    const t = byId[id];
+    return t && (t.animalOnly ? 'animal' : 'general') === pool;
+  });
+  const suggestedIn = (pool) => suggestions.filter(s => s.pool === pool);
+  const filledIn = (pool) => pickedIn(pool).length + suggestedIn(pool).length;
+  const roomIn = (pool) => quota[pool] - filledIn(pool);
+  const totalWanted = quota.general + quota.animal;
+  const totalFilled = picked.length + suggestions.length;
+
+  function togglePick(tpl) {
+    const pool = tpl.animalOnly ? 'animal' : 'general';
+    setPicked(p => {
+      if (p.includes(tpl._id)) return p.filter(x => x !== tpl._id);
+      if (roomIn(pool) <= 0) return p;                  // that pool is full
+      return [...p, tpl._id];
+    });
+  }
+  function addSuggestion(pool) {
+    const text = suggestDraft.trim();
+    if (!text || roomIn(pool) <= 0) return;
+    setSuggestions(s => [...s, { pool, text }]);
+    setSuggestDraft('');
+  }
+  const rmSuggestion = (i) => setSuggestions(s => s.filter((_, n) => n !== i));
 
   const BODY_MAX = DEFAULT_STATE.bonusPoints.bodyMax ?? 5;
   const CORE_MAX = DEFAULT_STATE.bonusPoints.coreMax ?? 5;
@@ -62,6 +124,24 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
     const traits = Object.fromEntries(
       Object.keys(DEFAULT_STATE.traits).map(t => [t, { base: 1 + spent[t], bonus: 0, levelBonus: 0 }])
     );
+    // Starting skills arrive at LEVEL 1 with NO spend record. The empty
+    // traitCosts is the point: §4's refund path already states that "a level with
+    // no spend history refunds nothing", so a free starting level costs no skill
+    // points and gives none back. It is your background, not your training budget.
+    const skills = picked.map(id => ({
+      id: uid(),
+      templateId: id,
+      level: 1,
+      capacity: byId[id]?.capacity || 5,
+      traitCosts: [],
+    }));
+    // A suggestion is not a skill yet — it is a request the GM approves, so it
+    // goes where the GM reads, never into the skills array as a fake template.
+    const note = suggestions.length
+      ? `— SUGGESTED SKILLS (awaiting GM approval) —\n` +
+        suggestions.map(s => `• [${s.pool}] ${s.text}`).join('\n') + '\n\n'
+      : '';
+
     // onDone returns an error string, or null on a confirmed save. Stay open on
     // failure — this overlay holds the only copy of what they just built.
     const problem = await onDone({
@@ -71,6 +151,8 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
       // The points are SPENT, so the remaining pools are what is left.
       bonusPoints: { ...DEFAULT_STATE.bonusPoints, body: bodyLeft, core: coreLeft },
       bodyParts: bodyPartsForSize(identity.size),
+      skills,
+      notes: note + (DEFAULT_STATE.notes || ''),
     });
     if (problem) { setErr(problem); setSaving(false); }
   }
@@ -81,7 +163,7 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
   return (
     <div className="login-overlay">
       <div className="login-box" style={{ width: 460, maxWidth: '92vw', maxHeight: '88vh', overflowY: 'auto' }}>
-        <div className="login-title">⚡ New Contestant — Step {step} of 3</div>
+        <div className="login-title">⚡ New Contestant — Step {step} of {STEPS}</div>
 
         {/* ── 1. IDENTITY ────────────────────────────────────────────────── */}
         {step === 1 && (
@@ -113,7 +195,7 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
             <div className="field-group">
               <label className="field-label">Race</label>
               <select className="fi" value={identity.race} onChange={e => set({ race: e.target.value })}>
-                {RACES.map(r => <option key={r} value={r}>{r}</option>)}
+                {CREATION_RACES.map(r => <option key={r} value={r}>{r}</option>)}
               </select>
             </div>
             <div className="field-group">
@@ -191,6 +273,103 @@ export default function CharacterCreation({ username, onDone, onSkip }) {
 
             <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
               <button className="btn btn-xs" style={{ flex: 1 }} onClick={() => setStep(2)}>← Back</button>
+              <button className="btn btn-cyan" style={{ flex: 2, padding: 9 }} onClick={() => setStep(4)}>
+                Next — what you can do
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ── 4. SKILLS ──────────────────────────────────────────────────── */}
+        {step === 4 && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div style={{ fontSize: 11, opacity: .7, lineHeight: 1.5 }}>
+              {identity.race === 'Animal'
+                ? <>You pick <b>{quota.general} general</b> skills and <b>{quota.animal} animal</b> skills —
+                   things this body can do that a human's cannot.</>
+                : <>You pick <b>{quota.general} skills</b>, none of them locked to an animal body.</>}
+              {' '}Basic skills only. If nothing here matches what you already know how to do,
+              <b> suggest it</b> and the GM will rule on it.
+            </div>
+
+            {library === null && <div style={{ fontSize: 11, opacity: .6 }}>Loading the skill library…</div>}
+            {libErr && <div className="login-err">{libErr}</div>}
+
+            {library !== null && (
+              <>
+                <input className="fi" placeholder="Filter skills…" value={skillFilter}
+                       onChange={e => setSkillFilter(e.target.value)} />
+
+                {['general', 'animal'].filter(pool => quota[pool] > 0).map(pool => {
+                  const want = quota[pool];
+                  const have = filledIn(pool);
+                  const list = pools[pool].filter(t =>
+                    !skillFilter || t.name.toLowerCase().includes(skillFilter.toLowerCase()));
+                  return (
+                    <div key={pool} className="field-group">
+                      <label className="field-label">
+                        {pool === 'animal' ? 'Animal skills' : 'General skills'}{' '}
+                        <span style={{ opacity: .6, color: have === want ? 'var(--success)' : undefined }}>
+                          — {have} of {want} chosen
+                        </span>
+                      </label>
+
+                      {list.length === 0 && (
+                        <div style={{ fontSize: 11, opacity: .6, padding: '4px 0' }}>
+                          {pools[pool].length === 0
+                            ? <>Nothing in the library is marked as {pool === 'animal' ? 'an animal skill' : 'a general skill'} yet — use the suggestion box below.</>
+                            : <>No match for “{skillFilter}”.</>}
+                        </div>
+                      )}
+
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, maxHeight: 170, overflowY: 'auto' }}>
+                        {list.map(t => {
+                          const on = picked.includes(t._id);
+                          const full = !on && roomIn(pool) <= 0;
+                          return (
+                            <button key={t._id}
+                                    className={`btn btn-xs ${on ? 'btn-cyan' : ''}`}
+                                    disabled={full}
+                                    title={[t.stats?.join(' · '), t.momentCost, t.effect].filter(Boolean).join(' — ')}
+                                    onClick={() => togglePick(t)}>
+                              {on ? '✓ ' : ''}{t.name}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {suggestedIn(pool).map((s) => (
+                        <div key={`${s.pool}-${s.text}`} style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, fontSize: 11 }}>
+                          <span style={{ flex: 1, fontStyle: 'italic', opacity: .8 }}>“{s.text}” — for the GM to rule on</span>
+                          <button className="btn btn-danger btn-xs"
+                                  onClick={() => rmSuggestion(suggestions.indexOf(s))}>✕</button>
+                        </div>
+                      ))}
+
+                      {roomIn(pool) > 0 && (
+                        <div style={{ display: 'flex', gap: 4, marginTop: 6 }}>
+                          <input className="fi" style={{ flex: 1 }} value={suggestDraft}
+                                 placeholder={`Suggest ${pool === 'animal' ? 'an animal' : 'a'} skill…`}
+                                 onChange={e => setSuggestDraft(e.target.value)}
+                                 onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addSuggestion(pool); } }} />
+                          <button className="btn btn-xs" disabled={!suggestDraft.trim()}
+                                  onClick={() => addSuggestion(pool)}>Suggest</button>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+
+                <div style={{ fontSize: 11, opacity: .7 }}>
+                  Chosen: <b>{totalFilled}</b> of {totalWanted}
+                  {totalFilled < totalWanted &&
+                    <span style={{ opacity: .7 }}> — you can enter with fewer and add the rest later.</span>}
+                </div>
+              </>
+            )}
+
+            <div style={{ display: 'flex', gap: 6, marginTop: 4 }}>
+              <button className="btn btn-xs" style={{ flex: 1 }} onClick={() => setStep(3)}>← Back</button>
               <button className="btn btn-gold" style={{ flex: 2, padding: 9 }} onClick={finish} disabled={saving}>
                 {saving ? 'Entering…' : 'Enter the Arena'}
               </button>

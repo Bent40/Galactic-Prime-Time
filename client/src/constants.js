@@ -20,6 +20,47 @@ export const TRAIT_LABELS = { physique: 'Physique', reflexes: 'Reflexes', mind: 
 // class; an item is a legal "explicit source"). Legacy values (Psy/Toxic/Shock,
 // sci-fi races) are migrated by server/migrate-rules-vocab.js.
 export const RACES = ['Human', 'Animal', 'Robot / AI'];
+
+// Races offered to a NEW contestant. `RACES` stays complete so existing sheets
+// (and the admin panel) still render every value — Robot / AI is only hidden from
+// creation, never removed, because live characters are that race.
+// Owner, 2026-09-19: "robots are probably gonna be discontinued."
+export const CREATION_RACES = ['Human', 'Animal'];
+
+// ── Starting skills (owner ruling 2026-09-19) ────────────────────────────────
+// "a human gets to choose 4 skills that arent locked to an animal when first made.
+//  an animal chooses 2 skills and 2 animal skills."
+// Only BASIC skills — never compound, which is a Gemstone merge product (§4.5).
+// A contestant with nothing that fits may SUGGEST one, for the GM to approve.
+export const STARTING_SKILLS = {
+  Human:        { general: 4, animal: 0 },
+  Animal:       { general: 2, animal: 2 },
+  'Robot / AI': { general: 4, animal: 0 },   // legacy: same shape as Human
+};
+export const STARTING_SKILL_DEFAULT = { general: 4, animal: 0 };
+
+export function startingSkillQuota(race) {
+  return STARTING_SKILLS[race] || STARTING_SKILL_DEFAULT;
+}
+
+/**
+ * Which pool a template belongs to at creation, or null if it is not pickable.
+ * A compound skill is never pickable — you cannot start with the thing you fuse INTO.
+ */
+export function startingSkillPool(tpl) {
+  if (!tpl || tpl.origin === 'compound') return null;
+  return tpl.animalOnly ? 'animal' : 'general';
+}
+
+/** Split a template list into the two creation pools, dropping compounds. */
+export function startingSkillPools(templates = []) {
+  const pools = { general: [], animal: [] };
+  for (const t of templates) {
+    const pool = startingSkillPool(t);
+    if (pool) pools[pool].push(t);
+  }
+  return pools;
+}
 // Rulebook §7.1 — SIZE SETS BASE PART HP (ruled 2026-09-15, v1.8). A base, never
 // a multiplier: §3.2's growth is flat, so a Small torso is 60% of a Medium's at
 // creation and 94% by F9. The head never drops below 2 at any size — it is a
@@ -37,6 +78,37 @@ export const SIZE_BASE_HP = {
  * §7.1 also allows non-standard layouts (flippers, not arms) — those are a GM
  * edit on the sheet afterwards; this is the starting frame.
  */
+/**
+ * Re-base an EXISTING body to a new size (a race change at the Surgeon's Table,
+ * §20.3, or a GM correction). Only `baseHp` moves — current HP, conditions,
+ * per-part resistances and any ADDED parts are left exactly as they are, because
+ * §7.1's table is a base and never a multiplier.
+ *
+ * A part is re-based only if its name matches a standard slot, so a grafted third
+ * arm or a flipper keeps whatever the GM gave it.
+ */
+export function rebasePartsForSize(parts = [], size = 'Medium') {
+  const hp = SIZE_BASE_HP[size] || SIZE_BASE_HP.Medium;
+  const slot = (name = '') => {
+    const n = name.trim().toLowerCase();
+    if (n === 'head') return 'Head';
+    if (n === 'torso') return 'Torso';
+    if (n.endsWith('arm')) return 'Arm';
+    if (n.endsWith('leg')) return 'Leg';
+    return null;
+  };
+  return parts.map(bp => {
+    const s = slot(bp.name);
+    if (!s) return bp;
+    const base = hp[s];
+    // maxHp is the legacy fallback for parts written before baseHp existed; keep
+    // the two in step so effectiveMaxHp() reads the same number either way.
+    const next = { ...bp, baseHp: base, maxHp: base };
+    if (typeof bp.currentHp === 'number') next.currentHp = Math.min(bp.currentHp, base);
+    return next;
+  });
+}
+
 export function bodyPartsForSize(size = 'Medium') {
   const hp = SIZE_BASE_HP[size] || SIZE_BASE_HP.Medium;
   const part = (id, name, base, lethal = false) =>

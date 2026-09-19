@@ -17,6 +17,17 @@ const skillTemplateSchema = new mongoose.Schema({
   // needs GM approval. Taxonomy: rulebook/skills-passover.md.
   keywords:          { type: [String], default: [] },
   levelEffects:      { type: Object, default: {} },
+  // Starting-skill eligibility (owner ruling 2026-09-19). A new contestant picks
+  // from this library: a Human takes 4 skills not locked to an animal; an Animal
+  // takes 2 of those plus 2 animal skills.
+  //   origin      'basic'    — pickable at creation
+  //               'compound' — a Gemstone MERGE product (§4.5, e.g. Intercept +
+  //                            Brace = Iron Stance). Never pickable at creation:
+  //                            you cannot start with something you fuse INTO.
+  //   animalOnly  the skill belongs to a body a human does not have.
+  // Neither field gates anything after creation — the GM grants whatever they like.
+  origin:     { type: String, enum: ['basic', 'compound'], default: 'basic' },
+  animalOnly: { type: Boolean, default: false },
 }, { timestamps: true });
 
 module.exports = mongoose.model('SkillTemplate', skillTemplateSchema);
