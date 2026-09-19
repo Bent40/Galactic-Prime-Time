@@ -223,3 +223,123 @@ the price) · **family** · **6–10 arc** (the R19 generalization direction) ·
 
 *After your answers: template-update script (dry-run first), `prime`/`family`/
 `exclusiveTo` fields + skill-card chips, new-skill seeds per G6, book changelog entry.*
+
+---
+
+# Part 3 — Starting-skill classification (owner ruling 2026-09-19)
+
+> *"a human gets to choose 4 skills that arent locked to an animal when first made. an
+> animal chooses 2 skills and 2 animal skills. robots are probably gonna be discontinued.
+> skills can be from our list, and can be any basic skill, not compound skills. they can
+> also suggest a skill if they believe non fit what they know to do. our current players
+> dont 100% fit to this."*
+
+The data lives in **`server/seeds/skills-classification.js`** — one row per template,
+each carrying its `why`. Apply it with
+`node apply-skill-classification.js --check | (dry run) | --apply` from `server/`;
+`--check` needs no `node_modules` and no DB, and prints the four pools.
+
+## ⚠️ The library is 49, not 44
+
+The 44-row table above is the pre-G6 library. **Five more were seeded 2026-07-25** —
+Intercept · Death Grip Jaws · Field Triage · **Iron Stance** · Play to the Camera —
+and every later count of "44 skills" is stale, this file's own header included.
+
+## 🔴 Three things the classification found, all live today
+
+1. **Iron Stance is pickable as a free starting skill.** It is §4.5's canonical
+   *merge product* — *"merge Intercept Lv 5 + Brace Lv 3 at the Skill Gemstone (both are
+   consumed)"* — and the creation picker offers it for nothing. ⭐ **A new contestant can
+   currently skip the entire Gemstone economy on their first click.** Fixed by
+   `origin: 'compound'`.
+2. **Mario's two exclusives are in the general pool.** G7 stamps `exclusiveTo: Mario` on
+   **Full Potential** and **Heroic Punch**, and the Compendium writes *"(Full Potential
+   exclusive)"* — but the field was proposed and never built, so nothing enforced it.
+3. **`RACE` ≠ `animalOnly`.** Seven skills carry the RACE family tag and **three of them
+   are XQUEZ/T's Robot racials** (Voicebox · Generate Visual Media · **Ignore All Previous
+   Commands**). With Robot/AI hidden from creation they belong to no pool at all, and
+   labelling them animal would offer a prompt-injection joke to a sea lion.
+
+## ✅ `exclusiveTo` is built (2026-09-19)
+
+§4.4 already says *"some skills are character-exclusive — tied to one contestant's nature
+and not obtainable by others"*; G7 proposed the field; it exists now on `SkillTemplate`,
+is whitelisted in the create / update / bulk-import routes and the player projection,
+shows as a **★ name only** badge and an edit field in the skill library, and
+**`startingSkillPool()` returns `null` for it** — so an exclusive skill is nobody's
+starting pick whichever pool it would otherwise sit in. Nothing after creation is gated;
+the GM still grants what they like.
+
+## The axis I widened, and it is mine not ruled
+
+`origin: 'compound'` is written to mean **"a new contestant may not take it cold"**, which
+covers two different shapes:
+
+- **MERGE** — a Gemstone product whose parents are consumed. **Two in the library:**
+  Iron Stance and **Elemental Confluence** (*"Consume Poison Ball Lv 5, Frost Ball Lv 5,
+  and Fire Ball Lv 5 at the Skill Gemstone. No other method."*).
+- **PREREQ** — the requirements name another skill at a level, so taken cold it is a dead
+  slot: Poison Wall · Mind Burst · and **the six chain follow-ups** (Slip Through ·
+  Decapitate · Shockwave · Execution · Pressure Strike · Thousand Cuts). **The three chain
+  OPENERS — Pounce, Overhead Slam, Feint — stay basic**, which is the right shape: a
+  contestant may start on a chain, never inside one.
+
+⚖ **Folding PREREQ in with MERGE is my call.** The field has exactly one job — deciding
+what a brand-new contestant may pick — and a skill that cannot fire is not a starting
+skill. Split them and the picker needs a second signal to do the same work. The `why`
+column keeps which kind each is, so the distinction is recorded, not lost.
+
+## 🔴 DRIFT — Frost Wall and Fire Wall
+
+The table above lists a **skill-prereq** for both, but their live `requirements` strings
+read only *"Mind 3."* — Poison Wall's reads *"Mind 3. Poison Ball Lv 3."* Either the two
+strings are missing a clause or the table is wrong. **Classified `compound` by symmetry
+and flagged `proposed`.**
+
+## The resulting pools
+
+| pool | n | contents |
+|---|---|---|
+| **General** | 27 | a Human picks 4, an Animal picks 2 |
+| **🐾 Animal-only** | 5 | Swim · Nightlurking · Slice n' Dice · ⚖ Juggling · ⚖ Death Grip Jaws |
+| **⚗ Compound** | 12 | nobody, at creation |
+| **★ Exclusive** | 5 | XQUEZ/T ×3 · Mario ×2 |
+
+⚠️ **The animal pool is the thin one** — 3 evidenced entries against a quota of 2, so an
+Animal's racial picks are nearly forced. Both ⚖ rows exist to widen it, and **R-4's
+"racial package per race" is the real answer.**
+
+## 👥 The two I was asked to read
+
+**Sasha (Cat) — `Slice n' Dice` + `Nightlurking`.** Not a guess: both carry the RACE
+family tag, **Slice n' Dice's own errata is *"math rewrite + FOREPAWS"***, and §7.1 cites
+**Nightlurking by name** as the small-animal passage trade. ⭐ **`Pounce` is the surprise —
+it is general**, and its own requirement proves it: *"Light Small Weapon (Claws **or
+Knife** type)."* It is also a chain opener feeding Slip Through → Decapitate, a family
+with nothing racial in it.
+
+**Filipe (Sea Lion) — `Swim` + ⚖ `Juggling`.** Swim is certain (RACE-tagged, and the
+Compendium writes *"Swim (racial)"*). The second is a judgement call, and the discriminator
+is **whose body the requirement is about**: Aura Reading asks that the *target* be visible,
+Vibe Control that the *target* be able to perceive you — those are a medic's skills and a
+human has them. **Juggling asks something of YOU** — *"must be able to physically handle
+the item's weight"* — and a performing sea lion balancing and tossing on nose and flippers
+is the species image itself. 🔴 **If you read Juggling as pure stagecraft, Filipe has ONE
+racial, not two** — which is simply the *"our current players dont 100% fit this"* case,
+and needs no correction.
+
+## 🔴 Still open
+
+1. ⚖ **Juggling** — animal or stagecraft? (decides Filipe's second slot)
+2. ⚖ **Death Grip Jaws** — animal? It fits a sea lion better than a cat, and it would give
+   the animal pool a fourth entry.
+3. ⚖ **Camouflage** — RACE-tagged with no owner, and its requirement is fully general
+   (*"look like or be concealed in the environment"*). A human in a ghillie suit qualifies.
+4. ⚖ **The three Robot racials** — `exclusiveTo: XQUEZ/T`, or something race-shaped?
+5. 🔴 **Frost Wall / Fire Wall** — the prereq drift above.
+6. 🔴 **The trade the game repo already ruled and the app does not implement.**
+   `data/races.json` carries the **2026-07-16** version of this same ruling — *"the
+   BACKGROUND grants 4 skills at creation; **any number may be given up for +1 cap on
+   another**"*, with `race_skill_bias` none/high. The 4/2+2 ruling is that ruling made
+   exact, but **trade-for-cap has never been built** and the creation picker has no way to
+   do it.

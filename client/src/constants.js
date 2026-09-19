@@ -49,6 +49,9 @@ export function startingSkillQuota(race) {
  */
 export function startingSkillPool(tpl) {
   if (!tpl || tpl.origin === 'compound') return null;
+  // §4.4 — a character-exclusive skill is nobody's starting pick, whichever
+  // pool it would otherwise sit in.
+  if (String(tpl.exclusiveTo || '').trim()) return null;
   return tpl.animalOnly ? 'animal' : 'general';
 }
 

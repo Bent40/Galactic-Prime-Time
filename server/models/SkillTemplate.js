@@ -25,9 +25,16 @@ const skillTemplateSchema = new mongoose.Schema({
   //                            Brace = Iron Stance). Never pickable at creation:
   //                            you cannot start with something you fuse INTO.
   //   animalOnly  the skill belongs to a body a human does not have.
-  // Neither field gates anything after creation — the GM grants whatever they like.
-  origin:     { type: String, enum: ['basic', 'compound'], default: 'basic' },
-  animalOnly: { type: Boolean, default: false },
+  //   exclusiveTo §4.4 "some skills are character-exclusive — tied to one
+  //               contestant's nature and not obtainable by others". A named
+  //               contestant here removes the skill from BOTH creation pools.
+  //               (Proposed in skills-passover G7; built 2026-09-19 because the
+  //               starting-skill picker was offering Mario's two exclusives and
+  //               XQUEZ/T's three Robot racials to every new contestant.)
+  // None of the three gates anything after creation — the GM grants what they like.
+  origin:      { type: String, enum: ['basic', 'compound'], default: 'basic' },
+  animalOnly:  { type: Boolean, default: false },
+  exclusiveTo: { type: String, default: '' },
 }, { timestamps: true });
 
 module.exports = mongoose.model('SkillTemplate', skillTemplateSchema);

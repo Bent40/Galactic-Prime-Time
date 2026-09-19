@@ -635,9 +635,9 @@ router.get('/skill-library', async (req, res) => {
 // POST /api/admin/skill-library
 router.post('/skill-library', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, exclusiveTo } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', animalOnly: !!animalOnly });
+    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', animalOnly: !!animalOnly, exclusiveTo: String(exclusiveTo || '').trim() });
     res.status(201).json(template);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -647,9 +647,9 @@ router.post('/skill-library', async (req, res) => {
 // PUT /api/admin/skill-library/:id
 router.put('/skill-library/:id', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, exclusiveTo } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', animalOnly: !!animalOnly }, { new: true });
+    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', animalOnly: !!animalOnly, exclusiveTo: String(exclusiveTo || '').trim() }, { new: true });
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json(template);
   } catch (err) {
@@ -700,6 +700,7 @@ router.post('/skill-library/bulk', async (req, res) => {
           levelEffects:      (s.levelEffects && typeof s.levelEffects === 'object') ? s.levelEffects : {},
           origin:            s.origin === 'compound' ? 'compound' : 'basic',
           animalOnly:        !!s.animalOnly,
+          exclusiveTo:       String(s.exclusiveTo || '').trim(),
         });
         results.added++;
       } catch (e) {

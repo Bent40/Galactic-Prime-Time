@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import {
   CREATION_RACES, SIZES, SIZE_BASE_HP, bodyPartsForSize,
   DEFAULT_STATE, BODY_TRAITS, CORE_TRAITS, TRAIT_LABELS,
-  startingSkillQuota, startingSkillPools, uid,
+  startingSkillQuota, startingSkillPools, startingSkillPool, uid,
 } from '../../constants.js';
 import { apiFetch } from '../../api.js';
 
@@ -75,7 +75,7 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
 
   const pickedIn = (pool) => picked.filter(id => {
     const t = byId[id];
-    return t && (t.animalOnly ? 'animal' : 'general') === pool;
+    return t && startingSkillPool(t) === pool;
   });
   const suggestedIn = (pool) => suggestions.filter(s => s.pool === pool);
   const filledIn = (pool) => pickedIn(pool).length + suggestedIn(pool).length;
@@ -84,7 +84,11 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
   const totalFilled = picked.length + suggestions.length;
 
   function togglePick(tpl) {
-    const pool = tpl.animalOnly ? 'animal' : 'general';
+    // Only ever called on a card drawn from a pool, but a template that is
+    // compound or character-exclusive belongs to neither — refuse rather than
+    // index quota with null.
+    const pool = startingSkillPool(tpl);
+    if (!pool) return;
     setPicked(p => {
       if (p.includes(tpl._id)) return p.filter(x => x !== tpl._id);
       if (roomIn(pool) <= 0) return p;                  // that pool is full

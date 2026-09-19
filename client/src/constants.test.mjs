@@ -212,5 +212,29 @@ eq('and the live party — 14 points each — sees no change at all today',
      .map(partHpBonus), [0, 0, 0, 0]);
 
 
+
+// ── §4.4 — a character-exclusive skill is nobody's starting pick ────────────
+console.log('\n§4.4 — exclusiveTo removes a skill from BOTH pools');
+eq('a plain general skill is general', startingSkillPool({ name: 'Brace' }), 'general');
+eq('an animal skill is animal', startingSkillPool({ name: 'Swim', animalOnly: true }), 'animal');
+eq('a compound skill is in no pool', startingSkillPool({ name: 'Iron Stance', origin: 'compound' }), null);
+eq('🔴 Mario-exclusive is in no pool, though it is basic and general',
+   startingSkillPool({ name: 'Heroic Punch', exclusiveTo: 'Mario' }), null);
+eq("⚠️ and an exclusive ANIMAL skill is still nobody's — the two locks compose",
+   startingSkillPool({ name: 'X', animalOnly: true, exclusiveTo: 'XQUEZ/T' }), null);
+eq('whitespace is not a name', startingSkillPool({ name: 'Y', exclusiveTo: '   ' }), 'general');
+{
+  const lib = [
+    { _id: 1, name: 'Brace' },
+    { _id: 2, name: 'Swim', animalOnly: true },
+    { _id: 3, name: 'Iron Stance', origin: 'compound' },
+    { _id: 4, name: 'Heroic Punch', exclusiveTo: 'Mario' },
+    { _id: 5, name: 'Voicebox', exclusiveTo: 'XQUEZ/T' },
+  ];
+  const pools = startingSkillPools(lib);
+  eq('the picker sees one general and one animal out of five', 
+     [pools.general.length, pools.animal.length], [1, 1]);
+}
+
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);

@@ -8,7 +8,7 @@ const BLANK_FORM = {
   requirements: '', range: '', target: '', effect: '', description: '',
   achievementUnlock: '', keywords: '', levelEffects: {},
   // Starting-skill eligibility (owner ruling 2026-09-19) — see models/SkillTemplate.js.
-  origin: 'basic', animalOnly: false,
+  origin: 'basic', animalOnly: false, exclusiveTo: '',
 };
 
 function LevelEffectsEditor({ value, onChange }) {
@@ -110,6 +110,7 @@ export default function SkillLibrarySection({ token, showToast }) {
                 {(t.keywords || []).map(k => <span key={k} className="badge badge-purple" title="Gemstone compatibility keyword">◈ {k}</span>)}
                 {t.animalOnly && <span className="badge badge-cyan" title="Animal-only: an Animal contestant may take this as one of its 2 animal starting skills">🐾 Animal</span>}
                 {t.origin === 'compound' && <span className="badge badge-muted" title="A Gemstone merge product (§4.5) — never pickable at character creation">⚗ Compound</span>}
+                {t.exclusiveTo && <span className="badge badge-gold" title="§4.4 character-exclusive — tied to one contestant and offered to nobody at creation">★ {t.exclusiveTo} only</span>}
                 {t.achievementUnlock && <span className="badge badge-gold">🔒 {t.achievementUnlock}</span>}
                 {t.levelEffects && Object.keys(t.levelEffects).filter(k => t.levelEffects[k]).length > 0 && (
                   <span className="badge badge-muted">
@@ -175,6 +176,11 @@ export default function SkillLibrarySection({ token, showToast }) {
                   <option value="general">General — any contestant</option>
                   <option value="animal">🐾 Animal only</option>
                 </select>
+              </div>
+              <div className="field-group">
+                <label className="field-label" title="§4.4 — tied to one contestant's nature and not obtainable by others. Any name here removes the skill from BOTH creation pools. Blank for none.">★ Exclusive to</label>
+                <input className="fi" placeholder="(nobody)" value={editModal.exclusiveTo || ''}
+                       onChange={e => setEditModal(m => ({ ...m, exclusiveTo: e.target.value }))} />
               </div>
             </div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Requirements</label><input className="fi" value={editModal.requirements || ''} onChange={e => setEditModal(m => ({ ...m, requirements: e.target.value }))} /></div>
