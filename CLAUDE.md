@@ -1931,12 +1931,49 @@ mislabel the older library. 🔴 **Needs an owner answer first:** were batches a
 Then `MATERIAL_BANDS` (M-0 **+0** and M-1 **+1** are ruled; M-2/M-3 are named sketches) and a
 Force readout. **Task #14.**
 
-## Rulebook & Wiki (added 2026-07-23)
+## Rulebook & Wiki (added 2026-07-23 · wiki rebuilt 2026-09-19)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
 - The player-facing **Wiki** (`/wiki` route, `client/src/pages/Wiki.jsx`) renders it via a
   `?raw` import + `marked` — one committed copy, no drift. The 📖 Wiki button in the sheet
   topbar opens it. `vite.config.js` has `server.fs.allow: ['..']` so dev mode can read it.
+
+### ✅ THE WIKI IS A REFERENCE TOOL NOW (2026-09-19) — presentation only, the book is byte-identical
+- **Full-text search across bodies, not just headings.** ⭐ **Scoring separates word-start
+  from mid-word hits** — without that, `hold` scored a direct hit inside every *threshold*
+  and **§14 Dodge Thresholds out-ranked the section that defines the Hold Threshold.**
+  Results carry section number, parent chapter, a match count and a marked snippet; clicking
+  one opens the chapter and highlights every occurrence **via a TreeWalker over text nodes**,
+  so the rendered HTML is never regex-rewritten. `/` or `Ctrl-K` focuses.
+- **Progressive disclosure** — a landing grid of 21 chapter cards over a pinned *"looked up
+  most"* row (§8.2 tiers · §7.3 Force · §10 resistance · §7.1 body · §21.6 prep · §6.1 · §5.5
+  · §12.6). ⭐ **Card summaries are derived from the book's own first sentence**, so nothing
+  is authored and nothing can drift; ⭐ **pins are held as section NUMBERS, not slugs**, so a
+  renumbering resolves or drops a card and **can never point at the wrong rule.**
+- **Both named bugs fixed.** The topbar hardcoded **v1.0**; it now parses the book's own
+  header (**1.10**, pinned against truncation to 1.1). `slugify` stripped every
+  non-alphanumeric, so section numbers could collide and `§` was dropped — now **97 sections,
+  97 unique ids, none empty, none an illegal selector.** 🔴 **And it closed a silent gap:**
+  the old regex only handled `h1–h3`, so **11 `h4` headings had NO id at all** — including
+  *"Force — the unit everything is measured in"*, one of the most looked-up lines in the book.
+- ⚙️ **Pure logic in `client/src/wikiIndex.js`** (`parseVersion` · `slugify` · `parseRulebook`
+  · `buildIndex` · `searchIndex` · `snippet` …), **101 dependency-free tests**, half against
+  the real rulebook. `node --experimental-detect-module client/src/wikiIndex.test.mjs`.
+- ⚠️ **HONEST LIMIT: none of it has been seen in a browser.** There is no jsdom in the
+  container, so the DOM decoration passes (tables → reference cards, markers → callouts,
+  heading anchors, highlight/unhighlight) are verified **by reading and by simulation against
+  real rendered HTML, never by execution.** They want one manual pass. 375px layout is
+  reasoned from the CSS, not observed.
+- 🟡 **One rulebook suggestion, NOT applied** (the book is the rules master — owner's call):
+  **§7.3 has no body of its own** — the `###` is immediately followed by `#### Force — the
+  unit everything is measured in`. It is the most looked-up rule in the book, and a heading
+  with no prose forced a fallback so a card or snippet can borrow from its child. **One
+  sentence under §7.3** (restating *"one Force is one basic punch"*) would fix the card, the
+  snippet and any future export. Nine other chapters have the same empty-preamble shape, but
+  those are chapter shells and the code handles them.
+- ⚠️ Pre-existing, out of scope: the JS bundle is **640 kB with no code-splitting**, and the
+  rulebook is ~110 kB of it `?raw`-imported into the main chunk — **so the character sheet
+  pays for the wiki.** A `React.lazy` on the `/wiki` route would fix it.
 - The full reconciliation plan (rules updates + app fixes, decisions D-1..D-8) lives in the
   game repo: `Galactic-Prime-Time-Game/docs/ttrpg-update-plan.md`.
 
