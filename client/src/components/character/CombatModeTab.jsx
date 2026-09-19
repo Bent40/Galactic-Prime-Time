@@ -1,8 +1,8 @@
-import { dmgClass, effectiveMaxHp, capBonus } from '../../constants.js';
+import { dmgClass, effectiveMaxHp, partHpBonus } from '../../constants.js';
 import TrackerBar from '../shared/TrackerBar.jsx';
 
 export default function CombatModeTab({ state, update, tracker }) {
-  const hpBonus = capBonus(state, 'physique');
+  const hpBonus = partHpBonus(state);
 
   function setHpDirect(bpId, delta) {
     update(s => ({ ...s, bodyParts: s.bodyParts.map(b => {
@@ -30,7 +30,7 @@ export default function CombatModeTab({ state, update, tracker }) {
                   </div>
                   <div className="combat-hp-big">{bp.currentHp}</div>
                   <div className="combat-hp-sep">/</div>
-                  <div className="combat-hp-max" title={hpBonus > 0 ? `Base ${bp.baseHp ?? bp.maxHp} + ${hpBonus} Physique` : undefined}>{effMax}</div>
+                  <div className="combat-hp-max" title={hpBonus > 0 ? `Base ${bp.baseHp ?? bp.maxHp} + ${hpBonus} from trait points` : undefined}>{effMax}</div>
                 </div>
                 {(bp.conditions || []).length > 0 && (
                   <div className="cond-list">

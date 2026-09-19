@@ -234,8 +234,30 @@ quietly deletes the pure caster).
   a real damage axis, and the trait band earns its keep on the skill side exactly as
   Architecture A framed it.
 - **L-18 — part HP scales off TOTAL trait points**, not Physique alone. The caster
-  chasm is closed: everyone's body grows as they grow. Physique may still keep a
-  bonus on top (⚖ open detail), but it is no longer the only source.
+  chasm is closed: everyone's body grows as they grow.
+
+✅ **BUILT 2026-09-19 — the book and the app now agree (rulebook v1.11).** §3.2's
+Physique row is withdrawn and replaced by *"every 5 trait points past creation adds
++1 max HP to every body part"*; `constants.js` computes it (`partHpBonus`,
+`totalTraitPoints`), the sheet and Combat Mode read it, and the Body Parts panel
+shows the running count.
+
+⚖ **The one open detail is closed the plain way: Physique keeps NO extra bonus.**
+L-18 left it open, but every calibration downstream already assumed this formula
+*alone* — `floor-bands.js`, `encounter-bands.js`, the 53 enemy statlines, §21.7
+encounter sizing and §21.8's press table are all sized against a torso of
+`5 + floor((points − 14) / 5)`. A second Physique source would put a focused build
+above the body the whole campaign is written for, and would re-open the chasm from
+the other end. **Mine, not blessed — one constant changes it.**
+
+⭐ **Nobody loses HP, and it is provable rather than hoped.** §2.2 forces 5 Core
+points at creation, so every legal contestant holds at least 4 points outside
+Physique — exactly the condition under which the total-points figure is never
+lower than the old Physique-only one. Existing sheets only ever gain.
+
+⚠️ **Zero change at the table today.** All four live contestants sit on exactly 14
+trait points, so their bonus was 0 under the old rule and is 0 under the new one.
+The rule starts paying on their second level.
 
 ---
 

@@ -1,9 +1,12 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.10** · 2026-09-18 — **a slot takes any modifier of its kind, at any
+**Version 1.11** · 2026-09-19 — **part HP scales off TOTAL trait points, not
+Physique alone** (§3.2, §7.1): every build's body grows at the same rate, the
+caster chasm is closed, and the live app now computes it. *Physique buys what it
+can lift, not how much of it there is.*
+*Previously —* **1.10** · 2026-09-18, **a slot takes any modifier of its kind, at any
 tier** (§12.3): item tier buys how MANY modifiers an object holds, never which
-ones, and the old access column is withdrawn. *A Basic knife may carry a Godly
-prefix; getting it back out is what costs.*
+ones, and the old access column is withdrawn.
 *Previously —* **1.9** · 2026-09-15, **what size buys is passage**, and the compensation
 lives in the race, not the size: **Animals are the specialised race** (§7.1).
 *Previously —* **1.8** · 2026-09-15, a weakness may **HEAL** instead of doubling (§7.3),
@@ -155,10 +158,13 @@ its own parenthetical guessed the future correctly.
   experience is finite by construction: there is no farm.
 - Each level grants **1 level point** into a shared pool. A level point buys
   **+1 to any one trait** — any trait, either pillar.
-- Levels grant nothing else by default (no automatic HP). More HP comes from
-  Physique (§3.2) or explicit rewards.
+- Levels grant nothing else by default (no automatic HP) — but **every point you
+  spend grows the body**, because part HP is sourced from your *total* trait
+  points (§3.2), whichever trait you put them in.
 
-### 3.2 Trait growth past 10 — milestone bonuses
+### 3.2 Trait growth — part HP and milestone bonuses
+
+#### Milestone bonuses past 10
 
 **Traits have no cap. They grow infinitely.** The over-10 thresholds are not
 ceilings — they are **repeating milestone payouts**: from 10 upward, every trait automatically pays out an extra effect
@@ -166,13 +172,49 @@ point at each step, forever:
 
 | Trait | Every … points past 10 | Grants |
 |---|---|---|
-| Physique | 5 | **+1 max HP to every body part** |
 | Reflexes | 12 | **+1 physical resistance point** (allocate to Bleed, Crush, or Burn) |
 | Mind | 15 | **+1 psychic resistance tier** |
 | Charm | 20 | **+1 Camera Call stack** (per session — §17.3) |
 
 (The formula in each row is `floor((trait − 10) / N)`, matching the live
 character-sheet app exactly.)
+
+> ⚰️ **Physique's row is withdrawn.** It used to read *"every 5 points past 10 →
+> +1 max HP to every body part."* Part HP no longer comes from Physique at all —
+> see the rule immediately below. Two faults: it paid **nothing** until Physique
+> reached 15, which is past Floor 2 even for a bruiser, so for the whole early
+> campaign the body was a flat number; and it made the body a **Physique tax**,
+> so a Mind or Charm build arrived at Floor 9 with a Floor 1 torso against Floor
+> 9 damage. *A contestant does not get tougher because the show hands them a
+> heavier sword; they get tougher because they have been here a while.*
+
+#### Part HP — the body grows off TOTAL trait points
+
+**Every 5 trait points past creation adds +1 max HP to every body part.**
+
+- **Creation is 14 points** — 1 base in each of the four traits plus the 10 bonus
+  points (§2.2). The count is your four trait totals added together.
+- The formula is `floor((total trait points − 14) / 5)`, and it is **flat on top
+  of the size base** (§7.1): a Small torso of 3 and a Medium torso of 5 both gain
+  the same number.
+- **Which trait the point went into does not matter.** Any point grows the body;
+  an *unspent* level point does not, because it has not grown anything yet.
+
+| | creation | F1 | F2 | F3 | F4 | F5 | F6 | F7 | F8 | F9 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **Total trait points** | 14 | 24 | 34 | 44 | 60 | 76 | 92 | 116 | 140 | 164 |
+| **+HP to every part** | +0 | +2 | +4 | +6 | +9 | +12 | +15 | +20 | +25 | **+30** |
+| **Medium torso** | 5 | 7 | 9 | 11 | 14 | 17 | 20 | 25 | 30 | **35** |
+
+- ⚙️ **This is the number every enemy statline is sized against.** §21.2's HP
+  budgets, §7.3's Force calibration, §21.7 encounter sizing and §21.8's press
+  table all derive from this torso. If it moves, all of them move with it.
+- ⚙️ **Nobody loses HP to this rule.** §2.2 forces 5 Core points at creation, so
+  every legal contestant holds at least 4 points outside Physique — which is
+  exactly the condition under which the total-points figure is never lower than
+  the old Physique-only one. Existing sheets only ever gain.
+- A part's max HP can still be raised **on top** by race, class, achievements,
+  skills and explicit rewards (§7.1).
 
 ### 3.3 Skill points
 
@@ -522,7 +564,8 @@ it is why `Nightlurking` reads the way it does.
   Medium. Effects referencing size read this field — **base part HP (above),
   passage through an opening (above), and grapple (§13).**
 - A part's max HP can be raised by **race, class, achievements, skills, and
-  stats** (Physique is the systematic source — §3.2).
+  stats**. The systematic source is **total trait points** — +1 to every part per
+  5 points past creation (§3.2), *not* Physique alone.
 
 ### 7.2 Targeting
 

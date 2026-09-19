@@ -30,7 +30,7 @@ import {
  * Held as SECTION NUMBERS, never slugs — renumber the book and this either
  * resolves or quietly drops the card; it can never point at the wrong rule.
  */
-const PINNED = ['8.2', '7.3', '10', '7.1', '21.6', '6.1', '5.5', '12.6'];
+const PINNED = ['8.2', '7.3', '10', '7.1', '3.2', '21.6', '6.1', '5.5', '12.6'];
 
 const MARKER_LABEL = {
   ruled: 'RULED', warn: 'CAUTION', open: 'OPEN', star: 'NOTE', cog: 'HOW IT WORKS',

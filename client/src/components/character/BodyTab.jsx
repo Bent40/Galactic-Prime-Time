@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { ALL_TRAITS, BODY_TRAITS, TRAIT_LABELS, RACES, SIZES, CANON_CONDITIONS, rebasePartsForSize } from '../../constants.js';
-import { uid, dmgClass, traitTotal as traitTotalOf, capBonus, effectiveMaxHp } from '../../constants.js';
+import { uid, dmgClass, traitTotal as traitTotalOf, capBonus, effectiveMaxHp,
+         partHpBonus, totalTraitPoints, pointsToNextHp, CREATION_POINTS, HP_PER_POINT } from '../../constants.js';
 
 function CondAddForm({ onAdd, onCancel }) {
   const [text, setText] = useState('');
@@ -130,7 +131,9 @@ export default function BodyTab({ state, update }) {
   const lvlPool = state.levelPoints?.pool ?? 0;
   const isLevelOne = (id.level || 1) <= 1;
 
-  const hpBonus       = capBonus(state, 'physique');
+  const hpBonus       = partHpBonus(state);
+  const traitPoints   = totalTraitPoints(state);
+  const toNextHp      = pointsToNextHp(state);
   const physResEarned = capBonus(state, 'reflexes');
   const dissolution   = capBonus(state, 'mind');
   const scb = state.statCapBonuses || {};
@@ -256,7 +259,14 @@ export default function BodyTab({ state, update }) {
       <div className="panel">
         <div className="panel-title">
           Body Parts
-          <button className="btn btn-cyan btn-sm" onClick={addBodyPart}>+ Part</button>
+          <div className="row gap-sm" style={{ fontWeight: 'normal' }}>
+            {/* L-18 — every part grows off TOTAL trait points, not Physique alone. */}
+            <span className={`pts-badge${hpBonus === 0 ? ' empty' : ''}`}
+                  title={`${traitPoints} trait points, ${CREATION_POINTS} at creation. Every ${HP_PER_POINT} points past creation add +1 HP to every part (L-18). ${toNextHp} more for +${hpBonus + 1}.`}>
+              {traitPoints} trait pts → {hpBonus > 0 ? `+${hpBonus} HP/part` : 'no body bonus'}
+            </span>
+            <button className="btn btn-cyan btn-sm" onClick={addBodyPart}>+ Part</button>
+          </div>
         </div>
         <div className="body-parts-grid">
           {state.bodyParts.map(bp => {
@@ -277,7 +287,7 @@ export default function BodyTab({ state, update }) {
                 <div className="hp-row">
                   <span className="hp-label">HP</span>
                   <input className="hp-max-input" type="number" min="0" value={baseHp}
-                    title={hpBonus > 0 ? `Base ${baseHp} + ${hpBonus} Physique = ${effectiveMax}` : undefined}
+                    title={hpBonus > 0 ? `Base ${baseHp} + ${hpBonus} from ${traitPoints} trait points = ${effectiveMax}` : undefined}
                     onChange={e => setBaseHp(bp.id, +e.target.value)} />
                   {hpBonus > 0 && <span style={{ fontSize: 9, color: 'var(--cyan)', marginLeft: 2 }}>+{hpBonus}</span>}
                   <div className="hp-boxes">

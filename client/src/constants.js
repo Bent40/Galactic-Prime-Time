@@ -215,17 +215,58 @@ export function traitTotal(state, t) {
 }
 
 // Traits are uncapped; every N points past 10 pays out one milestone bonus
-// (Physique /5 → +1 part HP · Reflexes /12 → +1 phys res · Mind /15 → +1 psychic
-// tier · Charm /20 → +1 Camera Call stack).
+// (Reflexes /12 → +1 phys res · Mind /15 → +1 psychic tier · Charm /20 → +1
+// Camera Call stack).
+//
+// ⚠️ PHYSIQUE'S ROW IS SUPERSEDED. §3.2 used to read "Physique /5 → +1 max HP to
+// every body part"; L-18 ruled part HP scales off TOTAL trait points instead, so
+// the HP source is partHpBonus() below and NOT capBonus(state, 'physique').
+// The divisor is kept only so the map stays whole — nothing reads it.
 export const CAP_DIVISORS = { physique: 5, reflexes: 12, mind: 15, charm: 20 };
 export function capBonus(state, t) {
   return Math.floor(Math.max(0, traitTotal(state, t) - 10) / CAP_DIVISORS[t]);
 }
 
-// A part's live max = its base HP (baseHp; legacy parts fall back to maxHp)
-// plus the Physique milestone bonus.
+// §2.2 — a contestant is created with 14 trait points: 1 base in each of the four
+// traits, plus the 10 bonus points (5 Body + 5 Core). This is the same
+// CREATION_POINTS that server/floor-bands.js and server/encounter-bands.js use to
+// derive every enemy statline, so the three must never drift.
+export const CREATION_POINTS = 14;
+// L-19 — +1 HP to every part per 5 total trait points past creation.
+export const HP_PER_POINT = 5;
+
+// The sum of all four traits (base + bonus + levelBonus). UNSPENT level points do
+// not count: a point in the pool has not grown anything yet.
+export function totalTraitPoints(state) {
+  return ALL_TRAITS.reduce((n, t) => n + traitTotal(state, t), 0);
+}
+
+/**
+ * L-18 (ruled 2026-08-18) — part HP scales off TOTAL trait points, not Physique
+ * alone, so a Mind or Charm build's body grows exactly as fast as a bruiser's.
+ * The curve is L-19's: a Medium torso runs 5 at creation → 7 at F1 → 35 at F9.
+ *
+ * ⚖ Physique keeps NO extra bonus on top. L-18 left that as an open detail, but
+ * every calibration already assumes this formula alone — floor-bands.js, the 53
+ * enemy statlines, §21.7 encounter sizing and §21.8's press table are all sized
+ * against a torso of 5 + floor((points − 14) / 5). Giving Physique a second
+ * source would put a focused build above the body the whole campaign is written
+ * for. One constant changes it if the owner rules otherwise.
+ */
+export function partHpBonus(state) {
+  return Math.floor(Math.max(0, totalTraitPoints(state) - CREATION_POINTS) / HP_PER_POINT);
+}
+
+// Points still owed toward the next +1 to every part. Purely a readout.
+export function pointsToNextHp(state) {
+  const past = Math.max(0, totalTraitPoints(state) - CREATION_POINTS);
+  return HP_PER_POINT - (past % HP_PER_POINT);
+}
+
+// A part's live max = its base HP (baseHp; legacy parts fall back to maxHp) plus
+// the whole-body trait-point bonus.
 export function effectiveMaxHp(bp, state) {
-  return (bp.baseHp ?? bp.maxHp ?? 0) + capBonus(state, 'physique');
+  return (bp.baseHp ?? bp.maxHp ?? 0) + partHpBonus(state);
 }
 
 export function dmgClass(current, max) {
