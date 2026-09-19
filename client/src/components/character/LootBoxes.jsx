@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../../api.js';
+import { publicSubtype } from '../../constants.js';
 
 // Sealed lootboxes strip + the reveal flow (item-drafting-passover ID-9).
 // Contents live server-side until opened; on open the SERVER only marks the box
@@ -17,7 +18,9 @@ const POLL_MS = 12000;
 // Read-only detail block — the informed-decision view (owner addition).
 function ItemDetail({ it }) {
   const rows = [
-    ['Tier', it.tier], ['Type', it.subtype || it.category],
+    // publicSubtype, never it.subtype — a hidden subtype (Growth) must read as
+    // its plain category here, the same as the junk beside it on the shelf.
+    ['Tier', it.tier], ['Type', publicSubtype(it.subtype, it.category)],
     ['Damage', it.damage && `${it.damage} ${(it.damageType || []).join('/')}`],
     ['Attack', (it.attackTypes || []).join(', ')], ['Range', it.range],
     ['RPM', it.rpm], ['Magazine', it.magazine],

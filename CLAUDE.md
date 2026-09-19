@@ -2123,12 +2123,18 @@ Basic 3 that would have marked them out — but **the SHELF gave them away by ca
   decent chance of investigating the wrong one.
 - ⚙️ **`shop-shelf.js` gained a camouflage gate**: Misc is now **16 lines, 4 of them Growth
   (25%)** and it **exits 1** if growth is ever the majority of its own shelf again.
-- 🔴 **A TELL I FOUND AND ONLY HALF-FIXED.** The shop card printed `subtype`, so *"Growth"*
-  sat beside *"Trinket"* — the page no longer prints it on Misc. ⚠️ **But the give-snapshot
-  copies `subtype` onto the player's own item**, so a granted growth item still says **Growth**
-  on their sheet. ⚖ **Recommended (mine, unruled): rename the four to `subtype: 'Trinket'` and
-  move the GM's marker to `themes: ['growth']`**, which is template-side and invisible to the
-  player. One `--force` seed.
+- ✅ **THE TELL IS CLOSED — `Growth` IS NEVER SHOWN TO A PLAYER (ruled 2026-09-19).** Owner:
+  *"Dont show growth tag on any item, it needs to be a revealed thing."* ⚠️ **My rename
+  proposal is WITHDRAWN and the owner's framing is better:** renaming the subtype would delete
+  the marker, and **you cannot reveal something you deleted.** ⭐ **The marker stays in the
+  data — it is the GM's filter and the seeder's category — and HIDING IT IS A DISPLAY RULE.**
+  `HIDDEN_SUBTYPES = ['Growth']` + **`publicSubtype(subtype, fallback)`** in `constants.js`;
+  a hidden subtype reads as its plain **category**, so a growth item in Misc shows *"Misc"*,
+  **indistinguishable from the junk beside it.** 🔴 **One live leak fixed:**
+  `character/LootBoxes.jsx` printed `['Type', it.subtype || it.category]` on the reveal card —
+  **a growth item opened from a box announced itself.** The shop page hides it too, on every
+  shelf. ⚙️ **A test walks `components/character/` and fails on any raw `it.subtype` in
+  markup**, so a new render site cannot leak it again.
 - 🔒 **`Signal Kit` is NOT STOCKED** (owner) — it stays in the library and stays grantable, it
   is simply not sold here. `NOT_STOCKED` in `shop-shelf.js` records it; ⚠️ **the reason is not
   written down**, and a one-line fiction note would keep it from looking like an oversight.

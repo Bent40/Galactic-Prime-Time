@@ -171,6 +171,35 @@ export const ITEM_CATS    = ['Equipment', 'Weapons', 'Tools', 'Consumables', 'Mi
 export const BOX_TIERS      = ['Bronze', 'Silver', 'Gold', 'Legendary', 'Mythic', 'Godly'];
 export const ITEM_SUBTYPES  = ['Bladed', 'Crush', 'Martial', 'Ranged', 'Thrown', 'Armor', 'Shield', 'Trinket', 'Tool', 'Consumable', 'Charged gear', 'Limited-magic', 'Kit', 'Growth', 'Tome', 'Material'];
 
+/**
+ * Subtypes the PLAYER must never be shown (owner, 2026-09-19: *"Dont show growth
+ * tag on any item, it needs to be a revealed thing."*).
+ *
+ * 🔴 `Growth` is the whole deferred-payoff category. The convention was already
+ * half-built — a growth item ships with NO `specialEffects`, so its card says only
+ * what anyone could see by looking at it — but the SUBTYPE leaked the secret in one
+ * word, and the give-snapshot copies `subtype` onto the player's own item.
+ *
+ * ⭐ The marker STAYS in the data. It is the GM's filter and the seeder's category;
+ * hiding it is a display rule, which is what makes the reveal possible later —
+ * delete the marker and there is nothing left to reveal.
+ */
+export const HIDDEN_SUBTYPES = ['Growth'];
+
+/**
+ * What a player may be shown in place of an item's subtype. A hidden subtype falls
+ * back to whatever was passed as `fallback` (normally the category), so the row
+ * still reads — a growth item in Misc shows "Misc", exactly like the junk beside it.
+ *
+ * ⛔ Every player-facing render of a subtype goes through this. A raw `it.subtype`
+ * on the sheet, in a loot box or on a shop card is a bug, and constants.test.mjs
+ * walks the source to catch it.
+ */
+export function publicSubtype(subtype, fallback = '') {
+  const s = String(subtype || '').trim();
+  return HIDDEN_SUBTYPES.includes(s) ? fallback : (s || fallback);
+}
+
 export const CAT_ICONS = {
   Weapons: '⚔️', Equipment: '🛡️', Tools: '🔧',
   Consumables: '💊', Misc: '📦', Hotbar: '⚡', Equipped: '🏃',

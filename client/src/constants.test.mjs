@@ -10,6 +10,7 @@ import { SIZES, SIZE_BASE_HP, bodyPartsForSize, DEFAULT_STATE, BODY_TRAITS, CORE
   traitTotal, capBonus, totalTraitPoints, partHpBonus, pointsToNextHp,
   effectiveMaxHp, CREATION_POINTS, HP_PER_POINT,
   itemDmgLabel, materialBand, strikingMaterial, MATERIAL_BANDS,
+  publicSubtype, HIDDEN_SUBTYPES, ITEM_SUBTYPES,
   reconcilePartHp, partHpBonusFor,
 } from './constants.js';
 
@@ -361,6 +362,45 @@ eq('a part with no currentHp at all is left alone',
    reconcilePartHp(sheet2(24, [{ name: 'Graft', baseHp: 3 }], 14)).bodyParts[0], { name: 'Graft', baseHp: 3 });
 eq('no state, no crash', reconcilePartHp(null), null);
 eq('no body and no traits, no crash', reconcilePartHp({ identity: { hpBasis: 14 }, traits: {} }).identity.hpBasis, 0);
+
+
+// ── ⛔ the Growth tag is never shown to a player ─────────────────────────────
+console.log('\n⛔ a hidden subtype never reaches a player');
+eq('Growth is the hidden one', HIDDEN_SUBTYPES, ['Growth']);
+ok('...and it is still a REAL subtype in the vocabulary — the marker stays in the data, '
+   + 'which is what makes a reveal possible later',
+   HIDDEN_SUBTYPES.every(s => ITEM_SUBTYPES.includes(s)));
+eq('⭐ a growth item reads as its plain category, exactly like the junk beside it',
+   publicSubtype('Growth', 'Misc'), 'Misc');
+eq('...and with no fallback it reads as nothing at all, never as "Growth"',
+   publicSubtype('Growth'), '');
+eq('an ordinary subtype passes straight through', publicSubtype('Trinket', 'Misc'), 'Trinket');
+eq('a blank subtype falls back to the category', publicSubtype('', 'Weapons'), 'Weapons');
+eq('whitespace is blank', publicSubtype('   ', 'Tools'), 'Tools');
+eq('no arguments at all is safe', [publicSubtype(), publicSubtype(null, null)], ['', null]);
+eq('🔒 a Trinket and a Growth item are INDISTINGUISHABLE once both are in Misc',
+   [publicSubtype('Growth', 'Misc'), publicSubtype('Misc', 'Misc')], ['Misc', 'Misc']);
+
+// Walk the player-facing components and prove none prints a raw subtype.
+{
+  const { readdirSync, statSync, readFileSync } = await import('node:fs');
+  const { join } = await import('node:path');
+  const offenders = [];
+  const walk = (dir) => {
+    for (const e of readdirSync(dir)) {
+      const p = join(dir, e);
+      if (statSync(p).isDirectory()) { walk(p); continue; }
+      if (!/\.jsx$/.test(e)) continue;
+      const t = readFileSync(p, 'utf8');
+      // `it.subtype` / `item.subtype` READ into markup, outside publicSubtype()
+      for (const m of t.matchAll(/\{[^{}]*\b(?:it|item)\.subtype\b[^{}]*\}/g))
+        if (!m[0].includes('publicSubtype')) offenders.push(`${e}: ${m[0].slice(0, 60)}`);
+    }
+  };
+  walk(new URL('./components/character', import.meta.url).pathname);
+  ok('🔒 no player-facing component renders a raw subtype — every one goes through publicSubtype',
+     offenders.length === 0, offenders.join(' | '));
+}
 
 console.log(`\n${pass} passed · ${fail} failed`);
 process.exit(fail ? 1 : 0);
