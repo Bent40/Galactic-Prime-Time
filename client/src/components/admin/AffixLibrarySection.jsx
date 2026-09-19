@@ -6,7 +6,7 @@ const TYPES = ['prefix', 'suffix'];
 const TIERS = AFFIX_TIERS;
 
 const TIER_COLOR = {
-  Lesser:    'var(--muted)',
+  Lesser:    'var(--muted-text)',
   Normal:    'var(--text)',
   Higher:    'var(--cyan)',
   Legendary: 'var(--gold)',
@@ -145,7 +145,7 @@ export default function AffixLibrarySection({ token, showToast }) {
                             <span style={{ fontWeight: 700, fontSize: 12, color: TIER_COLOR[a.tier] }}>
                               {a.type === 'prefix' ? a.name + ' …' : '… ' + a.name}
                             </span>
-                            <span style={{ fontSize: 9, color: 'var(--muted)', letterSpacing: 1, textTransform: 'uppercase' }}>
+                            <span style={{ fontSize: 9, color: 'var(--muted-text)', letterSpacing: 1, textTransform: 'uppercase' }}>
                               {a.tier}
                             </span>
                           </div>
@@ -153,7 +153,7 @@ export default function AffixLibrarySection({ token, showToast }) {
                             <div style={{ fontSize: 10, color: 'var(--gold)', marginBottom: 2 }}>{a.effects}</div>
                           )}
                           {a.description && (
-                            <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic' }}>{a.description}</div>
+                            <div style={{ fontSize: 10, color: 'var(--muted-text)', fontStyle: 'italic' }}>{a.description}</div>
                           )}
                           <div className="item-card-actions" style={{ marginTop: 6 }}>
                             <button className="btn btn-purple btn-xs" onClick={() => setEditModal({ ...a })}>Edit</button>
@@ -170,7 +170,7 @@ export default function AffixLibrarySection({ token, showToast }) {
         })}
 
         {affixes.length === 0 && (
-          <div style={{ color: 'var(--muted)', fontSize: 11, marginBottom: 16 }}>No affixes yet.</div>
+          <div style={{ color: 'var(--muted-text)', fontSize: 11, marginBottom: 16 }}>No affixes yet.</div>
         )}
 
         {/* Create form */}

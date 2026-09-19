@@ -25,9 +25,16 @@ const fileIdx = process.argv.indexOf('--file');
 const seedFile = fileIdx !== -1 ? process.argv[fileIdx + 1] : './seeds/skills-classification.js';
 
 const ORIGINS = ['basic', 'compound'];
-// §2.2 + the 2026-09-19 ruling. A Human takes 4 general; an Animal 2 general +
-// 2 animal. The pools must be able to FILL those quotas or creation dead-ends.
-const QUOTAS = { Human: { general: 4, animal: 0 }, Animal: { general: 2, animal: 2 } };
+// The races a skill may be locked to. '' = anyone.
+const RACES = ['Human', 'Animal', 'Robot / AI'];
+// §2.2 + the 2026-09-19 rulings. Every race takes some general picks plus some of
+// its OWN racials, and the pools must FILL those quotas or creation dead-ends.
+// Robot / AI is hidden from creation but kept honest here.
+const QUOTAS = {
+  Human:        { general: 4, racial: 0 },
+  Animal:       { general: 2, racial: 2 },
+  'Robot / AI': { general: 2, racial: 2 },
+};
 
 function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 function redactUri(uri) {
@@ -45,28 +52,33 @@ function check(rows) {
     if (seen.has(key)) errs.push(`${at}: duplicate of row ${seen.get(key)} — two rows cannot claim one template`);
     else seen.set(key, i);
     if (!ORIGINS.includes(r.origin)) errs.push(`${at}: origin "${r.origin}" is not ${ORIGINS.join(' | ')}`);
-    if (typeof r.animalOnly !== 'boolean') errs.push(`${at}: animalOnly must be a boolean`);
+    const lock = String(r.raceLock == null ? '' : r.raceLock);
+    if (lock && !RACES.includes(lock)) errs.push(`${at}: raceLock "${lock}" is not one of ${RACES.join(' | ')}`);
+    if (lock && r.exclusiveTo) errs.push(`${at}: a race lock and a character lock are different claims — pick one`);
     if (r.exclusiveTo === undefined) errs.push(`${at}: exclusiveTo must be present ('' for none)`);
     if (!r.why) errs.push(`${at}: every row states WHY — an unexplained lock is not reviewable`);
     if (!['evidenced', 'proposed'].includes(r.status)) errs.push(`${at}: status must be evidenced | proposed`);
     if ('requirementsFix' in r && !String(r.requirementsFix || '').trim())
       errs.push(`${at}: requirementsFix is present but empty — omit the field instead`);
-    // A compound skill nobody can reach is fine; an animal-only compound is not
-    // — an Animal's two racial slots cannot be spent on something unpickable.
-    if (r.origin === 'compound' && r.animalOnly) errs.push(`${at}: animalOnly + compound — an Animal's racial slot could never be filled with it`);
+    // A compound skill nobody can reach is fine; a race-LOCKED compound is not —
+    // that race's racial slots could never be filled with it.
+    if (r.origin === 'compound' && lock) errs.push(`${at}: raceLock + compound — a ${lock}'s racial slot could never be filled with it`);
   });
 
   // The quota gate: can each race actually fill its picks?
-  const general = rows.filter(r => r.origin === 'basic' && !r.animalOnly && !r.exclusiveTo);
-  const animal  = rows.filter(r => r.origin === 'basic' &&  r.animalOnly && !r.exclusiveTo);
+  const pickable = rows.filter(r => r.origin === 'basic' && !r.exclusiveTo);
+  const general = pickable.filter(r => !r.raceLock);
+  const racial  = {};
+  for (const r of pickable) if (r.raceLock) (racial[r.raceLock] = racial[r.raceLock] || []).push(r);
   for (const [race, q] of Object.entries(QUOTAS)) {
     if (general.length < q.general) errs.push(`${race}: needs ${q.general} general skills, the pool has ${general.length}`);
-    if (animal.length  < q.animal)  errs.push(`${race}: needs ${q.animal} animal skills, the pool has ${animal.length}`);
+    const own = (racial[race] || []).length;
+    if (own < q.racial) errs.push(`${race}: needs ${q.racial} ${race} skills, the pool has ${own}`);
   }
-  return { errs, general, animal };
+  return { errs, general, racial };
 }
 
-function printTable(rows, general, animal) {
+function printTable(rows, general, racial) {
   const compound  = rows.filter(r => r.origin === 'compound');
   const exclusive = rows.filter(r => r.exclusiveTo);
   const show = (title, list, note) => {
@@ -77,8 +89,9 @@ function printTable(rows, general, animal) {
       console.log(`  ${flag} ${r.name}${lock}`);
     }
   };
-  show('GENERAL — a Human picks 4 of these, an Animal 2', general);
-  show('ANIMAL-ONLY — an Animal picks 2 of these', animal);
+  show('GENERAL — anyone. A Human picks 4 of these, an Animal 2', general);
+  for (const [race, list] of Object.entries(racial))
+    show(`${race.toUpperCase()}-ONLY — ${/^[AEIOU]/.test(race) ? 'an' : 'a'} ${race} contestant picks ${(QUOTAS[race] || {}).racial ?? 2} of these`, list);
   show('COMPOUND — nobody picks these at creation', compound, '(MERGE or PREREQ; see why)');
   show('CHARACTER-EXCLUSIVE — offered to nobody at creation', exclusive);
   const proposed = rows.filter(r => r.status === 'proposed');
@@ -90,7 +103,7 @@ function printTable(rows, general, animal) {
 
 async function run() {
   const rows = require(path.isAbsolute(seedFile) ? seedFile : path.join(__dirname, seedFile));
-  const { errs, general, animal } = check(rows);
+  const { errs, general, racial } = check(rows);
   if (errs.length) {
     console.error(`Classification gate FAILED — ${errs.length} problem(s):`);
     errs.forEach(e => console.error('  ✗ ' + e));
@@ -99,7 +112,7 @@ async function run() {
 
   if (process.argv.includes('--check')) {
     console.log(`Classification gate passed — ${rows.length} template(s). (No DB touched.)`);
-    printTable(rows, general, animal);
+    printTable(rows, general, racial);
     return;
   }
 
@@ -107,14 +120,17 @@ async function run() {
   const mongoose = require('mongoose');
   const SkillTemplate = require('./models/SkillTemplate');
   const hasExclusive = !!SkillTemplate.schema.path('exclusiveTo');
+  const hasRaceLock  = !!SkillTemplate.schema.path('raceLock');
 
   const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/galactic-prime-time';
   await mongoose.connect(uri);
   console.log(`${apply ? '=== APPLY MODE ===' : '=== DRY RUN (pass --apply to write) ==='}  ${redactUri(uri)}`);
   console.log(`Seed file: ${seedFile} — ${rows.length} template(s)`);
-  if (!hasExclusive) console.log('⚠️  SkillTemplate has no `exclusiveTo` field yet — those values are REPORTED, never written.\n');
+  if (!hasExclusive) console.log('⚠️  SkillTemplate has no `exclusiveTo` field yet — those values are REPORTED, never written.');
+  if (!hasRaceLock)  console.log('⚠️  SkillTemplate has no `raceLock` field yet — those values are REPORTED, never written.');
+  console.log('');
 
-  const fields = ['origin', 'animalOnly', ...(hasExclusive ? ['exclusiveTo'] : [])];
+  const fields = ['origin', ...(hasRaceLock ? ['raceLock'] : []), ...(hasExclusive ? ['exclusiveTo'] : [])];
   // A content repair, not a classification — kept separate so it is obvious in the
   // diff that this call is rewriting a template's prose, and only where a row says to.
   const fixes = rows.filter(r => r.requirementsFix);

@@ -632,12 +632,23 @@ router.get('/skill-library', async (req, res) => {
   }
 });
 
+/**
+ * The race a skill is locked to at creation, or '' for anyone (owner, 2026-09-19).
+ * `animalOnly` is the boolean this replaced — a client that still sends it, or a
+ * template written before today, reads as a lock on 'Animal'. Never written back.
+ */
+function normRaceLock(raceLock, animalOnly) {
+  const lock = String(raceLock == null ? '' : raceLock).trim();
+  if (lock) return lock;
+  return animalOnly ? 'Animal' : '';
+}
+
 // POST /api/admin/skill-library
 router.post('/skill-library', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', animalOnly: !!animalOnly, exclusiveTo: String(exclusiveTo || '').trim() });
+    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() });
     res.status(201).json(template);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -647,9 +658,9 @@ router.post('/skill-library', async (req, res) => {
 // PUT /api/admin/skill-library/:id
 router.put('/skill-library/:id', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', animalOnly: !!animalOnly, exclusiveTo: String(exclusiveTo || '').trim() }, { new: true });
+    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() }, { new: true });
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json(template);
   } catch (err) {
@@ -699,7 +710,7 @@ router.post('/skill-library/bulk', async (req, res) => {
           achievementUnlock: s.achievementUnlock  || '',
           levelEffects:      (s.levelEffects && typeof s.levelEffects === 'object') ? s.levelEffects : {},
           origin:            s.origin === 'compound' ? 'compound' : 'basic',
-          animalOnly:        !!s.animalOnly,
+          raceLock:          normRaceLock(s.raceLock, s.animalOnly),
           exclusiveTo:       String(s.exclusiveTo || '').trim(),
         });
         results.added++;

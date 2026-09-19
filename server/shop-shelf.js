@@ -12,8 +12,15 @@
  * the library at Crude or Basic tier — the store sells nothing better, and the
  * Lounge takes over the moment it unlocks.
  */
-const FILES = ['items-batch-a.js', 'items-batch-b.js', 'items-batch-c.js', 'items-safety.js'];
+const FILES = ['items-batch-a.js', 'items-batch-b.js', 'items-batch-c.js',
+               'items-safety.js', 'items-curios.js'];
 const ORDER = ['Consumables', 'Weapons', 'Equipment', 'Tools', 'Misc'];
+
+/**
+ * In the library but NOT on the tutorial store's shelf (owner, 2026-09-19).
+ * The item keeps existing and stays grantable — it is simply not sold here.
+ */
+const NOT_STOCKED = new Set(['Signal Kit']);
 
 /** §19.3, and the whole price list is these three lines. */
 function price(item) {
@@ -29,7 +36,7 @@ function shelf() {
     all.push(...(Array.isArray(m) ? m : (m.items || [])));
   }
   return all
-    .filter(i => i.tier === 'Crude' || i.tier === 'Basic')
+    .filter(i => (i.tier === 'Crude' || i.tier === 'Basic') && !NOT_STOCKED.has(i.name))
     .map(i => ({
       n: i.name, ic: i.icon || '📦', c: i.category, t: i.tier, s: i.subtype || '',
       p: price(i), e: i.specialEffects || '', d: i.description || '',
@@ -54,14 +61,23 @@ if (require.main === module) {
     }
     console.log('');
   }
-  // ⚠️ The Growth shelf is the one that gives itself away: growth items are the
-  // ONLY things in Misc, so "the weird shelf" is a category a player can point at.
+  // ⚠️ THE CAMOUFLAGE GATE. Growth items are meant to look like nothing, and their
+  // price is careful — every one is Crude, so 1 UT, under the Basic 3 that would
+  // mark them out. But a Misc shelf that is ALL growth items gives them away by
+  // category instead: "what's the weird shelf?" is the question the price was
+  // designed not to provoke. Keep them a minority of their own shelf.
   const misc = stock.filter(i => i.c === 'Misc');
   const growth = misc.filter(i => i.s === 'Growth');
-  if (misc.length && growth.length === misc.length) {
-    console.log(`⚠️  Odds & Ends is ${misc.length} items and ALL ${growth.length} are Growth.`);
+  const share = misc.length ? growth.length / misc.length : 0;
+  if (growth.length && share > 0.5) {
+    console.log(`⚠️  Odds & Ends is ${misc.length} items and ${growth.length} of them are Growth `
+      + `(${Math.round(share * 100)}%).`);
     console.log('   Price is not the tell (every one is 1 UT) — the SHELF is.');
-    console.log('   Fix: author ordinary 1 UT curios into Misc so they have company.');
+    console.log('   Fix: author more worthless curios into Misc (seeds/items-curios.js).');
+    process.exitCode = 1;
+  } else if (growth.length) {
+    console.log(`✅ Odds & Ends: ${misc.length} lines, ${growth.length} of them Growth `
+      + `(${Math.round(share * 100)}%) — the shelf reads as junk.`);
   }
 }
 

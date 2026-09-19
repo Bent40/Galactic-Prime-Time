@@ -39,7 +39,7 @@ export default function PlayerPanel({ player, token, showToast }) {
     apiFetch('/api/tags', {}, token).then(d => { if (Array.isArray(d)) setTagLib(d); });
   }, [player.userId]);
 
-  if (loading) return <div style={{ padding: 20, color: 'var(--muted)', fontSize: 11, letterSpacing: 2 }}>LOADING...</div>;
+  if (loading) return <div style={{ padding: 20, color: 'var(--muted-text)', fontSize: 11, letterSpacing: 2 }}>LOADING...</div>;
   if (!charData) return null;
 
   const state = charData.state || {};
@@ -387,7 +387,7 @@ export default function PlayerPanel({ player, token, showToast }) {
               <div key={t} className="stat-box">
                 <div className="stat-name">{TRAIT_LABELS[t]}</div>
                 <div className="stat-val">{traitTotal(t)}</div>
-                <div style={{ fontSize: 9, color: 'var(--muted)', marginBottom: 4 }}>
+                <div style={{ fontSize: 9, color: 'var(--muted-text)', marginBottom: 4 }}>
                   Base {base}{bonus ? ` +${bonus}` : ''}{lvBonus ? ` +${lvBonus}Lv` : ''}
                 </div>
                 <div style={{ display: 'flex', gap: 4, justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -437,7 +437,7 @@ export default function PlayerPanel({ player, token, showToast }) {
                   <label className="field-label">{lbl}</label>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
                     <button className="btn btn-muted btn-xs" disabled={val <= 0} onClick={() => setAfflictionRes(key, val - 1)}>−</button>
-                    <span style={{ minWidth: 64, textAlign: 'center', fontSize: 11, fontWeight: 700, color: val > 0 ? 'var(--cyan)' : 'var(--muted)' }}>
+                    <span style={{ minWidth: 64, textAlign: 'center', fontSize: 11, fontWeight: 700, color: val > 0 ? 'var(--cyan)' : 'var(--muted-text)' }}>
                       {val > 0 ? `T${val} Immune` : '—'}
                     </span>
                     <button className="btn btn-cyan btn-xs" onClick={() => setAfflictionRes(key, val + 1)}>+</button>
@@ -488,7 +488,7 @@ export default function PlayerPanel({ player, token, showToast }) {
               <button className="btn btn-danger btn-xs" onClick={() => rmSkill(sk.id)}>✕</button>
             </div>
           ))}
-          {(!state.skills || state.skills.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No skills.</span>}
+          {(!state.skills || state.skills.length === 0) && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No skills.</span>}
         </div>
         <div className="section-label">Add from Library</div>
         <input className="fi" placeholder="Search library..." value={libSearch} onChange={e => setLibSearch(e.target.value)} style={{ marginBottom: 6 }} />
@@ -497,10 +497,10 @@ export default function PlayerPanel({ player, token, showToast }) {
             <div key={t._id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 8px', border: '1px solid var(--border)', borderRadius: 3, background: 'rgba(0,0,0,.2)', cursor: 'pointer' }}
               onClick={() => addSkill(t)}>
               <span style={{ flex: 1, fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{t.name}</span>
-              <span style={{ fontSize: 9, color: 'var(--muted)' }}>{t.capacity || 'Active'} · {t.momentCost || '—'}</span>
+              <span style={{ fontSize: 9, color: 'var(--muted-text)' }}>{t.capacity || 'Active'} · {t.momentCost || '—'}</span>
             </div>
           ))}
-          {filteredLib.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No matching templates.</span>}
+          {filteredLib.length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No matching templates.</span>}
         </div>
       </div>
 
@@ -519,7 +519,7 @@ export default function PlayerPanel({ player, token, showToast }) {
               <button className="btn btn-danger btn-xs" onClick={() => revokeAch(a.id)}>✕</button>
             </div>
           ))}
-          {(!state.achievements || state.achievements.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No achievements.</span>}
+          {(!state.achievements || state.achievements.length === 0) && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No achievements.</span>}
         </div>
         <div className="add-form">
           <div className="field-group" style={{ flex: 2 }}><label className="field-label">Title</label><input className="fi" value={achForm.title} onChange={e => setAchForm(f => ({ ...f, title: e.target.value }))} /></div>
@@ -535,11 +535,11 @@ export default function PlayerPanel({ player, token, showToast }) {
         <div className="row" style={{ flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
           {(state.tags || []).map(tag => (
             <span key={tag.id} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, padding: '3px 10px', borderRadius: 20, background: 'rgba(0,212,255,.07)', border: '1px solid rgba(0,212,255,.25)', color: 'var(--cyan)', fontSize: 10 }}>
-              {tag.name} <span style={{ color: 'var(--muted)', fontSize: 8 }}>({tag.kind === 'mark' ? `mark · ${tag.state}` : tag.state})</span>
-              <button style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer', fontSize: 10, padding: 0 }} onClick={() => rmTag(tag.id)}>✕</button>
+              {tag.name} <span style={{ color: 'var(--muted-text)', fontSize: 8 }}>({tag.kind === 'mark' ? `mark · ${tag.state}` : tag.state})</span>
+              <button style={{ background: 'none', border: 'none', color: 'var(--muted-text)', cursor: 'pointer', fontSize: 10, padding: 0 }} onClick={() => rmTag(tag.id)}>✕</button>
             </span>
           ))}
-          {(!state.tags || state.tags.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No tags.</span>}
+          {(!state.tags || state.tags.length === 0) && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No tags.</span>}
         </div>
         <div className="row">
           <input className="fi" style={{ flex: 1 }} placeholder="Tag name (pick from catalog or freetext)..." value={tagForm} onChange={e => setTagForm(e.target.value)} onKeyDown={e => e.key === 'Enter' && addTag()} list="admin-tag-master" />
@@ -585,11 +585,11 @@ export default function PlayerPanel({ player, token, showToast }) {
             <div key={it._id} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 8px', border: '1px solid var(--border)', borderRadius: 3, background: 'rgba(0,0,0,.2)' }}>
               <span style={{ fontSize: 16 }}>{it.icon || '📦'}</span>
               <span style={{ flex: 1, fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{it.name}</span>
-              <span style={{ fontSize: 9, color: 'var(--muted)' }}>{it.category}</span>
+              <span style={{ fontSize: 9, color: 'var(--muted-text)' }}>{it.category}</span>
               <button className="btn btn-cyan btn-xs" onClick={() => giveItem(it)}>Give</button>
             </div>
           ))}
-          {itemLib.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No items in library.</span>}
+          {itemLib.length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No items in library.</span>}
         </div>
       </div>
 
@@ -607,16 +607,16 @@ export default function PlayerPanel({ player, token, showToast }) {
             return (
               <div key={sec} style={{ marginBottom: 12 }}>
                 <div className="section-label">{sec === 'main' ? 'Main' : sec.charAt(0).toUpperCase() + sec.slice(1)}</div>
-                {list.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 10, fontStyle: 'italic' }}>No objectives in this section.</span>}
+                {list.length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 10, fontStyle: 'italic' }}>No objectives in this section.</span>}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                   {list.map(obj => (
                     <div key={obj.id} style={{ border: '1px solid var(--border)', borderRadius: 4, padding: 8, background: 'rgba(0,0,0,.15)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                         <span style={{ flex: 1, fontSize: 12, fontWeight: 700, color: 'var(--text)' }}>{obj.title}</span>
-                        <span style={{ fontSize: 9, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: 1 }}>{obj.status || 'active'}</span>
+                        <span style={{ fontSize: 9, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: 1 }}>{obj.status || 'active'}</span>
                         <button className="btn btn-danger btn-xs" onClick={() => objRemove(sec, obj.id)}>✕</button>
                       </div>
-                      {obj.description && <div style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 6 }}>{obj.description}</div>}
+                      {obj.description && <div style={{ fontSize: 10, color: 'var(--muted-text)', marginBottom: 6 }}>{obj.description}</div>}
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 3, marginBottom: 6 }}>
                         {(obj.subtasks || []).map(st => (
                           <div key={st.id} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -630,7 +630,7 @@ export default function PlayerPanel({ player, token, showToast }) {
                             <button className="btn btn-danger btn-xs" onClick={() => objRemoveSubtask(sec, obj.id, st.id)}>✕</button>
                           </div>
                         ))}
-                        {(obj.subtasks || []).length === 0 && <span style={{ color: 'var(--muted)', fontSize: 10, fontStyle: 'italic' }}>No subtasks.</span>}
+                        {(obj.subtasks || []).length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 10, fontStyle: 'italic' }}>No subtasks.</span>}
                       </div>
                       <div className="row" style={{ gap: 4 }}>
                         <input
@@ -665,7 +665,7 @@ export default function PlayerPanel({ player, token, showToast }) {
             <div key={cat.id} style={{ marginBottom: 12, border: '1px solid var(--border)', borderRadius: 4 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 12px', background: 'rgba(0,212,255,.04)', borderBottom: '1px solid var(--border)' }}>
                 <span style={{ flex: 1, fontSize: 11, fontWeight: 700, color: 'var(--cyan)', letterSpacing: 1, textTransform: 'uppercase' }}>{cat.name}</span>
-                <span style={{ fontSize: 10, color: 'var(--muted)' }}>{(cat.items || []).length} items</span>
+                <span style={{ fontSize: 10, color: 'var(--muted-text)' }}>{(cat.items || []).length} items</span>
                 <button className="btn btn-cyan btn-xs" onClick={() => invAddItem(cat.id)}>+ Add</button>
               </div>
               <div style={{ padding: '6px 10px', display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -691,7 +691,7 @@ export default function PlayerPanel({ player, token, showToast }) {
                     <button className="btn btn-danger btn-xs" onClick={() => invDeleteItem(cat.id, item.id)}>✕</button>
                   </div>
                 ))}
-                {(cat.items || []).length === 0 && <span style={{ color: 'var(--muted)', fontSize: 10, padding: '2px 0' }}>Empty</span>}
+                {(cat.items || []).length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 10, padding: '2px 0' }}>Empty</span>}
               </div>
             </div>
           ))}
@@ -719,7 +719,7 @@ export default function PlayerPanel({ player, token, showToast }) {
             ))}
             <div className="modal-grid2" style={{ marginBottom: 6 }}>
               <div className="field-group">
-                <label className="field-label">Max Uses <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(empty = unlimited)</span></label>
+                <label className="field-label">Max Uses <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(empty = unlimited)</span></label>
                 <input className="fi" type="number" min="1"
                   value={invItemModal.item.uses?.max ?? ''}
                   onChange={e => {

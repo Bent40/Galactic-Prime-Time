@@ -27,7 +27,7 @@ const CONTENT_FLAVOR = {
 };
 const SUB_FLAVOR = { Kit: ['Assembly'], Growth: ['Sleeper'], 'Limited-magic': ['Arcana'], Trinket: ['Bling'], Material: ['Quarry'], Tome: ['Book-Club'] };
 const SHOW = ['Primetime', 'Encore', 'Fan-Favorite', 'Sweeps-Week', 'Golden-Hour', 'Season-Finale', 'Commercial-Break', 'Ratings-Spike', 'Cliffhanger', 'Cold-Open'];
-const TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
+const TIER_COLOR = { Crude: 'var(--muted-text)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 const BOX_COLOR = { Bronze: '#cd7f32', Silver: '#c0c0c0', Gold: 'var(--gold)', Legendary: '#a855f7', Mythic: '#ec4899', Godly: '#fff' };
 const TIER_STEP = { '': 0, Crude: 0, Basic: 0, Quality: 1, Superior: 2, Exceptional: 3 };
 const BOX_LADDER = ['Bronze', 'Silver', 'Gold', 'Legendary'];
@@ -105,7 +105,7 @@ export default function BoxBuilder({ items, players, token, showToast }) {
   return (
     <div className="panel">
       <div className="panel-title admin" style={{ cursor: 'pointer', userSelect: 'none' }} onClick={() => setOpen(o => !o)}>
-        📦 Box Builder {open ? '▾' : '▸'} <span style={{ color: 'var(--muted)', fontSize: 11, fontWeight: 400 }}>compose sealed lootboxes — the Box Namer lives inside</span>
+        📦 Box Builder {open ? '▾' : '▸'} <span style={{ color: 'var(--muted-text)', fontSize: 11, fontWeight: 400 }}>compose sealed lootboxes — the Box Namer lives inside</span>
       </div>
       {open && (
         <>
@@ -126,10 +126,10 @@ export default function BoxBuilder({ items, players, token, showToast }) {
                 {filtered.map(i => (
                   <div key={i._id} style={rowStyle} onClick={() => addItem(i)}>
                     <span>{i.icon || '📦'} {i.name} {i.tier && <span style={{ fontSize: 10, color: TIER_COLOR[i.tier] }}>· {i.tier}</span>}</span>
-                    <span style={{ fontSize: 10, color: 'var(--muted)' }}>{i.subtype || i.category}</span>
+                    <span style={{ fontSize: 10, color: 'var(--muted-text)' }}>{i.subtype || i.category}</span>
                   </div>
                 ))}
-                {filtered.length === 0 && <div style={{ ...rowStyle, cursor: 'default', color: 'var(--muted)' }}>No matches.</div>}
+                {filtered.length === 0 && <div style={{ ...rowStyle, cursor: 'default', color: 'var(--muted-text)' }}>No matches.</div>}
               </div>
             </div>
 
@@ -155,7 +155,7 @@ export default function BoxBuilder({ items, players, token, showToast }) {
                   <button key={g} className={`badge-toggle${source === g ? ' on' : ''}`} style={{ fontSize: 10 }} onClick={() => setSource(g)}>{g}</button>
                 ))}
               </div>
-              <label className="field-label" style={{ marginTop: 10 }}>Box tier <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(auto: {inferTier()})</span></label>
+              <label className="field-label" style={{ marginTop: 10 }}>Box tier <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(auto: {inferTier()})</span></label>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
                 {['Auto', ...BOX_TIERS].map(t => (
                   <button key={t} className={`badge-toggle${tierPick === t ? ' on' : ''}`} onClick={() => setTierPick(t)}>{t}</button>
@@ -170,30 +170,30 @@ export default function BoxBuilder({ items, players, token, showToast }) {
           </div>
           <div style={{ marginTop: 12, display: 'flex', gap: 10, alignItems: 'center' }}>
             <button className="btn btn-cyan btn-sm" onClick={give}>Give sealed box</button>
-            <span style={{ fontSize: 11, color: 'var(--muted)' }}>
+            <span style={{ fontSize: 11, color: 'var(--muted-text)' }}>
               {picked.reduce((n, p) => n + p.qty, 0)} item(s) · {recips.length} recipient(s) · {mode === 'pick-one' ? 'they choose one' : 'they get everything'}
             </span>
           </div>
 
           <div className="panel-title admin" style={{ cursor: 'pointer', userSelect: 'none', marginTop: 16 }}
             onClick={() => { setLogOpen(o => !o); if (!log) loadLog(); }}>
-            📜 Box Log {logOpen ? '▾' : '▸'} <span style={{ color: 'var(--muted)', fontSize: 11, fontWeight: 400 }}>every box: who, what, why, and what was chosen</span>
+            📜 Box Log {logOpen ? '▾' : '▸'} <span style={{ color: 'var(--muted-text)', fontSize: 11, fontWeight: 400 }}>every box: who, what, why, and what was chosen</span>
           </div>
           {logOpen && (
             <div>
               <button className="btn btn-muted btn-xs" style={{ marginBottom: 8 }} onClick={loadLog}>↻ Refresh</button>
-              {!log && <div style={{ fontSize: 11, color: 'var(--muted)' }}>Loading…</div>}
-              {log && log.length === 0 && <div style={{ fontSize: 11, color: 'var(--muted)' }}>No boxes given yet.</div>}
+              {!log && <div style={{ fontSize: 11, color: 'var(--muted-text)' }}>Loading…</div>}
+              {log && log.length === 0 && <div style={{ fontSize: 11, color: 'var(--muted-text)' }}>No boxes given yet.</div>}
               {log && log.map(b => (
                 <div key={b._id} style={{ border: '1px solid var(--border)', borderRadius: 6, padding: '8px 12px', marginBottom: 6, background: 'rgba(0,0,0,.2)' }}>
                   <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
                     <span style={{ fontWeight: 700, fontSize: 13, color: BOX_COLOR[b.boxTier] || 'var(--text)' }}>{b.name}</span>
                     <span style={{ fontSize: 11, color: 'var(--cyan)' }}>→ {b.username}</span>
                     {b.source && <span style={{ fontSize: 11, color: 'var(--gold)' }}>({b.source})</span>}
-                    <span style={{ marginLeft: 'auto', fontSize: 10, color: b.status === 'opened' ? 'var(--success, #00ff88)' : 'var(--muted)' }}>
+                    <span style={{ marginLeft: 'auto', fontSize: 10, color: b.status === 'opened' ? 'var(--success, #00ff88)' : 'var(--muted-text)' }}>
                       {b.status === 'opened' ? `opened ${new Date(b.openedAt).toLocaleDateString()}` : 'sealed'}
                     </span>
-                    <span style={{ fontSize: 10, color: 'var(--muted)' }}>{new Date(b.createdAt).toLocaleDateString()}</span>
+                    <span style={{ fontSize: 10, color: 'var(--muted-text)' }}>{new Date(b.createdAt).toLocaleDateString()}</span>
                   </div>
                   <div style={{ fontSize: 11, marginTop: 4, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
                     {(b.items || []).map((it, i) => (

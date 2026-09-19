@@ -10,7 +10,7 @@ const BOX_TIER_COLOR = {
   Bronze: 'var(--bronze, #cd7f32)', Silver: 'var(--silver, #c0c0c0)', Gold: 'var(--gold)',
   Legendary: 'var(--legendary, #a855f7)', Mythic: 'var(--mythic, #ec4899)', Godly: '#ffffff',
 };
-const ITEM_TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
+const ITEM_TIER_COLOR = { Crude: 'var(--muted-text)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 const CAT_ID_MAP = { Equipment: 10, Weapons: 11, Tools: 12, Consumables: 13, Misc: 14, 'System Items': 17, 'Key Items': 18 };
 const POLL_MS = 12000;
 
@@ -29,11 +29,11 @@ function ItemDetail({ it }) {
     <div style={{ background: 'rgba(0,0,0,.3)', border: '1px solid var(--border)', borderRadius: 6, padding: '8px 10px', margin: '4px 0 8px', fontSize: 12 }}>
       {rows.map(([k, v]) => (
         <div key={k} style={{ display: 'flex', gap: 8, padding: '1px 0' }}>
-          <span style={{ color: 'var(--muted)', minWidth: 90, textTransform: 'uppercase', fontSize: 10, letterSpacing: 1, paddingTop: 2 }}>{k}</span>
+          <span style={{ color: 'var(--muted-text)', minWidth: 90, textTransform: 'uppercase', fontSize: 10, letterSpacing: 1, paddingTop: 2 }}>{k}</span>
           <span>{String(v)}</span>
         </div>
       ))}
-      {it.description && <div style={{ color: 'var(--muted)', fontStyle: 'italic', marginTop: 4 }}>{it.description}</div>}
+      {it.description && <div style={{ color: 'var(--muted-text)', fontStyle: 'italic', marginTop: 4 }}>{it.description}</div>}
     </div>
   );
 }
@@ -50,8 +50,8 @@ function LootRow({ it, expanded, onToggle, selectable, selected, onSelect }) {
         }}>
         <span style={{ fontSize: 20 }}>{it.icon || '📦'}</span>
         <span style={{ fontWeight: 700, fontSize: 13, color: col }}>{it.name}</span>
-        {it.qty > 1 && <span style={{ fontSize: 11, color: 'var(--muted)' }}>×{it.qty}</span>}
-        <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--muted)' }}>
+        {it.qty > 1 && <span style={{ fontSize: 11, color: 'var(--muted-text)' }}>×{it.qty}</span>}
+        <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--muted-text)' }}>
           {selectable ? (selected ? 'SELECTED' : 'select') : (expanded ? '▲ details' : '▼ details')}
         </span>
         {selectable && (
@@ -150,7 +150,7 @@ export default function LootBoxes({ token, update }) {
               const col = BOX_TIER_COLOR[b.boxTier] || 'var(--border)';
               return (
                 <div key={b._id} style={{ width: 140, textAlign: 'center', padding: '12px 8px', borderRadius: 8, border: `1px solid ${col}`, background: 'rgba(0,0,0,.25)', position: 'relative' }}>
-                  <span style={{ position: 'absolute', top: 4, right: 8, fontSize: 9, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: 1 }}>
+                  <span style={{ position: 'absolute', top: 4, right: 8, fontSize: 9, color: 'var(--muted-text)', textTransform: 'uppercase', letterSpacing: 1 }}>
                     {b.mode === 'pick-one' ? 'pick one' : 'sealed'}
                   </span>
                   <div style={{ fontSize: 30 }}>📦</div>
@@ -159,7 +159,7 @@ export default function LootBoxes({ token, update }) {
               );
             })}
           </div>
-          <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 8 }}>
+          <div style={{ fontSize: 10, color: 'var(--muted-text)', marginTop: 8 }}>
             House rule (§20): boxes only open at the Lounge — and opening opens ALL of them.
           </div>
         </div>
@@ -171,7 +171,7 @@ export default function LootBoxes({ token, update }) {
             {reveal.phase === 'items' && (
               <>
                 <div className="modal-title" style={{ color: BOX_TIER_COLOR[reveal.boxTier] || 'var(--text)' }}>{reveal.boxName}</div>
-                <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 10 }}>Items looted — click any item for details:</div>
+                <div style={{ fontSize: 12, color: 'var(--muted-text)', marginBottom: 10 }}>Items looted — click any item for details:</div>
                 {reveal.items.map((it, i) => (
                   <LootRow key={it.id || i} it={it}
                     expanded={!!expanded[i]} onToggle={() => setExpanded(x => ({ ...x, [i]: !x[i] }))} />
@@ -184,7 +184,7 @@ export default function LootBoxes({ token, update }) {
             {reveal.phase === 'pick' && (
               <>
                 <div className="modal-title" style={{ color: BOX_TIER_COLOR[reveal.boxTier] || 'var(--text)' }}>{reveal.boxName}</div>
-                <div style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 10 }}>
+                <div style={{ fontSize: 12, color: 'var(--muted-text)', marginBottom: 10 }}>
                   <b>Choose ONE — the others fade.</b> Click to select; "info" for details.
                 </div>
                 {reveal.choices.map((it, i) => (
@@ -204,7 +204,7 @@ export default function LootBoxes({ token, update }) {
             {reveal.phase === 'done' && (
               <>
                 <div className="modal-title" style={{ color: 'var(--success, #00ff88)' }}>All boxes opened</div>
-                <div style={{ fontSize: 13, color: 'var(--muted)', marginBottom: 10 }}>
+                <div style={{ fontSize: 13, color: 'var(--muted-text)', marginBottom: 10 }}>
                   {reveal.error ? `Note: ${reveal.error}` : 'Every item is in your inventory. The cameras got the whole thing.'}
                 </div>
                 <div className="modal-footer">

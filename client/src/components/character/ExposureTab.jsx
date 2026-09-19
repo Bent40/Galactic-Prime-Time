@@ -90,14 +90,14 @@ export default function ExposureTab({ state, update, token }) {
                     width: 28, height: 28, borderRadius: 4, border: `2px solid ${used ? 'var(--border)' : 'var(--gold)'}`,
                     background: used ? 'transparent' : 'rgba(200,168,75,0.18)',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 13, color: used ? 'var(--muted)' : 'var(--gold)',
+                    fontSize: 13, color: used ? 'var(--muted-text)' : 'var(--gold)',
                   }}>
                     {used ? '✕' : '★'}
                   </div>
                 );
               })}
             </div>
-            <span style={{ fontSize: 11, color: 'var(--muted)', letterSpacing: 1 }}>
+            <span style={{ fontSize: 11, color: 'var(--muted-text)', letterSpacing: 1 }}>
               {cameraCallAvail}/{cameraCallEarned} available
             </span>
             <button
@@ -155,7 +155,7 @@ export default function ExposureTab({ state, update, token }) {
               {tag.effect && <div className="tag-chip-effect">{tag.effect}</div>}
             </div>
           ))}
-          {(state.tags || []).filter(t => t.kind !== 'mark').length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No tags.</span>}
+          {(state.tags || []).filter(t => t.kind !== 'mark').length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No tags.</span>}
         </div>
         <div style={{ marginTop: 8 }}>
           {!tagPickerOpen ? (
@@ -188,7 +188,7 @@ export default function ExposureTab({ state, update, token }) {
                   </div>
                 ))}
                 {filteredMaster.length === 0 && (
-                  <span style={{ color: 'var(--muted)', fontSize: 11, padding: '6px 4px', fontStyle: 'italic' }}>
+                  <span style={{ color: 'var(--muted-text)', fontSize: 11, padding: '6px 4px', fontStyle: 'italic' }}>
                     {tagSearch ? 'No matching tags.' : 'All master tags are already on your sheet.'}
                   </span>
                 )}
@@ -217,10 +217,10 @@ export default function ExposureTab({ state, update, token }) {
             </div>
           ))}
           {(state.tags || []).filter(t => t.kind === 'mark').length === 0 && (
-            <span style={{ color: 'var(--muted)', fontSize: 11 }}>Unmarked.</span>
+            <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>Unmarked.</span>
           )}
         </div>
-        <div style={{ marginTop: 8, fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', lineHeight: 1.4 }}>
+        <div style={{ marginTop: 8, fontSize: 10, color: 'var(--muted-text)', fontStyle: 'italic', lineHeight: 1.4 }}>
           A Mark is burned into you by something you did. It does not fade and it cannot be
           removed. Click one when a scene wakes it.
         </div>

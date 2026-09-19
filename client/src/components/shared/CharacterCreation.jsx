@@ -23,7 +23,7 @@ import { apiFetch } from '../../api.js';
  *                   5 Core (Mind/Charm), on top of 1 in each trait. Four base
  *                   plus ten is the 14 creation points the level budget assumes.
  *   4. SKILLS     — owner ruling 2026-09-19. A Human picks 4 skills not locked to
- *                   an animal; an Animal picks 2 of those plus 2 animal skills.
+ *                   another race; an Animal picks 2 of those plus 2 of its own.
  *                   BASIC skills only — a compound is a Gemstone merge product
  *                   (§4.5), and you cannot start with the thing you fuse INTO.
  *                   Nothing fits? Suggest one; the GM approves it.
@@ -50,7 +50,7 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
   const [picked, setPicked] = useState([]);        // template _ids, in pick order
   const [suggestions, setSuggestions] = useState([]); // free-text, GM approves
   // Per-pool, not shared: one draft string showed the same text in both boxes.
-  const [suggestDraft, setSuggestDraft] = useState({ general: '', animal: '' });
+  const [suggestDraft, setSuggestDraft] = useState({ general: '', racial: '' });
   const [skillFilter, setSkillFilter] = useState('');
 
   // Fetch once, when they first reach the skill step — the first three steps
@@ -66,7 +66,9 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
   }, [step, library, token]);
 
   const quota = startingSkillQuota(identity.race);
-  const pools = useMemo(() => startingSkillPools(library || []), [library]);
+  // The race decides what a race-locked skill counts as, so a Human is never
+  // shown an Animal's skills and neither of them sees a Robot's.
+  const pools = useMemo(() => startingSkillPools(library || [], identity.race), [library, identity.race]);
   const byId = useMemo(() => {
     const m = {};
     for (const t of library || []) m[t._id] = t;
@@ -75,19 +77,19 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
 
   const pickedIn = (pool) => picked.filter(id => {
     const t = byId[id];
-    return t && startingSkillPool(t) === pool;
+    return t && startingSkillPool(t, identity.race) === pool;
   });
   const suggestedIn = (pool) => suggestions.filter(s => s.pool === pool);
   const filledIn = (pool) => pickedIn(pool).length + suggestedIn(pool).length;
   const roomIn = (pool) => quota[pool] - filledIn(pool);
-  const totalWanted = quota.general + quota.animal;
+  const totalWanted = quota.general + quota.racial;
   const totalFilled = picked.length + suggestions.length;
 
   function togglePick(tpl) {
     // Only ever called on a card drawn from a pool, but a template that is
     // compound or character-exclusive belongs to neither — refuse rather than
     // index quota with null.
-    const pool = startingSkillPool(tpl);
+    const pool = startingSkillPool(tpl, identity.race);
     if (!pool) return;
     setPicked(p => {
       if (p.includes(tpl._id)) return p.filter(x => x !== tpl._id);
@@ -290,9 +292,9 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div style={{ fontSize: 11, opacity: .7, lineHeight: 1.5 }}>
               {identity.race === 'Animal'
-                ? <>You pick <b>{quota.general} general</b> skills and <b>{quota.animal} animal</b> skills —
+                ? <>You pick <b>{quota.general} general</b> skills and <b>{quota.racial} {identity.race}</b> skills —
                    things this body can do that a human's cannot.</>
-                : <>You pick <b>{quota.general} skills</b>, none of them locked to an animal body.</>}
+                : <>You pick <b>{quota.general} skills</b>, none of them locked to another race's body.</>}
               {' '}Basic skills only. If nothing here matches what you already know how to do,
               <b> suggest it</b> and the GM will rule on it.
             </div>
@@ -305,7 +307,7 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
                 <input className="fi" placeholder="Filter skills…" value={skillFilter}
                        onChange={e => setSkillFilter(e.target.value)} />
 
-                {['general', 'animal'].filter(pool => quota[pool] > 0).map(pool => {
+                {['general', 'racial'].filter(pool => quota[pool] > 0).map(pool => {
                   const want = quota[pool];
                   const have = filledIn(pool);
                   const list = pools[pool].filter(t =>
@@ -313,7 +315,7 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
                   return (
                     <div key={pool} className="field-group">
                       <label className="field-label">
-                        {pool === 'animal' ? 'Animal skills' : 'General skills'}{' '}
+                        {pool === 'racial' ? `${identity.race} skills` : 'General skills'}{' '}
                         <span style={{ opacity: .6, color: have === want ? 'var(--success)' : undefined }}>
                           — {have} of {want} chosen
                         </span>
@@ -322,7 +324,7 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
                       {list.length === 0 && (
                         <div style={{ fontSize: 11, opacity: .6, padding: '4px 0' }}>
                           {pools[pool].length === 0
-                            ? <>Nothing in the library is marked as {pool === 'animal' ? 'an animal skill' : 'a general skill'} yet — use the suggestion box below.</>
+                            ? <>Nothing in the library is marked as {pool === 'racial' ? `a ${identity.race} skill` : 'a general skill'} yet — use the suggestion box below.</>
                             : <>No match for “{skillFilter}”.</>}
                         </div>
                       )}
@@ -353,7 +355,7 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
                       {roomIn(pool) > 0 && (
                         <div style={{ display: 'flex', gap: 4, marginTop: 6 }}>
                           <input className="fi" style={{ flex: 1 }} value={suggestDraft[pool] || ''}
-                                 placeholder={`Suggest ${pool === 'animal' ? 'an animal' : 'a'} skill…`}
+                                 placeholder={`Suggest ${pool === 'racial' ? `a ${identity.race}` : 'a'} skill…`}
                                  onChange={e => setSuggestDraft(d => ({ ...d, [pool]: e.target.value }))}
                                  onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addSuggestion(pool); } }} />
                           <button className="btn btn-xs" disabled={!(suggestDraft[pool] || '').trim()}

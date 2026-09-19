@@ -116,7 +116,7 @@ export default function TagLibrarySection({ token, showToast }) {
                 <div style={{ fontSize: 10, color: 'var(--gold)', marginBottom: 2 }}>{t.effect}</div>
               )}
               {t.conditions && (
-                <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic' }}>
+                <div style={{ fontSize: 10, color: 'var(--muted-text)', fontStyle: 'italic' }}>
                   Earned: {t.conditions}
                 </div>
               )}
@@ -129,10 +129,10 @@ export default function TagLibrarySection({ token, showToast }) {
         </div>
 
         {tags.length === 0 && (
-          <div style={{ color: 'var(--muted)', fontSize: 11, marginBottom: 16 }}>No tags yet.</div>
+          <div style={{ color: 'var(--muted-text)', fontSize: 11, marginBottom: 16 }}>No tags yet.</div>
         )}
         {tags.length > 0 && visible.length === 0 && (
-          <div style={{ color: 'var(--muted)', fontSize: 11, marginBottom: 16, fontStyle: 'italic' }}>No matching tags.</div>
+          <div style={{ color: 'var(--muted-text)', fontSize: 11, marginBottom: 16, fontStyle: 'italic' }}>No matching tags.</div>
         )}
 
         {/* Create form */}

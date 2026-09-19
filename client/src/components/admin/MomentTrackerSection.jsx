@@ -52,7 +52,7 @@ export default function MomentTrackerSection({ token, players, enemies, showToas
     else showToast(d.error, 'err');
   }
 
-  if (!tracker) return <div style={{ padding: 20, color: 'var(--muted)', fontSize: 11 }}>Loading tracker...</div>;
+  if (!tracker) return <div style={{ padding: 20, color: 'var(--muted-text)', fontSize: 11 }}>Loading tracker...</div>;
 
   const totalSlots = tracker.totalSlots || 10;
   const slotNums = Array.from({ length: totalSlots }, (_, i) => i + 1);
@@ -169,7 +169,7 @@ export default function MomentTrackerSection({ token, players, enemies, showToas
           {/* Characters */}
           <div>
             <div className="field-label" style={{ marginBottom: 6 }}>Characters</div>
-            {players.length === 0 && <div style={{ color: 'var(--muted)', fontSize: 10 }}>No players.</div>}
+            {players.length === 0 && <div style={{ color: 'var(--muted-text)', fontSize: 10 }}>No players.</div>}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
               {players.map(p => {
                 const alreadyIn = slotPlayerIds.includes(p.userId);
@@ -197,7 +197,7 @@ export default function MomentTrackerSection({ token, players, enemies, showToas
           <div>
             <div className="field-label" style={{ marginBottom: 6 }}>Enemies</div>
             {(enemies || []).length === 0 && (
-              <div style={{ color: 'var(--muted)', fontSize: 10 }}>No enemies in library. Add them in the Enemies tab.</div>
+              <div style={{ color: 'var(--muted-text)', fontSize: 10 }}>No enemies in library. Add them in the Enemies tab.</div>
             )}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
               {(enemies || []).map(e => {

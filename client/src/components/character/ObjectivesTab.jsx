@@ -59,7 +59,7 @@ export default function ObjectivesTab({ state, update }) {
             );
           })}
           {(state.objectives?.[sec] || []).length === 0 && (
-            <div style={{ color: 'var(--muted)', fontSize: 10, padding: '8px 0' }}>No objectives.</div>
+            <div style={{ color: 'var(--muted-text)', fontSize: 10, padding: '8px 0' }}>No objectives.</div>
           )}
         </div>
       ))}

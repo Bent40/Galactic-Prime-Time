@@ -235,7 +235,7 @@ export default function BodyTab({ state, update }) {
                   </div>
                 )}
                 {!isLevelOne && (bonus > 0 || lbonus > 0) && (
-                  <div className="trait-bonus-display" style={{ textAlign: 'center', fontSize: 9, color: 'var(--muted)' }}>
+                  <div className="trait-bonus-display" style={{ textAlign: 'center', fontSize: 9, color: 'var(--muted-text)' }}>
                     Base {base}{bonus > 0 ? ` +${bonus}` : ''}{lbonus > 0 ? ` +${lbonus}Lv` : ''}
                   </div>
                 )}
@@ -380,7 +380,7 @@ export default function BodyTab({ state, update }) {
             <div className="resist-group-label" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               Physical
               {physResEarned > 0 && (
-                <span style={{ fontSize: 9, color: physResRemain > 0 ? 'var(--cyan)' : 'var(--muted)', fontWeight: 700 }}>
+                <span style={{ fontSize: 9, color: physResRemain > 0 ? 'var(--cyan)' : 'var(--muted-text)', fontWeight: 700 }}>
                   {physResRemain}/{physResEarned} pts
                 </span>
               )}
@@ -444,7 +444,7 @@ export default function BodyTab({ state, update }) {
               ].map(([name, desc]) => (
                 <div key={name} style={{ padding: '6px 8px', background: 'rgba(0,0,0,.2)', borderLeft: '2px solid var(--danger)', borderRadius: 3 }}>
                   <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--danger)', letterSpacing: 1, marginBottom: 2 }}>{name}</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.4 }}>{desc}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted-text)', lineHeight: 1.4 }}>{desc}</div>
                 </div>
               ))}
             </div>
@@ -462,7 +462,7 @@ export default function BodyTab({ state, update }) {
               ].map(([name, desc]) => (
                 <div key={name} style={{ padding: '6px 8px', background: 'rgba(0,0,0,.2)', borderLeft: '2px solid var(--gold)', borderRadius: 3 }}>
                   <div style={{ fontSize: 10, fontWeight: 700, color: 'var(--gold)', letterSpacing: 1, marginBottom: 2 }}>{name}</div>
-                  <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.4 }}>{desc}</div>
+                  <div style={{ fontSize: 10, color: 'var(--muted-text)', lineHeight: 1.4 }}>{desc}</div>
                 </div>
               ))}
             </div>
@@ -483,7 +483,7 @@ export default function BodyTab({ state, update }) {
               <button className="chip-rm" onClick={() => rmEffect(e.id)}>✕</button>
             </span>
           ))}
-          {(!state.effects || state.effects.length === 0) && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No active effects</span>}
+          {(!state.effects || state.effects.length === 0) && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No active effects</span>}
         </div>
       </div>
 

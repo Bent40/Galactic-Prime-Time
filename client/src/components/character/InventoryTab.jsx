@@ -5,11 +5,11 @@ import LootBoxes from './LootBoxes.jsx';
 import MaterialsEditor from '../shared/MaterialsEditor.jsx';
 
 const AFFIX_TIER_COLOR = {
-  Lesser: 'var(--muted)', Normal: 'var(--text)', Higher: 'var(--cyan)',
+  Lesser: 'var(--muted-text)', Normal: 'var(--text)', Higher: 'var(--cyan)',
   Legendary: 'var(--gold)', Mythic: 'var(--purple)', Godly: '#ff6b6b',
 };
 const ITEM_TIER_COLOR = {
-  Crude: 'var(--muted)', Basic: '#8899aa', Quality: 'var(--cyan)',
+  Crude: 'var(--muted-text)', Basic: '#8899aa', Quality: 'var(--cyan)',
   Superior: 'var(--gold)', Exceptional: 'var(--purple)',
 };
 
@@ -21,12 +21,12 @@ function AffixPicker({ type, affixes, current, onPick, onClear }) {
   return (
     <div style={{ marginBottom: 6 }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span style={{ fontSize: 10, color: 'var(--muted)', width: 44, textTransform: 'uppercase', letterSpacing: 1 }}>{type}</span>
+        <span style={{ fontSize: 10, color: 'var(--muted-text)', width: 44, textTransform: 'uppercase', letterSpacing: 1 }}>{type}</span>
         {current ? (
           <>
             <span style={{ fontSize: 11, fontWeight: 700, color: AFFIX_TIER_COLOR[current.tier], flex: 1 }}>
               {type === 'prefix' ? current.name + ' …' : '… ' + current.name}
-              <span style={{ fontSize: 9, color: 'var(--muted)', marginLeft: 6 }}>[{current.tier}]</span>
+              <span style={{ fontSize: 9, color: 'var(--muted-text)', marginLeft: 6 }}>[{current.tier}]</span>
             </span>
             <button className="btn btn-muted btn-xs" onClick={() => { setOpen(v => !v); }}>Change</button>
             <button className="btn btn-danger btn-xs" onClick={onClear}>✕</button>
@@ -40,7 +40,7 @@ function AffixPicker({ type, affixes, current, onPick, onClear }) {
       {open && (
         <div style={{ marginTop: 6, maxHeight: 200, overflowY: 'auto', border: '1px solid var(--border)', borderRadius: 4, background: 'rgba(0,0,0,.4)' }}>
           {list.length === 0 && (
-            <div style={{ padding: '8px 12px', color: 'var(--muted)', fontSize: 10 }}>No {type}es defined by admin yet.</div>
+            <div style={{ padding: '8px 12px', color: 'var(--muted-text)', fontSize: 10 }}>No {type}es defined by admin yet.</div>
           )}
           {TIERS.map(tier => {
             const items = list.filter(a => a.tier === tier);
@@ -125,7 +125,7 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
         {/* Uses / Charges */}
         <div className="modal-grid2" style={{ marginBottom: 10 }}>
           <div className="field-group">
-            <label className="field-label">Max Uses <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(empty = unlimited)</span></label>
+            <label className="field-label">Max Uses <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(empty = unlimited)</span></label>
             <input className="fi" type="number" min="1"
               value={local.uses?.max ?? ''}
               onChange={e => {
@@ -148,7 +148,7 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
                   onClick={() => patch('uses', { ...local.uses, current: Math.min(local.uses.max, (local.uses?.current ?? 0) + 1) })}>+</button>
               </div>
             ) : (
-              <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic', padding: '6px 0' }}>Unlimited</div>
+              <div style={{ fontSize: 10, color: 'var(--muted-text)', fontStyle: 'italic', padding: '6px 0' }}>Unlimited</div>
             )}
           </div>
         </div>
@@ -177,7 +177,7 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
                 onPick={a => pickAffix('suffix', a)} onClear={() => patch('suffix', null)} />
             </>
           ) : (
-            <div style={{ fontSize: 10, color: 'var(--muted)', fontStyle: 'italic' }}>
+            <div style={{ fontSize: 10, color: 'var(--muted-text)', fontStyle: 'italic' }}>
               Set an item tier to unlock affixes.
             </div>
           )}
@@ -198,13 +198,13 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
             <input className="fi" value={local.range || ''} onChange={e => patch('range', e.target.value)} />
           </div>
           <div className="field-group">
-            <label className="field-label">RPM <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(ranged)</span></label>
+            <label className="field-label">RPM <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(ranged)</span></label>
             <input className="fi" type="number" min="1"
               value={local.rpm ?? ''}
               onChange={e => patch('rpm', e.target.value === '' ? null : Math.max(1, +e.target.value))} />
           </div>
           <div className="field-group">
-            <label className="field-label">Magazine <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(reload: 2 Moments, 2 hands)</span></label>
+            <label className="field-label">Magazine <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(reload: 2 Moments, 2 hands)</span></label>
             <input className="fi" type="number" min="1"
               value={local.magazine ?? ''}
               onChange={e => patch('magazine', e.target.value === '' ? null : Math.max(1, +e.target.value))} />
@@ -225,7 +225,7 @@ function ItemPopup({ item, catId, cats, affixes, onClose, onUpdate, onDelete, on
         </div>
 
         <div className="modal-section">
-          <div className="modal-section-label">Made of <span style={{ color: 'var(--muted)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>&mdash; taken apart at the Forge, these come back whole (&sect;12.7)</span></div>
+          <div className="modal-section-label">Made of <span style={{ color: 'var(--muted-text)', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>&mdash; taken apart at the Forge, these come back whole (&sect;12.7)</span></div>
           <MaterialsEditor value={local.materials} onChange={m => patch('materials', m)} />
         </div>
 
@@ -298,9 +298,9 @@ function InvRow({ item, catId, dragOverId, onDragStart, onDragOver, onDrop, onDr
       <span className="inv-row-drag">⠿</span>
       <span className="inv-row-icon">{icon}</span>
       <span className="inv-row-name">
-        {item.prefix && <span style={{ color: AFFIX_TIER_COLOR[item.prefix.tier] || 'var(--muted)', fontSize: 10 }}>{prefix}</span>}
+        {item.prefix && <span style={{ color: AFFIX_TIER_COLOR[item.prefix.tier] || 'var(--muted-text)', fontSize: 10 }}>{prefix}</span>}
         <span style={{ ...(tierCol ? { color: tierCol } : {}), ...(depleted ? { textDecoration: 'line-through' } : {}) }}>{item.name}</span>
-        {item.suffix && <span style={{ color: AFFIX_TIER_COLOR[item.suffix.tier] || 'var(--muted)', fontSize: 10 }}>{suffix}</span>}
+        {item.suffix && <span style={{ color: AFFIX_TIER_COLOR[item.suffix.tier] || 'var(--muted-text)', fontSize: 10 }}>{suffix}</span>}
         {item.tier && <span style={{ fontSize: 8, color: tierCol, marginLeft: 5, opacity: 0.7 }}>[{item.tier}]</span>}
         {depleted && <span style={{ fontSize: 8, color: '#ff6b6b', marginLeft: 6, letterSpacing: 1 }}>DEPLETED</span>}
       </span>
@@ -388,7 +388,7 @@ function CatPanel({ cat, fixed, cats, onPatchName, onAddItem, onRemoveCat, onReo
             />
           ))}
           {(cat.items || []).length === 0 && (
-            <span style={{ color: 'var(--muted)', fontSize: 10, letterSpacing: 1, padding: '4px 2px' }}>Empty</span>
+            <span style={{ color: 'var(--muted-text)', fontSize: 10, letterSpacing: 1, padding: '4px 2px' }}>Empty</span>
           )}
         </div>
       )}

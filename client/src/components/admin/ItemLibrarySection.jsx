@@ -33,12 +33,12 @@ function ItemForm({ value, onChange }) {
       <div className="modal-grid3">
         <div className="field-group"><label className="field-label">Range</label><input className="fi" value={value.range} onChange={e => onChange({ ...value, range: e.target.value })} /></div>
         <div className="field-group">
-          <label className="field-label">RPM <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(ranged only)</span></label>
+          <label className="field-label">RPM <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(ranged only)</span></label>
           <input className="fi" type="number" min="1" value={value.rpm ?? ''}
             onChange={e => onChange({ ...value, rpm: e.target.value === '' ? null : Math.max(1, +e.target.value) })} />
         </div>
         <div className="field-group">
-          <label className="field-label">Magazine <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(rounds before reload; reload = 2 Moments, both hands)</span></label>
+          <label className="field-label">Magazine <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(rounds before reload; reload = 2 Moments, both hands)</span></label>
           <input className="fi" type="number" min="1" value={value.magazine ?? ''}
             onChange={e => onChange({ ...value, magazine: e.target.value === '' ? null : Math.max(1, +e.target.value) })} />
         </div>
@@ -61,7 +61,7 @@ function ItemForm({ value, onChange }) {
       <div className="modal-grid2">
         <div className="field-group"><label className="field-label">Default Qty</label><input className="fi" type="number" min="1" style={{ width: 80 }} value={value.qty} onChange={e => onChange({ ...value, qty: +e.target.value })} /></div>
         <div className="field-group">
-          <label className="field-label">Max Uses <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(empty = unlimited)</span></label>
+          <label className="field-label">Max Uses <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(empty = unlimited)</span></label>
           <input className="fi" type="number" min="1" style={{ width: 80 }}
             value={value.uses?.max ?? ''}
             onChange={e => {
@@ -72,22 +72,22 @@ function ItemForm({ value, onChange }) {
         </div>
       </div>
       <div className="modal-grid2" style={{ marginTop: 8 }}>
-        <div className="field-group"><label className="field-label">Subtype <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(pool metadata)</span></label>
+        <div className="field-group"><label className="field-label">Subtype <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(pool metadata)</span></label>
           <select className="fi" value={value.subtype || ''} onChange={e => onChange({ ...value, subtype: e.target.value })}>
             <option value="">— None —</option>
             {ITEM_SUBTYPES.map(s => <option key={s}>{s}</option>)}
           </select>
         </div>
-        <div className="field-group"><label className="field-label">Source <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(e.g. batch-a)</span></label><input className="fi" value={value.source || ''} onChange={e => onChange({ ...value, source: e.target.value })} /></div>
+        <div className="field-group"><label className="field-label">Source <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(e.g. batch-a)</span></label><input className="fi" value={value.source || ''} onChange={e => onChange({ ...value, source: e.target.value })} /></div>
       </div>
       <div style={{ marginBottom: 10 }}>
-        <div className="field-label" style={{ marginBottom: 5 }}>Box Tiers <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(which loot-box pools carry this)</span></div>
+        <div className="field-label" style={{ marginBottom: 5 }}>Box Tiers <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(which loot-box pools carry this)</span></div>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
           {BOX_TIERS.map(t => <button key={t} className={`badge-toggle${(value.boxTiers || []).includes(t) ? ' on' : ''}`} onClick={() => onChange({ ...value, boxTiers: toggleArr(value.boxTiers || [], t) })}>{t}</button>)}
         </div>
       </div>
       <div className="field-group" style={{ marginBottom: 8 }}>
-        <label className="field-label">Themes <span style={{ color: 'var(--muted)', fontWeight: 400 }}>(comma-separated: floor-1, incineradile, …)</span></label>
+        <label className="field-label">Themes <span style={{ color: 'var(--muted-text)', fontWeight: 400 }}>(comma-separated: floor-1, incineradile, …)</span></label>
         <input className="fi" value={(value.themes || []).join(', ')}
           onChange={e => onChange({ ...value, themes: e.target.value.split(',').map(s => s.trim()) })} />
       </div>
@@ -97,7 +97,7 @@ function ItemForm({ value, onChange }) {
 
 const BLANK_FORM = { name: '', icon: '', category: 'Misc', tier: '', attackTypes: [], range: '', rpm: null, magazine: null, damage: '', damageType: [], specialEffects: '', resistance: '', requirements: '', description: '', qty: 1, uses: { max: null, current: null }, subtype: '', boxTiers: [], themes: [], source: '', materials: [] };
 
-const ITEM_TIER_COLOR = { Crude: 'var(--muted)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
+const ITEM_TIER_COLOR = { Crude: 'var(--muted-text)', Basic: 'var(--text)', Quality: 'var(--cyan)', Superior: 'var(--gold)', Exceptional: 'var(--purple)' };
 
 export default function ItemLibrarySection({ token, players, showToast }) {
   const [items, setItems] = useState([]);
@@ -173,7 +173,7 @@ export default function ItemLibrarySection({ token, players, showToast }) {
             </div>
           </div>
         ))}
-        {items.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No items yet.</span>}
+        {items.length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No items yet.</span>}
         <div style={{ marginTop: 16, padding: 14, background: 'rgba(0,0,0,.3)', borderRadius: 4, border: '1px dashed var(--muted)' }}>
           <div className="panel-title admin" style={{ marginBottom: 12 }}>Create New Item</div>
           <ItemForm value={form} onChange={setForm} />
@@ -208,7 +208,7 @@ export default function ItemLibrarySection({ token, players, showToast }) {
                 <label key={p.userId} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 8px', border: '1px solid var(--border)', borderRadius: 3, cursor: 'pointer', background: giveTarget.includes(p.userId) ? 'rgba(168,85,247,.08)' : 'transparent' }}>
                   <input type="checkbox" checked={giveTarget.includes(p.userId)} onChange={e => setGiveTarget(t => e.target.checked ? [...t, p.userId] : t.filter(x => x !== p.userId))} />
                   <span style={{ fontWeight: 700, fontSize: 11, color: 'var(--text)' }}>{p.username}</span>
-                  <span style={{ fontSize: 10, color: 'var(--muted)' }}>{p.characterName || 'No character'}</span>
+                  <span style={{ fontSize: 10, color: 'var(--muted-text)' }}>{p.characterName || 'No character'}</span>
                 </label>
               ))}
             </div>

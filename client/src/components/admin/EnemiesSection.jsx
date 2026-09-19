@@ -32,7 +32,7 @@ const TIERS = ['mob', 'elite', 'boss', 'legendary'];
 // Rulebook §7.1 — every combatant has a size; humans are Medium. §13 reads it for
 // grapple legality (no more than one size larger) and grapple-Suffocation immunity.
 const SIZES = ['Small', 'Medium', 'Large', 'Huge'];
-const TIER_COLOR = { mob: 'var(--muted)', elite: 'var(--cyan)', boss: 'var(--gold)', legendary: 'var(--purple)' };
+const TIER_COLOR = { mob: 'var(--muted-text)', elite: 'var(--cyan)', boss: 'var(--gold)', legendary: 'var(--purple)' };
 
 const DEFAULT_BODY_PARTS = [
   { name: 'Head', maxHp: 3 },
@@ -64,7 +64,7 @@ function BodyPartsEditor({ parts, onChange }) {
         </div>
       </div>
       {parts.length === 0 && (
-        <div style={{ color: 'var(--muted)', fontSize: 10, padding: '6px 0' }}>
+        <div style={{ color: 'var(--muted-text)', fontSize: 10, padding: '6px 0' }}>
           No body parts. Click "Use Defaults" for standard humanoid layout or "Add Part" to add manually.
         </div>
       )}
@@ -87,7 +87,7 @@ function BodyPartsEditor({ parts, onChange }) {
               value={bp.maxHp}
               onChange={e => patch(idx, 'maxHp', Math.max(1, +e.target.value))}
             />
-            <span style={{ fontSize: 9, color: 'var(--muted)', whiteSpace: 'nowrap' }}>HP</span>
+            <span style={{ fontSize: 9, color: 'var(--muted-text)', whiteSpace: 'nowrap' }}>HP</span>
             <button className="btn btn-danger btn-xs" onClick={() => remove(idx)}>✕</button>
           </div>
         ))}
@@ -110,7 +110,7 @@ function PhasesEditor({ phases, onChange }) {
         <button className="btn btn-gold btn-xs" onClick={add}>+ Phase</button>
       </div>
       {phases.length === 0 && (
-        <div style={{ color: 'var(--muted)', fontSize: 10, padding: '6px 0' }}>
+        <div style={{ color: 'var(--muted-text)', fontSize: 10, padding: '6px 0' }}>
           No phases defined. Add phases to track boss transitions.
         </div>
       )}
@@ -179,7 +179,7 @@ function EnemyForm({ value, onChange }) {
           <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
             <input type="color" value={value.color} onChange={e => onChange({ ...value, color: e.target.value })}
               style={{ width: 38, height: 32, border: '1px solid var(--muted)', borderRadius: 3, background: 'transparent', cursor: 'pointer', padding: 2 }} />
-            <span style={{ fontSize: 11, color: 'var(--muted)' }}>{value.color}</span>
+            <span style={{ fontSize: 11, color: 'var(--muted-text)' }}>{value.color}</span>
           </div>
         </div>
         <div className="field-group">
@@ -450,7 +450,7 @@ export default function EnemiesSection({ token, showToast, onEnemiesChange }) {
                       {e.phases.map((ph, i) => (
                         <div key={i} className="enemy-bp-row">
                           <span className="enemy-bp-name" style={{ color: 'var(--gold)' }}>Phase {i + 1}: {ph.name}</span>
-                          {ph.hpThreshold && <span className="enemy-bp-hp" style={{ color: 'var(--muted)' }}>{ph.hpThreshold}</span>}
+                          {ph.hpThreshold && <span className="enemy-bp-hp" style={{ color: 'var(--muted-text)' }}>{ph.hpThreshold}</span>}
                         </div>
                       ))}
                     </div>
@@ -466,7 +466,7 @@ export default function EnemiesSection({ token, showToast, onEnemiesChange }) {
           </div>
         ))}
 
-        {enemies.length === 0 && <div style={{ color: 'var(--muted)', fontSize: 11, marginBottom: 16 }}>No enemies yet.</div>}
+        {enemies.length === 0 && <div style={{ color: 'var(--muted-text)', fontSize: 11, marginBottom: 16 }}>No enemies yet.</div>}
 
         <div style={{ padding: 14, background: 'rgba(0,0,0,.3)', borderRadius: 4, border: '1px dashed var(--muted)' }}>
           <div className="panel-title admin" style={{ marginBottom: 12 }}>Create New Enemy</div>

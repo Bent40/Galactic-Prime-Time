@@ -85,7 +85,7 @@ export default function AdminPanel() {
         </div>
         <div className="topbar-right">
           <span className="admin-badge">ADMIN</span>
-          <span style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: 1 }}>{auth.username?.toUpperCase()}</span>
+          <span style={{ color: 'var(--muted-text)', fontSize: 11, letterSpacing: 1 }}>{auth.username?.toUpperCase()}</span>
           <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>
         </div>
       </div>
@@ -105,14 +105,14 @@ export default function AdminPanel() {
             <div style={{ padding: '8px 14px', borderBottom: '1px solid var(--border)', background: 'rgba(168,85,247,.07)' }}>
               <div style={{ fontSize: 9, color: 'var(--purple)', letterSpacing: 2, textTransform: 'uppercase', marginBottom: 6 }}>Bulk — {bulkSel.length} selected</div>
               <div style={{ marginBottom: 8 }}>
-                <div style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Grant Achievement</div>
+                <div style={{ fontSize: 8, color: 'var(--muted-text)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Grant Achievement</div>
                 <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Title" value={bulkAchForm.title} onChange={e => setBulkAchForm(f => ({ ...f, title: e.target.value }))} />
                 <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Description" value={bulkAchForm.desc} onChange={e => setBulkAchForm(f => ({ ...f, desc: e.target.value }))} />
                 <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="Reward" value={bulkAchForm.reward} onChange={e => setBulkAchForm(f => ({ ...f, reward: e.target.value }))} />
                 <button className="btn btn-gold btn-xs" onClick={bulkGrantAch} style={{ width: '100%' }}>Grant to Selected</button>
               </div>
               <div>
-                <div style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Send Objective</div>
+                <div style={{ fontSize: 8, color: 'var(--muted-text)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Send Objective</div>
                 <select className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} value={bulkObjForm.section} onChange={e => setBulkObjForm(f => ({ ...f, section: e.target.value }))}>
                   <option value="main">Main</option><option value="directives">Directives</option><option value="goals">Goals</option>
                 </select>
@@ -131,7 +131,7 @@ export default function AdminPanel() {
                 <button className="btn btn-cyan btn-xs" onClick={bulkSendObj} style={{ width: '100%' }}>Send to Selected</button>
               </div>
               <div style={{ marginTop: 8 }}>
-                <div style={{ fontSize: 8, color: 'var(--muted)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Set Followers</div>
+                <div style={{ fontSize: 8, color: 'var(--muted-text)', letterSpacing: 1, textTransform: 'uppercase', marginBottom: 4 }}>Set Followers</div>
                 <input className="fi" style={{ fontSize: 11, padding: '3px 6px', marginBottom: 4 }} placeholder="e.g. 1.5B, 200.6T" value={bulkFollowers} onChange={e => setBulkFollowers(e.target.value)} />
                 <button className="btn btn-purple btn-xs" onClick={bulkSetFollowers} style={{ width: '100%' }}>Set for Selected</button>
               </div>
@@ -158,7 +158,7 @@ export default function AdminPanel() {
                 <div className="player-lvl">Lv{p.level || 1}</div>
               </div>
             ))}
-            {players.length === 0 && <div style={{ padding: 20, color: 'var(--muted)', fontSize: 11, textAlign: 'center', letterSpacing: 1 }}>NO PLAYERS</div>}
+            {players.length === 0 && <div style={{ padding: 20, color: 'var(--muted-text)', fontSize: 11, textAlign: 'center', letterSpacing: 1 }}>NO PLAYERS</div>}
           </div>
         </div>
 

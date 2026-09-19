@@ -34,7 +34,7 @@ export default function MaterialsEditor({ value, onChange, readOnly = false }) {
   }
 
   if (readOnly) {
-    if (!rows.length) return <span style={{ color: 'var(--muted)', fontSize: 11 }}>Baseline stock — band step +0.</span>;
+    if (!rows.length) return <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>Baseline stock — band step +0.</span>;
     return (
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, alignItems: 'center' }}>
         {rows.map((r, i) => (

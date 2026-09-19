@@ -40,34 +40,58 @@ export const CREATION_RACES = ['Human', 'Animal'];
 //  an animal chooses 2 skills and 2 animal skills."
 // Only BASIC skills — never compound, which is a Gemstone merge product (§4.5).
 // A contestant with nothing that fits may SUGGEST one, for the GM to approve.
+//
+// ⭐ The axis is the RACE, not "animal or not" (owner, 2026-09-19: the three Robot
+// racials are "robot only"). So a skill carries a `raceLock` — the name of the one
+// race that may take it, or '' for anyone — and every race's quota is the same
+// shape: some general picks plus some of its OWN racials.
 export const STARTING_SKILLS = {
-  Human:        { general: 4, animal: 0 },
-  Animal:       { general: 2, animal: 2 },
-  'Robot / AI': { general: 4, animal: 0 },   // legacy: same shape as Human
-};
-export const STARTING_SKILL_DEFAULT = { general: 4, animal: 0 };
+  Human:        { general: 4, racial: 0 },   // Human is the flat race: no racials
+  Animal:       { general: 2, racial: 2 },
+  'Robot / AI': { general: 2, racial: 2 },   // ⚖ mine — hidden from creation, but
+};                                           //   consistent if it is ever re-enabled
+export const STARTING_SKILL_DEFAULT = { general: 4, racial: 0 };
 
 export function startingSkillQuota(race) {
   return STARTING_SKILLS[race] || STARTING_SKILL_DEFAULT;
 }
 
 /**
+ * The race a template is locked to, or '' for anyone.
+ * `animalOnly` is the legacy boolean this replaced; it still reads as 'Animal'.
+ */
+export function raceLockOf(tpl) {
+  const lock = String(tpl?.raceLock || '').trim();
+  if (lock) return lock;
+  return tpl?.animalOnly ? 'Animal' : '';
+}
+
+/**
  * Which pool a template belongs to at creation, or null if it is not pickable.
  * A compound skill is never pickable — you cannot start with the thing you fuse INTO.
+ *
+ * `race` decides what a race-locked skill counts as. WITHOUT it the answer is
+ * race-agnostic ('racial' for anything locked at all), which is what a library
+ * listing wants; WITH it, a lock for a DIFFERENT race is not pickable at all —
+ * which is the whole point of the field, and why a Human is never shown a
+ * Robot racial.
  */
-export function startingSkillPool(tpl) {
+export function startingSkillPool(tpl, race = null) {
   if (!tpl || tpl.origin === 'compound') return null;
   // §4.4 — a character-exclusive skill is nobody's starting pick, whichever
   // pool it would otherwise sit in.
   if (String(tpl.exclusiveTo || '').trim()) return null;
-  return tpl.animalOnly ? 'animal' : 'general';
+  const lock = raceLockOf(tpl);
+  if (!lock) return 'general';
+  if (!race) return 'racial';
+  return lock === race ? 'racial' : null;
 }
 
 /** Split a template list into the two creation pools, dropping compounds. */
-export function startingSkillPools(templates = []) {
-  const pools = { general: [], animal: [] };
+export function startingSkillPools(templates = [], race = null) {
+  const pools = { general: [], racial: [] };
   for (const t of templates) {
-    const pool = startingSkillPool(t);
+    const pool = startingSkillPool(t, race);
     if (pool) pools[pool].push(t);
   }
   return pools;

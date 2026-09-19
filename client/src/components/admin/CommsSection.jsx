@@ -57,7 +57,7 @@ export default function CommsSection({ token, players, showToast }) {
         <div className="panel" style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
           <div className="panel-title admin">
             Message Feed
-            <span style={{ fontSize: 9, color: 'var(--muted)', letterSpacing: 1, fontWeight: 'normal' }}>
+            <span style={{ fontSize: 9, color: 'var(--muted-text)', letterSpacing: 1, fontWeight: 'normal' }}>
               {messages.length} message{messages.length !== 1 ? 's' : ''}
             </span>
           </div>
@@ -122,7 +122,7 @@ export default function CommsSection({ token, players, showToast }) {
                 <button className="btn btn-danger btn-xs" onClick={() => delNpc(n._id)}>✕</button>
               </div>
             ))}
-            {npcs.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No NPCs.</span>}
+            {npcs.length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No NPCs.</span>}
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             <input className="fi" placeholder="NPC name..." value={newNpc.name} onChange={e => setNewNpc(n => ({ ...n, name: e.target.value }))} onKeyDown={e => e.key === 'Enter' && createNpc()} />

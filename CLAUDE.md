@@ -1984,6 +1984,18 @@ permissive one.
   skill-library verbs, the bulk import and the player projection; a **★ name only** badge and
   an edit field; and **`startingSkillPool()` returns `null` for it**, so an exclusive skill is
   nobody's pick whichever pool it would otherwise sit in. Nothing after creation is gated.
+- 🔒 **`animalOnly` IS GONE — the axis is `raceLock` (ruled 2026-09-19).** Owner: *"death grip
+  jaws is animal and the robot racials are robot only."* ⚠️ **My `exclusiveTo: XQUEZ/T` was the
+  wrong shape** — the three Robot racials are not one contestant's, they are **the Robot race's**,
+  and any Robot could take them. ⭐ **A boolean could never say that**, so the field is now the
+  NAME of the one race that may take a skill (`''` = anyone), and **every race's quota is the
+  same shape: general picks plus its OWN racials.** ⚙️ **Nothing to migrate — the classification
+  had never been applied** — and `animalOnly` is still READ as a lock on `Animal`, never written,
+  so a template written before today is safe. ⭐⭐ **The payoff is a rule that could not be
+  expressed before: a Human is never shown an Animal's skills and neither of them sees a Robot's**
+  — `startingSkillPool(tpl, race)` returns `null` for a lock belonging to someone else.
+  **Pools: 27 general · 5 Animal · 3 Robot / AI · 12 compound · 2 exclusive (both Mario's).**
+  🔒 **Death Grip Jaws is ANIMAL**, which takes the animal pool to five.
 - ⚖ **`origin: 'compound'` is written as "may not be taken cold"** — MERGE (2: Iron Stance,
   Elemental Confluence) **and** PREREQ (10). ⭐ **The three chain OPENERS stay basic:** you
   may start ON a chain, never INSIDE one. **Widening the field that way is mine, not ruled.**
@@ -1998,11 +2010,14 @@ permissive one.
   the **target**; **Juggling asks something of YOU** (*"must be able to physically handle the
   item's weight"*). 🔴 Read Juggling as pure stagecraft and Filipe has ONE racial — which is
   simply the *"our current players dont 100% fit this"* case.
-- 🔴 **Six open (skills-passover Part 3):** Juggling · Death Grip Jaws · Camouflage · the
-  three Robot racials · the **Frost Wall / Fire Wall prereq drift** (the passover table lists
-  a skill-prereq their live `requirements` strings do not carry) · and 🔴 **the game repo's
-  `races.json` already ruled a trade-for-cap at creation** (*"any number may be given up for
-  +1 cap on another"*, 2026-07-16) **that the app has never implemented.**
+- ✅ **ALL SIX CLOSED 2026-09-19.** Juggling **animal** · Camouflage **general** · Death Grip
+  Jaws **animal** · the three Robot racials **robot-only** · Frost Wall / Fire Wall **agreed as
+  prereq-gated** (the classification carries a `requirementsFix` that writes the missing
+  `Frost Ball Lv 3.` / `Fire Ball Lv 3.` clause — the only prose the applier touches).
+  **Nothing in the file is `proposed` any more.**
+- 🔴 **Still open, and it is NOT a classification question:** the game repo's `races.json`
+  ruled a **trade-for-cap** at creation (*"any number may be given up for +1 cap on another"*,
+  2026-07-16) **that the app has never implemented.**
 
 ## ✅ FORCE REACHES THE APP — 2026-09-19 (task #14 closed)
 
@@ -2039,8 +2054,9 @@ database — with a better reason than expected.**
 Owner: *"Also pull up the shop for us."* ⭐⭐ **It already existed and nobody had to price
 it.** §19.3 gives three lines — *consumables 1–2 UT · Crude 1 · Basic 3* — and the library
 already carries `tier` and `category` on every template, so **the whole store is a
-derivation**: everything at Crude or Basic tier, priced by those three lines. **57 lines**
-(Consumables 21 · Weapons 14 · Equipment 11 · Tools 7 · Misc 4).
+derivation**: everything at Crude or Basic tier, priced by those three lines. **68 lines**
+(Consumables 21 · Weapons 14 · Equipment 11 · Tools 6 · Misc 16) after the curios landed and
+`Signal Kit` came off the shelf.
 
 - ⚙️ **`server/shop-shelf.js`** prints it (`--shelf <cat>`, `--json`), **no `node_modules`,
   no DB** — the repo's standing pattern: a calculator regenerates the table instead of a
@@ -2066,6 +2082,57 @@ derivation**: everything at Crude or Basic tier, priced by those three lines. **
 - ⚠️ **Still open on this task:** the curios are not written, and **the fantasy item
   coupons still retire undistributed** (task #2) — the store closes when the Lounge
   unlocks, so an unspent coupon is gone.
+
+## 🎨 CONTRAST PASS — BUILT 2026-09-19 (the sheet AND the shop)
+
+🔒 **Owner:** *"the text is hard to read since things are dark with dark text."*
+
+- 🔴 **THE CAUSE WAS ONE TOKEN DOING TWO JOBS.** `--muted: #3a4560` coloured **74 pieces of
+  small text** in `index.css` *and* drew **35 borders and fills** — so it could not be
+  brightened without making every edge shout. ⭐ **Split it:** `--muted` keeps the structural
+  job at its old value, **`--muted-text: #94a6c6`** is the readable half, and **every `color:`
+  use moved** — 74 in CSS, 94 bare colour strings in JSX, 23 in the Wiki's own style block.
+- **Also raised:** `--text` **#b8c8e0 → #d3dff0** · `--border` **#1a2540 → #26324e** (panel
+  edges were nearly invisible) · `--panel`/`--panel2` a step up so a panel reads as a panel ·
+  and the accent set (`gold` `danger` `success` `bronze` `silver` `legendary` `mythic`
+  `purple`), all of which colour text somewhere.
+- ⚙️ **`client/src/contrast.test.mjs` — 45 checks, and it reads the REAL tokens out of
+  `index.css`**, so the palette cannot regress silently. Every text token is measured against
+  all three grounds at WCAG ratio: **`--text` 15.09:1 · `--muted-text` 8.26:1 · `--cyan`
+  11.49:1** on the page ground, against floors of 4.5 (body) and 3.0 (the 9–11px bold
+  uppercase labels). ⭐ **And it walks the source** to assert **no file colours text with
+  `--muted`** — which is what keeps the split from quietly undoing itself.
+  `node --experimental-detect-module client/src/contrast.test.mjs`
+- ⚠️ **Reasoned, not seen.** There is no browser in the container; the ratios are arithmetic
+  on the real hex values and the build is clean, but **the sheet has not been looked at.**
+
+## 🧸 THE CURIOS — BUILT 2026-09-19 (`server/seeds/items-curios.js`, 12 templates)
+
+🔒 **Owner: *"add the curios to misc."*** The Odds & Ends shelf held **four items and all
+four were Growth items.** Their PRICE was careful — every one is Crude, so 1 UT, under the
+Basic 3 that would have marked them out — but **the SHELF gave them away by category.**
+
+- **Twelve worthless things**, `subtype: 'Trinket'`, Crude, Misc, **no `specialEffects`, no
+  damage, no uses, nothing coming later.** ⭐ **Structurally identical to a Growth item on the
+  card** — same keys, same empty effects, same flat one-line read. The only difference is
+  `themes`, which is template-side and never reaches the player's copy.
+- ⛔ **NEVER give a curio a secret.** The moment one pays off, the players learn the shelf is
+  worth searching and the camouflage is spent.
+- ⭐ **Two are deliberately MORE intriguing than anything on the growth shelf** — `Unlabelled
+  Key` and `Ticket Stub`. A party that decides to investigate the weird trinket should have a
+  decent chance of investigating the wrong one.
+- ⚙️ **`shop-shelf.js` gained a camouflage gate**: Misc is now **16 lines, 4 of them Growth
+  (25%)** and it **exits 1** if growth is ever the majority of its own shelf again.
+- 🔴 **A TELL I FOUND AND ONLY HALF-FIXED.** The shop card printed `subtype`, so *"Growth"*
+  sat beside *"Trinket"* — the page no longer prints it on Misc. ⚠️ **But the give-snapshot
+  copies `subtype` onto the player's own item**, so a granted growth item still says **Growth**
+  on their sheet. ⚖ **Recommended (mine, unruled): rename the four to `subtype: 'Trinket'` and
+  move the GM's marker to `themes: ['growth']`**, which is template-side and invisible to the
+  player. One `--force` seed.
+- 🔒 **`Signal Kit` is NOT STOCKED** (owner) — it stays in the library and stays grantable, it
+  is simply not sold here. `NOT_STOCKED` in `shop-shelf.js` records it; ⚠️ **the reason is not
+  written down**, and a one-line fiction note would keep it from looking like an oversight.
+- **The store is now 68 lines.** Runbook: `node seed-items.js --file ./seeds/items-curios.js`.
 
 ## Rulebook & Wiki (added 2026-07-23 · wiki rebuilt 2026-09-19)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision

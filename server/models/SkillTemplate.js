@@ -24,7 +24,11 @@ const skillTemplateSchema = new mongoose.Schema({
   //               'compound' — a Gemstone MERGE product (§4.5, e.g. Intercept +
   //                            Brace = Iron Stance). Never pickable at creation:
   //                            you cannot start with something you fuse INTO.
-  //   animalOnly  the skill belongs to a body a human does not have.
+  //   raceLock    the ONE race that may take this at creation, or '' for anyone.
+  //               Replaced the `animalOnly` boolean 2026-09-19, when the owner
+  //               ruled the three Robot racials "robot only" — the axis was the
+  //               race all along, not "animal or not". `animalOnly` is still read
+  //               as raceLock: 'Animal' so nothing written before today is lost.
   //   exclusiveTo §4.4 "some skills are character-exclusive — tied to one
   //               contestant's nature and not obtainable by others". A named
   //               contestant here removes the skill from BOTH creation pools.
@@ -33,7 +37,8 @@ const skillTemplateSchema = new mongoose.Schema({
   //               XQUEZ/T's three Robot racials to every new contestant.)
   // None of the three gates anything after creation — the GM grants what they like.
   origin:      { type: String, enum: ['basic', 'compound'], default: 'basic' },
-  animalOnly:  { type: Boolean, default: false },
+  raceLock:    { type: String, default: '' },
+  animalOnly:  { type: Boolean, default: false },   // legacy — read, never written
   exclusiveTo: { type: String, default: '' },
 }, { timestamps: true });
 

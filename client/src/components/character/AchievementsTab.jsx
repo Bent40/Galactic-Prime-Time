@@ -13,7 +13,7 @@ export default function AchievementsTab({ state }) {
             </div>
           </div>
         ))}
-        {state.achievements.length === 0 && <span style={{ color: 'var(--muted)', fontSize: 11 }}>No achievements yet.</span>}
+        {state.achievements.length === 0 && <span style={{ color: 'var(--muted-text)', fontSize: 11 }}>No achievements yet.</span>}
       </div>
     </div>
   );

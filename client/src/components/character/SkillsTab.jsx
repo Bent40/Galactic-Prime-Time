@@ -129,7 +129,7 @@ export default function SkillsTab({ state, update, token }) {
                 borderRadius: 4,
                 border: `1px solid ${spent ? 'var(--border)' : 'var(--cyan)'}`,
                 background: spent ? 'transparent' : 'rgba(0,212,255,0.12)',
-                color: spent ? 'var(--muted)' : 'var(--cyan)',
+                color: spent ? 'var(--muted-text)' : 'var(--cyan)',
                 opacity: spent ? 0.6 : 1,
               }} title={spent ? `${TRAIT_LABELS[t]} skill points fully spent` : `${avail} ${TRAIT_LABELS[t]} skill point${avail === 1 ? '' : 's'} available`}>
                 {TRAIT_LABELS[t].slice(0, 3)} {avail}
@@ -140,7 +140,7 @@ export default function SkillsTab({ state, update, token }) {
       </div>
 
       {state.skills.length === 0 && (
-        <div style={{ color: 'var(--muted)', fontSize: 11, padding: '8px 0' }}>
+        <div style={{ color: 'var(--muted-text)', fontSize: 11, padding: '8px 0' }}>
           No skills yet. Skills are assigned by the admin.
         </div>
       )}
@@ -197,7 +197,7 @@ export default function SkillsTab({ state, update, token }) {
               {stats.length > 0 && !atMax && (
                 <div style={{
                   fontSize: 9, marginBottom: 4, letterSpacing: 1,
-                  color: canLevelUp ? 'var(--cyan)' : 'var(--muted)'
+                  color: canLevelUp ? 'var(--cyan)' : 'var(--muted-text)'
                 }}>
                   {canLevelUp
                     ? `▲ Next level costs: ${stats.map(t => `1 ${TRAIT_LABELS[t]}`).join(' + ')}`
@@ -269,8 +269,8 @@ export default function SkillsTab({ state, update, token }) {
                       if (lv === nextLv) {
                         return (
                           <div key={lv} className="skill-ro-lvl-row" style={{ opacity: 0.45 }}>
-                            <span className="skill-ro-lvl-badge" style={{ borderColor: 'var(--muted)', color: 'var(--muted)' }}>Lv{lv} 🔒</span>
-                            <span className="skill-ro-lvl-text" style={{ color: 'var(--muted)', fontStyle: 'italic' }}>{levelEffects[lv]}</span>
+                            <span className="skill-ro-lvl-badge" style={{ borderColor: 'var(--muted-text)', color: 'var(--muted-text)' }}>Lv{lv} 🔒</span>
+                            <span className="skill-ro-lvl-text" style={{ color: 'var(--muted-text)', fontStyle: 'italic' }}>{levelEffects[lv]}</span>
                           </div>
                         );
                       }

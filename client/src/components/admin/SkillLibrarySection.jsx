@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
+import { RACES } from '../../constants.js';
 
 const TIER_LEVELS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
@@ -8,7 +9,7 @@ const BLANK_FORM = {
   requirements: '', range: '', target: '', effect: '', description: '',
   achievementUnlock: '', keywords: '', levelEffects: {},
   // Starting-skill eligibility (owner ruling 2026-09-19) — see models/SkillTemplate.js.
-  origin: 'basic', animalOnly: false, exclusiveTo: '',
+  origin: 'basic', raceLock: '', exclusiveTo: '',
 };
 
 function LevelEffectsEditor({ value, onChange }) {
@@ -108,7 +109,7 @@ export default function SkillLibrarySection({ token, showToast }) {
                 {t.momentCost && <span className="badge badge-cyan">{t.momentCost}</span>}
                 {(t.stats || []).map(s => <span key={s} className="badge badge-muted">{s}</span>)}
                 {(t.keywords || []).map(k => <span key={k} className="badge badge-purple" title="Gemstone compatibility keyword">◈ {k}</span>)}
-                {t.animalOnly && <span className="badge badge-cyan" title="Animal-only: an Animal contestant may take this as one of its 2 animal starting skills">🐾 Animal</span>}
+                {(t.raceLock || t.animalOnly) && <span className="badge badge-cyan" title={`Race-locked: only a ${t.raceLock || 'Animal'} contestant may take this, as one of its 2 racial starting skills`}>{(t.raceLock || 'Animal') === 'Animal' ? '🐾' : '🤖'} {t.raceLock || 'Animal'}</span>}
                 {t.origin === 'compound' && <span className="badge badge-muted" title="A Gemstone merge product (§4.5) — never pickable at character creation">⚗ Compound</span>}
                 {t.exclusiveTo && <span className="badge badge-gold" title="§4.4 character-exclusive — tied to one contestant and offered to nobody at creation">★ {t.exclusiveTo} only</span>}
                 {t.achievementUnlock && <span className="badge badge-gold">🔒 {t.achievementUnlock}</span>}
@@ -139,11 +140,12 @@ export default function SkillLibrarySection({ token, showToast }) {
               <option value="compound">Compound</option>
             </select>
           </div>
-          <div className="field-group"><label className="field-label" title="An Animal contestant takes 2 of these at creation; a Human takes none">🐾 Animal</label>
-            <button className={`btn btn-xs ${form.animalOnly ? 'btn-cyan' : ''}`} style={{ width: 70 }}
-                    onClick={() => setForm(f => ({ ...f, animalOnly: !f.animalOnly }))}>
-              {form.animalOnly ? 'Yes' : 'No'}
-            </button>
+          <div className="field-group"><label className="field-label" title="Only this race may take the skill at creation, as one of its 2 racial picks. Human is the flat race and has none.">Race lock</label>
+            <select className="fi" style={{ width: 118 }} value={form.raceLock}
+                    onChange={e => setForm(f => ({ ...f, raceLock: e.target.value }))}>
+              <option value="">Anyone</option>
+              {RACES.filter(r => r !== 'Human').map(r => <option key={r} value={r}>{r}</option>)}
+            </select>
           </div>
           <button className="btn btn-purple btn-sm" onClick={create} style={{ alignSelf: 'flex-end' }}>+ Create</button>
         </div>
@@ -170,11 +172,12 @@ export default function SkillLibrarySection({ token, showToast }) {
                 </select>
               </div>
               <div className="field-group">
-                <label className="field-label" title="An Animal contestant takes 2 animal skills at creation; a Human takes 4 general ones and none of these.">Starting pool</label>
-                <select className="fi" value={editModal.animalOnly ? 'animal' : 'general'}
-                        onChange={e => setEditModal(m => ({ ...m, animalOnly: e.target.value === 'animal' }))}>
-                  <option value="general">General — any contestant</option>
-                  <option value="animal">🐾 Animal only</option>
+                <label className="field-label" title="Only this race may take the skill at creation, as one of its 2 racial picks. Human is the flat race and has none.">Race lock</label>
+                <select className="fi" value={editModal.raceLock ?? (editModal.animalOnly ? 'Animal' : '')}
+                        onChange={e => setEditModal(m => ({ ...m, raceLock: e.target.value }))}>
+                  <option value="">General — any contestant</option>
+                  {RACES.filter(r => r !== 'Human').map(r =>
+                    <option key={r} value={r}>{r === 'Animal' ? '🐾' : '🤖'} {r} only</option>)}
                 </select>
               </div>
               <div className="field-group">

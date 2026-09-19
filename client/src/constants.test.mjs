@@ -6,7 +6,7 @@
  */
 import { SIZES, SIZE_BASE_HP, bodyPartsForSize, DEFAULT_STATE, BODY_TRAITS, CORE_TRAITS,
   CREATION_RACES, RACES, STARTING_SKILLS, startingSkillQuota,
-  startingSkillPool, startingSkillPools, rebasePartsForSize,
+  startingSkillPool, startingSkillPools, raceLockOf, rebasePartsForSize,
   traitTotal, capBonus, totalTraitPoints, partHpBonus, pointsToNextHp,
   effectiveMaxHp, CREATION_POINTS, HP_PER_POINT,
   itemDmgLabel, materialBand, strikingMaterial, MATERIAL_BANDS,
@@ -58,36 +58,72 @@ ok('identity carries a size, defaulting to Medium', DEFAULT_STATE.identity.size 
 
 
 // ── Starting skills (owner ruling 2026-09-19) ────────────────────────────────
-eq('a Human picks 4 general and 0 animal', startingSkillQuota('Human'), { general: 4, animal: 0 });
-eq('an Animal picks 2 general and 2 animal', startingSkillQuota('Animal'), { general: 2, animal: 2 });
+eq('a Human picks 4 general and 0 racial', startingSkillQuota('Human'), { general: 4, racial: 0 });
+eq('an Animal picks 2 general and 2 racial', startingSkillQuota('Animal'), { general: 2, racial: 2 });
 eq('both races pick FOUR skills in total',
-   startingSkillQuota('Human').general + startingSkillQuota('Human').animal,
-   startingSkillQuota('Animal').general + startingSkillQuota('Animal').animal);
-eq('legacy Robot / AI keeps a quota rather than crashing', startingSkillQuota('Robot / AI'), { general: 4, animal: 0 });
-eq('an unknown race falls back to the Human shape', startingSkillQuota('Slime'), { general: 4, animal: 0 });
-eq('undefined race falls back too', startingSkillQuota(undefined), { general: 4, animal: 0 });
+   startingSkillQuota('Human').general + startingSkillQuota('Human').racial,
+   startingSkillQuota('Animal').general + startingSkillQuota('Animal').racial);
+eq('Robot / AI carries the same 2+2 shape as an Animal — hidden from creation, not broken',
+   startingSkillQuota('Robot / AI'), { general: 2, racial: 2 });
+eq('an unknown race falls back to the Human shape', startingSkillQuota('Slime'), { general: 4, racial: 0 });
+eq('undefined race falls back too', startingSkillQuota(undefined), { general: 4, racial: 0 });
+
+console.log('\n§4.4 — a skill is locked to a RACE, not to "animal or not"');
+eq('no lock reads as anyone', raceLockOf({ name: 'Brace' }), '');
+eq('a raceLock reads back', raceLockOf({ name: 'Voicebox', raceLock: 'Robot / AI' }), 'Robot / AI');
+eq('⚠️ the legacy animalOnly boolean still reads as a lock on Animal',
+   raceLockOf({ name: 'Swim', animalOnly: true }), 'Animal');
+eq('raceLock wins over the legacy flag',
+   raceLockOf({ name: 'X', raceLock: 'Robot / AI', animalOnly: true }), 'Robot / AI');
+eq('whitespace is not a lock', raceLockOf({ name: 'X', raceLock: '   ' }), '');
+eq('no template at all is safe', [raceLockOf(), raceLockOf(null)], ['', '']);
 
 eq('a plain skill is a general pick', startingSkillPool({ name: 'Brace' }), 'general');
-eq('an animal-locked skill is an animal pick', startingSkillPool({ name: 'Swim', animalOnly: true }), 'animal');
+eq('a race-locked skill read WITHOUT a race is simply "racial"',
+   startingSkillPool({ name: 'Swim', raceLock: 'Animal' }), 'racial');
+eq('⭐ read WITH the matching race it is that race\'s racial pick',
+   startingSkillPool({ name: 'Swim', raceLock: 'Animal' }, 'Animal'), 'racial');
+eq('⭐ and read with a DIFFERENT race it is not pickable at all — a Human is never '
+   + 'offered an Animal skill',
+   startingSkillPool({ name: 'Swim', raceLock: 'Animal' }, 'Human'), null);
+eq('🤖 nor is a Robot racial offered to an Animal',
+   startingSkillPool({ name: 'Voicebox', raceLock: 'Robot / AI' }, 'Animal'), null);
+eq('...and a Robot gets its own', startingSkillPool({ name: 'Voicebox', raceLock: 'Robot / AI' }, 'Robot / AI'), 'racial');
+eq('a general skill is general for every race',
+   ['Human', 'Animal', 'Robot / AI'].map(r => startingSkillPool({ name: 'Brace' }, r)),
+   ['general', 'general', 'general']);
 eq('a COMPOUND skill is never pickable', startingSkillPool({ name: 'Iron Stance', origin: 'compound' }), null);
-eq('compound beats animalOnly — a merged animal skill is still not a starting pick',
-   startingSkillPool({ name: 'Death Grip Jaws', origin: 'compound', animalOnly: true }), null);
+eq('compound beats a race lock — a merged racial is still not a starting pick',
+   startingSkillPool({ name: 'X', origin: 'compound', raceLock: 'Animal' }, 'Animal'), null);
+eq('🔴 exclusiveTo beats everything — Mario-only is nobody\'s pick',
+   startingSkillPool({ name: 'Heroic Punch', exclusiveTo: 'Mario' }, 'Human'), null);
 eq('an explicit basic origin is still general', startingSkillPool({ name: 'Brace', origin: 'basic' }), 'general');
 eq('a missing template is not pickable', startingSkillPool(undefined), null);
 
 {
-  const pools = startingSkillPools([
+  const lib = [
     { name: 'Brace' }, { name: 'Feint', origin: 'basic' },
-    { name: 'Swim', animalOnly: true },
+    { name: 'Swim', raceLock: 'Animal' },
+    { name: 'Voicebox', raceLock: 'Robot / AI' },
     { name: 'Iron Stance', origin: 'compound' },
-    { name: 'Death Grip Jaws', origin: 'compound', animalOnly: true },
-  ]);
-  eq('pools keep the two basics', pools.general.map(t => t.name), ['Brace', 'Feint']);
-  eq('pools keep the animal basic', pools.animal.map(t => t.name), ['Swim']);
-  eq('pools drop BOTH compounds', pools.general.length + pools.animal.length, 3);
+    { name: 'Heroic Punch', exclusiveTo: 'Mario' },
+  ];
+  const animal = startingSkillPools(lib, 'Animal');
+  eq('an Animal sees the two general basics', animal.general.map(t => t.name), ['Brace', 'Feint']);
+  eq('...and only its OWN racial', animal.racial.map(t => t.name), ['Swim']);
+  const human = startingSkillPools(lib, 'Human');
+  eq('⭐ a Human sees NO racials at all', human.racial, []);
+  eq('...and the same two generals', human.general.map(t => t.name), ['Brace', 'Feint']);
+  const robot = startingSkillPools(lib, 'Robot / AI');
+  eq('🤖 a Robot sees its own', robot.racial.map(t => t.name), ['Voicebox']);
+  const agnostic = startingSkillPools(lib);
+  eq('with no race, every lock lands in one racial bucket — what a library listing wants',
+     agnostic.racial.map(t => t.name), ['Swim', 'Voicebox']);
+  eq('the compound and the exclusive are dropped from every reading',
+     [animal, human, robot, agnostic].map(p => p.general.length + p.racial.length), [3, 2, 3, 4]);
 }
-eq('an empty library yields empty pools', startingSkillPools([]), { general: [], animal: [] });
-eq('no argument yields empty pools', startingSkillPools(), { general: [], animal: [] });
+eq('an empty library yields empty pools', startingSkillPools([]), { general: [], racial: [] });
+eq('no argument yields empty pools', startingSkillPools(), { general: [], racial: [] });
 
 // Robot / AI is hidden from creation but must NEVER be removed — live sheets are that race.
 ok('CREATION_RACES drops Robot / AI', !CREATION_RACES.includes('Robot / AI'));
@@ -217,26 +253,9 @@ eq('and the live party — 14 points each — sees no change at all today',
 
 // ── §4.4 — a character-exclusive skill is nobody's starting pick ────────────
 console.log('\n§4.4 — exclusiveTo removes a skill from BOTH pools');
-eq('a plain general skill is general', startingSkillPool({ name: 'Brace' }), 'general');
-eq('an animal skill is animal', startingSkillPool({ name: 'Swim', animalOnly: true }), 'animal');
-eq('a compound skill is in no pool', startingSkillPool({ name: 'Iron Stance', origin: 'compound' }), null);
-eq('🔴 Mario-exclusive is in no pool, though it is basic and general',
-   startingSkillPool({ name: 'Heroic Punch', exclusiveTo: 'Mario' }), null);
-eq("⚠️ and an exclusive ANIMAL skill is still nobody's — the two locks compose",
-   startingSkillPool({ name: 'X', animalOnly: true, exclusiveTo: 'XQUEZ/T' }), null);
+eq("⚠️ an exclusive RACIAL is still nobody's — the two locks compose",
+   startingSkillPool({ name: 'X', raceLock: 'Animal', exclusiveTo: 'Someone' }, 'Animal'), null);
 eq('whitespace is not a name', startingSkillPool({ name: 'Y', exclusiveTo: '   ' }), 'general');
-{
-  const lib = [
-    { _id: 1, name: 'Brace' },
-    { _id: 2, name: 'Swim', animalOnly: true },
-    { _id: 3, name: 'Iron Stance', origin: 'compound' },
-    { _id: 4, name: 'Heroic Punch', exclusiveTo: 'Mario' },
-    { _id: 5, name: 'Voicebox', exclusiveTo: 'XQUEZ/T' },
-  ];
-  const pools = startingSkillPools(lib);
-  eq('the picker sees one general and one animal out of five', 
-     [pools.general.length, pools.animal.length], [1, 1]);
-}
 
 
 // ── §7.3 — the damage number is FORCE, and §12.7's bands are Force steps ─────

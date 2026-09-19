@@ -24,13 +24,13 @@ export default function AllAchievementsSection({ token }) {
               </td>
               <td>
                 <div className="ach-title-cell">{r.title}</div>
-                {r.desc && <div style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}>{r.desc}</div>}
+                {r.desc && <div style={{ fontSize: 10, color: 'var(--muted-text)', marginTop: 2 }}>{r.desc}</div>}
               </td>
               <td>{r.reward && <div className="ach-reward-cell">{r.reward}</div>}</td>
             </tr>
           ))}
           {rows.length === 0 && (
-            <tr><td colSpan={3} style={{ color: 'var(--muted)', fontSize: 11, textAlign: 'center', padding: 16 }}>No achievements yet.</td></tr>
+            <tr><td colSpan={3} style={{ color: 'var(--muted-text)', fontSize: 11, textAlign: 'center', padding: 16 }}>No achievements yet.</td></tr>
           )}
         </tbody>
       </table>
