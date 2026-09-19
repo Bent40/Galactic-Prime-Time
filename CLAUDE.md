@@ -1868,8 +1868,8 @@ Owner's architecture: base + type + traits, cultivated by melding found diseases
   Poison or Infection by one Clock.** ⭐ **Immunity is a vaccine; delay is an immune system.**
   ⚙️ Checked on L-19's curve: F1 **0** (correct — the crystal should be terrifying there) ·
   F5 **3** · F9 **8**, and the floor answers with `Aggressive`/`Hardy`/a faster source.
-  ⚠️ **Drift noticed while §3.2 was open, flagged not touched:** its Physique row still reads
-  *"+1 max HP to every body part"*, but **L-18 ruled part HP scales off TOTAL trait points.**
+  ✅ **The §3.2 drift flagged here is FIXED (2026-09-19)** — the Physique row is withdrawn and
+  part HP now scales off TOTAL trait points. See "L-18 BUILT" below.
 - 🔴 **Five open (I-7):** the resistance mechanism · the trait catalog · research costs ·
   the extraction ladder · whether a type changes what resistance answers (⚖ recommend no).
 
@@ -1930,6 +1930,109 @@ already stores Force in `damage`** (Unsworn Sprig 3 · Kin-Carve 4 · Imperial 6
 mislabel the older library. 🔴 **Needs an owner answer first:** were batches a/b/c re-based?
 Then `MATERIAL_BANDS` (M-0 **+0** and M-1 **+1** are ruled; M-2/M-3 are named sketches) and a
 Force readout. **Task #14.**
+
+## ✅ L-18 BUILT 2026-09-19 — part HP off TOTAL trait points (rulebook v1.11)
+
+- 🔒 **§3.2's Physique row is WITHDRAWN.** It read *"every 5 points past 10 → +1 max HP to
+  every body part."* **Two faults, both tombstoned in the book:** it paid **nothing** until
+  Physique reached 15 — past Floor 2 even for a bruiser — so for the whole early campaign
+  the body was a flat number; and it made the body a **Physique tax**, so a Mind or Charm
+  build arrived at Floor 9 with a **Floor 1 torso against Floor 9 damage.**
+- **The rule now: `floor((total trait points − 14) / 5)` = +1 HP to EVERY part**, whichever
+  trait the point went into. **Unspent level points do not count** — a point in the pool
+  has not grown anything. It is **flat on top of the §7.1 size base**, so a Small torso of
+  3 and a Medium torso of 5 gain the same number.
+- ⭐⭐ **This is the number every enemy statline was ALREADY sized against.** `floor-bands.js`,
+  `encounter-bands.js`, the 53 statlines, §21.7 sizing and §21.8's press table all derive
+  from `5 + floor((points − 14)/5)`. **Verified against the calculator: F1 24 points → torso
+  7, F9 164 → 35, exact.** The app was the only place that disagreed.
+- ⚖ **L-18's one open detail closed the plain way: Physique keeps NO extra bonus.** A second
+  source would put a focused build above the body the campaign is written for. **Mine, not
+  blessed — one constant changes it** (`level-budget.md` L-17/L-18).
+- ⭐ **Nobody loses HP, and it is provable rather than hoped.** §2.2 forces 5 Core points at
+  creation, so every legal contestant holds ≥4 points outside Physique — exactly the
+  condition under which the new figure is never lower than the old. A 120×120 sweep pins it.
+- ⚠️ **ZERO change at the table today.** All four live contestants sit on exactly 14 trait
+  points, so their bonus was 0 before and is 0 now. **It starts paying at their second level.**
+- **App:** `constants.js` gains `CREATION_POINTS` · `HP_PER_POINT` · `totalTraitPoints` ·
+  `partHpBonus` · `pointsToNextHp`; `effectiveMaxHp` reads `partHpBonus`; `BodyTab` and
+  `CombatModeTab` follow, and the **Body Parts panel shows the running count** and how many
+  points buy the next one. `capBonus` keeps Reflexes/Mind/Charm. **99 constants tests** (+41)
+  pinning all nine L-19 anchors, the caster chasm (balanced F9: **+6 old vs +30 new**) and
+  the grafted-part fallback. **Wiki: 99 sections, all ids unique, §3.2 now pinned.**
+
+## ✅ SKILL CLASSIFICATION + `exclusiveTo` — BUILT 2026-09-19
+
+`server/seeds/skills-classification.js` is the markup surface (one row per template, each
+with its `why` and an `evidenced`/`proposed` status); `server/apply-skill-classification.js`
+applies it — **`--check` validates and prints the four pools with no DB and no
+`node_modules`**, then dry run, then `--apply`. It never creates a template and **names
+every template the file does not cover**, because the default (basic + general) is the
+permissive one.
+
+- ⚠️ **THE LIBRARY IS 49, NOT 44.** Five more were seeded 2026-07-25 — Intercept · Death
+  Grip Jaws · Field Triage · **Iron Stance** · Play to the Camera. Every later count of
+  "44 skills" is stale, including this file's own Backlog entry.
+- 🔴 **Three live faults found.** ① **Iron Stance is a free starting pick** — it is §4.5's
+  canonical *merge product* (*Intercept Lv5 + Brace Lv3, both consumed*), so a new
+  contestant could **skip the entire Gemstone economy on their first click.** ② **Mario's
+  Full Potential and Heroic Punch are in the general pool** — G7 stamped them `exclusiveTo`
+  months ago and the field was never built. ③ **`RACE` ≠ `animalOnly`:** three of the seven
+  RACE-tagged skills are **XQUEZ/T's Robot racials**, and labelling them animal would offer
+  a prompt-injection joke to a sea lion.
+- ✅ **`exclusiveTo` is built** (§4.4, proposed in skills-passover G7): on the model, both
+  skill-library verbs, the bulk import and the player projection; a **★ name only** badge and
+  an edit field; and **`startingSkillPool()` returns `null` for it**, so an exclusive skill is
+  nobody's pick whichever pool it would otherwise sit in. Nothing after creation is gated.
+- ⚖ **`origin: 'compound'` is written as "may not be taken cold"** — MERGE (2: Iron Stance,
+  Elemental Confluence) **and** PREREQ (10). ⭐ **The three chain OPENERS stay basic:** you
+  may start ON a chain, never INSIDE one. **Widening the field that way is mine, not ruled.**
+- **Pools: 27 general · 5 animal · 12 compound · 5 exclusive.** ⚠️ The animal pool is thin —
+  3 evidenced against a quota of 2 — which is what **R-4's racial packages** are for.
+- 👥 **Sasha = `Slice n' Dice` + `Nightlurking`, evidenced not guessed** (both RACE-tagged;
+  Slice n' Dice's own errata reads *"math rewrite + FOREPAWS"*; §7.1 cites Nightlurking by
+  name). ⭐ **`Pounce` is the surprise — it is GENERAL**, and its own requirement proves it:
+  *"Light Small Weapon (Claws **or Knife** type)."*
+- 👥 **Filipe = `Swim` + ⚖ `Juggling`.** Swim is certain. ⭐ **The discriminator for the second
+  is whose body the requirement is about:** Aura Reading and Vibe Control ask something of
+  the **target**; **Juggling asks something of YOU** (*"must be able to physically handle the
+  item's weight"*). 🔴 Read Juggling as pure stagecraft and Filipe has ONE racial — which is
+  simply the *"our current players dont 100% fit this"* case.
+- 🔴 **Six open (skills-passover Part 3):** Juggling · Death Grip Jaws · Camouflage · the
+  three Robot racials · the **Frost Wall / Fire Wall prereq drift** (the passover table lists
+  a skill-prereq their live `requirements` strings do not carry) · and 🔴 **the game repo's
+  `races.json` already ruled a trade-for-cap at creation** (*"any number may be given up for
+  +1 cap on another"*, 2026-07-16) **that the app has never implemented.**
+
+## ✅ FORCE REACHES THE APP — 2026-09-19 (task #14 closed)
+
+Owner: *"I think everything's pre force."* ✅ **Right for every item that is actually in the
+database — with a better reason than expected.**
+
+- 🔴 **Two readings of `damage` are alive in the seed files:** batches **a/b/c** write bare
+  §12.1 **weapon classes** (Camp Knife 2 · Dagger 2 · Sling 1 · Queensfang 3);
+  `items-set1-spine.js` writes **finished Force** (Kin-Carve 4 = class 3 + Beastbone's +1).
+- ⭐⭐ **They agree on the whole live library, so NOTHING needs re-basing: not one of the 145
+  seeded items carries a materials bill**, so every one sits at band step **+0** — and at +0
+  the class *is* the Force. The only Force-written batch, the 26-item spine, **has never been
+  applied.**
+- **Built:** `MATERIAL_BANDS` (M-0…M-3, every band that has names) + `materialBand()` +
+  `strikingMaterial()`; `itemDmgLabel` prints **"2 Force"** (free text like *"2 per hit"* is
+  left alone); `MaterialsEditor` shows the striking part's band beside the bill (*"F1 Forest
+  — band step +1 Force"*). ⚠️ **An unwritten material returns `null`, never `0`** — a Set 2/3
+  material nobody has named must not quietly read as baseline.
+- 🔒 **THE BAND IS NOT ADDED TO THE NUMBER, deliberately.** 🔴 **OPEN OWNER CALL
+  (`item-drafting-materials.md` M-10):** does `damage` store the **final Force (A)** or the
+  **raw class (B)**? ⚖ **Recommend A** — it costs nothing, the card keeps the number the GM
+  reads out, and `MATERIAL_BANDS` stays a *crafting* reference. **B is purer** (the bill
+  drives the number) but needs a bill on all 145 items and drops the spine's six values
+  (Andvari's Cut 6 → 3). Folding the band in today would **double-count the spine** the day
+  it is seeded.
+- 🔴 **Either way the real gap is the same: NO item records its striking material.** §12.7's
+  bill exists as a model field and an editor and is **empty everywhere** — so disassembly has
+  nothing to return and no item can ever show a band.
+- Also fixed: the **M-band section headings still read ×1/×2/×4/×8** while the corrected
+  table two sections above them already read in Force steps — a leftover from 2026-09-14.
 
 ## Rulebook & Wiki (added 2026-07-23 · wiki rebuilt 2026-09-19)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
