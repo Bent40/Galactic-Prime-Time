@@ -49,7 +49,8 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
   const [libErr, setLibErr] = useState('');
   const [picked, setPicked] = useState([]);        // template _ids, in pick order
   const [suggestions, setSuggestions] = useState([]); // free-text, GM approves
-  const [suggestDraft, setSuggestDraft] = useState('');
+  // Per-pool, not shared: one draft string showed the same text in both boxes.
+  const [suggestDraft, setSuggestDraft] = useState({ general: '', animal: '' });
   const [skillFilter, setSkillFilter] = useState('');
 
   // Fetch once, when they first reach the skill step — the first three steps
@@ -91,12 +92,12 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
     });
   }
   function addSuggestion(pool) {
-    const text = suggestDraft.trim();
+    const text = (suggestDraft[pool] || '').trim();
     if (!text || roomIn(pool) <= 0) return;
-    setSuggestions(s => [...s, { pool, text }]);
-    setSuggestDraft('');
+    setSuggestions(s => [...s, { id: uid(), pool, text }]);
+    setSuggestDraft(d => ({ ...d, [pool]: '' }));
   }
-  const rmSuggestion = (i) => setSuggestions(s => s.filter((_, n) => n !== i));
+  const rmSuggestion = (id) => setSuggestions(s => s.filter(x => x.id !== id));
 
   const BODY_MAX = DEFAULT_STATE.bonusPoints.bodyMax ?? 5;
   const CORE_MAX = DEFAULT_STATE.bonusPoints.coreMax ?? 5;
@@ -339,20 +340,19 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
                       </div>
 
                       {suggestedIn(pool).map((s) => (
-                        <div key={`${s.pool}-${s.text}`} style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, fontSize: 11 }}>
+                        <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, fontSize: 11 }}>
                           <span style={{ flex: 1, fontStyle: 'italic', opacity: .8 }}>“{s.text}” — for the GM to rule on</span>
-                          <button className="btn btn-danger btn-xs"
-                                  onClick={() => rmSuggestion(suggestions.indexOf(s))}>✕</button>
+                          <button className="btn btn-danger btn-xs" onClick={() => rmSuggestion(s.id)}>✕</button>
                         </div>
                       ))}
 
                       {roomIn(pool) > 0 && (
                         <div style={{ display: 'flex', gap: 4, marginTop: 6 }}>
-                          <input className="fi" style={{ flex: 1 }} value={suggestDraft}
+                          <input className="fi" style={{ flex: 1 }} value={suggestDraft[pool] || ''}
                                  placeholder={`Suggest ${pool === 'animal' ? 'an animal' : 'a'} skill…`}
-                                 onChange={e => setSuggestDraft(e.target.value)}
+                                 onChange={e => setSuggestDraft(d => ({ ...d, [pool]: e.target.value }))}
                                  onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addSuggestion(pool); } }} />
-                          <button className="btn btn-xs" disabled={!suggestDraft.trim()}
+                          <button className="btn btn-xs" disabled={!(suggestDraft[pool] || '').trim()}
                                   onClick={() => addSuggestion(pool)}>Suggest</button>
                         </div>
                       )}
