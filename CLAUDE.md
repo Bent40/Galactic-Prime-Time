@@ -2034,6 +2034,39 @@ database — with a better reason than expected.**
 - Also fixed: the **M-band section headings still read ×1/×2/×4/×8** while the corrected
   table two sections above them already read in Force steps — a leftover from 2026-09-14.
 
+## 🏪 THE SHOP — PULLED UP 2026-09-19 (`server/shop-shelf.js` + a table page)
+
+Owner: *"Also pull up the shop for us."* ⭐⭐ **It already existed and nobody had to price
+it.** §19.3 gives three lines — *consumables 1–2 UT · Crude 1 · Basic 3* — and the library
+already carries `tier` and `category` on every template, so **the whole store is a
+derivation**: everything at Crude or Basic tier, priced by those three lines. **57 lines**
+(Consumables 21 · Weapons 14 · Equipment 11 · Tools 7 · Misc 4).
+
+- ⚙️ **`server/shop-shelf.js`** prints it (`--shelf <cat>`, `--json`), **no `node_modules`,
+  no DB** — the repo's standing pattern: a calculator regenerates the table instead of a
+  hand-written price list drifting from the game. **There is no `price` field and there
+  should not be one.**
+- 🖥 **A table page is published** from that JSON — shelves, a search, a running till, and
+  the §19.3 coupon as a button that takes the dearest line off the bill. **Player-facing
+  and safe to hand over**: the Growth items appear exactly as the library shows them, with
+  no `specialEffects`.
+- ✅ **TASK #1 ANSWERS ITSELF — the bought half of the Growth shelf is ALREADY AUTHORED
+  and already correct.** All four (`Mycelium Core` · `Friendship Bracelet` · `Stray's
+  Whistle` · `Prop Crown`) are **Crude → 1 UT**, which is *under* Basic 3, so ⭐ **price is
+  not the tell**, which is exactly the constraint that was open.
+- 🔴 **BUT THE SHELF IS THE TELL, and that is the real finding.** **Odds & Ends is four
+  items and all four are Growth items.** A player scanning the store sees one small shelf of
+  unexplained trinkets next to four shelves of obvious kit — *"what's the weird shelf?"* is
+  a question the price was carefully designed not to provoke. ⭐ **The script has a gate
+  that says so**, and fails loudly if Misc is ever 100% Growth again.
+  ⚖ **Recommended fix (mine, unruled): author ordinary 1 UT curios into Misc** — genuinely
+  worthless junk with a public read and no effects — so the four have company. **Cheaper
+  than moving the Growth items**, and it makes the shelf read as *"whatever came off the
+  truck,"* which is what a tutorial store's odds-and-ends shelf is for.
+- ⚠️ **Still open on this task:** the curios are not written, and **the fantasy item
+  coupons still retire undistributed** (task #2) — the store closes when the Lounge
+  unlocks, so an unspent coupon is gone.
+
 ## Rulebook & Wiki (added 2026-07-23 · wiki rebuilt 2026-09-19)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
   D-8, 2026-07-23). Edit the markdown to change the rules; the docx/PDF are historical.
