@@ -94,14 +94,19 @@ function decorateTables(root) {
 }
 
 function decorateCallouts(root) {
-  for (const el of root.querySelectorAll('p, li, blockquote > p')) {
+  for (const el of root.querySelectorAll('p, li')) {
     const text = el.textContent.trimStart();
     if (!text) continue;
     const hit = MARKERS.find(m => text.startsWith(m.glyph));
     if (!hit) continue;
-    el.classList.add('wiki-callout');
-    el.setAttribute('data-mk', hit.kind);
-    el.setAttribute('data-mk-label', MARKER_LABEL[hit.kind] || '');
+    // Inside a blockquote the QUOTE is already the callout — recolour its rail
+    // rather than nesting one bordered box inside another. First marker wins.
+    const quote = el.closest('blockquote');
+    const target = quote || el;
+    if (target.hasAttribute('data-mk')) continue;
+    target.setAttribute('data-mk', hit.kind);
+    target.setAttribute('data-mk-label', MARKER_LABEL[hit.kind] || '');
+    if (!quote) el.classList.add('wiki-callout');
   }
 }
 
@@ -122,17 +127,27 @@ function decorateHeadings(root, onCopy) {
   }
 }
 
+/** Undo a previous highlight pass, restoring the text nodes it split. */
+function unhighlight(root) {
+  const marks = root.querySelectorAll('mark.wiki-hit');
+  for (const m of marks) m.parentNode.replaceChild(document.createTextNode(m.textContent), m);
+  if (marks.length) root.normalize();
+}
+
 /** Wrap every occurrence of `term` in <mark>, walking text nodes only. */
 function highlight(root, term) {
   const needle = String(term || '').trim();
   if (needle.length < 2) return 0;
   const re = new RegExp(reEscape(needle), 'gi');
+  // A SEPARATE, non-global regex for the filter: `.test()` on a /g regex
+  // advances lastIndex, so reusing `re` here would skip every other node.
+  const probe = new RegExp(reEscape(needle), 'i');
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
     acceptNode(node) {
       if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
       const p = node.parentElement;
       if (!p || p.closest('mark, .wiki-anchor, script, style')) return NodeFilter.FILTER_REJECT;
-      return re.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+      return probe.test(node.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     },
   });
   const targets = [];
@@ -196,6 +211,14 @@ export default function Wiki() {
 
   /* ── navigation: the hash IS the state, so deep links and Back both work ── */
 
+  const scrollToId = useCallback(id => {
+    const root = contentRef.current;
+    if (!root) return;
+    const el = id && root.querySelector(`#${CSS.escape(id)}`);
+    if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+    else root.scrollTop = 0;
+  }, []);
+
   const applyHash = useCallback(() => {
     let id = '';
     try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { id = window.location.hash.slice(1); }
@@ -222,9 +245,15 @@ export default function Wiki() {
       else { setChapterId(null); setAnchorId(null); }
       return;
     }
-    if (current === id) applyHash();        // same target: just re-scroll
-    else window.location.hash = id;          // otherwise let hashchange drive it
-  }, [applyHash]);
+    if (current === id) {
+      // Same hash: React sees no state change and the scroll effect will not
+      // re-run, so clicking the chip you are already on has to scroll by hand.
+      applyHash();
+      requestAnimationFrame(() => scrollToId(id));
+    } else {
+      window.location.hash = id;             // otherwise let hashchange drive it
+    }
+  }, [applyHash, scrollToId]);
 
   /* ── the rendered chapter ────────────────────────────────────────────────── */
 
@@ -252,23 +281,26 @@ export default function Wiki() {
   // Decorate + highlight after every content swap. useLayoutEffect so the reader
   // never sees one frame of undecorated markdown.
   useLayoutEffect(() => {
-    const root = contentRef.current;
-    if (!root || pane !== 'chapter') return;
-    decorateTables(root);
-    decorateCallouts(root);
-    decorateHeadings(root, copyLink);
-    if (query.trim().length >= 2) highlight(root, query.trim());
+    // the rendered markdown only — never the chapter bar, chips or pager, which
+    // are ours and must not sprout <mark>s or table wrappers
+    const md = pane === 'chapter' ? contentRef.current?.querySelector('.wiki-md') : null;
+    if (!md) return;
+    // Callouts FIRST: decorateTables refuses to turn a marker paragraph into a
+    // table's card header, and it can only see that once the class is on.
+    decorateCallouts(md);
+    decorateTables(md);
+    decorateHeadings(md, copyLink);
+    // Clearing the search box does NOT change the html, so React leaves the
+    // node alone and the last query's <mark>s would linger. Strip them first.
+    unhighlight(md);
+    if (query.trim().length >= 2) highlight(md, query.trim());
   }, [html, query, pane, copyLink]);
 
   // Scroll to the anchor once its chapter is on screen.
   useEffect(() => {
     if (pane !== 'chapter' || !anchorId) return;
-    const root = contentRef.current;
-    if (!root) return;
-    const el = root.querySelector(`#${CSS.escape(anchorId)}`);
-    if (el) el.scrollIntoView({ behavior: 'auto', block: 'start' });
-    else root.scrollTop = 0;
-  }, [anchorId, html, pane]);
+    scrollToId(anchorId);
+  }, [anchorId, html, pane, scrollToId]);
 
   useEffect(() => {
     if (pane !== 'chapter' && contentRef.current) contentRef.current.scrollTop = 0;
@@ -279,13 +311,14 @@ export default function Wiki() {
   useEffect(() => {
     const onKey = e => {
       const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target?.tagName || '');
-      if (!typing && (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k'))) {
+      const key = e.key || '';
+      if (!typing && (key === '/' || ((e.ctrlKey || e.metaKey) && key.toLowerCase() === 'k'))) {
         e.preventDefault();
         searchRef.current?.focus();
         searchRef.current?.select();
         return;
       }
-      if (e.key === 'Escape') {
+      if (key === 'Escape') {
         if (navOpen) { setNavOpen(false); return; }
         if (showResults) { setShowResults(false); return; }
         if (query) { setQuery(''); searchRef.current?.blur(); }
@@ -389,7 +422,7 @@ export default function Wiki() {
                         className={`wiki-chip${s.id === anchorId ? ' here' : ''}`}
                         type="button"
                         onClick={() => go(s.id)}
-                      >{s.num || stripNum(s.title)}</button>
+                      >{chipLabel(s)}</button>
                     ))}
                   </div>
                 )}
@@ -455,7 +488,7 @@ function HomePane({ book, pinned, onPick }) {
               <button key={s.id} className="wiki-pin" type="button" onClick={() => onPick(s.id)}>
                 <span className="wiki-pin-num">§{s.num}</span>
                 <span className="wiki-pin-ttl">{stripNum(s.title)}</span>
-                <span className="wiki-pin-sum">{summarize(s.md, 92)}</span>
+                <span className="wiki-pin-sum">{summarize(s.fullMd || s.md, 92)}</span>
               </button>
             ))}
           </div>
@@ -470,7 +503,7 @@ function HomePane({ book, pinned, onPick }) {
               <span className="wiki-chcard-num">{c.num || '·'}</span>
               <span className="wiki-chcard-body">
                 <span className="wiki-chcard-ttl">{stripNum(c.title)}</span>
-                <span className="wiki-chcard-sum">{summarize(c.ownMd, 108)}</span>
+                <span className="wiki-chcard-sum">{summarize(c.ownMd, 108) || summarize(c.md, 108)}</span>
                 {c.sections.filter(s => s.level === 3).length > 0 && (
                   <span className="wiki-chcard-meta">
                     {c.sections.filter(s => s.level === 3).length} sections
@@ -532,6 +565,16 @@ function SearchPane({ query, results, onPick, onClose }) {
 /** "8.2 Condition tiers" -> "Condition tiers" (the number is shown separately). */
 function stripNum(title) {
   return String(title || '').replace(/^\s*\d+(\.\d+)*\s*[.)]?\s+/, '');
+}
+
+/**
+ * A jump chip reads "§8.2 Condition tiers". The number alone is unreadable on a
+ * phone, where the chips ARE the in-chapter nav (the sidebar is a drawer), and
+ * the full title is too long — so the subtitle after an em dash is dropped.
+ */
+function chipLabel(s) {
+  const head = stripNum(s.title).split(/\s+[—–]\s+/)[0].trim();
+  return s.num ? `§${s.num} ${head}` : head;
 }
 
 /* ── styles (scoped to .wiki-root; nothing here reaches the sheet) ─────────── */
@@ -768,8 +811,8 @@ mark.wiki-hit {
 .wiki-chips { display: flex; gap: 5px; flex-wrap: wrap; min-width: 0; }
 .wiki-chip {
   background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 12px;
-  color: var(--muted); cursor: pointer; font-family: 'Courier New', monospace;
-  font-size: 11px; padding: 2px 9px;
+  color: var(--muted); cursor: pointer; font-size: 11.5px; padding: 3px 10px;
+  max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .wiki-chip:hover { color: var(--cyan); border-color: var(--cyan); }
 .wiki-chip.here { color: var(--bg); background: var(--cyan); border-color: var(--cyan); font-weight: 700; }
@@ -781,7 +824,7 @@ mark.wiki-hit {
 .wiki-backtohits:hover { background: rgba(0,212,255,.16); }
 
 /* ---- rendered markdown ---- */
-.wiki-md { padding-top: 6px; line-height: 1.65; }
+.wiki-md { padding-top: 6px; line-height: 1.65; overflow-wrap: break-word; }
 .wiki-md h2, .wiki-md h3, .wiki-md h4, .wiki-md h5, .wiki-md h6 {
   scroll-margin-top: 54px; position: relative; line-height: 1.25;
 }
@@ -842,7 +885,7 @@ mark.wiki-hit {
 .wiki-md th {
   background: #0b1024; color: var(--cyan); font-size: 9.5px; font-weight: 700;
   letter-spacing: 1.6px; text-transform: uppercase; white-space: nowrap;
-  border-bottom: 1px solid var(--cyan); position: sticky; top: 0;
+  border-bottom: 1px solid var(--cyan);
 }
 .wiki-md tbody tr:last-child td { border-bottom: none; }
 .wiki-md tbody tr:nth-child(even) td { background: rgba(255,255,255,.018); }
@@ -887,15 +930,25 @@ mark.wiki-hit {
 .wiki-md .wiki-callout[data-mk="aim"]   { border-left-color: var(--w-aim);   background: rgba(236,72,153,.055); }
 .wiki-md .wiki-callout[data-mk="new"]   { border-left-color: var(--w-new);   background: rgba(0,255,136,.05); }
 .wiki-md .wiki-callout[data-mk="weigh"] { border-left-color: var(--w-weigh); background: rgba(192,192,192,.045); }
-.wiki-md .wiki-callout::after {
+.wiki-md blockquote[data-mk] { position: relative; }
+.wiki-md blockquote[data-mk="ruled"] { border-left-color: var(--w-ruled); background: linear-gradient(90deg, rgba(0,212,255,.10), rgba(0,212,255,.02)); color: #d3ecf7; }
+.wiki-md blockquote[data-mk="warn"]  { border-left-color: var(--w-warn); }
+.wiki-md blockquote[data-mk="open"],
+.wiki-md blockquote[data-mk="stop"]  { border-left-color: var(--w-open); background: linear-gradient(90deg, rgba(255,34,85,.10), rgba(255,34,85,.02)); color: #f3d3da; }
+.wiki-md blockquote[data-mk="star"]  { border-left-color: var(--w-star); background: linear-gradient(90deg, rgba(168,85,247,.10), rgba(168,85,247,.02)); color: #e6d6f7; }
+.wiki-md .wiki-callout::after, .wiki-md blockquote[data-mk]::after {
   content: attr(data-mk-label); position: absolute; top: -8px; right: 9px;
   font-size: 8px; font-weight: 700; letter-spacing: 1.6px; color: var(--muted);
   background: var(--bg); padding: 0 5px; border-radius: 2px;
 }
-.wiki-md .wiki-callout[data-mk="ruled"]::after { color: var(--w-ruled); }
-.wiki-md .wiki-callout[data-mk="open"]::after,
-.wiki-md .wiki-callout[data-mk="stop"]::after { color: var(--w-open); }
-.wiki-md .wiki-callout[data-mk="warn"]::after { color: var(--w-warn); }
+.wiki-md [data-mk="ruled"]::after { color: var(--w-ruled); }
+.wiki-md [data-mk="open"]::after,
+.wiki-md [data-mk="stop"]::after  { color: var(--w-open); }
+.wiki-md [data-mk="warn"]::after  { color: var(--w-warn); }
+.wiki-md [data-mk="star"]::after  { color: var(--w-star); }
+.wiki-md [data-mk="done"]::after,
+.wiki-md [data-mk="new"]::after   { color: var(--w-done); }
+.wiki-md [data-mk-label=""]::after { display: none; }
 
 /* ---- pager ---- */
 .wiki-pager {
@@ -946,8 +999,9 @@ mark.wiki-hit {
   .wiki-md th, .wiki-md td { padding: 6px 8px; }
   .wiki-md th { position: static; }
   .wiki-pagebtn { max-width: 48%; }
-  .wiki-md li.wiki-callout { margin-left: -14px; }
+  .wiki-md li.wiki-callout { margin-left: -18px; }
   .wiki-md ul, .wiki-md ol { padding-left: 18px; }
+  .wiki-toc:not(.open) { visibility: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   .wiki-content { scroll-behavior: auto; }

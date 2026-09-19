@@ -32,7 +32,10 @@ export const MARKERS = [
   { glyph: '🆕', kind: 'new' },
   { glyph: '⚡', kind: 'star' },
   { glyph: '⚖️', kind: 'weigh' },
+  // bare code points, in case a later edit drops the variation selector
   { glyph: '⚖', kind: 'weigh' },
+  { glyph: '⚠', kind: 'warn' },
+  { glyph: '⚙', kind: 'cog' },
 ];
 
 /**
@@ -93,12 +96,17 @@ export function plainText(md) {
 
 /** A one-line gist for a card, taken from the section's own first sentence. */
 export function summarize(md, maxLen = 150) {
-  const body = plainText(md)
+  // Drop EVERY heading line, not just the first: §7.3 opens straight onto an h4,
+  // so a card summarising it would otherwise read "Force — the unit everything
+  // is measured in One Force is one basic punch."
+  const prose = String(md == null ? '' : md)
+    .split('\n')
+    .filter(l => !/^\s{0,3}#{1,6}\s/.test(l))
+    .join('\n');
+  const body = plainText(prose)
     .split('\n')
     .map(l => l.trim())
-    // skip the heading line itself and any leading table row leftovers
     .filter(l => l.length > 0)
-    .slice(1)
     .join(' ')
     .trim();
   if (!body) return '';

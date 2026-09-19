@@ -141,6 +141,14 @@ eq('an empty book does not throw', parseRulebook('').chapters.length, 0);
   const hold = searchIndex(idx, 'hold');
   eq('a word-start hit outranks the same letters buried mid-word', hold[0].num, '3');
   eq('the index body excludes the heading line', idx[0].text.includes('1. Force'), false);
+  // a heading whose body is empty still previews, by looking at its children
+  const hollow = parseRulebook('## 7. Damage\n\n### 7.3 Force\n\n#### The unit\n\nOne punch.\n');
+  const hidx = buildIndex(hollow);
+  const f = hidx.find(r => r.num === '7.3');
+  eq('a heading with no body of its own has empty MATCH text', f.text, '');
+  ok('but it still has PREVIEW text from its children', f.preview.includes('One punch.'), f.preview);
+  ok('and its search result carries a readable snippet',
+     searchIndex(hidx, 'force')[0].snippet.before.length + searchIndex(hidx, 'force')[0].snippet.match.length > 0);
 }
 
 // ── pickByNumber ─────────────────────────────────────────────────────────────
@@ -191,7 +199,13 @@ ok('the real book has every heading below h1', book.sections.length >= 90, Strin
   eq('every pinned quick-reference section resolves', found.length, PINNED.length);
   ok('the condition-tier pin is the condition-tier section',
      /condition tiers/i.test(found[0].title), found[0].title);
-  ok('every pin has a summary to print on its card', found.every(s => summarize(s.md, 92).length > 0));
+  // §7.3 has NO body of its own — it opens straight onto an h4 — so a card that
+  // reads only `md` prints an empty line. fullMd is what makes the pin usable.
+  ok('every pin has a summary to print on its card',
+     found.every(s => summarize(s.fullMd || s.md, 92).length > 0),
+     found.filter(s => !summarize(s.fullMd || s.md, 92)).map(s => s.num).join(', '));
+  ok('the pin with no body of its own still summarises',
+     summarize(book.sections.find(s => s.num === '7.3').fullMd, 92).length > 0);
 }
 
 {
