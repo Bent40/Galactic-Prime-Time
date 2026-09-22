@@ -5,7 +5,13 @@ const skillTemplateSchema = new mongoose.Schema({
   momentCost:   { type: String, default: '' },
   stats:        { type: [String], default: [] },
   passive:      { type: Boolean, default: false },
+  // `capacity` is the STARTING cap a contestant unlocks the skill at (§4.2: levels
+  // 1-5 need no unlocking). `maxCapacity` is the skill's OWN CEILING — how far
+  // Patron Tokens may ever raise that cap. Owner ruling 2026-09-22 (rulebook v1.13):
+  // "some skills cap at 5, some at 10, with special ones we can designate up to 15".
+  // The flat ceiling of 10 is withdrawn; a basic skill that stops at 5 sets both to 5.
   capacity:     { type: Number, default: 5 },
+  maxCapacity:  { type: Number, default: 10 },
   requirements: { type: String, default: '' },
   range:        { type: String, default: '' },
   target:       { type: String, default: '' },

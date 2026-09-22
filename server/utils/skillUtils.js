@@ -26,6 +26,8 @@ async function enrichSkills(skills) {
       level: sk.level || 0,
       capacity: sk.capacity ?? (tpl.capacity || 5),
       traitCosts: sk.traitCosts || [],
+      // §4.2 ceiling — template-owned, joined here, never stored on the instance
+      maxCapacity: tpl.maxCapacity || 10,
       // Template-derived display fields
       name: tpl.name,
       momentCost: tpl.momentCost || '',
@@ -67,6 +69,7 @@ function normalizeSkills(skills) {
       stats: sk.stats || [],
       passive: !!sk.passive,
       capacity: sk.capacity || 5,
+      maxCapacity: sk.maxCapacity || 10,
       level: sk.level || 0,
       requirements: sk.requirements || '',
       range: sk.range || '',

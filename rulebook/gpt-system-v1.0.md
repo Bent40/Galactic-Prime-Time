@@ -1,6 +1,10 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.12** · 2026-09-19 — **an item's written damage number IS its Force**
+**Version 1.13** · 2026-09-22 — **the skill ceiling is PER SKILL** (§4.2: most basic
+skills stop at 5, many go to 10, a designated few reach 15) and **a narrow keyword is a
+merge permission, not a category** (§4.5: `climbing` · `flight` · `scent` added as
+quarantines; **a racial may be the consumer, never the consumed**).
+*Previously —* **1.12** · 2026-09-19, **an item's written damage number IS its Force**
 (§12.7), band already counted: a card that reads 4 hits for 4, and a reforge
 rewrites the card. *The band is in the smith's hands, never the player's
 arithmetic.*
@@ -256,10 +260,23 @@ Skills run **0–10**:
 
 ### 4.2 Caps, thresholds, upgrades and mutations
 
-- Every skill can go to **10**. **Levels 1–5 are naturally available** — the
-  starting cap of 5 needs no unlocking. **Levels 6–10 unlock one by one:** each
-  step past 5 costs a **Patron Token** (+1 max level per token), to the ceiling
-  of 10. Cap 5 = useful; cap 6 = build-defining; level 10 = game changer.
+- 🔒 **THE CEILING IS PER SKILL (ruled 2026-09-22).** Every skill carries **its
+  own maximum, written on the skill**: **most basic skills stop at 5, many go to 10, and
+  a designated few reach 15.** A cap of 5 is not a lesser skill — it is a skill that has
+  said everything it has to say by level 5.
+- **Levels 1–5 are naturally available** — the starting cap of 5 needs no unlocking.
+  **Every level past 5 unlocks one at a time:** each step costs a **Patron Token** (+1 max
+  level per token), stopping at **that skill's own ceiling**. Cap 5 = useful; cap 6 =
+  build-defining; level 10 = game changer; **15 is reserved and must be designated
+  deliberately, never reached by default.**
+
+  > ⚠️ **ERRATA — the flat ceiling of 10 is withdrawn (2026-09-22).** This line read
+  > ~~*"Every skill can go to 10 … to the ceiling of 10"*~~. It was written before **L-17**
+  > ruled that skills scale with their **governing trait**, which is uncapped — so a single
+  > system-wide ceiling was the *system* deciding how far every skill goes, when **the skill
+  > itself is the thing that knows.** The cap is now an authoring statement. ⭐ It also
+  > closes a live hole: starting skills are basic skills, so **a starting pick caps at 5**,
+  > which is why no creation-time trade may buy a higher one.
 - **Thresholds:** every level from 5 up is a threshold. Reaching one **Upgrades**
   (adds effects) or **Mutates** (changes purpose completely) the skill. **The GM
   offers the available upgrade or mutation. The work itself happens only in the
@@ -300,11 +317,11 @@ unless stated. Never automatic — requires conditions AND player consent.
 |---|---|
 | magic | fire · cold · toxin · psychic · force |
 | strikes | blade · blunt · unarmed · flurry · precision · power |
-| movement | leaping · tumbling · rushing |
+| movement | leaping · tumbling · rushing · **climbing** · **flight** |
 | performance | deception · presence · sound · projection |
 | survival | treatment · bracing · aquatic |
 | control | grapple · throw |
-| perception | empathy · patterning · awareness |
+| perception | empathy · patterning · awareness · **scent** |
 | infiltration | stealth · locks · squeezing |
 | craft | repair · improvisation |
 
@@ -312,6 +329,30 @@ unless stated. Never automatic — requires conditions AND player consent.
 a **broad** group (two magic skills of different elements, say) is the "ask the
 GM with a fiction reason" case. No overlap = incompatible. New skills pick from
 this list; the GM may grow the taxonomy deliberately, never casually.
+
+🔒 **A NARROW IS A MERGE PERMISSION, NOT A CATEGORY.** This is the rule that decides
+where a new keyword goes: filing a skill under an existing narrow **grants it every fusion
+that narrow already allows.** So the question is never *"what kind of thing is this?"* — it
+is *"what should this be allowed to become?"*
+
+🔒 **`climbing`, `flight` and `scent` were added on that reasoning (2026-09-22)**, for
+the racial packages, and each one sits **alone on purpose**:
+
+| narrow | under | why it is not filed under a neighbour |
+|---|---|---|
+| **`flight`** | movement | under *leaping* it becomes compatible with every jumper — and through Acrobatics, which carries both, with the tumblers as well, so a merge could produce a winged acrobat nobody designed |
+| **`climbing`** | movement | under *tumbling* it merges with the acrobatic saves |
+| **`scent`** | perception | under *awareness* it merges with the psychic-perception line — a nose that reads auras |
+
+⭐ They are **quarantines**, not an expansion: a body fact should grant what that body
+does and **no fusion that was never designed.** Grow the taxonomy the same way —
+deliberately, and for this reason.
+
+🔒 **A RACIAL SKILL MAY BE THE CONSUMER, NEVER THE CONSUMED (ruled 2026-09-22).** A
+merge **destroys both parents**, so feeding a racial into the Gemstone would quietly change
+what your body is — a **race change routing around the Surgeon's Table** (§20.3), which is
+the one station meant to edit a body and the one that charges for it. A racial may eat
+another skill and grow; **nothing may eat a racial.**
 
 **The canonical worked example:** **Intercept Lv 5 +
 Brace Lv 3** — compatible through *bracing* — merge at the Gemstone into

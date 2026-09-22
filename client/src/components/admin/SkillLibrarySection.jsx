@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'react';
 import { apiFetch } from '../../api.js';
-import { RACES } from '../../constants.js';
+import { RACES, SKILL_CEILING_MAX, SKILL_CEILING_DEFAULT, skillCeiling } from '../../constants.js';
 
-const TIER_LEVELS = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+// §4.2 — the tier rows run to the SKILL's own ceiling, not a fixed 10 (v1.13). A skill
+// that stops at 5 no longer shows five empty rows it can never reach, and a designated
+// 15 can be authored all the way up.
+const tierLevels = (ceiling) => {
+  const top = Math.min(SKILL_CEILING_MAX, Math.max(2, Number(ceiling) || SKILL_CEILING_DEFAULT));
+  return Array.from({ length: top - 1 }, (_, i) => i + 2);
+};
 
 const BLANK_FORM = {
-  name: '', momentCost: '', stats: '', passive: false, capacity: 5,
+  name: '', momentCost: '', stats: '', passive: false, capacity: 5, maxCapacity: SKILL_CEILING_DEFAULT,
   requirements: '', range: '', target: '', effect: '', description: '',
   achievementUnlock: '', keywords: '', levelEffects: {},
   // Starting-skill eligibility (owner ruling 2026-09-19) — see models/SkillTemplate.js.
   origin: 'basic', raceLock: '', exclusiveTo: '',
 };
 
-function LevelEffectsEditor({ value, onChange }) {
+function LevelEffectsEditor({ value, onChange, ceiling = SKILL_CEILING_DEFAULT }) {
+  const levels = tierLevels(ceiling);
   return (
     <div style={{ marginBottom: 8 }}>
-      <div className="field-label" style={{ marginBottom: 6 }}>Tier Effects (2–10)</div>
+      <div className="field-label" style={{ marginBottom: 6 }}>Tier Effects (2–{levels[levels.length - 1]})</div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-        {TIER_LEVELS.map(lvl => (
+        {levels.map(lvl => (
           <div key={lvl} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: 2, color: 'var(--cyan)', width: 24, textAlign: 'right', flexShrink: 0 }}>T{lvl}</span>
             <input
@@ -112,6 +119,7 @@ export default function SkillLibrarySection({ token, showToast }) {
                 {(t.raceLock || t.animalOnly) && <span className="badge badge-cyan" title={`Race-locked: only a ${t.raceLock || 'Animal'} contestant may take this, as one of its 2 racial starting skills`}>{(t.raceLock || 'Animal') === 'Animal' ? '🐾' : '🤖'} {t.raceLock || 'Animal'}</span>}
                 {t.origin === 'compound' && <span className="badge badge-muted" title="A Gemstone merge product (§4.5) — never pickable at character creation">⚗ Compound</span>}
                 {t.exclusiveTo && <span className="badge badge-gold" title="§4.4 character-exclusive — tied to one contestant and offered to nobody at creation">★ {t.exclusiveTo} only</span>}
+                {skillCeiling(t) !== SKILL_CEILING_DEFAULT && <span className="badge badge-muted" title={`§4.2 — this skill's own ceiling. Patron Tokens raise its cap no further than ${skillCeiling(t)}.`}>⬆ max {skillCeiling(t)}</span>}
                 {t.achievementUnlock && <span className="badge badge-gold">🔒 {t.achievementUnlock}</span>}
                 {t.levelEffects && Object.keys(t.levelEffects).filter(k => t.levelEffects[k]).length > 0 && (
                   <span className="badge badge-muted">
@@ -181,6 +189,15 @@ export default function SkillLibrarySection({ token, showToast }) {
                 </select>
               </div>
               <div className="field-group">
+                <label className="field-label" title="§4.2 — how far Patron Tokens may ever raise this skill's cap. Most basic skills stop at 5, many go to 10, and a designated few reach 15. This is the skill's OWN ceiling, not a system constant.">Ceiling (max level)</label>
+                <select className="fi" value={skillCeiling(editModal)}
+                        onChange={e => setEditModal(m => ({ ...m, maxCapacity: Number(e.target.value) }))}>
+                  <option value={5}>5 — basic: it has said everything by 5</option>
+                  <option value={10}>10 — the ordinary ceiling</option>
+                  <option value={15}>15 — designated, deliberately</option>
+                </select>
+              </div>
+              <div className="field-group">
                 <label className="field-label" title="§4.4 — tied to one contestant's nature and not obtainable by others. Any name here removes the skill from BOTH creation pools. Blank for none.">★ Exclusive to</label>
                 <input className="fi" placeholder="(nobody)" value={editModal.exclusiveTo || ''}
                        onChange={e => setEditModal(m => ({ ...m, exclusiveTo: e.target.value }))} />
@@ -188,7 +205,7 @@ export default function SkillLibrarySection({ token, showToast }) {
             </div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Requirements</label><input className="fi" value={editModal.requirements || ''} onChange={e => setEditModal(m => ({ ...m, requirements: e.target.value }))} /></div>
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Base Effect (Tier 1)</label><textarea className="fi" value={editModal.effect || ''} onChange={e => setEditModal(m => ({ ...m, effect: e.target.value }))} /></div>
-            <LevelEffectsEditor value={editModal.levelEffects || {}} onChange={v => setEditModal(m => ({ ...m, levelEffects: v }))} />
+            <LevelEffectsEditor value={editModal.levelEffects || {}} ceiling={skillCeiling(editModal)} onChange={v => setEditModal(m => ({ ...m, levelEffects: v }))} />
             <div className="field-group" style={{ marginBottom: 8 }}><label className="field-label">Description</label><textarea className="fi" value={editModal.description || ''} onChange={e => setEditModal(m => ({ ...m, description: e.target.value }))} /></div>
             <div className="modal-footer">
               <button className="btn btn-muted btn-sm" onClick={() => setEditModal(null)}>Cancel</button>

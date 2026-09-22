@@ -256,11 +256,15 @@ const PATCHES = [
 // ── G3-A: Gemstone compatibility keywords ─────────────────────────────────────
 // Taxonomy (broad → narrow): magic → fire/cold/toxin/psychic/force ·
 // strikes → blade/blunt/unarmed/flurry/precision/power · movement →
-// leaping/tumbling/rushing · performance → deception/presence/sound/projection ·
-// survival → treatment/bracing/aquatic · control → grapple/throw ·
-// perception → empathy/patterning/awareness · infiltration →
-// stealth/locks/squeezing · craft → repair/improvisation.
+// leaping/tumbling/rushing/climbing/flight · performance →
+// deception/presence/sound/projection · survival → treatment/bracing/aquatic ·
+// control → grapple/throw · perception → empathy/patterning/awareness/scent ·
+// infiltration → stealth/locks/squeezing · craft → repair/improvisation.
 // Rule: share a NARROW keyword = compatible; share only a BROAD one = GM call.
+// climbing/flight/scent added 2026-09-22 (rulebook v1.13) for the racial packages.
+// They are QUARANTINES: a narrow is a merge permission, not a category, so a skill
+// filed under one of them drops the neighbouring narrow rather than carrying both.
+// No template below uses them yet — the racial packages are still a proposal.
 const KEYWORDS = {
   'Controlled Sweep': ['strikes', 'blade'],
   'Quick Step': ['movement', 'rushing'],

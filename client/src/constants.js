@@ -293,6 +293,23 @@ export function capBonus(state, t) {
   return Math.floor(Math.max(0, traitTotal(state, t) - 10) / CAP_DIVISORS[t]);
 }
 
+// §4.2 — THE SKILL CEILING IS PER SKILL (owner ruling 2026-09-22, rulebook v1.13).
+// "Some skills cap at 5, some at 10, with special ones we can designate up to 15."
+// The flat ceiling of 10 is withdrawn: a skill's `capacity` is the cap it is CURRENTLY
+// unlocked to (Patron Tokens raise it one step each), and `maxCapacity` is how far that
+// may ever go. A template written before the ruling has no maxCapacity, so it reads as
+// 10 — the old universal value — and nothing changes meaning.
+export const SKILL_CEILING_MAX     = 15;
+export const SKILL_CEILING_DEFAULT = 10;
+export function skillCeiling(sk) {
+  const start = Number(sk?.capacity) || 5;
+  const raw   = Number(sk?.maxCapacity);
+  const ceil  = Number.isFinite(raw) && raw > 0 ? Math.floor(raw) : SKILL_CEILING_DEFAULT;
+  // A ceiling under the skill's own current cap would strand a level nobody could
+  // reach, so the cap wins. Never above the designated maximum.
+  return Math.min(SKILL_CEILING_MAX, Math.max(ceil, start));
+}
+
 // The sum of all four traits (base + bonus + levelBonus). UNSPENT level points do
 // not count: a point in the pool has not grown anything yet.
 export function totalTraitPoints(state) {

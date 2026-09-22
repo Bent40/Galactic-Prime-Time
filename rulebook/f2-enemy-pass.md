@@ -359,7 +359,7 @@ what he thinks of them when they arrive."* Now it does.
 > *offer accepted / offer refused*, it is **the Double's murder** — joining Bex means killing
 > the queen, and *"killing the double, not the original Vermilia."* So the table below is
 > superseded by the one under **③ Do both branches mark?**: **joining and killing the
-> "queen"** proposes 🟡 **`Effigy`** (🔴 **not** `Regicide` — no monarch died, and the absence
+> "queen"** carries 🔒 **`Scapegoat`** (🔴 **not** `Regicide` — no monarch died, and the absence
 > is the tell), and **refusing marks NOTHING**, because a refusal is a decision inside a
 > conversation rather than a deed. The original follows, struck.
 
@@ -436,10 +436,16 @@ accepted / offer refused*. The deed is now the **Double's murder**, so:
 
 | Deed | Mark |
 |---|---|
-| **Joined Bex, killed the "queen"** | 🟡 **Proposed: `Effigy`** — names the truth (they destroyed an image, not the thing) without explaining it, and satisfies the inclusion test hard: a grudge that lasts, and a road closed. 🔴 **Not `Regicide`** |
+| **Joined Bex, killed the "queen"** | 🔒 **`Scapegoat`** — ⭐ **names the VICTIM, not the object.** The doll died for a secret that was never hers, believing to the last that it had failed to protect a sister it never had. Satisfies the inclusion test hard: a grudge that lasts, and a road closed. 🔴 **Not `Regicide`** |
 | **Refused** | ❌ **No mark.** A refusal is a decision inside a conversation, not a deed — the same reason killing Bex at F2 was cut |
 
-🔴 **`Effigy` is unblessed.** It is the one piece of this ruling I invented rather than received.
+✅ **BLESSED 2026-09-22 — and the owner renamed it.** I proposed `Effigy`; the ruling is
+**`Scapegoat`**. ⭐ **The difference is the whole authoring rule (C-0b): `Effigy` names the
+OBJECT they destroyed, `Scapegoat` names the PERSON who paid.** The party did not break an
+image — they killed someone who carried a punishment that belonged to Vermilia, which is
+what a scapegoat is. ⭐⭐ And it keeps the question live the way a Mark must: a contestant
+reading `Scapegoat` on their own body knows **someone else should have taken that**, and
+does not yet know who.
 
 ---
 

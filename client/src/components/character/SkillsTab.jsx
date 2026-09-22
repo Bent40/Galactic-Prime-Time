@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../../api.js';
-import { ALL_TRAITS, TRAIT_LABELS, traitTotal as traitTotalOf } from '../../constants.js';
+import { ALL_TRAITS, TRAIT_LABELS, traitTotal as traitTotalOf, skillCeiling } from '../../constants.js';
 
 export default function SkillsTab({ state, update, token }) {
   const [lib, setLib] = useState([]);
@@ -23,7 +23,8 @@ export default function SkillsTab({ state, update, token }) {
 
   function raiseCap(sk) {
     const cap = sk.capacity || 5;
-    if (cap >= 10) return;
+    // §4.2 — the ceiling is the SKILL's, not a system constant (v1.13)
+    if (cap >= skillCeiling(sk)) return;
     const patronTokens = state.tokens?.patronTokens || 0;
     if (patronTokens <= 0) return;
     const newState = {
@@ -111,6 +112,8 @@ export default function SkillsTab({ state, update, token }) {
       passive: tpl.passive,
       keywords: tpl.keywords,
       levelEffects: tpl.levelEffects,
+      // §4.2 ceiling — template-owned, joined for display, never stored on the instance
+      maxCapacity: tpl.maxCapacity,
     };
   });
 
@@ -155,7 +158,8 @@ export default function SkillsTab({ state, update, token }) {
           const atMax = level >= cap;
           const canLevelUp = !atMax && (stats.length === 0 || stats.every(t => availableFor(t) > 0));
           const patronTokens = state.tokens?.patronTokens || 0;
-          const canRaiseCap = cap < 10 && patronTokens > 0;
+          const ceiling = skillCeiling(sk);
+          const canRaiseCap = cap < ceiling && patronTokens > 0;
 
           return (
             <div key={sk.id} className="skill-card-ro">
@@ -211,7 +215,7 @@ export default function SkillsTab({ state, update, token }) {
               )}
 
               {/* Raise Cap */}
-              {cap < 10 && (
+              {cap < ceiling && (
                 <button
                   className={`btn btn-xs ${canRaiseCap ? 'btn-gold' : 'btn-muted'}`}
                   style={{ marginBottom: 6, fontSize: 9 }}
@@ -219,7 +223,7 @@ export default function SkillsTab({ state, update, token }) {
                   title={canRaiseCap ? `Raise cap to ${cap + 1} (costs 1 Patron Token)` : patronTokens <= 0 ? 'No Patron Tokens' : `Cap is already ${cap}`}
                   onClick={() => raiseCap(sk)}
                 >
-                  ▲ Raise Cap ({cap}/10) — 1 Patron Token
+                  ▲ Raise Cap ({cap}/{ceiling}) — 1 Patron Token
                 </button>
               )}
 

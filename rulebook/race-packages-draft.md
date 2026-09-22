@@ -86,11 +86,11 @@ no `Fennec Endurance`.
 | **`Swim`** | ✅ live | Physique | **5** 🟡*(15?)* | survival · aquatic | **Sea Lion · Crocodile · Octopus** | Water stops being terrain: currents become movement bonuses, and you may drag a grappled target under |
 | **`Nightlurking`** | ✅ live | Reflexes | 10 | infiltration · awareness · squeezing | **Cat · Rat · Bat** | Always aware of the nearest exit, gap or vent; fits plausible small spaces without a Forced Action |
 | **`Death Grip Jaws`** | ✅ live | Physique | 5 | control · grapple | **Crocodile · Dog · Honey Badger** | Bite-grapple by the standard §13 rules — *"no hands? no problem"* |
-| **`Scent Trail`** | 🆕 | Mind | 10 | perception · awareness *(·scent)* | **Dog · Honey Badger · Elephant · Camel** | Follow a trail hours or days old, and **read its direction**; names who or what left it if you have met them before |
+| **`Scent Trail`** | 🆕 | Mind | 10 | perception · **scent** | **Dog · Honey Badger · Elephant · Camel** | Follow a trail hours or days old, and **read its direction**; names who or what left it if you have met them before |
 | **`Beast Strength`** | 🆕 | Physique | 10 | strikes · power | **Elephant · Camel · Crocodile · Ostrich** | Lift, drag, haul, shift or hold what a Medium body cannot — the §21.6 **Party** assist you give counts as two |
 | **`Bolt`** | 🆕 | Reflexes | 10 | movement · rushing | **Ostrich · Kangaroo · Fennec Fox · Cat** | Once per Clock, cross open ground in a single Moment at a distance nothing on two legs should manage |
-| **`Sure-Foot`** | 🆕 | Reflexes | 10 | movement · tumbling *(·climbing)* | **Goat · Cat** | Vertical and near-vertical surfaces are terrain, not obstacles; narrow ledges never call a Forced Action |
-| **`Take Wing`** | 🆕 | Reflexes | 10 | movement · leaping *(·flight)* | **Crow · Bat** | Leave the ground. ⚠️ **Ceiling-gated and load-gated** — see the bill in RP-4 |
+| **`Sure-Foot`** | 🆕 | Reflexes | 10 | movement · **climbing** | **Goat · Cat** | Vertical and near-vertical surfaces are terrain, not obstacles; narrow ledges never call a Forced Action |
+| **`Take Wing`** | 🆕 | Reflexes | 10 | movement · **flight** | **Crow · Bat** | Leave the ground. ⚠️ **Ceiling-gated and load-gated** — see the bill in RP-4 |
 | **`Whisker-Read`** | 🆕 | Mind | 5 | perception · awareness | **Cat · Rat · Sea Lion** | At 1 space, in total darkness or blind, you read contact, airflow and movement as if you could see it |
 | **`Water-Miser`** | 🆕 | Physique | 5 | survival · bracing | **Camel · Fennec Fox · Kangaroo** | Thirst, heat and water-deprivation clocks do not run on you; you take your water from what you eat |
 | **`Heat-Shed`** | 🆕 | Physique | 5 | survival · bracing | **Fennec Fox · Elephant** | Your ears are radiators: heat effects and Burn-adjacent environmental tiers advance one step slower |
@@ -571,12 +571,32 @@ skill in this draft that competes with a general-pool skill rather than doing so
 the general pool cannot. ⚖ **Recommend cutting it**; the octopus already has three
 candidates and `Beak-Gauge` is the better spike.
 
-### 5. 🔴 **THE §4.5 KEYWORD TAXONOMY HAS NO HOME FOR FLIGHT, CLIMBING OR SCENT**
+### 5. ✅ **RULED 2026-09-22 — ALL THREE NARROWS ARE IN THE BOOK** (§4.5, v1.13)
 
-§4.5's compatibility system is a closed list — `movement` is *leaping · tumbling ·
-rushing*, `perception` is *empathy · patterning · awareness* — and the book says the GM
-*"may grow the taxonomy deliberately, never casually."* This pass needs **three new
-narrows** and there is no honest way around it:
+⭐ **And the ruling came with the reason generalised:** 🔒 *a narrow is a **merge
+permission**, not a category* — so the question about a new keyword is never *"what kind of
+thing is this?"* but ***"what should this be allowed to become?"*** `climbing`, `flight` and
+`scent` are written into §4.5 as **quarantines** on exactly that reading.
+
+⚠️ **Consequence applied to RP-2, and it is the rule's own content rather than a second
+decision: each of the three skills DROPS its neighbouring narrow.** `Scent Trail` is
+`perception · scent` and **not** *awareness*; `Sure-Foot` is `movement · climbing` and
+**not** *tumbling*; `Take Wing` is `movement · flight` and **not** *leaping*. A skill
+carrying both the new narrow and the old one would be quarantined and un-quarantined in the
+same line. ⭐ They still share the **broad** group with their neighbours, which is the *"ask
+the GM with a fiction reason"* case — the door is closed, not walled.
+
+🔒 **A second rule landed with them: a racial may be the CONSUMER, never the CONSUMED**
+(§4.5). A merge destroys both parents, so feeding a racial into the Gemstone would be a
+**race change routing around §20.3's Surgeon's Table**. ⭐ It also protects this whole draft
+from itself: every package below is a body fact, and none of them can be traded away.
+
+*The original finding follows.*
+
+§4.5's compatibility system was a closed list — `movement` was *leaping · tumbling ·
+rushing*, `perception` was *empathy · patterning · awareness* — and the book says the GM
+*"may grow the taxonomy deliberately, never casually."* This pass needed **three new
+narrows** and there was no honest way around it:
 
 | narrow | under | needed by | what it would break if forced elsewhere |
 |---|---|---|---|
@@ -586,8 +606,8 @@ narrows** and there is no honest way around it:
 
 ⭐ **A racial-package pass is exactly the "deliberate" occasion the book reserves**, so
 this is a cheap yes — but it is a **rulebook change** and therefore the owner's, not
-mine. Every keyword in RP-2 marked *(·flight)*, *(·climbing)* or *(·scent)* is
-provisional on it.
+mine. ~~Every keyword in RP-2 marked *(·flight)*, *(·climbing)* or *(·scent)* is
+provisional on it.~~ ✅ **Ruled, and RP-2 is updated.**
 
 ### 6. 🟡 **THE THREE `Bolt` / `Beast Strength` / `Scent Trail` PLACEMENTS I AM LEAST SURE OF**
 

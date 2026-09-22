@@ -12,6 +12,7 @@ import { SIZES, SIZE_BASE_HP, bodyPartsForSize, DEFAULT_STATE, BODY_TRAITS, CORE
   itemDmgLabel, materialBand, strikingMaterial, MATERIAL_BANDS,
   publicSubtype, HIDDEN_SUBTYPES, ITEM_SUBTYPES,
   reconcilePartHp, partHpBonusFor,
+  skillCeiling, SKILL_CEILING_MAX, SKILL_CEILING_DEFAULT,
 } from './constants.js';
 
 let pass = 0, fail = 0;
@@ -400,6 +401,32 @@ eq('🔒 a Trinket and a Growth item are INDISTINGUISHABLE once both are in Misc
   walk(new URL('./components/character', import.meta.url).pathname);
   ok('🔒 no player-facing component renders a raw subtype — every one goes through publicSubtype',
      offenders.length === 0, offenders.join(' | '));
+}
+
+console.log('\n§4.2 — the skill ceiling is PER SKILL (ruled 2026-09-22, rulebook v1.13)');
+ok('the designated maximum is 15', SKILL_CEILING_MAX === 15);
+ok('the ordinary ceiling is 10', SKILL_CEILING_DEFAULT === 10);
+// A template written before the ruling has no maxCapacity. It must read as the OLD
+// universal value, or the ruling would silently re-cap the whole live library.
+eq('🔒 an unset ceiling reads as 10, so nothing written before the ruling changes',
+   skillCeiling({ capacity: 5 }), 10);
+eq('a basic skill designated 5 stops at 5', skillCeiling({ capacity: 5, maxCapacity: 5 }), 5);
+eq('a designated few reach 15', skillCeiling({ capacity: 5, maxCapacity: 15 }), 15);
+eq('nothing may be designated past 15', skillCeiling({ capacity: 5, maxCapacity: 40 }), 15);
+// A ceiling under the skill's own current cap would strand a level nobody could
+// reach — a contestant already sitting at cap 7 on a skill later designated 5.
+eq('⚠️ a ceiling below the skill\'s own cap is raised to it, never stranding a level',
+   skillCeiling({ capacity: 7, maxCapacity: 5 }), 7);
+eq('junk reads as the ordinary ceiling', skillCeiling({ capacity: 5, maxCapacity: 'x' }), 10);
+eq('a missing skill does not throw', skillCeiling(undefined), 10);
+eq('a fractional ceiling floors', skillCeiling({ capacity: 5, maxCapacity: 10.9 }), 10);
+
+// SkillsTab must not carry the withdrawn flat ceiling any more.
+{
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('./components/character/SkillsTab.jsx', import.meta.url).pathname, 'utf8');
+  ok('🔒 SkillsTab caps against the skill\'s ceiling, not a hardcoded 10',
+     !/cap\s*[<>]=?\s*10/.test(src) && src.includes('skillCeiling'));
 }
 
 console.log(`\n${pass} passed · ${fail} failed`);

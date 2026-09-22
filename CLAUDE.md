@@ -564,8 +564,9 @@ Skills are granted to players by templateId. The player sheet joins template dat
   ⭐ **The tell they already had: Marks stay dark on a doll**, so a `Witness` party feels nothing in
   front of "the queen." Cost: a permanent enemy in the real Vermilia, a **poisoned F3 access
   ladder** (they used her own brand to reach her double), and a sincere victim who died believing
-  she failed to protect her sister. 🟡 Proposed mark **`Effigy`** (unblessed — mine, not the
-  owner's); refusing marks nothing. ② **He does NOT name the farm** — he states the principle
+  she failed to protect her sister. 🔒 **`Scapegoat`** (ruled 2026-09-22 — I proposed
+  `Effigy`; the owner renamed it, and **naming the victim beats naming the object**);
+  refusing marks nothing. ② **He does NOT name the farm** — he states the principle
   honestly (*"take as little as possible… a humble sacrifice, for the benefit of all"*) and 🔴 **offers
   proof: a living human they fed on and kept alive.** ⭐ Real evidence of restraint by his own
   metric, and undecodable until F3 supplies the referent — **they lack the referent, not the
@@ -2283,9 +2284,10 @@ so HP is exactly the buffer between those two clauses.
 - ✅ **Brothers' loot to the party + THREE store coupons each.**
 
 **Marks**
-- ✅ **`Effigy` APPROVED** for killing the Double — 🟡 **with `Scapegoat` as the owner's live
-  alternative.** ⭐ `Scapegoat` names the VICTIM (the doll died for Vermilia's secret) where
-  `Effigy` names the OBJECT; both satisfy the inclusion test.
+- ✅ **A MARK FOR KILLING THE DOUBLE IS APPROVED** — and 🔒 **the name is `Scapegoat`**
+  (settled later the same day). ⭐ `Scapegoat` names the VICTIM (the doll died for Vermilia's
+  secret) where my `Effigy` named the OBJECT; both satisfied the inclusion test, only one
+  satisfies C-0b's *name the deed by its weight*.
 
 **Items**
 - 🔒 **VITRIAN IS DELETED — there is no court brand-smith.** Owner: *"The brand is made by the
@@ -2362,7 +2364,18 @@ so HP is exactly the buffer between those two clauses.
   by an existing contestant before Floor 1 even starts. **8 is a gate; 6 was scenery.**
 - ✅ **ANDVARI'S CUT KEEPS ITS 6** — *"spend it, why not?"* The one place *an item may outpace its
   class inside its band* is spent, deliberately, on the apex of the Oathbreaker line.
-- 🟡 **`Effigy` vs `Scapegoat` still needs one word** — "yup" confirmed the mark, not the name.
+- 🔒 **THE MARK IS `Scapegoat` (ruled 2026-09-22).** `Effigy` is withdrawn. ⭐ **The
+  difference is C-0b's authoring rule doing its job: `Effigy` names the OBJECT they destroyed,
+  `Scapegoat` names the PERSON who paid.** They did not break an image — they killed someone
+  carrying a punishment that belonged to Vermilia, which is what a scapegoat *is*. ⭐⭐ And it
+  keeps the question live the way a Mark must: a contestant reading `Scapegoat` on their own body
+  knows **someone else should have taken that**, and does not yet know who.
+  ⭐ **A gap fell out of writing it in:** the Set 1 deed sweep (C-0c) had **no F2 Medium row at
+  all** — the deed was ruled 2026-09-01 and never entered the table, which is exactly the hole
+  `f2-enemy-pass.md` F2-2 named from the other end (*the party cannot change the outcome*).
+  **A route with no deeds in it was the sweep saying so in arithmetic.** Added; the sweep is
+  **24 rows · 23 distinct**, and ⭐ **that resolves the 22-vs-23 count discrepancy by addition
+  rather than adjudication** — C-10 #8's number was the right one all along.
 
 **⭐⭐ AUXILIARY DUNGEONS — a new structure (owner, 2026-09-22)**
 - On Turquoise's missing source: *"Maybe we can have it be in a shrine in the village? It's a rough
@@ -2400,17 +2413,81 @@ so HP is exactly the buffer between those two clauses.
   swimmer's spike a service the party wants.
 
 **Skills**
+- ✅ **BOTH BUILT 2026-09-22 — rulebook v1.13. See the section below.**
 - 🔒 **THE CAP READING IS CONFIRMED: the ceiling is PER SKILL, and some basic skills stop at 5.**
-  §4.2's universal "every skill can go to 10" becomes a default, not a law. **Needs a §4.2 errata.**
-- 🔴 **§4.5's taxonomy has no narrow for `flight`, `climbing` or `scent`** — the open call, expanded
-  in chat and on the published index. ⭐ The argument: **a narrow is a MERGE PERMISSION, not a
-  category**, so filing a body-fact skill under an existing narrow grants a fusion nobody designed
-  (scent under `awareness` fuses with Aura Reading into a psychic nose). Three new narrows act as
-  **quarantines**, not an expansion. 🟡 **And the question underneath (mine):** a merge CONSUMES
-  both skills, so a racial traded away is a race change that routed around the Surgeon's Table —
-  proposed that **a racial may be the consumer, never the consumed.**
+  §4.2's universal "every skill can go to 10" becomes a default, not a law.
+- ✅ **§4.5's three narrows are RULED IN** — `climbing` · `flight` · `scent`. ⭐ The argument the
+  owner approved: **a narrow is a MERGE PERMISSION, not a category**, so filing a body-fact skill
+  under an existing narrow grants a fusion nobody designed (scent under `awareness` fuses with
+  Aura Reading into a psychic nose). They are **quarantines**, not an expansion.
+- ✅ **A RACIAL MAY BE THE CONSUMER, NEVER THE CONSUMED — approved.** A merge CONSUMES both
+  parents, so a racial traded away is a **race change routing around §20.3's Surgeon's Table**,
+  the one station meant to edit a body and the one that charges for it.
 - 🖥 **Published index of all 49 skills + the taxonomy:** https://claude.ai/artifact/Qw2PGzfidKAHny8QChL45k
 
+
+## ✅ BUILT 2026-09-22 — the per-skill ceiling and the three narrows (rulebook v1.13)
+
+### §4.2 — THE CEILING IS PER SKILL, and the app was already right
+
+🔒 Owner: *"some skills cap at 5, some at 10, with special ones we can designate up to 15."*
+§4.2's *"every skill can go to 10 … to the ceiling of 10"* is **withdrawn**, tombstoned in the
+book with its cause: it was written **before L-17** made skills scale with an **uncapped**
+governing trait, so a single system-wide ceiling was the *system* deciding how far every skill
+goes when **the skill itself is the thing that knows.**
+
+- ⭐⭐ **THE APP HAD BEEN PER-SKILL ALL ALONG AND NOBODY NOTICED.** `SkillTemplate.capacity`
+  already defaults to **5** and `SkillsTab` already treats it as that skill's cap with a Patron
+  Token raising it one step. **The book was the half that was out of step**, not the app — which
+  is the reverse of the usual direction and worth saying, because the instinct was to go looking
+  for a migration. There is none.
+- 🔴 **But the ceiling itself was hardcoded to 10 in three places** (`raiseCap`, `canRaiseCap`,
+  and the button that literally reads `({cap}/10)`), so a designated 15 was unreachable and a
+  basic skill that should stop at 5 could be walked to 10 with tokens.
+- **Built: `SkillTemplate.maxCapacity`** (default **10**) — *how far Patron Tokens may ever raise
+  the cap* — distinct from `capacity`, *the cap it is unlocked to right now*. Whitelisted in the
+  library create, update **and bulk import**, in the player-facing projection, joined by
+  `enrichSkills`, and **never stored on the instance** (it is template-owned, like every other
+  display field). The legacy inline-skill path carries its own, because it has no template to
+  join from.
+- ⚙️ **`normCeiling` / `skillCeiling` clamp the two ways this can be authored wrong**: never
+  above **15**, and **never below the skill's own current cap** — a ceiling under the cap would
+  strand a level nobody could reach (a contestant already at cap 7 on a skill later designated 5).
+- ⭐ **Unset reads as 10 — the old universal value — so no template written before today changes
+  meaning, and there is no migration.** A test pins exactly that, because the failure mode would
+  be silent: re-capping the whole live library the moment the field landed.
+- ⭐ **One thing got better on the way past:** the tier-effects editor showed rows 2–10 for every
+  skill. It now runs to **that skill's ceiling**, so a 5-cap skill stops offering five rows it can
+  never reach and a designated 15 can be authored all the way up. A **⬆ max N** badge shows on any
+  skill whose ceiling is not the ordinary 10.
+- ⚠️ **The authoring pass is NOT done — every one of the 49 templates still reads as 10.** The
+  ruling says *most basic skills stop at 5*; the field now exists to say so, and nothing says it
+  yet. That is a library pass, and it belongs with `skills-classification.js`.
+
+### §4.5 — `climbing` · `flight` · `scent`, and what a narrow IS
+
+🔒 **A NARROW IS A MERGE PERMISSION, NOT A CATEGORY.** Written into the book as the rule that
+decides where any new keyword goes: filing a skill under an existing narrow **grants it every
+fusion that narrow already allows**, so the question is never *"what kind of thing is this?"* but
+***"what should this be allowed to become?"***
+
+- The three are **quarantines**: `flight` under *leaping* would make it compatible with every
+  tumbler; `scent` under *awareness* merges a nose with Aura Reading into **a psychic nose**.
+- ⚠️ **Consequence applied to the racial draft, and it is the rule's own content rather than a
+  second decision: each skill DROPS its neighbouring narrow.** `Scent Trail` is `perception ·
+  scent` and **not** *awareness*. A skill carrying both would be quarantined and un-quarantined
+  in the same line. ⭐ They still share the **broad** group, which is the *"ask the GM with a
+  fiction reason"* case — the door is closed, not walled.
+- 🔒 **A RACIAL MAY BE THE CONSUMER, NEVER THE CONSUMED.** A merge destroys both parents, so
+  feeding a racial into the Gemstone is a **race change routing around §20.3's Surgeon's Table** —
+  the one station meant to edit a body, and the one that charges for it.
+- ⚙️ Propagated to `race-packages-draft.md` (RP-5 closed, RP-2's three provisional keywords
+  resolved) and to the taxonomy comment in `apply-skill-passover.js`.
+
+✅ **169 constants tests** (+16) · 101 wiki · 45 contrast · 27 syncGate · 53 admin-level ·
+190 enemy; all four doctrine gates pass at their own floors; client build clean.
+⚠️ **Reasoned, not seen** — no browser in the container, so the new Ceiling selector and the
+⬆ badge are verified by build and by test, never by looking at them.
 
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
 

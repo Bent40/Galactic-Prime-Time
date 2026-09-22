@@ -314,6 +314,7 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 |---|---|---|---|---|
 | 🔴 **Kill the Doorward** | Easy | **`Unsealed`** | Nullrot · the capital · the plague | ⭐ **The best name in the sweep.** It warned you *aloud and truthfully* and you did it anyway — and it was **the right move**. A question the party carries into F3 |
 | **Spare the Doorward** | Easy | 🔒 **`Torment`** | the stair · the host | ⭐ Names **what you caused**, not what you did — and leaves *whose* torment open. Stasis is a choice, and the man pays for it |
+| 🔴 **Join Bex, kill the "queen"** | Medium | 🔒 **`Scapegoat`** | Vermilia · the F3 court · every Double after this one | ⭐ **Added 2026-09-22 — the Medium route's only mark, and it arrived last.** The sweep originally found **none** here, which is exactly what flagged Medium as the route whose outcome the party could not change; the 2026-09-01 Petition ruling gave it one, and this is it. 🔴 **Not `Regicide`** — no monarch died, and **the absence is the tell**. Names the **victim**, not the object: the doll paid a punishment that was Vermilia's |
 | 🔴 **Hand the Loong to the hunters** | Hard | **`Livestock`** | the Loong · demons · the F3 hunt | 🔴 **The ugliest mark in Set 1 and it should be.** Canon: a captured Loong is not a murder, it is livestock, bled indefinitely. **You did that** |
 | **Take the Horn intact** | Hard | **`Houndcaller`** 🟡 | hunters · packs · the capital's hunt | C-9's deed. You ended the hunt and kept the instrument |
 | **Bring the Loong to safe haven** | Hard | 🔒 **`Shepherd`** | the Loong · hunters · the F3 hunt | 🔴 **Reframed (owner): there is no village to save.** The village is the *destination*, not a victim — the deed is escorting a hurt, hunted creature across a desert to somewhere safe. Canon: the hunt breaks and **it sheds a scale**, which is how M-5 **Loong-Scale** enters the game at all. `Shepherd` moved here from F3 because *this* is the shepherding act — 🔒 **confirmed by the owner over the hope-word alternative** |
@@ -334,20 +335,25 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 
 ### What the sweep found
 
-> ⚠️ **FLAGGED 2026-09-22, NOT changed — a count discrepancy inside this document.** This
-> bullet says **22 distinct deeds across 23 rows**; **C-10 #8** says *"23 distinct Set 1
-> deeds."* Counting the tables above gives **23 rows** (F1 9 · F2 5 · F3 9) and, because
-> `Fateful Meeting` is listed twice, **22 distinct marks** — so this bullet's arithmetic and
-> its route split (6+6+8+1+2 = 23) are self-consistent and C-10 #8 looks like the loose one.
-> **Left for an owner call rather than guessed**; either number may be the intended one.
+> ✅ **RESOLVED 2026-09-22 — by an addition, not an adjudication.** The discrepancy was
+> real: this bullet said **22 distinct across 23 rows**, **C-10 #8** said *"23 distinct Set 1
+> deeds,"* and neither was wrong about what it was counting. ⭐ **What settled it was the
+> missing row** — the F2 Medium deed (`Scapegoat`) had been ruled on 2026-09-01 and never
+> entered the sweep. With it in, the tables give **24 rows** (F1 9 · F2 6 · F3 9) and, because
+> `Fateful Meeting` is listed twice, **23 distinct marks** — so **C-10 #8's number is the
+> correct one** and this bullet's was a snapshot of an incomplete table. The bullet's
+> original arithmetic follows, struck.
 
-- **22 distinct deeds** across 23 rows — 26 swept, **4 cut** (`It Did Not Take`, `Broke the
-  Cage`, `Answered`, `Recognition`), **1 added** (the F3 Hard extraction as the lesser option),
-  and **`Fateful Meeting` listed twice** because the F3 Hard ending and the convergence row are
-  one act (C-0e). **Only 3 come from items**, so C-10 #8's premise holds: **Marks are a campaign
-  rule**, authored per floor beside the enemy passes.
-- ✅ **Routes: Easy 6 · Medium 6 · Hard 8** (+1 shared, +2 convergence). Even without padding,
-  and it fell out of the beats rather than being designed for.
+- **23 distinct deeds** across 24 rows — 27 swept, **4 cut** (`It Did Not Take`, `Broke the
+  Cage`, `Answered`, `Recognition`), **2 added** (the F3 Hard extraction as the lesser option,
+  and the F2 Medium murder of the Double), and **`Fateful Meeting` listed twice** because the
+  F3 Hard ending and the convergence row are one act (C-0e). **Only 3 come from items**, so
+  C-10 #8's premise holds: **Marks are a campaign rule**, authored per floor beside the enemy
+  passes. ~~22 distinct across 23 rows, 26 swept, 1 added~~ — the pre-`Scapegoat` count.
+- ✅ **Routes: Easy 6 · Medium 7 · Hard 8** (+1 shared, +2 convergence). ⚠️ **Medium was 6 and
+  held no F2 mark at all until 2026-09-22** — ~~Easy 6 · Medium 6 · Hard 8~~ — which is the
+  same hole `f2-enemy-pass.md` F2-2 named from the other end: *the party cannot change the
+  outcome.* A route with no deeds in it was the sweep saying so in arithmetic.
 - 🔴 **All four cuts failed the same way.** `It Did Not Take` (kill Bex at F2), `Broke the Cage`
   and `Answered` are each a real decision **inside a fight**, with the world unchanged the next
   morning; `Recognition` was a **precondition** rather than a deed. ⚙️ **The looser first-draft

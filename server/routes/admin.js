@@ -250,7 +250,7 @@ router.post('/players/bulk/objectives', async (req, res) => {
 // POST /api/admin/players/:userId/skills — add a skill to a player's character
 router.post('/players/:userId/skills', async (req, res) => {
   try {
-    const { templateId, name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, levelEffects } = req.body;
+    const { templateId, name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, levelEffects } = req.body;
 
     const character = await Character.findOne({ userId: req.params.userId });
     if (!character) return res.status(404).json({ error: 'Character not found' });
@@ -279,6 +279,7 @@ router.post('/players/:userId/skills', async (req, res) => {
         stats: stats || [],
         passive: !!passive,
         capacity: capacity || 5,
+        maxCapacity: normCeiling(maxCapacity, capacity),
         level: 0,
         requirements: requirements || '',
         range: range || '',
@@ -643,12 +644,25 @@ function normRaceLock(raceLock, animalOnly) {
   return animalOnly ? 'Animal' : '';
 }
 
+// §4.2 — a skill's own ceiling (owner ruling 2026-09-22, rulebook v1.13). Most basic
+// skills stop at 5, many go to 10, a designated few reach 15; the flat ceiling of 10 is
+// withdrawn. Unset reads as 10, the old universal value, so nothing written before the
+// ruling changes meaning. A ceiling below the skill's own starting cap is incoherent
+// (it would strand a level nobody could reach), so it is raised to it.
+const SKILL_CEILING_MAX = 15;
+function normCeiling(maxCapacity, capacity) {
+  const start = Number(capacity) || 5;
+  const raw = Number(maxCapacity);
+  const ceil = Number.isFinite(raw) && raw > 0 ? Math.floor(raw) : 10;
+  return Math.min(SKILL_CEILING_MAX, Math.max(ceil, start));
+}
+
 // POST /api/admin/skill-library
 router.post('/skill-library', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() });
+    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() });
     res.status(201).json(template);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -658,9 +672,9 @@ router.post('/skill-library', async (req, res) => {
 // PUT /api/admin/skill-library/:id
 router.put('/skill-library/:id', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() }, { new: true });
+    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() }, { new: true });
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json(template);
   } catch (err) {
@@ -702,6 +716,7 @@ router.post('/skill-library/bulk', async (req, res) => {
           stats:            Array.isArray(s.stats) ? s.stats : (s.stats ? [s.stats] : []),
           passive:          !!s.passive,
           capacity:         Number(s.capacity) || 5,
+          maxCapacity:      normCeiling(s.maxCapacity, s.capacity),
           requirements:     s.requirements  || '',
           range:            s.range         || '',
           target:           s.target        || '',
