@@ -214,8 +214,13 @@ Skills are granted to players by templateId. The player sheet joins template dat
   **affix catalog is source of truth** over book §12.3's working list.
 - **Affix catalog seeding:** `node seed-affixes.js` (dry run) → `--apply` from
   `server/`; data in `server/seeds/affixes-higher.js` (15 Higher affixes, blessed
-  2026-08-10). Ruled: affix damage numerics multiply by the item's material band;
-  condition/utility affixes don't scale (book §12.7 "Modifiers ride the band").
+  2026-08-10). 🔴 **CORRECTED 2026-09-22 — the old "affix numerics MULTIPLY by the band"
+  ruling (2026-08-10) was silently overturned by FORCE (2026-09-01) and the strike was
+  never made.** Rulebook §12.7 is the answer and it is **additive and band-blind**:
+  *"Modifiers are Force too… **Serrated III is +3 Force of Bleed whatever it is bolted
+  to**. Condition and utility modifiers add no Force at all."* ⭐ The old worked example
+  was wrong by 8× (Serrated III on a Jade blade is **+3**, not +24). The second half
+  survives as a book sentence — condition/utility affixes carry no number.
 - **Materials system** (`rulebook/item-drafting-materials.md`, blessed): tier =
   craftsmanship, material = power scale; one band per floor, ×2 each floor
   (F1 ×2 → F9 ×512); parts = material capacity; striking part sets the band.

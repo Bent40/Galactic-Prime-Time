@@ -17,7 +17,24 @@ roll Higher on Superior+ drops.
 convenience → once-per-Clock power → **stance-changing**. Higher is where an
 affix starts defining how the item is *played*, not just how hard it hits.
 
-## The key sitting question — affixes × material bands ⚖
+## ~~The key sitting question — affixes × material bands~~ ✅ ANSWERED, THEN OVERTURNED
+
+> 🔴 **THE PROPOSAL BELOW IS WITHDRAWN (struck 2026-09-22).** It was blessed
+> 2026-08-10 as *"affix numerics multiply by the band"* — and then the **FORCE
+> ruling (2026-09-01) removed multiplication from the system entirely.**
+> **Rulebook §12.7 is now the answer, and it is ADDITIVE and band-blind:**
+>
+> > *"**Modifiers are Force too.** An affix that adds damage adds **Force**, of its own
+> > type, and it is added like everything else (**Serrated III is +3 Force of Bleed
+> > whatever it is bolted to**). Condition and utility modifiers add no Force at all — a
+> > T2 Poison or a saved Moment was never a number."*
+>
+> ⭐ **So the proposal's own worked example is now wrong by a factor of eight:** Serrated
+> III on a Jade blade is **+3**, not +24. ⚠️ The second half of the proposal SURVIVES and
+> is now a rulebook sentence — **condition and utility affixes carry no number**, which is
+> why this list leans conditions and utility. The original text follows, struck.
+
+## ~~The key sitting question — affixes × material bands~~ ⚖
 
 Flat "+3 Bleed" on an F3 Jade blade (24 base) is seasoning; on an F7 blade it's
 a rounding error. **Proposal: affix damage numerics multiply by the item's

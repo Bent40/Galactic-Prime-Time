@@ -20,11 +20,18 @@ degrades with the part), and §21.7 encounter sizing.
 > **The real roster is written up in the next pass; this file is kept for the
 > findings that held.**
 
-**Where the tutorial actually lives.** Not in this repo's `Enemy` collection. Four entries
+> ✅ **ALL OF THIS PARAGRAPH IS NOW STALE (struck 2026-09-22).** All **five** entries live
+> in this repo's `Enemy` collection — `server/seeds/enemies-tutorial.js`, written up in
+> `tutorial-enemy-pass.md`. **Floor 0 is a gated floor** (2026-09-15), every entry carries a
+> `signature`, and every resistance and weakness carries its `why`. **`War Hound` is not
+> tutorial content at all** (owner, 2026-09-17 — agent-authored sim scaffolding, parked for
+> F2). The original finding follows, for the record only.
+
+~~**Where the tutorial actually lives.** Not in this repo's `Enemy` collection. Four entries
 exist only in the **game repo's** `data/enemies.json` — `Roach-dog` (mob) · `Little Brother
 Roach` (elite) · `Incinedile` (boss) · `War Hound` (elite) — plus the design record at
 Compendium **§3.1** and the party snapshot at **§5**. So the tutorial has **no doctrine
-gate, no `signature`, and no `why` on any resistance.**
+gate, no `signature`, and no `why` on any resistance.**~~
 
 ---
 
@@ -75,8 +82,17 @@ tutorial boss is §10.1's exemplar and it predates §10.1. Nothing to change.
 pairs only.** And *"elites are not pack hunters"* composes exactly with ② — **the elite
 directs without joining the merge.** Two designs, months apart, same rule.
 
-🔒 **Adopt the sim's cap as the tutorial's setting: the press pairs, it does not stack to
-three.** That is the difference between a tense room and a dead contestant (T-3).
+> 🔴 **WITHDRAWN — THE OWNER RULED THE OPPOSITE (2026-09-15).** *"Roach-dog damage won't be
+> buffed. And the press is buffed to 3."* **The press caps at THREE, not pairs**, and the
+> line below carried a 🔒 for a week while saying the wrong number. ⭐⭐ **And the owner's
+> version is better than mine:** at a cap of three the maximum press is **exactly one
+> destroyed torso on every floor** (F1 9 vs a 7 torso · F5 20 vs 17 · F9 46 vs 35), so the
+> rule is **bounded at lethal-once and cannot reach past it**. At the tutorial, bite 1: armor
+> 0 → 3 through, a Small torso falls · armor 1 → 2 → nothing's torso falls. **One worn piece
+> is the whole difference**, in the room where it happens.
+
+~~🔒 **Adopt the sim's cap as the tutorial's setting: the press pairs, it does not stack to
+three.** That is the difference between a tense room and a dead contestant (T-3).~~
 
 ---
 
@@ -102,7 +118,7 @@ for **3**, not 1.
 
 ### The calibration table — merged Force, minus armor, vs torso
 
-| bite | armor | 1 mob | **2 (the pair cap)** | 3 | kills a 5-torso at | kills Sasha (3) at |
+| bite | armor | 1 mob | 2 pressing | **3 (the RULED cap)** | kills a 5-torso at | kills Sasha (3) at |
 |---|---|---|---|---|---|---|
 | **1** *(as written)* | 1 | 0 | **1** | 2 | never | never |
 | **2** ⭐ | 1 | 1 | **3** | 5 | 3 mobs | 2 mobs |
@@ -110,13 +126,21 @@ for **3**, not 1.
 | **3** *(doctrine)* | 1 | 2 | **5** | 8 | **2 mobs** | **2 mobs** |
 | **3** | 0 | 3 | **6** | 9 | **2 mobs** | **1 mob** |
 
-⚖ **Recommendation: bite 2, press capped at pairs.** A lone roach is chaff (1 through), a
+> 🔴 **BOTH HALVES OF THIS RECOMMENDATION WERE REJECTED (owner, 2026-09-15)**, and the
+> ruling is better than the proposal. **The bite stays at 1** and **the press goes to 3.**
+> Read the table's **bite 1 / armor 1** row: a press of three lands **2**. That is the whole
+> answer — the roach-dog's threat was never its number, it is the **Bleed TIER** (which
+> §12.6 then uses to drop that part's resistance, so twelve bites take your armor apart),
+> and its band-sized hit exists: **it is the press.** ⭐ The press is the only reason a
+> roach-dog can hurt anybody, and the press only exists while a directing elite is alive.
+
+~~⚖ **Recommendation: bite 2, press capped at pairs.** A lone roach is chaff (1 through), a
 pair genuinely hurts (3), and nothing at the tutorial one-shots a torso. **Bite 3 is the
 doctrine number and it is too hot here** — at armor 0 a single roach takes a third of
-Sasha's torso and a pair kills her.
+Sasha's torso and a pair kills her.~~
 
-⚠️ **The two changes are one change.** Raising the bite without capping the press, or
-capping without raising, both miss.
+~~⚠️ **The two changes are one change.** Raising the bite without capping the press, or
+capping without raising, both miss.~~
 
 ---
 
@@ -239,8 +263,8 @@ moved to absent/null/`''`. Roster: **`rulebook/tutorial-enemy-pass.md`** +
 | | |
 |---|---|
 | ✅ **The boss is fine — and is now STATTED** (T-9, 2026-09-19) | 125 parts = the boss centre; the 50-HP Network is the tutorial-scale fight; its breach paths are §10.1 before §10.1 existed. **No number was changed**; what the write-up added was the ward, the fire split, and a gate that can see both readings at once |
-| 🔴 **The mob is not.** | `1 Bleed` against flat armor is **zero**, which is the whole of *"12 mobs, no issues."* Recommend **2**, not the doctrine's 3 |
-| 🔒 **The Press is already half-built** | in the sim, for these roaches, **capped at pairs** — adopt that cap |
+| ✅ **The mob is fine after all.** | `1 Bleed` against flat armor is **zero** — that half stands. ⚠️ **My "recommend 2" is WITHDRAWN** (owner, 2026-09-15: *"Roach-dog damage won't be buffed"*). The bite stays **1**; the threat is the Bleed TIER plus the press |
+| ✅ **The Press is already half-built** | in the sim, for these roaches. ⚠️ **My "adopt the sim's cap of pairs" is WITHDRAWN** — owner ruled **the press caps at THREE** (2026-09-15), and it is better: three is exactly one destroyed torso on every floor, so the rule is bounded at lethal-once |
 | ⚠️ **Next session is the hard case** | a director that **summons its own pressers and drags you into them**, whose AI hunts the wounded that §12.6 just softened |
 | 🔴 **Sasha's 3-HP torso** | moves every threshold one mob earlier. The owner's own *"hard to hurt without killing"* note, now with two new rules pushing on it |
 | ✅ **Two build gaps — BOTH CLOSED 2026-09-15** | `weaknesses[].mode` = `double`\|`heal` is built (per-part overridable) · the gate has floor 0. **All five entries are statted** in `tutorial-enemy-pass.md` |

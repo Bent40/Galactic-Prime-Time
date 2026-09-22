@@ -27,7 +27,12 @@
   merge recorded in book §4.5 as the canonical example · **Death Grip Jaws** approved
   WITHOUT a prime (any bite-capable body may grapple freely) · **Field Triage**
   approved · **Play to the Camera** approved. Remaining ~20 candidates stay parked.
-- **G7 RULED — NO exclusive skills.** Acquisition requirements instead (ruled round 2):
+- 🔴 **STRUCK 2026-09-22 — SUPERSEDED BY THE BOOK.** Rulebook **§4.4** states outright:
+  *"Some skills are **character-exclusive** — tied to one contestant's nature and not
+  obtainable by others."* The rules master wins over a passover note (D-8), `exclusiveTo`
+  was built 2026-09-19, and G7's own section further down this file proposes the field.
+  ⚠️ **This file carried both answers at once.** The original round-2 line follows, struck.
+- ~~**G7 RULED — NO exclusive skills.** Acquisition requirements instead (ruled round 2):~~
   Full Potential = "be savvy with your hands and have real repair experience";
   Heroic Punch = "aspire wholeheartedly to be a hero while being extremely weak at the
   same time." No `exclusiveTo` field. (Anyone could earn them.)

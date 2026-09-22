@@ -854,7 +854,25 @@ need by failing to recognise it.
 | **S-c** | Bex's fate on the spared branch | ✅ **He was never in it for himself alone.** He does what is necessary **for demonkind**; the means are ugly and he knows it. A working cure is a win he will take from anyone's hand |
 | **S-d** | Is the tongue required for the revival? | ✅ **Required.** Find it → interaction unlocks → then settle (v1 catalyst / v2 debt). See S-6 |
 
-## S-9 — ✅ NOTHING IS OPEN (swept 2026-09-18)
+## S-9 — ⚠️ THE 2026-09-18 SWEEP WAS INCOMPLETE (corrected 2026-09-22)
+
+> 🔴 **This section claimed "nothing is open" and TWO items were live.** Re-swept
+> 2026-09-22:
+>
+> - **S-8 — the cure-first / confession-first sequencing** of Cinnabrus's verdict.
+>   Marked 🔴 here *and* in `set1-review-and-changelog.md` C.4 #7, with the note
+>   *"rule it deliberately, it will come up."* **Still unruled.**
+> - **The mausoleum tombs** — 🟡 are the "previous queens'" graves the **discarded
+>   dolls**? The text says outright it *"would need an owner call before it is canon."*
+>   **Still unruled.**
+>
+> ⚠️ **The irony is the point:** this section exists to warn that *"a ruling is not
+> recorded until the question it answers is struck"* — and it over-claimed in the other
+> direction, declaring questions closed that were never answered. **Both failure modes
+> are the same failure: the marker and the truth drifting apart.** The original text of
+> the sweep follows; its three genuine closures stand.
+
+### ~~✅ NOTHING IS OPEN~~ (swept 2026-09-18 — three closures valid, two misses)
 
 Every story call in this document is ruled. The sweep re-checked all of them against the
 rulings and struck three that were closed but still carrying 🔴 — the Double's knowledge and
