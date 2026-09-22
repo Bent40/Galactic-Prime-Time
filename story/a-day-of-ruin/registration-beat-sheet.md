@@ -123,8 +123,26 @@ steam is fix a form field. Funny and bleak in the same gesture.
 - ⚖ The barb is not a gag — it is that the system **approves**, and then
   populates a second value beside it that nobody asked for. Age is a **betting
   input**; this is a casino instrument. Approval is more unsettling than a joke.
-- 🔴 What the second value is: life expectancy, an actuarial note, a number with
-  no label. Undecided.
+- 🔒 **THE SECOND FIELD IS RACE — RULED 2026-09-22.**
+
+  ⭐⭐ **And its best justification is canon, not comedy: the form is not for
+  humans.** Canon runs the cycle *"roughly once a quarter-millennium"* and says
+  **"this cycle it is the humans, in the human realm, on Earth"** — *this*
+  cycle. So there were other realms before and there will be others after, and
+  the registration form is **standard casino paperwork reused across cycles.**
+
+  ⭐ **The field's existence is the worldbuilding.** One word tells the reader
+  there have been others, and Marcus will not notice, because he would fill in
+  a dropdown without thinking about why the dropdown exists. Nothing has to be
+  explained and nothing is hidden.
+
+  ⚖ **Strongest staging, and it is a tired-employee beat:** the oracle
+  **pre-fills it before Marcus can answer.** On this cycle it is always the
+  same answer, and typing it four thousand times is the job. The apathy and the
+  reveal are the same gesture.
+
+  ⚙️ Consistent with non-human champions existing without committing to any on
+  the page: they are *other cycles' problem*, and the form remembers them.
 
 ## Phase 4 — SEX · Ch. 4 · 🔒 the "last year" gag
 
@@ -342,8 +360,24 @@ goes quiet.
 2. ✅ ~~Whether the thigh brand leaves the show without a visible mark~~ —
    **closed 2026-09-22 by the hole in the pants.** ✅ And it is a **brand**,
    never a *tattoo* — ruled, wording pinned.
-3. Whether the crowd is shown reacting at all, and if so from whose vantage.
-4. Whether the odds appear at the door or are held back.
+3. ✅ ~~Whether the crowd is shown reacting~~ — 🔒 **RULED 2026-09-22: NO.**
+   **"They are all numbers to him for now."** The crowd's reaction is a reveal
+   held for much later.
+
+   ⭐ **Consequence: the odds become the only face the crowd has.** If Marcus
+   never sees them, **1:259 *is* the audience** — a population rendered as
+   arithmetic, which is exactly what the casino thinks they are.
+
+   ⭐⭐ **And it is the tense device at book scale.** The crowd is the one thing
+   that is *always present and never registered* — in every scene, processed in
+   none. The reader can be made to feel a presence Marcus does not, for as long
+   as the author wants to hold it, using machinery already in the prose.
+
+   ⚙️ Ch. 1 retro-justifies it: the show announced itself to him **through a
+   television.** He has only ever seen the audience as broadcast output. He has
+   never been on the other side of the camera.
+4. Whether the odds appear at the door or are held back — ⚖ now carries more
+   weight, since the number is standing in for the crowd.
 5. ✅ ~~The trouser timeline~~ — **closed 2026-09-22: the trousers simply have
    not been washed.** ⭐ Better than the tragic reading: it is a *slob* detail,
    not a pathos one, so it stays inside the register guard. **The same trait
