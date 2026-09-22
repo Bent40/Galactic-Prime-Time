@@ -293,6 +293,34 @@ suit, has physical evidence his brothers kept what he made them.**
 
 **Drops:** the **WHIP** (class 3, plain, range 7).
 
+### 🪱 AND THE FIVE PARASITES — his real carve, and the party cannot refuse it
+
+🔒 **After the hatchery, no save and no roll: something crawls into skin or roboparts**
+(XQUEZ/T's goes into the machine, which is worse). ⭐ **He made them the way he made the
+suit and the doll** — thrown out for being weak, he answered by **making more family**,
+and the party inherits his children. That is what makes them his §17.6 carve rather than
+an invention.
+
+**Five sealed specimens · one each · no two contestants hold the same one.** The
+Corporation's overlay prompts the party to allocate them, because *five contestants
+arguing about who gets the lie-detector is a scene*. 🔴 **On a party of four the fifth
+stays in the bag, sealed and alive** — a scene of its own, and a slot waiting.
+
+| | gauges | the card says |
+|---|---|---|
+| 👁 **Dread-Eye** | DANGER | *A specimen jar, hatchery stock. Something pale and lidded. It is warm, and it is facing you.* |
+| 🌿 **Falsewort** | SINCERITY | *A grey sprig with a fleshy root. Kept in brine. The leaves curl when anyone speaks near it.* |
+| 🫱 **The Beggar** | WANT | *Small, thin, and already reaching. The jar is scratched from the inside.* |
+| 🪱 **Ringworm** | AGE | *A coil of something banded like cut wood. You can count the bands. There are more than there should be.* |
+| 🍂 **Gravemoss** | DEATH | *A wet grey mat that smells like turned earth. It is the only one of the five that is quiet.* |
+
+⚠️ **PUBLIC READS ONLY** — the card shows only what anyone could see by looking at the
+jar. The gauges, the stages and the eruption are GM material: **`growth-items-and-parasites.md`
+G-2/G-3**. Data: `server/seeds/items-parasites.js`.
+
+⭐ **Gravemoss goes quiet in the hatchery** — nothing has died there yet — which is the
+first honest thing any of them says.
+
 ---
 
 ## T-7 — Sizing the rooms (§21.7), with armor in

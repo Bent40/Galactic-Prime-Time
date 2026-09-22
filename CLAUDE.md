@@ -1688,6 +1688,12 @@ write-up added was the ward, the fire split, and a gate that can see both readin
   right for a system it was never written for. ⚠️ Self-harm is already priced by §12.6 +
   §21.6 and the once-per-combat cap; ⭐ the real tension is **hold it for a bigger blast and
   you might die holding it**, which is superb television (§17.8).
+- ✅ **CROSS-REFERENCED INTO THE TUTORIAL 2026-09-22.** `tutorial-enemy-pass.md` T-6 and
+  the Little Brother seed notes now carry the drop, with the five cards. ⚠️ **They did not
+  before** — the parasite doc said *"after the hatchery"* and the hatchery doc never said
+  *"and then the parasites"*, so a GM running the room from the tutorial file would have
+  missed the whole drop. ⚠️ **The seed notes changed, so Little Brother needs `--force`**
+  to update his Atlas document.
 - 🔒 **THE PARASITES ARE LOOT THEY CANNOT ESCAPE (owner)** — no save, no roll: after the
   hatchery **something crawls into skin or roboparts** (XQUEZ/T's goes into the machine,
   which is worse). 🔒 **Little Bro made them**, the way he made the suit and the doll —
@@ -2124,7 +2130,7 @@ database — with a better reason than expected.**
 - Also fixed: the **M-band section headings still read ×1/×2/×4/×8** while the corrected
   table two sections above them already read in Force steps — a leftover from 2026-09-14.
 
-## 🏪 THE SHOP — PULLED UP 2026-09-19 (`server/shop-shelf.js` + a table page)
+## 🏪 THE SHOP — PULLED UP 2026-09-19 · **documented 2026-09-22 in `rulebook/the-shop.md`**
 
 Owner: *"Also pull up the shop for us."* ⭐⭐ **It already existed and nobody had to price
 it.** §19.3 gives three lines — *consumables 1–2 UT · Crude 1 · Basic 3* — and the library
@@ -2133,6 +2139,10 @@ derivation**: everything at Crude or Basic tier, priced by those three lines. **
 (Consumables 21 · Weapons 14 · Equipment 11 · Tools 6 · Misc 16) after the curios landed and
 `Signal Kit` came off the shelf.
 
+- 📄 **`rulebook/the-shop.md` is the write-up** (SH-0 the derivation · SH-1 the shelf ·
+  SH-2 the camouflage rule · SH-3 not stocked · SH-4 the coupon and the closing bell ·
+  SH-5 the runbook). ⚠️ **It had been built, priced, gated and published and existed
+  nowhere in `rulebook/`** — only here and in the script.
 - ⚙️ **`server/shop-shelf.js`** prints it (`--shelf <cat>`, `--json`), **no `node_modules`,
   no DB** — the repo's standing pattern: a calculator regenerates the table instead of a
   hand-written price list drifting from the game. **There is no `price` field and there
@@ -2214,6 +2224,13 @@ Basic 3 that would have marked them out — but **the SHELF gave them away by ca
   is simply not sold here. `NOT_STOCKED` in `shop-shelf.js` records it; ⚠️ **the reason is not
   written down**, and a one-line fiction note would keep it from looking like an oversight.
 - **The store is now 68 lines.** Runbook: `node seed-items.js --file ./seeds/items-curios.js`.
+
+## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
+
+The Artifact links for the shop, the Little Brother fight screen, the Broadcast Bestiary
+and the Set 1 spine. ⚠️ **They lived only in chat history**, so a new session could not
+find them and would rebuild rather than update — which is how two Bestiary pages and a
+duplicate fight screen already exist. **To change a page, update it at its own link.**
 
 ## Rulebook & Wiki (added 2026-07-23 · wiki rebuilt 2026-09-19)
 - **`rulebook/gpt-system-v1.0.md` is the canonical TTRPG rules master** (owner decision
