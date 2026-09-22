@@ -65,7 +65,7 @@ story/
 
 | Work | State |
 |---|---|
-| [`a-day-of-ruin/`](a-day-of-ruin/) | Ch. 1 drafted (v0.3). Registration scene beat-sheeted. Serial-first; target Royal Road. |
+| [`a-day-of-ruin/`](a-day-of-ruin/) | Ch. 1 drafted. Registration scene beat-sheeted; the odds economy ruled. Serial-first; target Royal Road. |
 
 ## Review log
 
