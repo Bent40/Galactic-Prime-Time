@@ -2230,6 +2230,116 @@ Basic 3 that would have marked them out — but **the SHELF gave them away by ca
   written down**, and a one-line fiction note would keep it from looking like an oversight.
 - **The store is now 68 lines.** Runbook: `node seed-items.js --file ./seeds/items-curios.js`.
 
+## 🛡️ HP IS A SHIELD, NOT HEALTH (owner, 2026-09-22) — the reframe
+
+🔒 **Owner:** *"treating HP as HP is incorrect, as it works as more of a shield for states.
+Incinedile's hp is really just the 50, with an amount of shield around it."*
+
+⭐⭐ **This is the frame the whole damage system has been describing without naming.** A part's
+HP is not a life total — it is **the shield that holds the STATES off.** Force wears the shield
+down; when it is gone the part takes a **condition tier** (§8.1's two layers, stated as one
+sentence), and §12.6 already says a conditioned part **resists less**, which is a shield that
+has stopped working. **Force is what the attack does now; the tier is what it leaves behind** —
+so HP is exactly the buffer between those two clauses.
+
+- ⭐ **It validates the reachable-budget rule rather than sitting beside it.** The Incinedile's
+  real HP **is** the Network's 50; the puppet's 75 is **shield around it**, and a warded part is
+  shield the floor cannot get through. The gate now measures the thing the owner says is the
+  creature, which is why 125 and 50 were never in conflict.
+- ⭐ **And it explains the armour findings of 2026-09-14 in one line.** *"Armor SORTS threats
+  into cannot-touch-you and can"* is what a shield does; *"a current-armoured party is immune to
+  ordinary mob damage on every floor, so a mob's threat cannot be its damage"* is the shield
+  holding — which is why **the mobs that still matter are the ones that deal a TIER and no
+  Force** (§8.1's Chill/Poison/Infection/Dissolution), because those **bypass the shield
+  entirely.** Nothing needs rewriting; the reading makes the existing rules agree.
+
+## 🔒 RULINGS — 2026-09-22 (the open-question sweep, answered)
+
+**Tutorial / structure**
+- ✅ **THE REACHABLE BUDGET IS APPROVED.** A part warded at or above its floor's own Force does
+  not count toward the §21.2 part budget. Built, gated, printed both-numbers, no verdict moved.
+- ✅ **IRON STANCE REDIRECTS AREA.** An area attack that would catch adjacent allies is pulled
+  onto the stance-holder instead — ⭐ *which is the only reading under which the skill does
+  anything in the boss fight §3.3 says it was designed for* (the wide flamethrower cone).
+  ⚠️ §7.3's **area does not divide**, so he eats the full Force once per target redirected.
+- ✅ **INTERCEPT: 0 Moment, ONCE PER MOMENT.** The same dial as Big Brother's dodge, so the
+  tutorial already teaches the shape. Free-and-unlimited would have deleted positioning.
+- ✅ **XQUEZ/T EARNS THE KIT — no grant.** He builds Brace + Intercept and merges at the
+  Gemstone (§4.5). The economy works as designed.
+- ✅ **NO ROBOT BRACE VARIANT.** Owner: *"robot probably abandoned soon. Already working on a
+  new character."* ⚠️ Consequently the three Robot racials and `CREATION_RACES`' exclusion stand
+  as-is and **R-4's Robot row is closed as "discontinued", not "unwritten."**
+- ✅ **Brothers' loot to the party + THREE store coupons each.**
+
+**Marks**
+- ✅ **`Effigy` APPROVED** for killing the Double — 🟡 **with `Scapegoat` as the owner's live
+  alternative.** ⭐ `Scapegoat` names the VICTIM (the doll died for Vermilia's secret) where
+  `Effigy` names the OBJECT; both satisfy the inclusion test.
+
+**Items**
+- 🔒 **VITRIAN IS DELETED — there is no court brand-smith.** Owner: *"The brand is made by the
+  queen itself, with her own blood and powers. The result of regal blood."* ⭐⭐ **Better than the
+  invention, and it closes a hole rather than filling one:** the brand carries *her permission*
+  (which is why a branded party can read her journal and reach her at F3), and **permission
+  cannot be delegated to a smith.** It had to be her blood for the access ladder to work at all.
+  ⚠️ The coerced-craft defect rider dies with him. **C-5's line is regal blood, not craft.**
+- ✅ **THE KINSHIP TRACK IS APPROVED**, thresholds explicitly provisional (3 = a body part
+  changes permanently · 6 = the hunts turn onto you).
+
+**Infection cultivation** (`rulebook/infection-cultivation.md` I-7, all five closed)
+- ✅ **AFFLICTION RESISTANCE RIDES PHYSIQUE** — every 12 past 10 → +1, each point **delaying**
+  the next advancement of any Chill/Poison/Infection by one Clock. ⭐ Owner's reason is the
+  decisive one: ***"since physique now does nothing"*** — L-18 withdrew §3.2's Physique row, so
+  Physique is the one trait with **no cap-bonus row at all**, and Affliction is the one group
+  with no trait. **They are each other's missing half, and the vacancy is now literal.**
+- ✅ **The 11 drafted disease traits are approved.**
+- 🔒 **RESEARCH COSTS UPGRADE TOKENS, AND THE COST IS TIME.** Traits are drafted onto diseases
+  and each trait is priced; **trait cost correlates to tier.**
+- 🔒 **CULTIVATING A TRAIT DOES NOT DROP A TIER** — *"traits should probably be tier related
+  anyway."* ⭐ So the affix extraction ladder does NOT transfer: a disease is not a weapon with a
+  modifier bolted on, its traits **are** its tier.
+- 🔒 **TYPE DOES NOT CHANGE WHAT RESISTANCE ANSWERS** — *"but maybe adds more resistances
+  required to fight it."* ⭐ One resistance answers infection; a nastier type asks for **more
+  kinds of answer**, never a different one.
+
+**Parasites**
+- ⛔ **THE HARVEST IS OUT.** ⚠️ And the reason closes the loop: *"The parasites already latched
+  onto everyone who were in the hatchery"* — they are not an item you cash in, they are a
+  **tenant.**
+- ✅ **`Ringworm` keeps its name.**
+
+**Level budget**
+- ✅ **All three routes pay identical levels.**
+- 🔒 **THE SKILL CAP IS PER SKILL, NOT UNIVERSAL: most cap at 5 or 10, and special ones may be
+  designated up to 15.** ⭐ This is better than a single ceiling because L-17 made skills scale
+  off an uncapped trait — **the cap is now the skill's own statement of how far it goes**,
+  which is an authoring decision rather than a system constant.
+- ✅ **The six unspent level points were spent.**
+- 🔒 **TRADE-FOR-CAP AT CREATION DOES NOT SURVIVE** — *"since starter skills cap at 5."*
+  The `races.json` 2026-07-16 rule is withdrawn and the app was right never to build it.
+
+**Race & class**
+- 🔒 **DRAFT THE ANIMALS FROM RESEARCH.** *"Find what makes the animal unique, and draft skills
+  from there."* ⭐ **Duplicate skills are FINE and wanted** — *"if we decide that both elephants
+  and gorillas get a strength skill, it can be the same skill, no need to force uniqueness where
+  there isnt."* Draft: `rulebook/race-packages-draft.md`.
+- 🔒 **A CLASS IS THE SPINE, NOT THE WHOLE BODY.** Re-governing is its spine; a class **also
+  grants unique skills**, and 🟡 possibly **unique traits** — *"like demons and demonic power?"*
+  ⚠️ Unique traits are the part that touches L-19's curve and needs care.
+- 🔒 **COMMON CLASSES ARE CAREERS** — *"swordsman, spearman, cashier — the fantasy and
+  non-fantasy career options, by how interesting/common they are."* ⭐⭐ **The cashier is the
+  ruling.** A show about abducted humans should let you be what you actually were, and a
+  non-fantasy career sitting in the same list as *spearman* is the whole premise in one menu.
+
+**Scaling / economy**
+- ✅ **Tides at 250 confirmed** (post-Force, down from ~3,000 at F9).
+- 🔒 **APEX ITEMS GET A RESALE MARKET** (the Nanatsu model), not finite-and-destructible.
+  ⚠️ This is the **sink** the economy currently lacks — Lootbox items are permanent property
+  with nothing removing them, so resale is what makes an apex item circulate.
+- ✅ **M-5 IS GRADED INTO INTERNAL RUNGS** so F7–F9 ascends instead of plateauing.
+- ⏸️ **Story elites deferred** — owner will look at the roster later for a detailed run.
+
+
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
 
 The Artifact links for the shop, the Little Brother fight screen, the Broadcast Bestiary
