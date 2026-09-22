@@ -1,5 +1,27 @@
 # `story/` — prose fiction set in the Galactic Prime Time universe
 
+> ## ⛔ STANDING RULE — THE AUTHOR WRITES THE PROSE (2026-09-22)
+>
+> **Do not draft, ghostwrite, continue, or "show an example of" any prose for
+> these works. Not a paragraph, not a line, not a demonstration.** The author's
+> reason is explicit and it governs: *"The prose and writing in general has to
+> come from me, otherwise i won't get better at it."*
+>
+> **Do not offer, either.** A repeated offer is pressure.
+>
+> **What assistance looks like here instead:**
+> | Useful | Not this |
+> |---|---|
+> | Reviewing prose the author wrote | Writing prose for them |
+> | Canon and continuity checks | Filling a gap with invented text |
+> | Structure, beats, pacing, open calls | Drafting the scene to "show" a structure |
+> | Genre, market, serial-cadence data | Sample chapters or comp pastiche |
+> | Recording rulings; asking the unblocking question | Rewriting a line to demonstrate a fix |
+> | **Teaching a technique** (`lit-teach`) so the author executes it | Executing it for them |
+>
+> Quoting the author's own words back to them — in a review, a beat sheet or a
+> ruling — is not drafting. Inventing new ones is.
+
 Drafts live here, versioned. **This is manuscript, not game content**: nothing
 in this folder is consumed by the app, the seeders, the rulebook or the Godot
 sim, and nothing here should ever be imported by them.

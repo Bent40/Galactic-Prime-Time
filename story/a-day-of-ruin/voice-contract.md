@@ -1,5 +1,9 @@
 # Voice contract — *A Day of Ruin*
 
+⛔ **THE AUTHOR WRITES THE PROSE.** No drafting, no ghostwriting, no
+demonstration passages, and no offering to — see the standing rule in
+[`../README.md`](../README.md). Review, don't supply.
+
 **Read this before any line edit, copy edit, or prose review of this novel.**
 It exists because the rules below look like errors and are not. A reviewer who
 edits without it will "correct" the book's central device. That has already

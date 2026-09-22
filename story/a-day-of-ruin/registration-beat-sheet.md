@@ -310,9 +310,10 @@ will throw away.** The help is real and completely deniable.
 aimed upward** — at the house, not at Marcus. Keep that available; never
 confirm it.
 
-### 🔴 The one call left: does the voice go quiet after the teleport?
+### 🔒 THE VOICE GOES QUIET — RULED 2026-09-22
 
-⚖ **Strongly recommended: yes — it stops dead at "Welcome, sugar~!"** Then:
+**It stops dead at "Welcome, sugar~!"** and does not speak again until the
+Ch. 2 cliffhanger. Consequences, all of them free:
 
 - **Impartiality renders as silence.** He did the paperwork; now he is not
   allowed to speak to you. Nothing has to explain it.
