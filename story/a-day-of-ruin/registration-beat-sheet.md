@@ -272,35 +272,66 @@ and move on.
 
 ---
 
-## 🔴🔴 THE ONE THAT MATTERS — IS THE TIRED ORACLE **ENKI**?
+## 🔒 THE ORACLE IS ENKI — RULED 2026-09-22
 
-Canon, verbatim: Marcus's game *"is **controlled by Enki**, who is trying to
-teach Marcus how to survive and win **while remaining impartial**."* The cast
-table gives Enki the roles **`patron, dealer, forsaken_host`** — he is the host
-of this table.
+**Enki hosts the tutorial table.** Consistent with canon rather than a change:
+he is already Marcus's game runner and carries `forsaken_host` in the cast
+table, and canon's job description for him is *"trying to **teach** Marcus how
+to survive and win **while remaining impartial**."* **Teaching is what a
+tutorial is.** The registration desk is the tutorial.
 
-⭐⭐ **And the bible's Ch. 2 cliffhanger is already this device.** Its beat list
-ends Ch. 2 with ***"a voice finishes his thought"***, resolving as Enki in Ch. 3.
-**A voice that finishes your thoughts is a transcription system.** The tired
-oracle and the Ch. 2 reveal are the same invention, arrived at twice.
+⭐⭐ **The bible's Ch. 2 cliffhanger was already this voice.** Its beat list ends
+Ch. 2 on ***"a voice finishes his thought"***, resolving as Enki in Ch. 3 — and
+a voice that finishes your thoughts is a transcription system. The device was
+invented twice.
 
-**If it is Enki** — the exhaustion is a **performance of impartiality.** He is
-forbidden to help, so he acts like furniture, and the tiredness is the cost of
-not being allowed to care. The Ch. 3 rib-realignment then becomes the moment the
-mask slips, and every flat line in registration re-reads as restraint.
-⚖ **Recommended, with the reader not knowing for a long time** — a bored clerk
-is the perfect disguise for a host under a rule.
+### 🔒 The constraint this gives the whole novel
 
-**If it is not** — the oracle is background staff and Enki arrives clean later.
-Simpler; costs the re-read.
+> **Enki helps only through his job functions. Never advice.**
 
-🔴 **Author's call, and it should be made before the scene is drafted**, because
-it decides whether the flatness is apathy or discipline. Nothing on the page
-changes; everything underneath it does.
+He will process your form correctly and set your bones, and he will tell you
+nothing. Canon already plays it twice — the registration desk here, the ribs
+realigned in Ch. 3 — and stated as a rule it generates the rest by itself.
 
-⚙️ Either way the **Momus handoff still works** — the oracle *processes*, Momus
+### ⭐⭐ It reframes the sponsor glitch one more time, and this is the best version
+
+Enki is a god of **wisdom, craft and TRICKERY**. ⭐ **For a trickster forbidden
+to help, literalism *is* the trick** — exact compliance is how you smuggle
+something past a rule.
+
+So the "fault" is not laziness and not a bug. **He writes PAUL, corrects it to
+PLUTUS because he knows perfectly well who that is, and lets the correction
+render as a stutter.** He is not permitted to tell Marcus who his sponsor is —
+but he is permitted to fill in a form accurately. ⭐ **A god of trickery obeying
+impartiality to the letter, handing the truth to the audience in a shape they
+will throw away.** The help is real and completely deniable.
+
+⚙️ And by the same reading, **"SHIRLY THISSISAJOKE" may be malicious compliance
+aimed upward** — at the house, not at Marcus. Keep that available; never
+confirm it.
+
+### 🔴 The one call left: does the voice go quiet after the teleport?
+
+⚖ **Strongly recommended: yes — it stops dead at "Welcome, sugar~!"** Then:
+
+- **Impartiality renders as silence.** He did the paperwork; now he is not
+  allowed to speak to you. Nothing has to explain it.
+- ⭐⭐ **Ch. 2 becomes a REUNION, not an introduction.** *A voice finishes his
+  thought* is Marcus **recognising someone** — and what he recognises first is
+  **the tiredness.** That is a far better reveal than meeting a new character,
+  and it only exists because the voice was there at registration and then left.
+- It also keeps the HUD from becoming a chatty companion, which is the trope
+  this whole design has been avoiding.
+
+⚖ Free plant, costs one clause: **Enki is a water god**, and Ch. 3 wakes Marcus
+in a **public pool** with a bearded figure rising out of it. So let **the scan
+feel like water** — something cool moving through him rather than a beam. The
+reader's body remembers it two chapters later.
+
+⚙️ The **Momus handoff is unaffected**: the oracle *processes*, Momus
 *presents*. ⭐ The whiplash from an exhausted clerk to **"Welcome, sugar~!"** is
-**backstage → on-air**, and it is the moment the camera turns on.
+**backstage → on-air** — the moment the camera turns on, and the moment Enki
+goes quiet.
 
 ---
 

@@ -125,12 +125,26 @@ a forgotten god on the registration desk is the divinity economy's bottom rung
 doing shift work — and it rhymes with Plutus one rung lower, begging on a
 corner. **Two broke gods bracket the registration.**
 
-🔴 **OPEN AND LOAD-BEARING: is the oracle ENKI?** Canon has Marcus's game
-*"controlled by Enki… while remaining impartial"*, and the bible's **Ch. 2
-cliffhanger is already *"a voice finishes his thought"***, resolving as Enki in
-Ch. 3 — which is a transcription system described in other words. If it is him,
-the exhaustion is a performance of impartiality and every flat line re-reads as
-restraint. Full argument in the beat sheet.
+🔒 **THE ORACLE IS ENKI — RULED 2026-09-22.** He hosts the tutorial table.
+Consistent with canon, not a change: he already runs Marcus's game, carries
+`forsaken_host`, and is described as *"trying to **teach** Marcus how to survive
+and win while remaining impartial"* — **teaching is what a tutorial is.** The
+bible's **Ch. 2 cliffhanger, *"a voice finishes his thought"***, was already
+this device.
+
+🔒 **The constraint it gives the novel: Enki helps only through his job
+functions. Never advice.** He processes your form correctly and sets your bones,
+and tells you nothing.
+
+⭐⭐ **And it improves the sponsor glitch.** Enki is a god of **trickery**, and
+for a trickster forbidden to help, **literalism IS the trick.** He writes PAUL,
+corrects to PLUTUS because he knows exactly who that is, and lets the correction
+render as a stutter — obeying impartiality to the letter while handing the
+audience a truth they will discard. Real help, fully deniable.
+
+🔴 One call left: **does the voice go quiet after the teleport?** ⚖ Recommended
+yes — impartiality as silence, and it turns Ch. 2 into a **reunion** rather than
+an introduction. Full argument in the beat sheet.
 
 🔒 Demonstrated at the **Name** field: *Surely this is a joke* is transcribed
 **SHIRLY THISSISAJOKE**; he answers **"NO"** and corrects it.
