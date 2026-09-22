@@ -1714,15 +1714,25 @@ write-up added was the ward, the fire split, and a gate that can see both readin
   rules parasocial pull lives in the AUDIENCE systems and never in Charm, so **a parasite is
   an audience system made flesh** · and **`Parasocial` is tag #79**, already defined as
   *"They don't know you. They feel like they do"* — **the tag turned inward.**
-- 🔒 **ALL FIVE ARE SEEDS** — identical mechanism, identical Bleed eruption, identical
-  radius curve. **The gauge is the entire difference.** ⭐ And **no gauge is strictly best
+- 🔴 **WITHDRAWN 2026-09-22 — THE FIVE ARE NOT SEEDS, AND I HAD MERGED TWO DIFFERENT THINGS.**
+  Owner: *"No need for the parasite to deal damage all around it. It's planted, and it'll awaken to
+  stimuli, depending on what the players do to it… Bloody Artillery is UNRELATED to the feeling
+  parasites."* ⭐⭐ **So there are two designs, not one:** **Bloody Artillery** is the seed (eruption,
+  radius, friendly fire) and **the five gauges are TENANTS** — planted, dormant, and they **wake to
+  what you do to them.** They carry no eruption at all.
+  ⭐⭐ **AND ALLOCATION IS EMERGENT, WHICH IS BETTER THAN THE PROPOSAL.** The system does not prompt
+  and the party does not choose from a menu: *"One of my players tried to fear it, so I made it into
+  the moss. I'll see what the others do and distribute it that way."* **The parasite you get is
+  decided by how you TREATED it** — fear it and you get the mourner; the gauge finds the person
+  rather than the person picking the gauge. ⚠️ **This retires the "five contestants arguing about
+  who gets the lie-detector" scene** and replaces it with something the table generates by itself.
+- ~~🔒 **ALL FIVE ARE SEEDS** — identical mechanism, identical Bleed eruption, identical
+  radius curve.~~ **The gauge is the entire difference.** ⭐ And **no gauge is strictly best
   because the FLOOR decides** (the same logic that prices an Animal's racial spike):
   sincerity is gold on F1 and starving on Hard; Gravemoss is the reverse. **The party cannot
   know which floor they will draw.**
-- 🔒 **ALLOCATION: the system prompts, the party chooses, no duplicates.** Getting to
-  choose *is* the bonus — ⭐ and it is a Corporation move, because **five contestants arguing
-  about who gets the lie-detector is a scene.** 🔴 On a party of four the **fifth specimen
-  stays sealed and alive in the bag** — a scene of its own and a slot for a fifth contestant.
+- 🔴 **ALLOCATION WITHDRAWN — see the correction above.** ~~The system prompts, the party
+  chooses, no duplicates.~~ **The parasite is decided by how the contestant treats it.**
 - **THE FIVE** (`server/seeds/items-parasites.js`, 5 templates, all PUBLIC READS ONLY):
   - 👁 **Dread-Eye — DANGER.** Close your eyes; it opens its own. **The number of eyes is
     how much danger is in the scene**, and **a boss makes it SMILE**. ⭐ It reads §21.7's own
@@ -1748,8 +1758,9 @@ write-up added was the ward, the fire split, and a gate that can see both readin
     is quiet in the hatchery, because nothing has died there yet. ⚠️ **It is the only one of
     the five that is kind** — a mourner, grateful to be taken somewhere terrible — and the
     players should have to work out which one that is.
-- 🔴 **Open:** the harvest is mine and unblessed · friendly fire on the eruption needs a
-  confirm · `Ringworm` vs `Yearworm` · **the BOUGHT half of the shelf is not authored yet**
+- ✅ **ALL CLOSED 2026-09-22:** the harvest is **OUT** · **friendly fire on the Bloody Artillery
+  eruption is RULED IN** (⚠️ *"just a matter of it actually being artillery"* — it should arc and
+  bombard, not be a self-centred blast) · **`Ringworm` keeps its name** · **the BOUGHT half of the shelf is not authored yet**
   (price at or under Basic 3 UT so price is not the tell; §19.3 closes the store when the
   Lounge unlocks, so it is a one-time offer the book already declares) · **the fantasy item
   coupons still retire undistributed.**
@@ -2338,6 +2349,67 @@ so HP is exactly the buffer between those two clauses.
   with nothing removing them, so resale is what makes an apex item circulate.
 - ✅ **M-5 IS GRADED INTO INTERNAL RUNGS** so F7–F9 ascends instead of plateauing.
 - ⏸️ **Story elites deferred** — owner will look at the roster later for a detailed run.
+
+
+## 🔒 RULINGS — 2026-09-22 (second batch)
+
+**Items · marks**
+- ✅ **THE FOUR MARK NAMES ARE BLESSED** — `Shoot the Dog` · `Bloodsport` · `The Price` ·
+  `Matchmaker`. With the three that rode in on the role-name/state-name class blessing
+  (`Kingmaker` · `Houndcaller` · `Branded`), **no Mark name is unruled.**
+- ✅ **C-1's read is `Mind 8`, mechanism approved.** ⭐ Owner's reason is the decisive one:
+  ***"we already have a player with Mind 9 in floor 0"*** — so the proposed 6 would have been met
+  by an existing contestant before Floor 1 even starts. **8 is a gate; 6 was scenery.**
+- ✅ **ANDVARI'S CUT KEEPS ITS 6** — *"spend it, why not?"* The one place *an item may outpace its
+  class inside its band* is spent, deliberately, on the apex of the Oathbreaker line.
+- 🟡 **`Effigy` vs `Scapegoat` still needs one word** — "yup" confirmed the mark, not the name.
+
+**⭐⭐ AUXILIARY DUNGEONS — a new structure (owner, 2026-09-22)**
+- On Turquoise's missing source: *"Maybe we can have it be in a shrine in the village? It's a rough
+  question. The answer might actually be in the **auxiliary dungeons we will need to spread around
+  in the floors. Dungeons that are for leveling up, not for story purposes.**"*
+- ⭐⭐ **This is a whole content category nobody had named**, and it answers a problem the level
+  budget has been carrying since L-24: **a floor's experience is finite** (nothing respawns), so a
+  party that skips content falls off L-19's curve with no way back. **Auxiliary dungeons are the way
+  back** — optional, repeatable-in-the-sense-of-plural, and *not* story, so skipping one costs
+  nothing narrative. ⚙️ They are also **where a material with no story source can honestly live**:
+  Turquoise does not need an F2 elite to carve, it needs a hole in the desert with a shrine in it.
+- 🔴 **Unscoped:** how many per floor · how they pay under L-24's part-budget share · whether they
+  carry their own rosters or reuse the floor's.
+
+**Race · size · the roster**
+- 🔒 **SIZE IS MEASURED, NOT JUDGED: over 2.5 m in length OR height is LARGE; over 10 m is HUGE.**
+  ⭐⭐ **And the rule fixes the draft by itself** — the two animals I had marked Huge are not Huge
+  under it. An elephant is ~3.3 m at the shoulder and a saltwater crocodile ~5 m, so **both are
+  Large**, which is playable and grappleable. ⚠️ **Huge is therefore empty of real animals** and
+  belongs to the Loong and the Dragon, which is why the next ruling costs nothing.
+- 🔒 **A HUGE CONTESTANT IS NOT PLAYABLE as it stands.**
+- 🔴 **MORE SIZES MAY BE NEEDED** — *"we have a lot of different mythical animals too whose sizes
+  will vary greatly."* §7.1 has four rungs and the body totals run 11 / 17 / 25 / 38; a fifth would
+  land near 57 on the same curve. **Unruled.**
+- 🔒 **MARIO IS HUMAN — a mascot hero at a theme aquarium.** ⭐⭐ This resolves the contradictory
+  records *and* explains them: the sheet said Human brawler, the Compendium grouped him with sea
+  lion material, and **both were looking at the same man — the guy in the costume at the aquarium.**
+  ⭐ It also retro-justifies his two `exclusiveTo` skills: **`Heroic Punch` and `Full Potential`
+  are a mascot's moves**, which is why they are his alone and why they are theatre.
+- 🔒 **WATER GOES INTO THE FLOORS** — *"we need to make some lakes in the floors, or rivers, and
+  hide things in them."* ⚠️ This was the draft's sharpest finding: Set 1 as authored contains **no
+  water at all**, so `Swim` — live, and held by a contestant — was worth zero for the whole
+  campaign. ⭐ **And "hide things in them" is the better half of the ruling:** water that only
+  rewards a swimmer is a tax on everyone else, while water with something *in* it makes the
+  swimmer's spike a service the party wants.
+
+**Skills**
+- 🔒 **THE CAP READING IS CONFIRMED: the ceiling is PER SKILL, and some basic skills stop at 5.**
+  §4.2's universal "every skill can go to 10" becomes a default, not a law. **Needs a §4.2 errata.**
+- 🔴 **§4.5's taxonomy has no narrow for `flight`, `climbing` or `scent`** — the open call, expanded
+  in chat and on the published index. ⭐ The argument: **a narrow is a MERGE PERMISSION, not a
+  category**, so filing a body-fact skill under an existing narrow grants a fusion nobody designed
+  (scent under `awareness` fuses with Aura Reading into a psychic nose). Three new narrows act as
+  **quarantines**, not an expansion. 🟡 **And the question underneath (mine):** a merge CONSUMES
+  both skills, so a racial traded away is a race change that routed around the Surgeon's Table —
+  proposed that **a racial may be the consumer, never the consumed.**
+- 🖥 **Published index of all 49 skills + the taxonomy:** https://claude.ai/artifact/Qw2PGzfidKAHny8QChL45k
 
 
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
