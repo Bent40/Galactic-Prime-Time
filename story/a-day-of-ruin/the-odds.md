@@ -112,6 +112,50 @@ and never says why. Now it does: **a table nobody can touch is the only honest
 bet in the casino.** The odds cannot be manipulated, so the payout is real.
 Falls straight out of the beat; nothing needs inventing.
 
+### 🔒 WHY PLUTUS PICKS SOLO — RULED 2026-09-22
+
+**He goes Forsaken, everyone reads it as greed, and greed is the cover.**
+The real function: **at a Forsaken table nobody can ruin his run.**
+
+⭐⭐ **Forsaken is not abandonment, it is QUARANTINE.** Canon bars tipping the
+dealer at a Forsaken table — no boons, and equally no *"trials, monsters,
+curses."* A god too poor to shield his champion from every other god's
+interference does the only thing available: **he moves him to the one table
+where interference is illegal.** Plutus cannot help Marcus, and that is the
+price of nobody being able to hurt him.
+
+⭐ **And the cover story is canon's own reading.** Canon says he *"tricked
+Marcus into the Forsaken game for a higher payout"* — so *greed* is the
+published motive, and every other god believes it. It is true, and it is not
+the whole reason.
+
+⭐⭐⭐ **It makes "blind and naive" land three ways at once.** Plutus is blind in
+myth, blind as the man on the corner, and now **blind to what his own best move
+costs.** He found the only protection available and did not think through the
+bill — total isolation, no goals, no aid, the odds collapsing. **He solved the
+problem he could see and created a worse one he could not.** Not stupid;
+short-sighted in exactly the way canon specifies. **The metaphor and the plot
+are the same fact.**
+
+⚠️ **GUARD — this must not make Plutus warm.** Canon's register is *gods are
+morally alien; no redemption, no hidden benevolence.* It holds only if the
+protection is read as **asset protection, never kindness.** He went all-in; a
+ruined run ruins *him*. He is protecting an investment and **would do the same
+for a horse.** He still tricked Marcus, still never asked, still *"consent not
+included."*
+
+### ⭐⭐ How this composes with the swing — nobody builds the room, and the room gets built
+
+1. **Plutus picks Forsaken.** Looks like greed. Is quarantine.
+2. **The crowd sees the pick and swings**, collectively pricing Marcus as dead.
+3. **In swinging, they lock themselves out** — both sides, per above.
+4. ⭐ **So the crowd that condemned him finishes the wall Plutus started.**
+
+**Everyone acts in their own interest and the result is a sealed room.** No two
+parties agreed on anything. **That is the casino as a system**, and it is the
+best version of "the market does the cruelty" — because here the market also,
+accidentally, does the mercy.
+
 ### 🔴 Who picks the table — canon has an answer
 
 ⚠️ Canon is explicit and recent: *"Forsaken games are **god-initiated**… the
@@ -126,7 +170,7 @@ ONE.**
 fields ago. **The form asks him a question it has already answered** — which is
 the tired-oracle bureaucracy, *"consent not included"*, and the register of the
 whole book, in one gesture. The brand on his thigh is the contract; he has been
-carrying it since before the aliens arrived.
+carrying it since before any of this started.
 
 ⚖ Available but note the cost: **Marcus genuinely picking Forsaken out of
 ignorance** is tempting, and it makes him complicit in a way that weakens him

@@ -91,8 +91,8 @@ chase and starts happening *instead of* it.
 - ⚖ **Offer YES and NO, and make NO genuinely selectable.** A gate with one
   button is a joke; a gate where refusal works is a **contract**.
 - He answers instantly, without reading. Nobody reads terms.
-- ⭐ **This is the actual abduction.** Not the teleport — the teleport is
-  delivery. He consents to *the game* believing he consents to *survival*,
+- ⭐ **This is where he is actually entered.** Not the teleport — the teleport
+  is delivery. He consents to *the game* believing he consents to *survival*,
   which is the Forsaken trick in one line of UI. He should not realise for a
   long time.
 

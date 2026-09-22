@@ -39,6 +39,29 @@ snapshot disagree, the canon is right until the author rules otherwise — and
 `v2/canon/` is itself generated from the game repo, so never hand-edit it to
 match a chapter. Record story rulings in `<work>/outline.md` instead.
 
+## ⚠️ EDITION GUARD — these works are **v2 (Cosmic Casino)**, never v1
+
+*A Day of Ruin* is the **source** of the v2 frame, not an adaptation of v1. The
+repo's `rulebook/` is the v1 tabletop edition and **none of its vocabulary or
+machinery belongs in this prose or in these notes.** An assistant reasoning
+across both will leak; this table is the check.
+
+| ✅ v2 — this is the world | ⛔ v1 — never here |
+|---|---|
+| The **Cosmic Casino**; tables (Normal / VIP / VVIP-Forsaken) | The **Corporation™** |
+| **Gods** wager; **patrons**; tipping the dealer | **Aliens**; humans **abducted** by them |
+| **Divinity**, followers, standing, the prayer yield | **UT**, the Lounge, Directives |
+| **Momus** hosts; realm bindings weaken on the ~250-year cycle | v1 **Marks** / the causality ledger; v1 tag lifecycle |
+| Contestants **entered / staked / claimed** | Contestants **abducted** |
+
+⚠️ *"The show"*, *"the broadcast"* and *"the audience"* **are v2-legal** — it is
+still a broadcast spectacle with a host. What is barred is the alien production
+company that runs it in v1. ✅ *"Morally alien"* is canon's own phrase for the
+gods and stays.
+
+**Recorded because it already happened:** a 2026-09-22 note in `the-odds.md`
+wrote *"since before the aliens arrived."* Corrected.
+
 ## Layout
 
 ```
