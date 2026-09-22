@@ -109,11 +109,28 @@ friend"* he would not name, so the field exposes that lie for one frame and the
 glitch buries it; and **the odds are therefore mispriced** — a crowd betting
 against a sponsor it believes is a rendering bug.
 
-### 🔒 The auto-detect's limit — RULED 2026-09-22
+### 🔒 What the System IS — RULED 2026-09-22
 
-**The system transcribes; it does not understand.** A speech-to-text engine
-pointed at his head, rendering whatever crosses it phonetically, with no
-comprehension and no ranking.
+🔒 **A very tired oracle working the registration desk** — an employee at the
+end of their wit. **Not software.**
+
+> **THE SYSTEM HEARS EVERYTHING AND CANNOT BE BOTHERED.**
+
+⚠️ Supersedes *"it does not understand."* It understands fine and processes him
+literally anyway, because literal is faster and it is not paid enough to
+interpret. Apathy, not incapacity — which is a choice, and funnier.
+
+⭐⭐ **Canon, not invention:** the games are run by **fallen, bankrupt gods**, so
+a forgotten god on the registration desk is the divinity economy's bottom rung
+doing shift work — and it rhymes with Plutus one rung lower, begging on a
+corner. **Two broke gods bracket the registration.**
+
+🔴 **OPEN AND LOAD-BEARING: is the oracle ENKI?** Canon has Marcus's game
+*"controlled by Enki… while remaining impartial"*, and the bible's **Ch. 2
+cliffhanger is already *"a voice finishes his thought"***, resolving as Enki in
+Ch. 3 — which is a transcription system described in other words. If it is him,
+the exhaustion is a performance of impartiality and every flat line re-reads as
+restraint. Full argument in the beat sheet.
 
 🔒 Demonstrated at the **Name** field: *Surely this is a joke* is transcribed
 **SHIRLY THISSISAJOKE**; he answers **"NO"** and corrects it.

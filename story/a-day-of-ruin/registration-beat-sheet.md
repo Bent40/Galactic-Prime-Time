@@ -5,25 +5,57 @@ The System's arrival, Chapters 3–5 of the opening arc. Markers: 🔒 author-ru
 
 ---
 
-## 🔒 The governing rule — one sentence
+## 🔒 The governing rule — RESTATED 2026-09-22
 
-> **THE SYSTEM TRANSCRIBES. IT DOES NOT UNDERSTAND.**
+> **THE SYSTEM HEARS EVERYTHING AND CANNOT BE BOTHERED.**
 
-Everything the scene does comes out of that. It is a speech-to-text engine
-pointed at a man's head: it renders whatever crosses his mind, phonetically,
-with no comprehension and no ranking. So —
+🔒 **It is not software. It is a very tired oracle working the registration
+desk** — an employee at the end of their wit, on a shift that will not end.
 
-- *Surely this is a joke* → **SHIRLY THISSISAJOKE**. It heard sounds.
-- *last year* in the **Sex** field → **"Not a date field."** It did not get the
-  joke. It got a **type error**. The machine is a compiler, not a comedian, and
-  it is technically correct.
-- **Sponsor** → it cannot reason about sponsorship, so it retrieves the nearest
-  matching token in memory. It finds the man who handed him the ticket.
+⚠️ **This supersedes the earlier "it does not understand."** It understands
+perfectly well and processes him **literally anyway**, because literal is
+faster and it is not paid enough to interpret. Every gag survives the change
+and gets *better*, because the source moves from incapacity to **apathy** —
+which is a choice, and choices are funnier:
 
-⭐ **The rule is also the misdirection.** Three fields of visible literal-minded
-failure teach the reader *"this thing is dumb"* — which is exactly the belief
-required for them to misread the sponsor resolution. **The scene builds its own
-alibi two fields early.**
+- *Surely this is a joke* → **SHIRLY THISSISAJOKE**. Not a parser failing.
+  **A tired clerk typing exactly what they heard**, because working out what
+  you meant is not their job. Marcus says NO; they fix it without comment.
+  That is a DMV interaction, not a bug report.
+- *last year* in the **Sex** field → **"Not a date field."** Somebody who has
+  said that exact sentence four thousand times today.
+- **Sponsor** → it will not ask twice, so it goes and looks.
+
+⭐ **The rule is also the misdirection.** Three fields of visible can't-be-arsed
+teach the reader *"this thing is sloppy"* — exactly the belief required to
+misread the sponsor resolution. **The scene builds its own alibi two fields
+early.**
+
+### 🔒 Register — the line that keeps it fresh
+
+**It is never trying to be funny, and it is never cruel. It just wants the
+shift to end.** Marcus is not a person to it; he is a ticket in a queue.
+
+- Flat affect, but **affect** — a machine has no tone, an exhausted person has a
+  *suppressed* one. Elisions, shortcuts, repeating a prompt instead of
+  rephrasing it, never explaining.
+- ⛔ **Do not let it become chatty or sarcastic.** The snarky AI is stock LitRPG
+  furniture and it is everywhere. **Tired is the fresh note precisely because it
+  withholds.** The moment it quips back, it is Standard Snarky System.
+- ⭐ **It also fixes the omniscience worry for free.** A machine that can read
+  memories can read anything; **a tired employee just does not want to.** The
+  limit is effort, not capability — so it can be thorough when annoyed and lazy
+  when bored without that ever being a plot hole. People are inconsistent.
+
+### ⭐⭐ Why a tired god is canon, not an invention
+
+Canon runs the games on **fallen gods — bankrupt, forgotten religions.** A
+forgotten god working the registration desk **is** what bankruptcy looks like
+from underneath: the divinity economy's bottom rung, doing shift work.
+
+⭐ And it rhymes hard with Plutus, one rung further down, begging on a corner.
+**Two broke gods bracket Marcus's registration — one gave him the ticket, one
+processes it, and neither wants to be there.**
 
 ---
 
@@ -103,19 +135,26 @@ steam is fix a form field. Funny and bleak in the same gesture.
 | System | 🔒 **"Not a date field."** |
 | Then | 🔒 He failed to answer, so it **auto-detects and fills it in anyway** |
 
-**Author's draft:** *Sex? / Last Year / Not a date field, defaulting to
-biological reading. Male.*
+🔒 **THE SCAN — RULED 2026-09-22, and it beats every written version.**
 
-⚖ **One word off: "biological reading" is the system being too careful.** It
-hedges — it implies the machine knows a distinction exists and is being precise
-about which one it applies. That is a *thoughtful* system, and the governing
-rule says it understands nothing. A dumb transcriber would not qualify its own
-epistemology; it would **look at the meat and write it down.**
+> **Sex?**
+> *Last Year*
+> **"Not a date field."**
+> — then something goes through his body. It stops at his groin.
+> **"Male."**
 
-⚖ Proposed, clipped into separate sentences because system text should not
-splice: **"Not a date field. Defaulting to scan. Male."** More invasive, funnier,
-and in character — the horror is that it resolved the field **by examining him
-without asking.**
+⭐ **The system says nothing while it scans, and the silence is the joke.** No
+explanation of method, no hedge about which reading it is using — it simply
+**looks at him without asking** and names him. Invasive, wordless, and entirely
+in character for somebody who will not ask a second time.
+
+⭐ **It also runs on the tense gate by itself:** he feels the thing moving
+through him (**present** — happening, unregistered), it stops, and *then* he is
+named (**past** — and the naming is done to him, not by him).
+
+⚠️ My *"defaulting to biological reading"* fix is **withdrawn** — it was the
+same hedge in fewer words. The staged physical scan removes the need for the
+system to describe itself at all.
 
 ⚖ Also settle whether the prompt is `SEX:` (a label, like the other fields) or
 *"Sex?"* (a question). The label is colder and sets the intrusive thought up
@@ -140,12 +179,24 @@ the prose should stop being funny without announcing that it has.
    suit** — on a homeless man the suit finally explains itself.
    ⚠️ He gave the ticket *"from a friend"* he would not name.
 
-   🎯 **DO NOT LET THE SCOUR TELL A STORY.** The system does not rank or
-   sequence — it dumps a **search result**. Surface the fragments in a useless
-   order (the pocket first, the firing last) at flat, wrong-weighted vividness,
-   and let **the reader** assemble what Marcus does not. That keeps the beat
-   short inside a chase, it is the governing rule working, and it rewards a
-   re-read. A narrated flashback here will stall Ch. 4 dead.
+   🔒 **THE SCOUR MUST END ON PAUL HANDING OVER THE TICKET** — that is the hit,
+   and the hit is what resolves the field.
+
+   ⭐ **That reconciles cleanly with "don't narrate it," and the reconciliation
+   is better than either half.** A search does not return in narrative order —
+   **but it stops when it finds something.** So:
+
+   > **near-misses in a useless order → THE HIT → the scatter stops.**
+
+   The stopping is the punctuation. No flashback, no chronology, and the beat
+   still lands exactly where it must.
+
+   ⚖ **Make the near-misses the system guessing wrong about what a sponsor
+   is.** It is looking for *someone who gave you something* — so it throws up
+   his mother, his boss, the severance envelope, each one a wrong answer to a
+   question it will not stop to understand. ⭐ **His whole life renders as a
+   list of people who gave him things, and the one that counted was a stranger
+   he helped.** Free, and it costs about forty words.
 4. 🔒🔒 **THE RESOLUTION, DISPLAYED AS A FAULT.** The field populates **PAUL**,
    flickers, errors, and settles on **PLUTUS**. The crowd reads a transcription
    fumble. **It is correct.**
@@ -221,19 +272,48 @@ and move on.
 
 ---
 
+## 🔴🔴 THE ONE THAT MATTERS — IS THE TIRED ORACLE **ENKI**?
+
+Canon, verbatim: Marcus's game *"is **controlled by Enki**, who is trying to
+teach Marcus how to survive and win **while remaining impartial**."* The cast
+table gives Enki the roles **`patron, dealer, forsaken_host`** — he is the host
+of this table.
+
+⭐⭐ **And the bible's Ch. 2 cliffhanger is already this device.** Its beat list
+ends Ch. 2 with ***"a voice finishes his thought"***, resolving as Enki in Ch. 3.
+**A voice that finishes your thoughts is a transcription system.** The tired
+oracle and the Ch. 2 reveal are the same invention, arrived at twice.
+
+**If it is Enki** — the exhaustion is a **performance of impartiality.** He is
+forbidden to help, so he acts like furniture, and the tiredness is the cost of
+not being allowed to care. The Ch. 3 rib-realignment then becomes the moment the
+mask slips, and every flat line in registration re-reads as restraint.
+⚖ **Recommended, with the reader not knowing for a long time** — a bored clerk
+is the perfect disguise for a host under a rule.
+
+**If it is not** — the oracle is background staff and Enki arrives clean later.
+Simpler; costs the re-read.
+
+🔴 **Author's call, and it should be made before the scene is drafted**, because
+it decides whether the flatness is apathy or discipline. Nothing on the page
+changes; everything underneath it does.
+
+⚙️ Either way the **Momus handoff still works** — the oracle *processes*, Momus
+*presents*. ⭐ The whiplash from an exhausted clerk to **"Welcome, sugar~!"** is
+**backstage → on-air**, and it is the moment the camera turns on.
+
+---
+
 ## 🔴 Open
 
 1. The second value beside **Age** (Phase 3).
 2. ✅ ~~Whether the thigh brand leaves the show without a visible mark~~ —
-   **closed 2026-09-22 by the hole in the pants.**
+   **closed 2026-09-22 by the hole in the pants.** ✅ And it is a **brand**,
+   never a *tattoo* — ruled, wording pinned.
 3. Whether the crowd is shown reacting at all, and if so from whose vantage.
 4. Whether the odds appear at the door or are held back.
-5. 🔴 **THE TROUSER TIMELINE.** The ticket is in the pocket of the sweatpants he
-   is wearing in Ch. 1, so either the firing was recent or **he has not changed
-   his trousers since he lost his job.** The second is grimmer, funnier and more
-   in character — but it has to be true in the text, and it sets how long ago
-   the memory happened.
-   ⭐ Free glue if wanted: Ch. 1 already says he *"haven't worn my glasses for
-   the past few months."* If he stopped wearing them when he was fired, the
-   firing dates itself and giving up on the glasses becomes the same small
-   surrender as giving up on the trousers.
+5. ✅ ~~The trouser timeline~~ — **closed 2026-09-22: the trousers simply have
+   not been washed.** ⭐ Better than the tragic reading: it is a *slob* detail,
+   not a pathos one, so it stays inside the register guard. **The same trait
+   forgets the ticket and keeps it** — one character note doing both jobs, and
+   the ticket survives to reach his thigh because of laundry.
