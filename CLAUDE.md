@@ -2514,21 +2514,40 @@ this file and **eight of them had never reached the document that actually holds
   **apex resale as the economy's missing sink** (nothing currently removes a Lootbox item, so
   resale makes apex gear *circulate* rather than pile up).
 
-### ⏸ ONE THING IS OPEN AND IT IS THE OWNER'S CALL — `scent` or `sensory`?
+## ✅ `scent` → `sensory` + THE CARVE-OUT — RULED AND BUILT 2026-09-22 (rulebook v1.14)
 
-Owner, after v1.13 shipped: *"maybe instead of scent it'll be sensory? you can potentially merge
-things that are sensory and reach a dead end branch."* ⭐ **My recommendation is yes**, and the
-evidence is in my own draft: **`Whisker-Read` is filed `perception · awareness`** — a pure
-body-sense skill (whiskers reading airflow in the dark) sitting in the **psychic** narrow, one
-row below the `Scent Trail` where I caught the same mistake. `scent` is too small to hold it;
-`sensory` holds it, plus the Bat's `Echo-Cast`, which has no keywords at all.
-🔴 **It interacts with the racial rule and that is the thing to decide:** every member of
-`sensory` is a racial, and *a racial may never be the consumed*, so the narrow's permission
-could never be exercised — it would be a cul-de-sac with a locked gate. **The carve-out that
-makes it mean something: a racial may be consumed by a racial sharing its narrow, and the
-product inherits that narrow.** Nothing leaks (a sensory racial fused into a sensory racial is
-still a sensory racial, still Animal-locked), and the cost is real — two of your two creation
-racials for one product. **Not applied; the owner flagged it as open.**
+🔒 Owner, after v1.13 shipped: *"maybe instead of scent it'll be sensory? you can potentially
+merge things that are sensory and reach a dead end branch."* → **"Sensory + carve."**
+
+- 🔴 **AND IT CAUGHT A LIVE BUG IN MY OWN DRAFT.** **`Whisker-Read` was filed `perception ·
+  awareness`** — whiskers reading contact and airflow in the dark, a **body sense**, sitting in
+  the **psychic** narrow, **one row below the `Scent Trail` where I had just caught exactly this
+  mistake.** ⭐⭐ **`scent` could not have caught it** — a narrow named for one sense has no room
+  for a second. The shelf now holds **three**: `Scent Trail` (smell) · `Whisker-Read` (touch and
+  airflow) · `Echo-Cast` (hearing), which had **no keywords at all** because the unique-skills
+  table has no keyword column.
+- ⭐ **A narrow with one member can never do the one thing a narrow does.** `scent` was a type
+  error wearing a keyword's clothes; and `sensory` **scales** — every animal added later brings
+  a sense, and they all land on one shelf instead of minting `hearing`, `echolocation` and
+  `thermal` one pass at a time.
+- 🔒 **THE CARVE-OUT: a racial MAY be consumed by a racial that shares its narrow, and the
+  product inherits that narrow.** ⭐ Without it the narrow's permission **could never be
+  exercised by anybody**, because every member of `sensory` is a racial and *a racial may never
+  be the consumed* — a cul-de-sac with a locked gate. With it, **you may build inside the branch
+  and never out of it: a dead end, deliberately.**
+- ⭐ **Nothing leaks.** A sensory racial fused into a sensory racial is still a sensory racial,
+  still locked to the race it came from — you have not stopped being what you are, you have
+  **concentrated it.** A dog that fuses its nose and its ears has not changed species; it traded
+  two organs for one sharper one. ⚠️ **The price is the whole point: both racial picks on one
+  skill.**
+- ⭐⭐ **THE ARGUMENT FOR IT IS THAT IT PRODUCES SENSIBLE RESULTS ON A DRAFT WRITTEN BEFORE IT
+  EXISTED.** Two legal fusions already sit in RP-2 unarranged: **Sea Lion's `Swim` + `Deep
+  Breath`** (both `survival · aquatic`) and **Camel's `Water-Miser` + `Heat-Shed`** (both
+  `survival · bracing`) — **a deeper diver and a desert body**, each costing both racial picks.
+  ⚠️ **Neither is authored** — naming what they merge *into* is next session's job.
+- ⚙️ Propagated: §4.5 + the version header · RP-2's keyword column · RP-5 · the taxonomy comment
+  in `apply-skill-passover.js` · the published Gemstone Index. **No app change** — keywords are
+  a free-text array and nothing cross-checks the taxonomy.
 
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
 

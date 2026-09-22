@@ -86,12 +86,12 @@ no `Fennec Endurance`.
 | **`Swim`** | ✅ live | Physique | **5** 🟡*(15?)* | survival · aquatic | **Sea Lion · Crocodile · Octopus** | Water stops being terrain: currents become movement bonuses, and you may drag a grappled target under |
 | **`Nightlurking`** | ✅ live | Reflexes | 10 | infiltration · awareness · squeezing | **Cat · Rat · Bat** | Always aware of the nearest exit, gap or vent; fits plausible small spaces without a Forced Action |
 | **`Death Grip Jaws`** | ✅ live | Physique | 5 | control · grapple | **Crocodile · Dog · Honey Badger** | Bite-grapple by the standard §13 rules — *"no hands? no problem"* |
-| **`Scent Trail`** | 🆕 | Mind | 10 | perception · **scent** | **Dog · Honey Badger · Elephant · Camel** | Follow a trail hours or days old, and **read its direction**; names who or what left it if you have met them before |
+| **`Scent Trail`** | 🆕 | Mind | 10 | perception · **sensory** | **Dog · Honey Badger · Elephant · Camel** | Follow a trail hours or days old, and **read its direction**; names who or what left it if you have met them before |
 | **`Beast Strength`** | 🆕 | Physique | 10 | strikes · power | **Elephant · Camel · Crocodile · Ostrich** | Lift, drag, haul, shift or hold what a Medium body cannot — the §21.6 **Party** assist you give counts as two |
 | **`Bolt`** | 🆕 | Reflexes | 10 | movement · rushing | **Ostrich · Kangaroo · Fennec Fox · Cat** | Once per Clock, cross open ground in a single Moment at a distance nothing on two legs should manage |
 | **`Sure-Foot`** | 🆕 | Reflexes | 10 | movement · **climbing** | **Goat · Cat** | Vertical and near-vertical surfaces are terrain, not obstacles; narrow ledges never call a Forced Action |
 | **`Take Wing`** | 🆕 | Reflexes | 10 | movement · **flight** | **Crow · Bat** | Leave the ground. ⚠️ **Ceiling-gated and load-gated** — see the bill in RP-4 |
-| **`Whisker-Read`** | 🆕 | Mind | 5 | perception · awareness | **Cat · Rat · Sea Lion** | At 1 space, in total darkness or blind, you read contact, airflow and movement as if you could see it |
+| **`Whisker-Read`** | 🆕 | Mind | 5 | perception · **sensory** ⚠️ *(was `awareness` — see RP-5)* | **Cat · Rat · Sea Lion** | At 1 space, in total darkness or blind, you read contact, airflow and movement as if you could see it |
 | **`Water-Miser`** | 🆕 | Physique | 5 | survival · bracing | **Camel · Fennec Fox · Kangaroo** | Thirst, heat and water-deprivation clocks do not run on you; you take your water from what you eat |
 | **`Heat-Shed`** | 🆕 | Physique | 5 | survival · bracing | **Fennec Fox · Elephant** | Your ears are radiators: heat effects and Burn-adjacent environmental tiers advance one step slower |
 | **`Deep Breath`** | 🆕 | Physique | 5 | survival · aquatic | **Sea Lion · Crocodile** | Suffocation's clock does not start while you choose to hold; you surface when you decide to |
@@ -119,6 +119,12 @@ superiority over a human, not because the draft got lazy.
 | **`Fifth Limb`** | Physique | 5 | **Kangaroo** | 🔴 The tail as a load-bearing leg. Extensible to a prehensile-tailed monkey race if one is ever drafted |
 | **`Beak-Gauge`** | Reflexes | **10** | **Octopus** | No skeleton at all. This is passage taken to its absolute limit and nothing else comes close |
 | **`Skin-Speak`** | Mind | 5 | **Octopus** | 🟡 **Overlaps general `Camouflage` — flagged, RP-7 #4** |
+
+⚙️ **This table carries no keyword column, which is how `Echo-Cast` reached RP-7 with no
+keywords at all.** It is **`perception · sensory`** — biosonar is a body sense, and `sensory`
+is where every body sense lives (§4.5, v1.14). ⭐ **That makes three members on the shelf**
+— `Scent Trail` (smell) · `Whisker-Read` (touch and airflow) · `Echo-Cast` (hearing) — and
+three is what a narrow needs to be a narrow rather than a wall.
 
 ---
 
@@ -614,20 +620,50 @@ candidates and `Beak-Gauge` is the better spike.
 ⭐ **And the ruling came with the reason generalised:** 🔒 *a narrow is a **merge
 permission**, not a category* — so the question about a new keyword is never *"what kind of
 thing is this?"* but ***"what should this be allowed to become?"*** `climbing`, `flight` and
-`scent` are written into §4.5 as **quarantines** on exactly that reading.
+**`sensory`** are written into §4.5 as **quarantines** on exactly that reading.
 
 ⚠️ **Consequence applied to RP-2, and it is the rule's own content rather than a second
-decision: each of the three skills DROPS its neighbouring narrow.** `Scent Trail` is
-`perception · scent` and **not** *awareness*; `Sure-Foot` is `movement · climbing` and
-**not** *tumbling*; `Take Wing` is `movement · flight` and **not** *leaping*. A skill
-carrying both the new narrow and the old one would be quarantined and un-quarantined in the
-same line. ⭐ They still share the **broad** group with their neighbours, which is the *"ask
-the GM with a fiction reason"* case — the door is closed, not walled.
+decision: each skill DROPS its neighbouring narrow.** `Scent Trail` is `perception ·
+sensory` and **not** *awareness*; `Sure-Foot` is `movement · climbing` and **not**
+*tumbling*; `Take Wing` is `movement · flight` and **not** *leaping*. A skill carrying both
+the new narrow and the old one would be quarantined and un-quarantined in the same line.
+⭐ They still share the **broad** group with their neighbours, which is the *"ask the GM with
+a fiction reason"* case — the door is closed, not walled.
 
-🔒 **A second rule landed with them: a racial may be the CONSUMER, never the CONSUMED**
-(§4.5). A merge destroys both parents, so feeding a racial into the Gemstone would be a
-**race change routing around §20.3's Surgeon's Table**. ⭐ It also protects this whole draft
-from itself: every package below is a body fact, and none of them can be traded away.
+### ✅ CORRECTED 2026-09-22 — `scent` became **`sensory`**, and it caught a live bug in THIS DRAFT
+
+🔴 **`Whisker-Read` was filed `perception · awareness`** — one row below the `Scent Trail`
+where I caught exactly this mistake. Whiskers reading contact and airflow in the dark is a
+**body sense**, and `awareness` is the **psychic** narrow, so the skill was Gemstone-compatible
+with `Aura Reading` and `Nightlurking`. ⚠️ **`scent` could not have caught it** — a narrow
+named for one sense has no room for a second. **`sensory` does**, and the draft holds **three**:
+
+| skill | sense | was |
+|---|---|---|
+| **`Scent Trail`** | smell | — |
+| **`Whisker-Read`** | touch · airflow | 🔴 `awareness` — **fixed** |
+| **`Echo-Cast`** | hearing (biosonar) | ⚠️ **no keywords at all** — the unique-skills table has no keyword column |
+
+⭐ **And it scales, which `scent` never could:** every animal added after this brings a sense,
+and they all land on the one shelf instead of minting `hearing`, `echolocation` and `thermal`
+one pass at a time.
+
+🔒 **A racial may be the CONSUMER, never the CONSUMED — WITH ONE EXCEPTION (§4.5, v1.14):
+a racial MAY be consumed by a racial sharing its narrow, and the product inherits that
+narrow.** ⭐ Without it `sensory` would be a cul-de-sac with a locked gate, because **every
+member of it is a racial** and nothing could ever be merged. With it, the shelf is a **dead
+end you can build inside and never out of.**
+
+⚙️ **Three legal fusions already exist in this draft**, and none of them was arranged:
+**Dog** (`Scent Trail` + nothing yet) · **Cat** (`Whisker-Read` — one member, so no fusion) ·
+**Bat** (`Echo-Cast` + `Take Wing` share no narrow, so no) — but **Sea Lion's `Swim` +
+`Deep Breath`** are both `survival · aquatic` and **Camel's `Water-Miser` + `Heat-Shed`** are
+both `survival · bracing`. ⭐ **A deeper diver and a desert body**, each costing both racial
+picks, both coherent, neither designed. That the rule produces sensible results on a draft
+written before it existed is the argument for it.
+
+⚠️ **RP-2's keyword column is updated; the two aquatic/bracing fusions above are NOT authored** —
+naming what they merge INTO is part of the next pass.
 
 *The original finding follows.*
 

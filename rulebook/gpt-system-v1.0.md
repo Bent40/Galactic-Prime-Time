@@ -1,8 +1,11 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.13** · 2026-09-22 — **the skill ceiling is PER SKILL** (§4.2: most basic
+**Version 1.14** · 2026-09-22 — **`scent` becomes `sensory`** (§4.5), covering every
+body sense rather than one, **and a racial may be consumed by a racial sharing its narrow**,
+which turns the quarantine into a dead-end branch you can build inside and never out of.
+*Previously —* **1.13** · 2026-09-22, **the skill ceiling is PER SKILL** (§4.2: most basic
 skills stop at 5, many go to 10, a designated few reach 15) and **a narrow keyword is a
-merge permission, not a category** (§4.5: `climbing` · `flight` · `scent` added as
+merge permission, not a category** (§4.5: `climbing` · `flight` · `sensory` added as
 quarantines; **a racial may be the consumer, never the consumed**).
 *Previously —* **1.12** · 2026-09-19, **an item's written damage number IS its Force**
 (§12.7), band already counted: a card that reads 4 hits for 4, and a reforge
@@ -321,7 +324,7 @@ unless stated. Never automatic — requires conditions AND player consent.
 | performance | deception · presence · sound · projection |
 | survival | treatment · bracing · aquatic |
 | control | grapple · throw |
-| perception | empathy · patterning · awareness · **scent** |
+| perception | empathy · patterning · awareness · **sensory** |
 | infiltration | stealth · locks · squeezing |
 | craft | repair · improvisation |
 
@@ -335,24 +338,43 @@ where a new keyword goes: filing a skill under an existing narrow **grants it ev
 that narrow already allows.** So the question is never *"what kind of thing is this?"* — it
 is *"what should this be allowed to become?"*
 
-🔒 **`climbing`, `flight` and `scent` were added on that reasoning (2026-09-22)**, for
-the racial packages, and each one sits **alone on purpose**:
+🔒 **`climbing`, `flight` and `sensory` were added on that reasoning (2026-09-22)**,
+for the racial packages:
 
 | narrow | under | why it is not filed under a neighbour |
 |---|---|---|
 | **`flight`** | movement | under *leaping* it becomes compatible with every jumper — and through Acrobatics, which carries both, with the tumblers as well, so a merge could produce a winged acrobat nobody designed |
 | **`climbing`** | movement | under *tumbling* it merges with the acrobatic saves |
-| **`scent`** | perception | under *awareness* it merges with the psychic-perception line — a nose that reads auras |
+| **`sensory`** | perception | under *awareness* a body sense merges with the psychic-perception line — **a nose that reads auras** |
 
 ⭐ They are **quarantines**, not an expansion: a body fact should grant what that body
 does and **no fusion that was never designed.** Grow the taxonomy the same way —
 deliberately, and for this reason.
+
+🔒 **`sensory` COVERS EVERY BODY SENSE, not one of them.** ⚠️ It was first written as
+`scent` and that was **too small to be a narrow**: smell, hearing, echolocation, whiskers,
+heat and every sense a later creature brings would each have needed a keyword of its own,
+and **a narrow with one member can never do the one thing a narrow does.** One shelf holds
+them all, and it is walled from `awareness` exactly as before.
 
 🔒 **A RACIAL SKILL MAY BE THE CONSUMER, NEVER THE CONSUMED (ruled 2026-09-22).** A
 merge **destroys both parents**, so feeding a racial into the Gemstone would quietly change
 what your body is — a **race change routing around the Surgeon's Table** (§20.3), which is
 the one station meant to edit a body and the one that charges for it. A racial may eat
 another skill and grow; **nothing may eat a racial.**
+
+🔒 **ONE EXCEPTION — A RACIAL MAY BE CONSUMED BY A RACIAL THAT SHARES ITS NARROW, and
+the product inherits that narrow.** ⭐ Nothing leaks: a sensory racial fused into a sensory
+racial is **still a sensory racial, still locked to the race it came from**, so you have not
+stopped being what you are — you have **concentrated it.** A dog that fuses its nose and its
+ears has not changed species; it has traded two organs for one sharper one. ⚠️ **The price
+is the whole point: that is both of your racial picks spent on one skill.**
+
+⭐ **This is what makes a quarantine a PLACE rather than a WALL.** Every member of
+`sensory` is a racial, so without the exception the narrow's permission could never be
+exercised by anybody — a cul-de-sac with a locked gate. With it, **you may build inside the
+branch and you may never build out of it**: a **dead end**, deliberately, and the only kind
+of fusion a body fact is allowed to reach.
 
 **The canonical worked example:** **Intercept Lv 5 +
 Brace Lv 3** — compatible through *bracing* — merge at the Gemstone into
