@@ -86,6 +86,86 @@ from nowhere every few weeks.
 
 ---
 
+## 🟡 THE SWING — proposed 2026-09-22, the moment the economy is created
+
+**Normal odds show on him first.** Then the table type is picked — and the
+odds **swing immensely against him in one beat**, as everyone collectively
+predicts his death and, in doing so, **locks themselves out of ever helping
+him.**
+
+### ⭐⭐ The lock-out is the whole idea, and it cuts both ways
+
+**Nobody decides to abandon him.** Every god makes an individually sensible
+bet — *he is going to die, bet accordingly* — and **in aggregate, in about four
+seconds, they price him out of all contact.** The isolation is not a rule, not
+a punishment and not a house decision. It is **a crowd being rational, once.**
+
+⭐ **And the against-bettors lock themselves out too.** Canon bars tipping at a
+Forsaken table in both directions — no boons, and no *"trials, monsters,
+curses"* either. So the people who bet on his death **cannot arrange it.**
+Everyone who moved is now a pure spectator. **The swing does not just isolate
+Marcus; it converts the entire audience into an audience.**
+
+⭐⭐ **Which retro-explains why Forsaken pays so much.** Canon says the format
+carries *"much higher divinity… the sponsoring god's payout is much higher"*
+and never says why. Now it does: **a table nobody can touch is the only honest
+bet in the casino.** The odds cannot be manipulated, so the payout is real.
+Falls straight out of the beat; nothing needs inventing.
+
+### 🔴 Who picks the table — canon has an answer
+
+⚠️ Canon is explicit and recent: *"Forsaken games are **god-initiated**… the
+champion is chosen by the gods… **never the champion's refusal of patronage.**
+(Marcus: Plutus went all-in; **consent not included.**)"*
+
+So a real choice by Marcus contradicts it. ⚖ **Recommended third option, which
+is funnier than either and costs no canon: the choice is OFFERED AND IS NOT
+ONE.**
+
+⭐⭐ **Because the SPONSOR field already decided it.** He filled that in two
+fields ago. **The form asks him a question it has already answered** — which is
+the tired-oracle bureaucracy, *"consent not included"*, and the register of the
+whole book, in one gesture. The brand on his thigh is the contract; he has been
+carrying it since before the aliens arrived.
+
+⚖ Available but note the cost: **Marcus genuinely picking Forsaken out of
+ignorance** is tempting, and it makes him complicit in a way that weakens him
+as Plutus's victim — and it breaks *"never the champion's refusal."*
+
+### 🔒 THE NUMBER — do not inflate it
+
+**The author's instinct is correct.** Three reasons, the second decisive:
+
+1. **Past about 1:100 the number stops being felt.** 1:259 and 1:25,000 produce
+   the same reaction — *very bad.* Inflation buys no emotion.
+2. ⭐⭐ **It would break the progression bar ruled above.** If his odds ARE the
+   axis, they need a **legible range**. 259 → 180 → 90 is a story a reader can
+   feel. 25,000 → 24,300 is noise. **Inflating the number destroys the mechanic
+   it was invented to dramatise.**
+3. **The drama is the MOVEMENT, not the magnitude.** *"Biggest turnover ever"*
+   is a **delta**. Maximise the contrast and the speed, not the endpoint.
+
+⭐ **Land it on canon's 1:259 and change nothing.** It is already the opening
+figure, and it is *unround* — **a crowd that prices a man at 1:259 has done
+sums.** 1:10,000 reads as contempt; **1:259 reads as appraisal**, which is
+colder. They did not dismiss him. They **evaluated** him.
+
+**What to maximise instead:**
+
+- ⭐ **How ordinary the BEFORE number is.** Make it forgettable — even money,
+  or mildly unfavourable. The more mundane the before, the more violent the
+  after, and the reader can hold a baseline.
+- ⭐ **Speed.** One re-render, not a climbing ticker. Instant collective
+  judgment.
+- ⭐⭐ **Put the big number on the COUNT, not the ratio.** *How many wagers just
+  landed* scales as far as wanted without breaking anything, and it is the
+  figure that actually describes the abandonment. **Two numbers, two jobs:** the
+  ratio stays legible, the crowd size gets to be horrifying.
+- ⭐ **The oracle does not react.** The largest turnover in the casino's history
+  renders, and the clerk moves to the next field. *That* is the horror.
+
+---
+
 ## ⚠️ Authorial discipline — what protects the reveal
 
 🔒 **Marcus must never be able to tell rarity from absence.** He has no way to
