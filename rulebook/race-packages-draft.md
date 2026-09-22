@@ -129,7 +129,12 @@ superiority over a human, not because the draft got lazy.
 | **body total (§7.1)** | 11 | 17 | 25 | 38 |
 | | Cat 🐱 · Rat 🐀 · Crow 🐦‍⬛ · Bat 🦇 · Fennec 🦊 · Octopus 🐙 | Dog 🐕 · Goat 🐐 · Chimpanzee 🦍 · Honey Badger 🦡 | Sea Lion 🦭 · Ostrich 🦤 · Camel 🐪 · Kangaroo 🦘 | Crocodile 🐊 · Elephant 🐘 |
 
-**16 animals · 6 Small · 4 Medium · 4 Large · 2 Huge.**
+⚠️ ~~**16 animals · 6 Small · 4 Medium · 4 Large · 2 Huge.**~~ — **superseded
+2026-09-22 by the measured size rule** (over 2.5 m = Large, over 10 m = Huge). Crocodile
+(~5 m) and Elephant (~3.3 m at the shoulder) are **Large**, so the roster is
+**16 animals · 6 Small · 4 Medium · 6 Large · 0 Huge** — and **Huge holds no real animal
+at all**, which is why a Huge contestant could be ruled unplayable for free. 🔴 The two
+blocks in RP-4 and the RP-5 matrix are **not yet re-drafted**; see RP-7 ③.
 
 ---
 
@@ -492,14 +497,32 @@ F2 desert · F3 city**, and there is **no water floor** (RP-4, Sea Lion).
 |---|---|---|---|
 | **Sasha** | **Cat**, Small | `Slice n' Dice` · `Nightlurking` | ✅ **Yes, unchanged.** Both are on the Cat list; that is exactly two animal picks |
 | **Filipe** | **Sea Lion**, Large | `Swim` · `Juggling` | ✅ **Yes, unchanged.** Both are on the Sea Lion list |
-| **Mario** | 🔴 **disputed — see below** | `Full Potential` · `Heroic Punch` (both `exclusiveTo: Mario`) | ✅ **Either way.** His two are `exclusiveTo`, not racials, so **they occupy no animal slot and conflict with nothing** |
+| **Mario** | 🔒 **HUMAN** (ruled 2026-09-22) | `Full Potential` · `Heroic Punch` (both `exclusiveTo: Mario`) | ✅ **Either way.** His two are `exclusiveTo`, not racials, so **they occupy no animal slot and conflict with nothing** |
 | **XQUEZ/T** | Robot / AI | three `raceLock: 'Robot / AI'` racials | ➖ out of scope; the race is discontinued for new contestants |
 
 ✅ **ZERO migration.** Nothing in this draft changes a live sheet, because the three
 live animal skills it re-uses (`Swim` · `Nightlurking` · `Death Grip Jaws`) are re-used
 **unchanged** — same names, same text, same `raceLock`.
 
-🔴 **ONE CONTRADICTION I CANNOT RESOLVE AND WILL NOT GUESS — what species is Mario?**
+✅ **RULED 2026-09-22 — MARIO IS HUMAN, a mascot hero at a theme aquarium.**
+
+⭐⭐ **The ruling does not pick a side — it explains why both sides were looking at the
+same man.** The sheet said *Human brawler*; the Compendium filed him with sea lion material;
+and **the guy in the sea lion costume at the aquarium is both of those descriptions at once.**
+The records were never in conflict about the person, only about the suit.
+
+⭐ **And it retro-justifies his two `exclusiveTo` skills.** `Heroic Punch` and `Full
+Potential` are **a mascot's moves** — which is why they belong to him alone and why they
+read as theatre rather than training. A field nobody could explain now explains itself.
+
+⚙️ **Consequence for this draft: none.** He takes no animal slot, holds no racial, and as a
+Human he is the **flat race** — four general picks, no racials, nothing closed. The RP-6 row
+above stands as written.
+
+*The original finding follows, struck — it is worth keeping because it names where the
+contradiction lived.*
+
+~~🔴 **ONE CONTRADICTION I CANNOT RESOLVE AND WILL NOT GUESS — what species is Mario?**~~
 The brief that commissioned this draft says *"Filipe and Mario are SEA LIONS."*
 The repo says otherwise, in three places:
 
@@ -519,9 +542,24 @@ party does."** 🔴 **Owner: one word settles it.**
 
 ---
 
-## RP-7 🔴 OPEN CALLS — what I am least sure of
+## RP-7 ✅ THREE OF FOUR RULED 2026-09-22
 
-### 1. 🔴🔴 **SET 1 HAS NO WATER, AND THREE ANIMALS STAKE THEIR SPIKE ON IT**
+| # | Ruling |
+|---|---|
+| **1** | 🔒 **WATER GOES INTO THE FLOORS** — *"we need to make some lakes in the floors, or rivers, and hide things in them."* ⭐ **The second half is the better half.** Water that only rewards a swimmer is a tax on everyone else; **water with something IN it makes the swimmer's spike a service the party wants.** My one-flooded-beat recommendation is superseded by something broader and better — this is a Set 1 terrain job, not a single scene |
+| **2** | ✅ **READING A IS CORRECT — the caps here are CEILINGS**, and §4.2 now agrees. **Rulebook v1.13** withdrew the flat *"every skill can go to 10"*: the ceiling is **the skill's own**, most basic skills stop at 5, many go to 10, a designated few reach 15. ⭐ So RP-2's cap column means exactly what it says and needs no re-reading. ⚙️ Built as `SkillTemplate.maxCapacity` |
+| **3** | 🔒 **HUGE IS NOT PLAYABLE — and the ruling that came with it DISSOLVED the problem instead of choosing between my three options.** 🔒 **Size is MEASURED, not judged: over 2.5 m in length OR height is Large; over 10 m is Huge.** ⭐⭐ **Under that rule neither of my two Huge animals is Huge** — an elephant is ~3.3 m at the shoulder and a saltwater crocodile ~5 m, so **both are Large**: playable, grappleable, and fine in an interior. ⚠️ **Huge is therefore empty of real animals** and belongs to the Loong and the Dragon, which is why *"a Huge contestant is not playable"* costs nothing to rule. 🔴 **Still open:** *"we have a lot of different mythical animals too whose sizes will vary greatly — we might need more sizes."* §7.1 has four rungs at 11 / 17 / 25 / 38; a fifth lands near **57** on the same curve. **Unruled** |
+
+⚠️ **RP-2, RP-3 and RP-4 have NOT been re-drafted for the size rule** — the Crocodile and
+Elephant blocks still read **Huge** and their body totals are still the 38-frame. That is the
+first job of the next pass, not a footnote: it changes two body totals, the RP-3 counts and
+the RP-5 floor matrix (a Large croc is no longer barred from the capital).
+
+*The original four follow. ①②③ are answered; ④ stands.*
+
+### ~~🔴 OPEN CALLS — what I am least sure of~~
+
+### ~~1.~~ ✅ **SET 1 HAS NO WATER, AND THREE ANIMALS STAKE THEIR SPIKE ON IT** — RULED
 
 The single biggest finding. `Swim` is live, is held by at least one and possibly two
 contestants, and **F1 forest / F2 desert / F3 capital contain no swimmable water at
@@ -532,7 +570,7 @@ excavation runs *under* a capital of two million; groundwater is the most natura
 thing in the world down there, it costs no new content, and ⭐ it would put the sea
 lion's racial in the room on the floor that matters most.
 
-### 2. 🔴 **TODAY'S CAP RULING AND §4.2 DISAGREE, AND I DREW CAPS WITHOUT KNOWING WHICH WINS**
+### ~~2.~~ ✅ **TODAY'S CAP RULING AND §4.2 DISAGREE** — RULED: reading **A**, and §4.2 moved
 
 Today's ruling: *most skills cap at 5 or 10; special ones may be designated up to 15.*
 **§4.2 says something different:** *every* skill can reach 10 — levels 1–5 free, 6–10
@@ -550,7 +588,7 @@ Under §4.2 "caps at 5" cannot mean anything. **Two readings:**
 the answer is B, every `10` below is just "the normal skill" and the meaningful column
 is only which ones are 15.
 
-### 3. 🔴 **A HUGE CONTESTANT MAY NOT BE A PLAYABLE THING, AND I DRAFTED TWO**
+### ~~3.~~ ✅ **A HUGE CONTESTANT MAY NOT BE A PLAYABLE THING, AND I DRAFTED TWO** — RULED, and neither of them is Huge
 
 Crocodile and Elephant are Huge. §13 says a Medium contestant cannot grapple Huge, §7.1
 says a Huge body is *outdoors*, and **F3 is an entire floor of interiors** — the

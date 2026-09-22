@@ -2489,6 +2489,47 @@ fusion that narrow already allows**, so the question is never *"what kind of thi
 ⚠️ **Reasoned, not seen** — no browser in the container, so the new Ceiling selector and the
 ⬆ badge are verified by build and by test, never by looking at them.
 
+### 🔴 THE CLOSE-OUT SWEEP — the second batch of rulings had NOT reached its home docs
+
+⚠️ **This is the repo's named recurring failure, caught at session close**: *a ruling is not
+recorded until the question it answers is struck.* The 2026-09-22 rulings were all written into
+this file and **eight of them had never reached the document that actually holds the question.**
+
+- 🔴 **AND ONE WAS A WRONG NUMBER IN A SEED FILE.** `set1-item-concepts.md` C-12 ③ still read
+  **`Mind 6`** and so did `items-set1-spine.js`, **in two places** — while the ruling is
+  **`Mind 8`** (*"we already have a player with Mind 9 in floor 0"*, so 6 is met before Floor 1
+  begins and was scenery wearing a gate's clothes). ⭐ **The spine has never been seeded, so
+  nothing in Atlas was wrong** — but the file would have seeded the withdrawn number. Corrected.
+- **`set1-item-concepts.md` C-12** — all five struck: Vitrian **deleted** · Kinship **approved**
+  (thresholds provisional) · `Mind 8` · Turquoise **parked to auxiliary dungeons** · Andvari's
+  Cut **keeps its 6**.
+- **`race-packages-draft.md`** — RP-7's four open calls are now three ruled and one standing;
+  RP-6's Mario contradiction is closed; RP-3's roster counts are superseded.
+  ⭐⭐ **The size ruling DISSOLVED my open call instead of answering it** — I asked which of three
+  options to take for a Huge contestant, and *over 2.5 m = Large, over 10 m = Huge* makes **both
+  of my Huge animals Large** (elephant ~3.3 m, saltwater crocodile ~5 m). **Huge holds no real
+  animal at all**, which is exactly why ruling a Huge contestant unplayable costs nothing.
+  ⚠️ **RP-2/3/4/5 are not re-drafted for it** — that is the first job of task #5, not a footnote.
+- **`item-drafting-materials.md` M-5** — the internal rungs (F7–F9 must ascend, not plateau) and
+  **apex resale as the economy's missing sink** (nothing currently removes a Lootbox item, so
+  resale makes apex gear *circulate* rather than pile up).
+
+### ⏸ ONE THING IS OPEN AND IT IS THE OWNER'S CALL — `scent` or `sensory`?
+
+Owner, after v1.13 shipped: *"maybe instead of scent it'll be sensory? you can potentially merge
+things that are sensory and reach a dead end branch."* ⭐ **My recommendation is yes**, and the
+evidence is in my own draft: **`Whisker-Read` is filed `perception · awareness`** — a pure
+body-sense skill (whiskers reading airflow in the dark) sitting in the **psychic** narrow, one
+row below the `Scent Trail` where I caught the same mistake. `scent` is too small to hold it;
+`sensory` holds it, plus the Bat's `Echo-Cast`, which has no keywords at all.
+🔴 **It interacts with the racial rule and that is the thing to decide:** every member of
+`sensory` is a racial, and *a racial may never be the consumed*, so the narrow's permission
+could never be exercised — it would be a cul-de-sac with a locked gate. **The carve-out that
+makes it mean something: a racial may be consumed by a racial sharing its narrow, and the
+product inherits that narrow.** Nothing leaks (a sensory racial fused into a sensory racial is
+still a sensory racial, still Animal-locked), and the cost is real — two of your two creation
+racials for one product. **Not applied; the owner flagged it as open.**
+
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
 
 The Artifact links for the shop, the Little Brother fight screen, the Broadcast Bestiary

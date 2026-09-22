@@ -891,15 +891,32 @@ Only C-2 and C-8 are weapons.
 | **C-8** ⭐ | Hard × crafted | Warden-Carve | Kin-Carve | Kin-Carve, Imperial |
 | **C-9** | Hard × story | — | The Horn, taken | The Horn, turned |
 
-### 🔴 Five things in the blocks are MINE, not ruled — they need a call
+### ✅ ALL FIVE RULED 2026-09-22 — four closed, one parked
+
+⚠️ **These sat here for three weeks after being answered, and one of them was a WRONG
+NUMBER in a seed file** (① below). This is the repo's named recurring failure: *a ruling is
+not recorded until the question it answers is struck.* The original table follows, each row
+struck and answered.
+
+| # | Ruling |
+|---|---|
+| **1** | 🔒 **VITRIAN IS DELETED — there is no court brand-smith.** *"The brand is made by the queen itself, with her own blood and powers. The result of regal blood."* ⭐⭐ It closes a hole rather than filling one: the brand carries **her permission** (which is why a branded party reads her journal at F2 and reaches her at F3), and **permission cannot be delegated to a smith.** It had to be her blood for the access ladder to work at all. ⚠️ The coerced-craft defect rider dies with him |
+| **2** | ✅ **THE KINSHIP TRACK IS APPROVED**, with **3** and **6** explicitly **provisional** — the shape ships, the thresholds are the owner's to move at the table |
+| **3** | 🔒 **C-1 READS `Mind 8`, not 6.** ⭐ The owner's reason is the decisive one: ***"we already have a player with Mind 9 in floor 0"*** — the proposed 6 is **met by a live contestant before Floor 1 begins**, so it was scenery wearing a gate's clothes. **8 is a gate.** 🔴 **`items-set1-spine.js` carried the 6 in two places and is corrected** (the file has never been seeded, so nothing in Atlas was wrong). C-2's cold-wielder punish is approved as written |
+| **4** | ⏸ **TURQUOISE — PARKED, with a direction.** Neither of my two options was taken. Owner: *"maybe a shrine in the village… the answer might actually be in the **auxiliary dungeons** we will need to spread around in the floors."* ⭐⭐ **A material with no story source does not need an F2 elite to carve — it needs a hole in the desert with a shrine in it.** The F2 roster gains nothing and C-2's middle reading keeps its Turquoise. 🔴 Auxiliary dungeons are **unscoped** (how many per floor · how they pay under L-24's part-budget share · own roster or the floor's) |
+| **5** | ✅ **ANDVARI'S CUT KEEPS ITS 6** — *"spend it, why not?"* ⭐ The one place *an item may outpace its class inside its band* is spent **deliberately**, on the apex of the Oathbreaker line, which is the right object to spend it on |
+
+*The original five follow, struck.*
+
+### ~~🔴 Five things in the blocks are MINE, not ruled — they need a call~~
 
 | # | Invention | Note |
 |---|---|---|
-| **1** | 🟡 **Vitrian, the court's brand-smith** (C-5) | W-8 §6 says every crafter-gated source in the corpus names one maker and GPT's carve names none. A high-court demon who does not know the crown's secret. **Placeholder name — swap freely.** Carries the tranche-2 rider: commission politely → clean; coerce → the brand reads as *whose*, naming its granter to the wrong factions |
-| **2** | 🟡 **The Kinship track** (C-8) | 3 Kinship changes a body part permanently; 6 turns the hunts onto the bearer. Rides on `bodyParts`, which already exist, so nothing new is built — **but both thresholds are guesses** |
-| **3** | 🟡 **C-1's `Mind 6` read · C-2's cold-wielder punish** | Both are requirement-shaped gates in §12.1's existing sense. **The specific numbers are first-pass** |
-| **4** | 🔴 **Turquoise still has no source** | C-2's middle reading needs it and the F2 roster has no carve or gather for it. Either F2 gains one, or that reading moves to Sunglass **and loses the Burn** |
-| **5** | ⚠️ **Andvari's Cut reads 3 on a Heavy Small** (baseline 2) | Legal under *an item CAN outpace its class inside its band* — but it is **the one place that permission was spent**, and it should be spent deliberately |
+| ~~**1**~~ | ~~🟡 **Vitrian, the court's brand-smith** (C-5)~~ — **deleted** | W-8 §6 says every crafter-gated source in the corpus names one maker and GPT's carve names none. A high-court demon who does not know the crown's secret. **Placeholder name — swap freely.** Carries the tranche-2 rider: commission politely → clean; coerce → the brand reads as *whose*, naming its granter to the wrong factions |
+| ~~**2**~~ | ~~🟡 **The Kinship track** (C-8)~~ — **approved** | 3 Kinship changes a body part permanently; 6 turns the hunts onto the bearer. Rides on `bodyParts`, which already exist, so nothing new is built — **but both thresholds are guesses** |
+| ~~**3**~~ | ~~🟡 **C-1's `Mind 6` read · C-2's cold-wielder punish**~~ — **`Mind 8`** | Both are requirement-shaped gates in §12.1's existing sense. **The specific numbers are first-pass** |
+| ~~**4**~~ | ~~🔴 **Turquoise still has no source**~~ — **parked to auxiliary dungeons** | C-2's middle reading needs it and the F2 roster has no carve or gather for it. Either F2 gains one, or that reading moves to Sunglass **and loses the Burn** |
+| ~~**5**~~ | ~~⚠️ **Andvari's Cut reads 3 on a Heavy Small** (baseline 2)~~ — **kept** | Legal under *an item CAN outpace its class inside its band* — but it is **the one place that permission was spent**, and it should be spent deliberately |
 
 ---
 

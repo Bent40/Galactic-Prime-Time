@@ -129,6 +129,22 @@ beard, a mountain's roots, a bear's sinew, a fish's breath, a bird's spittle) ·
 cosmos) · **Star-Metal** · **Ichor**. Each is a story event with a stat block,
 Godly-adjacent (C-7 guidance applies).
 
+🔒 **M-5 IS GRADED INTO INTERNAL RUNGS (ruled 2026-09-22).** One flat apex band across
+**F7–F9** would make the last three floors a **plateau** — the campaign's most powerful
+stretch is the one stretch where nothing gets better. So the five above are not peers:
+M-5 carries its own ladder inside it, and F7 · F8 · F9 each read a rung up.
+⚠️ **The rungs are not assigned yet** — which of the five sits where is a Set-3 authoring
+job, and it wants doing before F7 is designed, not after.
+
+🔒 **APEX ITEMS GET A RESALE MARKET (ruled 2026-09-22)** — the Nanatsu model, and
+explicitly **not** finite-and-destructible. ⚠️ **This is the SINK the economy does not
+have:** a Lootbox item is permanent property and **nothing in the game removes one**, so
+apex gear accumulates with no way out. Resale is what makes an apex object **circulate**
+rather than pile up — it leaves one party and arrives at another instead of being deleted.
+🔴 Unscoped: who buys, at what price, and whether a resold apex keeps its Marks and its
+history (⭐ **it should** — R-3 says weapons birth myths from deeds, and a weapon that
+forgets its deeds on sale breaks that loop).
+
 ---
 
 ## M-6 — Parts tables ⚖ (part count = material capacity, ID-0.28)

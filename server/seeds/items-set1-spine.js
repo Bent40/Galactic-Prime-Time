@@ -45,8 +45,8 @@ module.exports = [
 
   { name: 'Seepage, Thinned', icon: '💧', category: 'Consumables', subtype: 'Consumable', tier: 'Quality',
     ...S('easy', 2), uses: uses(1),
-    requirements: '1 Moment Cost. Mind 6 to read which one it is BEFORE drinking.',
-    specialEffects: 'F2 Desert band (+2 Force). Same coin flip as Seepage, Sealed — unless the bearer has Mind 6, who sees the tell and knows the result in advance. Seventy years of Doorward feeding thinned it.',
+    requirements: '1 Moment Cost. Mind 8 to read which one it is BEFORE drinking.',
+    specialEffects: 'F2 Desert band (+2 Force). Same coin flip as Seepage, Sealed — unless the bearer has Mind 8, who sees the tell and knows the result in advance. Seventy years of Doorward feeding thinned it.',
     description: 'Thin enough to see through, if anyone thinks to look.' },
 
   { name: 'Seepage, Sorted', icon: '⚗️', category: 'Consumables', subtype: 'Consumable', tier: 'Superior',
