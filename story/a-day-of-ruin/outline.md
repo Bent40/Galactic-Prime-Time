@@ -16,7 +16,7 @@ The author's seven beats, mapped to serial installments. Royal Road band is
 
 | # | Beat | Installment | Ends on |
 |---|---|---|---|
-| 1 | Wake → T.V. → the hunt announcement | **Ch. 1** ✅ drafted (v0.2, ~1,130w) | *"Found you~!"* |
+| 1 | Wake → T.V. → the hunt announcement | **Ch. 1** ✅ drafted (v0.3, ~1,125w) | *"Found you~!"* |
 | 2 | Escaping the house with nothing on them | **Ch. 2** | out the door, no shoes, no plan |
 | 3 | Streets, avoiding detection — **system download begins** | **Ch. 3** | |
 | 4 | Getting detected close to the destination | Ch. 3 climax / **Ch. 4** open | the moment of being seen |
@@ -61,43 +61,78 @@ Runs **during** beats 3–6. The System arrives mid-flight, not at a menu.
 - **The brand has physical logic:** the object becomes the mark **where the
   pocket was.**
 
-### Where Paul went
+### 🔒 Where Paul went — RULED 2026-09-22
 
-⚖ Proposed: Paul is **not cut** — he moves into the memory-scour as a retrieved
-fragment (~80 words, mid-sprint), surfacing at the exact moment it explains
-something. Canon keeps the blind man in the crumpled suit; the reader gets him
-compressed and causal instead of as an opening scene. 🔴 Author's call.
+**Paul survives.** The bible's pub scene is not cut, it is **relocated into the
+memory-scour** as a retrieved fragment (~80 words, mid-sprint), surfacing at the
+one moment it explains something. Canon keeps the blind man in the crumpled
+suit; the reader gets him compressed and causal instead of as an opening scene.
 
-### 🔴 Open calls this scene creates
+### 🔒 The sponsor resolution — RULED 2026-09-22
 
-1. **The auto-detect's limit.** A system that can read memories for a sponsor
-   can read them for anything. ⚖ Proposed: auto-detect is **lazy and literal**
-   — it grabs the nearest matching token, not the truth. It finds "Plutus"
-   because the name is lying in a memory, not because it understands
-   sponsorship. Keeps it funny, keeps it fallible, and makes it confidently
-   wrong later.
-2. **Thigh brand vs. the bible's chest brand** (*"a golden rectangle on the
-   chest"*). ⚖ Proposed: keep **both** — the thigh scar is the *ticket*
-   (private, shameful, what happened to him); the chest rectangle is champion
-   *livery* (broadcast, applied separately, what he is to the audience).
-3. **Does the sister get a field?** ⚖ If he doesn't think to ask about her
-   until after he is gone, that is the arc's real gut-punch and it is free.
-4. **Length discipline.** Registration is static comedy; the chase is kinetic.
-   ⚖ Split the fields across two chapters (name/age in the streets,
-   sex/sponsor in the chase, completion at the door) rather than one block —
-   past roughly 600–700 words in one run it stops being *during* the chase and
-   becomes *instead of* it.
+**Plutus is confirmed canon** (`v2/canon/cosmic-casino-canon.md:109` — *"Patron:
+Plutus"*).
+
+🔒 **The system is CORRECT and the display is FAULTY.** The sponsor field
+populates **PAUL**, glitches, and settles on **PLUTUS** — and the crowd reads a
+transcription error. It is not an error. Canon lists *"Paul, the blind man who
+gave Marcus the ticket, reads as Plutus"* as an inference to confirm; this
+confirms it in text while handing everyone a reason to dismiss it.
+
+⭐ Consequences, recorded because they are load-bearing: the irony **inverts**
+(the in-world spectators are the ones who get it wrong, not Marcus); the alibi
+is free because **both names start with P**; Paul gave the ticket *"from a
+friend"* he would not name, so the field exposes that lie for one frame and the
+glitch buries it; and **the odds are therefore mispriced** — a crowd betting
+against a sponsor it believes is a rendering bug.
+
+### 🔒 The auto-detect's limit — RULED 2026-09-22
+
+**The system transcribes; it does not understand.** A speech-to-text engine
+pointed at his head, rendering whatever crosses it phonetically, with no
+comprehension and no ranking.
+
+🔒 Demonstrated at the **Name** field: *Surely this is a joke* is transcribed
+**SHIRLY THISSISAJOKE**; he answers **"NO"** and corrects it.
+
+⭐ This also supplies the misdirection for the sponsor beat — three fields of
+visible literal-minded failure teach the reader *"this thing is dumb"*, which is
+precisely the belief needed to misread the Paul→Plutus resolution. The scene
+builds its own alibi two fields early.
+
+### 🔒 The brand — RULED 2026-09-22
+
+**The thigh brand SUPERSEDES** the bible's *"golden rectangle on the chest."*
+One mark, not two. 🔴 Consequence still open: the chest rectangle was *livery* —
+visible to the audience. A thigh brand under clothing is private, so either the
+broadcast chrome does all the identifying now, or the show wants a visible mark
+and no longer has one.
+
+### 🔴 Still open on this scene
+
+1. The unrequested second value beside **Current age**.
+2. Whether the thigh ruling leaves the show without a visible mark (above).
+3. **Does the sister get a field?** ⚖ If he doesn't think to ask until after he
+   is gone, that is the arc's real gut-punch and it is free.
+4. **Length discipline.** ⚖ Split the fields across three chapters (name/age in
+   the streets, sex/sponsor in the chase, completion at the door) rather than
+   one block — past roughly 600–700 words in one run it stops being *during* the
+   chase and becomes *instead of* it.
 5. **The patron tab.** The bible's HUD spec locks the patron icon. If the system
    writes Plutus in, brands him for it, and the tab is **still locked**, the
-   Forsaken cruelty lands as a UI state for the price of one sentence. ⚖ Mine.
+   Forsaken cruelty lands as a UI state for one sentence. ⚖ Mine.
+6. Whether the crowd is shown reacting at all, and from whose vantage.
+
+**Full staging: [`registration-beat-sheet.md`](registration-beat-sheet.md).**
 
 ---
 
 ## Canon questions still open on the opening
 
-- 🔴 **Marcus is never named in Ch. 1.** The broadcast prints *Daniel Krieg*
-  under the first photo; the narrator reads it out, then skips the name under
-  his own. Deliver it there, or point at the withholding deliberately.
+- ✅ **Marcus is never named in Ch. 1 — RESOLVED by the registration scene.**
+  The **Name** field is where the reader learns it, two and a half chapters in,
+  and **the show is what names him**: his identity enters the book as a form
+  field, corrected under duress.
 - 🔒 ⚖ **Age:** bible says 28; the photo says 26 and is established as out of
   date. Consistent if deliberate — confirm.
 - **Is the newscaster Momus?** Host is RULED as Momus, shared between novel and
