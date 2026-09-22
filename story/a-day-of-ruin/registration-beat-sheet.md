@@ -101,7 +101,26 @@ steam is fix a form field. Funny and bleak in the same gesture.
 | Prompt | **SEX:** |
 | Intrusive thought | *last year* — **present tense, ungated.** He did not choose it; the system answers a thought he never meant to send |
 | System | 🔒 **"Not a date field."** |
-| ⚖ Then | He failed to answer, so it **auto-detects and fills it in anyway.** A small humiliation on top of the joke |
+| Then | 🔒 He failed to answer, so it **auto-detects and fills it in anyway** |
+
+**Author's draft:** *Sex? / Last Year / Not a date field, defaulting to
+biological reading. Male.*
+
+⚖ **One word off: "biological reading" is the system being too careful.** It
+hedges — it implies the machine knows a distinction exists and is being precise
+about which one it applies. That is a *thoughtful* system, and the governing
+rule says it understands nothing. A dumb transcriber would not qualify its own
+epistemology; it would **look at the meat and write it down.**
+
+⚖ Proposed, clipped into separate sentences because system text should not
+splice: **"Not a date field. Defaulting to scan. Male."** More invasive, funnier,
+and in character — the horror is that it resolved the field **by examining him
+without asking.**
+
+⚖ Also settle whether the prompt is `SEX:` (a label, like the other fields) or
+*"Sex?"* (a question). The label is colder and sets the intrusive thought up
+better; the question is funnier as a straight line. Either is fine — be
+consistent with Name and Age.
 
 ⚙️ Land it at the worst possible moment of the sprint. ⚖ If the crowd is ever
 shown reacting, here is where they first laugh.
@@ -114,11 +133,19 @@ the prose should stop being funny without announcing that it has.
 1. **He has no idea.** Genuine blank — he does not know he has a sponsor.
 2. **The scour.** ⚖ It surfaces memories in the wrong order at the wrong weight
    — trivia at full sensory vividness — because it does not rank, it retrieves.
-3. **Paul lands here.** ~80 words, full weight, mid-sprint: blind, skeletal,
-   crumpled expensive suit, formally strange speech, uncannily perceptive. The
-   flash-paper ticket, handed over *"from a friend"* he would not name.
-   🔒 **Paul survives** — the bible's pub scene is not cut, it is relocated to
-   the one moment it explains something.
+3. 🔒 **THE MEMORY SEQUENCE.** Marcus **fired** · **drunk, in his pajamas** ·
+   sees **Paul, a homeless man** · **helps him without knowing him** · is given
+   **the ticket** in return · **pockets it without thinking, crumpling it.**
+   Paul keeps the bible's blindness, skeletal frame and **crumpled expensive
+   suit** — on a homeless man the suit finally explains itself.
+   ⚠️ He gave the ticket *"from a friend"* he would not name.
+
+   🎯 **DO NOT LET THE SCOUR TELL A STORY.** The system does not rank or
+   sequence — it dumps a **search result**. Surface the fragments in a useless
+   order (the pocket first, the firing last) at flat, wrong-weighted vividness,
+   and let **the reader** assemble what Marcus does not. That keeps the beat
+   short inside a chase, it is the governing rule working, and it rewards a
+   re-read. A narrated flashback here will stall Ch. 4 dead.
 4. 🔒🔒 **THE RESOLUTION, DISPLAYED AS A FAULT.** The field populates **PAUL**,
    flickers, errors, and settles on **PLUTUS**. The crowd reads a transcription
    fumble. **It is correct.**
@@ -151,16 +178,27 @@ and move on.
 
 6. 🔒 **THE BURN.** The ticket is in his sweatpants pocket — the same gray
    sweatpants the broadcast showed the whole planet in Ch. 1. It ignites and
-   brands the thigh.
+   brands the thigh, **burning a hole through the pants that the audience can
+   see through.**
+   - 🔒 **The brand is a CRUMPLE PATTERN**, because he crumpled the ticket
+     pocketing it. It reads as damage, not as a mark — ⭐ the same joke as the
+     sponsor glitch, in flesh. *The true thing arrives looking like a
+     malfunction.*
+   - ⚖ Flash paper burns fast and clean, so the hole has a scorched edge and
+     the crumple shows through it — which makes the misread even easier. It
+     looks like he was hit by something.
    - ⚖ **He feels it a beat late.** Present: the pocket is burning. Past: he
      registered his leg was on fire. The tense rule delivered as physical
      sensation — his best chance to teach the device through the body.
    - 🔒 **The thigh brand SUPERSEDES the bible's** *"golden rectangle on the
-     chest."* One mark, not two.
-   - 🔴 **Consequence to settle:** the chest rectangle was *livery* — a mark the
-     audience could see. A thigh brand under clothing is private. Either the
-     broadcast chrome (odds board, HUD) does all the identifying now, or the
-     show wants something visible and does not have it.
+     chest."* One mark, not two. ⚠️ It is a **brand**, never a *tattoo*.
+   - ✅ **The visible-mark question is closed by the hole** — the mark makes its
+     own window, so the show needs no added livery. ⭐ Involuntary exposure, and
+     mundanely shameful: a hole in your sweatpants at thigh height is not a
+     heroic scar in a heroic place. He wears it until he finds other clothes.
+   - ⚖ **He sees the hole before he understands the brand** — a hole appears in
+     his pants while he is running (present); he registers what made it
+     afterwards (past).
 
 ## Phase 6 — COMPLETION AND THE LOCK · Ch. 5
 
@@ -186,6 +224,16 @@ and move on.
 ## 🔴 Open
 
 1. The second value beside **Age** (Phase 3).
-2. Whether the thigh brand leaves the show without a visible mark (Phase 5).
+2. ✅ ~~Whether the thigh brand leaves the show without a visible mark~~ —
+   **closed 2026-09-22 by the hole in the pants.**
 3. Whether the crowd is shown reacting at all, and if so from whose vantage.
 4. Whether the odds appear at the door or are held back.
+5. 🔴 **THE TROUSER TIMELINE.** The ticket is in the pocket of the sweatpants he
+   is wearing in Ch. 1, so either the firing was recent or **he has not changed
+   his trousers since he lost his job.** The second is grimmer, funnier and more
+   in character — but it has to be true in the text, and it sets how long ago
+   the memory happened.
+   ⭐ Free glue if wanted: Ch. 1 already says he *"haven't worn my glasses for
+   the past few months."* If he stopped wearing them when he was fired, the
+   firing dates itself and giving up on the glasses becomes the same small
+   surrender as giving up on the trousers.

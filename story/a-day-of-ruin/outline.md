@@ -63,10 +63,33 @@ Runs **during** beats 3–6. The System arrives mid-flight, not at a menu.
 
 ### 🔒 Where Paul went — RULED 2026-09-22
 
-**Paul survives.** The bible's pub scene is not cut, it is **relocated into the
-memory-scour** as a retrieved fragment (~80 words, mid-sprint), surfacing at the
-one moment it explains something. Canon keeps the blind man in the crumpled
-suit; the reader gets him compressed and causal instead of as an opening scene.
+**Paul survives**, relocated out of the pub and into the **memory-scour**.
+
+🔒 **PAUL IS HOMELESS — supersedes the bible's pub scene.** The sequence the
+scour surfaces: **Marcus fired · drunk, in his pajamas · sees Paul, a homeless
+man · helps him without knowing him · is given the ticket in return · stuffs it
+in his pocket without thinking, crumpling it.**
+
+⭐ **This supersedes less than it looks like it does, and completes canon rather
+than breaking it.** The bible already dresses Paul in a *crumpled expensive
+suit* and calls him skeletal — that is a man who **was** wealthy. Homelessness
+explains the suit instead of contradicting it. And canon's own mechanism is that
+**debaucherous casino spending bankrupts gods**: a **bankrupt god of wealth
+begging on a street corner**, about to go all-in on one contestant, is that rule
+made flesh. Keep the crumpled expensive suit.
+
+⭐ **The mercy beat makes the selection non-random.** Plutus picked him *because*
+he helped — so canon's *"blind and naive"* finally has a mechanism: **he is naive
+precisely because he over-read a drunk man's small decency as champion
+material.** And the thesis sharpens — Marcus is not merely a loser, he is a loser
+who did one decent thing on the worst day of his life and **the kindness is what
+ruined him.**
+
+⚠️ **Register guard.** He must not help out of compassion, or the bible's *no
+hero power fantasy, no divine redemption, no chosen one* starts to leak. He
+helps because he is drunk, because it was easier than not, because he wanted the
+moment over. **A kindness he would deny under oath.** Characterisation, never
+virtue.
 
 ### 🔒 The sponsor resolution — RULED 2026-09-22
 
@@ -103,10 +126,34 @@ builds its own alibi two fields early.
 ### 🔒 The brand — RULED 2026-09-22
 
 **The thigh brand SUPERSEDES** the bible's *"golden rectangle on the chest."*
-One mark, not two. 🔴 Consequence still open: the chest rectangle was *livery* —
-visible to the audience. A thigh brand under clothing is private, so either the
-broadcast chrome does all the identifying now, or the show wants a visible mark
-and no longer has one.
+One mark, not two.
+
+🔒 **THE TICKET WAS CRUMPLED WHEN POCKETED, SO THE BRAND IS A CRUMPLE PATTERN** —
+not a clean rectangle. ⭐⭐ **It therefore looks like damage rather than a mark**,
+to the crowd and to Marcus both. **That is the same joke as the sponsor glitch,
+expressed in flesh:** the field looks like an error and is correct; the brand
+looks like a burn scar and is a divine contract.
+
+🔒 **THE MOTIF, named so it can be used again:** *in this world the true thing
+arrives looking like a malfunction.* Two independent instances land in one scene.
+A third, later, is now available and will read as design rather than repetition.
+
+✅ **THE VISIBLE-MARK QUESTION IS CLOSED** — 🔒 **the brand burns a hole through
+his pants, and the audience can see it through the hole.** Better than either
+option previously on the table: **the mark makes its own window**, so the show
+needs no added livery. ⭐ It is *involuntary exposure* — he did not choose to
+display it, the thing displays itself — and it is shameful in a **mundane** way:
+a hole in your sweatpants at thigh height is not a heroic scar in a heroic
+place. The anti-power-fantasy operating at costume level, and he wears it until
+he finds other clothes.
+
+⚖ Micro-beat: **he sees the hole before he understands the brand.** A hole
+appears in his pants while he is running (present), and only afterwards does he
+register what made it (past).
+
+⚠️ **Wording pin: it is a BRAND, not a tattoo.** A tattoo implies ink someone
+applied; a brand implies a burn. Flash paper ignites, so *brand* is the
+consistent word — fix it now or it will wobble for two hundred chapters.
 
 ### 🔴 Still open on this scene
 
