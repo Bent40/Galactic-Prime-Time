@@ -37,7 +37,17 @@ none of it.
 
 ---
 
-## L-8 — 🔴 The blocker: traits do not multiply damage
+## L-8 — ~~🔴 The blocker:~~ ✅ **ANSWERED — traits do not multiply damage, and that is the DESIGN**
+
+> ✅ **STRUCK 2026-09-22 — this stopped being a blocker on 2026-08-18.** **L-11 ruled
+> Architecture A** and the owner sharpened it: *"the weapons will be the ones reaching the
+> nuclear level, but the stats rising will have narrative trails of improvement rather than
+> be the cause for more damage."* **Stats are the KEY, not the gun.** **L-14** then lifted
+> §12.1's requirement ceiling so a trait buys *the right to hold* the weapon, and **L-17**
+> gave Mind/Charm builds their damage axis through skills. The finding below is correct and
+> still worth reading — it is simply the **premise** of the ruling now, not an obstacle to it.
+> ⚡ One detail below has moved: the material band is **+1 Force per step**, not ×2…×512
+> (L-23, §7.3 / §12.7, 2026-09-01).
 
 Before any curve can deliver "nuclear punches", this has to be said plainly:
 
@@ -200,7 +210,17 @@ just enemy HP. That belongs with the encounter tables in E-4.
 
 ---
 
-## L-16 — 🔴 The problem this creates: the caster has no HP
+## L-16 — ~~🔴 The problem this creates:~~ ✅ **SOLVED — the caster has no HP**
+
+> ✅ **STRUCK 2026-09-22 — ruled and built.** **L-18 RULED 2026-08-18**: part HP scales off
+> **TOTAL trait points**, not Physique alone — the recommended fix below, taken. **BUILT
+> 2026-09-19** (rulebook v1.11): §3.2's Physique row is withdrawn, `constants.js` computes
+> `partHpBonus`/`totalTraitPoints`, and the sheet and Combat Mode read it. ⚖ The one detail
+> L-18 left open — *does Physique keep an extra bonus on top* — closed the plain way:
+> **no**. See L-17 / L-18 below.
+> ⚠️ **The F9 table below is from the EXPONENTIAL draft** (L-9/L-10), which L-19 superseded;
+> under the linear 150-level curve an F9 Physique build reads 110, not ~36,800. The chasm
+> was real; the numbers illustrating it were not the ones that shipped.
 
 §3.2 gives part HP from **Physique only** — `floor((Phy − 10) / 5)` per part. Under
 an exponential curve that is no longer a modest difference between builds. It is a
@@ -500,13 +520,13 @@ purely decorative.
 | ~~L-g~~ | ~~Architecture A or B~~ | **RULED: A**, refined — stats gate, weapons carry (L-11, L-14) |
 | ~~L-17~~ | ~~Do skills scale with the trait~~ | **RULED: yes** |
 | ~~L-18~~ | ~~Non-Physique HP source~~ | **RULED: HP scales off TOTAL trait points** |
-| **L-19** ⚖ | **Confirm the per-floor level grants** (10/10/10 · 16/16/16 · 24/24/24 = 150) | Sets every number downstream. All anchors land as drafted |
+| ~~**L-19** ⚖~~ | ~~**Confirm the per-floor level grants** (10/10/10 · 16/16/16 · 24/24/24 = 150)~~ | ✅ **CONFIRMED — struck 2026-09-22.** **L-24 (owner, 2026-09-15) adopted the grants by name** — *"a floor is worth its floor's grant (L-19: 10/10/10 · 16/16/16 · 24/24/24)"* — and made them the divisor for per-kill payment. **BUILT 2026-09-19**: `constants.js`' 99 tests pin all nine L-19 anchors |
 | ~~L-20~~ | ~~The band collision~~ | **Dissolved by L-22** — it was a units error, not a balance flaw. No band change needed; the ×512 per-floor ladder can stay |
 | ~~**L-22**~~ | ~~Sheets are written in band units; the band cancels within a floor~~ | ⚡ **WITHDRAWN 2026-09-01 — see L-23.** It made every floor arithmetically identical and produced fractions on any weapon carried across a floor |
 | **L-23** ⭐ | **The band ADDS: a material step is +1 Force** (§7.3) | Upgrades become visible, no fractions, numbers stay two-digit, and the difference between a prepared and an unprepared party exceeds the difference between floors |
-| **L-h** | Is the trait band `÷5, doubling` the right curve, or gentler (÷5, doubling every ×4)? | Sets the whole ceiling |
-| **L-i** | 12 points per level at the tutorial, doubling per floor — right, or steeper? | The anchor fits; the tail is a choice |
-| **L-j** | Does the **creation** allocation rescale from 14, or stay? | 14 is now a rounding error by F1 |
+| ~~**L-h**~~ | ~~Is the trait band `÷5, doubling` the right curve, or gentler?~~ | ✅ **MOOT — struck 2026-09-22.** **L-19 made the curve LINEAR** (~150 levels); the exponential L-9/L-10 draft it belonged to is superseded. There is no doubling trait band left to gentle |
+| ~~**L-i**~~ | ~~12 points per level at the tutorial, doubling per floor — right, or steeper?~~ | ✅ **MOOT — struck 2026-09-22.** **L-19: §3.1 needs no change — one level grants ONE point**, on every floor. The only knob is levels *per floor*, and that is the row above |
+| ~~**L-j**~~ | ~~Does the **creation** allocation rescale from 14, or stay?~~ | ✅ **STAYS — struck 2026-09-22.** L-19's own table starts F1 at 24 total points, i.e. **creation 14 + 10 levels**, and the app pins it: `CREATION_POINTS = 14` (4 base + 10 allocated), asserted by `constants.test.mjs` and assumed by `floor-bands.js` |
 | **L-k** | Do skill *levels* (0–10) also scale, or is the trait band enough? | 10 is a hard cap in a world with no other caps |
 | **L-l** | Routes still pay identical levels? (L-4 recommendation stands) | ±1 floor of grants compounds hard now |
 
@@ -680,12 +700,20 @@ payouts, while the band buys damage. That is a coherent split, and it is worth
 saying out loud because it is the reason a linear level curve can sit under an
 exponential damage ladder without breaking.
 
-🔴 **The open risk:** trait-driven **HP** grows linearly (Physique ÷5) while
+> ✅ **STRUCK 2026-09-22 — the ruling came, and both halves of the risk were removed.**
+> **① The HP source:** **L-18 RULED 2026-08-18** — part HP scales off **TOTAL trait
+> points**, not Physique ÷5 — and was **BUILT 2026-09-19** (rulebook v1.11, §3.2's Physique
+> row withdrawn). **② The exponential damage it was measured against is gone too:** L-19
+> made the curve **linear** and L-23 replaced the ×2-per-floor band with **+1 Force per band
+> step**. An F9 torso is **35**, not 5–11, against numbers that no longer run to 500+.
+> The original follows, struck.
+
+~~🔴 **The open risk:** trait-driven **HP** grows linearly (Physique ÷5) while
 incoming **damage** grows exponentially. By F9 a body part might have 5–11 HP
 against swings of 500+. Every hit is lethal regardless of Physique. That is
 either intended (the system is lethal, conditions and positioning are the defence,
 and §7.3's small pools are called "the design") — or F7–F9 needs a different HP
-source than Physique. **This needs a ruling before Set 3 is designed**, not after.
+source than Physique. **This needs a ruling before Set 3 is designed**, not after.~~
 
 ---
 
@@ -693,9 +721,9 @@ source than Physique. **This needs a ruling before Set 3 is designed**, not afte
 
 | # | Question | Why it matters |
 |---|---|---|
-| **L-a** | Is 3/4/5 per set the right shape, or flat 4? | Sets the whole curve |
+| ~~**L-a**~~ | ~~Is 3/4/5 per set the right shape, or flat 4?~~ | ✅ **SUPERSEDED — struck 2026-09-22.** This is the linear-36 draft's grant shape. **L-19 replaced it with 10/10/10 · 16/16/16 · 24/24/24 = 150**, escalating by set, and L-24 adopted those grants by name |
 | **L-b** | Routes pay equally? (L-4 recommends yes) | ±9 levels by F9 |
-| **L-c** | Do achievements grant levels, or only Upgrade Tokens? | The only off-curve source |
-| **L-d** | Specialization-by-design, or widen the budget? (L-5) | Decides whether spread builds are viable |
-| **L-e** | Does part HP need a non-Physique source at Set 3? (L-6) | Decides whether F7–F9 is playable |
+| ~~**L-c**~~ | ~~Do achievements grant levels, or only Upgrade Tokens?~~ | ✅ **RULED — struck 2026-09-22.** **L-24 (owner, 2026-09-15)** splits the channels: **levels come from bodies; boxes and audience come from deeds** (§17.6 + §17.8). An achievement pays in boxes and Exposure, not levels — *"grinding gets you statted and leaves you unequipped and unwatched"* |
+| ~~**L-d**~~ | ~~Specialization-by-design, or widen the budget? (L-5)~~ | ✅ **WIDENED — struck 2026-09-22.** **L-19's 150 levels** put a **balanced build near 40 in every trait at F9** (against a focused 110), so a spread build is viable by construction. **L-17** then gave non-Physique builds a damage axis and **L-18** gave them a body |
+| ~~**L-e**~~ | ~~Does part HP need a non-Physique source at Set 3? (L-6)~~ | ✅ **RULED YES — struck 2026-09-22.** **L-18 (2026-08-18): part HP scales off TOTAL trait points**, Physique keeping no extra bonus. **BUILT 2026-09-19** (rulebook v1.11) — §3.2's Physique row withdrawn, `partHpBonus` in `constants.js` |
 | **L-f** | Are the 6 unspent points on the live party spent before F1, or banked? | Changes the F1 band by up to 6 points |

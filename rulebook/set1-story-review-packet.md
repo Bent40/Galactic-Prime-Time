@@ -1,3 +1,32 @@
+> ⚠️✅ **SUPERSEDED — banner added 2026-09-22. This is a FROZEN 2026-08-20 handout, not
+> live canon.** It was written self-contained for an external reader and is preserved as
+> sent. **For the current state of any question below, read
+> [`set1-review-and-changelog.md`](set1-review-and-changelog.md) and
+> [`set1-story-canon.md`](set1-story-canon.md)** — where they disagree with this packet,
+> they win.
+>
+> **What has changed since it went out:**
+>
+> - 🔒 **§6.3's two proposals were BLESSED 2026-09-01** (`set1-story-canon.md` **S-f**).
+>   Both land, so §6.1's three steps **do** collapse into one act: **the v1 catalyst is the
+>   cure itself**, and **the Loong's blood-claim is what opens the prison** — Beelzebub's
+>   seal answers gods and demons and has no reply to the descendant of the corpse it was
+>   built inside. They are no longer 🟡 proposals.
+> - 🔒 **§7's two OPEN items were both RULED 2026-08-25.** *Where the tongue's prison is* —
+>   **beneath the capital, in the RIBS OF THE DRAGON Cinnabrus killed**, which puts it on
+>   Floor 3, reachable in one campaign. *Whether Floor 3 converges the routes* — **yes:
+>   FLOOR 3 IS THE CONVERGENCE**, not a fourth route but the room the other three arrive
+>   in, same city, same days.
+> - ✅ **§8's eight questions are answered in Part A of the changelog**, question by
+>   question: **A.1** the Doorward · **A.2** the killable queen · **A.3** the trade track ·
+>   **A.4** Bex · **A.5** "no villains" · **A.6** information architecture · **A.7**
+>   contradictions · **A.8** the §6.3 proposals.
+> - ⚠️ A great deal more was ruled after the review — the clan layer, the Double, the
+>   access ladder, the two locks of the prison, Marks. **None of it is reflected below.**
+>
+> ℹ️ **Deliberately left unedited section by section**, so the packet still reads as the
+> document the reviewers actually received.
+
 # Galactic Prime Time — Set 1 Story Review Packet
 
 **Prepared 2026-08-20 · self-contained · for external review**

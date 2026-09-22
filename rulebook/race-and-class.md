@@ -1,6 +1,17 @@
 # Race and Class — design (2026-09-15)
 
-🔴 **PROPOSAL. Nothing here is ruled.** Owner direction, two turns:
+> ✅ **STRUCK 2026-09-22 — most of this file IS ruled; the header outlived its own document.**
+> Explicit owner rulings carried below, all **2026-09-15**: **R-3** — the Surgeon's Table does
+> **three verbs, ADD · REMOVE · CHANGE**, and **modification does NOT grant a Mark** ·
+> **C-1** — **a Mark unlocks a SET OF CHOICES** (with a common pool needing no key, and
+> delaying the pick valid) · **R-4** — **size sets base part HP** and the per-size tables ·
+> **R-4.1** — **size buys PASSAGE**, and animals are the specialised race. **R-1** rests on
+> book canon (§20.3's Surgeon's Table already names race change as its L1 service).
+> ➕ **2026-09-19** added the starting-skill quotas and `raceLock`, which land on R-2/R-4.
+> 🔴 **What is still genuinely open is R-4's last row — the racial package per race.**
+> The original follows, struck.
+
+~~🔴 **PROPOSAL. Nothing here is ruled.**~~ Owner direction, two turns:
 
 > *"Technically race can be just whatever you add to yourself, and you don't exactly
 > race change per se. We could also just add a race change option besides the
@@ -65,9 +76,15 @@ Four limits, and ⭐ **every one of them is a rule that already exists:**
 has no field — §7.3 has `weaknesses` (doubles) and `resistances` (subtracts), and
 **healing from a type is a third thing.** An **Incinedile arm graft that heals from
 fire** is precisely what an L3 boss-part graft should be, so *the field that boss
-needs and the field assimilation needs are the same field.* Proposed:
-`weaknesses[].mode` = `double` (default) | `heal`, per-part overridable, keeping the
-required `why`.
+needs and the field assimilation needs are the same field.* ~~Proposed:~~
+**✅ BUILT 2026-09-15 — struck 2026-09-22:** `weaknesses[].mode` = `double` (default) | `heal`,
+per-part overridable, keeping the required `why` — shipped exactly as proposed.
+`WeaknessSchema.mode` (enum, defaults `double`) plus **`BodyPartSchema.weaknesses[]`**, with a
+part **overriding** the body for its own type; `checkWeaknessSet()` gates it over the body and
+every part, and `WEAKNESS_MODES` is duplicated in the seeder so `--check` still needs no
+`node_modules`. Rulebook §7.3 carries the rule (*"resistance ADDS between body and part; a
+weakness REPLACES"*), and the admin `WeaknessRow` editor has the doubles/HEALS selector.
+⭐ **So an L3 boss-part graft that heals from fire is expressible today.**
 
 🔒 **RULED 2026-09-15 — three verbs, not one: ADD · REMOVE · CHANGE.** My draft
 said a graft *replaces* a part. It does more than that, and the extra verbs
@@ -206,7 +223,7 @@ buys reach. It is not a trade:
 |---|---|
 | **Human** | ⭐ **the flat one.** No racial skill and nothing closed. Thematically exact — the show is about abducted humans, so Human is the unmarked default |
 | **Animal** | 🔒 **the specialist.** A tall, narrow spike and a real bill for it |
-| **Robot · AI** | 🔴 **unwritten.** ⚖ Mine, unblessed: the **modular** one — the race the Augmentation Hub (§20.3) speaks to natively, so its spike is *what it has bolted on* rather than what it was born as. XQUEZ/T is Physique 5 with **no weapons**, which is already a shape |
+| **Robot · AI** | ✅ **DISCONTINUED — struck 2026-09-22.** Owner, 2026-09-19: *"robots are probably gonna be discontinued."* It is **out of `CREATION_RACES`** (`['Human', 'Animal']`) so no new contestant picks it, but deliberately **kept in `RACES`** — XQUEZ/T is that race and dropping the value would break a live sheet — and its three racials (`Voicebox`, `Generate Visual Media`, `Ignore All Previous Commands`) are pinned `raceLock: 'Robot / AI'`. So the race has a *shape* after all: **a closed pool with exactly one holder.** ~~🔴 unwritten. ⚖ Mine, unblessed: the **modular** one — the race the Augmentation Hub (§20.3) speaks to natively…~~ |
 
 ⭐⭐ **An Animal's spike is CONDITIONAL, and that is the cost paying for itself.**
 A sea lion's Swim is enormous *in water* and nothing in a desert — so **the floor
@@ -232,4 +249,4 @@ it is why `Nightlurking` reads the way it does.
 |---|---|
 | ~~What Small buys~~ | ✅ **RULED — passage**, and the race carries the rest |
 | **The racial package per race** | 🔴 Still unwritten, and now the *only* remaining piece: **what each Animal's one spike is.** A race is an identity line plus its package, and this is what a *common* race choice picks from |
-| **Robot · AI's shape** | 🔴 Open — the one race with no stated frame |
+| ~~**Robot · AI's shape**~~ | ✅ **CLOSED — struck 2026-09-22: DISCONTINUED**, not designed. Owner, 2026-09-19: *"robots are probably gonna be discontinued."* Hidden from `CREATION_RACES`, kept in `RACES` for the one live holder, three racials `raceLock`ed to it. ~~🔴 Open — the one race with no stated frame~~ |

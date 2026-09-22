@@ -495,18 +495,21 @@ first entry.
 Spoken lines mint facts ("illusions" nearly entered canon as an untagged capability).
 Dialogue drafts get the same fact-audit as design text.
 
-## C.4 Standing open list (consolidated)
+## C.4 Standing open list (consolidated) — ✅ **SIX OF EIGHT CLOSED**
 
-| # | Decision | From |
-|---|---|---|
-| 1 | Rival-resolution rule for campaign-defining branch points | B.2 |
-| 2 | Bex's accent: deliberate resonance or rewrite | B.4 |
-| 3 | Canon entry for the oath-ignoring mask-cutting material | B.5 |
-| 4 | Clan inheritance mechanics (parentage, children's status, F3 bloodline consequence) | B.5 |
-| 5 | Which clans boom under Corporation causality; the Corporation's in-fiction age | B.5 |
-| 6 | Routes-as-difficulty-of-understanding: canonize or rebalance (the Loong as Hard's channel) | A.6 |
-| 7 | The cure-first / confession-first sequencing rule for the verdict | B.8 |
-| 8 | Where the tongue's prison is; Floor 3 vs Floor 4 convergence | packet §7, A.3 |
+> ✅ **STRUCK 2026-09-22 — six of these eight were ruled and the list was never updated.**
+> ⚠️ **Rows 5 and 7 are genuinely still open** and are left unstruck.
+
+| # | Decision | From | Status |
+|---|---|---|---|
+| ~~1~~ | ~~Rival-resolution rule for campaign-defining branch points~~ | B.2 | ✅ **RULED 2026-08-25 — TWO TIERS**, and **B.2 in this same file already says CLOSED.** 🔴 **Reserved** (the F1 Girl, the F2 Doorward, the Loong's capture): threaten, delay, complicate, charge a price — **never resolve offscreen.** 🟢 Everything else is fair game, announced first via the rumor network. ⭐ The reserved tier enforces itself in fiction: **the Corporation protects the branch points FOR RATINGS** |
+| ~~2~~ | ~~Bex's accent: deliberate resonance or rewrite~~ | B.4 | ✅ **DECIDED — DELIBERATE**, and **B.4 in this same file already says so.** Register: **tragedy disguised politely** — southern-sounding, courteous, immovable, **apology without confession**. ⚠️ Handling rule: **never pair the word "farm" with the accent in player-facing text** |
+| ~~3~~ | ~~Canon entry for the oath-ignoring mask-cutting material~~ | B.5 | ✅ **WRITTEN — it is the Oathbreaker line**, `set1-item-concepts.md` **C-2** (Easy × crafted): **Mistletoe** at F1 · Turquoise at F2 · **Cursed Gold** at F3, gated by `Charm 8` — *"a CLAIM, not an edge … it cuts what is warded because **you are owed the cut**."* Promoted from flavour note to a full concept with stat blocks (`items-set1-spine.js`). 🔴 One thread of it is still live — **Turquoise has no source** (C-12 #4) |
+| ~~4~~ | ~~Clan inheritance mechanics (parentage, children's status, F3 bloodline consequence)~~ | B.5 | ✅ **RULED** (`set1-story-canon.md`, the clan law): **rebirth runs through clan bloodline — ONE clan parent suffices**, and 🔒 **birth odds ride CLAN STRENGTH** — a clan down to its last member has almost no odds. Natural selection, not a prohibition. ⭐ **And the F3-bloodline worry is VOID:** 🔒 the dynasty is a **ruse** — there are no new queens and there never were, **Vermilia is the entire line**. There is no bloodline for the stake to leak into, so the killable-queen stake holds on every floor |
+| **5** | Which clans boom under Corporation causality; the Corporation's in-fiction age | B.5 | 🔴 **STILL OPEN** — likely Set 2 material |
+| ~~6~~ | ~~Routes-as-difficulty-of-understanding: canonize or rebalance (the Loong as Hard's channel)~~ | A.6 | ✅ **DISSOLVED 2026-08-25 by FLOOR 3 IS THE CONVERGENCE.** The capital is not a fourth route, it is the room the other three arrive in — same city, same days — so a one-route party can reach all of it there. ⭐ *"The load-bearing facts all flow through the Easy column"* is now a **Floors 1–2** problem, not a campaign-long one; the S-7 trade track still governs those two |
+| ~~7~~ | ~~The cure-first / confession-first sequencing rule for the verdict~~ | B.8 | ✅ **RULED 2026-09-22 — NEITHER; it is the PARTY'S to solve, and they INTERVENE MID-CONFESSION.** ⭐ The question is dissolved rather than answered: a sequencing rule would have printed a correct order for the loophole (*cure first → followers grow → judgment stops being suicide*), and this puts the decision at the table instead. **The GM's job is to START the confession, not to gate it** — Vermilia asks her two-century question and four humans decide whether to let her finish. 🔴 Consequence: **the scene must be interruptible by design.** See `set1-story-canon.md` S-8 / S-e |
+| ~~8~~ | ~~Where the tongue's prison is; Floor 3 vs Floor 4 convergence~~ | packet §7, A.3 | ✅ **RULED 2026-08-25 — beneath the capital, deep underground, in the RIBS OF THE DRAGON Cinnabrus killed.** Both halves answered at once: it is **on Floor 3**, reachable in one campaign (closing S-e), and the seal's jurisdiction gap becomes obvious — Beelzebub's seal answers gods and demons and **has no reply to the descendant of the corpse it was built inside**, so the Loong is not a key the party carries down, **it is the only creature with standing** |
 
 ---
 

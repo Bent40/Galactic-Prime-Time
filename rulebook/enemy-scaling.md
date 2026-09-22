@@ -246,7 +246,7 @@ touches them. **The mobs that still matter are the ones that deal no damage.**
 | ~~Enemy damage is free text~~ | **DONE** — `Enemy.signature` is a structured field, gated by `seed-enemies.js` exactly the way HP is, and **all 53 entries are migrated** (2026-09-14) |
 | **Tide sizes are ⚖ untested** | Sized by arithmetic, never played. The first F2 session is the real check |
 | **Area-attack multipliers** | "× the spaces covered" needs a worked example per skill shape (cone, line, burst) before it is table-ready |
-| **F2–F9 rosters** | This is the *frame*, not the content. Only F1 exists |
+| **~~F2–F9~~ F4–F9 rosters** | ⚠️ **NARROWED 2026-09-22 — ~~only F1 exists~~ four floors exist.** **F2 (16 entries)** and **F3 (18)** were written and seeded **2026-08-18** (`seeds/enemies-f2.js`, `-f3.js`), and **floor 0, the tutorial**, landed 2026-09-15/19 (`seeds/enemies-tutorial.js`; `FLOOR_MOB_HP` gained a floor-0 rung — mob 2 · elite 24 · boss 50 · super 120). **53 entries across F1–F3 plus the tutorial roster**, all passing the doctrine gate at their own floors. 🔴 **F4–F9 remain genuinely unwritten** — Set 2's floors are undesigned and M-4 is names-only, so that is design work, not roster work |
 
 ---
 

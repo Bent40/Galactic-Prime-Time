@@ -25,14 +25,21 @@ system is ruled territory.
 
 ---
 
-## GC1 — Currency: no new money (recommended)
+## GC1 — Currency: ~~no new money (recommended)~~ **NO NEW MONEY — RULED**
+
+> ✅ **STRUCK 2026-09-22 — settled, and this file's own header says so.** Status:
+> ✅ **FULLY RULED (owner, 2026-07-25)** — *"GC0 (Boss Tokens retired), **GC1 (UT is the
+> money)**"*, and **Appendix B is empty because the system is fully ruled.** §19.1 then
+> re-denominated the whole payout ladder in Upgrade Tokens.
 
 **Upgrade Tokens ARE the cash.** The show is post-money for contestants; four token
 types already exist and a fifth currency would dilute them. The store prices in UT,
 bartering is UT-denominated, and crowd donations are literally the audience tipping
 you spending money — the loop closes: **earn on camera, spend in the cage.**
-(Alternative if you want it: a separate "Sponsor Credits" cash layer — say so and I'll
-draft the split.)
+~~(Alternative if you want it: a separate "Sponsor Credits" cash layer — say so and I'll
+draft the split.)~~ ✅ **STRUCK 2026-09-22 — the alternative was DECLINED.** GC0 retired Boss
+Tokens *into* UT rather than adding a layer; a Sponsor Credits split would reverse the
+ruling that closed this sitting.
 
 ## GC2 — RULED (owner, 2026-07-25, amended): the store is TUTORIAL-ONLY; retail after that is GACHA
 

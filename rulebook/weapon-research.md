@@ -433,13 +433,24 @@ Monster Hunter gets its breadth from **one axis (the monster you carved) crossed
 fixed set of classes**, not from a large flat catalog.
 
 ⚙️ 🔴 **That is GPT's model exactly, and it means the grid may be over-specified.** GPT already
-has **weapon class (2–4 damage) × material band (×2 per floor, F1 ×2 → F9 ×512)**. The band
+has **weapon class (2–4 damage) × material band** (~~×2 per floor, F1 ×2 → F9 ×512~~
+**+1 Force per band step** — see the banner below). The band
 *already* makes one greatsword serve all nine floors — so **the 9-floor axis of the 9 × 3 × 3
 grid is largely solved by a rule we already shipped, not by 9× the items.**
-🟡 **Proposal, unblessed:** the corpus's real target may be closer to **~27 concepts (3 routes
+
+> ✅ **STRUCK 2026-09-22 — the proposal below was RULED IN, and the band arithmetic moved.**
+> **① The scope finding was accepted:** **W-9 R-1** in this same file records the owner's
+> ruling (2026-08-25) — *"the band already solves the floor axis — go with ~27 concepts"* —
+> and corrects the arithmetic (the axes are **set × route × acquisition** = 27, not routes ×
+> acquisition = 9). Set 1's nine are authored in `set1-item-concepts.md`.
+> **② The ×2-per-floor ladder is WITHDRAWN**, superseded by **FORCE**: a material band step
+> is **+1 Force** (rulebook §7.3 / §12.7, 2026-09-01). The band still carries one weapon
+> across nine floors — it just adds instead of multiplying. The original follows, struck.
+
+~~🟡 **Proposal, unblessed:** the corpus's real target may be closer to **~27 concepts (3 routes
 × 3 acquisition classes), each carried across floors by the band**, plus a small apex set —
 rather than 81 distinct authored weapons. This is a **scope finding for the owner**, not a
-ruling; the 9 × 3 × 3 framing came from the owner and stands until they say otherwise.
+ruling; the 9 × 3 × 3 framing came from the owner and stands until they say otherwise.~~
 🔗 [Weapons](https://monsterhunterwilds.wiki.fextralife.com/Weapons)
 
 ### Dark Souls 3 — thin, recorded honestly
@@ -1007,9 +1018,18 @@ machinery the book already shipped.
 > **Owner:** *"the band already solves the floor axis — go with ~27 concepts."*
 
 The 9-floor axis of the grid is **a rule we already shipped**, not content we owe: §12.7's
-material band carries one weapon from F1 to F9 (×2 per floor, F1 ×2 → F9 ×512), and the
+material band carries one weapon from F1 to F9 (~~×2 per floor, F1 ×2 → F9 ×512~~ **+1 Force
+per band step, +1 at F1 → +9 at F9**), and the
 materials catalog already states *"the sheet plays identically on every floor; only the
 numbers inflate."*
+
+> ✅ **STRUCK 2026-09-22 — the band ADDS, it does not multiply.** The ×2-per-floor ladder
+> was withdrawn and superseded by **FORCE** (rulebook §7.3 / §12.7, owner-approved
+> 2026-09-01): a material band step is worth **+1 Force**. ⚠️ **R-1's ruling is untouched**
+> — the band still solves the floor axis and ~27 concepts is still the target; only the
+> arithmetic inside it changed. The materials catalog's *"plays identically on every
+> floor"* line went with the multiplication, and is why it went: it made a gear upgrade
+> read on a sheet as nothing.
 
 ⚠️ **Arithmetic correction to W-7 §3.** That section proposed *"~27 concepts (3 routes × 3
 acquisition classes)"* — but 3 × 3 = **9**, not 27. The parenthetical was wrong; the **27 is

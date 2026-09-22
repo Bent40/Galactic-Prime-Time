@@ -165,7 +165,7 @@ own fight mechanics, probably Physique.** *"We need to think of a better way to 
 
 | Trait | Every … past 10 | Grants |
 |---|---|---|
-| Physique | 5 | +1 max HP to every body part |
+| ~~Physique~~ | ~~5~~ | ~~+1 max HP to every body part~~ — ✅ **ROW WITHDRAWN 2026-09-19** (see below) |
 | Reflexes | 12 | +1 **physical** resistance point (Bleed · Crush · Burn) |
 | Mind | 15 | +1 **psychic** resistance tier (Dissolution) |
 | Charm | 20 | +1 Camera Call stack |
@@ -204,9 +204,20 @@ contestant is a practical god, and the floor answers with `Aggressive`, `Hardy`,
 entry tier, or a source that escalates faster (the Dissolution errata's knob, which works
 here unchanged). **Both dials already exist.**
 
-⚠️ **One drift to check while §3.2 is open:** that table's Physique row still reads *"+1 max
+> ✅ **STRUCK 2026-09-22 — the drift is FIXED; §3.2's Physique row is gone.**
+> **L-18 was BUILT 2026-09-19 (rulebook v1.11):** the Physique row is **withdrawn**, and
+> part HP now reads *"every 5 trait points past creation adds +1 max HP to every body
+> part"* — `floor((total trait points − 14) / 5)`, flat on top of §7.1's size base,
+> whichever trait the point went into. `constants.js` computes it (`partHpBonus`,
+> `totalTraitPoints`) and the sheet reads it.
+> ⭐ **And this SHARPENS I-6's own argument rather than blunting it.** The finding below
+> was *"Physique is the trait with no resistance row"* — with the HP row withdrawn,
+> **Physique now has no §3.2 row at all**, so the proposed affliction-resistance row is no
+> longer a second job for the trait. It is the trait's only one. The original follows, struck.
+
+~~⚠️ **One drift to check while §3.2 is open:** that table's Physique row still reads *"+1 max
 HP to every body part"*, but **L-18 ruled part HP scales off TOTAL trait points, not
-Physique alone.** The row and the ruling may no longer agree. Flagged, not touched.
+Physique alone.** The row and the ruling may no longer agree. Flagged, not touched.~~
 
 ---
 

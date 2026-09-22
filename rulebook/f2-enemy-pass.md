@@ -354,8 +354,17 @@ what he thinks of them when they arrive."* Now it does.
 | **Take his offer** | 🟡 **`Shareholder`** | 🕯 gratitude, 🚪 possibilities changed. And the name is a question: *a share in what?* They find out at F3 |
 | **Kill him after the offer** | 🟡 **`Answered In Kind`** | 🩸 a grudge that survives a century, because the offer was sincere |
 
-⚠️ **Both branches marking may be one too many** — the owner's earlier trim favoured marking the
-costly side only. **Owner call.**
+> ✅ **STRUCK 2026-09-22 — the owner call came 2026-09-01, further down this same file.**
+> ⚠️ **And it dissolved the question rather than answering it:** the deed is no longer
+> *offer accepted / offer refused*, it is **the Double's murder** — joining Bex means killing
+> the queen, and *"killing the double, not the original Vermilia."* So the table below is
+> superseded by the one under **③ Do both branches mark?**: **joining and killing the
+> "queen"** proposes 🟡 **`Effigy`** (🔴 **not** `Regicide` — no monarch died, and the absence
+> is the tell), and **refusing marks NOTHING**, because a refusal is a decision inside a
+> conversation rather than a deed. The original follows, struck.
+
+~~⚠️ **Both branches marking may be one too many** — the owner's earlier trim favoured marking the
+costly side only. **Owner call.**~~
 
 #### ✅ ALL THREE CLOSED — RULED 2026-09-01
 
@@ -459,7 +468,14 @@ leak it, however sincerely it is questioned.
 **opens a door to Vermilia.** The player learns the brand is valuable one floor before they learn
 it is how you get an audience.
 
-#### 🟡 Two refinements worth taking
+#### ~~🟡 Two refinements worth taking~~ ✅ **BOTH ACCEPTED 2026-08-25**
+
+> ✅ **STRUCK 2026-09-22 — neither is still an offer.** Both were taken on **2026-08-25**
+> (ruling record: `CLAUDE.md`, the Set 1 clan-layer block). **② is evidenced in this file
+> immediately below**, in the owner's own words — the journal is keyed to Vermilia alone,
+> it is the F1 night from her side, and **the doll describing the party is how she learns
+> they can return**, which is what adds the *"if those ones come back, bring them to me"*
+> line to every doll made after that visit. They are **rulings**, not proposals.
 
 **1 · The CORPORATION does the translating.** *"Their system auto-translates it"* — make that the
 production, not the brand. **The show subtitles it, because the audience needs to follow the
@@ -609,8 +625,16 @@ it is the moment the errand acquires a reason beyond grief.
 ### F2-2c — What this proposal does NOT settle
 
 - ✅ **Ruled 2026-08-25:** Medium takes **①+③**; the Hard village **is where the Loong heard of
-  the mask**. ⚠️ **The owner notes this does not settle Hard's destination problem** — knowing
-  *why* the Loong is going there is not the same as knowing *what the place is*. Still open.
+  the mask**. ~~⚠️ **The owner notes this does not settle Hard's destination problem** — knowing
+  *why* the Loong is going there is not the same as knowing *what the place is*. Still open.~~
+  ✅ **STRUCK 2026-09-22 — the destination WAS ruled, the same day, in this same file:
+  “The village is the SURVIVORS of the F1 city.”** A few adults and children who ran before
+  the mist, now a settlement two or three generations deep that **does not know what it is
+  descended from.** ⭐ It does not contradict F1 — the party said *staying leads to nothing*
+  and **they were right**; what the Loong should have been guarding had already walked out.
+  🎭 The village remembers a guardian deity *"in the form of a long snake or a tall woman"*
+  — both forms, which is the hint — and the villagers must never work it out. The
+  “waypoint vs destination” gap this bullet named is exactly what that section closes.
 - **No new statlines.** Every proposal above rides the existing C-1/C-2/C-3 and D-1/D-2/D-3
   entries; the fights do not change.
 - **The Marks that would follow are unwritten** — deliberately. Author them *after* a spine is
@@ -625,7 +649,7 @@ it is the moment the errand acquires a reason beyond grief.
 | **Encounter tables / room counts** | A roster, not a dungeon — same gap as F1 |
 | **Desert terrain blocks** | §21.4 wants three answers each: open sand, the salt flats, the ruined stair, the court, night vs day. **A-2 makes this urgent** |
 | **Night as a mechanic** | Saltbound's gate implies a day/night state the floor does not yet have rules for ⚖ |
-| **Exposure / token payouts** | Still unassigned, F1 and F2 alike |
-| **The three boss names** | ⚖ Doorward, Rival Noble, Hunt's Owner — all mine. The Rival becomes canon at F3 if the farm storyline references it |
+| **Exposure / token payouts** | ⚠️ **NARROWED 2026-09-22 — ~~F1 and F2 alike~~ F2 and F3 only.** **F1's are DONE (2026-09-14)** — §17.8 is the contract (swings, not counts) and the per-enemy hooks + payout table are `f1-enemy-pass.md` **E-8.3 / E-8.4**. F2's remain unassigned, and the F1 work is the template |
+| ~~**The three boss names**~~ | ✅ **RULED — struck 2026-09-22.** The 2026-09-14 naming pass settled all three: **The Doorward KEPT** (it wards a door *and* holds your things **in ward** — the whole encounter in one word) · **The Hunt's Owner KEPT** (it states its own thesis flatly, right for a man never within reach) · **Bex BLESSED 2026-08-18**, so *Foreman Bex* / *Bex, the Rival Noble* are canon, not mine. ~~⚖ all mine~~ |
 | **Filipe's Dissolution song** | `[OPEN]` in Compendium §3.5 and needed for C-3 |
 | **Turquoise ⭐** | The rare F2 material has no source in this roster — needs a carve or a gather |

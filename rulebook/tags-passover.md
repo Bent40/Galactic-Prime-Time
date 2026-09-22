@@ -1,7 +1,11 @@
 # Tags Passover — the sitting worksheet
 
-**Date:** 2026-07-25 · **Status:** GT1–GT5 APPROVED + batch 1 approved (owner,
-2026-07-25). Batches 2–5 authored below — awaiting owner overrules.
+**Date:** 2026-07-25 · **Status:** ✅ **GT1–GT5 + ALL FIVE BATCHES APPROVED** (owner,
+2026-07-25). ~~Batches 2–5 authored below — awaiting owner overrules.~~
+
+> ✅ **STRUCK 2026-09-22 — no overrules came, and the applier records the approval.**
+> `server/seedTagEffects.js` carries it in its own header: *"GT1–GT5 **+ all five batches
+> approved**; assignments mirror this worksheet."* The effects are seeded.
 **Applied by:** `server/seedTagEffects.js` (dry-run default; writes each tag's
 `effect` line: domains + rider).
 **Scope:** mechanical effects for all 100 tags (TABLE canon). Descriptions (the earn
@@ -62,7 +66,14 @@ Each tag's DB `effect` field gets one line: `Domains: X, Y.` plus the rider sent
 it has one. Players see it in the tag picker and on owned chips (already wired). The
 book's §18 gains the pattern rules + the rider table; per-tag text stays in the DB/wiki.
 
-### GT4 — Rider candidates (~10 — pick, cut, amend)
+### GT4 — Rider candidates ~~(~10 — pick, cut, amend)~~ ✅ **ALL TEN TAKEN, VERBATIM**
+
+> ✅ **STRUCK 2026-09-22 — nothing was picked out, cut or amended: all ten shipped.**
+> They are **rulebook §18.2 "The flagship riders"**, word for word, with only two
+> copy-edits (*"GM picks"*→*"the GM prices"* on Fan Favorite). ⭐ The rider shape went on
+> to carry **Marks** too — §18.4's presence-activation reuses §18.2's flagship-rider
+> machinery, which is why Marks cost *one flag and one trigger type* instead of a second
+> system. The candidate table below is now a record of what shipped.
 
 | Tag | Proposed rider |
 |---|---|

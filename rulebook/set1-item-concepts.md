@@ -2,8 +2,17 @@
 
 **The first 9 of the ~27 authored by W-9 R-1.** Set 1 is F1–F3, three routes × three
 acquisition classes. **There is no floor axis here** — §12.7's material band carries each
-concept from F1 to F3 on its own (M-1 ×2 → M-2 ×4 → M-3 ×8), so every concept below is written
-**once** and read three times.
+concept from F1 to F3 on its own (~~M-1 ×2 → M-2 ×4 → M-3 ×8~~ **M-1 +1 → M-2 +2 → M-3 +3
+Force**), so every concept below is written **once** and read three times.
+
+> ⚡ ✅ **STRUCK 2026-09-22 — the band ADDS, it does not multiply.** **L-22 was WITHDRAWN**
+> and replaced by **L-23** (`level-budget.md`, owner-approved 2026-09-01): a material band
+> step is **+1 Force** (rulebook §7.3 / §12.7), not a ×2 multiplier. ⚠️ **The shape of this
+> document is untouched** — one concept still reads three times across F1–F3; what changed
+> is that the three readings now differ by **+1 Force per step** instead of cancelling out.
+> **`items-set1-spine.js` has already been rewritten in Force** (2026-09-14 migration §5):
+> Unsworn Sprig 3 · Sun's Dart 4 · Andvari's Cut 6 · Warden-Carve 3 · Kin-Carve 4 ·
+> Imperial 6, and every `(×2)/(×4)/(×8)` phrase is gone from the seed.
 
 > **Graded against the corpus in [`weapon-research.md`](weapon-research.md).** Every design
 > call below cites the finding it answers. Where the corpus and the rulings disagree, **the
@@ -22,8 +31,14 @@ instead of demanding a tag.
 by the deed, and **contextually active** rather than continuously on. It **repairs a hole in C-6**
 that the first draft shipped.
 
-🔴 **The rest is unruled.** Nine concepts, no stat blocks — numbers come after the shapes are
-blessed. Open calls are in **C-10**.
+> ✅ **STRUCK 2026-09-22 — the rest was ruled, and the stat blocks exist.**
+> **C-10 closed all thirteen open calls** (owner, 2026-08-25 — that section now reads
+> *"Nothing is open"*), and **C-12 wrote the stat blocks 2026-09-01**: 26 templates in
+> `server/seeds/items-set1-spine.js`, 9 concepts × 3 floors less C-9's F1. The original
+> follows, struck.
+
+~~🔴 **The rest is unruled.** Nine concepts, no stat blocks — numbers come after the shapes are
+blessed. Open calls are in **C-10**.~~
 
 ---
 
@@ -266,9 +281,18 @@ choices inside a fight, but the world is unchanged the next morning. ⚙️ **A 
 not a deed. A hard fight is not a deed.** ⭐ Bex at F2 may still deserve an **achievement** —
 just not a Mark.
 
-⚠️ **Names are provisional.** They follow C-0b's rule — *name the deed by its weight, never by
+> ✅ **STRUCK 2026-09-22 — the naming pass ran and no ❓ entries remain.** **C-10 #5 is
+> RULED** (owner, 2026-08-25 — *three names, one concept*), the mark names themselves were
+> settled by the owner's naming pass (`Heeded the Mural`→**`Historian`** · `Left Him
+> Chained`→**`Torment`** · `Made It Unnecessary`→**`Saint`** · `No Fight`→**`Fateful
+> Meeting`** · `Surgical`→**`Crystal No More`** · `Unhurried`→**`Laid To Rest`** · `The
+> Village Stands`→**`Shepherd`**), and the single ❓ this paragraph pointed at — *Unmask the
+> host* — is marked **closed** in the F1 table below. Nothing in the sweep still carries ❓.
+> The original follows, struck.
+
+~~⚠️ **Names are provisional.** They follow C-0b's rule — *name the deed by its weight, never by
 its action* — but the naming pass is **C-10 #5**. Entries marked 🟡 are the ones I am least sure
-of. Entries marked ❓ need a **canon call** before they can be authored at all.
+of. Entries marked ❓ need a **canon call** before they can be authored at all.~~
 
 ### Floor 1 — the green forest
 
@@ -310,6 +334,13 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
 
 ### What the sweep found
 
+> ⚠️ **FLAGGED 2026-09-22, NOT changed — a count discrepancy inside this document.** This
+> bullet says **22 distinct deeds across 23 rows**; **C-10 #8** says *"23 distinct Set 1
+> deeds."* Counting the tables above gives **23 rows** (F1 9 · F2 5 · F3 9) and, because
+> `Fateful Meeting` is listed twice, **22 distinct marks** — so this bullet's arithmetic and
+> its route split (6+6+8+1+2 = 23) are self-consistent and C-10 #8 looks like the loose one.
+> **Left for an owner call rather than guessed**; either number may be the intended one.
+
 - **22 distinct deeds** across 23 rows — 26 swept, **4 cut** (`It Did Not Take`, `Broke the
   Cage`, `Answered`, `Recognition`), **1 added** (the F3 Hard extraction as the lesser option),
   and **`Fateful Meeting` listed twice** because the F3 Hard ending and the convergence row are
@@ -322,16 +353,32 @@ of. Entries marked ❓ need a **canon call** before they can be authored at all.
   morning; `Recognition` was a **precondition** rather than a deed. ⚙️ **The looser first-draft
   test could not tell a tactical choice — or a setup beat — from a deed.** The owner's
   grudge/gratitude/possibility test can, immediately.
-- ⭐ **The strongest names are the ones that state an unwelcome fact** — `Unsealed`, `It Did Not
-  Take`, `He Was Right`, `Livestock`, `Two Million`. Each is a sentence the party would not say
+- ⭐ **The strongest names are the ones that state an unwelcome fact** — `Unsealed`,
+  **`Martyr`** (killed Nullrot), **`Left To Rot`** (extracted the Loong and left the city
+  sick), `Livestock`, `Two Million`. Each is a sentence the party would not say
   about themselves, which is exactly why it belongs on their body.
+  > ✅ **STRUCK 2026-09-22 — two of the five names cited here no longer exist.**
+  > `It Did Not Take` was **CUT** by the inclusion test in this same section (killing Bex at
+  > F2 fails all three limbs), and `He Was Right` was **RETIRED by `Martyr`** (owner,
+  > 2026-08-25 — *"a martyr is someone who was right and died of it"*, F3 Easy table above).
+  > Replaced with the two live names that carry the same quality. The original follows, struck.
+  >
+  > ~~⭐ **The strongest names are the ones that state an unwelcome fact** — `Unsealed`, `It Did Not Take`, `He Was Right`, `Livestock`, `Two Million`.~~
 - 🔴 **Every route has a mark for the RIGHT choice that still costs.** `Unsealed` is correct and
-  releases a plague champion; `He Was Right` is a win over someone who was right; `Shoot the Dog`
+  releases a plague champion; **`Martyr`** is a win over someone who was right; `Shoot the Dog`
   is the only thing that works. **That is the campaign's whole thesis, and Marks are where it
   finally lands mechanically.**
-- ⚠️ **Only two deeds are unambiguously good** — `Made It Unnecessary` and `No Fight`, and the
+  > ✅ **STRUCK 2026-09-22** — ~~`He Was Right`~~ was **retired by `Martyr`** (owner,
+  > 2026-08-25). Same deed, same thesis, live name.
+- ⚠️ **Only two deeds are unambiguously good** — **`Saint`** and **`Fateful Meeting`**, and the
   second is *a mark for the thing that did not happen*. The owner's *"not necessarily good"* is
   an understatement: Set 1 brands you for being right roughly as often as for being wrong.
+  > ✅ **STRUCK 2026-09-22 — both names are PRE-RENAME.** The owner's naming pass ruled
+  > `Made It Unnecessary`→**`Saint`** and `No Fight`→**`Fateful Meeting`**; both live names
+  > are already used in the F3 tables above, so this bullet was the last place the old ones
+  > survived. The original follows, struck.
+  >
+  > ~~⚠️ **Only two deeds are unambiguously good** — `Made It Unnecessary` and `No Fight`…~~
 
 ---
 
@@ -804,15 +851,29 @@ The shapes were blessed, so the numbers exist now. **`server/seeds/items-set1-sp
 `ItemTemplate` enums. Seed with
 `node seed-items.js --file ./seeds/items-set1-spine.js` (dry run) → `--apply`.
 
-🔒 **Written in BAND UNITS (L-22).** A damage number does **not** change from F1 to F3 — the
+> ⚡ ✅ **STRUCK 2026-09-22 — L-22 IS WITHDRAWN, and the seed has already been rewritten.**
+> **L-23** (`level-budget.md`, owner-approved 2026-09-01) replaced band units with **FORCE**:
+> a material band step is **+1 Force**, so a damage number **does** move F1→F3, by +1 per
+> step. L-22 had two faults and the second killed it — it made every floor arithmetically
+> identical (a gear upgrade read on a sheet as *nothing*), and it broke the moment gear
+> crossed a floor (an F1 sword reads **0.75** in F3 band units).
+> ✅ **`items-set1-spine.js` was migrated 2026-09-14** (migration §5): **Force = weapon class
+> + one per band step of the STRIKING part** — Unsworn Sprig **3** · Sun's Dart **4** ·
+> Andvari's Cut **6** · Warden-Carve **3** · **Kin-Carve 4** (the edge is still Beastbone
+> though the haft is Sky-Iron — the teaching case) · Imperial **6**. Every `(×2)/(×4)/(×8)`
+> phrase is gone from the seed.
+> ⭐ **The design claim survives the arithmetic:** what moves across the three readings is
+> still **capability**. The original follows, struck.
+
+~~🔒 **Written in BAND UNITS (L-22).** A damage number does **not** change from F1 to F3 — the
 band multiplies every native number on a floor equally, so it cancels inside the floor. What
 moves across the three readings is **capability**, never arithmetic. Do not "scale" these per
-floor; that is exactly the units error L-22 dissolved.
+floor; that is exactly the units error L-22 dissolved.~~
 
 ✅ **W-6 §2 honoured: 20 of the 26 deal no damage at all**, and not one reads `+X damage`.
 Only C-2 and C-8 are weapons.
 
-| ID | Route × class | F1 ×2 Forest | F2 ×4 Desert | F3 ×8 Capital |
+| ID | Route × class | F1 ~~×2~~ **+1** Forest | F2 ~~×4~~ **+2** Desert | F3 ~~×8~~ **+3** Capital |
 |---|---|---|---|---|
 | **C-1** | Easy × loot | Seepage, Sealed | Seepage, Thinned | Seepage, Sorted |
 | **C-2** ⭐ | Easy × crafted | The Unsworn Sprig | The Sun's Dart | Andvari's Cut |

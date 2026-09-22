@@ -39,7 +39,15 @@ the model. `⚖` marks a table-tunable number.
 These are the load-bearing interpretation calls. **E-0.1–E-0.4 are ruled**; the
 seeder refuses to write data that breaks them.
 
-### E-0.1 ⚖ The rank number is a **part budget**, not a pooled bar
+> ✅ **STRUCK 2026-09-22 — the ⚖ on the sub-headings below is stale.** This section's own
+> heading reads ✅ **BLESSED 2026-08-18**, its own preamble says E-0.1–E-0.4 are ruled, and
+> **`seed-enemies.js` enforces all four and exits 1 on a violation** (`--check` runs that
+> gate alone, with no `node_modules` and no DB). E-0.5's size field is on `models/Enemy.js`,
+> whitelisted in both `routes/enemies.js` verbs and edited in `admin/EnemiesSection.jsx`.
+> **A rule the seeder refuses to break is not a proposal.** The ⚖ marks are struck inline
+> below and the headings otherwise left exactly as written.
+
+### E-0.1 ~~⚖~~ The rank number is a **part budget**, not a pooled bar
 
 §21.2 gives F1 as mob ~5 · elite ~60 · boss ~125 · super ~300. But §7.3 resolves
 damage **per part**, and §7.5 kills on head/torso at 0 — there is no pooled bar
@@ -63,7 +71,7 @@ exactly 5. A mob that needs to survive a hit gets a **gate** (E-0.3), never a 6.
 **And the converse is ruled too: elite and above are always multi-part.** A single
 fat bar is not an elite, it is a mob that cheated. The seeder rejects both errors.
 
-### E-0.3 ⚖ Every enemy above mob rank names its **weak system**; every mob that survives names its **gate**
+### E-0.3 ~~⚖~~ Every enemy above mob rank names its **weak system**; every mob that survives names its **gate**
 
 §21.2/§21.3. A gate is a stated rule that makes a hit not land (surface
 immunity, damage-type immunity, untargetable-while-X). A weak system is the
@@ -71,14 +79,14 @@ discoverable thing that turns the gate off. Both are written in the enemy's
 `notes` field so the GM reads them at the table. **If an entry below has neither,
 it is a mob and it simply dies.**
 
-### E-0.4 ⚖ Mobs do not carve individually — a cleared room yields **one gather roll**
+### E-0.4 ~~⚖~~ Mobs do not carve individually — a cleared room yields **one gather roll**
 
 Carving eight Bramblewretches for eight Beastbones is inventory spam. Elites and
 above carve a **named** material (§12.7 "a boss yields its named material");
 mob rooms yield one gather from the floor's band. Named carves are listed per
 entry below.
 
-### E-0.5 ⚖ Every enemy carries a **size** — and it is now a real field
+### E-0.5 ~~⚖~~ Every enemy carries a **size** — and it is now a real field
 
 §7.1 says *"every combatant has a size: Small / Medium / Large / Huge. Humans are
 Medium. Effects referencing size read this field."* The `Enemy` model had no such
@@ -105,12 +113,25 @@ stops being poetry and becomes a mechanism: he is the disease's source and its o
 known cure, carried in the same body, and neither can be taken without the other.
 It is also why the demons at F3 want him and the Loong both (§4.4).
 
-⚖ **One timeline consequence to rule later** (E-4): the Hard route's city is
+> ✅ **STRUCK 2026-09-22 — RULED 2026-08-20, and the answer is simpler than the tidy
+> reading.** `set1-story-canon.md` **S-3** states the Hard route's crystal outright:
+> **"This is Cinnabrus's plague still leaking out of the ground."** It comes from the
+> **buried god**, not from a mask. ⚠️ **So "a previous bearer moved the city" is
+> withdrawn** — and it has to be, because the mask ruling (S-2, 2026-08-20) makes the F1
+> man the vessel **mid-conversion**: the mask is Nullrot's own reliquary, sealed by
+> Beelzebub, being forced open from the inside, and **the chains hold that conversion for
+> seventy years.** There is no earlier finished bearer to have walked a city.
+> ⭐ **The unification the note was reaching for survives, by a better route:** Easy and
+> Hard are the same story because they are **the same plague**, one leaking from the
+> ground and one leaking from its champion — not because one is a later draft of the
+> other. The original follows, struck.
+
+~~⚖ **One timeline consequence to rule later** (E-4): the Hard route's city is
 *already* crystallised at F1, before the Easy route's man puts the mask on. The
 tidy reading is that **the mask carries the plague and he is only its newest
 host** — making the moving city the work of a previous bearer, and making Easy and
 Hard *the same story at two stages*. A party on Hard sees the ending before the
-beginning.
+beginning.~~
 
 **Mechanically it uses only what the book already has** — no new condition class:
 
@@ -690,8 +711,16 @@ The shape to keep: **the forest sells the answer to the floor's worst thing**, t
 way The Rack sells the Mistletoe that answers THE MASKED (E-3). A party that gathered
 resin walks in protected. A party that didn't has Burn T2 and a hard choice.
 
-⚖ Only the respirator is genuinely new. If you'd rather it not exist, Resin plus Burn
-is already a complete answer — the respirator only makes it *comfortable*.
+> ✅ **STRUCK 2026-09-22 — it exists: BUILT and SEEDED 2026-08-25.** The offer to drop it
+> was not taken. `server/seeds/items-safety.js` ships **four** pieces, not one — **Cloth
+> Filter Mask** (Crude) · **Sealed Respirator** (Quality) · **Reservoir Seal** (Superior,
+> the F3 answer) · **Resin Coat** — and E-4 below already records it as DONE.
+> ⭐ **The design note held exactly as written:** all four answer **INHALATION only**;
+> contact stays the player's problem, so Resin and Burn T2 keep their jobs. The original
+> follows, struck.
+
+~~⚖ Only the respirator is genuinely new. If you'd rather it not exist, Resin plus Burn
+is already a complete answer — the respirator only makes it *comfortable*.~~
 
 ---
 
@@ -705,10 +734,10 @@ is already a complete answer — the respirator only makes it *comfortable*.
 | ~~Token/loot payouts~~ | **DONE 2026-09-14** — §19.1 now says which rung a floor sits on and §17.6 says what each rank drops; the F1 numbers are **E-8.4** |
 | ~~Foreman Bex's name~~ | **BLESSED 2026-08-18** |
 | ~~The Girl's F1 fightability~~ | **RULED 2026-08-18** — killable; the cost is the Beelzebub chain (C-4) |
-| **Level budget** | 🟡 now drafted at [`level-budget.md`](level-budget.md) — **still the calibration dependency for every number in this document.** L-6 checks the F1 ladder against it and the F1 numbers hold |
+| ~~**Level budget**~~ | ✅ **RULED AND BUILT — struck 2026-09-22.** ~~🟡 now drafted~~ — **L-19** ruled the curve (linear, ~150 levels, anchors per FLOOR: 10/10/10 · 16/16/16 · 24/24/24), **L-17/L-18** ruled skills scale with their governing trait and part HP off **TOTAL trait points**, and **L-18 was BUILT 2026-09-19** (rulebook v1.11; `partHpBonus` in `constants.js`). ⭐ **The dependency resolved in this roster's favour:** the F1 torso is **7** and every number in this document was already sized against it. It is still the calibration source — it is no longer an open one |
 | ~~Infected T3 = statue?~~ | **RULED 2026-08-18** — T3 kills normally; the statue idea is dropped, and the crystal needs no rules exception |
 | ~~The respirator template~~ | **DONE 2026-08-25** — `server/seeds/items-safety.js`: Cloth Filter Mask (Crude) · **Sealed Respirator** (Quality) · Reservoir Seal (Superior, the F3 answer) · Resin Coat. All four answer **inhalation only**; contact stays the player's problem |
-| ~~Nullrot's direction of causality~~ | **RULED 2026-08-18** — he is **both**. Open follow-on: the F1 timeline (does the mask carry it?) — see E-0.6 |
+| ~~Nullrot's direction of causality~~ | **RULED 2026-08-18** — he is **both**. ~~Open follow-on: the F1 timeline (does the mask carry it?)~~ ✅ **FOLLOW-ON CLOSED 2026-08-20, struck 2026-09-22 — NO.** `set1-story-canon.md` **S-3**: the Hard route's crystal is *"Cinnabrus's plague still leaking out of the ground."* And the mask ruling (S-2) puts the F1 man **mid-conversion under chains**, so there is no previous bearer. See E-0.6 |
 | ~~Horde counts for later floors~~ | **DONE 2026-08-18** — [`enemy-scaling.md`](enemy-scaling.md) S-2: ~12 × 2^(N−S), and how to run a tide as one entity with a count |
 | ~~Requirements on F1 loot~~ | **DONE 2026-08-25** — every F1 material in `seeds/items-materials-f1.js` now names a requirement that rides into whatever it is crafted into. **Mistletoe asks Charm 8** — the first item in the game to break §12.1's old ceiling of 5, and the proof L-14 is real |
 | **F2/F3 rosters** | The *frame* now exists ([`enemy-scaling.md`](enemy-scaling.md) S-1/S-3 — damage bands and an authoring checklist); the rosters do not |
@@ -874,8 +903,28 @@ is "more mobs"**:
    Spore-Drunk's death-puff and the Crystal Spore Mist are the only two enemies
    on this floor an armoured party cannot shrug — **and neither deals damage.**
 
-🔴 **Unruled.** Pick one, or rule that Floor 1 is *meant* to have no hard room and
-that the Medium route's fire Clock carries the tension instead.
+> ✅ **STRUCK 2026-09-22 — ANSWERED 2026-09-14 by §21.8 THE PRESS**, and by none of the
+> three options listed above. `enemy-scaling.md` **S-6 ①** rules that **mobs able to reach
+> the same target may combine into ONE attack — their Force adds, and resistance and any
+> universal apply ONCE to the merged total** — while a directing elite is alive and can
+> see the target (**②**). §5.7 had already written the mechanic and never restricted it to
+> contestants.
+> ⭐ **That fills this exact 28%→83% hole without a second elite**, because it makes a
+> mob's threat **positional** rather than numerical: on every floor, **1 mob is chaff · 2
+> hurts · 3 destroys a torso** (F1 1/5/9 against a 7 torso). The armoured party the
+> playtest described stops being immune the moment it lets itself be surrounded.
+> ⭐ And option **3** below was right too — §8.1's condition mobs carry a tier and no
+> Force, so flat resistance never touches them. **The F1 roster was already correct; the
+> sizing lens was wrong.**
+>
+> 🔴 **CAVEAT, and it is a real one: the per-room ceilings in the tables below were NEVER
+> RECOMPUTED with the press in.** They are the 2026-09-14 armour-recalibrated numbers,
+> which assume mobs attack **separately**. A gathered, directed mob room is worth more
+> than its printed percentage. **Read the ceilings as a floor, not a bound**, until
+> `encounter-bands.js` is re-run against §21.8. The original follows, struck.
+
+~~🔴 **Unruled.** Pick one, or rule that Floor 1 is *meant* to have no hard room and
+that the Medium route's fire Clock carries the tension instead.~~
 
 ⭐ **Read the ceilings below as what they are: almost every mob room on this floor
 is free, and that is correct.** Their job is **Moments, position and conditions**

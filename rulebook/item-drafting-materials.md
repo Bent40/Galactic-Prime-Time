@@ -57,8 +57,15 @@ it's where the verdict system reads the answer sheet).
 
 **Band availability tracks floors** but isn't locked to them — earlier bands
 stay craftable forever (that's what commodity gear is), deeper bands only enter
-the world when their floor does. ⚖ Gentler alternative if doubling-per-floor
-feels hot: one band per SET (×2/×8/×32) — say the word and the table reflows.
+the world when their floor does.
+
+> ✅ **STRUCK 2026-09-22 — MOOT: there is no doubling left to soften.** The
+> ×2-per-floor multiplication was **withdrawn and superseded by FORCE** (rulebook §7.3 /
+> §12.7, owner-approved 2026-09-01) — a band step is **+1 Force**, nine floors, nine steps.
+> The gentler alternative was an answer to a problem the FORCE ruling removed entirely.
+> The original follows, struck.
+
+~~⚖ Gentler alternative if doubling-per-floor feels hot: one band per SET (×2/×8/×32) — say the word and the table reflows.~~
 
 ---
 
@@ -191,11 +198,19 @@ session record; re-sweep any tradition on demand.
 
 ---
 
-*Trim or bless: the ×2 ladder (M-0), the F1 band (M-1 — play needs it first),
+> ✅ **STRUCK 2026-09-22 — this file was BLESSED the day it was written.** Its own header
+> reads 🟢 **BLESSED (owner, 2026-08-04 — ladder approved with the catalog)**, so the
+> closing trim-or-bless ask was already answered above it. Everything on the list landed:
+> the F1 band ships as gatherable material items (`server/seeds/items-materials-f1.js`,
+> seeded), and the app carries the bill of materials (§12.7, built 2026-09-01).
+> ⚡ One line of it did NOT survive: the **×2 ladder is withdrawn**, superseded by FORCE
+> — **+1 Force per band step** (§7.3 / §12.7, 2026-09-01). The original follows, struck.
+
+~~*Trim or bless: the ×2 ladder (M-0), the F1 band (M-1 — play needs it first),
 parts tables (M-6), the ammo rule (M-7), and carve/reforge (M-8). F2/F3 fill in
 when play approaches; F4–6 wait on floor design. On bless, materials enter the
 app as pool metadata (`material` field ⚖) and the F1 band ships to the library
-as gatherable material items.*
+as gatherable material items.*~~
 
 ---
 

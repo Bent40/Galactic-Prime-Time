@@ -619,11 +619,22 @@ existed, and **nobody questions why the queen visits her ancestors, or why the d
 stops under a house of the dead.** The ruse and the excavation are **the same building**, and
 each one explains the other.
 
-🟡 **Proposed, not ruled — what is actually in the tombs.** The Double is remade at every
-crowning (above), so there have been many. 🔴 **If the discarded dolls are what the "previous
-queens" tombs hold**, then the current Double walks past her own predecessors on the way to
-work, and does not know what she is looking at. ⚠️ Grim, follows directly from two ruled facts,
-and would need an owner call before it is canon.
+🔒 **RULED 2026-09-22 — YES. The "previous queens" tombs hold the DISCARDED DOLLS.** The
+Double is remade at every crowning, so there have been many, and **the current Double walks
+past her own predecessors on the way to work and does not know what she is looking at.**
+
+⭐ **It closes the ruse's last loose end at zero cost:** a fabricated dynasty needs graves, and
+a queen who never dies needs somewhere to put the bodies that are not hers. **The cover story
+and the disposal problem turn out to be the same room** — the mausoleum is the dig site, the
+alibi *and* the cemetery for a line of people who each believed they were the elder sister.
+
+🔴 **And it arms the party.** A doll believes it is Vermilia's **elder sister**; the tombs are
+full of others who believed exactly that. ⚠️ **Showing a Double its predecessors is the one
+attack that can break one without a fight** — and the truth *can* be written into clay, so what
+happens next is the queen's problem, not the party's. ⚙️ **Ringworm reads it cold**: the graves
+are two centuries deep and the woman standing beside them is three days old.
+
+⚠️ The original was flagged *"would need an owner call before it is canon."* It has one.
 
 
 | Route | The beat | What is really happening |
@@ -853,18 +864,19 @@ need by failing to recognise it.
 | **S-b** | Does the staircase man survive inside Nullrot? | ✅ **Yes — he co-pilots.** Not for, not against. *"Just different after 170 years of this mess."* He can be talked to at F3 |
 | **S-c** | Bex's fate on the spared branch | ✅ **He was never in it for himself alone.** He does what is necessary **for demonkind**; the means are ugly and he knows it. A working cure is a win he will take from anyone's hand |
 | **S-d** | Is the tongue required for the revival? | ✅ **Required.** Find it → interaction unlocks → then settle (v1 catalyst / v2 debt). See S-6 |
+| **S-e** | Cure-first or confession-first? | 🔒 **RULED 2026-09-22 — NEITHER. It is the PARTY'S to solve, and the expectation is they INTERVENE MID-CONFESSION.** ⭐ This dissolves the question instead of answering it: the loophole was *"cure first → followers grow → judgment stops being suicide"*, and a sequencing **rule** would have made that a puzzle with a correct order printed in the book. Making it the party's problem puts the decision where the drama is — **Vermilia begins confessing, and the table decides whether to let her finish.** ⚙️ So the GM's job is to **start the confession**, not to gate it: she asks her two-century question, and the only thing standing between a god's verdict and his last follower is four humans choosing to interrupt. 🔴 **Consequence: the scene must be interruptible by design** — she cannot get it all out in one uninterruptible speech, and the party must be able to tell something is happening before it is over |
 
 ## S-9 — ⚠️ THE 2026-09-18 SWEEP WAS INCOMPLETE (corrected 2026-09-22)
 
 > 🔴 **This section claimed "nothing is open" and TWO items were live.** Re-swept
 > 2026-09-22:
 >
-> - **S-8 — the cure-first / confession-first sequencing** of Cinnabrus's verdict.
->   Marked 🔴 here *and* in `set1-review-and-changelog.md` C.4 #7, with the note
->   *"rule it deliberately, it will come up."* **Still unruled.**
-> - **The mausoleum tombs** — 🟡 are the "previous queens'" graves the **discarded
->   dolls**? The text says outright it *"would need an owner call before it is canon."*
->   **Still unruled.**
+> - ✅ **S-8 — the cure-first / confession-first sequencing. RULED 2026-09-22** as
+>   **S-e** above: neither, it is the party's to solve, and they intervene mid-confession.
+> - ✅ **The mausoleum tombs — RULED 2026-09-22: YES**, the "previous queens'" graves
+>   hold the **discarded dolls**. See the mausoleum section.
+>
+> **Both were live when this section said nothing was. Both are closed now.**
 >
 > ⚠️ **The irony is the point:** this section exists to warn that *"a ruling is not
 > recorded until the question it answers is struck"* — and it over-claimed in the other

@@ -77,14 +77,23 @@ how deep you are:
   downtime — time heals sickness — but HP recovery slows to **+1 HP per part per
   downtime** ⚖. A mauled party without tokens limps for real story time; a funded
   party pays the bill and re-deploys shiny.
-- Open sub-calls for the owner:
-  - **(a)** Free-rest rate: +1 HP/part/downtime (recommended — prevents an unwinnable
-    broke-and-broken lockout) · or NO free HP at all (hard mode) · or rest-to-half?
-  - **(b)** Currency confirm: Upgrade Tokens (recommended — healing becomes THE big UT
-    sink, with GM income as the difficulty lever) or something else?
-  - **(c)** Does a bleed-out stabilization count as a "heal" claim? (Recommend: no —
-    the claim is the restore, not the save.)
-  - **(d)** Formula shape confirm: `Floor × 2^claims`, or a different base/curve?
+- ✅ **STRUCK 2026-09-22 — all four were ruled 2026-07-25, in this file's own header.**
+  The header reads *"GL6 sub-calls ruled (slow trickle · Upgrade Tokens · bleed-out
+  stabilization FREE — 'losing the contestant costs more than stabilizing them' ·
+  Floor × 2^claims)"*, which answers each in order:
+  - **(a)** ✅ **The recommendation — free rest is a slow trickle, +1 HP per part per downtime.**
+  - **(b)** ✅ **Upgrade Tokens.** Healing is THE big UT sink.
+  - **(c)** ✅ **NO — a bleed-out stabilization is NOT a claim**, and it is **free**:
+    *"losing the contestant costs more than stabilizing them."* The claim is the restore,
+    not the save.
+  - **(d)** ✅ **`Floor × 2^claims` confirmed.**
+
+  *The originals follow, struck.*
+- ~~Open sub-calls for the owner:~~
+  - ~~**(a)** Free-rest rate: +1 HP/part/downtime (recommended) · or NO free HP at all (hard mode) · or rest-to-half?~~
+  - ~~**(b)** Currency confirm: Upgrade Tokens (recommended) or something else?~~
+  - ~~**(c)** Does a bleed-out stabilization count as a "heal" claim? (Recommend: no — the claim is the restore, not the save.)~~
+  - ~~**(d)** Formula shape confirm: `Floor × 2^claims`, or a different base/curve?~~
 
 ---
 

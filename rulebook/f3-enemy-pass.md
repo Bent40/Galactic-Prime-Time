@@ -309,9 +309,9 @@ window — the F1 Crystal Spore Mist in the one place it has ever had a ceiling.
 
 | Item | Note |
 |---|---|
-| **Encounter tables / room counts** | Same gap as F1 and F2 |
-| **Capital terrain blocks** | §21.4 — the sealed districts, the pens, the court |
-| **Exposure / token payouts** | Unassigned across all three floors |
+| **Encounter tables / room counts** | ⚠️ **NARROWED 2026-09-22 — ~~same gap as F1 and F2~~ same gap as F2.** **F1's closed 2026-09-14**: §21.7 rules the two dials (**SIZE** = the Clock fraction, **DANGER** = `width × mob signature × ⌈count ÷ 2⌉`) and `f1-enemy-pass.md` **E-8.1** sizes 14 rooms with it. The calculator is `server/encounter-bands.js`, so F3 needs authoring, not designing |
+| **Capital terrain blocks** | §21.4 — the sealed districts, the pens, the court. ⚠️ F1's four are written (**E-8.2**) and are the template |
+| **Exposure / token payouts** | ⚠️ **NARROWED 2026-09-22 — ~~across all three floors~~ F2 and F3.** **F1's are DONE (2026-09-14)** — §17.8 is the contract (swings, not counts) and §17.6 + §19.1 say what each rank drops; F1's numbers are **E-8.3 / E-8.4** |
 | **The Lounge attachment** | §4.1 makes the capital persistent afterwards; no rules for what that gives |
 | ~~Names~~ | **DONE 2026-09-14** — the naming pass ran over all 53. Two renames (*The One Who Would Be Human* → **The One Who Would Be Clean**; *Kennel-Warden* → **The Houndmaster**), three stale ⚖ markers cleared, and `renamedFrom` added to the seeder so a rename moves the Atlas document instead of orphaning it |
 | **Orichalcum** | Only a Royal Guard gather — no proper source |

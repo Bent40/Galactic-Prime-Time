@@ -3,9 +3,15 @@
 **Date:** 2026-08-04 · **Status:** 🟢 ROUND 2 — R1–R5 all RULED as proposed and
 **Batch A BLESSED** (owner, 2026-08-04). The delivery layer is BUILT: `ItemTemplate`
 metadata fields, admin-form inputs, `BOX_TIERS`/`ITEM_SUBTYPES` constants, and
-`server/seed-items.js` + `server/seeds/items-batch-a.js` (41 templates). Runbook in
-ID-5 — awaiting an owner run against the campaign DB. ⚖ still marks numbers the
-owner may tune at the table.
+`server/seed-items.js` + `server/seeds/items-batch-a.js` (41 templates). ⚖ still marks
+numbers the owner may tune at the table.
+
+> ✅ **STRUCK 2026-09-22 — the ID-5 runbook HAS been run: Batches A–D are seeded and live.**
+> The campaign library now carries **145 item templates** against Atlas (batches a, b, c,
+> d-repairs, plus the later materials-f1, safety, curios and parasite seeds). The original
+> follows, struck.
+
+~~Runbook in ID-5 — awaiting an owner run against the campaign DB.~~
 
 **Source canon:** book §12 / §17.6 / §19–20 · economy-passover GC0–GC6 · the live
 affix catalog (27 affixes, Lesser + Normal) · floor canon in the game repo
@@ -205,10 +211,18 @@ lives at Mythic, ID-0.22). The description always states what it teaches.
 - **B. Stacking — RULED:** resists stack across worn pieces (the struck part's
   armor counts; global-resist trinkets stay possible as authored specials ⚖).
 - **C. Nullification — RULED:** per the ID-1 bands.
-- **D. Shields — residual R1:** proposed loose rule stands until ruled — a shield
-  grants its resist to whatever part the wielder defends, GM-adjudicated ⚖.
+- ✅ **STRUCK 2026-09-22 — R1 was ruled: the loose rule is APPROVED AS PROPOSED.**
+  Residuals, owner round 2, 2026-08-04 — *"R1 shields' loose rule · … — **all approved as
+  proposed**."* The rule never needed changing; only the marker did. The original follows, struck.
+- ~~**D. Shields — residual R1:** proposed loose rule stands until ruled — a shield
+  grants its resist to whatever part the wielder defends, GM-adjudicated ⚖.~~
 
-## ID-3 — The Exceptional path — RULED (kit odds), gating PROPOSED
+## ID-3 — The Exceptional path — RULED (kit odds), ~~gating PROPOSED~~ **gating RULED**
+
+> ✅ **STRUCK 2026-09-22 — the gating is RULED, not proposed.** Residuals, owner round 2,
+> 2026-08-04: **R2** (Polish-Kit grade gating + the Forge as venue) and **R3** (fail = kit
+> consumed, item untouched) were both **approved as proposed**. Nothing below changed —
+> the markers simply outlived the ruling.
 
 **Polish Kits (odds RULED, owner 2026-08-04).** Consumable upgrade item; applied
 during downtime at the Forge ⚖ (venue = residual R2). One kit = one d6 roll:
@@ -222,9 +236,11 @@ during downtime at the Forge ⚖ (venue = residual R2). One kit = one d6 roll:
 - **Double success never exceeds Exceptional** (RULED).
 - Expected tier-steps per kit: 0.5 / 0.67 / 1.0 — a clean monotone curve, and the
   Superior kit's 1-in-6 jackpot is a camera moment.
-- **Fail = kit consumed, item untouched** (PROPOSED default — nothing in the
+- **Fail = kit consumed, item untouched** (~~PROPOSED default~~ **RULED — residual R3,
+  owner 2026-08-04, approved as proposed** — nothing in the
   ladder ever destroys the item; kinder than the slab, fits the show economy).
-- **Grade gating (PROPOSED ⚖ — residual R2):** Crude kits polish rungs up to
+- **Grade gating (~~PROPOSED ⚖~~ **RULED** — residual R2, owner 2026-08-04, approved as
+  proposed; venue = the Forge):** Crude kits polish rungs up to
   →Quality · Normal up to →Superior · **Superior kits are the only path to
   Exceptional and are never sold** (Legendary+ boxes, deep finds). Without gating,
   cheap Crude kits farm Exceptional at 50% a roll and ID-0.6 stops being true.
@@ -269,16 +285,23 @@ every combination — the kit hands assembly to the player:
   without teaching it), 8 Gold game-changers, **6 skill tomes** (Fire Ball,
   Frost Ball, Telekinesis, Lockpicking, Seal The Wound, Brace — all anchored to
   live skill templates), and 2 kits (Quality Weapon Creation Kit, Normal Polish
-  Kit). Awaiting trim/bless; seed syncs to trims before apply.
+  Kit). ✅ **STRUCK 2026-09-22 — Batch B is BLESSED** (owner, 2026-08-04 — *"mostly
+  approved, we can rethink things if need be later"*, per its own file header), seeded and
+  live. The original follows, struck: ~~Awaiting trim/bless; seed syncs to trims before apply.~~
 - **Batch C — the top shelf — AUTHORED as proposal, see
   `rulebook/item-drafting-batch-c.md` + `server/seeds/items-batch-c.js` (17
   templates + Godly guidance):** 6 route-hooked Legendary named items (arrive
-  Superior, polishable — call ⚖), 4 Mythic artifacts (arrive Exceptional —
-  call ⚖; incl. the Tome of the First Flame with the C-5 "Fireball?" chain
+  Superior, polishable — ~~call ⚖~~ **RULED**), 4 Mythic artifacts (arrive Exceptional —
+  ~~call ⚖~~ **RULED**; incl. the Tome of the First Flame with the C-5 "Fireball?" chain
   sketch), 3 nullification armor pieces (ID-2C cashed in), 3 two-layer growth
   items scoring the verdict axes (public reads only in seeds — GM-secrecy
   discipline), the Superior Polish Kit, and Godly authoring guidance (no pool,
-  by design). Awaiting trim/bless.
+  by design). ✅ **STRUCK 2026-09-22 — Batch C is BLESSED and both tier-placement calls
+  are RULED.** `item-drafting-batch-c.md`'s own header (owner, 2026-08-04) rules them as
+  authored: **(1)** Legendary named items drop at item-tier **Superior**, polishable to
+  Exceptional · **(2)** Mythic artifacts arrive at **Exceptional**, *"the authored
+  exception to 'Exceptional is polish-only'; divinity does not queue at the Forge."*
+  The original follows, struck: ~~Awaiting trim/bless.~~
 - **Batch D — repair pass — BUILT (2026-08-04), see
   `rulebook/item-drafting-batch-d.md`:** 26 of 28 legacy templates get subtype
   stamps + tiers for the untiered (metadata only — owner stats untouched;
@@ -292,8 +315,12 @@ every combination — the kit hands assembly to the player:
 **Affix reconciliation — RULED direction (catalog is truth, extendable):**
 Hollow Point & Explosive Tip → candidate ADDs (tier ⚖) · catalog Spiked/Barbed
 effects stand over the book text · residual R4: write Draining's once-per-Clock cap
-into its catalog effect text (PROPOSED yes — the abuse case is documented) ·
-residual R5: Balanced + Sharpened II incompatibility (PROPOSED yes ⚖).
+into its catalog effect text (~~PROPOSED yes~~ **RULED yes** — the abuse case is documented) ·
+residual R5: Balanced + Sharpened II incompatibility (~~PROPOSED yes ⚖~~ **RULED yes**).
+
+> ✅ **STRUCK 2026-09-22 — R4 and R5 were both approved as proposed** (Residuals, owner
+> round 2, 2026-08-04). Both are catalog edits, queued in Batch D and shipped as
+> `server/repair-affixes.js`.
 
 ## ID-5 — App-side delivery — BUILT (2026-08-04)
 
@@ -323,7 +350,13 @@ catalog of record pointed at `item-drafting-materials.md`) · §17.6
 generic-vs-specific boxes · §21.2 rewritten to the horde doctrine + struggle
 ratios. Pool tables stay app-side per ID-5.
 
-## ID-7 — Box Namer (GM tool) — PROPOSED, mockup shipped
+## ID-7 — Box Namer (GM tool) — ~~PROPOSED, mockup shipped~~ **BUILT, then RETIRED into BoxBuilder**
+
+> ✅ **STRUCK 2026-09-22 — this shipped; the heading outlived the build.** This section's
+> own Status paragraph reads **BUILT (owner approved v2, 2026-08-04)**, and the component
+> has since been **absorbed into `admin/BoxBuilder.jsx`** — its suggest lanes, tier
+> inference and earned-by picker live inside the Builder, and `BoxNamer.jsx` is retired
+> (ID-9 Status, 2026-08-10).
 
 Owner request (2026-08-04): after players roll for loot, the GM inputs what
 dropped + how it was earned, and gets box names by tier — "Bronze Massacre Box",
@@ -352,7 +385,16 @@ the top of the admin Items section. Loot picker uses the live library (already
 loaded by the section); enemies fetch lazily from `/api/enemies` on first
 expand; suggestions copy to clipboard with a toast. Client build verified.
 
-## ID-8 — MATERIALS (supersedes the item-level draft; direction RULED ID-0.26, mechanics PROPOSED ⚖)
+## ID-8 — MATERIALS (supersedes the item-level draft; direction RULED ID-0.26, ~~mechanics PROPOSED ⚖~~ **mechanics RULED**)
+
+> ✅ **STRUCK 2026-09-22 — the mechanics are RULED; the materials catalog answers all of ID-8.**
+> `rulebook/item-drafting-materials.md` is 🟢 **BLESSED (owner, 2026-08-04)** and carries every
+> mechanic this heading left open: the band ladder (**M-0–M-5**), the parts tables and the
+> striking-part rule (**M-6**), the ammo / delivery-cap rule (**M-7**), and carve · claims ·
+> gather · reforge cost (**M-8**).
+> ⚡ **One of those answers has itself since moved:** the ×2-per-band-step ladder was
+> **withdrawn and superseded by FORCE** — a material band step is worth **+1 Force**
+> (rulebook §7.3 / §12.7, 2026-09-01). Read every ×2 below as **+1 Force**.
 
 **The pivot:** a level is a per-item integer somebody has to track. A material
 puts the same scaling **inside the fiction**: every item is made of something,
@@ -391,9 +433,13 @@ zero slots.
    count (sword 4: blade/guard/hilt/pommel · dagger 2 · spear 3 · maul 2 ⚖ —
    table lands in the materials catalog). Premade catalog entries are standard
    builds; opt-in part-crafting sockets up to N materials. Layer split
-   PROPOSED ⚖: the **striking part** (blade/head) sets the damage band; every
+   ~~PROPOSED ⚖~~ **RULED**: the **striking part** (blade/head) sets the damage band; every
    socketed material contributes its inherent effect; affix slots (tier)
-   remain a separate enchantment layer on top. Armor/tool parts: later wave ⚖.
+   remain a separate enchantment layer on top. ~~Armor/tool parts: later wave ⚖.~~
+   ✅ **STRUCK 2026-09-22** — **M-6** of the BLESSED materials catalog (owner, 2026-08-04)
+   states the layer split verbatim as "the striking-part rule", and its parts table is the
+   one promised here — **including the armor and shield rows**, so the "later wave" landed
+   with the rest.
 7. **Naming does the display work:** `<Material> <Base>` — "Chitin Spear,"
    "Quality Crystal Rapier" (composes with the tier-span rule). Zero new UI;
    app impact is one optional `material` field + a catalog, later.
@@ -401,8 +447,10 @@ zero slots.
    have no material identity; they are **made FROM materials** (crafting
    inputs — Farm stock, carve yields; a Beastbone antitoxin is still an
    antitoxin).
-9. **Guns, cannons & tech weapons — PROPOSED ⚖ ("the part that touches the
-   target carries the band"):**
+9. **Guns, cannons & tech weapons — ~~PROPOSED ⚖~~ RULED ("the part that touches the
+   target carries the band"):** ✅ **STRUCK 2026-09-22** — carried into **M-7** of the
+   BLESSED materials catalog (owner, 2026-08-04) as written, with the part sketches
+   landing in **M-6**.
    - **Firearms/cannons/bows — the AMMO is the blade.** Rounds, shells, bolts,
      and arrows are crafted FROM banded materials (they're consumables —
      ID-0.27a already covers them): Beastbone shot, Sunglass rounds, Crystal
@@ -424,15 +472,32 @@ zero slots.
      cannon: barrel · carriage (2) — bow: limbs · grip · string (3) —
      crossbow: prod · stock · mechanism (3) — tech: emitter/core · housing ·
      cell (3). Magazine stays a stat, not a part.
-8b. **Open ⚖ (the materials sitting):** confirm ×2-per-band · carve/harvest
+
+> ✅ **STRUCK 2026-09-22 — the materials sitting was held and all four were answered.**
+> The BLESSED catalog (`item-drafting-materials.md`, owner 2026-08-04) rules each in turn:
+> the **band ladder** (M-0–M-5) · **carve / gather / claims** — automatic post-combat out
+> of danger, a 1-Moment action mid-combat, yields to the party pool with the carver calling
+> dibs on named boss materials (M-8) · **reforge cost** — the new material + **1 UT per
+> band step** (M-8) · **inherent × affix layering** — M-6's striking-part rule: inherent
+> effects ride the material, use no slot, and never touch the affix layer.
+> ⚡ **The first of the four has since moved again:** ×2-per-band is **withdrawn**; a band
+> step is **+1 Force** (§7.3 / §12.7, 2026-09-01). The original follows, struck.
+
+~~8b. **Open ⚖ (the materials sitting):** confirm ×2-per-band · carve/harvest
    rules (an action? who claims? split?) · reforge cost · inherent-effect ×
-   affix stacking.
+   affix stacking.~~
 9. **Content workstream:** the MATERIAL CATALOG is authored per floor band —
    **F1 forest band first** (the party is standing on it); F4–6 bands wait on
    floor design. The Incineradile is the first carve ⚖ (mycelium-threaded
    hide?).
 
-## ID-9 — Lootbox distribution system (app) — PROPOSED, mockup shipped
+## ID-9 — Lootbox distribution system (app) — ~~PROPOSED, mockup shipped~~ **BUILT**
+
+> ✅ **STRUCK 2026-09-22 — this shipped; the heading outlived the build.** This section's
+> own Status paragraph reads **BUILT (owner approved + additions, 2026-08-10)** — LootBox
+> model + `/api/boxes` routes, the Inventory-tab reveal strip, the Box Builder (which
+> absorbed ID-7's Box Namer) and the permanent Box Log. The ⚖ marks on the data contract
+> below were the pre-build approval gate; that approval was given.
 
 Owner request (2026-08-10): GM gives a player a sealed box of items; the player
 sees the sealed box, opens it, gets the "Items looted: …" reveal, and the items

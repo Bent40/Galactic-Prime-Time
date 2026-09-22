@@ -1,6 +1,14 @@
 # Skill Passover — the sitting worksheet
 
-**Date:** 2026-07-23 · **Status:** PART 1 RULED (see block below); G3 + G6 in progress
+**Date:** 2026-07-23 · **Status:** ~~PART 1 RULED (see block below); G3 + G6 in progress~~
+**PART 1 FULLY RULED — G3 and G6 included.**
+
+> ✅ **STRUCK 2026-09-22 — G3 and G6 were ruled the same day this header was written.**
+> The RULINGS block immediately below carries both: **G3 RULED — model A, the keyword
+> tree** (round 2, 2026-07-23; taxonomy in book §4.5, assignments in
+> `apply-skill-passover.js`) and **G6 RULED (round 2)** — Intercept's zig-zag ladder, Iron
+> Stance as the first authored Gemstone MUTATION, Death Grip Jaws, Field Triage and Play
+> to the Camera all approved. Nothing was left in progress.
 
 ## RULINGS (owner, 2026-07-23, in chat)
 
@@ -39,7 +47,11 @@
 - **G8 APPROVED** — the repair batch.
 
 **Applied by:** `server/apply-skill-passover.js` (dry-run default; 25 template patches).
-**Scope:** all 44 skill templates (the TABLE canon — the live campaign's skill library).
+**Scope:** ~~all 44 skill templates~~ **all 49 skill templates** (the TABLE canon — the live
+campaign's skill library). ✅ **STRUCK 2026-09-22** — five more were seeded 2026-07-25
+(Intercept · Death Grip Jaws · Field Triage · Iron Stance · Play to the Camera), which this
+file already records further down under *"⚠️ The library is 49, not 44"* — naming **its own
+header** as one of the stale counts. This is that correction, applied.
 Answer by number in chat ("G1: B, G4: approved, #9: change to…") or edit this file.
 Everything here builds on the full per-skill audit (game repo,
 `docs/audits/skills-audit.md`) filtered for the table: **game-only rulings do NOT apply
@@ -294,25 +306,48 @@ what a brand-new contestant may pick — and a skill that cannot fire is not a s
 skill. Split them and the picker needs a second signal to do the same work. The `why`
 column keeps which kind each is, so the distinction is recorded, not lost.
 
-## 🔴 DRIFT — Frost Wall and Fire Wall
+## ~~🔴 DRIFT~~ ✅ RESOLVED — Frost Wall and Fire Wall
 
-The table above lists a **skill-prereq** for both, but their live `requirements` strings
+> ✅ **STRUCK 2026-09-22 — agreed 2026-09-19: the STRINGS were missing a clause, not the
+> table.** Both are `origin: 'compound'`, **`status: 'evidenced'`** (no longer `proposed`),
+> and `skills-classification.js` carries a **`requirementsFix`** that writes the missing
+> prereq — `Mind 3. Frost Ball Lv 3.` and `Mind 3. Fire Ball Lv 3.` — matching Poison
+> Wall. ⭐ That fix is the only prose the applier touches. The original follows, struck.
+
+~~The table above lists a **skill-prereq** for both, but their live `requirements` strings
 read only *"Mind 3."* — Poison Wall's reads *"Mind 3. Poison Ball Lv 3."* Either the two
 strings are missing a clause or the table is wrong. **Classified `compound` by symmetry
-and flagged `proposed`.**
+and flagged `proposed`.**~~
 
 ## The resulting pools
+
+> ✅ **STRUCK 2026-09-22 — the ⚖ rows were RULED and the Exclusive row moved.** Owner,
+> **2026-09-19**: **Juggling** and **Death Grip Jaws** are both **Animal**, so the animal
+> pool is 5 evidenced, not 3, against a quota of 2. And the axis changed — `animalOnly`
+> became **`raceLock`**, *"death grip jaws is animal and the robot racials are robot only"*
+> — so **XQUEZ/T's three racials are no longer Exclusive; they are `raceLock: 'Robot / AI'`,
+> a pool any Robot could draw from.** Exclusive is down to **2** (both Mario's).
+> ⚠️ **The 49 total is unchanged**, only its buckets. The corrected table:
 
 | pool | n | contents |
 |---|---|---|
 | **General** | 27 | a Human picks 4, an Animal picks 2 |
-| **🐾 Animal-only** | 5 | Swim · Nightlurking · Slice n' Dice · ⚖ Juggling · ⚖ Death Grip Jaws |
+| **🐾 Animal** (`raceLock`) | 5 | Swim · Nightlurking · Slice n' Dice · **Juggling** · **Death Grip Jaws** |
+| **🤖 Robot · AI** (`raceLock`) | 3 | Voicebox · Generate Visual Media · Ignore All Previous Commands |
 | **⚗ Compound** | 12 | nobody, at creation |
-| **★ Exclusive** | 5 | XQUEZ/T ×3 · Mario ×2 |
+| **★ Exclusive** | 2 | Mario ×2 |
 
-⚠️ **The animal pool is the thin one** — 3 evidenced entries against a quota of 2, so an
+The original follows, struck.
+
+~~| **General** | 27 | a Human picks 4, an Animal picks 2 |~~
+~~| **🐾 Animal-only** | 5 | Swim · Nightlurking · Slice n' Dice · ⚖ Juggling · ⚖ Death Grip Jaws |~~
+~~| **⚗ Compound** | 12 | nobody, at creation |~~
+~~| **★ Exclusive** | 5 | XQUEZ/T ×3 · Mario ×2 |~~
+
+~~⚠️ **The animal pool is the thin one** — 3 evidenced entries against a quota of 2, so an
 Animal's racial picks are nearly forced. Both ⚖ rows exist to widen it, and **R-4's
-"racial package per race" is the real answer.**
+"racial package per race" is the real answer.**~~ ⚠️ **R-4's "racial package per race" is
+still the real answer** — that row remains genuinely open.
 
 ## 👥 The two I was asked to read
 
@@ -333,15 +368,30 @@ is the species image itself. 🔴 **If you read Juggling as pure stagecraft, Fil
 racial, not two** — which is simply the *"our current players dont 100% fit this"* case,
 and needs no correction.
 
-## 🔴 Still open
+## ~~🔴 Still open~~ ✅ FIVE OF SIX CLOSED — one genuinely open
 
-1. ⚖ **Juggling** — animal or stagecraft? (decides Filipe's second slot)
-2. ⚖ **Death Grip Jaws** — animal? It fits a sea lion better than a cat, and it would give
-   the animal pool a fourth entry.
-3. ⚖ **Camouflage** — RACE-tagged with no owner, and its requirement is fully general
-   (*"look like or be concealed in the environment"*). A human in a ghillie suit qualifies.
-4. ⚖ **The three Robot racials** — `exclusiveTo: XQUEZ/T`, or something race-shaped?
-5. 🔴 **Frost Wall / Fire Wall** — the prereq drift above.
+> ✅ **STRUCK 2026-09-22 — calls 1–5 were all ruled 2026-09-19** and are recorded with
+> their `why` in `server/seeds/skills-classification.js`; **nothing in that file is
+> `proposed` any more.** ⚠️ **#6 is NOT closed** and is left standing below, because it is
+> not a classification question at all.
+>
+> | # | Call | Ruling, 2026-09-19 |
+> |---|---|---|
+> | ~~1~~ | Juggling — animal or stagecraft? | 🐾 **ANIMAL.** The discriminator is *whose body the requirement is about*: Juggling asks something of **you** |
+> | ~~2~~ | Death Grip Jaws — animal? | 🐾 **ANIMAL.** Takes the animal pool to **five** |
+> | ~~3~~ | Camouflage — racial or general? | ✅ **GENERAL.** RACE-tagged, but the requirement is fully general — a human in a ghillie suit qualifies |
+> | ~~4~~ | The three Robot racials — `exclusiveTo`, or race-shaped? | 🤖 **RACE-SHAPED, and the axis itself changed.** Owner: *"the robot racials are robot only"* — `animalOnly` became **`raceLock`**, the NAME of the one race that may take a skill. They are the **Robot race's**, not XQUEZ/T's |
+> | ~~5~~ | Frost Wall / Fire Wall prereq drift | ✅ **AGREED — the strings were wrong.** `requirementsFix` writes the missing `Frost Ball Lv 3.` / `Fire Ball Lv 3.` clause |
+>
+> The originals follow, struck.
+
+~~1. ⚖ **Juggling** — animal or stagecraft? (decides Filipe's second slot)~~
+~~2. ⚖ **Death Grip Jaws** — animal? It fits a sea lion better than a cat, and it would give the animal pool a fourth entry.~~
+~~3. ⚖ **Camouflage** — RACE-tagged with no owner, and its requirement is fully general (*"look like or be concealed in the environment"*). A human in a ghillie suit qualifies.~~
+~~4. ⚖ **The three Robot racials** — `exclusiveTo: XQUEZ/T`, or something race-shaped?~~
+~~5. 🔴 **Frost Wall / Fire Wall** — the prereq drift above.~~
+
+**🔴 STILL OPEN — the one that is not a classification question:**
 6. 🔴 **The trade the game repo already ruled and the app does not implement.**
    `data/races.json` carries the **2026-07-16** version of this same ruling — *"the
    BACKGROUND grants 4 skills at creation; **any number may be given up for +1 cap on
