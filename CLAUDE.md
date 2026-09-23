@@ -2597,7 +2597,14 @@ approval): https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv
 - 🔴 **Honest limits:** no MongoDB in the container, so **a logged-in table with a real map has
   not been seen** — headless Chromium loads all three routes without runtime errors and every suite
   is green (105 tables · 140 table-client · the rest unchanged). The GM page shows the LIVE map
-  only (prep = hidden tokens, or go live between rooms). Socket.IO still needs approval.
+  only (prep = hidden tokens, or go live between rooms).
+- ✅ **SOCKET.IO — approved and built (owner: "go ahead with socket.io").** `server/realtime.js`
+  is a **notifier, never the source of truth**: every table / tracker / chat write still goes
+  through its route, then emits to the table's room (`join` only for a seated user or admin,
+  JWT handshake) and clients **re-fetch**. The 2 s poll stays as the fallback and slows to 15 s
+  while the socket is up (green dot in the table topbar). Fails open: no-op when unattached.
+  **22 tests:** `node server/test-realtime.js` (real server + real client on port 0).
+  Vite proxies `/socket.io` with `ws: true`; Render free supports WebSockets as-is.
 - ✅ **Pre-existing test failure closed:** `test-skill-library.js` still asserted the
   `animalOnly` boolean that 2026-09-19 replaced with `raceLock`; now 17/17.
 

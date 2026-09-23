@@ -85,12 +85,21 @@ app.get('*', (req, res) => {
 // Now: LISTEN FIRST, connect in the background, and never exit on a database
 // error. The service boots, passes its health check, serves the client, answers
 // /api with a 503 that names the cause, and keeps retrying.
+const realtime = require('./realtime');
+const Table = require('./models/Table');
 const server = app.listen(PORT, () => {
   logger.info(`Server listening on port ${PORT}`);
   logger.info(`Log level: ${process.env.LOG_LEVEL || 'http'}`);
   if (!process.env.MONGODB_URI) {
     logger.warn('MONGODB_URI is not set — falling back to localhost. On a deploy this is almost certainly wrong.');
   }
+});
+
+// Socket.IO rides the same HTTP server (Render free supports WebSockets). It only
+// NOTIFIES — see realtime.js; a client that misses an event re-fetches on its poll.
+realtime.attach(server, {
+  logger,
+  checkSeat: async (tableId, userId) => !!(await Table.exists({ _id: tableId, 'seats.userId': String(userId) })),
 });
 
 const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/galactic-prime-time';
@@ -124,6 +133,7 @@ mongoose.connection.on('error', err => { lastDbError = err.message; });
 for (const sig of ['SIGTERM', 'SIGINT']) {
   process.on(sig, () => {
     logger.info(`${sig} received — shutting down`);
+    realtime.close();
     server.close(() => mongoose.connection.close(false).then(() => process.exit(0)));
     setTimeout(() => process.exit(0), 10000).unref();
   });

@@ -7,6 +7,7 @@ const NPC = require('../models/NPC');
 const requireAdmin = require('../middleware/adminAuth');
 const logger = require('../logger');
 const { enrichSkills } = require('../utils/skillUtils');
+const { notifyChat } = require('../realtime');
 
 const router = express.Router();
 
@@ -856,6 +857,7 @@ router.post('/messages', async (req, res) => {
       style: msgStyle,
       text: text.trim(),
     });
+    notifyChat({ kind: 'say' });
     res.status(201).json(msg);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

@@ -9,7 +9,7 @@ import { apiFetch } from '../api.js';
  */
 function fmtTime(t) { return t ? new Date(t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''; }
 
-export default function TableChat({ token, role, players = [], pollMs = 3000, injected = [] }) {
+export default function TableChat({ token, role, players = [], pollMs = 3000, injected = [], refreshKey = 0 }) {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
   const [target, setTarget] = useState('');
@@ -17,7 +17,8 @@ export default function TableChat({ token, role, players = [], pollMs = 3000, in
   const path = role === 'gm' ? '/api/admin/messages' : '/api/messages';
 
   function load() { apiFetch(path, {}, token).then(d => { if (Array.isArray(d)) setMessages(d); }); }
-  useEffect(() => { load(); const iv = setInterval(load, pollMs); return () => clearInterval(iv); }, [path]);
+  useEffect(() => { load(); const iv = setInterval(load, pollMs); return () => clearInterval(iv); }, [path, pollMs]);
+  useEffect(() => { if (refreshKey) load(); }, [refreshKey]);
   useEffect(() => { if (injected.length) setMessages(m => m.some(x => x._id === injected[injected.length - 1]._id) ? m : [...m, injected[injected.length - 1]]); }, [injected]);
   useEffect(() => { feed.current?.scrollTo(0, feed.current.scrollHeight); }, [messages.length]);
 

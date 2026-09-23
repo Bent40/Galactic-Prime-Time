@@ -8,6 +8,7 @@ const Message = require('../models/Message');
 const User = require('../models/User');
 const Character = require('../models/Character');
 const dice = require('../dice');
+const { notify } = require('../realtime');
 
 const router = express.Router();
 
@@ -162,6 +163,7 @@ router.patch('/:id/tokens/:tokenId/move', requireAuth, async (req, res) => {
     tok.col = Math.max(0, Math.round(num(col))); tok.row = Math.max(0, Math.round(num(row)));
     map.markModified('tokens');
     await map.save();
+    notify(table._id, 'token:moved', { tokenId: tok.tokenId, col: tok.col, row: tok.row });
     res.json({ ok: true, token: tok });
   } catch (err) { fail(res, 'PATCH move', err); }
 });
@@ -223,6 +225,7 @@ router.post('/:id/roll', requireAuth, async (req, res) => {
       text: `${result.label}: ${result.total}${result.effect ? ' — ' + result.effect : ''}`,
       kind: 'roll', roll: result, gmOnly, tableId: String(table._id),
     });
+    require('../realtime').notifyChat({ tableId: String(table._id), kind: 'roll' });
     res.status(201).json(msg);
   } catch (err) { fail(res, 'POST roll', err); }
 });
@@ -238,6 +241,7 @@ router.post('/:id/cues', async (req, res) => {
     const bad = cueProblem(cue); if (bad) return res.status(400).json({ error: bad });
     table.cues.push(cue);
     await table.save();
+    notify(table._id, 'cues');
     res.status(201).json(table.cues[table.cues.length - 1]);
   } catch (err) { fail(res, 'POST cue', err); }
 });
@@ -252,6 +256,7 @@ router.patch('/:id/cues/:cueId', async (req, res) => {
     const bad = cueProblem(cue); if (bad) return res.status(400).json({ error: bad });
     table.cues[i] = cue; table.markModified('cues');
     await table.save();
+    notify(table._id, 'cues');
     res.json(table.cues[i]);
   } catch (err) { fail(res, 'PATCH cue', err); }
 });
@@ -265,6 +270,7 @@ router.delete('/:id/cues/:cueId', async (req, res) => {
     if (table.cues.length === before) return res.status(404).json({ error: 'Cue not found' });
     if (table.sound?.cueId === req.params.cueId) setSound(table, '');
     await table.save();
+    notify(table._id, 'cues');
     res.json({ ok: true });
   } catch (err) { fail(res, 'DELETE cue', err); }
 });
@@ -281,6 +287,7 @@ router.post('/:id/sound', async (req, res) => {
       setSound(table, cue.cueId);
     }
     await table.save();
+    notify(table._id, 'sound', { seq: table.sound.seq });
     res.json({ sound: table.sound, cue: currentCue(table) });
   } catch (err) { fail(res, 'POST sound', err); }
 });
@@ -297,6 +304,7 @@ router.post('/:id/fx', async (req, res) => {
                  label: String(b.label || '').slice(0, 40), at: new Date() };
     table.fx = [...pruneFx(table.fx), fx];
     await table.save();
+    notify(table._id, 'fx', { fxId: fx.fxId });
     res.status(201).json(fx);
   } catch (err) { fail(res, 'POST fx', err); }
 });
@@ -351,6 +359,7 @@ router.patch('/:id', async (req, res) => {
       }
     }
     await table.save();
+    notify(table._id, 'table:patched');
     res.json(table);
   } catch (err) { fail(res, 'PATCH /api/tables/:id', err); }
 });
@@ -374,6 +383,7 @@ router.post('/:id/seats', async (req, res) => {
     if (!userId) return res.status(400).json({ error: 'userId required' });
     if (!table.seats.some(s => s.userId === userId)) table.seats.push({ userId });
     await table.save();
+    notify(table._id, 'seats');
     res.json(table);
   } catch (err) { fail(res, 'POST seats', err); }
 });
@@ -384,6 +394,7 @@ router.delete('/:id/seats/:userId', async (req, res) => {
     const table = await loadTable(req, res); if (!table) return;
     table.seats = table.seats.filter(s => s.userId !== req.params.userId);
     await table.save();
+    notify(table._id, 'seats');
     res.json(table);
   } catch (err) { fail(res, 'DELETE seat', err); }
 });
@@ -432,6 +443,7 @@ router.patch('/:id/maps/:mapId', async (req, res) => {
     if (b.notes != null) map.notes = String(b.notes);
     if (Array.isArray(b.tokens)) map.tokens = b.tokens.map(t => normToken(t, { tokenId: t.tokenId || uid(), name: 'Token' }));
     await map.save();
+    notify(table._id, 'map:patched', { mapId: String(map._id) });
     const out = map.toObject(); if (b.image === undefined) delete out.image;
     res.json(out);
   } catch (err) { fail(res, 'PATCH map', err); }
@@ -444,6 +456,7 @@ router.delete('/:id/maps/:mapId', async (req, res) => {
     const map = await loadMap(req, res, table); if (!map) return;
     await map.deleteOne();
     if (String(table.activeMapId) === String(map._id)) { table.activeMapId = null; await table.save(); }
+    notify(table._id, 'map:deleted', { mapId: String(map._id) });
     res.json({ ok: true, activeMapId: table.activeMapId });
   } catch (err) { fail(res, 'DELETE map', err); }
 });
@@ -458,6 +471,7 @@ router.post('/:id/maps/:mapId/tokens', async (req, res) => {
     const tok = normToken(b, { tokenId: uid(), name: 'Token', kind: 'marker', color: '#94a6c6', col: 0, row: 0, hidden: false, parts: [], conditions: [] });
     map.tokens.push(tok);
     await map.save();
+    notify(table._id, 'token:added', { tokenId: tok.tokenId });
     res.status(201).json(map.tokens[map.tokens.length - 1]);
   } catch (err) { fail(res, 'POST token', err); }
 });
@@ -472,6 +486,7 @@ router.patch('/:id/maps/:mapId/tokens/:tokenId', async (req, res) => {
     map.tokens[i] = normToken(req.body || {}, map.tokens[i].toObject());
     map.markModified('tokens');
     await map.save();
+    notify(table._id, 'token:patched', { tokenId: req.params.tokenId });
     res.json(map.tokens[i]);
   } catch (err) { fail(res, 'PATCH token', err); }
 });
@@ -485,6 +500,7 @@ router.delete('/:id/maps/:mapId/tokens/:tokenId', async (req, res) => {
     map.tokens = map.tokens.filter(t => t.tokenId !== req.params.tokenId);
     if (map.tokens.length === before) return res.status(404).json({ error: 'Token not found' });
     await map.save();
+    notify(table._id, 'token:removed', { tokenId: req.params.tokenId });
     res.json({ ok: true });
   } catch (err) { fail(res, 'DELETE token', err); }
 });

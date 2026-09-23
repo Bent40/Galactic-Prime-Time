@@ -3,8 +3,8 @@
 **Status:** research 2026-09-23, **approved and BUILT the same day** (V-8 below). The mockup
 that was approved: **https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv**. The app now has the
 table (`/table` for players, `/gm/:tableId` for the GM), the book's dice, sound cues and
-visual effects by damage type. Real-time is the 2 s poll; Socket.IO is still the recommended
-upgrade and still needs approval (it is a dependency).
+visual effects by damage type, and — approved and built later the same day — **Socket.IO as
+the notifier**, with the 2 s poll kept as the fallback (V-9).
 
 > Sourcing note. The container's proxy blocks every first-party VTT host (roll20.net,
 > help.roll20.net, foundryvtt.com, owlbear.rodeo, web.archive.org), so the Roll20 inventory
@@ -33,7 +33,7 @@ upgrade and still needs approval (it is a dependency).
 4. **Built this session:** `Table` + `TableMap` models, 17 routes, an admin **Tables**
    section (create a table · seat players · upload Inkarnate exports · put one map live),
    a 57-check route test, and the login `userId` bug fixed — then, on approval, the play
-   surface, the dice, sound cues and visual effects (V-8). **Not built:** the socket.
+   surface, the dice, sound cues and visual effects (V-8), then the socket (V-9).
 5. **Inkarnate stays.** It is the map *painter*; the table only needs its PNG export. Nothing
    in Roll20 replaces Inkarnate either.
 
@@ -207,7 +207,7 @@ needs to reach every screen in the same instant, which is the socket's first cus
 | 1 | **Player table page** `/table` — the live map as a hex board (SVG over the image), tokens, own token draggable, Clock rail, 2 s poll | ✅ built | two browsers see each other's tokens move within 2 s |
 | 2 | **GM table page** `/gm/:tableId` — every token draggable, hide/reveal, add from the enemy library or the seated players, fog brush, ruler, ping | ✅ built | the GM runs a room from the app with no Roll20 tab open |
 | 3 | **Dice** — the server rolls, posts a `kind: 'roll'` Message, GM-only option, the §6.1 row printed | ✅ built | a Forced Action rolled on the table reads its consequence aloud in chat |
-| 4 | **Socket.IO** — rooms per table, events on every write, clients re-fetch; polling stays as fallback | needs approval | a token drag lands on the other screen in <100 ms |
+| 4 | **Socket.IO** — rooms per table, events on every write, clients re-fetch; polling stays as fallback | ✅ built (V-9) | a token drag lands on the other screen in <100 ms |
 | 5 | **Per-part damage from the table** — `PATCH players/:id/parts/:partId`, tokens show part HP + condition badges | ✅ built (the Press highlighter is not) | GM clicks −, the player's sheet updates on its next poll |
 | 5b | **Sound cues** and **visual effects by damage type** (owner ask, 2026-09-23) | ✅ built | see V-8 |
 | 6 | Handouts, drawing, vision cones, map alignment UI, the Press highlighter, GM prep view of a non-live map | later | — |
@@ -302,3 +302,34 @@ copying is Roll20's *align to grid* box-drag, queued as step 6.
    for **names only, no numbers** on enemy tokens for players. Recommend: names + condition
    badges, numbers GM-only.
 5. **Socket.IO** adds a dependency to both packages. Approve before step 4.
+
+
+---
+
+## V-9 — Socket.IO, built 2026-09-23 (owner: "go ahead with socket.io")
+
+- **A notifier, never the source of truth.** `server/realtime.js` attaches Socket.IO to the
+  same HTTP server. Every table write in `routes/tables.js` still goes through its route and
+  then calls `notify(tableId, event, hint)`; the tracker routes call `notifyTracker`, the
+  message routes and the roll route call `notifyChat`. Clients **re-fetch** on an event —
+  `useTableSocket` hands `table:changed` to the poll's `refresh()`, `tracker:changed` to the
+  tracker loader, `chat:changed` to the chat. Nothing on the wire is state, so a missed event
+  costs at most one poll.
+- **The seat is still the permission.** The handshake verifies the JWT (`auth.token`, same
+  secret as the routes); `join <tableId>` succeeds only for a seated user or an admin, and a
+  socket holds one table room at a time. `tracker` and `chat` are global rooms.
+- **The poll is the fallback, not gone.** While the socket is connected the table poll runs
+  every 15 s, the tracker/sheet loaders every 20 s and the chat every 20 s; the moment it
+  drops they return to 2 / 6 / 3 s. A green dot in the table's topbar says which mode you are in.
+- **Fails open.** With nothing attached (the route tests, a missing module) every `notify` is a
+  no-op; the client swallows a connect error and keeps polling.
+- **Deploy:** Render free supports WebSockets on the same service, no config. Vite dev proxies
+  `/socket.io` with `ws: true`. Dependencies: `socket.io` (server) and `socket.io-client`
+  (client; also a server devDependency for the test).
+- **Tests:** `node server/test-realtime.js` — 22 checks with a real server on port 0 and a real
+  client: no/bad/wrong-secret token refused, seated joins and unseated is refused, admin joins
+  anything, a notify reaches only its room, moving rooms leaves the old one, the global rooms
+  reach everyone, the event shape, and no-op before attach and after close.
+- ⚠️ **Still not seen with a real database** — same limit as V-8. The first live session
+  verifies the whole chain; if the green dot never lights, check the browser console for the
+  handshake error and that the deploy is on HTTPS (mixed-content blocks `ws://`).

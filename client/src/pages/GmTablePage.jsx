@@ -9,6 +9,7 @@ import SoundPlayer from '../table/SoundPlayer.jsx';
 import DiceTray from '../table/DiceTray.jsx';
 import TableChat from '../table/TableChat.jsx';
 import useTablePoll from '../table/useTablePoll.js';
+import useTableSocket from '../table/useTableSocket.js';
 import { FX_TYPES, FX_STYLE } from '../table/FxLayer.jsx';
 import { moveCost, key } from '../table/hex.js';
 
@@ -38,20 +39,27 @@ export default function GmTablePage() {
   const [addFilter, setAddFilter] = useState('');
   const [condText, setCondText] = useState('');
 
-  const { live, error, image, clock, refresh, patchLocal } = useTablePoll(tableId, auth?.token, 2000);
+  const [chatKey, setChatKey] = useState(0);
+  const [socketOn, setSocketOn] = useState(false);
+  const { live, error, image, clock, refresh, patchLocal } = useTablePoll(tableId, auth?.token, socketOn ? 15000 : 2000);
   const map = live?.map;
+  const loadTracker = () => auth && apiFetch('/api/tracker', {}, auth.token).then(d => { if (d && !d.error) setTracker(d); });
+  const loadTable = () => auth && apiFetch(`/api/tables/${tableId}`, {}, auth.token).then(d => { if (d && !d.error) setTable(d); });
+  const connected = useTableSocket(tableId, auth?.token, {
+    onTable: (e) => { refresh(); if (/map|cues|seats|table/.test(e.event)) loadTable(); },
+    onTracker: () => loadTracker(),
+    onChat: () => setChatKey(k => k + 1),
+  });
+  useEffect(() => setSocketOn(connected), [connected]);
 
   useEffect(() => {
     if (!auth) return;
-    const load = () => {
-      apiFetch(`/api/tables/${tableId}`, {}, auth.token).then(d => { if (d && !d.error) setTable(d); });
-      apiFetch('/api/tracker', {}, auth.token).then(d => { if (d && !d.error) setTracker(d); });
-    };
+    const load = () => { loadTable(); loadTracker(); };
     load();
     apiFetch('/api/enemies', {}, auth.token).then(d => { if (Array.isArray(d)) setEnemies(d); });
     apiFetch('/api/admin/players', {}, auth.token).then(d => { if (Array.isArray(d)) setPlayers(d.filter(p => !p.isAdmin)); });
-    const iv = setInterval(load, 5000); return () => clearInterval(iv);
-  }, [auth, tableId]);
+    const iv = setInterval(load, socketOn ? 20000 : 5000); return () => clearInterval(iv);
+  }, [auth, tableId, socketOn]);
 
   const selToken = useMemo(() => map?.tokens.find(t => t.tokenId === selected) || null, [map, selected]);
   // a player token's parts come from the sheet, refreshed with the poll
@@ -150,6 +158,7 @@ export default function GmTablePage() {
         </div>
         <span className="spacer" />
         <SoundPlayer cue={live?.cue} sound={live?.sound} serverNow={clock.serverNow} syncedAt={clock.syncedAt} compact />
+        <span className={`sync-dot${socketOn ? ' on' : ''}`} title={socketOn ? 'live (socket)' : 'polling every 2 s'} />
         <Link to="/admin" className="btn btn-muted btn-xs">Admin</Link>
         {error && <span className="table-err">{error}</span>}
       </header>
@@ -224,7 +233,7 @@ export default function GmTablePage() {
           <h3>Dice</h3>
           <DiceTray tableId={tableId} token={auth.token} role="gm" actorName={selToken?.name} onRolled={m => setRolled(r => [...r, m])} showToast={showToast} />
           <h3 style={{ marginTop: 10 }}>Table talk</h3>
-          <TableChat token={auth.token} role="gm" players={players.map(p => ({ userId: p.userId, displayName: p.characterName || p.username }))} injected={rolled} />
+          <TableChat token={auth.token} role="gm" players={players.map(p => ({ userId: p.userId, displayName: p.characterName || p.username }))} injected={rolled} refreshKey={chatKey} pollMs={socketOn ? 20000 : 3000} />
         </aside>
       </div>
       <Toast toast={toast} />

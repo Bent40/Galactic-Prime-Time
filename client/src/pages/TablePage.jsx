@@ -9,6 +9,7 @@ import SoundPlayer from '../table/SoundPlayer.jsx';
 import DiceTray from '../table/DiceTray.jsx';
 import TableChat from '../table/TableChat.jsx';
 import useTablePoll from '../table/useTablePoll.js';
+import useTableSocket from '../table/useTableSocket.js';
 import { moveCost } from '../table/hex.js';
 
 /**
@@ -47,17 +48,25 @@ export default function TablePage() {
   }, [auth]);
   useEffect(() => { if (tableId) localStorage.setItem('tableId', tableId); }, [tableId]);
 
-  const { live, error, image, clock, refresh, patchLocal } = useTablePoll(tableId, auth?.token, 2000);
+  const [chatKey, setChatKey] = useState(0);
+  const [socketOn, setSocketOn] = useState(false);
+  // the socket is the notifier; the poll is the fallback and slows down while it is up
+  const { live, error, image, clock, refresh, patchLocal } = useTablePoll(tableId, auth?.token, socketOn ? 15000 : 2000);
+  const loadTracker = () => auth && apiFetch('/api/tracker', {}, auth.token).then(d => { if (d && !d.error) setTracker(d); });
+  const loadSheet = () => auth && apiFetch('/api/character', {}, auth.token).then(d => { if (d && d.state) setSheet(d.state); });
+  const connected = useTableSocket(tableId, auth?.token, {
+    onTable: () => refresh(),
+    onTracker: () => loadTracker(),
+    onChat: () => setChatKey(k => k + 1),
+  });
+  useEffect(() => setSocketOn(connected), [connected]);
 
   // the Clock + my sheet, on the sheet's own cadence
   useEffect(() => {
     if (!auth) return;
-    const load = () => {
-      apiFetch('/api/tracker', {}, auth.token).then(d => { if (d && !d.error) setTracker(d); });
-      apiFetch('/api/character', {}, auth.token).then(d => { if (d && d.state) setSheet(d.state); });
-    };
-    load(); const iv = setInterval(load, 6000); return () => clearInterval(iv);
-  }, [auth]);
+    const load = () => { loadTracker(); loadSheet(); };
+    load(); const iv = setInterval(load, socketOn ? 20000 : 6000); return () => clearInterval(iv);
+  }, [auth, socketOn]);
 
   const myToken = useMemo(() => live?.map?.tokens.find(t => t.kind === 'player' && t.refId === String(auth?.userId)) || null, [live, auth]);
   const selToken = useMemo(() => live?.map?.tokens.find(t => t.tokenId === selected) || null, [live, selected]);
@@ -84,6 +93,7 @@ export default function TablePage() {
         {tables && tables.length > 1 && <select className="fi" value={tableId} onChange={e => setTableId(e.target.value)} style={{ width: 'auto' }}>{tables.map(t => <option key={t._id} value={t._id}>{t.name}</option>)}</select>}
         <span className="spacer" />
         <SoundPlayer cue={live?.cue} sound={live?.sound} serverNow={clock.serverNow} syncedAt={clock.syncedAt} compact />
+        <span className={`sync-dot${socketOn ? ' on' : ''}`} title={socketOn ? 'live (socket)' : 'polling every 2 s'} />
         <Link to="/" className="btn btn-muted btn-xs">Sheet</Link>
         {error && <span className="table-err">{error}</span>}
       </header>
@@ -122,7 +132,7 @@ export default function TablePage() {
           <h3>Dice</h3>
           <DiceTray tableId={tableId} token={auth.token} role="player" onRolled={m => setRolled(r => [...r, m])} showToast={showToast} />
           <h3 style={{ marginTop: 10 }}>Table talk</h3>
-          <TableChat token={auth.token} role="player" players={players} injected={rolled} />
+          <TableChat token={auth.token} role="player" players={players} injected={rolled} refreshKey={chatKey} pollMs={socketOn ? 20000 : 3000} />
         </aside>
       </div>
       <Toast toast={toast} />

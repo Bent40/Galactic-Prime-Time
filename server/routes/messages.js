@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Character = require('../models/Character');
 const NPC = require('../models/NPC');
 const requireAuth = require('../middleware/auth');
+const { notifyChat } = require('../realtime');
 
 const router = express.Router();
 
@@ -76,6 +77,7 @@ router.post('/', requireAuth, async (req, res) => {
       style: safeStyle,
       text: text.trim(),
     });
+    notifyChat({ kind: 'say' });
     res.status(201).json(msg);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

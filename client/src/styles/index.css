@@ -803,3 +803,6 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
   .table-side.left, .table-side.right { border: none; border-top: 1px solid var(--border); }
   .table-map { min-height: 60vh; }
 }
+/* live-sync indicator: gold = socket connected, grey = polling fallback */
+.sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
+.sync-dot.on { background: var(--success); box-shadow: 0 0 6px var(--success); }
