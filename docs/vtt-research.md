@@ -32,8 +32,8 @@ upgrade and still needs approval (it is a dependency).
    **dice in the chat**, and **real-time sync** — the app polls at 5–12 s today.
 4. **Built this session:** `Table` + `TableMap` models, 17 routes, an admin **Tables**
    section (create a table · seat players · upload Inkarnate exports · put one map live),
-   a 57-check route test, and the login `userId` bug fixed. **Not built:** the play surface,
-   the dice, the sync. Those are V-5's build order and start once the mockup is approved.
+   a 57-check route test, and the login `userId` bug fixed — then, on approval, the play
+   surface, the dice, sound cues and visual effects (V-8). **Not built:** the socket.
 5. **Inkarnate stays.** It is the map *painter*; the table only needs its PNG export. Nothing
    in Roll20 replaces Inkarnate either.
 
