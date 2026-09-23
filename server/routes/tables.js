@@ -4,6 +4,10 @@ const TableMap = require('../models/TableMap');
 const requireAuth = require('../middleware/auth');
 const requireAdmin = require('../middleware/adminAuth');
 const logger = require('../logger');
+const Message = require('../models/Message');
+const User = require('../models/User');
+const Character = require('../models/Character');
+const dice = require('../dice');
 
 const router = express.Router();
 
@@ -14,6 +18,46 @@ const MAX_IMAGE_CHARS = 8_000_000;
 const TOKEN_KINDS = ['player', 'enemy', 'npc', 'marker'];
 
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const FX_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution', 'Heal'];
+const FX_WINDOW_MS = 20_000;   // how long an effect stays visible to pollers
+const FX_KEEP_MS = 60_000;     // how long it stays in the document before pruning
+const CUE_SOURCES = ['youtube', 'audio'];
+const CUE_TRIGGERS = ['manual', 'map-live'];
+
+// Whitelist + coerce one cue. `existing` lets PATCH keep fields it does not name.
+function normCue(input, existing = {}) {
+  const c = { ...existing };
+  if (input.name != null) c.name = String(input.name).slice(0, 60);
+  if (input.source != null) c.source = CUE_SOURCES.includes(input.source) ? input.source : 'youtube';
+  if (input.ref != null) c.ref = String(input.ref).trim();
+  if (input.start != null) c.start = Math.max(0, num(input.start));
+  if (input.end != null) c.end = Math.max(0, num(input.end));
+  if (input.loop != null) c.loop = !!input.loop;
+  if (input.volume != null) c.volume = Math.max(0, Math.min(100, Math.round(num(input.volume, 80))));
+  if (input.trigger != null) c.trigger = CUE_TRIGGERS.includes(input.trigger) ? input.trigger : 'manual';
+  if (input.mapId != null) c.mapId = String(input.mapId);
+  if (c.end && c.end <= c.start) c.end = 0;   // a segment that ends before it starts runs to the end instead
+  return c;
+}
+function cueProblem(c) {
+  if (!c.name || !c.name.trim()) return 'name required';
+  if (!c.ref) return c.source === 'youtube' ? 'YouTube video id required' : 'audio URL required';
+  if (c.source === 'youtube' && !/^[\w-]{6,20}$/.test(c.ref)) return 'not a YouTube video id (paste the 11-character id, e.g. dQw4w9WgXcQ)';
+  if (c.source === 'audio') {
+    if (c.ref.length > MAX_IMAGE_CHARS) return `audio too large (max ${MAX_IMAGE_CHARS} chars)`;
+    if (!/^https:\/\//.test(c.ref) && !/^data:audio\/[\w.+-]+;base64,/.test(c.ref)) return 'audio must be an https URL or a data:audio/* URL';
+  }
+  return null;
+}
+const liveFx = (fx, now = Date.now()) => (fx || []).filter(f => now - new Date(f.at).getTime() < FX_WINDOW_MS);
+const pruneFx = (fx, now = Date.now()) => (fx || []).filter(f => now - new Date(f.at).getTime() < FX_KEEP_MS);
+const currentCue = (table) => (table.sound?.cueId ? (table.cues || []).find(c => c.cueId === table.sound.cueId) || null : null);
+function setSound(table, cueId) {
+  const s = table.sound || {};
+  table.sound = { cueId: cueId || '', playing: !!cueId, startedAt: cueId ? new Date() : null, seq: (s.seq || 0) + 1 };
+  table.markModified && table.markModified('sound');
+}
+const seated = (table, userId) => (table.seats || []).some(s => s.userId === String(userId));
 const isHex = s => /^#[0-9a-fA-F]{3,8}$/.test(s || '');
 const num = (v, d = 0) => (Number.isFinite(Number(v)) ? Number(v) : d);
 
@@ -62,6 +106,14 @@ function playerView(map) {
     tokens: (map.tokens || []).filter(t => !t.hidden),
     updatedAt: map.updatedAt,
   };
+}
+
+// The GM's projection of a map for the poll: everything but the image.
+function gmView(map) {
+  if (!map) return null;
+  const o = typeof map.toObject === 'function' ? map.toObject() : { ...map };
+  delete o.image;
+  return o;
 }
 
 async function loadTable(req, res) {
@@ -114,8 +166,140 @@ router.patch('/:id/tokens/:tokenId/move', requireAuth, async (req, res) => {
   } catch (err) { fail(res, 'PATCH move', err); }
 });
 
+// GET /api/tables/:id/live — THE POLL. Seated players and the GM both call this every
+// couple of seconds; it never carries the map image (fetch that once, below). Players
+// get the player projection + only the cue that is playing; the GM gets everything.
+router.get('/:id/live', requireAuth, async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    if (!req.isAdmin && !seated(table, req.userId)) return res.status(403).json({ error: 'You are not seated at this table' });
+    const live = table.activeMapId ? await TableMap.findById(table.activeMapId) : null;
+    const now = Date.now();
+    const cue = currentCue(table);
+    const out = {
+      _id: table._id, name: table.name, description: table.description, status: table.status,
+      seats: table.seats.map(s => s.userId), activeMapId: table.activeMapId,
+      sound: table.sound, cue, fx: liveFx(table.fx, now), serverNow: now,
+      map: req.isAdmin ? gmView(live) : (() => { const v = playerView(live); if (v) delete v.image; return v; })(),
+    };
+    if (req.isAdmin) out.cues = table.cues;
+    res.json(out);
+  } catch (err) { fail(res, 'GET /api/tables/:id/live', err); }
+});
+
+// GET /api/tables/:id/maps/:mapId/image — the background, fetched once per map. A
+// player may fetch only the LIVE map's image; the GM any map on the table.
+router.get('/:id/maps/:mapId/image', requireAuth, async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    if (!req.isAdmin) {
+      if (!seated(table, req.userId)) return res.status(403).json({ error: 'You are not seated at this table' });
+      if (String(table.activeMapId) !== String(req.params.mapId)) return res.status(403).json({ error: 'That map is not live' });
+    }
+    const map = await TableMap.findOne({ _id: req.params.mapId, tableId: table._id }).select('image width height').lean();
+    if (!map) return res.status(404).json({ error: 'Map not found on this table' });
+    res.json({ image: map.image, width: map.width, height: map.height });
+  } catch (err) { fail(res, 'GET map image', err); }
+});
+
+// POST /api/tables/:id/roll { kind, height?, stat?, gmOnly? } — the server rolls and
+// posts the result as a Message. Only the GM may make a roll GM-only.
+router.post('/:id/roll', requireAuth, async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    if (!req.isAdmin && !seated(table, req.userId)) return res.status(403).json({ error: 'You are not seated at this table' });
+    const b = req.body || {};
+    const result = dice.roll(b.kind, { height: b.height, stat: b.stat });
+    if (!result) return res.status(400).json({ error: `kind must be one of ${dice.KINDS.join(', ')}` });
+    let senderName = 'GM';
+    if (!req.isAdmin) {
+      const c = await Character.findOne({ userId: req.userId }, 'state.identity.name').lean();
+      const u = await User.findById(req.userId, 'username').lean();
+      senderName = c?.state?.identity?.name?.trim() || u?.username || 'Contestant';
+    } else if (b.actorName) senderName = String(b.actorName).slice(0, 60);
+    const gmOnly = !!(req.isAdmin && b.gmOnly);
+    const msg = await Message.create({
+      sender: req.userId, senderName, recipient: null, recipientNPC: null, recipientName: null,
+      text: `${result.label}: ${result.total}${result.effect ? ' — ' + result.effect : ''}`,
+      kind: 'roll', roll: result, gmOnly, tableId: String(table._id),
+    });
+    res.status(201).json(msg);
+  } catch (err) { fail(res, 'POST roll', err); }
+});
+
 // ── GM side ──────────────────────────────────────────────────────────────────
 router.use(requireAdmin);
+
+// POST /api/tables/:id/cues — add a sound cue
+router.post('/:id/cues', async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    const cue = normCue(req.body || {}, { cueId: uid(), name: '', source: 'youtube', ref: '', start: 0, end: 0, loop: true, volume: 80, trigger: 'manual', mapId: '' });
+    const bad = cueProblem(cue); if (bad) return res.status(400).json({ error: bad });
+    table.cues.push(cue);
+    await table.save();
+    res.status(201).json(table.cues[table.cues.length - 1]);
+  } catch (err) { fail(res, 'POST cue', err); }
+});
+
+// PATCH /api/tables/:id/cues/:cueId
+router.patch('/:id/cues/:cueId', async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    const i = table.cues.findIndex(c => c.cueId === req.params.cueId);
+    if (i < 0) return res.status(404).json({ error: 'Cue not found' });
+    const cue = normCue(req.body || {}, typeof table.cues[i].toObject === 'function' ? table.cues[i].toObject() : { ...table.cues[i] });
+    const bad = cueProblem(cue); if (bad) return res.status(400).json({ error: bad });
+    table.cues[i] = cue; table.markModified('cues');
+    await table.save();
+    res.json(table.cues[i]);
+  } catch (err) { fail(res, 'PATCH cue', err); }
+});
+
+// DELETE /api/tables/:id/cues/:cueId — stops it if it is playing
+router.delete('/:id/cues/:cueId', async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    const before = table.cues.length;
+    table.cues = table.cues.filter(c => c.cueId !== req.params.cueId);
+    if (table.cues.length === before) return res.status(404).json({ error: 'Cue not found' });
+    if (table.sound?.cueId === req.params.cueId) setSound(table, '');
+    await table.save();
+    res.json({ ok: true });
+  } catch (err) { fail(res, 'DELETE cue', err); }
+});
+
+// POST /api/tables/:id/sound { cueId } to play a cue from its start · { stop: true } to stop
+router.post('/:id/sound', async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    const b = req.body || {};
+    if (b.stop) setSound(table, '');
+    else {
+      const cue = table.cues.find(c => c.cueId === b.cueId);
+      if (!cue) return res.status(404).json({ error: 'Cue not found' });
+      setSound(table, cue.cueId);
+    }
+    await table.save();
+    res.json({ sound: table.sound, cue: currentCue(table) });
+  } catch (err) { fail(res, 'POST sound', err); }
+});
+
+// POST /api/tables/:id/fx { type, to: {col,row}, from?: {col,row}, label? } — fire a visual effect
+router.post('/:id/fx', async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    const b = req.body || {};
+    if (!FX_TYPES.includes(b.type)) return res.status(400).json({ error: `type must be one of ${FX_TYPES.join(', ')}` });
+    if (!b.to || b.to.col == null || b.to.row == null) return res.status(400).json({ error: 'to {col,row} required' });
+    const fx = { fxId: uid(), type: b.type, to: { col: Math.round(num(b.to.col)), row: Math.round(num(b.to.row)) },
+                 from: b.from && b.from.col != null ? { col: Math.round(num(b.from.col)), row: Math.round(num(b.from.row)) } : null,
+                 label: String(b.label || '').slice(0, 40), at: new Date() };
+    table.fx = [...pruneFx(table.fx), fx];
+    await table.save();
+    res.status(201).json(fx);
+  } catch (err) { fail(res, 'POST fx', err); }
+});
 
 // GET /api/tables — every table, with seat and map counts (no images)
 router.get('/', async (req, res) => {
@@ -161,6 +345,9 @@ router.patch('/:id', async (req, res) => {
         const map = await TableMap.findOne({ _id: activeMapId, tableId: table._id });
         if (!map) return res.status(400).json({ error: 'activeMapId is not a map on this table' });
         table.activeMapId = map._id;
+        // a cue with trigger 'map-live' bound to this map starts the moment it goes live
+        const auto = (table.cues || []).find(c => c.trigger === 'map-live' && c.mapId === String(map._id));
+        if (auto) setSound(table, auto.cueId);
       }
     }
     await table.save();
@@ -307,3 +494,7 @@ module.exports.playerView = playerView;
 module.exports.normToken = normToken;
 module.exports.imageProblem = imageProblem;
 module.exports.MAX_IMAGE_CHARS = MAX_IMAGE_CHARS;
+module.exports.normCue = normCue;
+module.exports.cueProblem = cueProblem;
+module.exports.liveFx = liveFx;
+module.exports.FX_TYPES = FX_TYPES;

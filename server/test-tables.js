@@ -38,20 +38,31 @@ function makeModel(defaults) {
     _rows: rows,
     create: async (data) => { const row = { _id: 'id' + (seq++), ...defaults(), ...clone(data), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() }; rows.set(row._id, row); return wrap(row); },
     findById: (id) => { const r = rows.get(String(id)); const p = Promise.resolve(r ? wrap(r) : null); p.lean = async () => (r ? clone(r) : null); return p; },
-    findOne: async (q) => { const r = [...rows.values()].find(x => matches(x, q)); return r ? wrap(r) : null; },
+    findOne: (q, fields) => {
+      const r = [...rows.values()].find(x => matches(x, q));
+      const p = Promise.resolve(r ? wrap(r) : null);
+      p.select = (f) => ({ lean: async () => { if (!r) return null; const c = clone(r); if (f.startsWith('-')) { delete c[f.slice(1)]; return c; } const keep = f.split(' '); return Object.fromEntries(Object.entries(c).filter(([k]) => keep.includes(k) || k === '_id')); } });
+      p.lean = async () => (r ? clone(r) : null);
+      return p;
+    },
     find: (q = {}) => chain([...rows.values()].filter(x => matches(x, q))),
     deleteMany: async (q) => { for (const [k, v] of rows) if (matches(v, q)) rows.delete(k); },
     aggregate: async () => { const n = {}; for (const v of rows.values()) n[v.tableId] = (n[v.tableId] || 0) + 1; return Object.entries(n).map(([k, c]) => ({ _id: k, n: c })); },
   };
   return M;
 }
-const FakeTable = makeModel(() => ({ description: '', status: 'open', seats: [], activeMapId: null, createdBy: '' }));
+const FakeTable = makeModel(() => ({ description: '', status: 'open', seats: [], activeMapId: null, createdBy: '', cues: [], sound: { cueId: '', playing: false, startedAt: null, seq: 0 }, fx: [] }));
 const FakeMap = makeModel(() => ({ image: '', width: 0, height: 0, grid: { type: 'hex', size: 40, offsetX: 0, offsetY: 0, cols: 30, rows: 20 }, visible: false, revealed: [], fogEnabled: false, tokens: [], notes: '' }));
 
+const MESSAGES = [];
+const FakeMessage = { create: async (m) => { const row = { _id: 'm' + (seq++), ...clone(m), createdAt: new Date().toISOString() }; MESSAGES.push(row); return row; } };
+const FakeUser = { findById: () => ({ lean: async () => ({ username: 'sasha_user' }) }) };
+const FakeCharacter = { findOne: () => ({ lean: async () => ({ state: { identity: { name: 'Sasha' } } }) }) };
 let CURRENT = { userId: 'gm', isAdmin: true };
 for (const [mod, exp] of [
   ['./models/Table', FakeTable], ['./models/TableMap', FakeMap],
-  ['./middleware/auth', (req, res, next) => { req.userId = CURRENT.userId; next(); }],
+  ['./models/Message', FakeMessage], ['./models/User', FakeUser], ['./models/Character', FakeCharacter],
+  ['./middleware/auth', (req, res, next) => { req.userId = CURRENT.userId; req.isAdmin = CURRENT.isAdmin; next(); }],
   ['./middleware/adminAuth', (req, res, next) => { if (!CURRENT.isAdmin) return res.status(403).json({ error: 'Admin access required' }); req.userId = CURRENT.userId; next(); }],
 ]) { const p = require.resolve(mod); require.cache[p] = { id: p, filename: p, loaded: true, exports: exp }; }
 
@@ -137,6 +148,70 @@ const eq = (label, got, want) => check(label, JSON.stringify(got) === JSON.strin
   await call('PATCH', `/${T}/maps/${M1}`, { fogEnabled: true, revealed: ['1,1', '2,1'] });
   asPlayer('sasha');
   r = await call('GET', '/mine'); eq('fog on → revealed keys reach the player', r.body[0].live.revealed, ['1,1', '2,1']);
+
+  // ── 8b. the poll: /live projects per role and never carries the image ──────
+  asPlayer('sasha');
+  r = await call('GET', `/${T}/live`); eq('player /live → 200', r.status, 200);
+  check('player /live map has no image', r.body.map && r.body.map.image === undefined);
+  eq('player /live strips hidden tokens', r.body.map.tokens.map(t => t.name), ['Sasha', 'x']);
+  check('player /live has no cue list', r.body.cues === undefined);
+  check('player /live carries serverNow', typeof r.body.serverNow === 'number');
+  asPlayer('filipe');
+  r = await call('GET', `/${T}/live`); eq('unseated /live → 403', r.status, 403);
+  asGM();
+  r = await call('GET', `/${T}/live`); eq('GM /live sees hidden tokens', r.body.map.tokens.length, 3); check('GM /live has the cue list', Array.isArray(r.body.cues));
+  check('GM /live map has no image either', r.body.map.image === undefined);
+
+  // ── 8c. the image: once per map, live-only for players ─────────────────────
+  asPlayer('sasha');
+  r = await call('GET', `/${T}/maps/${M1}/image`); eq('player fetches the live map image', r.body.image, 'data:image/png;base64,AAAA');
+  r = await call('GET', `/${T}/maps/${M2}/image`); eq('player cannot fetch a map that is not live', r.status, 403);
+  asGM();
+  r = await call('GET', `/${T}/maps/${M2}/image`); eq('GM fetches any map', r.status, 200);
+
+  // ── 8d. the server rolls ───────────────────────────────────────────────────
+  asPlayer('sasha');
+  r = await call('POST', `/${T}/roll`, { kind: 'body' }); eq('player roll → 201', r.status, 201);
+  eq('roll is a Message of kind roll', r.body.kind, 'roll'); eq('roll names the character', r.body.senderName, 'Sasha');
+  check('d6 result in range', r.body.roll.total >= 1 && r.body.roll.total <= 6); check('Forced Action carries its table row', /—/.test(r.body.roll.effect));
+  r = await call('POST', `/${T}/roll`, { kind: 'body', gmOnly: true }); eq('a player cannot make a roll GM-only', r.body.gmOnly, false);
+  r = await call('POST', `/${T}/roll`, { kind: 'd20' }); eq('no d20 in this game → 400', r.status, 400);
+  r = await call('POST', `/${T}/roll`, { kind: 'fall', height: 2 }); eq('a 2 m fall rolls nothing', r.body.roll.total, 0);
+  r = await call('POST', `/${T}/roll`, { kind: 'fall', height: 10 }); eq('a 10 m fall is 3d6', r.body.roll.die, '3d6');
+  asGM();
+  r = await call('POST', `/${T}/roll`, { kind: 'tool', gmOnly: true, actorName: 'The Rack' }); eq('GM roll can be GM-only', r.body.gmOnly, true); eq('GM roll can name an actor', r.body.senderName, 'The Rack');
+  asPlayer('filipe');
+  r = await call('POST', `/${T}/roll`, { kind: 'd4' }); eq('unseated roll → 403', r.status, 403);
+
+  // ── 8e. sound cues ─────────────────────────────────────────────────────────
+  asGM();
+  r = await call('POST', `/${T}/cues`, { name: 'Boss phase 1', source: 'youtube', ref: 'dQw4w9WgXcQ', start: 0, end: 36, loop: true });
+  eq('cue create → 201', r.status, 201); eq('cue keeps its segment', [r.body.start, r.body.end, r.body.loop], [0, 36, true]); const C1 = r.body.cueId;
+  r = await call('POST', `/${T}/cues`, { name: 'Phase 2', source: 'youtube', ref: 'dQw4w9WgXcQ', start: 36, end: 110, loop: true }); const C2 = r.body.cueId;
+  r = await call('POST', `/${T}/cues`, { name: 'Bad', source: 'youtube', ref: 'https://youtube.com/watch?v=x' }); eq('a URL is not a video id → 400', r.status, 400);
+  r = await call('POST', `/${T}/cues`, { name: 'Bad', source: 'audio', ref: 'http://x/y.mp3' }); eq('plain-http audio → 400', r.status, 400);
+  r = await call('POST', `/${T}/cues`, { name: 'Backwards', source: 'youtube', ref: 'dQw4w9WgXcQ', start: 50, end: 20 }); eq('end before start → runs to the end (0)', r.body.end, 0);
+  r = await call('POST', `/${T}/sound`, { cueId: C1 }); eq('play cue 1', r.body.sound.cueId, C1); eq('…playing', r.body.sound.playing, true); check('…startedAt set', !!r.body.sound.startedAt); const seq1 = r.body.sound.seq;
+  r = await call('POST', `/${T}/sound`, { cueId: C2 }); eq('switch to cue 2 bumps seq', r.body.sound.seq, seq1 + 1); eq('…cue projected', r.body.cue.name, 'Phase 2');
+  asPlayer('sasha');
+  r = await call('GET', `/${T}/live`); eq('player /live carries only the playing cue', r.body.cue.cueId, C2);
+  asGM();
+  r = await call('POST', `/${T}/sound`, { stop: true }); eq('stop', r.body.sound.playing, false); eq('stop clears the cue', r.body.cue, null);
+  r = await call('POST', `/${T}/sound`, { cueId: 'nope' }); eq('unknown cue → 404', r.status, 404);
+  r = await call('PATCH', `/${T}/cues/${C1}`, { trigger: 'map-live', mapId: M2 }); eq('cue bound to a map', r.body.mapId, M2);
+  r = await call('PATCH', `/${T}`, { activeMapId: M2 }); eq('map going live fires its cue', r.body.sound.cueId, C1);
+  await call('PATCH', `/${T}`, { activeMapId: M1 });
+  r = await call('DELETE', `/${T}/cues/${C1}`); eq('delete the playing cue', r.body.ok, true);
+  r = await call('GET', `/${T}/live`); eq('…which stops it', r.body.sound.playing, false);
+
+  // ── 8f. visual effects ─────────────────────────────────────────────────────
+  r = await call('POST', `/${T}/fx`, { type: 'Burn', from: { col: 6, row: 8 }, to: { col: 10, row: 7 }, label: 'Torch' }); eq('fx → 201', r.status, 201); eq('fx keeps its type', r.body.type, 'Burn');
+  r = await call('POST', `/${T}/fx`, { type: 'Lightning', to: { col: 1, row: 1 } }); eq('unknown damage type → 400', r.status, 400);
+  r = await call('POST', `/${T}/fx`, { type: 'Crush' }); eq('fx without a target → 400', r.status, 400);
+  asPlayer('sasha');
+  r = await call('GET', `/${T}/live`); eq('player /live carries the effect', r.body.fx.map(f => f.type), ['Burn']);
+  eq('liveFx drops effects older than the window', router.liveFx([{ at: new Date(Date.now() - 30000), type: 'Burn' }]).length, 0);
+  asGM();
 
   // ── 9. deleting the live map clears activeMapId; deleting the table cascades ─
   asGM();

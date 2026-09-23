@@ -1,9 +1,10 @@
 # Leaving Roll20 — what a virtual tabletop is, what GPT needs, and what to build
 
-**Status:** research + proposal, 2026-09-23. The foundation (tables, seats, maps) is BUILT
-and tested; the play surface is MOCKED and waiting on approval:
-**https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv** (toggle GM / Player view; drag tokens;
-roll the book's dice).
+**Status:** research 2026-09-23, **approved and BUILT the same day** (V-8 below). The mockup
+that was approved: **https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv**. The app now has the
+table (`/table` for players, `/gm/:tableId` for the GM), the book's dice, sound cues and
+visual effects by damage type. Real-time is the 2 s poll; Socket.IO is still the recommended
+upgrade and still needs approval (it is a dependency).
 
 > Sourcing note. The container's proxy blocks every first-party VTT host (roll20.net,
 > help.roll20.net, foundryvtt.com, owlbear.rodeo, web.archive.org), so the Roll20 inventory
@@ -203,14 +204,78 @@ needs to reach every screen in the same instant, which is the socket's first cus
 | # | Step | Size | Done when |
 |---|---|---|---|
 | 0 | **Foundation** — Table/TableMap, routes, admin Tables section, login `userId` | ✅ built | GM creates a table, seats players, uploads a map, sets it live; player `/mine` returns it |
-| 1 | **Player table page** `/table` — the live map as a hex board (SVG over the image), tokens drawn from `tokens[]` + live sheet HP for `player` kind, drag your own token (the one player write), Clock rail, 2 s poll | ~1 session | two browsers see each other's tokens move within 2 s |
-| 2 | **GM table page** — same board with every token draggable, hide/reveal, add token from the enemy library (snapshot `parts[]` from `bodyParts`) or a seated player, fog reveal brush, ruler, ping | ~1 session | the GM runs a room from the app with no Roll20 tab open |
-| 3 | **Dice in Comms** — `Message.kind`, three buttons, GM-only, the §6.1 table row printed | ~½ session | a Forced Action rolled on the table reads its consequence aloud in chat |
-| 4 | **Socket.IO** — rooms per table, events on every write, clients re-fetch; polling stays as fallback | ~1 session | a token drag lands on the other screen in <100 ms |
-| 5 | **Per-part damage from the table** — `PATCH players/:id/parts/:partId`, tokens show part HP + condition badges, the Press highlighter | ~1 session | GM clicks a torso, types 4, the player's sheet updates without a reload |
-| 6 | Handouts, drawing, vision cones, map alignment UI | later | — |
+| 1 | **Player table page** `/table` — the live map as a hex board (SVG over the image), tokens, own token draggable, Clock rail, 2 s poll | ✅ built | two browsers see each other's tokens move within 2 s |
+| 2 | **GM table page** `/gm/:tableId` — every token draggable, hide/reveal, add from the enemy library or the seated players, fog brush, ruler, ping | ✅ built | the GM runs a room from the app with no Roll20 tab open |
+| 3 | **Dice** — the server rolls, posts a `kind: 'roll'` Message, GM-only option, the §6.1 row printed | ✅ built | a Forced Action rolled on the table reads its consequence aloud in chat |
+| 4 | **Socket.IO** — rooms per table, events on every write, clients re-fetch; polling stays as fallback | needs approval | a token drag lands on the other screen in <100 ms |
+| 5 | **Per-part damage from the table** — `PATCH players/:id/parts/:partId`, tokens show part HP + condition badges | ✅ built (the Press highlighter is not) | GM clicks −, the player's sheet updates on its next poll |
+| 5b | **Sound cues** and **visual effects by damage type** (owner ask, 2026-09-23) | ✅ built | see V-8 |
+| 6 | Handouts, drawing, vision cones, map alignment UI, the Press highlighter, GM prep view of a non-live map | later | — |
 
-Steps 1–2 are the mockup; **they start when the mockup is approved.**
+---
+
+## V-8 — What was built (2026-09-23) and how the two new tools work
+
+### The table, end to end
+- **`/table`** (player): picks the seated table (a selector if several), polls `GET /api/tables/:id/live`
+  every 2 s (`useTablePoll`), fetches the map image once per map, draws the board, drags only the
+  player's own token (`PATCH …/tokens/:id/move`), shows the Clock (`TrackerBar`), their body from the
+  sheet, the dice tray and the chat. A "🎲 Table" button on the sheet's topbar opens it.
+- **`/gm/:tableId`** (GM, admin token): the same `HexBoard` with `role="gm"` — every token drags;
+  hide / reveal / remove; add a token from the enemy library (parts snapshotted from `bodyParts`,
+  placed hidden at 1,1) or a seated player (size from their sheet); per-part − / + (an enemy token's
+  own `parts[]`; a player's via the new `PATCH /api/admin/players/:id/parts/:partId`); conditions;
+  the fog brush (radius 2, debounced 400 ms) with on/off and cover-all; ruler; ping; the **fx** tool;
+  the cue buttons; Clock advance/retreat; GM-only dice rolled *as* the selected token; the chat.
+  "Open the GM table" sits on each table in Admin → Tables.
+- **Board geometry** is pure (`client/src/table/hex.js`, 140 tests with the sound engine): pointy-top
+  odd-r hexes, `nearestCell` round-trips every cell, `moveCost` is §5.5 at v1.15, wheel-zoom and pan.
+- **One honest limit:** the GM page shows the **live** map only. Prep happens with hidden tokens on
+  the live map, or by putting the next map live between rooms. A "preview a non-live map" mode is
+  step 6.
+
+### Sound cues — "song A: loop 0–0:36, then 0:36–1:50, then stop"
+- A **cue** is a segment of a source: `{ name, source: youtube|audio, ref, start, end, loop, volume,
+  trigger }`. The owner's example is **three cues on one video**: *phase 1* 0:00–0:36 looping,
+  *phase 2* 0:36–1:50 looping, and the **Stop** button. Cues are authored in Admin → Tables (paste a
+  YouTube link or id; or an https mp3 URL; or upload a small file, which is stored as a data URL under
+  the same ~6 MB cap as a map) and fired from the GM table's left pane.
+- **Trigger `map-live`** binds a cue to a map: the moment that map goes live the cue starts. That is
+  the "on map entry" trigger. Everything else is a button.
+- **Sync without a socket:** the table's `sound` state holds `{ cueId, playing, startedAt, seq }`.
+  Every client computes *where in the source it should be* from `startedAt` (server time, with the
+  client clock offset from the poll) — so a player who opens the page mid-boss lands inside the
+  loop at the right second — and a 250 ms loop seeks when it drifts more than 1.5 s or reaches the
+  segment's end (`soundEngine.tick`). A cue change is seen within one poll (≤ 2 s).
+- **Backends:** the YouTube IFrame API (audio from a video; a 1 px player sits in the corner, a
+  "video" toggle shows it) and a plain `<audio>` element. Same loop drives both.
+- ⚠️ **The browser rule:** nothing plays before a user gesture. Each player page shows **"🔊 Enable
+  sound"** once; after that click every cue the GM fires plays unasked. The GM page runs the same
+  player, so the GM hears what the table hears.
+- ⚠️ **YouTube limits:** the video must allow embedding (most music does; some labels block it —
+  the status line says so), and a few videos refuse to play in a 1 px frame; the "video" toggle is
+  the workaround. Playback on a phone that has locked its screen stops (the OS, not us).
+
+### Visual effects by damage type
+- `POST /api/tables/:id/fx { type, to, from?, label }` queues an effect; pollers see it for 20 s and
+  play it once. **Eight types, eight SHAPES** (`FxLayer.jsx`): Bleed slashes and drips · Crush rings
+  and cracks · Burn tongues rising · Chill shards · Poison bubbles · Infection crystals growing ·
+  Dissolution an unravelling spiral · Heal a soft pulse — shape not just colour, so a colour-blind
+  table still reads the attack. With a token selected the effect **travels from it** (a projectile,
+  then the burst on the target).
+- **How the GM fires one:** pick the **fx** tool, pick a type from the toolbar, click a hex or a
+  token. The label ("Burn → The Rack") is drawn over the burst.
+- **Not yet automatic from skills.** A skill has `damageType[]` on its template, so "cast this
+  skill" firing the matching effect is a small follow-up once the table knows which skill was used
+  (that needs a "use skill" action on the table, which does not exist yet). Today the GM picks the
+  type by hand.
+
+### Tests and verification
+`test-tables.js` **105** (poll projection per role, live-only image, server rolls, cue validation,
+map-live trigger, fx) · `table.test.mjs` **140** (hex geometry, §5.5 pricing, the cue arithmetic) ·
+every older suite green · `vite build` clean · **headless Chromium loads `/table`, `/gm/:id` and
+`/admin` with no runtime errors.** ⚠️ **Not seen:** a logged-in table with a real map — there is no
+MongoDB in the container. The first real session is the test.
 
 ---
 

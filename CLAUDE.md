@@ -2577,8 +2577,27 @@ approval): https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv
   through a per-part PATCH (step 5, unbuilt). Real-time: **recommend Socket.IO** on the same
   Express server (Render free supports WebSockets), polling as fallback — needs approval,
   it is a new dependency.
-- 🔴 **NOT BUILT, by design:** the play surface (steps 1–2 of V-5), dice in Comms, the socket.
-  They start on mockup approval. **Five owner calls in `vtt-research.md` V-7.**
+- ✅ **APPROVED AND BUILT THE SAME DAY — the table is live in the app** (`vtt-research.md` V-8).
+  **`/table`** (player: live map, own token drags, Clock, dice, chat, sound) · **`/gm/:tableId`**
+  (GM: every token, hide/reveal, add from enemies or seated players, per-part − / +, conditions,
+  fog brush, ruler, ping, **fx** by damage type, cue buttons, Clock advance, GM-only dice). Shared
+  `client/src/table/HexBoard.jsx`; pure `hex.js` + `soundEngine.js` (**140 tests**). Poll is
+  `GET /api/tables/:id/live` every 2 s, image fetched once per map. **Dice are rolled by the
+  SERVER** (`server/dice.js`: §6.1 d6 tables, §14 d4/d6/d8, §21.5 falling) and posted as
+  `Message{kind:'roll'}`; `gmOnly` never reaches a player feed.
+- 🎵 **SOUND CUES (owner ask):** a cue is a SEGMENT `{source: youtube|audio, ref, start, end, loop}`
+  — "loop 0–0:36 · then 0:36–1:50 · then stop" is three cues on one video plus the Stop button.
+  Trigger `map-live` fires a cue when its map goes live. Sync is arithmetic on `sound.startedAt`
+  (server time) so a late joiner lands mid-loop at the right second; a 250 ms loop seeks on drift.
+  ⚠️ Browsers need one click ("🔊 Enable sound") per page before anything plays; YouTube videos
+  must allow embedding.
+- 🎨 **VISUAL EFFECTS:** `POST /api/tables/:id/fx` queues one; eight damage types, eight SHAPES
+  (`FxLayer.jsx`), projectile from the selected token. GM picks the type by hand — auto-firing
+  from a skill's `damageType` needs a "use skill" action on the table first (not built).
+- 🔴 **Honest limits:** no MongoDB in the container, so **a logged-in table with a real map has
+  not been seen** — headless Chromium loads all three routes without runtime errors and every suite
+  is green (105 tables · 140 table-client · the rest unchanged). The GM page shows the LIVE map
+  only (prep = hidden tokens, or go live between rooms). Socket.IO still needs approval.
 - ✅ **Pre-existing test failure closed:** `test-skill-library.js` still asserted the
   `animalOnly` boolean that 2026-09-19 replaced with `raceLock`; now 17/17.
 

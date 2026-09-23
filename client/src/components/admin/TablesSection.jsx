@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { apiFetch } from '../../api.js';
+import { parseTimecode, formatTimecode, parseYouTubeRef } from '../../table/soundEngine.js';
 
 /**
  * TablesSection — the GM creates a TABLE (Roll20's "game"), seats players at it,
  * and stacks MAPS on it. One map is LIVE: that is the one a seated player sees.
  *
- * This is the setup half. The play surface (hex map, tokens, dice, the Clock) is
- * mocked up and waiting on approval — see docs/vtt-research.md.
+ * This is the setup half; the play surface is /gm/:tableId (GM) and /table (players).
+ * Sound cues are authored here and fired from the GM table. See docs/vtt-research.md.
  */
 const MAX_IMAGE_CHARS = 8_000_000;   // mirrors routes/tables.js
 
@@ -30,6 +32,7 @@ export default function TablesSection({ token, players, showToast }) {
   const [newName, setNewName] = useState('');
   const [mapForm, setMapForm] = useState({ name: '', image: '', width: 0, height: 0, size: 40, cols: 30, rows: 20 });
   const [busy, setBusy] = useState(false);
+  const [cueForm, setCueForm] = useState({ name: '', source: 'youtube', ref: '', start: '0:00', end: '', loop: true, volume: 80, trigger: 'manual', mapId: '' });
 
   useEffect(() => { loadTables(); }, []);
   function loadTables() { apiFetch('/api/tables', {}, token).then(d => { if (Array.isArray(d)) setTables(d); }); }
@@ -85,6 +88,27 @@ export default function TablesSection({ token, players, showToast }) {
     if (d.error) showToast(d.error, 'err'); else refresh();
   }
 
+  async function addCue(e) {
+    e.preventDefault();
+    const ref = cueForm.source === 'youtube' ? parseYouTubeRef(cueForm.ref) : cueForm.ref.trim();
+    if (cueForm.source === 'youtube' && !ref) return showToast('Paste a YouTube link or video id', 'err');
+    const body = { name: cueForm.name, source: cueForm.source, ref, start: parseTimecode(cueForm.start), end: parseTimecode(cueForm.end), loop: cueForm.loop, volume: Number(cueForm.volume), trigger: cueForm.trigger, mapId: cueForm.trigger === 'map-live' ? cueForm.mapId : '' };
+    const d = await apiFetch(`/api/tables/${sel._id}/cues`, { method: 'POST', body: JSON.stringify(body) }, token);
+    if (d.error) return showToast(d.error, 'err');
+    setCueForm(f => ({ ...f, name: '', start: '0:00', end: '' }));
+    refresh(); showToast('Cue added');
+  }
+  async function deleteCue(c) {
+    const d = await apiFetch(`/api/tables/${sel._id}/cues/${c.cueId}`, { method: 'DELETE' }, token);
+    if (d.error) showToast(d.error, 'err'); else refresh();
+  }
+  async function pickAudio(e) {
+    const file = e.target.files?.[0]; if (!file) return;
+    const fr = new FileReader();
+    fr.onload = () => { if (fr.result.length > MAX_IMAGE_CHARS) return showToast('Audio too large — link an https URL or a YouTube video instead', 'err'); setCueForm(f => ({ ...f, source: 'audio', ref: fr.result, name: f.name || file.name.replace(/\.[^.]+$/, '') })); };
+    fr.readAsDataURL(file);
+  }
+
   const seatedIds = new Set((sel?.seats || []).map(s => s.userId));
   const nameOf = uid => { const p = players.find(p => p.userId === uid); return p ? (p.characterName || p.username) : uid; };
 
@@ -127,6 +151,7 @@ export default function TablesSection({ token, players, showToast }) {
                 <option value="closed">Closed</option>
               </select>
               <span style={{ flex: 1 }} />
+              <Link to={`/gm/${sel._id}`} className="btn btn-gold btn-sm" target="_blank">🎲 Open the GM table</Link>
               <button className="btn btn-danger btn-sm" onClick={deleteTable}>Delete table</button>
             </div>
             <input className="fi" placeholder="Description (players see this)" defaultValue={sel.description} key={'d' + sel._id} onBlur={e => e.target.value !== sel.description && patchTable({ description: e.target.value })} style={{ marginTop: 8 }} />
@@ -185,6 +210,35 @@ export default function TablesSection({ token, players, showToast }) {
               </div>
               <button className="btn btn-purple btn-sm" type="submit" disabled={busy}>{busy ? 'Saving…' : 'Add map'}</button>
             </form>
+          </div>
+        
+          <div className="panel admin">
+            <div className="panel-title admin">Sound cues — a segment of a track, fired from the GM table</div>
+            {(sel.cues || []).length === 0 && <div style={{ color: 'var(--muted-text)', fontSize: 11, marginBottom: 8 }}>No cues yet. A cue plays one stretch of a YouTube video or an mp3 — "0:00–0:36, looping" — so a boss with three phases is three cues on one track, and "stop" is a button on the table.</div>}
+            {(sel.cues || []).map(c => (
+              <div key={c.cueId} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '6px 10px', border: '1px solid var(--border)', borderRadius: 4, marginBottom: 6, fontSize: 12 }}>
+                <span style={{ fontWeight: 700, flex: 1 }}>{c.name}</span>
+                <span style={{ fontFamily: "'Courier New', monospace", fontSize: 11, color: 'var(--muted-text)' }}>{c.source === 'youtube' ? `▶ ${c.ref}` : '♪ audio'} · {formatTimecode(c.start)}–{c.end ? formatTimecode(c.end) : 'end'}{c.loop ? ' ⟳' : ' once'} · vol {c.volume}{c.trigger === 'map-live' ? ` · auto when "${sel.maps.find(m => String(m._id) === c.mapId)?.name || '?'}" goes live` : ''}</span>
+                <button className="btn btn-danger btn-xs" onClick={() => deleteCue(c)}>✕</button>
+              </div>
+            ))}
+            <form onSubmit={addCue} style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 2fr', gap: 6, marginTop: 8, alignItems: 'end' }}>
+              <div className="field-group"><span className="field-label">Cue name</span><input className="fi" value={cueForm.name} onChange={e => setCueForm(f => ({ ...f, name: e.target.value }))} placeholder="Boss — phase 1" /></div>
+              <div className="field-group"><span className="field-label">Source</span><select className="fi" value={cueForm.source} onChange={e => setCueForm(f => ({ ...f, source: e.target.value, ref: '' }))}><option value="youtube">YouTube</option><option value="audio">mp3 / audio URL</option></select></div>
+              {cueForm.source === 'youtube'
+                ? <div className="field-group"><span className="field-label">YouTube link or video id</span><input className="fi" value={cueForm.ref} onChange={e => setCueForm(f => ({ ...f, ref: e.target.value }))} placeholder="https://youtu.be/…" /></div>
+                : <div className="field-group"><span className="field-label">https URL, or upload a small file (under ~6 MB)</span><div style={{ display: 'flex', gap: 6 }}><input className="fi" value={cueForm.ref.startsWith('data:') ? '(file loaded)' : cueForm.ref} onChange={e => setCueForm(f => ({ ...f, ref: e.target.value }))} placeholder="https://…/track.mp3" style={{ flex: 1 }} /><input type="file" accept="audio/*" onChange={pickAudio} style={{ width: 110, fontSize: 10 }} /></div></div>}
+              <div className="field-group"><span className="field-label">Start (m:ss)</span><input className="fi" value={cueForm.start} onChange={e => setCueForm(f => ({ ...f, start: e.target.value }))} /></div>
+              <div className="field-group"><span className="field-label">End (m:ss · blank = track end)</span><input className="fi" value={cueForm.end} onChange={e => setCueForm(f => ({ ...f, end: e.target.value }))} placeholder="0:36" /></div>
+              <div style={{ display: 'flex', gap: 10, alignItems: 'center', fontSize: 11, flexWrap: 'wrap' }}>
+                <label><input type="checkbox" checked={cueForm.loop} onChange={e => setCueForm(f => ({ ...f, loop: e.target.checked }))} /> loop the segment</label>
+                <label>vol <input className="fi" type="number" min="0" max="100" value={cueForm.volume} onChange={e => setCueForm(f => ({ ...f, volume: e.target.value }))} style={{ width: 56 }} /></label>
+                <label>trigger <select className="fi" value={cueForm.trigger} onChange={e => setCueForm(f => ({ ...f, trigger: e.target.value }))} style={{ width: 'auto' }}><option value="manual">button on the table</option><option value="map-live">when a map goes live</option></select></label>
+                {cueForm.trigger === 'map-live' && <select className="fi" value={cueForm.mapId} onChange={e => setCueForm(f => ({ ...f, mapId: e.target.value }))} style={{ width: 'auto' }}><option value="">— which map —</option>{sel.maps.map(m => <option key={m._id} value={m._id}>{m.name}</option>)}</select>}
+                <button className="btn btn-purple btn-sm" type="submit">Add cue</button>
+              </div>
+            </form>
+            <div style={{ fontSize: 10, color: 'var(--muted-text)', marginTop: 8 }}>Players hear it after clicking "Enable sound" once on their table page (a browser rule, not ours). YouTube must allow embedding for the video; most music does.</div>
           </div>
         </div>
       )}

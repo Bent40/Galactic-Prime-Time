@@ -229,6 +229,7 @@ export default function CharacterSheet() {
             {saveStatus === 'saving' ? 'SAVING…' : saveStatus === 'error' ? 'NOT SAVED' : 'SAVED'}
           </span>
           <span style={{ letterSpacing: 1 }}>{auth.username?.toUpperCase()}</span>
+          <button className="btn btn-cyan btn-sm" onClick={() => window.open('/table', '_blank')} title="Open the table (map, dice, chat)">🎲 Table</button>
           <button className="btn btn-wiki" onClick={() => window.open('/wiki', '_blank')} title="Open the rulebook">📖 Wiki</button>
           <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>
         </div>
