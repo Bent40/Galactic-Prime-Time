@@ -57,7 +57,7 @@ const eq = (label, got, want) => {
   // -- create ---------------------------------------------------------------
   SAVED = [];
   await send(base, { name: 'Swim', animalOnly: true, origin: 'basic' });
-  eq('create keeps animalOnly', last().animalOnly, true);
+  eq('create maps animalOnly:true → raceLock Animal (ruled 2026-09-19)', last().raceLock, 'Animal');
   eq('create keeps origin basic', last().origin, 'basic');
 
   await send(base, { name: 'Iron Stance', origin: 'compound' });
@@ -72,11 +72,11 @@ const eq = (label, got, want) => {
   await send(base, { name: 'Junk', origin: 'legendary' });
   eq('an unknown origin is coerced to basic, never passed through', last().origin, 'basic');
   await send(base, { name: 'Truthy', animalOnly: 'yes' });
-  eq('a truthy animalOnly is coerced to a real boolean', last().animalOnly, true);
+  eq('a truthy animalOnly still reads as the Animal lock', last().raceLock, 'Animal');
 
   // -- update ---------------------------------------------------------------
   await send(base + '/id1', { name: 'Swim', animalOnly: true, origin: 'basic' }, 'PUT');
-  eq('update keeps animalOnly', last().animalOnly, true);
+  eq('update maps animalOnly → raceLock Animal', last().raceLock, 'Animal');
   await send(base + '/id1', { name: 'Swim', animalOnly: false, origin: 'compound' }, 'PUT');
   eq('update can turn animalOnly OFF again', last().animalOnly, false);
   eq('update can promote to compound', last().origin, 'compound');
@@ -91,7 +91,7 @@ const eq = (label, got, want) => {
     { name: 'Death Grip Jaws', animalOnly: true, origin: 'compound' },
   ] });
   eq('bulk imports all three', r.body.added, 3);
-  eq('bulk keeps animalOnly', SAVED.map(s => s.animalOnly), [true, false, true]);
+  eq('bulk maps animalOnly → raceLock', SAVED.map(s => s.raceLock), ['Animal', '', 'Animal']);
   eq('bulk keeps origin', SAVED.map(s => s.origin), ['basic', 'basic', 'compound']);
 
   // -- the projection the creation picker reads ------------------------------

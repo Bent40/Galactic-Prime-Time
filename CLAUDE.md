@@ -2549,6 +2549,47 @@ merge things that are sensory and reach a dead end branch."* → **"Sensory + ca
   in `apply-skill-passover.js` · the published Gemstone Index. **No app change** — keywords are
   a free-text array and nothing cross-checks the taxonomy.
 
+## 🎲 LEAVING ROLL20 — THE TABLE (research + foundation, 2026-09-23)
+
+Owner: *"build things in the app to remove ourselves from roll20 … a map, dice rolling,
+tokens … the admin creates a table, connects players to it, adds maps."* Full research,
+the need-vs-offered filter and the build order: **`docs/vtt-research.md`**. Mockup (awaiting
+approval): https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv
+
+- ⭐ **Roll20's irreducible core is Owlbear-sized** — room · scene + grid · draggable tokens ·
+  fog · ruler · ping · synced dice · real-time — and **GPT needs less than that plus one thing
+  Roll20 cannot do: the Clock rail**, which `MomentTracker` already is. ⛔ Skipped on purpose:
+  the d20 macro engine, initiative trackers, HP bars, compendium, jukebox, dynamic lighting.
+  The book's only dice are **§6.1's d6 tables, §14's d4/d6/d8 threshold die, §21.5's falling
+  dice** — three buttons, not a `/roll` parser.
+- ✅ **BUILT — the foundation.** `models/Table.js` (seats + `activeMapId`) · `models/TableMap.js`
+  (image as a capped data URL, hex `grid`, fog `revealed[]`, `tokens[]`) · `routes/tables.js`
+  (17 routes; **the seat is the permission** — `GET /api/tables/mine` returns only seated
+  tables with the LIVE map projected: no GM notes, no hidden tokens; the ONE player write is
+  moving your own token) · `admin/TablesSection.jsx` (create · seat · upload an Inkarnate export
+  · go live). **57 tests:** `node server/test-tables.js`. 🔒 **A player token never stores HP —
+  it reads the sheet**; an enemy token carries `parts[]` because `Enemy` is a template.
+- 🔴 **LIVE BUG FIXED:** login/register never returned `userId`, so `localStorage.userId` was
+  the string `"undefined"` (CommsTab's self-filter never matched). Both routes return it now;
+  `CharacterSheet` falls back to the JWT payload for sessions that stored the bad value.
+- ⚠️ **THE SYNC HAZARD THAT SHAPES THE DESIGN:** the sheet autosaves the whole blob, last
+  writer wins — so **the table must never write a player's sheet wholesale.** GM damage goes
+  through a per-part PATCH (step 5, unbuilt). Real-time: **recommend Socket.IO** on the same
+  Express server (Render free supports WebSockets), polling as fallback — needs approval,
+  it is a new dependency.
+- 🔴 **NOT BUILT, by design:** the play surface (steps 1–2 of V-5), dice in Comms, the socket.
+  They start on mockup approval. **Five owner calls in `vtt-research.md` V-7.**
+- ✅ **Pre-existing test failure closed:** `test-skill-library.js` still asserted the
+  `animalOnly` boolean that 2026-09-19 replaced with `raceLock`; now 17/17.
+
+## 🔒 THE FREE MOVE IS FOUR SPACES (owner, 2026-09-23 — rulebook v1.15)
+
+*"a player can move 4 spaces in a turn."* §5.5: **1–4 spaces free** (was 1–3), longer moves
+`ceil((spaces − 4) / 4)`; §11 Slowed still drops the allowance to 1. ⚠️ **The Godot sim
+still prices 3** (`action_resolver.gd`, tests in `test_kan2_acceptance.gd` / `test_zones.gd`)
+— recorded in the game repo's `rules-addendum.md` R3 as *book changed, sim pending*, because
+there is no Godot binary in the container to run the 583-test suite honestly.
+
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
 
 The Artifact links for the shop, the Little Brother fight screen, the Broadcast Bestiary

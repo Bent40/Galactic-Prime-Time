@@ -46,8 +46,14 @@ function mergeLoadedState(state) {
 export default function CharacterSheet() {
   const [auth, setAuth] = useState(() => {
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
     const username = localStorage.getItem('username');
+    // Before 2026-09-23 login never returned userId, so older sessions stored the
+    // string "undefined". The JWT payload always carried it — read it from there.
+    let userId = localStorage.getItem('userId');
+    if (token && (!userId || userId === 'undefined')) {
+      try { userId = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))).userId || null; } catch { userId = null; }
+      if (userId) localStorage.setItem('userId', userId);
+    }
     return token ? { token, userId, username } : null;
   });
   const [charState, setCharState] = useState(DEFAULT_STATE);

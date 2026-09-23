@@ -11,9 +11,10 @@ import ItemLibrarySection from '../components/admin/ItemLibrarySection.jsx';
 import EnemiesSection from '../components/admin/EnemiesSection.jsx';
 import AffixLibrarySection from '../components/admin/AffixLibrarySection.jsx';
 import TagLibrarySection from '../components/admin/TagLibrarySection.jsx';
+import TablesSection from '../components/admin/TablesSection.jsx';
 
-const SECTIONS = ['players', 'library', 'achievements', 'comms', 'tracker', 'items', 'affixes', 'tags', 'enemies'];
-const SECTION_LABELS = { players: 'Players', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library', affixes: 'Affixes', tags: 'Tags', enemies: 'Enemies' };
+const SECTIONS = ['players', 'tables', 'library', 'achievements', 'comms', 'tracker', 'items', 'affixes', 'tags', 'enemies'];
+const SECTION_LABELS = { players: 'Players', tables: 'Tables', library: 'Skill Library', achievements: 'All Achievements', comms: 'Comms', tracker: 'Moment Tracker', items: 'Item Library', affixes: 'Affixes', tags: 'Tags', enemies: 'Enemies' };
 
 export default function AdminPanel() {
   const [auth, setAuth] = useState(() => {
@@ -177,6 +178,7 @@ export default function AdminPanel() {
                 ? <PlayerPanel key={selectedPlayer.userId} player={selectedPlayer} token={auth.token} showToast={showToast} onRefresh={loadPlayers} />
                 : <div className="empty-state"><div className="empty-icon">👤</div><div className="empty-text">Select a player</div></div>
             )}
+            {activeSection === 'tables' && <TablesSection token={auth.token} players={players} showToast={showToast} />}
             {activeSection === 'library' && <SkillLibrarySection token={auth.token} showToast={showToast} />}
             {activeSection === 'achievements' && <AllAchievementsSection token={auth.token} />}
             {activeSection === 'comms' && <CommsSection token={auth.token} players={players} showToast={showToast} />}

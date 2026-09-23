@@ -21,6 +21,7 @@ const enemiesRoutes = require('./routes/enemies');
 const affixesRoutes = require('./routes/affixes');
 const tagsRoutes = require('./routes/tags');
 const boxesRoutes = require('./routes/boxes');
+const tablesRoutes = require('./routes/tables');
 
 const app = express();
 // Last MongoDB error, surfaced by /api/health. Declared here because the health
@@ -65,6 +66,7 @@ app.use('/api/enemies', enemiesRoutes);
 app.use('/api/affixes', affixesRoutes);
 app.use('/api/tags', tagsRoutes);
 app.use('/api/boxes', boxesRoutes);
+app.use('/api/tables', tablesRoutes);
 
 // Serve React client in production
 const clientDist = path.join(__dirname, '..', 'client', 'dist');

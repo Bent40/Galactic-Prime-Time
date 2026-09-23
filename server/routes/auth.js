@@ -26,7 +26,7 @@ router.post('/register', async (req, res) => {
     const user = await User.create({ username, password });
     const token = signToken(user._id, user.isAdmin);
     logger.info(`REGISTER  "${username}"  ip=${req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '?'}`);
-    res.status(201).json({ token, username: user.username, isAdmin: user.isAdmin });
+    res.status(201).json({ token, userId: String(user._id), username: user.username, isAdmin: user.isAdmin });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
 
     const token = signToken(user._id, user.isAdmin);
     logger.info(`LOGIN  OK   "${username}"${user.isAdmin ? ' [admin]' : ''}  ip=${ip}`);
-    res.json({ token, username: user.username, isAdmin: user.isAdmin });
+    res.json({ token, userId: String(user._id), username: user.username, isAdmin: user.isAdmin });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }

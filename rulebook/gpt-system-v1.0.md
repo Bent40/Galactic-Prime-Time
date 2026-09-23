@@ -1,6 +1,9 @@
 # GALACTIC PRIME TIME — System Rulebook
 
-**Version 1.14** · 2026-09-22 — **`scent` becomes `sensory`** (§4.5), covering every
+**Version 1.15** · 2026-09-23 — **the free move is FOUR spaces** (§5.5): a contestant
+moves 1–4 spaces as their free action, and a longer move costs `ceil((spaces − 4) / 4)`
+Moments. Slowed still cuts the allowance to 1 (§11).
+*Previously —* **1.14** · 2026-09-22, **`scent` becomes `sensory`** (§4.5), covering every
 body sense rather than one, **and a racial may be consumed by a racial sharing its narrow**,
 which turns the quarantine into a dead-end branch you can build inside and never out of.
 *Previously —* **1.13** · 2026-09-22, **the skill ceiling is PER SKILL** (§4.2: most basic
@@ -465,9 +468,9 @@ Per Moment, a combatant gets at most:
 3. **One reaction** (§5.6). A 0-cost reaction consumes the free-action slot too.
 
 **Movement:**
-- A move of **1–3 spaces is free** but consumes the free-action slot — **once per
-  Moment**.
-- Longer moves cost `ceil((spaces − 3) / 4)` Moments as a scheduled action.
+- A move of **1–4 spaces is free** but consumes the free-action slot — **once per
+  Moment**. *(v1.15 — was 1–3.)*
+- Longer moves cost `ceil((spaces − 4) / 4)` Moments as a scheduled action.
 - You cannot move twice in one Moment.
 
 **Inventory**:
@@ -961,7 +964,7 @@ nothing to a universal 6; one contestant hitting for 8 does 2.
 | **Exposed** | Lethal targeting allowed against you (head, executions). Caused by: Stumble, Prone, Helpless, Channeling, windups, exposing abilities. |
 | **Helpless** | Cannot act or react; you are Exposed; attackers may target **any** part including the head. |
 | **Prone** | You are Exposed; may only crawl 1 space per Moment; standing costs 1 Moment (scheduled). You cannot dodge (§14). |
-| **Slowed** | Free-move allowance drops 3 → 1 space; movement Moment costs double. |
+| **Slowed** | Free-move allowance drops 4 → 1 space; movement Moment costs double. |
 | **Channeling** | = performing a multi-Moment action. Already Exposed (§5.3); the word adds no new state. |
 | **Overwhelmed** | GM-adjudicated: ambush, execution positioning, extreme speed disparity. Opens head targeting (§7.2). |
 | **Alerted** | Knows *something* is there, not where (§15). |
