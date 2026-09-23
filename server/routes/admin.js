@@ -7,6 +7,8 @@ const NPC = require('../models/NPC');
 const requireAdmin = require('../middleware/adminAuth');
 const logger = require('../logger');
 const { enrichSkills } = require('../utils/skillUtils');
+const { notifyChat } = require('../realtime');
+const { normDamageTypes } = require('../skill-fx');
 
 const router = express.Router();
 
@@ -497,6 +499,30 @@ router.patch('/players/:userId/level-spend', async (req, res) => {
   }
 });
 
+// PATCH /api/admin/players/:userId/parts/:partId — damage or heal ONE body part from the
+// table (2026-09-23). Touches only that part's currentHp / conditions and nothing else in
+// the blob, so a GM hit and the player's own autosave collide on as little as possible.
+// Body: { currentHp } and/or { delta } and/or { conditions: [{ text, tier }] }.
+router.patch('/players/:userId/parts/:partId', async (req, res) => {
+  try {
+    const character = await Character.findOne({ userId: req.params.userId });
+    if (!character) return res.status(404).json({ error: 'Character not found' });
+    const state = character.state || {};
+    const parts = Array.isArray(state.bodyParts) ? state.bodyParts : [];
+    const part = parts.find(p => String(p.id) === String(req.params.partId) || p.name === req.params.partId);
+    if (!part) return res.status(404).json({ error: 'Body part not found' });
+    const b = req.body || {};
+    const max = Number(part.maxHp) || 0;
+    if (b.currentHp != null) part.currentHp = Math.max(0, Math.min(max || Infinity, Number(b.currentHp) || 0));
+    if (b.delta != null) part.currentHp = Math.max(0, Math.min(max || Infinity, (Number(part.currentHp) || 0) + (Number(b.delta) || 0)));
+    if (Array.isArray(b.conditions)) part.conditions = b.conditions.filter(c => c && c.text).map(c => ({ id: c.id || Date.now() + Math.floor(Math.random() * 1e6), text: String(c.text), tier: Math.max(1, Math.min(4, Number(c.tier) || 1)) }));
+    await Character.findOneAndUpdate({ userId: req.params.userId }, { state });
+    res.json({ ok: true, part });
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
 // PATCH /api/admin/players/:userId/traits — set trait values (consolidated format)
 router.patch('/players/:userId/traits', async (req, res) => {
   try {
@@ -660,9 +686,9 @@ function normCeiling(maxCapacity, capacity) {
 // POST /api/admin/skill-library
 router.post('/skill-library', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo, damageTypes } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() });
+    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim(), damageTypes: normDamageTypes(damageTypes) });
     res.status(201).json(template);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -672,9 +698,9 @@ router.post('/skill-library', async (req, res) => {
 // PUT /api/admin/skill-library/:id
 router.put('/skill-library/:id', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo, damageTypes } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() }, { new: true });
+    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim(), damageTypes: normDamageTypes(damageTypes) }, { new: true });
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json(template);
   } catch (err) {
@@ -727,6 +753,7 @@ router.post('/skill-library/bulk', async (req, res) => {
           origin:            s.origin === 'compound' ? 'compound' : 'basic',
           raceLock:          normRaceLock(s.raceLock, s.animalOnly),
           exclusiveTo:       String(s.exclusiveTo || '').trim(),
+          damageTypes:       normDamageTypes(s.damageTypes),
         });
         results.added++;
       } catch (e) {
@@ -832,6 +859,7 @@ router.post('/messages', async (req, res) => {
       style: msgStyle,
       text: text.trim(),
     });
+    notifyChat({ kind: 'say' });
     res.status(201).json(msg);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

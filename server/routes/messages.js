@@ -4,6 +4,7 @@ const User = require('../models/User');
 const Character = require('../models/Character');
 const NPC = require('../models/NPC');
 const requireAuth = require('../middleware/auth');
+const { notifyChat } = require('../realtime');
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.get('/', requireAuth, async (req, res) => {
     const uid = req.userId;
     const messages = await Message.find({
       $or: [
-        { recipient: null, recipientNPC: null },     // broadcasts
+        { recipient: null, recipientNPC: null, gmOnly: { $ne: true } },     // broadcasts (never a GM-only roll)
         { recipient: uid },                           // whispers to me (user)
         { sender: uid, recipient: { $ne: null } },   // my outgoing user whispers
         { sender: uid, recipientNPC: { $ne: null } }, // my outgoing NPC whispers
@@ -76,6 +77,7 @@ router.post('/', requireAuth, async (req, res) => {
       style: safeStyle,
       text: text.trim(),
     });
+    notifyChat({ kind: 'say' });
     res.status(201).json(msg);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

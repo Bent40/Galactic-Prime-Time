@@ -37,6 +37,9 @@ function _confirmBase(url) {
   _baseResolve(url);
 }
 
+// The base the socket should dial: the confirmed one, else PRIMARY ('' = same origin).
+export function getApiBase() { return _base !== null ? _base : PRIMARY; }
+
 // Core dispatcher — drives discovery on the first call, then fast-paths.
 async function dispatch(path, opts, headers) {
   // Fast path: base already confirmed.

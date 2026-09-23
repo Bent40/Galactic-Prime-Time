@@ -2,6 +2,7 @@ const express = require('express');
 const MomentTracker = require('../models/MomentTracker');
 const requireAuth  = require('../middleware/auth');
 const requireAdmin = require('../middleware/adminAuth');
+const { notifyTracker } = require('../realtime');
 
 const router = express.Router();
 
@@ -35,6 +36,7 @@ router.patch('/advance', requireAdmin, async (req, res) => {
       tracker.currentMoment += 1;
     }
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -48,6 +50,7 @@ router.patch('/retreat', requireAdmin, async (req, res) => {
     const tracker = await getTracker();
     if (tracker.currentMoment > 0) tracker.currentMoment -= 1;
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -64,6 +67,7 @@ router.patch('/set-moment', requireAdmin, async (req, res) => {
     const tracker = await getTracker();
     tracker.currentMoment = m;
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -93,6 +97,7 @@ router.post('/entries', requireAdmin, async (req, res) => {
     };
     tracker.entries.push(entry);
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -122,6 +127,7 @@ router.patch('/entries/:entryId', requireAdmin, async (req, res) => {
 
     tracker.markModified('entries');
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -137,6 +143,7 @@ router.delete('/entries/:entryId', requireAdmin, async (req, res) => {
     if (tracker.entries.length === before) return res.status(404).json({ error: 'Entry not found' });
     tracker.markModified('entries');
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -150,6 +157,7 @@ router.delete('/entries', requireAdmin, async (req, res) => {
     const tracker = await getTracker();
     tracker.entries = [];
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -164,6 +172,7 @@ router.post('/reset', requireAdmin, async (req, res) => {
     tracker.currentMoment = 0;
     tracker.clock = 0;
     await tracker.save();
+    notifyTracker({ currentMoment: tracker.currentMoment, clock: tracker.clock });
     res.json(tracker);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });

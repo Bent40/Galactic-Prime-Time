@@ -46,8 +46,14 @@ function mergeLoadedState(state) {
 export default function CharacterSheet() {
   const [auth, setAuth] = useState(() => {
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
     const username = localStorage.getItem('username');
+    // Before 2026-09-23 login never returned userId, so older sessions stored the
+    // string "undefined". The JWT payload always carried it — read it from there.
+    let userId = localStorage.getItem('userId');
+    if (token && (!userId || userId === 'undefined')) {
+      try { userId = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/'))).userId || null; } catch { userId = null; }
+      if (userId) localStorage.setItem('userId', userId);
+    }
     return token ? { token, userId, username } : null;
   });
   const [charState, setCharState] = useState(DEFAULT_STATE);
@@ -223,6 +229,7 @@ export default function CharacterSheet() {
             {saveStatus === 'saving' ? 'SAVING…' : saveStatus === 'error' ? 'NOT SAVED' : 'SAVED'}
           </span>
           <span style={{ letterSpacing: 1 }}>{auth.username?.toUpperCase()}</span>
+          <button className="btn btn-cyan btn-sm" onClick={() => window.open('/table', '_blank')} title="Open the table (map, dice, chat)">🎲 Table</button>
           <button className="btn btn-wiki" onClick={() => window.open('/wiki', '_blank')} title="Open the rulebook">📖 Wiki</button>
           <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>
         </div>

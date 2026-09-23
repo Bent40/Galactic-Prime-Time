@@ -46,6 +46,9 @@ const skillTemplateSchema = new mongoose.Schema({
   raceLock:    { type: String, default: '' },
   animalOnly:  { type: Boolean, default: false },   // legacy — read, never written
   exclusiveTo: { type: String, default: '' },
+  // §7.3 damage types the skill deals (0–2). The table fires this effect when the
+  // skill is used; empty = inferred from the skill's own text (server/skill-fx.js).
+  damageTypes: { type: [String], default: [] },
 }, { timestamps: true });
 
 module.exports = mongoose.model('SkillTemplate', skillTemplateSchema);

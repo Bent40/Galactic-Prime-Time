@@ -2549,6 +2549,86 @@ merge things that are sensory and reach a dead end branch."* → **"Sensory + ca
   in `apply-skill-passover.js` · the published Gemstone Index. **No app change** — keywords are
   a free-text array and nothing cross-checks the taxonomy.
 
+## 🎲 LEAVING ROLL20 — THE TABLE (research + foundation, 2026-09-23)
+
+Owner: *"build things in the app to remove ourselves from roll20 … a map, dice rolling,
+tokens … the admin creates a table, connects players to it, adds maps."* Full research,
+the need-vs-offered filter and the build order: **`docs/vtt-research.md`**. Mockup (awaiting
+approval): https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv
+
+- ⭐ **Roll20's irreducible core is Owlbear-sized** — room · scene + grid · draggable tokens ·
+  fog · ruler · ping · synced dice · real-time — and **GPT needs less than that plus one thing
+  Roll20 cannot do: the Clock rail**, which `MomentTracker` already is. ⛔ Skipped on purpose:
+  the d20 macro engine, initiative trackers, HP bars, compendium, jukebox, dynamic lighting.
+  The book's only dice are **§6.1's d6 tables, §14's d4/d6/d8 threshold die, §21.5's falling
+  dice** — three buttons, not a `/roll` parser.
+- ✅ **BUILT — the foundation.** `models/Table.js` (seats + `activeMapId`) · `models/TableMap.js`
+  (image as a capped data URL, hex `grid`, fog `revealed[]`, `tokens[]`) · `routes/tables.js`
+  (17 routes; **the seat is the permission** — `GET /api/tables/mine` returns only seated
+  tables with the LIVE map projected: no GM notes, no hidden tokens; the ONE player write is
+  moving your own token) · `admin/TablesSection.jsx` (create · seat · upload an Inkarnate export
+  · go live). **57 tests:** `node server/test-tables.js`. 🔒 **A player token never stores HP —
+  it reads the sheet**; an enemy token carries `parts[]` because `Enemy` is a template.
+- 🔴 **LIVE BUG FIXED:** login/register never returned `userId`, so `localStorage.userId` was
+  the string `"undefined"` (CommsTab's self-filter never matched). Both routes return it now;
+  `CharacterSheet` falls back to the JWT payload for sessions that stored the bad value.
+- ⚠️ **THE SYNC HAZARD THAT SHAPES THE DESIGN:** the sheet autosaves the whole blob, last
+  writer wins — so **the table must never write a player's sheet wholesale.** GM damage goes
+  through a per-part PATCH (step 5, unbuilt). Real-time: **recommend Socket.IO** on the same
+  Express server (Render free supports WebSockets), polling as fallback — needs approval,
+  it is a new dependency.
+- ✅ **APPROVED AND BUILT THE SAME DAY — the table is live in the app** (`vtt-research.md` V-8).
+  **`/table`** (player: live map, own token drags, Clock, dice, chat, sound) · **`/gm/:tableId`**
+  (GM: every token, hide/reveal, add from enemies or seated players, per-part − / +, conditions,
+  fog brush, ruler, ping, **fx** by damage type, cue buttons, Clock advance, GM-only dice). Shared
+  `client/src/table/HexBoard.jsx`; pure `hex.js` + `soundEngine.js` (**140 tests**). Poll is
+  `GET /api/tables/:id/live` every 2 s, image fetched once per map. **Dice are rolled by the
+  SERVER** (`server/dice.js`: §6.1 d6 tables, §14 d4/d6/d8, §21.5 falling) and posted as
+  `Message{kind:'roll'}`; `gmOnly` never reaches a player feed.
+- 🎵 **SOUND CUES (owner ask):** a cue is a SEGMENT `{source: youtube|audio, ref, start, end, loop}`
+  — "loop 0–0:36 · then 0:36–1:50 · then stop" is three cues on one video plus the Stop button.
+  Trigger `map-live` fires a cue when its map goes live. Sync is arithmetic on `sound.startedAt`
+  (server time) so a late joiner lands mid-loop at the right second; a 250 ms loop seeks on drift.
+  ⚠️ Browsers need one click ("🔊 Enable sound") per page before anything plays; YouTube videos
+  must allow embedding.
+- 🎨 **VISUAL EFFECTS:** `POST /api/tables/:id/fx` queues one; eight damage types, eight SHAPES
+  (`FxLayer.jsx`), projectile from the selected token. GM picks the type by hand on the fx tool.
+- ⚡ **SKILLS AUTO-FIRE THEIR TYPE (owner, 2026-09-23 — built).** `POST /api/tables/:id/use-skill`:
+  a player names a skill **on their sheet** and a target (token or hex); the server resolves the
+  type, queues one effect per type from their own token, and posts a `Message{kind:'skill'}`
+  (*"⚡ Sasha uses Fire Ball → The Kindler (Burn)"*). The GM fires an enemy ability by **name**
+  from a selected token, with the type inferred or overridden. ⭐ **The type is authored or read:**
+  `SkillTemplate.damageTypes` (new field; whitelisted in create/update/bulk-import, in the player
+  projection and `enrichSkills`; a ⚡ checkbox row in `SkillLibrarySection`) wins outright; else
+  `server/skill-fx.js` reads the skill's own text with the book's vocabulary (fire/flame/ember →
+  Burn, frost/ice → Chill, slash/claw/bite → Bleed, punch/slam → Crush …), heal words → **Heal**,
+  nothing → the neutral cyan **Skill** burst so no skill is ever silent. At most two types fire.
+  ⚠️ **None of the 49 templates carries `damageTypes` yet** — inference does the work until the
+  library pass; a wrong read is one checkbox away. Player flow: **Skills panel → click one → click
+  a target** (`TablePage`); GM: fx tool → ability name → target (`GmTablePage`). Tests:
+  `node server/test-skill-fx.js` (19) + section 8g of `test-tables.js` (122).
+- 🔴 **Honest limits:** no MongoDB in the container, so **a logged-in table with a real map has
+  not been seen** — headless Chromium loads all three routes without runtime errors and every suite
+  is green (122 tables · 19 skill-fx · 22 realtime · 140 table-client · the rest unchanged). The GM page shows the LIVE map
+  only (prep = hidden tokens, or go live between rooms).
+- ✅ **SOCKET.IO — approved and built (owner: "go ahead with socket.io").** `server/realtime.js`
+  is a **notifier, never the source of truth**: every table / tracker / chat write still goes
+  through its route, then emits to the table's room (`join` only for a seated user or admin,
+  JWT handshake) and clients **re-fetch**. The 2 s poll stays as the fallback and slows to 15 s
+  while the socket is up (green dot in the table topbar). Fails open: no-op when unattached.
+  **22 tests:** `node server/test-realtime.js` (real server + real client on port 0).
+  Vite proxies `/socket.io` with `ws: true`; Render free supports WebSockets as-is.
+- ✅ **Pre-existing test failure closed:** `test-skill-library.js` still asserted the
+  `animalOnly` boolean that 2026-09-19 replaced with `raceLock`; now 17/17.
+
+## 🔒 THE FREE MOVE IS FOUR SPACES (owner, 2026-09-23 — rulebook v1.15)
+
+*"a player can move 4 spaces in a turn."* §5.5: **1–4 spaces free** (was 1–3), longer moves
+`ceil((spaces − 4) / 4)`; §11 Slowed still drops the allowance to 1. ⚠️ **The Godot sim
+still prices 3** (`action_resolver.gd`, tests in `test_kan2_acceptance.gd` / `test_zones.gd`)
+— recorded in the game repo's `rules-addendum.md` R3 as *book changed, sim pending*, because
+there is no Godot binary in the container to run the 583-test suite honestly.
+
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
 
 The Artifact links for the shop, the Little Brother fight screen, the Broadcast Bestiary
