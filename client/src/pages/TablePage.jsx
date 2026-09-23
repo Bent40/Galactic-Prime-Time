@@ -36,6 +36,7 @@ export default function TablePage() {
   const [sheet, setSheet] = useState(null);
   const [rolled, setRolled] = useState([]);
   const [players, setPlayers] = useState([]);
+  const [armed, setArmed] = useState(null);   // the skill waiting for a target
 
   useEffect(() => {
     if (!auth) return;
@@ -77,6 +78,17 @@ export default function TablePage() {
     if (d.error) { showToast(d.error, 'err'); refresh(); }
     else showToast(`${dist} space${dist > 1 ? 's' : ''} — ${moveCost(dist).label}`);
   }
+  async function useSkill(cell, tok) {
+    if (!armed) return;
+    const body = tok ? { skillId: armed.id, targetTokenId: tok.tokenId } : { skillId: armed.id, to: cell };
+    const d = await apiFetch(`/api/tables/${tableId}/use-skill`, { method: 'POST', body: JSON.stringify(body) }, auth.token);
+    setArmed(null); setTool('move');
+    if (d.error) showToast(d.error, 'err'); else { refresh(); if (d.message) setRolled(r => [...r, d.message]); }
+  }
+  function armSkill(sk) {
+    if (armed?.id === sk.id) { setArmed(null); setTool('move'); return; }
+    setArmed(sk); setTool('fx'); showToast(`${sk.name}: click a target on the map`);
+  }
   function ping(cell) { const id = Date.now(); setPings(p => [...p, { ...cell, id }]); setTimeout(() => setPings(p => p.filter(x => x.id !== id)), 1300); }
 
   if (!auth) return <LoginOverlay onLogin={a => setAuth(a)} isAdmin={false} />;
@@ -112,11 +124,12 @@ export default function TablePage() {
           {map ? (
             <>
               <div className="board-tools" role="toolbar">
-                {['move', 'measure', 'ping'].map(t => <button key={t} type="button" className={`tool${tool === t ? ' on' : ''}`} onClick={() => setTool(t)}>{t}</button>)}
+                {['move', 'measure', 'ping'].map(t => <button key={t} type="button" className={`tool${tool === t ? ' on' : ''}`} onClick={() => { setTool(t); setArmed(null); }}>{t}</button>)}
+                {armed && <button type="button" className="tool on" onClick={() => { setArmed(null); setTool('move'); }}>⚡ {armed.name} — pick a target ✕</button>}
               </div>
               <HexBoard map={map} image={image} role="player" myUserId={auth.userId} selectedId={selected} tool={tool}
-                        onSelect={t => setSelected(t.tokenId)} onMoveToken={moveToken} onPing={ping} pings={pings} fx={live.fx} />
-              <div className="board-info">1 space = 1 hex · free move 1–4 · wheel zooms · drag empty ground to pan</div>
+                        onSelect={t => setSelected(t.tokenId)} onMoveToken={moveToken} onPing={ping} onFxTarget={useSkill} pings={pings} fx={live.fx} />
+              <div className="board-info">{armed ? `click a token or hex to use ${armed.name}` : '1 space = 1 hex · free move 1–4 · wheel zooms · drag empty ground to pan'}</div>
             </>
           ) : <div className="table-empty small">{live ? 'The GM has not put a map live yet.' : 'Loading the table…'}</div>}
         </main>
@@ -129,7 +142,17 @@ export default function TablePage() {
               {selToken.kind === 'player' && selToken.refId === String(auth.userId) && <div className="hint">That's you. Drag to move.</div>}
             </div>
           )}
-          <h3>Dice</h3>
+          <h3>Skills — click one, then a target</h3>
+          <div className="skilllist">
+            {(sheet?.skills || []).filter(sk => sk.name && !sk.passive).map(sk => (
+              <button key={sk.id} type="button" className={`skillbtn${armed?.id === sk.id ? ' on' : ''}`} onClick={() => armSkill(sk)} disabled={!map} title={sk.effect || ''}>
+                <span className="sk-name">{sk.name}</span>
+                <span className="sk-meta">Lv {sk.level || 0}{sk.momentCost ? ` · ${sk.momentCost}` : ''}{sk.damageTypes?.length ? ` · ${sk.damageTypes.join('+')}` : ''}</span>
+              </button>
+            ))}
+            {sheet && !(sheet.skills || []).some(sk => sk.name && !sk.passive) && <div className="hint">No active skills on your sheet.</div>}
+          </div>
+          <h3 style={{ marginTop: 10 }}>Dice</h3>
           <DiceTray tableId={tableId} token={auth.token} role="player" onRolled={m => setRolled(r => [...r, m])} showToast={showToast} />
           <h3 style={{ marginTop: 10 }}>Table talk</h3>
           <TableChat token={auth.token} role="player" players={players} injected={rolled} refreshKey={chatKey} pollMs={socketOn ? 20000 : 3000} />

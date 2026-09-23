@@ -35,7 +35,7 @@ export default function TableChat({ token, role, players = [], pollMs = 3000, in
     <div className="tablechat">
       <div className="chat-log" ref={feed}>
         {messages.map(m => (
-          <div key={m._id} className={`msg${m.kind === 'roll' ? ' roll' : ''}${m.recipient || m.recipientNPC ? ' whisper' : ''}${m.gmOnly ? ' gmonly' : ''}`}>
+          <div key={m._id} className={`msg${m.kind === 'roll' ? ' roll' : ''}${m.kind === 'skill' ? ' skill' : ''}${m.recipient || m.recipientNPC ? ' whisper' : ''}${m.gmOnly ? ' gmonly' : ''}`}>
             <div className="who">{m.senderName}{m.recipientName ? ` → ${m.recipientName}` : ''}{m.gmOnly ? ' · GM only' : ''} <span className="t">{fmtTime(m.createdAt)}</span></div>
             {m.kind === 'roll' && m.roll ? (
               <div className="rollrow"><span className={`res${/Forced/.test(m.roll.label) ? ' fa' : ''}`}>{m.roll.total}</span><span className="fx"><b>{m.roll.label}</b> <span className="die">{m.roll.die}{m.roll.rolls?.length > 1 ? ` [${m.roll.rolls.join('+')}]` : ''}</span><br />{m.roll.effect}</span></div>

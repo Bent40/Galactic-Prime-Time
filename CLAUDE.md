@@ -2592,11 +2592,24 @@ approval): https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv
   ⚠️ Browsers need one click ("🔊 Enable sound") per page before anything plays; YouTube videos
   must allow embedding.
 - 🎨 **VISUAL EFFECTS:** `POST /api/tables/:id/fx` queues one; eight damage types, eight SHAPES
-  (`FxLayer.jsx`), projectile from the selected token. GM picks the type by hand — auto-firing
-  from a skill's `damageType` needs a "use skill" action on the table first (not built).
+  (`FxLayer.jsx`), projectile from the selected token. GM picks the type by hand on the fx tool.
+- ⚡ **SKILLS AUTO-FIRE THEIR TYPE (owner, 2026-09-23 — built).** `POST /api/tables/:id/use-skill`:
+  a player names a skill **on their sheet** and a target (token or hex); the server resolves the
+  type, queues one effect per type from their own token, and posts a `Message{kind:'skill'}`
+  (*"⚡ Sasha uses Fire Ball → The Kindler (Burn)"*). The GM fires an enemy ability by **name**
+  from a selected token, with the type inferred or overridden. ⭐ **The type is authored or read:**
+  `SkillTemplate.damageTypes` (new field; whitelisted in create/update/bulk-import, in the player
+  projection and `enrichSkills`; a ⚡ checkbox row in `SkillLibrarySection`) wins outright; else
+  `server/skill-fx.js` reads the skill's own text with the book's vocabulary (fire/flame/ember →
+  Burn, frost/ice → Chill, slash/claw/bite → Bleed, punch/slam → Crush …), heal words → **Heal**,
+  nothing → the neutral cyan **Skill** burst so no skill is ever silent. At most two types fire.
+  ⚠️ **None of the 49 templates carries `damageTypes` yet** — inference does the work until the
+  library pass; a wrong read is one checkbox away. Player flow: **Skills panel → click one → click
+  a target** (`TablePage`); GM: fx tool → ability name → target (`GmTablePage`). Tests:
+  `node server/test-skill-fx.js` (19) + section 8g of `test-tables.js` (122).
 - 🔴 **Honest limits:** no MongoDB in the container, so **a logged-in table with a real map has
   not been seen** — headless Chromium loads all three routes without runtime errors and every suite
-  is green (105 tables · 140 table-client · the rest unchanged). The GM page shows the LIVE map
+  is green (122 tables · 19 skill-fx · 22 realtime · 140 table-client · the rest unchanged). The GM page shows the LIVE map
   only (prep = hidden tokens, or go live between rooms).
 - ✅ **SOCKET.IO — approved and built (owner: "go ahead with socket.io").** `server/realtime.js`
   is a **notifier, never the source of truth**: every table / tracker / chat write still goes

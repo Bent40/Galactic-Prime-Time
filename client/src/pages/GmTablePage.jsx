@@ -38,6 +38,7 @@ export default function GmTablePage() {
   const [rolled, setRolled] = useState([]);
   const [addFilter, setAddFilter] = useState('');
   const [condText, setCondText] = useState('');
+  const [ability, setAbility] = useState('');   // fx tool: an ability name makes the click a 'use skill' (announced + inferred type)
 
   const [chatKey, setChatKey] = useState(0);
   const [socketOn, setSocketOn] = useState(false);
@@ -126,6 +127,12 @@ export default function GmTablePage() {
   }
   async function setFog(on) { const d = await apiFetch(`${mapPath()}`, { method: 'PATCH', body: JSON.stringify(on === 'reset' ? { revealed: [] } : { fogEnabled: on }) }, auth.token); if (d.error) showToast(d.error, 'err'); else refresh(); }
   async function fireFx(cell, tok) {
+    if (ability.trim()) {
+      const body = { name: ability.trim(), actorTokenId: selToken?.tokenId, type: fxType === 'auto' ? undefined : fxType, ...(tok ? { targetTokenId: tok.tokenId } : { to: cell }) };
+      const d = await apiFetch(`/api/tables/${tableId}/use-skill`, { method: 'POST', body: JSON.stringify(body) }, auth.token);
+      if (d.error) showToast(d.error, 'err'); else { refresh(); if (d.message) setRolled(r => [...r, d.message]); }
+      return;
+    }
     const from = selToken && selToken !== tok ? { col: selToken.col, row: selToken.row } : null;
     const body = { type: fxType, to: cell, from, label: tok ? `${fxType} → ${tok.name}` : fxType };
     const d = await apiFetch(`/api/tables/${tableId}/fx`, { method: 'POST', body: JSON.stringify(body) }, auth.token);
@@ -196,11 +203,13 @@ export default function GmTablePage() {
                 {tool === 'fx' && <>
                   <span className="sep" />
                   {FX_TYPES.map(t => <button key={t} type="button" className={`tool fxpick${fxType === t ? ' on' : ''}`} style={{ color: FX_STYLE[t].color }} onClick={() => setFxType(t)}>{t}</button>)}
+                  <button type="button" className={`tool fxpick${fxType === 'auto' ? ' on' : ''}`} onClick={() => setFxType('auto')} title="infer the type from the ability's name">auto</button>
+                  <input className="fi" placeholder="ability name (announces it)" value={ability} onChange={e => setAbility(e.target.value)} style={{ width: 170, padding: '3px 6px', fontSize: 11 }} />
                 </>}
               </div>
               <HexBoard map={map} image={image} role="gm" selectedId={selected} tool={tool} live={String(map._id) === String(live.activeMapId)}
                         onSelect={t => setSelected(t.tokenId)} onMoveToken={moveToken} onFogPaint={fogPaint} onPing={ping} onFxTarget={fireFx} pings={pings} fx={live.fx} />
-              <div className="board-info">{tool === 'fx' ? `click a hex or token to land a ${fxType}${selToken ? ` from ${selToken.name}` : ''}` : tool === 'fog' ? 'paint to reveal (radius 2)' : 'drag any token · wheel zooms · drag ground to pan'}</div>
+              <div className="board-info">{tool === 'fx' ? (ability.trim() ? `click a target: ${selToken ? selToken.name + ' uses ' : ''}${ability.trim()} (${fxType === 'auto' ? 'type from the name' : fxType})` : `click a hex or token to land a ${fxType === 'auto' ? 'Skill' : fxType}${selToken ? ` from ${selToken.name}` : ''}`) : tool === 'fog' ? 'paint to reveal (radius 2)' : 'drag any token · wheel zooms · drag ground to pan'}</div>
             </>
           ) : <div className="table-empty small">Pick a map to put live.</div>}
         </main>

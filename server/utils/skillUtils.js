@@ -40,6 +40,7 @@ async function enrichSkills(skills) {
       description: tpl.description || '',
       keywords: tpl.keywords || [],
       levelEffects: tpl.levelEffects || {},
+      damageTypes: tpl.damageTypes || [],
     };
   });
 }

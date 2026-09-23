@@ -60,7 +60,7 @@ export default function HexBoard({
     if (tool === 'measure') { setMeasure({ a: cell, b: cell }); svgRef.current.setPointerCapture(e.pointerId); return; }
     if (tool === 'fog' && role === 'gm') { onFogPaint?.(cellsWithin(cell, 2, grid).map(key)); setPan({ fog: true }); svgRef.current.setPointerCapture(e.pointerId); return; }
     if (tool === 'ping') { onPing?.(cell); return; }
-    if (tool === 'fx' && role === 'gm') { onFxTarget?.(cell, tok); return; }
+    if (tool === 'fx') { onFxTarget?.(cell, tok); return; }
   }
   function onPointerMove(e) {
     const p = toBoard(e); const cell = nearestCell(p.x, p.y, grid);

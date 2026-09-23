@@ -118,6 +118,7 @@ export default function SkillLibrarySection({ token, showToast }) {
                 {(t.keywords || []).map(k => <span key={k} className="badge badge-purple" title="Gemstone compatibility keyword">◈ {k}</span>)}
                 {(t.raceLock || t.animalOnly) && <span className="badge badge-cyan" title={`Race-locked: only a ${t.raceLock || 'Animal'} contestant may take this, as one of its 2 racial starting skills`}>{(t.raceLock || 'Animal') === 'Animal' ? '🐾' : '🤖'} {t.raceLock || 'Animal'}</span>}
                 {t.origin === 'compound' && <span className="badge badge-muted" title="A Gemstone merge product (§4.5) — never pickable at character creation">⚗ Compound</span>}
+                {(t.damageTypes || []).map(d => <span key={d} className="badge badge-cyan" title="§7.3 damage type — the effect the table fires">⚡ {d}</span>)}
                 {t.exclusiveTo && <span className="badge badge-gold" title="§4.4 character-exclusive — tied to one contestant and offered to nobody at creation">★ {t.exclusiveTo} only</span>}
                 {skillCeiling(t) !== SKILL_CEILING_DEFAULT && <span className="badge badge-muted" title={`§4.2 — this skill's own ceiling. Patron Tokens raise its cap no further than ${skillCeiling(t)}.`}>⬆ max {skillCeiling(t)}</span>}
                 {t.achievementUnlock && <span className="badge badge-gold">🔒 {t.achievementUnlock}</span>}
@@ -196,6 +197,16 @@ export default function SkillLibrarySection({ token, showToast }) {
                   <option value={10}>10 — the ordinary ceiling</option>
                   <option value={15}>15 — designated, deliberately</option>
                 </select>
+              </div>
+              <div className="field-group">
+                <label className="field-label" title="§7.3 — the effect the table fires when this skill is used. Blank = inferred from the skill's own text (fire → Burn, frost → Chill …).">⚡ Damage types (fx on the table)</label>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, fontSize: 11 }}>
+                  {['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution'].map(t => (
+                    <label key={t} style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+                      <input type="checkbox" checked={(editModal.damageTypes || []).includes(t)} onChange={e => setEditModal(m => ({ ...m, damageTypes: e.target.checked ? [...(m.damageTypes || []), t] : (m.damageTypes || []).filter(x => x !== t) }))} />{t}
+                    </label>
+                  ))}
+                </div>
               </div>
               <div className="field-group">
                 <label className="field-label" title="§4.4 — tied to one contestant's nature and not obtainable by others. Any name here removes the skill from BOTH creation pools. Blank for none.">★ Exclusive to</label>

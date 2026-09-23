@@ -19,6 +19,7 @@ export const FX_STYLE = {
   Infection:   { color: '#f2a6ff', glow: 'rgba(242,166,255,.6)' },
   Dissolution: { color: '#bd7cff', glow: 'rgba(189,124,255,.6)' },
   Heal:        { color: '#3dffa2', glow: 'rgba(61,255,162,.5)' },
+  Skill:       { color: '#00d4ff', glow: 'rgba(0,212,255,.6)' },
 };
 export const FX_TYPES = Object.keys(FX_STYLE);
 
@@ -61,6 +62,12 @@ function Burst({ type, r }) {
       <g className="fx-burst fx-dissolution">
         <circle className="fx-spiral" r={r * 0.9} fill="none" stroke={c} strokeWidth={3} strokeDasharray="14 10" />
         <circle className="fx-spiral rev" r={r * 0.55} fill="none" stroke="#fff" strokeOpacity={0.6} strokeWidth={2} strokeDasharray="6 8" />
+      </g>);
+    case 'Skill': return (
+      <g className="fx-burst fx-skill">
+        <circle className="fx-ring" r={r * 0.5} fill="none" stroke={c} strokeWidth={3} />
+        {[0, 45, 90, 135].map(a => <line key={a} className="fx-crack" x1={-r * 1.1 * Math.cos(rad(a))} y1={-r * 1.1 * Math.sin(rad(a))} x2={r * 1.1 * Math.cos(rad(a))} y2={r * 1.1 * Math.sin(rad(a))} stroke={c} strokeWidth={1.5} strokeOpacity={0.8} strokeDasharray="4 6" />)}
+        <circle className="fx-pulse" r={r * 0.25} fill={c} fillOpacity={0.5} />
       </g>);
     default: return (
       <g className="fx-burst fx-heal">

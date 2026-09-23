@@ -806,3 +806,11 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 /* live-sync indicator: gold = socket connected, grey = polling fallback */
 .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); display: inline-block; }
 .sync-dot.on { background: var(--success); box-shadow: 0 0 6px var(--success); }
+/* skills on the player table */
+.skilllist { display: flex; flex-direction: column; gap: 3px; max-height: 220px; overflow: auto; }
+.skillbtn { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; background: var(--panel2); border: 1px solid var(--border); color: var(--text); border-radius: 3px; padding: 5px 8px; font-size: 12px; text-align: left; cursor: pointer; font-family: inherit; }
+.skillbtn:hover { border-color: var(--cyan); }
+.skillbtn.on { border-color: var(--cyan); box-shadow: inset 0 0 0 1px var(--cyan); color: var(--cyan); }
+.skillbtn:disabled { opacity: .4; cursor: default; }
+.skillbtn .sk-meta { font-size: 10px; color: var(--muted-text); font-family: 'Courier New', monospace; white-space: nowrap; }
+.chat-log .msg.skill { border-left-color: var(--cyan); background: rgba(0,212,255,.06); }

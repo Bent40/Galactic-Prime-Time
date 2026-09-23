@@ -8,6 +8,8 @@ const Message = require('../models/Message');
 const User = require('../models/User');
 const Character = require('../models/Character');
 const dice = require('../dice');
+const { enrichSkills } = require('../utils/skillUtils');
+const { inferDamageTypes } = require('../skill-fx');
 const { notify } = require('../realtime');
 
 const router = express.Router();
@@ -19,7 +21,7 @@ const MAX_IMAGE_CHARS = 8_000_000;
 const TOKEN_KINDS = ['player', 'enemy', 'npc', 'marker'];
 
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-const FX_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution', 'Heal'];
+const FX_TYPES = ['Bleed', 'Crush', 'Burn', 'Chill', 'Poison', 'Infection', 'Dissolution', 'Heal', 'Skill'];
 const FX_WINDOW_MS = 20_000;   // how long an effect stays visible to pollers
 const FX_KEEP_MS = 60_000;     // how long it stays in the document before pruning
 const CUE_SOURCES = ['youtube', 'audio'];
@@ -228,6 +230,56 @@ router.post('/:id/roll', requireAuth, async (req, res) => {
     require('../realtime').notifyChat({ tableId: String(table._id), kind: 'roll' });
     res.status(201).json(msg);
   } catch (err) { fail(res, 'POST roll', err); }
+});
+
+// POST /api/tables/:id/use-skill — a skill fires its damage-type effect on the board
+// and announces itself in chat (owner ask, 2026-09-23).
+//   player: { skillId | templateId, targetTokenId? | to?{col,row} } — the skill must be on
+//           their sheet; the effect travels from their own token if they have one.
+//   GM:     { actorTokenId?, name, type?, targetTokenId? | to? } — an enemy ability by name;
+//           `type` overrides the text inference.
+router.post('/:id/use-skill', requireAuth, async (req, res) => {
+  try {
+    const table = await loadTable(req, res); if (!table) return;
+    if (!req.isAdmin && !seated(table, req.userId)) return res.status(403).json({ error: 'You are not seated at this table' });
+    const b = req.body || {};
+    const map = table.activeMapId ? await TableMap.findById(table.activeMapId) : null;
+    if (!map) return res.status(409).json({ error: 'No live map' });
+
+    let actorName, skillName, types, from = null;
+    if (req.isAdmin) {
+      skillName = String(b.name || '').trim().slice(0, 60);
+      if (!skillName) return res.status(400).json({ error: 'name required' });
+      const actor = b.actorTokenId ? map.tokens.find(t => t.tokenId === b.actorTokenId) : null;
+      actorName = actor ? actor.name : (b.actorName ? String(b.actorName).slice(0, 60) : 'GM');
+      if (actor) from = { col: actor.col, row: actor.row };
+      types = b.type && FX_TYPES.includes(b.type) ? [b.type] : inferDamageTypes({ name: skillName, effect: String(b.effect || '') });
+    } else {
+      const c = await Character.findOne({ userId: req.userId });
+      if (!c) return res.status(404).json({ error: 'No character' });
+      const skills = await enrichSkills(c.state?.skills || []);
+      const sk = skills.find(x => (b.skillId != null && String(x.id) === String(b.skillId)) || (b.templateId && String(x.templateId) === String(b.templateId)));
+      if (!sk) return res.status(404).json({ error: 'That skill is not on your sheet' });
+      actorName = c.state?.identity?.name?.trim() || 'Contestant';
+      skillName = sk.name || 'Skill';
+      types = inferDamageTypes(sk);
+      const mine = map.tokens.find(t => t.kind === 'player' && t.refId === String(req.userId));
+      if (mine) from = { col: mine.col, row: mine.row };
+    }
+    const target = b.targetTokenId ? map.tokens.find(t => t.tokenId === b.targetTokenId) : null;
+    const to = target ? { col: target.col, row: target.row } : (b.to && b.to.col != null ? { col: Math.round(num(b.to.col)), row: Math.round(num(b.to.row)) } : from);
+    if (!to) return res.status(400).json({ error: 'No target and no token to fire from — give a targetTokenId or to {col,row}' });
+    const now = new Date();
+    const fx = types.map((type, i) => ({ fxId: uid(), type, to, from: from && (from.col !== to.col || from.row !== to.row) ? from : null, label: i === 0 ? skillName : '', at: now }));
+    table.fx = [...pruneFx(table.fx), ...fx];
+    await table.save();
+    notify(table._id, 'fx', { fxId: fx[0].fxId, skill: skillName });
+    const text = `⚡ ${actorName} uses ${skillName}${target ? ' → ' + target.name : ''} (${types.join(' + ')})`;
+    const msg = await Message.create({ sender: req.userId, senderName: actorName, recipient: null, recipientNPC: null, recipientName: null,
+      text, kind: 'skill', roll: { skill: skillName, types, target: target ? target.name : null }, gmOnly: false, tableId: String(table._id) });
+    require('../realtime').notifyChat({ tableId: String(table._id), kind: 'skill' });
+    res.status(201).json({ ok: true, types, fx, message: msg });
+  } catch (err) { fail(res, 'POST use-skill', err); }
 });
 
 // ── GM side ──────────────────────────────────────────────────────────────────

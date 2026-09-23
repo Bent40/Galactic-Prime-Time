@@ -8,6 +8,7 @@ const requireAdmin = require('../middleware/adminAuth');
 const logger = require('../logger');
 const { enrichSkills } = require('../utils/skillUtils');
 const { notifyChat } = require('../realtime');
+const { normDamageTypes } = require('../skill-fx');
 
 const router = express.Router();
 
@@ -685,9 +686,9 @@ function normCeiling(maxCapacity, capacity) {
 // POST /api/admin/skill-library
 router.post('/skill-library', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo, damageTypes } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() });
+    const template = await SkillTemplate.create({ name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim(), damageTypes: normDamageTypes(damageTypes) });
     res.status(201).json(template);
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
@@ -697,9 +698,9 @@ router.post('/skill-library', async (req, res) => {
 // PUT /api/admin/skill-library/:id
 router.put('/skill-library/:id', async (req, res) => {
   try {
-    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo } = req.body;
+    const { name, momentCost, stats, passive, capacity, maxCapacity, requirements, range, target, effect, description, achievementUnlock, keywords, levelEffects, origin, animalOnly, raceLock, exclusiveTo, damageTypes } = req.body;
     if (!name) return res.status(400).json({ error: 'Skill name required' });
-    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim() }, { new: true });
+    const template = await SkillTemplate.findByIdAndUpdate(req.params.id, { name, momentCost, stats, passive, capacity, maxCapacity: normCeiling(maxCapacity, capacity), requirements, range, target, effect, description, achievementUnlock, keywords: keywords || [], levelEffects: levelEffects || {}, origin: origin === 'compound' ? 'compound' : 'basic', raceLock: normRaceLock(raceLock, animalOnly), exclusiveTo: String(exclusiveTo || '').trim(), damageTypes: normDamageTypes(damageTypes) }, { new: true });
     if (!template) return res.status(404).json({ error: 'Template not found' });
     res.json(template);
   } catch (err) {
@@ -752,6 +753,7 @@ router.post('/skill-library/bulk', async (req, res) => {
           origin:            s.origin === 'compound' ? 'compound' : 'basic',
           raceLock:          normRaceLock(s.raceLock, s.animalOnly),
           exclusiveTo:       String(s.exclusiveTo || '').trim(),
+          damageTypes:       normDamageTypes(s.damageTypes),
         });
         results.added++;
       } catch (e) {

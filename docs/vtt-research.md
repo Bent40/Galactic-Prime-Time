@@ -333,3 +333,51 @@ copying is Roll20's *align to grid* box-drag, queued as step 6.
 - ⚠️ **Still not seen with a real database** — same limit as V-8. The first live session
   verifies the whole chain; if the green dot never lights, check the browser console for the
   handshake error and that the deploy is on HTTPS (mixed-content blocks `ws://`).
+
+---
+
+## V-10 — Skills auto-fire their damage-type effect (owner, 2026-09-23 — built)
+
+Owner: *"Skills should auto-fire their damage type effect when used."* V-8's fx tool made the
+GM pick a type by hand; this makes the skill carry it.
+
+- **The route:** `POST /api/tables/:id/use-skill` (`requireAuth`; a player must be seated, the
+  table must have a live map).
+  - **Player** `{ skillId | templateId, targetTokenId? | to?{col,row} }` — the skill must be on
+    their own sheet (`enrichSkills` over `character.state.skills`; anything else is 404). The
+    effect travels **from their own token** if they have one on the live map; with no target
+    it bursts on themselves.
+  - **GM** `{ name, actorTokenId?, actorName?, type?, effect?, targetTokenId? | to? }` — an
+    enemy ability by name from a selected token; `type` overrides the inference.
+  - Queues one `fx` entry **per type** (label on the first), saves, `notify(… 'fx')`, and posts
+    a `Message{ kind: 'skill', roll: { skill, types, target } }` so the chat announces
+    *"⚡ Sasha uses Fire Ball → The Kindler (Burn)"* and `notifyChat` wakes every feed.
+- **Where the type comes from** — `server/skill-fx.js`, pure and dependency-free:
+  1. **Authored** `SkillTemplate.damageTypes` (new `[String]` field, coerced to the seven §7.3
+     types by `normDamageTypes`; whitelisted in the library create, update and bulk-import
+     routes, joined by `enrichSkills`, projected to the player). A ⚡ checkbox row in the skill
+     library's edit modal and a `⚡ Burn` badge on the card.
+  2. Else **read off the skill's own text** (name · effect · description) with the book's
+     vocabulary: fire/flame/ember/torch → Burn · frost/ice/cold → Chill · slash/cut/claw/bite/
+     blade → Bleed · punch/slam/smash/kick → Crush · poison/venom/toxic → Poison · infect/
+     plague/spore/rot → Infection · dissolve/unravel/psychic/dread → Dissolution. Word-bounded,
+     so *cutscene* is not a cut.
+  3. Else heal words (heal/mend/triage/bandage/cure) → **Heal**.
+  4. Else the neutral **Skill** burst (cyan ring, dashed cross, pulse) — **no skill is silent.**
+  At most **two** types fire (a torch that also cuts).
+- **Client:** `TablePage` has a *Skills — click one, then a target* panel built from the sheet's
+  non-passive skills; arming one switches the board to the fx tool and the next click on a token
+  or hex posts `use-skill`. `GmTablePage`'s fx tool gains an ability-name input and an **auto**
+  type button; with a name set, `fireFx` goes through `use-skill` instead of the raw fx queue.
+  `TableChat` renders `kind === 'skill'` rows; `FxLayer` has the `Skill` shape.
+- ⚠️ **None of the 49 live templates carries `damageTypes` yet.** Inference does the work until
+  the GM tags them; a wrong read is one checkbox in the library. Good candidates to check first:
+  anything whose effect names a type only obliquely (a "wall" skill, a psychic taunt).
+- **Not built, on purpose:** the route does not touch HP or conditions — it is the *broadcast*
+  of a skill use, never its resolution. Damage still goes through the GM's per-part − / + so the
+  sheet-sync rule (V-4: the table never writes a sheet wholesale) holds.
+- **Tests:** `node server/test-skill-fx.js` (19: authored wins and caps at two, each vocabulary
+  family, heal, neutral, word boundaries, coercion) and section 8g of `test-tables.js` (122:
+  player fires from own token with the projectile `from`, authored two-type skill queues two
+  effects, unknown skill 404, unseated 403, GM explicit type, GM inferred type, GM neutral,
+  GM without a name 400, effects reach the poll and the chat).

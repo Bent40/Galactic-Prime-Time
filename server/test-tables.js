@@ -57,11 +57,16 @@ const FakeMap = makeModel(() => ({ image: '', width: 0, height: 0, grid: { type:
 const MESSAGES = [];
 const FakeMessage = { create: async (m) => { const row = { _id: 'm' + (seq++), ...clone(m), createdAt: new Date().toISOString() }; MESSAGES.push(row); return row; } };
 const FakeUser = { findById: () => ({ lean: async () => ({ username: 'sasha_user' }) }) };
-const FakeCharacter = { findOne: () => ({ lean: async () => ({ state: { identity: { name: 'Sasha' } } }) }) };
+const SASHA_STATE = { identity: { name: 'Sasha' }, skills: [{ id: 's1', templateId: 't1', level: 2 }, { id: 's2', templateId: 't2', level: 1 }] };
+const FakeCharacter = { findOne: () => { const p = Promise.resolve({ state: SASHA_STATE }); p.lean = async () => ({ state: SASHA_STATE }); return p; } };
+// enrichSkills is what joins the template; stub it with two shapes — one authored, one text-only
+const FakeSkillUtils = { enrichSkills: async (skills) => skills.map(sk => sk.templateId === 't1'
+  ? { ...sk, name: 'Fire Ball', effect: 'Hurl a ball of flame.', damageTypes: [] }
+  : { ...sk, name: 'Chilling Cut', effect: 'x', damageTypes: ['Chill', 'Bleed'] }) };
 let CURRENT = { userId: 'gm', isAdmin: true };
 for (const [mod, exp] of [
   ['./models/Table', FakeTable], ['./models/TableMap', FakeMap],
-  ['./models/Message', FakeMessage], ['./models/User', FakeUser], ['./models/Character', FakeCharacter],
+  ['./models/Message', FakeMessage], ['./models/User', FakeUser], ['./models/Character', FakeCharacter], ['./utils/skillUtils', FakeSkillUtils],
   ['./middleware/auth', (req, res, next) => { req.userId = CURRENT.userId; req.isAdmin = CURRENT.isAdmin; next(); }],
   ['./middleware/adminAuth', (req, res, next) => { if (!CURRENT.isAdmin) return res.status(403).json({ error: 'Admin access required' }); req.userId = CURRENT.userId; next(); }],
 ]) { const p = require.resolve(mod); require.cache[p] = { id: p, filename: p, loaded: true, exports: exp }; }
@@ -212,6 +217,24 @@ const eq = (label, got, want) => check(label, JSON.stringify(got) === JSON.strin
   r = await call('GET', `/${T}/live`); eq('player /live carries the effect', r.body.fx.map(f => f.type), ['Burn']);
   eq('liveFx drops effects older than the window', router.liveFx([{ at: new Date(Date.now() - 30000), type: 'Burn' }]).length, 0);
   asGM();
+
+  // ── 8g. a skill fires its damage-type effect (owner ask) ───────────────────
+  asPlayer('sasha');
+  r = await call('POST', `/${T}/use-skill`, { skillId: 's1', targetTokenId: TOK_K }); eq('player uses a skill → 201', r.status, 201);
+  eq('Fire Ball with no authored type infers Burn from its text', r.body.types, ['Burn']);
+  eq('the effect travels from the player token to the target', [r.body.fx[0].from, r.body.fx[0].to], [{ col: 7, row: 9 }, { col: 18, row: 5 }]);
+  eq('the effect is labelled with the skill', r.body.fx[0].label, 'Fire Ball');
+  eq('and it is announced in chat', r.body.message.kind, 'skill'); check('the announcement names actor, skill and target', /Sasha uses Fire Ball → The Kindler/.test(r.body.message.text));
+  r = await call('POST', `/${T}/use-skill`, { skillId: 's2', to: { col: 3, row: 3 } }); eq('authored types win: two effects', r.body.types, ['Chill', 'Bleed']); eq('…two fx queued', r.body.fx.length, 2); eq('only the first carries the label', r.body.fx[1].label, '');
+  r = await call('POST', `/${T}/use-skill`, { skillId: 'nope', to: { col: 1, row: 1 } }); eq('a skill not on the sheet → 404', r.status, 404);
+  r = await call('GET', `/${T}/live`); eq('the effects reach the poll', r.body.fx.length >= 3, true);
+  asPlayer('filipe');
+  r = await call('POST', `/${T}/use-skill`, { skillId: 's1', to: { col: 1, row: 1 } }); eq('unseated → 403', r.status, 403);
+  asGM();
+  r = await call('POST', `/${T}/use-skill`, { name: 'Charged Shot', actorTokenId: TOK_K, targetTokenId: TOK_S, type: 'Crush' }); eq('GM ability with an explicit type', r.body.types, ['Crush']); check('GM ability announces the actor token', /The Kindler uses Charged Shot → Sasha/.test(r.body.message.text));
+  r = await call('POST', `/${T}/use-skill`, { name: 'Ember Breath', actorTokenId: TOK_K, to: { col: 2, row: 2 } }); eq('GM ability with no type infers from the name', r.body.types, ['Burn']);
+  r = await call('POST', `/${T}/use-skill`, { name: 'Glare', actorTokenId: TOK_K, to: { col: 2, row: 2 } }); eq('an ability with no damage word fires the neutral burst', r.body.types, ['Skill']);
+  r = await call('POST', `/${T}/use-skill`, { actorTokenId: TOK_K, to: { col: 2, row: 2 } }); eq('GM ability without a name → 400', r.status, 400);
 
   // ── 9. deleting the live map clears activeMapId; deleting the table cascades ─
   asGM();
