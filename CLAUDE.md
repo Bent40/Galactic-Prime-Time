@@ -2629,6 +2629,11 @@ still prices 3** (`action_resolver.gd`, tests in `test_kan2_acceptance.gd` / `te
 — recorded in the game repo's `rules-addendum.md` R3 as *book changed, sim pending*, because
 there is no Godot binary in the container to run the 583-test suite honestly.
 
+## 💡 Idea board — `rulebook/idea-board.md` (created 2026-10-07)
+
+Parked, unruled campaign ideas, one entry each, struck when picked up. Throw ideas there;
+nothing in it is statted or seeded.
+
 ## 🔗 Published pages — `docs/published-pages.md` (recorded 2026-09-22)
 
 The Artifact links for the shop, the Little Brother fight screen, the Broadcast Bestiary
