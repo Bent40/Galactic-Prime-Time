@@ -2625,9 +2625,9 @@ approval): https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv
 
 *"a player can move 4 spaces in a turn."* §5.5: **1–4 spaces free** (was 1–3), longer moves
 `ceil((spaces − 4) / 4)`; §11 Slowed still drops the allowance to 1. ✅ **Ported to the Godot
-sim 2026-10-13** (`ActionResolver.FREE_MOVE_SPACES = 4`, 918/918 tests on 4.7.1). 🔴 **Enemy AI
-still PLANS with 3** — switching it moves 19 AI tests and the legacy hash pins, so enemy pacing
-waits on an owner call (game repo `rules-addendum.md` R3).
+sim 2026-10-13** (`ActionResolver.FREE_MOVE_SPACES = 4`, 918/918 tests on 4.7.1). ✅ **Enemies plan
+4 too** (owner, 2026-10-13) — one allowance for every combatant; 19 AI tests re-staged and the
+arena/door legacy hash re-pinned (game repo `rules-addendum.md` R3).
 
 ## 💡 Idea board — `rulebook/idea-board.md` (created 2026-10-07)
 
