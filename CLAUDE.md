@@ -2624,10 +2624,10 @@ approval): https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv
 ## 🔒 THE FREE MOVE IS FOUR SPACES (owner, 2026-09-23 — rulebook v1.15)
 
 *"a player can move 4 spaces in a turn."* §5.5: **1–4 spaces free** (was 1–3), longer moves
-`ceil((spaces − 4) / 4)`; §11 Slowed still drops the allowance to 1. ⚠️ **The Godot sim
-still prices 3** (`action_resolver.gd`, tests in `test_kan2_acceptance.gd` / `test_zones.gd`)
-— recorded in the game repo's `rules-addendum.md` R3 as *book changed, sim pending*, because
-there is no Godot binary in the container to run the 583-test suite honestly.
+`ceil((spaces − 4) / 4)`; §11 Slowed still drops the allowance to 1. ✅ **Ported to the Godot
+sim 2026-10-13** (`ActionResolver.FREE_MOVE_SPACES = 4`, 918/918 tests on 4.7.1). 🔴 **Enemy AI
+still PLANS with 3** — switching it moves 19 AI tests and the legacy hash pins, so enemy pacing
+waits on an owner call (game repo `rules-addendum.md` R3).
 
 ## 💡 Idea board — `rulebook/idea-board.md` (created 2026-10-07)
 
