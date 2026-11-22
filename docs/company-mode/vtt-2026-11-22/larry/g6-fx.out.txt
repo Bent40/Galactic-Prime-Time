@@ -1,0 +1,13 @@
+wf browse run: 9 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g6-fx.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+  [ 2] PASS  wait_for  — saw text 'SOUND CUES'
+  [ 3] PASS  wait  — waited 1200 ms
+  [ 4] PASS  click  — clicked
+  [ 5] PASS  click  — clicked
+  [ 6] PASS  click  — clicked
+  [ 7] PASS  click  — clicked
+  [ 8] PASS  wait  — waited 600 ms
+  [ 9] PASS  screenshot  — -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g6.png
+— 9/9 steps PASSED
+wf browse run: effort: 4 action(s) (click 4), 1 navigation(s)
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g6-fx.yaml: effort: 4 action(s) (click 4), 1 navigation(s)

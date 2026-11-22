@@ -1,0 +1,9 @@
+# Offline, send chat: the UI must tell the user the message did not go (any visible error). It shows nothing; the connection dot stays green.
+- {kind: goto, url: "http://localhost:3001/table"}
+- {kind: wait, ms: 2000}
+- {kind: set_offline, value: true}
+- {kind: fill, selector: "[aria-label=Message]", value: "OFFLINE-{{unique}}"}
+- {kind: click, text: "SEND"}
+- {kind: wait, ms: 2500}
+- {kind: screenshot, path: "/tmp/cass-off.png"}
+- {assert_text: "Not sent"}

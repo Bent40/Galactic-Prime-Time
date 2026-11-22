@@ -1,0 +1,6 @@
+# BLOCKED (tool gap): token move is SVG pointerdown/move/up drag; wf browse has no drag/mouse step and the app has no keyboard/click-to-move path.
+# Closest flow: select own token (click) and show the Move tool is active; the move itself cannot be expressed.
+- goto: http://localhost:3001/table
+- {kind: wait_for, text: SEATED}
+- {kind: click, selector: "g[data-token].draggable"}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p2.png}

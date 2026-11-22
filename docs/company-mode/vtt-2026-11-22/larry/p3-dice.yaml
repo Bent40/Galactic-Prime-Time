@@ -1,0 +1,5 @@
+- goto: http://localhost:3001/table
+- {kind: wait_for, text: SEATED}
+- {kind: click, text: d6, selector: "button:has-text('THRESHOLD'):has-text('d6')"}
+- {kind: wait_for, text: 'Threshold die'}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p3.png}

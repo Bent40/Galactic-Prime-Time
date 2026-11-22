@@ -1,0 +1,6 @@
+- goto: http://localhost:3001/table
+- {kind: wait_for, text: SEATED}
+- {kind: fill, selector: "input[placeholder^='Say something']", value: "larry-chat-{{unique}}"}
+- {kind: press, key: Enter, selector: "input[placeholder^='Say something']"}
+- {kind: wait_for, text: larry-chat}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p5.png}

@@ -1,0 +1,62 @@
+wf browse run: 5 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g2-reveal.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+  [ 2] PASS  wait_for  — saw text 'SOUND CUES'
+  [ 3] PASS  wait  — waited 1200 ms
+  [ 4] FAIL  click  — Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("g.hidden-tok circle.ring").first
+    - locator resolved to <circle r="36" class="ring" stroke="#8e44ad"></circle>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx">😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀…</div> from <aside class="table-side right">…</aside> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx">😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀…</div> from <aside class="table-side right">…</aside> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    19 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="fx">😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀…</div> from <aside class="table-side right">…</aside> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+  [ 5] NOT_VERIFIED  click  — not reached: an earlier step failed
+— 3/5 steps PASSED (1 not verified)
+wf browse run: effort: 2 action(s) (click 2), 1 navigation(s)
+wf browse run: FAILED at step 4 (click): Locator.click: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator("g.hidden-tok circle.ring").first
+    - locator resolved to <circle r="36" class="ring" stroke="#8e44ad"></circle>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx">😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀…</div> from <aside class="table-side right">…</aside> subtree intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div class="fx">😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀…</div> from <aside class="table-side right">…</aside> subtree intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    19 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div class="fx">😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀é😀…</div> from <aside class="table-side right">…</aside> subtree intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g2-reveal.yaml: effort: 2 action(s) (click 2), 1 navigation(s)

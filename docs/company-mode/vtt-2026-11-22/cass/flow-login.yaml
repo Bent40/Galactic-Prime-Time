@@ -1,0 +1,6 @@
+- {kind: goto, url: "http://localhost:3001/table"}
+- {kind: fill, selector: "form input >> nth=0", value: "sasha"}
+- {kind: fill, selector: "input[type=password]", value: "testpass1"}
+- {kind: press, key: Enter}
+- {kind: wait, ms: 2500}
+- {kind: screenshot, path: "/tmp/cass-table.png"}

@@ -1,0 +1,9 @@
+wf browse run: 5 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p3-dice.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/table
+  [ 2] PASS  wait_for  — saw text 'SEATED'
+  [ 3] PASS  click  — clicked
+  [ 4] PASS  wait_for  — saw text 'Threshold die'
+  [ 5] PASS  screenshot  — -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p3.png
+— 5/5 steps PASSED
+wf browse run: effort: 1 action(s) (click 1), 1 navigation(s)
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p3-dice.yaml: effort: 1 action(s) (click 1), 1 navigation(s)

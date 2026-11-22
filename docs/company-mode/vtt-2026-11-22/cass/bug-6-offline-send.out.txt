@@ -1,0 +1,12 @@
+wf browse run: 8 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/cass/bug-6-offline-send.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/table
+  [ 2] PASS  wait  — waited 2000 ms
+  [ 3] PASS  set_offline  — offline
+  [ 4] PASS  fill  — filled '[aria-label=Message]'
+  [ 5] PASS  click  — clicked
+  [ 6] PASS  wait  — waited 2500 ms
+  [ 7] PASS  screenshot  — -> /tmp/cass-off.png
+  [ 8] FAIL  assert_text  — text 'not sent' not found on page
+— 7/8 steps PASSED
+wf browse run: effort: 2 action(s) (click 1, fill 1), 1 navigation(s)
+wf browse run: FAILED at step 8 (assert_text): text 'not sent' not found on page

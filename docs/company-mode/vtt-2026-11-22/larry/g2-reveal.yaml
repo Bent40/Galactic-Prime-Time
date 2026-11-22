@@ -1,0 +1,7 @@
+# BLOCKED: hidden token sits at col14,row6, cropped off the right edge of the board at 1280x720, 1920x1080 and 2560x1440;
+# GM has no token list, only click-on-map, and wf browse cannot pan (drag) or zoom (wheel). Closest flow shows it is unclickable.
+- goto: http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+- {kind: wait_for, text: SOUND CUES}
+- {kind: wait, ms: 1200}
+- {kind: click, selector: "g.hidden-tok circle.ring"}
+- {kind: click, text: reveal}

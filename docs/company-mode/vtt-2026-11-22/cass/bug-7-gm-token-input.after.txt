@@ -1,0 +1,1 @@
+{"tokenId":"mwrrtocl4sv4nh","kind":"enemy","refId":"","name":"CassTmp","label":"🔥🔥","color":"#94a6c6","tier":"","size":"Medium","col":0,"row":0,"hidden":false,"parts":[{"name":"P","currentHp":2,"maxHp":2,"lethal":true}],"conditions":[]}

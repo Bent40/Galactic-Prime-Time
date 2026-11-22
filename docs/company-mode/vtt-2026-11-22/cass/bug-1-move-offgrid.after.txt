@@ -1,0 +1,1 @@
+{"ok":true,"token":{"tokenId":"mwrrjl84n6wkrh","kind":"player","refId":"6b02d4264e945d2a1dbcacf6","name":"Sasha","label":"","color":"#ffb347","tier":"","size":"Medium","col":29,"row":19,"hidden":false,"parts":[],"conditions":[]}}

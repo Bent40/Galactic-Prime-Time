@@ -145,6 +145,9 @@ const eq = (label, got, want) => check(label, JSON.stringify(got) === JSON.strin
   r = await call('PATCH', `/${T}/tokens/${TOK_S}/move`, { col: 7, row: 9 }); eq('own token moves', r.status, 200); eq('…to the new hex', [r.body.token.col, r.body.token.row], [7, 9]);
   r = await call('PATCH', `/${T}/tokens/${TOK_K}/move`, { col: 1, row: 1 }); eq('someone else\'s token → 403', r.status, 403);
   r = await call('PATCH', `/${T}/tokens/${TOK_S}/move`, {}); eq('move without col/row → 400', r.status, 400);
+  r = await call('PATCH', `/${T}/tokens/${TOK_S}/move`, { col: 999999999, row: 50000 }); eq('a move off the map is clamped to the grid edge (27×20 → 26,19)', [r.body.token.col, r.body.token.row], [26, 19]);
+  r = await call('PATCH', `/${T}/tokens/${TOK_S}/move`, { col: 'abc', row: 2 }); eq('a non-number move → 400 (it used to become 0)', r.status, 400);
+  r = await call('PATCH', `/${T}/tokens/${TOK_S}/move`, { col: 7, row: 9 });
   asPlayer('filipe');
   r = await call('PATCH', `/${T}/tokens/${TOK_S}/move`, { col: 0, row: 0 }); eq('unseated player → 403', r.status, 403);
 
@@ -220,6 +223,8 @@ const eq = (label, got, want) => check(label, JSON.stringify(got) === JSON.strin
 
   // ── 8g. a skill fires its damage-type effect (owner ask) ───────────────────
   asPlayer('sasha');
+  r = await call('POST', `/${T}/use-skill`, { skillId: 's1', targetTokenId: TOK_K }); eq('a player cannot target a HIDDEN token (its name would leak to chat) → 404', r.status, 404);
+  asGM(); await call('PATCH', `/${T}/maps/${M1}/tokens/${TOK_K}`, { hidden: false }); asPlayer('sasha');
   r = await call('POST', `/${T}/use-skill`, { skillId: 's1', targetTokenId: TOK_K }); eq('player uses a skill → 201', r.status, 201);
   eq('Fire Ball with no authored type infers Burn from its text', r.body.types, ['Burn']);
   eq('the effect travels from the player token to the target', [r.body.fx[0].from, r.body.fx[0].to], [{ col: 7, row: 9 }, { col: 18, row: 5 }]);

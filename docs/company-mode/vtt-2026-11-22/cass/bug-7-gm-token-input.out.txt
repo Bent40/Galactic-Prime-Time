@@ -1,0 +1,3 @@
+{"tokenId":"mwrrqbpv8vhvwj","kind":"enemy","refId":"","name":"CassTmp","label":"🔥\ud83d","color":"#94a6c6","tier":"","size":"Medium","col":0,"row":0,"hidden":false,"parts":[{"name":"P","currentHp":999,"maxHp":2,"lethal":true}],"conditions":[]}
+BUG label has lone surrogate '🔥\ud83d'
+BUG currentHp 999 > maxHp 2

@@ -30,7 +30,9 @@ router.get('/', requireAuth, async (req, res) => {
 router.post('/', requireAuth, async (req, res) => {
   try {
     const { text, recipientId, recipientNpcId, style } = req.body;
-    if (!text || !text.trim()) return res.status(400).json({ error: 'Message text required' });
+    if (typeof text !== 'string' || !text.trim()) return res.status(400).json({ error: 'Message text required' });
+    const isId = v => v == null || v === '' || /^[a-f0-9]{24}$/i.test(String(v));
+    if (!isId(recipientId) || !isId(recipientNpcId)) return res.status(400).json({ error: 'Invalid recipient' });
     if (text.length > 500) return res.status(400).json({ error: 'Message too long (max 500 chars)' });
 
     const sender = await User.findById(req.userId, 'username').lean();
