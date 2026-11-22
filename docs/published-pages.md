@@ -12,6 +12,7 @@ them and would rebuild rather than update. Recorded here so they can be updated 
 | **The Set 1 Spine** | https://claude.ai/artifact/AN6og6iiQuzDfQvinoE9R5 | `server/seeds/items-set1-spine.js` | The 26 spine templates |
 | **Design Review Brief** | https://claude.ai/artifact/UtsWKA1AxhNWcoGc2FFwWq | — | 2026-08-11, historical |
 | **The Broadcast Table** — VTT mockup | https://claude.ai/artifact/SB1CqERqWCGcayvbUANJWv | `docs/vtt-research.md` | 2026-09-23. GM / player view toggle, hex board, tokens, the Clock rail, the book's three dice. **Awaiting approval** before the play surface is built |
+| **Tabletop UI Fixes** — mockup | https://claude.ai/artifact/DbkxiaW61QsKvsA5GYPC4S | `docs/mockups/vtt-ui-fixes-mockup.html` | 2026-11-22, from the Company Mode VTT pass. GM token list + off-map warning, click-to-move, phone layout. **Awaiting approval** |
 
 ⚠️ **To change a page, UPDATE it at its own link.** Publishing without the URL creates a
 second artifact and the old link keeps serving stale content — which is how the two
