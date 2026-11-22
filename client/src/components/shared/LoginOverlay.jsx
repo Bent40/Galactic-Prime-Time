@@ -38,19 +38,19 @@ export default function LoginOverlay({ onLogin, isAdmin = false }) {
   }
 
   return (
-    <div className="login-overlay">
+    <main className="login-overlay">
       <div className={`login-box${isAdmin ? ' admin' : ''}`}>
-        <div className={`login-title${isAdmin ? ' admin' : ''}`}>
+        <h1 className={`login-title${isAdmin ? ' admin' : ''}`}>
           ⚡ {isAdmin ? 'Admin Access' : isRegister ? 'Register Contestant' : 'Contestant Login'}
-        </div>
+        </h1>
         <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div className="field-group">
-            <label className="field-label">Username</label>
-            <input className="fi" value={username} onChange={e => setUsername(e.target.value)} required autoFocus />
+            <label className="field-label" htmlFor="login-username">Username</label>
+            <input id="login-username" autoComplete="username" className="fi" value={username} onChange={e => setUsername(e.target.value)} required autoFocus />
           </div>
           <div className="field-group">
-            <label className="field-label">Password</label>
-            <input className="fi" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+            <label className="field-label" htmlFor="login-password">Password</label>
+            <input id="login-password" autoComplete={isRegister ? 'new-password' : 'current-password'} className="fi" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
           </div>
           <button
             className={`btn ${isAdmin ? 'btn-purple' : 'btn-cyan'}`}
@@ -61,13 +61,13 @@ export default function LoginOverlay({ onLogin, isAdmin = false }) {
             {loading ? 'Connecting...' : isAdmin ? 'Enter Admin Panel' : isRegister ? 'Register' : 'Enter the Arena'}
           </button>
         </form>
-        {err && <div className="login-err">{err}</div>}
+        {err && <div className="login-err" role="alert">{err}</div>}
         {!isAdmin && (
-          <div className="login-toggle" onClick={() => setIsRegister(r => !r)}>
+          <button type="button" className="login-toggle" onClick={() => { setIsRegister(r => !r); setErr(''); }}>
             {isRegister ? 'Have an account? Login' : 'New contestant? Register'}
-          </div>
+          </button>
         )}
       </div>
-    </div>
+    </main>
   );
 }

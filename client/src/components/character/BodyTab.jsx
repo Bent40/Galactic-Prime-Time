@@ -159,44 +159,44 @@ export default function BodyTab({ state, update }) {
           </div>
           <div className="identity-fields">
             <div className="field-group">
-              <label className="field-label">Character Name</label>
-              <input className="fi" value={id.name} onChange={e => patchId('name', e.target.value)} />
+              <label className="field-label" htmlFor="id-name">Character Name</label>
+              <input id="id-name" className="fi" value={id.name} onChange={e => patchId('name', e.target.value)} />
             </div>
             <div className="field-group">
-              <label className="field-label">Player Name</label>
-              <input className="fi" value={id.player} onChange={e => patchId('player', e.target.value)} />
+              <label className="field-label" htmlFor="id-player">Player Name</label>
+              <input id="id-player" className="fi" value={id.player} onChange={e => patchId('player', e.target.value)} />
             </div>
             <div className="field-group">
-              <label className="field-label">Race</label>
-              <select className="fi" value={id.race} onChange={e => patchId('race', e.target.value)}>
+              <label className="field-label" htmlFor="id-race">Race</label>
+              <select id="id-race" className="fi" value={id.race} onChange={e => patchId('race', e.target.value)}>
                 {id.race && !RACES.includes(id.race) && <option value={id.race}>{id.race} (legacy)</option>}
                 {RACES.map(r => <option key={r}>{r}</option>)}
               </select>
             </div>
             <div className="field-group">
-              <label className="field-label">Species / Model</label>
-              <input className="fi" value={id.species || ''} onChange={e => patchId('species', e.target.value)} placeholder="e.g. Sea Lion" />
+              <label className="field-label" htmlFor="id-species">Species / Model</label>
+              <input id="id-species" className="fi" value={id.species || ''} onChange={e => patchId('species', e.target.value)} placeholder="e.g. Sea Lion" />
             </div>
             <div className="field-group">
-              <label className="field-label" title="§7.1 — size sets the base HP of every body part. Changing it re-bases your body; current HP, conditions and any added part are kept.">
-                Size <span style={{ opacity: .6 }}>— re-bases your body</span>
+              <label className="field-label" htmlFor="id-size" title="§7.1 — size sets the base HP of every body part. Changing it re-bases your body; current HP, conditions and any added part are kept.">
+                Size <span className="label-hint">— re-bases your body</span>
               </label>
-              <select className="fi" value={id.size || 'Medium'} onChange={e => setSize(e.target.value)}>
+              <select id="id-size" className="fi" value={id.size || 'Medium'} onChange={e => setSize(e.target.value)}>
                 {id.size && !SIZES.includes(id.size) && <option value={id.size}>{id.size} (legacy)</option>}
                 {SIZES.map(sz => <option key={sz}>{sz}</option>)}
               </select>
             </div>
             <div className="field-group">
-              <label className="field-label">Level</label>
-              <input className="fi" type="number" value={id.level} readOnly disabled />
+              <label className="field-label" htmlFor="id-level">Level</label>
+              <input id="id-level" className="fi" type="number" value={id.level} readOnly disabled />
             </div>
             <div className="field-group" style={{ gridColumn: '1 / -1' }}>
-              <label className="field-label">Background</label>
-              <input className="fi" value={id.background} onChange={e => patchId('background', e.target.value)} />
+              <label className="field-label" htmlFor="id-background">Background</label>
+              <input id="id-background" className="fi" value={id.background} onChange={e => patchId('background', e.target.value)} />
             </div>
             <div className="field-group">
-              <label className="field-label">Contestant #</label>
-              <input className="fi" value={id.contestantNumber} onChange={e => patchId('contestantNumber', e.target.value)} />
+              <label className="field-label" htmlFor="id-number">Contestant #</label>
+              <input id="id-number" className="fi" value={id.contestantNumber} onChange={e => patchId('contestantNumber', e.target.value)} />
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@ export default function BodyTab({ state, update }) {
             return (
               <div key={bp.id} className={`bp-card${cls ? ' ' + cls : ''}`}>
                 <div className="bp-header">
-                  <input className="bp-name-input" value={bp.name} onChange={e => patchBP(bp.id, 'name', e.target.value)} />
+                  <input className="bp-name-input" aria-label="Body part name" value={bp.name} onChange={e => patchBP(bp.id, 'name', e.target.value)} />
                   <label className="lethal-toggle">
                     <input type="checkbox" checked={!!bp.lethal} onChange={e => patchBP(bp.id, 'lethal', e.target.checked)} />
                     LETHAL
@@ -286,7 +286,7 @@ export default function BodyTab({ state, update }) {
                 </div>
                 <div className="hp-row">
                   <span className="hp-label">HP</span>
-                  <input className="hp-max-input" type="number" min="0" value={baseHp}
+                  <input className="hp-max-input" aria-label={`${bp.name} base HP`} type="number" min="0" value={baseHp}
                     title={hpBonus > 0
                       ? `Base ${baseHp} (size, §7.1) + ${hpBonus} from ${traitPoints} trait points (L-18) = ${effectiveMax}`
                       : `Base ${baseHp} — set by size (§7.1). It grows automatically every ${HP_PER_POINT} trait points.`}

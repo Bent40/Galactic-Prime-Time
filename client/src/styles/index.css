@@ -160,10 +160,14 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .login-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: flex; align-items: center; justify-content: center; z-index: 1000; backdrop-filter: blur(6px); }
 .login-box { background: var(--panel); border: 1px solid var(--cyan); border-radius: 6px; padding: 30px; width: 340px; box-shadow: 0 0 40px rgba(0,212,255,.25); }
 .login-box.admin { border-color: var(--purple); box-shadow: 0 0 40px rgba(168,85,247,.3); }
-.login-title { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 22px; text-align: center; }
+.login-title { margin-top: 0; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); margin-bottom: 22px; text-align: center; }
 .login-title.admin { color: var(--purple); }
 .login-err { color: var(--danger); font-size: 10px; letter-spacing: 1px; margin-top: 8px; text-align: center; min-height: 14px; }
-.login-toggle { color: var(--muted-text); font-size: 10px; letter-spacing: 1px; margin-top: 10px; text-align: center; cursor: pointer; text-decoration: underline; }
+.login-toggle { color: var(--muted-text); font-size: 10px; letter-spacing: 1px; margin-top: 10px; text-align: center; cursor: pointer; text-decoration: underline;
+  /* a real <button> now (keyboard users can reach it), styled to look like the old link */
+  display: block; width: 100%; background: none; border: none; padding: 4px; font-family: inherit; }
+.login-toggle:hover { color: var(--text); }
+.login-toggle:disabled { opacity: .5; cursor: default; }
 
 /* ---- TOAST ---- */
 .toast { position: fixed; bottom: 22px; right: 22px; background: #0a1a2e; border: 1px solid var(--success); border-radius: 4px; color: var(--success); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 8px 16px; z-index: 9999; opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; pointer-events: none; }
@@ -181,7 +185,7 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .traits-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
 .trait-card { background: rgba(0,212,255,.03); border: 1px solid var(--border); border-radius: 5px; padding: 12px; text-align: center; }
 .trait-name { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted-text); margin-bottom: 2px; }
-.trait-sub { font-size: 8px; color: var(--muted-text); opacity: .6; margin-bottom: 6px; }
+.trait-sub { font-size: 8px; color: var(--muted-text); margin-bottom: 6px; }
 .trait-val { font-family: 'Courier New',monospace; font-size: 40px; font-weight: 700; color: var(--cyan); text-shadow: 0 0 18px rgba(0,212,255,.5); line-height: 1; margin-bottom: 6px; }
 .trait-controls { display: flex; align-items: center; justify-content: center; gap: 6px; }
 .trait-bonus-display { font-family: 'Courier New',monospace; font-size: 10px; color: var(--muted-text); min-width: 60px; }
@@ -268,7 +272,7 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .inv-container { background: var(--panel); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; }
 .inv-container-header { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: rgba(0,212,255,.04); cursor: pointer; user-select: none; border-bottom: 1px solid var(--border); }
 .inv-container-header:hover { background: rgba(0,212,255,.08); }
-.inv-cat-name-in { background: transparent; border: none; color: var(--text); font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; flex: 1; font-family: inherit; cursor: text; }
+.inv-cat-name-in { background: transparent; border: none; color: var(--text); font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; flex: 1; min-width: 0; font-family: inherit; cursor: text; }
 .inv-cat-name-in:focus { outline: none; }
 .inv-cat-count { font-family: 'Courier New',monospace; font-size: 10px; background: var(--muted); color: var(--panel); padding: 1px 6px; border-radius: 10px; }
 .inv-cat-body-col { padding: 8px 12px; display: flex; flex-direction: column; gap: 6px; min-height: 40px; }
@@ -814,3 +818,29 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .skillbtn:disabled { opacity: .4; cursor: default; }
 .skillbtn .sk-meta { font-size: 10px; color: var(--muted-text); font-family: 'Courier New', monospace; white-space: nowrap; }
 .chat-log .msg.skill { border-left-color: var(--cyan); background: rgba(0,212,255,.06); }
+
+/* ---- ACCESSIBILITY + PHONE PASS (Company Mode pilot findings 5–7) ---- */
+/* Secondary words inside a label ("— re-bases your body"). Was opacity .6 on
+   --muted-text, which axe measured at 3.49:1. Full --muted-text passes. */
+.label-hint { color: var(--muted-text); font-weight: 400; }
+/* A visible ring for keyboard users only (mouse clicks stay clean). */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+h1.topbar-title { margin: 0; }
+
+/* Phone: one column, nothing clipped off the right edge. */
+@media (max-width: 600px) {
+  .sheet-topbar { flex-wrap: wrap; gap: 6px 10px; padding: 8px 12px; justify-content: center; }
+  .sheet-topbar .topbar-title { order: -1; width: 100%; text-align: center; font-size: 15px; letter-spacing: 3px; }
+  .sheet-topbar .topbar-live { font-size: 9px; }
+  .sheet-topbar .topbar-right { flex-wrap: wrap; justify-content: center; gap: 6px; font-size: 10px; }
+  .sheet-topbar .topbar-right .btn { padding: 4px 8px; font-size: 9px; letter-spacing: 1px; }
+  .tab-nav { padding: 0 6px; }
+  .tab-btn { padding: 12px 10px; }
+  .tab-content { padding: 10px; }
+  .identity-row { grid-template-columns: 1fr; }
+  .identity-row > :first-child { justify-self: center; }
+  .identity-fields { grid-template-columns: 1fr 1fr; }
+  .traits-grid, .stats-grid { grid-template-columns: 1fr 1fr; }
+  .two-col, .three-col, .obj-cols, .exposure-counters, .comms-layout, .resist-grid { grid-template-columns: 1fr; }
+  .panel-title { flex-wrap: wrap; gap: 6px; }
+}
