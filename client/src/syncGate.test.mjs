@@ -6,7 +6,8 @@
  * A wrong answer throws away a player's unsaved sheet in the middle of a
  * session, so every branch is pinned here.
  */
-import { NO_CHARACTER, shouldPoll, pollOutcome, syncMessage } from './syncGate.js';
+import { NO_CHARACTER, shouldPoll, pollOutcome, syncMessage,
+  saveSucceeded, retryDelay, canKeepalive, pendingKey, restoreDecision } from './syncGate.js';
 
 let pass = 0, fail = 0;
 const ok = (label, cond, detail) => {
@@ -62,6 +63,32 @@ eq('two owed pluralise', syncMessage(0, -2), { msg: '▼ 2 level points owed —
 eq('a revoke that only eats the spare pool is not a debt', syncMessage(3, 2), { msg: 'Sheet updated by the GM', type: 'ok' });
 eq('anything else is generic', syncMessage(1, 1), { msg: 'Sheet updated by the GM', type: 'ok' });
 eq('a grant that clears a debt reads as a grant', syncMessage(-2, 0), { msg: '▲ 2 level points — spend on the Body tab', type: 'ok' });
+
+// ── saving ───────────────────────────────────────────────────────────────────
+eq('ok:true is a save', saveSucceeded({ ok: true, updatedAt: 't' }), true);
+eq('a 503 body is NOT a save (apiFetch resolves on any status)', saveSucceeded({ error: 'Database unavailable' }), false);
+eq('a 500 body is not a save', saveSucceeded({ error: 'Server error' }), false);
+eq('no reply is not a save', saveSucceeded(undefined), false);
+eq('first retry after 2s', retryDelay(0), 2000);
+eq('second retry after 4s', retryDelay(1), 4000);
+eq('retries cap at 60s', retryDelay(20), 60000);
+eq('a bad attempt count still gives a delay', retryDelay(undefined), 2000);
+eq('a small body may use keepalive', canKeepalive(JSON.stringify({ state: { a: 1 } })), true);
+eq('a body over the keepalive cap may not', canKeepalive('x'.repeat(70000)), false);
+eq('a body is measured in BYTES, not characters', canKeepalive('🧨'.repeat(16000)), false);
+eq('pending key is per user id', pendingKey({ userId: 'u1', username: 'bob' }), 'gpt.pendingSave.u1');
+eq('pending key falls back to username', pendingKey({ userId: null, username: 'bob' }), 'gpt.pendingSave.bob');
+eq('no auth, no key', pendingKey(null), null);
+
+// ── restoreDecision ──────────────────────────────────────────────────────────
+const st = { state: { notes: 'x' }, baseVersion: 'v1', flushed: false };
+eq('nothing stored', restoreDecision({ stored: null, serverUpdatedAt: 'v1' }), 'none');
+eq('junk stored', restoreDecision({ stored: 'nope', serverUpdatedAt: 'v1' }), 'none');
+eq('server unchanged since the edit → restore it', restoreDecision({ stored: st, serverUpdatedAt: 'v1' }), 'restore');
+eq('unchanged even when it was flushed (the flush failed) → restore', restoreDecision({ stored: { ...st, flushed: true }, serverUpdatedAt: 'v1' }), 'restore');
+eq('server moved and we flushed → the flush landed', restoreDecision({ stored: { ...st, flushed: true }, serverUpdatedAt: 'v2' }), 'landed');
+eq('server moved and we never flushed → conflict, keep the server', restoreDecision({ stored: st, serverUpdatedAt: 'v2' }), 'conflict');
+eq('a brand-new sheet (no version yet) restores', restoreDecision({ stored: { ...st, baseVersion: null }, serverUpdatedAt: undefined }), 'restore');
 
 console.log(`\n${fail === 0 ? '✅' : '❌'} syncGate: ${pass} passed, ${fail} failed`);
 process.exit(fail === 0 ? 0 : 1);

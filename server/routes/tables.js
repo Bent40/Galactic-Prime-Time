@@ -8,6 +8,7 @@ const Message = require('../models/Message');
 const User = require('../models/User');
 const Character = require('../models/Character');
 const dice = require('../dice');
+const { tableNameError, tableDescriptionError, validationMessage } = require('../utils/validate');
 const { enrichSkills } = require('../utils/skillUtils');
 const { inferDamageTypes } = require('../skill-fx');
 const { notify } = require('../realtime');
@@ -129,7 +130,11 @@ async function loadMap(req, res, table) {
   if (!map) { res.status(404).json({ error: 'Map not found on this table' }); return null; }
   return map;
 }
-const fail = (res, where, err) => { logger.error(`${where} failed`, { message: err.message }); res.status(500).json({ error: 'Server error' }); };
+const fail = (res, where, err) => {
+  const msg = validationMessage(err);
+  if (msg) return res.status(400).json({ error: msg });
+  logger.error(`${where} failed`, { message: err.message }); res.status(500).json({ error: 'Server error' });
+};
 
 // ── Player side ──────────────────────────────────────────────────────────────
 
@@ -375,7 +380,8 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { name, description } = req.body || {};
-    if (!name || !String(name).trim()) return res.status(400).json({ error: 'name required' });
+    const bad = tableNameError(name) || tableDescriptionError(description);
+    if (bad) return res.status(400).json({ error: bad });
     const table = await Table.create({ name: String(name).trim(), description: String(description || ''), createdBy: String(req.userId || '') });
     logger.info(`TABLE CREATE "${table.name}" by=${req.userId}`);
     res.status(201).json(table);
@@ -396,7 +402,9 @@ router.patch('/:id', async (req, res) => {
   try {
     const table = await loadTable(req, res); if (!table) return;
     const { name, description, status, activeMapId } = req.body || {};
-    if (name != null) { if (!String(name).trim()) return res.status(400).json({ error: 'name cannot be empty' }); table.name = String(name).trim(); }
+    const bad = tableNameError(name, { required: false }) || tableDescriptionError(description);
+    if (bad) return res.status(400).json({ error: bad });
+    if (name != null) table.name = String(name).trim();
     if (description != null) table.description = String(description);
     if (status != null) { if (!['open', 'closed'].includes(status)) return res.status(400).json({ error: 'status must be open or closed' }); table.status = status; }
     if (activeMapId !== undefined) {
