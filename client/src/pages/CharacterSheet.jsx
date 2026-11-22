@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { apiFetch } from '../api.js';
 import { DEFAULT_STATE, TABS, ALL_TRAITS, reconcilePartHp } from '../constants.js';
-import { NO_CHARACTER, shouldPoll, pollOutcome, syncMessage } from '../syncGate.js';
+import { NO_CHARACTER, shouldPoll, pollOutcome, syncMessage,
+  saveSucceeded, retryDelay, canKeepalive, pendingKey, restoreDecision } from '../syncGate.js';
 import CharacterCreation from '../components/shared/CharacterCreation.jsx';
 import LoginOverlay from '../components/shared/LoginOverlay.jsx';
 import Toast, { useToast } from '../components/shared/Toast.jsx';
@@ -85,13 +86,123 @@ export default function CharacterSheet() {
   const poolRef = useRef(0);
   poolRef.current = charState.levelPoints?.pool ?? 0;
 
+  // ── Not losing edits ────────────────────────────────────────────────────────
+  // pending is the newest edit the server has not confirmed: { state, gen }.
+  // It is mirrored into localStorage, saved on a 1500ms debounce, flushed when
+  // the page is hidden or closed, and retried with back-off after a failure and
+  // the moment the browser comes back online. The pilot lost edits two ways:
+  // a reload inside the debounce, and any edit made while offline.
+  const pending = useRef(null);
+  const retryTimer = useRef(null);
+  const retryAttempt = useRef(0);
+  // Bumped on logout so a save still in flight cannot write into the next session.
+  const epoch = useRef(0);
+  const authRef = useRef(auth);
+  authRef.current = auth;
+
+  function storeKey() { return pendingKey(authRef.current); }
+  function writeStored(extra = {}) {
+    const key = storeKey(); const p = pending.current;
+    if (!key || !p) return;
+    try {
+      localStorage.setItem(key, JSON.stringify({
+        state: p.state, baseVersion: serverVersion.current, flushed: false, ...extra,
+      }));
+    } catch { /* full or blocked storage: the server save still runs */ }
+  }
+  function readStored() {
+    const key = storeKey(); if (!key) return null;
+    try { return JSON.parse(localStorage.getItem(key) || 'null'); } catch { return null; }
+  }
+  function clearStored() {
+    const key = storeKey(); if (!key) return;
+    try { localStorage.removeItem(key); } catch { /* ignore */ }
+  }
+
+  // Send the pending edit now. `leaving` = the page is being hidden or closed,
+  // so use a keepalive request (the only kind a browser still sends while
+  // unloading) when the body is small enough for one.
+  function saveNow({ leaving = false } = {}) {
+    const p = pending.current;
+    const token = authRef.current?.token;
+    if (!p || !token) return;
+    clearTimeout(saveTimer.current);
+    clearTimeout(retryTimer.current);
+    const myEpoch = epoch.current;
+    const body = JSON.stringify({ state: p.state });
+    const keepalive = leaving && canKeepalive(body);
+    // Only a keepalive request survives the unload, so only it may be assumed
+    // to have landed when the page next loads.
+    if (keepalive) writeStored({ flushed: true });
+    setSaveStatus('saving');
+    apiFetch('/api/character', { method: 'POST', body, ...(keepalive ? { keepalive: true } : {}) }, token)
+      .then(d => {
+        if (epoch.current !== myEpoch) return;
+        if (!saveSucceeded(d)) throw new Error(d?.error || 'save failed');
+        if (p.gen > syncedGen.current) syncedGen.current = p.gen;
+        if (d.updatedAt) serverVersion.current = d.updatedAt;
+        retryAttempt.current = 0;
+        if (pending.current === p) {
+          pending.current = null;
+          clearStored();
+          setSaveStatus('saved');
+        } else {
+          writeStored(); // a newer edit is waiting; re-base it on the new version
+        }
+      })
+      .catch(() => {
+        if (epoch.current !== myEpoch) return;
+        if (pending.current !== p) return; // a newer edit owns the next save
+        // A failed save used to report 'SAVED', and later just sat there. The
+        // edit is still only in this browser, so say so AND keep trying.
+        setSaveStatus('error');
+        writeStored();
+        retryTimer.current = setTimeout(() => saveNow(), retryDelay(retryAttempt.current++));
+      });
+  }
+  const saveNowRef = useRef(saveNow);
+  saveNowRef.current = saveNow;
+
+  useEffect(() => {
+    const flush = () => { if (pending.current) saveNowRef.current({ leaving: true }); };
+    const onVisibility = () => { if (document.visibilityState === 'hidden') flush(); };
+    const onOnline = () => { if (pending.current) saveNowRef.current(); };
+    window.addEventListener('pagehide', flush);
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('online', onOnline);
+    return () => {
+      window.removeEventListener('pagehide', flush);
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('online', onOnline);
+    };
+  }, []);
+
   useEffect(() => {
     if (!auth) return;
     apiFetch('/api/character', {}, auth.token).then(d => {
       if (d.state) {
-        setCharState(mergeLoadedState(d.state));
         serverVersion.current = d.updatedAt || null;
         setNeedsCreation(false);
+        const stored = readStored();
+        const decision = restoreDecision({ stored, serverUpdatedAt: d.updatedAt });
+        if (decision === 'restore') {
+          // Edits from the last visit never got a confirmed save, and the server
+          // has not moved since: they are the newest copy. Put them back and save.
+          const restored = mergeLoadedState(stored.state);
+          setCharState(restored);
+          localGen.current += 1;
+          pending.current = { state: restored, gen: localGen.current };
+          saveNowRef.current();
+          showToast('Restored changes that had not saved yet');
+        } else {
+          setCharState(mergeLoadedState(d.state));
+          if (decision === 'conflict') {
+            clearStored();
+            showToast('Changes from your last visit did not save, and the GM has changed your sheet since. Showing the GM\'s version.', 'err');
+          } else if (decision === 'landed') {
+            clearStored();
+          }
+        }
       } else if (d.error === NO_CHARACTER) {
         // GET /api/character 404s for a user who registered and has no character
         // document yet. That used to fall through to a blank DEFAULT_STATE sheet.
@@ -155,26 +266,25 @@ export default function CharacterSheet() {
       // window between a keystroke and the save has to count as dirty too —
       // otherwise a poll landing inside those 1500ms would discard the edit.
       localGen.current += 1;
-      const gen = localGen.current;
+      pending.current = { state: next, gen: localGen.current };
+      writeStored();
+      retryAttempt.current = 0;
+      clearTimeout(retryTimer.current);
       clearTimeout(saveTimer.current);
-      saveTimer.current = setTimeout(() => {
-        apiFetch('/api/character', { method: 'POST', body: JSON.stringify({ state: next }) }, auth?.token)
-          .then(d => {
-            setSaveStatus('saved');
-            if (gen > syncedGen.current) syncedGen.current = gen;
-            if (d?.updatedAt) serverVersion.current = d.updatedAt;
-          })
-          // A failed save used to report 'SAVED'. It must not: the edit is still
-          // only in this browser, and the GM-grant poll deliberately refuses to
-          // sync a dirty sheet, so a silent failure would also stop grants
-          // arriving. Say so, and let the next edit retry.
-          .catch(() => setSaveStatus('error'));
-      }, 1500);
+      saveTimer.current = setTimeout(() => saveNowRef.current(), 1500);
       return next;
     });
   }
 
   function logout() {
+    // Send any unsaved edit while we still hold the token. It also stays in
+    // localStorage under this user, so the next login restores it if this fails.
+    if (pending.current) saveNow({ leaving: true });
+    epoch.current += 1;
+    pending.current = null;
+    clearTimeout(saveTimer.current);
+    clearTimeout(retryTimer.current);
+    retryAttempt.current = 0;
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('username');
@@ -212,7 +322,13 @@ export default function CharacterSheet() {
         username={auth.username}
         token={auth.token}
         onDone={finishCreation}
-        onSkip={() => setNeedsCreation(false)}
+        // Skip used to just close the wizard, so the sheet behind it existed only
+        // in this tab and a reload sent the player back into creation. It now
+        // saves a blank character through the same confirmed write as Done.
+        onSkip={() => finishCreation({
+          ...DEFAULT_STATE,
+          identity: { ...DEFAULT_STATE.identity, name: auth.username || 'Unnamed Contestant' },
+        })}
       />
     );
   }
@@ -225,7 +341,7 @@ export default function CharacterSheet() {
         <div className="topbar-title">GALACTIC PRIME TIME</div>
         <div className="topbar-right">
           <span className={`save-pill ${saveStatus}`}
-                title={saveStatus === 'error' ? 'The last save did not reach the server. Your changes are only in this browser — make another edit to retry.' : undefined}>
+                title={saveStatus === 'error' ? 'The last save did not reach the server. Your changes are kept in this browser and will be sent again automatically.' : undefined}>
             {saveStatus === 'saving' ? 'SAVING…' : saveStatus === 'error' ? 'NOT SAVED' : 'SAVED'}
           </span>
           <span style={{ letterSpacing: 1 }}>{auth.username?.toUpperCase()}</span>

@@ -164,6 +164,15 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
     if (problem) { setErr(problem); setSaving(false); }
   }
 
+  // Skip saves a blank character the same way Done does (onSkip returns an
+  // error string, or null once it is in the database), so stay open on failure.
+  async function skip() {
+    if (saving) return;
+    setSaving(true); setErr('');
+    const problem = await onSkip();
+    if (problem) { setErr(problem); setSaving(false); }
+  }
+
   const hp = SIZE_BASE_HP[identity.size] || SIZE_BASE_HP.Medium;
   const bodyTotal = hp.Head + hp.Torso + 2 * hp.Arm + 2 * hp.Leg;
 
@@ -385,7 +394,8 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
 
         {err && <div className="login-err">{err}</div>}
 
-        <div className="login-toggle" onClick={onSkip}>
+        <div className="login-toggle" role="button" tabIndex={0}
+             onClick={skip} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); skip(); } }}>
           Skip — I'll fill the sheet in myself
         </div>
       </div>

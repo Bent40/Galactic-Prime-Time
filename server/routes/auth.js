@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const logger = require('../logger');
+const { usernameError, passwordError, validationMessage } = require('../utils/validate');
 
 const router = express.Router();
 
@@ -16,9 +17,12 @@ function signToken(userId, isAdmin = false) {
 // POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
-    const { username, password } = req.body;
-    if (!username || !password) return res.status(400).json({ error: 'Username and password required' });
-    if (password.length < 6) return res.status(400).json({ error: 'Password must be at least 6 characters' });
+    const { password } = req.body || {};
+    // The schema trims, so check (and look up) the trimmed name, or "bob " would
+    // pass the duplicate check and then collide with "bob" on insert.
+    const username = typeof req.body?.username === 'string' ? req.body.username.trim() : '';
+    const bad = usernameError(username) || passwordError(password);
+    if (bad) return res.status(400).json({ error: bad });
 
     const existing = await User.findOne({ username });
     if (existing) return res.status(409).json({ error: 'Username already taken' });
@@ -28,6 +32,9 @@ router.post('/register', async (req, res) => {
     logger.info(`REGISTER  "${username}"  ip=${req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '?'}`);
     res.status(201).json({ token, userId: String(user._id), username: user.username, isAdmin: user.isAdmin });
   } catch (err) {
+    const msg = validationMessage(err);
+    if (msg) return res.status(400).json({ error: msg });
+    if (err?.code === 11000) return res.status(409).json({ error: 'Username already taken' });
     res.status(500).json({ error: 'Server error' });
   }
 });
@@ -35,7 +42,8 @@ router.post('/register', async (req, res) => {
 // POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { password } = req.body || {};
+    const username = typeof req.body?.username === 'string' ? req.body.username.trim() : '';
     if (!username || !password) return res.status(400).json({ error: 'Username and password required' });
 
     const ip = (req.headers['x-forwarded-for'] || req.socket?.remoteAddress || '?').split(',')[0].trim();

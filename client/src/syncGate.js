@@ -59,3 +59,50 @@ export function syncMessage(before, after) {
   }
   return { msg: 'Sheet updated by the GM', type: 'ok' };
 }
+
+// ── Saving ────────────────────────────────────────────────────────────────────
+// apiFetch resolves with the parsed body on ANY status, so a 503 from the DB
+// guard or a 500 arrives in .then(), not .catch(). Only `ok: true` means the
+// server has the edit.
+export function saveSucceeded(reply) {
+  return reply?.ok === true;
+}
+
+// Back-off for an automatic retry after a failed save: 2s, 4s, 8s … capped at 60s.
+export function retryDelay(attempt) {
+  const n = Math.max(0, Math.floor(attempt || 0));
+  return Math.min(2000 * 2 ** Math.min(n, 10), 60000);
+}
+
+// keepalive requests (the only kind a browser still sends while the page is
+// unloading) are capped at 64 KiB of body in total. Above that the browser
+// rejects the request, so send a normal one instead and do not claim it landed.
+export const KEEPALIVE_MAX_BYTES = 60000;
+export function canKeepalive(body) {
+  return typeof body === 'string' && new Blob([body]).size <= KEEPALIVE_MAX_BYTES;
+}
+
+// Unsaved edits are mirrored into localStorage so a closed tab, a crash or an
+// offline session does not lose them. Keyed per user so a shared browser never
+// hands one player's sheet to another.
+export function pendingKey(auth) {
+  const who = auth?.userId || auth?.username;
+  return who ? `gpt.pendingSave.${who}` : null;
+}
+
+/**
+ * The page loaded and the browser holds a copy of edits that never got a
+ * confirmed save. What now?
+ *   'none'     — nothing stored (or unreadable)
+ *   'restore'  — the server has not moved since those edits were made, so they
+ *                are newer than what it holds: put them back and save them
+ *   'landed'   — the server moved AND the copy was flushed on the way out, so
+ *                the flush is what moved it: the edits are already there
+ *   'conflict' — the server moved for another reason (a GM change, another
+ *                device): keep the server's copy and tell the player
+ */
+export function restoreDecision({ stored, serverUpdatedAt }) {
+  if (!stored || typeof stored !== 'object' || !stored.state) return 'none';
+  if ((stored.baseVersion || null) === (serverUpdatedAt || null)) return 'restore';
+  return stored.flushed ? 'landed' : 'conflict';
+}
