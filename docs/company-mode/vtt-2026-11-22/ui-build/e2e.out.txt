@@ -1,0 +1,16 @@
+PASS  GM list shows every token incl. the hidden one  ["Sashaplayer 5/5 HIDE","Filipeplayer 5/5 HIDE","Roach-dogenemy 1/2 HIDE","Little Brother Roachenemy · off map 8/8 REVEAL"]
+PASS  off-map warning shown  1 token is outside the map picture
+SHOW
+PASS  after Show, Little Brother is on screen  {"x":857.2058715820312,"y":535.5945434570312,"width":97.897705078125,"height":13.03839111328125}
+PASS  Reveal from the list un-hides it
+PASS  Hide from the list hides it again
+PASS  Enter picks up the token  PICK A HEX: CLICK ONE, OR USE THE ARROW KEYS AND ENTER. ESC CANCELS.
+PASS  arrows show the distance and cost  2 SPACES · FREE MOVE — CLICK A HEX OR PRESS ENTER
+PASS  keyboard move lands two hexes right  5,3
+PASS  click picks up the token
+PASS  clicking a hex moves the token  5,5
+PASS  phone: no sideways scroll  scrollWidth 375
+PASS  phone: board is above the tabs
+PASS  phone: Chat tab shows the chat, hides the body
+PASS  desktop: no tabs, body + chat both visible
+PASS  no page errors

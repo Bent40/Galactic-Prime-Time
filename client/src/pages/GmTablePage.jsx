@@ -11,7 +11,7 @@ import TableChat from '../table/TableChat.jsx';
 import useTablePoll from '../table/useTablePoll.js';
 import useTableSocket from '../table/useTableSocket.js';
 import { FX_TYPES, FX_STYLE } from '../table/FxLayer.jsx';
-import { moveCost, key } from '../table/hex.js';
+import { moveCost, key, boardSize, centre } from '../table/hex.js';
 
 /**
  * /gm/:tableId — the GM's table. Same board as the players, plus: every token drags,
@@ -40,6 +40,8 @@ export default function GmTablePage() {
   const [condText, setCondText] = useState('');
   const [ability, setAbility] = useState('');   // fx tool: an ability name makes the click a 'use skill' (announced + inferred type)
 
+  const [focusReq, setFocusReq] = useState(null);   // centre the board on a token picked from the list
+  const [fitReq, setFitReq] = useState(0);           // "Fit all"
   const [chatKey, setChatKey] = useState(0);
   const [socketOn, setSocketOn] = useState(false);
   const { live, error, image, clock, refresh, patchLocal } = useTablePoll(tableId, auth?.token, socketOn ? 15000 : 2000);
@@ -62,6 +64,13 @@ export default function GmTablePage() {
     const iv = setInterval(load, socketOn ? 20000 : 5000); return () => clearInterval(iv);
   }, [auth, tableId, socketOn]);
 
+  // A token whose centre is outside the map picture cannot be seen at the default zoom.
+  const offMap = useMemo(() => {
+    if (!map) return new Set();
+    const sz = boardSize(map);
+    return new Set(map.tokens.filter(t => { const p = centre(t.col, t.row, map.grid); return p.x < 0 || p.y < 0 || p.x > sz.width || p.y > sz.height; }).map(t => t.tokenId));
+  }, [map]);
+  function pickFromList(t) { setSelected(t.tokenId); if (offMap.has(t.tokenId)) setFitReq(n => n + 1); else setFocusReq({ col: t.col, row: t.row, n: Date.now() }); }
   const selToken = useMemo(() => map?.tokens.find(t => t.tokenId === selected) || null, [map, selected]);
   // a player token's parts come from the sheet, refreshed with the poll
   useEffect(() => {
@@ -195,6 +204,7 @@ export default function GmTablePage() {
             <>
               <div className="board-tools" role="toolbar">
                 {['move', 'measure', 'fog', 'ping', 'fx'].map(t => <button key={t} type="button" className={`tool${tool === t ? ' on' : ''}`} onClick={() => setTool(t)}>{t}</button>)}
+                <button type="button" className="tool" onClick={() => setFitReq(n => n + 1)} title="Zoom out until the whole map and every token fit">fit all</button>
                 {tool === 'fog' && <>
                   <span className="sep" />
                   <button type="button" className="tool" onClick={() => setFog(!map.fogEnabled)}>{map.fogEnabled ? 'fog: on' : 'fog: off'}</button>
@@ -208,13 +218,33 @@ export default function GmTablePage() {
                 </>}
               </div>
               <HexBoard map={map} image={image} role="gm" selectedId={selected} tool={tool} live={String(map._id) === String(live.activeMapId)}
-                        onSelect={t => setSelected(t.tokenId)} onMoveToken={moveToken} onFogPaint={fogPaint} onPing={ping} onFxTarget={fireFx} pings={pings} fx={live.fx} />
+                        onSelect={t => setSelected(t.tokenId)} onMoveToken={moveToken} onFogPaint={fogPaint} onPing={ping} onFxTarget={fireFx} pings={pings} fx={live.fx} focusRequest={focusReq} fitRequest={fitReq} />
               <div className="board-info">{tool === 'fx' ? (ability.trim() ? `click a target: ${selToken ? selToken.name + ' uses ' : ''}${ability.trim()} (${fxType === 'auto' ? 'type from the name' : fxType})` : `click a hex or token to land a ${fxType === 'auto' ? 'Skill' : fxType}${selToken ? ` from ${selToken.name}` : ''}`) : tool === 'fog' ? 'paint to reveal (radius 2)' : 'drag any token · wheel zooms · drag ground to pan'}</div>
             </>
           ) : <div className="table-empty small">Pick a map to put live.</div>}
         </main>
 
         <aside className="table-side right">
+          {map && <>
+            <h3>Tokens on this map</h3>
+            {offMap.size > 0 && <div className="offmap-warn" role="status"><span>{offMap.size} token{offMap.size > 1 ? 's are' : ' is'} outside the map picture</span>
+              <button type="button" onClick={() => { const t = map.tokens.find(x => offMap.has(x.tokenId)); if (t) setSelected(t.tokenId); setFitReq(n => n + 1); }}>Show</button></div>}
+            <ul className="toklist">
+              {map.tokens.map(t => {
+                const hp = t.kind === 'player' ? (playerSheets[t.refId]?.bodyParts || []).find(p => /torso/i.test(p.name)) : (t.parts || []).find(p => p.lethal) || (t.parts || [])[0];
+                return (
+                  <li key={t.tokenId} className={`tokrow${t.hidden ? ' hid' : ''}${selected === t.tokenId ? ' sel' : ''}`}>
+                    <button type="button" className="tokrow-main" onClick={() => pickFromList(t)} aria-label={`Select ${t.name}${t.hidden ? ' (hidden)' : ''}`}>
+                      <span className="sw" style={{ borderColor: t.color }} />
+                      <span className="nm">{t.name}<small>{t.kind}{offMap.has(t.tokenId) ? ' · off map' : ''}</small></span>
+                      {hp && <span className="hp">{hp.currentHp}/{hp.maxHp}</span>}
+                    </button>
+                    <button type="button" className={`eye${t.hidden ? ' hidden' : ''}`} onClick={() => patchToken(t, { hidden: !t.hidden })} aria-label={`${t.hidden ? 'Reveal' : 'Hide'} ${t.name}`}>{t.hidden ? 'Reveal' : 'Hide'}</button>
+                  </li>);
+              })}
+              {map.tokens.length === 0 && <li className="hint">No tokens yet. Add them from the left.</li>}
+            </ul>
+          </>}
           {selToken ? (
             <div className="selbox">
               <h3>Selected</h3>

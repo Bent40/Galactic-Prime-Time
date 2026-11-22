@@ -27,7 +27,16 @@ only), map "Hatchery", a hidden Little Brother Roach.
 Moving another player's token → 403 · player on GM routes → 403 · GM-only rolls
 never reach players · `/live` strips hidden tokens · unseated user → 403 everywhere.
 
-## Not fixed — UI changes, need a mockup and the owner's approval
+## BUILT 2026-11-22 (owner: "yes, build as shown")
+
+GM token list with hide/reveal + off-map warning + "fit all" · click-to-move with
+keyboard (Enter / arrows / Esc) and 1–4 free / 5–8 one-Moment shading · phone
+layout (board on top, Body/Skills/Dice/Chat tabs, Moment rail scrolls). Also a
+failed map-image fetch now retries on the next poll instead of sticking.
+Real-browser check: `ui-build/e2e.js` → `ui-build/e2e.out.txt`, 15/15 PASS.
+Not checked: touch drag on a real phone; screen-reader announcement of the board.
+
+## Originally proposed — UI changes, need a mockup and the owner's approval
 
 Ranked recommendation. ⚠️ The designer round (Mies, Ada) was voiced by the orchestrator, not run as independent agents; every item cites tester evidence.
 
