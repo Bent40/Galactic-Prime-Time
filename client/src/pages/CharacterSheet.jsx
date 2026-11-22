@@ -59,7 +59,23 @@ export default function CharacterSheet() {
   });
   const [charState, setCharState] = useState(DEFAULT_STATE);
   const [tracker, setTracker] = useState(null);
-  const [activeTab, setActiveTab] = useState('body');
+  // The open tab lives in the URL hash (#notes), so a reload keeps it and the
+  // browser's Back button steps through the tabs you visited (pilot finding 6).
+  const tabFromHash = () => {
+    const h = window.location.hash.slice(1);
+    return TABS.some(t => t.id === h) ? h : 'body';
+  };
+  const [activeTab, setActiveTabState] = useState(tabFromHash);
+  function setActiveTab(id) {
+    if (id === activeTab) return;
+    window.history.pushState(null, '', `#${id}`);
+    setActiveTabState(id);
+  }
+  useEffect(() => {
+    const onPop = () => setActiveTabState(tabFromHash());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   const [saveStatus, setSaveStatus] = useState('saved');
   const [toast, showToast] = useToast();
   const saveTimer = useRef(null);
@@ -336,9 +352,9 @@ export default function CharacterSheet() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
       {/* Top Bar */}
-      <div className="topbar">
+      <header className="topbar sheet-topbar">
         <div className="topbar-live"><div className="live-dot" />LIVE</div>
-        <div className="topbar-title">GALACTIC PRIME TIME</div>
+        <h1 className="topbar-title">GALACTIC PRIME TIME</h1>
         <div className="topbar-right">
           <span className={`save-pill ${saveStatus}`}
                 title={saveStatus === 'error' ? 'The last save did not reach the server. Your changes are kept in this browser and will be sent again automatically.' : undefined}>
@@ -349,19 +365,20 @@ export default function CharacterSheet() {
           <button className="btn btn-wiki" onClick={() => window.open('/wiki', '_blank')} title="Open the rulebook">📖 Wiki</button>
           <button className="btn btn-danger btn-sm" onClick={logout}>Logout</button>
         </div>
-      </div>
+      </header>
 
       {/* Tab Nav */}
-      <div className="tab-nav">
+      <nav className="tab-nav" aria-label="Sheet sections">
         {TABS.map(t => (
-          <button key={t.id} className={`tab-btn${activeTab === t.id ? ' active' : ''}`} onClick={() => setActiveTab(t.id)}>
+          <button key={t.id} className={`tab-btn${activeTab === t.id ? ' active' : ''}`}
+                  aria-current={activeTab === t.id ? 'page' : undefined} onClick={() => setActiveTab(t.id)}>
             {t.label}
           </button>
         ))}
-      </div>
+      </nav>
 
       {/* Tab Content */}
-      <div className="tab-content">
+      <main className="tab-content">
         {activeTab === 'body' && <BodyTab state={charState} update={update} showToast={showToast} />}
         {activeTab === 'skills' && <SkillsTab state={charState} update={update} token={auth.token} />}
         {activeTab === 'achievements' && <AchievementsTab state={charState} />}
@@ -371,7 +388,7 @@ export default function CharacterSheet() {
         {activeTab === 'combat' && <CombatModeTab state={charState} update={update} tracker={tracker} />}
         {activeTab === 'notes' && <NotesTab state={charState} update={update} />}
         {activeTab === 'comms' && <CommsTab auth={auth} />}
-      </div>
+      </main>
 
       <Toast toast={toast} />
     </div>

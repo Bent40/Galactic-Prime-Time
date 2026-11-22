@@ -185,18 +185,18 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
         {step === 1 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div className="field-group">
-              <label className="field-label">Contestant name</label>
-              <input className="fi" value={identity.name} autoFocus
+              <label className="field-label" htmlFor="cc-name">Contestant name</label>
+              <input id="cc-name" className="fi" value={identity.name} autoFocus
                      placeholder="What the audience will chant"
                      onChange={e => set({ name: e.target.value })} />
             </div>
             <div className="field-group">
-              <label className="field-label">Player</label>
-              <input className="fi" value={identity.player} onChange={e => set({ player: e.target.value })} />
+              <label className="field-label" htmlFor="cc-player">Player</label>
+              <input id="cc-player" className="fi" value={identity.player} onChange={e => set({ player: e.target.value })} />
             </div>
             <div className="field-group">
-              <label className="field-label">Background <span style={{ opacity: .6 }}>— who you were before the abduction</span></label>
-              <textarea className="fi" rows={3} value={identity.background}
+              <label className="field-label" htmlFor="cc-background">Background <span className="label-hint">— who you were before the abduction</span></label>
+              <textarea id="cc-background" className="fi" rows={3} value={identity.background}
                         onChange={e => set({ background: e.target.value })} />
             </div>
             <button className="btn btn-cyan" style={{ padding: 9, marginTop: 6 }} onClick={() => setStep(2)}>
@@ -209,20 +209,20 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
         {step === 2 && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
             <div className="field-group">
-              <label className="field-label">Race</label>
-              <select className="fi" value={identity.race} onChange={e => set({ race: e.target.value })}>
+              <label className="field-label" htmlFor="cc-race">Race</label>
+              <select id="cc-race" className="fi" value={identity.race} onChange={e => set({ race: e.target.value })}>
                 {CREATION_RACES.map(r => <option key={r} value={r}>{r}</option>)}
               </select>
             </div>
             <div className="field-group">
-              <label className="field-label">
-                Species <span style={{ opacity: .6 }}>— free text (sea lion, cat, K-pop unit…)</span>
+              <label className="field-label" htmlFor="cc-species">
+                Species <span className="label-hint">— free text (sea lion, cat, K-pop unit…)</span>
               </label>
-              <input className="fi" value={identity.species} placeholder={identity.race === 'Human' ? 'Human' : 'e.g. cat'}
+              <input id="cc-species" className="fi" value={identity.species} placeholder={identity.race === 'Human' ? 'Human' : 'e.g. cat'}
                      onChange={e => set({ species: e.target.value })} />
             </div>
             <div className="field-group">
-              <label className="field-label">Size <span style={{ opacity: .6 }}>— §7.1, this sets your body</span></label>
+              <label className="field-label">Size <span className="label-hint">— §7.1, this sets your body</span></label>
               <div style={{ display: 'flex', gap: 6 }}>
                 {SIZES.map(sz => (
                   <button key={sz}
@@ -269,7 +269,7 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
               ([label, traits, left, max]) => (
                 <div key={label} className="field-group">
                   <label className="field-label">
-                    {label} <span style={{ opacity: .6 }}>— {left} of {max} left</span>
+                    {label} <span className="label-hint">— {left} of {max} left</span>
                   </label>
                   {traits.map(t => (
                     <div key={t} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
@@ -392,12 +392,11 @@ export default function CharacterCreation({ username, token, onDone, onSkip }) {
           </div>
         )}
 
-        {err && <div className="login-err">{err}</div>}
+        {err && <div className="login-err" role="alert">{err}</div>}
 
-        <div className="login-toggle" role="button" tabIndex={0}
-             onClick={skip} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); skip(); } }}>
+        <button type="button" className="login-toggle" onClick={skip} disabled={saving}>
           Skip — I'll fill the sheet in myself
-        </div>
+        </button>
       </div>
     </div>
   );
