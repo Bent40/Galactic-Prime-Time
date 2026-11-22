@@ -1,0 +1,8 @@
+- goto: http://127.0.0.1:3001/table
+- {kind: fill, selector: "input:not([type=password])", value: sasha}
+- {kind: fill, selector: "input[type=password]", value: testpass1}
+- {kind: click, text: ENTER THE ARENA}
+- {kind: wait_for, text: SEATED}
+- {kind: wait_for, text: Roach-dog}
+- {assert_text: Sasha}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p1.png}

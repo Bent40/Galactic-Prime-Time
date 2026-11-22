@@ -76,12 +76,15 @@ function imageProblem(image) {
 }
 
 // Whitelist + coerce one token. `existing` lets PATCH keep fields it does not name.
+// Slice by code point, not UTF-16 unit, so an emoji is never cut in half.
+function cpSlice(v, n) { return Array.from(String(v)).slice(0, n).join(''); }
+
 function normToken(input, existing = {}) {
   const t = { ...existing };
-  if (input.name != null) t.name = String(input.name).slice(0, 60);
+  if (input.name != null) t.name = cpSlice(input.name, 60);
   if (input.kind != null) t.kind = TOKEN_KINDS.includes(input.kind) ? input.kind : 'marker';
   if (input.refId != null) t.refId = String(input.refId);
-  if (input.label != null) t.label = String(input.label).slice(0, 3);
+  if (input.label != null) t.label = cpSlice(input.label, 3);
   if (input.color != null) t.color = isHex(input.color) ? input.color : (existing.color || '#94a6c6');
   if (input.tier != null) t.tier = String(input.tier);
   if (input.size != null) t.size = String(input.size);
@@ -93,7 +96,7 @@ function normToken(input, existing = {}) {
     t.parts = input.parts.map(p => ({
       name: String(p.name || 'Part'),
       maxHp: Math.max(0, num(p.maxHp)),
-      currentHp: Math.max(0, num(p.currentHp, num(p.maxHp))),
+      currentHp: Math.min(Math.max(0, num(p.maxHp)), Math.max(0, num(p.currentHp, num(p.maxHp)))),
       lethal: !!p.lethal,
     }));
   }
@@ -167,7 +170,11 @@ router.patch('/:id/tokens/:tokenId/move', requireAuth, async (req, res) => {
     if (tok.kind !== 'player' || tok.refId !== String(req.userId)) return res.status(403).json({ error: 'Not your token' });
     const { col, row } = req.body || {};
     if (col == null || row == null) return res.status(400).json({ error: 'col and row required' });
-    tok.col = Math.max(0, Math.round(num(col))); tok.row = Math.max(0, Math.round(num(row)));
+    const c = Number(col), r = Number(row);
+    if (!Number.isFinite(c) || !Number.isFinite(r)) return res.status(400).json({ error: 'col and row must be numbers' });
+    const g = map.grid || {};
+    const maxCol = Math.max(0, (g.cols || 30) - 1), maxRow = Math.max(0, (g.rows || 20) - 1);
+    tok.col = Math.min(maxCol, Math.max(0, Math.round(c))); tok.row = Math.min(maxRow, Math.max(0, Math.round(r)));
     map.markModified('tokens');
     await map.save();
     notify(table._id, 'token:moved', { tokenId: tok.tokenId, col: tok.col, row: tok.row });
@@ -271,7 +278,10 @@ router.post('/:id/use-skill', requireAuth, async (req, res) => {
       const mine = map.tokens.find(t => t.kind === 'player' && t.refId === String(req.userId));
       if (mine) from = { col: mine.col, row: mine.row };
     }
-    const target = b.targetTokenId ? map.tokens.find(t => t.tokenId === b.targetTokenId) : null;
+    // A player may only name a token they can SEE: a hidden token is treated as absent,
+    // or its id would leak its name into public chat (Company Mode VTT pass, 2026-11-22).
+    const target = b.targetTokenId ? map.tokens.find(t => t.tokenId === b.targetTokenId && (req.isAdmin || !t.hidden)) : null;
+    if (b.targetTokenId && !target) return res.status(404).json({ error: 'Target token not found' });
     const to = target ? { col: target.col, row: target.row } : (b.to && b.to.col != null ? { col: Math.round(num(b.to.col)), row: Math.round(num(b.to.row)) } : from);
     if (!to) return res.status(400).json({ error: 'No target and no token to fire from — give a targetTokenId or to {col,row}' });
     const now = new Date();

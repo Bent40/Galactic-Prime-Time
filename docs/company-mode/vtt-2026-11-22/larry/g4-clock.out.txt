@@ -1,0 +1,10 @@
+wf browse run: 6 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g4-clock.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+  [ 2] PASS  wait_for  — saw text 'SOUND CUES'
+  [ 3] PASS  wait  — waited 1200 ms
+  [ 4] PASS  click  — clicked
+  [ 5] PASS  wait  — waited 800 ms
+  [ 6] PASS  screenshot  — -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g4.png
+— 6/6 steps PASSED
+wf browse run: effort: 1 action(s) (click 1), 1 navigation(s)
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g4-clock.yaml: effort: 1 action(s) (click 1), 1 navigation(s)

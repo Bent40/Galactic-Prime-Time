@@ -1,0 +1,5 @@
+- {kind: goto, url: "http://localhost:3001/table"}
+- {kind: wait, ms: 2000}
+- {kind: fill, selector: "[aria-label=Message]", value: "DBLSUBMIT-{{unique}}"}
+- {kind: dblclick, text: "SEND"}
+- {kind: wait, ms: 1500}

@@ -13,6 +13,9 @@ export default function TableChat({ token, role, players = [], pollMs = 3000, in
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState('');
   const [target, setTarget] = useState('');
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState('');
+  const sendingRef = useRef(false); // a ref, so a double-click in one frame cannot slip past the state update
   const feed = useRef(null);
   const path = role === 'gm' ? '/api/admin/messages' : '/api/messages';
 
@@ -27,8 +30,15 @@ export default function TableChat({ token, role, players = [], pollMs = 3000, in
     const t = text.trim(); if (!t) return;
     const body = { text: t };
     if (target) body.recipientId = target;
-    const d = await apiFetch(path, { method: 'POST', body: JSON.stringify(body) }, token);
-    if (d && d._id) { setText(''); setMessages(m => [...m, d]); }
+    if (sendingRef.current) return;
+    sendingRef.current = true; setSending(true); setSendError('');
+    try {
+      const d = await apiFetch(path, { method: 'POST', body: JSON.stringify(body) }, token);
+      if (d && d._id) { setText(''); setMessages(m => [...m, d]); }
+      else setSendError(`Not sent: ${(d && d.error) || 'the server refused it'}`);
+    } catch {
+      setSendError('Not sent: no connection. Your message is still in the box.');
+    } finally { sendingRef.current = false; setSending(false); }
   }
 
   return (
@@ -50,8 +60,9 @@ export default function TableChat({ token, role, players = [], pollMs = 3000, in
           {players.map(p => <option key={p.userId} value={p.userId}>🤫 {p.displayName || p.characterName || p.username}</option>)}
         </select>
         <input className="fi" value={text} onChange={e => setText(e.target.value)} placeholder="Say something…" maxLength={500} aria-label="Message" />
-        <button className="btn btn-cyan btn-sm" type="submit">Send</button>
+        <button className="btn btn-cyan btn-sm" type="submit" disabled={sending}>{sending ? 'Sending…' : 'Send'}</button>
       </form>
+      {sendError && <div className="hint" role="alert" style={{ color: 'var(--danger)' }}>{sendError}</div>}
     </div>
   );
 }

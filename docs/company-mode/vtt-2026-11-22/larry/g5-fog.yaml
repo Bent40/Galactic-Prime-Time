@@ -1,0 +1,8 @@
+- goto: http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+- {kind: wait_for, text: SOUND CUES}
+- {kind: wait, ms: 1200}
+- {kind: click, selector: "button.tool:text-is('fog')"}
+- {kind: click, selector: "button.tool:text-is('fog: off')"}
+- {kind: wait_for, text: "fog: on"}
+- {kind: click, selector: "g[data-token]:has(text:text-is('Roach-dog')) circle.ring"}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g5.png}

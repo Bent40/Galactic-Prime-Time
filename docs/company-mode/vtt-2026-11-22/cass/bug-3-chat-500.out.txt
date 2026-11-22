@@ -1,0 +1,3 @@
+{"text":{"$gt":""}} -> 500
+{"text":"hi","recipientId":"nothex"} -> 500
+{"text":["a"]} -> 500

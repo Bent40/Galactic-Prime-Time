@@ -1,0 +1,12 @@
+wf browse run: 8 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p1-login.yaml
+  [ 1] PASS  goto  — -> http://127.0.0.1:3001/table
+  [ 2] PASS  fill  — filled 'input:not([type=password])'
+  [ 3] PASS  fill  — filled 'input[type=password]'
+  [ 4] PASS  click  — clicked
+  [ 5] PASS  wait_for  — saw text 'SEATED'
+  [ 6] PASS  wait_for  — saw text 'Roach-dog'
+  [ 7] PASS  assert_text  — found 'Sasha'
+  [ 8] PASS  screenshot  — -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p1.png
+— 8/8 steps PASSED
+wf browse run: effort: 3 action(s) (click 1, fill 2), 1 navigation(s)
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p1-login.yaml: effort: 3 action(s) (click 1, fill 2), 1 navigation(s)

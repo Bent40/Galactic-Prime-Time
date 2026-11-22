@@ -1,0 +1,53 @@
+# accessibility snapshot: http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+- generic: (no name)
+  - banner: (no name)
+    - combobox: "Which map is live" @e1
+      - MenuListPopup: (no name)
+        - option: "— no map live —"
+        - option: "Hatchery"
+    - button: "◀" @e2
+    - button: "▶ ADVANCE" @e3
+    - generic: (no name)
+      - button: "🔊 ENABLE SOUND" @e4
+    - link: "ADMIN" @e5
+  - complementary: (no name)
+    - heading: "SOUND CUES"
+    - heading: "ADD A TOKEN"
+    - button: "Sasha" @e6
+    - button: "Filipe" @e7
+    - textbox: "filter enemies…" @e8
+  - main: (no name)
+    - toolbar: (no name)
+      - button: "MOVE" @e9
+      - button: "MEASURE" @e10
+      - button: "FOG" @e11
+      - button: "PING" @e12
+      - button: "FX" @e13
+    - SvgRoot: (no name)
+  - complementary: (no name)
+    - heading: "DICE"
+    - button: "FORCED ACTION Body d6" @e14
+    - button: "FORCED ACTION Tool d6" @e15
+    - button: "THRESHOLD d4" @e16
+    - button: "THRESHOLD d6" @e17
+    - button: "THRESHOLD d8" @e18
+    - button: "FALLING 4 m" @e19
+    - LabelText: (no name)
+      - combobox: "stat" @e20
+        - MenuListPopup: (no name)
+          - option: "Reflexes"
+          - option: "Mind"
+          - option: "Physique"
+          - option: "Charm"
+    - LabelText: (no name)
+      - spinbutton: "fall m" @e21
+    - checkbox: "GM-only" @e22
+    - heading: "TABLE TALK"
+    - form: (no name)
+      - combobox: "Recipient" @e23
+        - MenuListPopup: (no name)
+          - option: "📢 table"
+          - option: "🤫 Sasha"
+          - option: "🤫 Filipe"
+      - textbox: "Message" @e24
+      - button: "SEND" @e25

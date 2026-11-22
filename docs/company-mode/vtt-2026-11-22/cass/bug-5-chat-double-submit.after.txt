@@ -1,0 +1,2 @@
+2
+copies of the same message after ONE double-click: 1

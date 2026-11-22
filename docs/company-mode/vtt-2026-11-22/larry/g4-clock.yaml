@@ -1,0 +1,6 @@
+- goto: http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+- {kind: wait_for, text: SOUND CUES}
+- {kind: wait, ms: 1200}
+- {kind: click, text: ADVANCE}
+- {kind: wait, ms: 800}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g4.png}

@@ -1,0 +1,8 @@
+- goto: http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+- {kind: fill, selector: "input:not([type=password])", value: gamemaster}
+- {kind: fill, selector: "input[type=password]", value: testpass1}
+- {kind: click, text: ENTER ADMIN PANEL}
+- {kind: wait_for, text: Roach-dog}
+- {assert_text: Little Brother Roach}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g1.png}
+- {kind: snapshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g1-snapshot.txt}

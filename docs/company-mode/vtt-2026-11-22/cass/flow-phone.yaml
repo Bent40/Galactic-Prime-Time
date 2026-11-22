@@ -1,0 +1,6 @@
+- {kind: goto, url: "http://localhost:3001/table"}
+- {kind: wait, ms: 2000}
+- {kind: set_viewport, width: 375, height: 667}
+- {kind: wait, ms: 800}
+- {kind: screenshot, path: "/tmp/cass-phone.png"}
+- {kind: assert_no_console_errors}

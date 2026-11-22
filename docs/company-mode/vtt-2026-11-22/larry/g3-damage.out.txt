@@ -1,0 +1,11 @@
+wf browse run: 7 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g3-damage.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+  [ 2] PASS  wait_for  — saw text 'SOUND CUES'
+  [ 3] PASS  wait  — waited 1200 ms
+  [ 4] PASS  click  — clicked
+  [ 5] PASS  click  — clicked
+  [ 6] PASS  wait_for  — saw text '1/2'
+  [ 7] PASS  screenshot  — -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g3.png
+— 7/7 steps PASSED
+wf browse run: effort: 2 action(s) (click 2), 1 navigation(s)
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g3-damage.yaml: effort: 2 action(s) (click 2), 1 navigation(s)

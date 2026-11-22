@@ -1,0 +1,6 @@
+- {kind: goto, url: "http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d"}
+- {kind: fill, selector: "form input >> nth=0", value: "gamemaster"}
+- {kind: fill, selector: "input[type=password]", value: "testpass1"}
+- {kind: press, key: Enter}
+- {kind: wait, ms: 3000}
+- {kind: screenshot, path: "/tmp/cass-gm.png"}

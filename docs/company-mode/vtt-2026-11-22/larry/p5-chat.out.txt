@@ -1,0 +1,10 @@
+wf browse run: 6 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p5-chat.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/table
+  [ 2] PASS  wait_for  — saw text 'SEATED'
+  [ 3] PASS  fill  — filled "input[placeholder^='Say something']"
+  [ 4] PASS  press  — pressed 'Enter' in "input[placeholder^='Say something']"
+  [ 5] PASS  wait_for  — saw text 'larry-chat'
+  [ 6] PASS  screenshot  — -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p5.png
+— 6/6 steps PASSED
+wf browse run: effort: 2 action(s) (fill 1, press 1), 1 navigation(s)
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p5-chat.yaml: effort: 2 action(s) (fill 1, press 1), 1 navigation(s)

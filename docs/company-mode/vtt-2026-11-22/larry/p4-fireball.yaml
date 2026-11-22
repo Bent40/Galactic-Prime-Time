@@ -1,0 +1,6 @@
+- goto: http://localhost:3001/table
+- {kind: wait_for, text: SEATED}
+- {kind: click, selector: "button.skillbtn:has-text('Fire Ball')"}
+- {kind: click, selector: "g[data-token]:has(text:text-is('Roach-dog')) circle.ring"}
+- {kind: wait_for, text: 'uses Fire Ball'}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/p4.png}

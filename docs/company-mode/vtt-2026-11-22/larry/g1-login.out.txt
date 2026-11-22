@@ -1,0 +1,13 @@
+wf browse run: 8 step(s) from /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g1-login.yaml
+  [ 1] PASS  goto  — -> http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+  [ 2] PASS  fill  — filled 'input:not([type=password])'
+  [ 3] PASS  fill  — filled 'input[type=password]'
+  [ 4] PASS  click  — clicked
+  [ 5] PASS  wait_for  — saw text 'Roach-dog'
+  [ 6] PASS  assert_text  — found 'Little Brother Roach'
+  [ 7] PASS  screenshot  — -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g1.png
+  [ 8] PASS  snapshot  — 25 @ref(s) on http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d -> /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g1-snapshot.txt
+— 8/8 steps PASSED
+wf browse run: effort: 3 action(s) (click 1, fill 2), 1 navigation(s)
+/home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g1-login.yaml: effort: 3 action(s) (click 1, fill 2), 1 navigation(s)
+NOTE (Larry): flow PASSES only because the hidden token's nameplate is in the DOM. Screenshots g1.png / g1-1080p.png / g1-1440p.png show Little Brother Roach (col14,row6) is NOT visible: board is cropped on the right. Verdict FAIL.

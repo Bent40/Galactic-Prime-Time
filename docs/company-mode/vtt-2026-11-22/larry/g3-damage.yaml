@@ -1,0 +1,7 @@
+- goto: http://localhost:3001/gm/6b02d4274e945d2a1dbcad0d
+- {kind: wait_for, text: SOUND CUES}
+- {kind: wait, ms: 1200}
+- {kind: click, selector: "g[data-token]:has(text:text-is('Roach-dog')) circle.ring"}
+- {kind: click, selector: ".partsbox .part:has-text('Carapace') button:has-text('−')"}
+- {kind: wait_for, text: "1/2"}
+- {kind: screenshot, path: /home/user/Galactic-Prime-Time/docs/company-mode/vtt-2026-11-22/larry/g3.png}
