@@ -69,6 +69,8 @@ export default function TablePage() {
     load(); const iv = setInterval(load, socketOn ? 20000 : 6000); return () => clearInterval(iv);
   }, [auth, socketOn]);
 
+  const [pickStatus, setPickStatus] = useState(null);
+  const [pane, setPane] = useState('body');   // phone only: which side panel shows under the board
   const myToken = useMemo(() => live?.map?.tokens.find(t => t.kind === 'player' && t.refId === String(auth?.userId)) || null, [live, auth]);
   const selToken = useMemo(() => live?.map?.tokens.find(t => t.tokenId === selected) || null, [live, selected]);
 
@@ -110,8 +112,12 @@ export default function TablePage() {
         {error && <span className="table-err">{error}</span>}
       </header>
       <div className="table-rail"><TrackerBar tracker={tracker} /></div>
-      <div className="table-body">
-        <aside className="table-side left">
+      <div className="table-body" data-pane={pane}>
+        <nav className="table-panes" aria-label="Table panels">
+          {[['body', 'Body'], ['skills', 'Skills'], ['dice', 'Dice'], ['chat', 'Chat']].map(([k, l]) => (
+            <button key={k} type="button" className={pane === k ? 'on' : ''} aria-pressed={pane === k} onClick={() => setPane(k)}>{l}</button>))}
+        </nav>
+        <aside className="table-side left" data-pane-of="body">
           <h3>Seated</h3>
           {(live?.seats || []).map(uid => { const p = uid === String(auth.userId) ? { displayName: sheet?.identity?.name || auth.username } : players.find(x => x.userId === uid); return <div key={uid} className="row"><span className="dot on" /><span className="nm">{p?.displayName || p?.username || uid}</span></div>; })}
           <h3 style={{ marginTop: 12 }}>My body</h3>
@@ -128,20 +134,23 @@ export default function TablePage() {
                 {armed && <button type="button" className="tool on" onClick={() => { setArmed(null); setTool('move'); }}>⚡ {armed.name} — pick a target ✕</button>}
               </div>
               <HexBoard map={map} image={image} role="player" myUserId={auth.userId} selectedId={selected} tool={tool}
-                        onSelect={t => setSelected(t.tokenId)} onMoveToken={moveToken} onPing={ping} onFxTarget={useSkill} pings={pings} fx={live.fx} />
-              <div className="board-info">{armed ? `click a token or hex to use ${armed.name}` : '1 space = 1 hex · free move 1–4 · wheel zooms · drag empty ground to pan'}</div>
+                        onSelect={t => setSelected(t.tokenId)} onMoveToken={moveToken} onPing={ping} onFxTarget={useSkill} pings={pings} fx={live.fx} onPickStatus={setPickStatus} />
+              <div className="board-info" role="status">{armed ? `click a token or hex to use ${armed.name}` : pickStatus || 'click your token, then a hex — or drag it · free move 1–4 · wheel zooms · drag empty ground to pan'}</div>
             </>
           ) : <div className="table-empty small">{live ? 'The GM has not put a map live yet.' : 'Loading the table…'}</div>}
         </main>
         <aside className="table-side right">
+          <div data-pane-of="body">
           {selToken && (
             <div className="selbox">
               <h3>Selected</h3>
               <div className="sel-name">{selToken.name} <small>{selToken.size}{selToken.tier ? ' · ' + selToken.tier : ''}</small></div>
               {selToken.conditions?.length > 0 && <div className="hint" style={{ color: 'var(--danger)' }}>{selToken.conditions.join(' · ')}</div>}
-              {selToken.kind === 'player' && selToken.refId === String(auth.userId) && <div className="hint">That's you. Drag to move.</div>}
+              {selToken.kind === 'player' && selToken.refId === String(auth.userId) && <div className="hint">That's you. Click it, then a hex, or drag it.</div>}
             </div>
           )}
+          </div>
+          <div data-pane-of="skills">
           <h3>Skills — click one, then a target</h3>
           <div className="skilllist">
             {(sheet?.skills || []).filter(sk => sk.name && !sk.passive).map(sk => (
@@ -152,10 +161,15 @@ export default function TablePage() {
             ))}
             {sheet && !(sheet.skills || []).some(sk => sk.name && !sk.passive) && <div className="hint">No active skills on your sheet.</div>}
           </div>
+          </div>
+          <div data-pane-of="dice">
           <h3 style={{ marginTop: 10 }}>Dice</h3>
           <DiceTray tableId={tableId} token={auth.token} role="player" onRolled={m => setRolled(r => [...r, m])} showToast={showToast} />
+          </div>
+          <div data-pane-of="chat">
           <h3 style={{ marginTop: 10 }}>Table talk</h3>
           <TableChat token={auth.token} role="player" players={players} injected={rolled} refreshKey={chatKey} pollMs={socketOn ? 20000 : 3000} />
+          </div>
         </aside>
       </div>
       <Toast toast={toast} />

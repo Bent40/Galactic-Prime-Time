@@ -688,6 +688,11 @@ textarea.fi { resize: vertical; min-height: 60px; line-height: 1.5; }
 .hex-grid { fill: none; stroke: rgba(0,212,255,.18); stroke-width: 1; pointer-events: none; }
 .hex-hover { fill: rgba(217,187,99,.18); stroke: var(--gold); stroke-width: 1; pointer-events: none; }
 .hex-fog { fill: rgba(4,5,13,.72); pointer-events: none; }
+.pick-free { fill: rgba(0,212,255,.22); }
+.pick-paid { fill: rgba(217,187,99,.18); }
+.pick-cursor { fill: none; stroke: var(--cyan); stroke-width: 3; }
+.hexboard .tok:focus { outline: none; }
+.hexboard .tok:focus-visible .ring { stroke: var(--gold); stroke-width: 4; }
 .hexboard.player .hex-fog { fill: #04050d; }
 .board-note { font-size: 20px; font-weight: 900; letter-spacing: 4px; fill: var(--gold); paint-order: stroke; stroke: #04050d; stroke-width: 6px; pointer-events: none; }
 .tok { cursor: default; }
@@ -844,3 +849,41 @@ h1.topbar-title { margin: 0; }
   .two-col, .three-col, .obj-cols, .exposure-counters, .comms-layout, .resist-grid { grid-template-columns: 1fr; }
   .panel-title { flex-wrap: wrap; gap: 6px; }
 }
+
+/* ---- TABLE: phone layout (Company Mode VTT pass, 2026-11-22) ----
+   Above 600px nothing changes. At phone width the board goes on top, the side
+   panels become four tabs under it, and the Moment rail scrolls in its own strip. */
+.table-panes { display: none; }
+@media (max-width: 600px) {
+  .tablepage .topbar.table-top { gap: 6px 10px; padding: 6px 10px; }
+  .tablepage .sound-text { max-width: 120px; }
+  .table-rail { overflow-x: auto; }
+  .table-rail .tracker-bar { flex-wrap: nowrap; width: max-content; min-width: 100%; }
+  .table-body { display: flex; flex-direction: column; }
+  .table-body .table-map { order: -2; min-height: 55vh; }
+  .table-panes { display: grid; grid-template-columns: repeat(4, 1fr); order: -1; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--panel); }
+  .table-panes button { background: none; border: 0; color: var(--muted-text); font: 700 11px 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; padding: 10px 2px; cursor: pointer; }
+  .table-panes button.on { color: var(--cyan); box-shadow: inset 0 2px 0 var(--cyan); }
+  .table-body[data-pane] [data-pane-of] { display: none; }
+  .table-body[data-pane="body"] [data-pane-of="body"], .table-body[data-pane="skills"] [data-pane-of="skills"],
+  .table-body[data-pane="dice"] [data-pane-of="dice"], .table-body[data-pane="chat"] [data-pane-of="chat"] { display: block; }
+  .table-side.left[data-pane-of] { display: none; }
+  .table-body[data-pane="body"] .table-side.left[data-pane-of="body"] { display: flex; }
+  .table-side { overflow: visible; }
+  .board-tools { flex-wrap: wrap; max-width: calc(100% - 20px); }
+}
+
+/* ---- GM token list (Company Mode VTT pass, 2026-11-22) ---- */
+.toklist { list-style: none; margin: 0 0 10px; padding: 0; display: flex; flex-direction: column; gap: 3px; max-height: 210px; overflow: auto; }
+.tokrow { display: flex; gap: 4px; align-items: stretch; }
+.tokrow-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 7px; background: var(--panel2); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 5px 7px; font: inherit; font-size: 12px; text-align: left; cursor: pointer; }
+.tokrow.sel .tokrow-main { border-color: var(--cyan); }
+.tokrow.hid .nm { color: var(--muted-text); font-style: italic; }
+.tokrow .sw { width: 10px; height: 10px; border-radius: 50%; border: 2px solid; flex: 0 0 auto; }
+.tokrow .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tokrow .nm small { margin-left: 5px; color: var(--muted-text); font-family: 'Courier New', monospace; font-size: 10px; font-style: normal; }
+.tokrow .hp { font-family: 'Courier New', monospace; font-size: 11px; color: var(--muted-text); font-variant-numeric: tabular-nums; }
+.tokrow .eye { background: none; border: 1px solid var(--border); border-radius: 4px; color: var(--muted-text); font: 700 10px 'Courier New', monospace; letter-spacing: 1px; text-transform: uppercase; padding: 0 7px; cursor: pointer; }
+.tokrow .eye.hidden { color: var(--gold); border-color: var(--gold); }
+.offmap-warn { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 11px; color: var(--gold); border: 1px solid #5a4b1d; background: #15120a; border-radius: 4px; padding: 5px 8px; margin-bottom: 6px; }
+.offmap-warn button { background: none; border: 1px solid var(--gold); color: var(--gold); border-radius: 3px; font: 700 10px 'Courier New', monospace; text-transform: uppercase; padding: 2px 7px; cursor: pointer; }

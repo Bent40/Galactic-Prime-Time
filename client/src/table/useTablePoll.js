@@ -31,8 +31,13 @@ export default function useTablePoll(tableId, token, ms = 2000) {
           imgFor.current = mid;
           if (!mid) setImage(null);
           else {
-            const im = await apiFetch(`/api/tables/${tableId}/maps/${mid}/image`, {}, token);
-            if (imgFor.current === mid) setImage(im && !im.error && im.image ? im.image : null);
+            // A failed fetch must not stick: forget the id so the next poll tries again
+            // (it used to leave the board black until the map changed).
+            const im = await apiFetch(`/api/tables/${tableId}/maps/${mid}/image`, {}, token).catch(() => null);
+            if (imgFor.current === mid) {
+              if (im && !im.error) setImage(im.image || null);
+              else { imgFor.current = ''; }
+            }
           }
         }
       } else setError(d?.error || 'Table unavailable');
