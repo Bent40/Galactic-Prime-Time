@@ -32,10 +32,14 @@ never reach players · `/live` strips hidden tokens · unseated user → 403 eve
 Ranked recommendation. ⚠️ The designer round (Mies, Ada) was voiced by the orchestrator, not run as independent agents; every item cites tester evidence.
 
 1. **A token list in the GM sidebar, hidden tokens included, each with a reveal
-   toggle.** The GM could not see or click the hidden Little Brother at 1280,
-   1920 or 2560 wide (`larry/g1*.png`, `larry/g2-reveal.out.txt`). Also the
-   keyboard path to every token.
-2. **Open the board fitted to the screen**, with a "fit" button.
+   toggle, plus an off-map warning and a "Fit all" button.** The GM could not see
+   or click the hidden Little Brother at 1280, 1920 or 2560 wide
+   (`larry/g1*.png`, `larry/g2-reveal.out.txt`). ⚠️ CORRECTED after reading
+   `HexBoard.jsx`: the board already opens fitted to the map picture; the seed put
+   the grid (and Little Brother) past the edge of a 900×600 test picture. The real
+   gap is no warning for an off-picture token and no list to reach it from — also
+   the keyboard path to every token.
+2. ~~Open the board fitted to the screen~~ — folded into 1 ("Fit all").
 3. **Click-to-move**: select your token, click a hex. Drag is the only way to
    move today (`larry/p2-move.yaml`), which shuts out keyboard and some touch users.
 4. **Phone width (375px)**: the player page overflows; Moments 6–10 and body chips
@@ -44,6 +48,9 @@ Ranked recommendation. ⚠️ The designer round (Mies, Ada) was voiced by the o
 Dissent: Larry also wants Enter to submit login and the fog brush to turn fog on
 by itself (`larry/g5-fog.yaml`, 3 actions). Against it: auto-enabling fog
 hides the map from players without the GM noticing.
+
+Mockup (awaiting owner approval): `docs/mockups/vtt-ui-fixes-mockup.html`,
+published at https://claude.ai/artifact/DbkxiaW61QsKvsA5GYPC4S
 
 ## Tool gaps (Workflow, not app bugs)
 No canvas click/drag at coordinates (token drag, fog brush, ruler, ping, fx, HP
