@@ -8,6 +8,7 @@ const Message = require('../models/Message');
 const User = require('../models/User');
 const Character = require('../models/Character');
 const dice = require('../dice');
+const { tableNameError, tableDescriptionError, validationMessage } = require('../utils/validate');
 const { enrichSkills } = require('../utils/skillUtils');
 const { inferDamageTypes } = require('../skill-fx');
 const { notify } = require('../realtime');
