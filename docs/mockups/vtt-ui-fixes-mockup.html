@@ -1,0 +1,274 @@
+<title>Tabletop UI Fixes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: three numbered proposals stacked, each a live slice of the real table UI with notes beside it. Single dark look, matching the app. */
+:root {
+  --bg: #04050d; --panel: #0b0f20; --panel2: #111628; --border: #26324e; --muted: #3a4560;
+  --text: #d3dff0; --muted-text: #94a6c6; --cyan: #00d4ff; --gold: #d9bb63; --danger: #ff4d6d;
+  --success: #3dffa2; --purple: #bd7cff; --map: #2e3a28; --map2: #3c4a34;
+  --mono: 'Courier New', ui-monospace, monospace; --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 48px; }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 40px; }
+h1 { font-family: var(--mono); letter-spacing: .25em; text-transform: uppercase; color: var(--cyan); font-size: 1.15rem; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted-text); max-width: 68ch; margin: 6px 0 0; }
+.note-correction { border: 1px solid var(--gold); background: #1a1708; color: var(--text); padding: 10px 14px; border-radius: 6px; max-width: 80ch; font-size: .92rem; }
+.note-correction b { color: var(--gold); }
+section { display: grid; gap: 14px; }
+.sh { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.num { font-family: var(--mono); color: var(--gold); font-weight: 700; letter-spacing: .1em; }
+h2 { margin: 0; font-size: 1.1rem; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 20px; align-items: start; }
+@media (max-width: 860px) { .row { grid-template-columns: minmax(0,1fr); } }
+.notes { display: grid; gap: 10px; font-size: .92rem; color: var(--muted-text); }
+.notes h3 { margin: 0; font-size: .78rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text); font-family: var(--mono); }
+.notes ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.notes .why { border-left: 2px solid var(--muted); padding-left: 10px; }
+.frame { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--panel); min-width: 0; }
+.topbar { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-bottom: 1px solid var(--border); background: #070914; flex-wrap: wrap; }
+.brand { font-family: var(--mono); letter-spacing: .3em; font-size: .75rem; color: var(--purple); font-weight: 700; }
+.brand.player { color: var(--cyan); }
+.chip { font-family: var(--mono); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--border); border-radius: 4px; padding: 3px 8px; color: var(--muted-text); background: var(--panel2); }
+.chip.new { border-color: var(--gold); color: var(--gold); }
+.gm { display: grid; grid-template-columns: minmax(0,1fr) 280px; min-height: 440px; }
+@media (max-width: 700px) { .gm { grid-template-columns: minmax(0,1fr); } }
+.board { position: relative; background: #05060f; min-height: 300px; }
+.board svg { display: block; width: 100%; height: auto; }
+.tools { position: absolute; top: 10px; left: 10px; display: flex; gap: 2px; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 3px; flex-wrap: wrap; }
+.tools span, .tools button { font: 700 .66rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted-text); padding: 5px 9px; border-radius: 4px; background: none; border: 0; }
+.tools .on { color: var(--cyan); outline: 1px solid var(--cyan); }
+.tools .new { color: var(--gold); outline: 1px dashed var(--gold); cursor: pointer; }
+.side { border-left: 1px solid var(--border); padding: 12px; display: grid; gap: 10px; align-content: start; background: var(--panel); }
+.lbl { font: 700 .68rem var(--mono); letter-spacing: .18em; text-transform: uppercase; color: var(--muted-text); display: flex; justify-content: space-between; align-items: center; }
+.toklist { display: grid; gap: 4px; outline: 1px dashed var(--gold); outline-offset: 4px; border-radius: 4px; }
+.tok { display: grid; grid-template-columns: 14px minmax(0,1fr) auto auto; gap: 8px; align-items: center; padding: 6px 8px; border: 1px solid var(--border); border-radius: 5px; background: var(--panel2); font-size: .85rem; }
+.tok:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.tok.sel { border-color: var(--cyan); }
+.tok .dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid; }
+.tok .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tok .nm small { color: var(--muted-text); font-family: var(--mono); font-size: .7rem; margin-left: 4px; }
+.tok.hid .nm { color: var(--muted-text); font-style: italic; }
+.hp { font: .72rem var(--mono); color: var(--muted-text); font-variant-numeric: tabular-nums; }
+.eye { font: 700 .62rem var(--mono); letter-spacing: .08em; text-transform: uppercase; border: 1px solid var(--border); background: none; color: var(--muted-text); border-radius: 4px; padding: 3px 6px; cursor: pointer; }
+.eye.hidden { color: var(--gold); border-color: var(--gold); }
+.warn { font-size: .78rem; color: var(--gold); border: 1px solid #5a4b1d; background: #15120a; border-radius: 5px; padding: 6px 8px; display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.warn button { font: 700 .62rem var(--mono); text-transform: uppercase; letter-spacing: .08em; background: none; border: 1px solid var(--gold); color: var(--gold); border-radius: 4px; padding: 3px 6px; cursor: pointer; }
+.hint { font-size: .74rem; color: var(--muted-text); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .8rem; color: var(--muted-text); }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: -2px; margin-right: 5px; }
+.key { font: .72rem var(--mono); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 3px; padding: 0 5px; color: var(--text); }
+.phones { display: flex; gap: 20px; flex-wrap: wrap; }
+.phone { width: 300px; max-width: 100%; border: 1px solid var(--border); border-radius: 22px; padding: 10px; background: #020308; }
+.phone .scr { border-radius: 14px; overflow: hidden; background: var(--bg); border: 1px solid var(--border); }
+.cap { font: 700 .66rem var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--muted-text); text-align: center; margin-top: 8px; }
+.ptop { display: flex; align-items: center; justify-content: space-between; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+.ptop .brand { font-size: .62rem; letter-spacing: .2em; }
+.rail { display: flex; gap: 4px; overflow-x: auto; padding: 6px 10px; border-bottom: 1px solid var(--border); scrollbar-width: none; }
+.rail span { flex: 0 0 auto; font: 700 .66rem var(--mono); padding: 4px 7px; border: 1px solid var(--border); border-radius: 4px; color: var(--muted-text); }
+.rail span.now { color: var(--cyan); border-color: var(--cyan); }
+.rail span.big { color: var(--cyan); border-color: var(--cyan); font-size: .8rem; }
+.pboard { height: 230px; position: relative; background: #05060f; }
+.pboard svg { width: 100%; height: 100%; display: block; }
+.tabs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); }
+.tabs span { text-align: center; padding: 8px 2px; font: 700 .62rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted-text); }
+.tabs span.on { color: var(--cyan); box-shadow: inset 0 2px 0 var(--cyan); }
+.pbody { padding: 10px; display: grid; gap: 6px; }
+.parts { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+.parts div { display: flex; justify-content: space-between; border: 1px solid var(--border); border-radius: 4px; padding: 5px 7px; font-size: .74rem; }
+.parts b { font-family: var(--mono); color: var(--cyan); }
+.ok { color: var(--success); }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Tabletop UI fixes</h1>
+    <p class="lede">Three proposals from today's Company Mode test of the virtual tabletop, for your approval before anything is built. Gold dashed outlines mark what is new; everything else is the screen as it is today. Click the tokens and buttons: the mockup responds.</p>
+  </header>
+
+  <div class="note-correction"><b>Correction to my last report.</b> I said the map opens too zoomed in. That was wrong. The board opens fitted to the map picture. The test seed put the grid, and the hidden Little Brother, past the right edge of a small test picture, so he was off the board. The real gap is that nothing tells the GM a token is off the picture, and there is no list to reach it from. Proposal 1 now fixes that instead.</div>
+
+  <section>
+    <div class="sh"><span class="num">1</span><h2>GM token list, with an off-map warning</h2><span class="chip">GM page</span></div>
+    <div class="row">
+      <div class="frame">
+        <div class="topbar"><span class="brand">GM · TUTORIAL FLOOR</span><span class="chip">Hatchery</span><span class="chip">Moment 0</span></div>
+        <div class="gm">
+          <div class="board" style="padding-top:44px">
+            <svg id="gmsvg" viewBox="0 0 640 400" aria-label="GM board"></svg>
+            <div class="tools"><span class="on">Move</span><span>Measure</span><span>Fog</span><span>Ping</span><span>Fx</span><button class="new" id="fitall" type="button">Fit all</button></div>
+          </div>
+          <aside class="side" aria-label="GM sidebar">
+            <div class="lbl">Tokens on this map <span class="chip new">new</span></div>
+            <div class="warn" id="offwarn"><span>1 token is outside the map picture</span><button type="button" id="showoff">Show</button></div>
+            <div class="toklist" id="toklist" role="list"></div>
+            <div class="hint">Click a row to select and centre it. Tab and Enter reach every token. The eye button hides or reveals it to players.</div>
+            <div class="lbl" style="margin-top:6px">Add a token</div>
+            <div class="hint">(unchanged)</div>
+          </aside>
+        </div>
+      </div>
+      <div class="notes">
+        <h3>What changes</h3>
+        <ul>
+          <li>A list of every token on the live map, hidden ones in italics, with HP at a glance.</li>
+          <li>A Hide / Reveal button on each row, so revealing an enemy is one click and needs no map hunting.</li>
+          <li>A warning when a token sits off the map picture, with a button that brings it into view.</li>
+          <li>"Fit all" zooms the board out until every token and the whole picture fit.</li>
+        </ul>
+        <p class="why">Why: the tester could not find or reveal Little Brother at 1280, 1920 or 2560 pixels wide. Clicking a row is also the keyboard path to every token, which the board does not have today.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="num">2</span><h2>Click to move</h2><span class="chip">player page</span></div>
+    <div class="row">
+      <div class="frame">
+        <div class="topbar"><span class="brand player">ON AIR · TUTORIAL FLOOR</span><span class="chip">Moment 2</span></div>
+        <div class="board" style="padding-top:44px">
+          <svg id="mvsvg" viewBox="0 0 640 360" aria-label="Player board"></svg>
+          <div class="tools"><span class="on">Move</span><span>Measure</span><span>Ping</span></div>
+        </div>
+        <div class="topbar" style="border-top:1px solid var(--border);border-bottom:0"><span class="legend"><span><i class="sw" style="background:rgba(0,212,255,.35)"></i>Free, 1–4 spaces</span><span><i class="sw" style="background:rgba(217,187,99,.28)"></i>5–8 spaces, costs 1 Moment</span></span><span class="hint" id="mvstatus">Click your token (S) to start.</span></div>
+      </div>
+      <div class="notes">
+        <h3>What changes</h3>
+        <ul>
+          <li>Click your own token, then click a hex. Dragging still works as it does today.</li>
+          <li>While your token is selected, the board shades where you can go: 1–4 spaces free (§5.5), 5–8 costing one Moment.</li>
+          <li>Keyboard: <span class="key">Tab</span> to your token, arrow keys to pick a hex, <span class="key">Enter</span> to move, <span class="key">Esc</span> to cancel.</li>
+          <li>The shading is a guide, not a lock. The server still lets you place your token anywhere on the map, as now.</li>
+        </ul>
+        <p class="why">Why: drag is the only way to move today, which shuts out keyboard players and is fiddly on a phone.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="num">3</span><h2>The player page at phone width</h2><span class="chip">375 px</span></div>
+    <div class="row">
+      <div class="phones">
+        <div><div class="phone"><div class="scr">
+          <div class="ptop"><span class="brand player">● ON AIR</span><span class="chip">Sheet</span></div>
+          <div class="rail" aria-label="Moments"><span class="big">2</span><span>1</span><span class="now">2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+          <div class="pboard"><svg id="ph1" viewBox="0 0 300 230"></svg></div>
+          <div class="tabs"><span class="on">Body</span><span>Skills</span><span>Dice</span><span>Chat</span></div>
+          <div class="pbody"><div class="parts"><div>Head<b>2/2</b></div><div>Torso<b>5/5</b></div><div>L Arm<b>2/2</b></div><div>R Arm<b>2/2</b></div><div>L Leg<b>3/3</b></div><div>R Leg<b>3/3</b></div></div></div>
+        </div></div><div class="cap">Today's overflow, fixed</div></div>
+        <div><div class="phone"><div class="scr">
+          <div class="ptop"><span class="brand player">● ON AIR</span><span class="chip">Sheet</span></div>
+          <div class="rail"><span class="big">2</span><span>1</span><span class="now">2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span></div>
+          <div class="pboard"><svg id="ph2" viewBox="0 0 300 230"></svg></div>
+          <div class="tabs"><span>Body</span><span>Skills</span><span>Dice</span><span class="on">Chat</span></div>
+          <div class="pbody" style="font-size:.74rem"><div><b style="color:var(--cyan)">Sasha</b> · Fire Ball → Roach-dog (Burn)</div><div><b style="color:var(--cyan)">Filipe</b> · on my way</div><div style="display:flex;gap:4px"><span class="chip" style="flex:1">Say something…</span><span class="chip" style="color:var(--cyan)">Send</span></div></div>
+        </div></div><div class="cap">Chat tab</div></div>
+      </div>
+      <div class="notes">
+        <h3>What changes</h3>
+        <ul>
+          <li>The board takes the full width at the top, since it is what you look at most.</li>
+          <li>The side panels become four tabs under it: Body, Skills, Dice, Chat.</li>
+          <li>The Moment rail scrolls sideways inside its own strip, so Moments 6–10 are never cut off.</li>
+          <li>Above 600 px wide, the page stays exactly as it is now.</li>
+        </ul>
+        <p class="why">Why: at 375 px the page was wider than the screen. Moments 6–10 and the Torso and Right Arm chips were cut off.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  const NS = 'http://www.w3.org/2000/svg', S3 = Math.sqrt(3);
+  function el(t, a, p) { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+  function ctr(c, r, s) { return { x: S3 * s * (c + 0.5 * (r & 1)) + S3 * s / 2, y: 1.5 * s * r + s }; }
+  function hexD(x, y, s) { let d = ''; for (let i = 0; i < 6; i++) { const a = Math.PI / 180 * (60 * i - 30); d += (i ? 'L' : 'M') + (x + s * Math.cos(a)).toFixed(1) + ',' + (y + s * Math.sin(a)).toFixed(1); } return d + 'Z'; }
+  function dist(a, b) { const q = (o) => { const x = o.col - (o.row - (o.row & 1)) / 2; return { x, z: o.row, y: -x - o.row }; }; const A = q(a), B = q(b); return Math.max(Math.abs(A.x - B.x), Math.abs(A.y - B.y), Math.abs(A.z - B.z)); }
+  function board(svg, cols, rows, s, picW, picH) {
+    el('rect', { x: -2000, y: -2000, width: 5000, height: 5000, fill: '#05060f' }, svg);
+    el('rect', { x: 0, y: 0, width: picW, height: picH, fill: 'var(--map)' }, svg);
+    el('rect', { x: picW * .38, y: picH * .35, width: picW * .3, height: picH * .3, fill: '#5a5046', opacity: .8 }, svg);
+    let d = ''; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) { const p = ctr(c, r, s); d += hexD(p.x, p.y, s); }
+    el('path', { d, fill: 'none', stroke: 'rgba(0,212,255,.16)', 'stroke-width': 1 }, svg);
+  }
+  function token(svg, t, s) {
+    const p = ctr(t.col, t.row, s), g = el('g', { 'data-id': t.id, style: 'cursor:pointer', opacity: t.hidden ? .45 : 1 }, svg);
+    el('circle', { cx: p.x, cy: p.y, r: s * .78, fill: '#0b0f20', stroke: t.color, 'stroke-width': 3, 'stroke-dasharray': t.hidden ? '5 4' : '' }, g);
+    const tx = el('text', { x: p.x, y: p.y + s * .3, 'text-anchor': 'middle', fill: '#fff', 'font-family': 'Courier New', 'font-weight': 700, 'font-size': s * .85 }, g); tx.textContent = t.name[0];
+    const lb = el('text', { x: p.x, y: p.y + s * 1.35, 'text-anchor': 'middle', fill: '#d3dff0', 'font-size': s * .42, 'font-family': 'system-ui' }, g); lb.textContent = t.name;
+    return g;
+  }
+
+  // ── 1. GM ──────────────────────────────────────────────
+  const gm = document.getElementById('gmsvg'), S = 22, VB = { x: 0, y: 0, w: 640, h: 400 };
+  const toks = [
+    { id: 's', name: 'Sasha', kind: 'player', col: 3, row: 3, color: '#ffb347', hp: '5/5 torso' },
+    { id: 'f', name: 'Filipe', kind: 'player', col: 4, row: 6, color: '#5bc0eb', hp: '5/5 torso' },
+    { id: 'r', name: 'Roach-dog', kind: 'enemy', col: 11, row: 5, color: '#ff4d6d', hp: '1/2' },
+    { id: 'l', name: 'Little Brother Roach', kind: 'enemy', col: 21, row: 8, color: '#bd7cff', hp: '12/12', hidden: true },
+  ];
+  let sel = null;
+  function setVB(v) { gm.setAttribute('viewBox', `${v.x} ${v.y} ${v.w} ${v.h}`); }
+  function drawGM() {
+    gm.innerHTML = '';
+    board(gm, 26, 13, S, 640, 400);
+    el('rect', { x: 0, y: 0, width: 640, height: 400, fill: 'none', stroke: 'var(--gold)', 'stroke-dasharray': '6 5', opacity: .5 }, gm);
+    toks.forEach(t => { const g = token(gm, t, S); if (sel === t.id) { const p = ctr(t.col, t.row, S); el('circle', { cx: p.x, cy: p.y, r: S * 1.05, fill: 'none', stroke: 'var(--cyan)', 'stroke-width': 2 }, g); } g.addEventListener('click', () => select(t.id)); });
+    const list = document.getElementById('toklist'); list.innerHTML = '';
+    toks.forEach(t => {
+      const row = document.createElement('div'); row.className = 'tok' + (t.hidden ? ' hid' : '') + (sel === t.id ? ' sel' : ''); row.tabIndex = 0; row.setAttribute('role', 'listitem');
+      row.innerHTML = `<span class="dot" style="border-color:${t.color}"></span><span class="nm">${t.name}<small>${t.kind}${offMap(t) ? ' · off map' : ''}</small></span><span class="hp">${t.hp}</span>`;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'eye' + (t.hidden ? ' hidden' : ''); b.textContent = t.hidden ? 'Reveal' : 'Hide';
+      b.setAttribute('aria-label', (t.hidden ? 'Reveal ' : 'Hide ') + t.name);
+      b.addEventListener('click', e => { e.stopPropagation(); t.hidden = !t.hidden; drawGM(); });
+      row.appendChild(b);
+      row.addEventListener('click', () => select(t.id, true));
+      row.addEventListener('keydown', e => { if (e.key === 'Enter') select(t.id, true); });
+      list.appendChild(row);
+    });
+  }
+  function offMap(t) { const p = ctr(t.col, t.row, S); return p.x > 640 || p.y > 400; }
+  function select(id, centre) { sel = id; drawGM(); if (centre) { const t = toks.find(x => x.id === id), p = ctr(t.col, t.row, S); if (offMap(t)) fitAll(); } }
+  function fitAll() { setVB({ x: -10, y: -10, w: 1000, h: 625 }); }
+  document.getElementById('fitall').addEventListener('click', fitAll);
+  document.getElementById('showoff').addEventListener('click', () => select('l', true));
+  setVB(VB); drawGM();
+
+  // ── 2. click to move ───────────────────────────────────
+  const mv = document.getElementById('mvsvg'), MS = 20, cols = 17, rows = 11;
+  const me = { id: 'me', name: 'Sasha', col: 4, row: 5, color: '#ffb347' };
+  const others = [{ id: 'f', name: 'Filipe', col: 5, row: 8, color: '#5bc0eb' }, { id: 'r', name: 'Roach-dog', col: 12, row: 4, color: '#ff4d6d' }];
+  let picking = false, cursor = null;
+  const status = document.getElementById('mvstatus');
+  function drawMV() {
+    mv.innerHTML = ''; board(mv, cols, rows, MS, 640, 360);
+    if (picking) for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+      const d = dist(me, { col: c, row: r }); if (!d || d > 8) continue;
+      const p = ctr(c, r, MS), h = el('path', { d: hexD(p.x, p.y, MS - 1), fill: d <= 4 ? 'rgba(0,212,255,.28)' : 'rgba(217,187,99,.2)', style: 'cursor:pointer' }, mv);
+      h.addEventListener('click', () => moveTo(c, r, d));
+      h.addEventListener('mouseenter', () => { cursor = { col: c, row: r }; status.textContent = d <= 4 ? `${d} space${d > 1 ? 's' : ''}, free` : `${d} spaces, costs 1 Moment`; });
+    }
+    if (picking && cursor) { const p = ctr(cursor.col, cursor.row, MS); el('path', { d: hexD(p.x, p.y, MS - 1), fill: 'none', stroke: 'var(--cyan)', 'stroke-width': 2, 'pointer-events': 'none' }, mv); }
+    others.forEach(t => token(mv, t, MS));
+    const g = token(mv, me, MS); g.setAttribute('tabindex', 0); g.setAttribute('role', 'button'); g.setAttribute('aria-label', 'Your token, Sasha');
+    if (picking) { const p = ctr(me.col, me.row, MS); el('circle', { cx: p.x, cy: p.y, r: MS * 1.05, fill: 'none', stroke: 'var(--cyan)', 'stroke-width': 2 }, g); }
+    g.addEventListener('click', () => { picking = !picking; cursor = picking ? { col: me.col, row: me.row } : null; status.textContent = picking ? 'Pick a hex. Esc cancels.' : 'Click your token (S) to start.'; drawMV(); });
+    g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); g.dispatchEvent(new Event('click')); setTimeout(() => mv.querySelector('[data-id=me]').focus(), 0); } });
+  }
+  function moveTo(c, r, d) { me.col = c; me.row = r; picking = false; cursor = null; status.textContent = d <= 4 ? `Moved ${d}. Free move used.` : `Moved ${d}. That cost 1 Moment.`; drawMV(); }
+  document.addEventListener('keydown', e => {
+    if (!picking) return;
+    if (e.key === 'Escape') { picking = false; cursor = null; status.textContent = 'Cancelled.'; drawMV(); return; }
+    const dirs = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
+    if (dirs[e.key]) { e.preventDefault(); const [dc, dr] = dirs[e.key]; const n = { col: Math.min(cols - 1, Math.max(0, cursor.col + dc)), row: Math.min(rows - 1, Math.max(0, cursor.row + dr)) }; if (dist(me, n) <= 8) cursor = n; const d = dist(me, cursor); status.textContent = d ? (d <= 4 ? `${d} space${d > 1 ? 's' : ''}, free. Enter to move.` : `${d} spaces, costs 1 Moment. Enter to move.`) : 'Arrow keys pick a hex.'; drawMV(); mv.querySelector('[data-id=me]').focus(); }
+    if (e.key === 'Enter' && cursor && dist(me, cursor)) { e.preventDefault(); moveTo(cursor.col, cursor.row, dist(me, cursor)); }
+  });
+  drawMV();
+
+  // ── 3. phone boards ────────────────────────────────────
+  ['ph1', 'ph2'].forEach(id => { const s = document.getElementById(id); board(s, 9, 8, 16, 300, 230); [{ name: 'Sasha', col: 2, row: 2, color: '#ffb347' }, { name: 'Filipe', col: 3, row: 5, color: '#5bc0eb' }, { name: 'Roach', col: 6, row: 3, color: '#ff4d6d' }].forEach(t => token(s, t, 16)); });
+})();
+</script>
